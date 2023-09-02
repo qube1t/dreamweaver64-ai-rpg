@@ -16,7 +16,7 @@ import javafx.util.Duration;
 public class App extends Application {
 
     private static final int COLUMNS  =   4;
-    private static final int COUNT    =  10;
+    private static final int COUNT    =  13;
     private static final int OFFSET_X =  18;
     private static final int OFFSET_Y =  25;
     private static final int WIDTH    = 374;
