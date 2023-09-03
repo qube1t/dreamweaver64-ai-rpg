@@ -1,49 +1,53 @@
 package nz.ac.auckland.se206;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import javafx.animation.Animation;
+import java.io.IOException;
 import javafx.application.Application;
-import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
+/**
+ * This is the entry point of the JavaFX application, while you can change this class, it should
+ * remain as the class that runs the JavaFX application.
+ */
 public class App extends Application {
 
-    private static final int COLUMNS  =   4;
-    private static final int COUNT    =  13;
-    private static final int OFFSET_X =  18;
-    private static final int OFFSET_Y =  25;
-    private static final int WIDTH    = 374;
-    private static final int HEIGHT   = 243;
+  private static Scene scene;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+  public static void main(final String[] args) {
+    launch();
+  }
 
-    public void start(Stage primaryStage) throws FileNotFoundException {
-        primaryStage.setTitle("The Horse in Motion");
+  public static void setRoot(String fxml) throws IOException {
+    scene.setRoot(loadFxml(fxml));
+  }
 
-        Image input = new Image(getClass().getResource("/images/The_Horse_in_Motion.jpg").toExternalForm());
-        final ImageView imageView = new ImageView(input);
-        imageView.setViewport(new Rectangle2D(OFFSET_X, OFFSET_Y, WIDTH, HEIGHT));
+  /**
+   * Returns the node associated to the input file. The method expects that the file is located in
+   * "src/main/resources/fxml".
+   *
+   * @param fxml The name of the FXML file (without extension).
+   * @return The node of the input file.
+   * @throws IOException If the file is not found.
+   */
+  private static Parent loadFxml(final String fxml) throws IOException {
+    return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
+  }
 
-        final Animation animation = new SpriteAnimation(
-                imageView,
-                Duration.millis(1000),
-                COUNT, COLUMNS,
-                OFFSET_X, OFFSET_Y,
-                WIDTH, HEIGHT
-        );
-        animation.setCycleCount(Animation.INDEFINITE);
-        animation.play();
+  /**
+   * This method is invoked when the application starts. It loads and shows the "Canvas" scene.
+   *
+   * @param stage The primary stage of the application.
+   * @throws IOException If "src/main/resources/fxml/canvas.fxml" is not found.
+   */
+  @Override
+  public void start(final Stage stage) throws IOException {
+    Parent root = loadFxml("room");
+    scene = new Scene(root, 600, 470);
+    stage.setScene(scene);
+    stage.show();
+    root.requestFocus();
+  }
 
-        primaryStage.setScene(new Scene(new Group(imageView)));
-        primaryStage.show();
-    }
 }

@@ -4,8 +4,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="452.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <ImageView fitHeight="322.0" fitWidth="452.0" pickOnBounds="true" preserveRatio="true" />
-   </children>
-</AnchorPane>
+<fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+      <ImageView fx:id="active_img" fitHeight="322.0" fitWidth="452.0" pickOnBounds="true" preserveRatio="true" />
+</fx:root>
