@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.components.Character;
 
 /** Controller class for the room view. */
 public class RoomController {
@@ -15,6 +16,8 @@ public class RoomController {
   @FXML private Rectangle door;
   @FXML private Rectangle window;
   @FXML private Rectangle vase;
+
+  @FXML private Character character;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -29,6 +32,10 @@ public class RoomController {
   @FXML
   public void onKeyPressed(KeyEvent event) {
     System.out.println("key " + event.getCode() + " pressed");
+
+    if (event.getCode().toString().equals("D")) {
+      character.startAnimation();
+    }
   }
 
   /**
@@ -39,6 +46,10 @@ public class RoomController {
   @FXML
   public void onKeyReleased(KeyEvent event) {
     System.out.println("key " + event.getCode() + " released");
+
+    if (event.getCode().toString().equals("D")) {
+      character.endAnimation();
+    }
   }
 
   /**
