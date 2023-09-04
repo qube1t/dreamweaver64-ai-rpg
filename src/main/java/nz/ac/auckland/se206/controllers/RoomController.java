@@ -6,7 +6,6 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
 
@@ -32,9 +31,21 @@ public class RoomController {
   @FXML
   public void onKeyPressed(KeyEvent event) {
     System.out.println("key " + event.getCode() + " pressed");
-
-    if (event.getCode().toString().equals("D")) {
-      character.startAnimation();
+    if (!character.isAnimating()) {
+      if (event.getCode().toString().equals("W")) {
+        character.setAction(0);
+        character.startAnimation();
+      } else if (event.getCode().toString().equals("A")) {
+        character.setAction(1);
+        character.startAnimation();
+      }
+      if (event.getCode().toString().equals("S")) {
+        character.setAction(2);
+        character.startAnimation();
+      } else if (event.getCode().toString().equals("D")) {
+        character.setAction(3);
+        character.startAnimation();
+      }
     }
   }
 
@@ -47,7 +58,10 @@ public class RoomController {
   public void onKeyReleased(KeyEvent event) {
     System.out.println("key " + event.getCode() + " released");
 
-    if (event.getCode().toString().equals("D")) {
+    if (event.getCode().toString().equals("D")
+        || event.getCode().toString().equals("A")
+        || event.getCode().toString().equals("W")
+        || event.getCode().toString().equals("S")) {
       character.endAnimation();
     }
   }
