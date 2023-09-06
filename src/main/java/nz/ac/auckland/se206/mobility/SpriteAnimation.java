@@ -1,4 +1,4 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.mobility;
 
 import javafx.animation.Interpolator;
 import javafx.animation.Transition;
