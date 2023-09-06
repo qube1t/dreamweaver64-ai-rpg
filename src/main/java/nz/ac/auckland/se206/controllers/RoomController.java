@@ -21,6 +21,7 @@ public class RoomController {
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
+    character.enableMobility(null, null);
   }
 
   /**
@@ -31,22 +32,21 @@ public class RoomController {
   @FXML
   public void onKeyPressed(KeyEvent event) {
     System.out.println("key " + event.getCode() + " pressed");
-    if (!character.isAnimating()) {
-      if (event.getCode().toString().equals("W")) {
-        character.setAction(0);
-        character.startAnimation();
-      } else if (event.getCode().toString().equals("A")) {
-        character.setAction(1);
-        character.startAnimation();
-      }
-      if (event.getCode().toString().equals("S")) {
-        character.setAction(2);
-        character.startAnimation();
-      } else if (event.getCode().toString().equals("D")) {
-        character.setAction(3);
-        character.startAnimation();
-      }
+
+    String letter = event.getCode().toString();
+
+    if (letter.equals("W")) {
+      character.setAction(0);
+    } else if (letter.equals("A")) {
+      character.setAction(1);
     }
+    if (letter.equals("S")) {
+      character.setAction(2);
+    } else if (letter.equals("D")) {
+      character.setAction(3);
+    }
+    character.move();
+    if (!character.isAnimating()) character.startAnimation();
   }
 
   /**
@@ -57,11 +57,8 @@ public class RoomController {
   @FXML
   public void onKeyReleased(KeyEvent event) {
     System.out.println("key " + event.getCode() + " released");
-
-    if (event.getCode().toString().equals("D")
-        || event.getCode().toString().equals("A")
-        || event.getCode().toString().equals("W")
-        || event.getCode().toString().equals("S")) {
+    String letter = event.getCode().toString();
+    if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
       character.endAnimation();
     }
   }
