@@ -45,8 +45,10 @@ public class RoomController {
     } else if (letter.equals("D")) {
       character.setAction(3);
     }
-    character.move();
+
+    // move after animating as it will change direction of character
     if (!character.isAnimating()) character.startAnimation();
+    character.move();
   }
 
   /**
