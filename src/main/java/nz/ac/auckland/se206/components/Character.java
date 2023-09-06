@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.components;
 
 import java.io.IOException;
+import java.util.List;
 import javafx.animation.Animation;
 import javafx.beans.NamedArg;
 import javafx.fxml.FXML;
@@ -9,8 +10,10 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.SpriteAnimation;
+import nz.ac.auckland.se206.mobility.CharacterMovement;
+import nz.ac.auckland.se206.mobility.SpriteAnimation;
 
 public class Character extends AnchorPane {
   @FXML private ImageView active_img;
@@ -25,6 +28,7 @@ public class Character extends AnchorPane {
   private String spriteSheet;
 
   private SpriteAnimation animation;
+  private CharacterMovement movement;
 
   private boolean animating = false;
 
@@ -66,6 +70,8 @@ public class Character extends AnchorPane {
     this.frame_width = frame_width;
     this.frame_height = frame_height;
 
+    double x = this.getLayoutX();
+
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/character.fxml"));
     fxmlLoader.setRoot(this);
     fxmlLoader.setController(this);
@@ -96,6 +102,14 @@ public class Character extends AnchorPane {
             offset_y + 64 * action,
             frame_width,
             frame_height);
+  }
+
+  public void enableMobility(Rectangle playerBound, List<Rectangle> obstacles) {
+    movement = new CharacterMovement(this, playerBound, obstacles);
+  }
+
+  public void move() {
+    movement.movePlayer(action);
   }
 
   public void startAnimation() {
