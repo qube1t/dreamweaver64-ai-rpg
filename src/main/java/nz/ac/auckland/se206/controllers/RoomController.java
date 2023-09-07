@@ -5,16 +5,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
 
 /** Controller class for the room view. */
 public class RoomController {
 
-  @FXML private Rectangle door;
-  @FXML private Rectangle window;
-  @FXML private Rectangle vase;
+  // @FXML private Rectangle door;
+  // @FXML private Rectangle window;
+  // @FXML private Rectangle vase;
 
   @FXML private Character character;
 
