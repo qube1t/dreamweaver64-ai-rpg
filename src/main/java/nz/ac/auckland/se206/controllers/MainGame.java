@@ -57,7 +57,7 @@ public class MainGame {
    */
   @FXML
   public void onKeyPressed(KeyEvent event) {
-    System.out.println("key " + event.getCode() + " pressed");
+    // System.out.println("key " + event.getCode() + " pressed");
 
     String letter = event.getCode().toString();
 
@@ -73,8 +73,10 @@ public class MainGame {
     }
 
     // move after animating as it will change direction of character
-    if (!character.isAnimating()) character.startAnimation();
-    character.move();
+    if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
+      if (!character.isAnimating()) character.startAnimation();
+      character.move();
+    }
   }
 
   /**
@@ -84,7 +86,7 @@ public class MainGame {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) {
-    System.out.println("key " + event.getCode() + " released");
+    // System.out.println("key " + event.getCode() + " released");
     String letter = event.getCode().toString();
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
       character.endAnimation();
