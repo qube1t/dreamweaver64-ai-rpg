@@ -10,7 +10,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
 
 /** Controller class for the room view. */
-public class RoomController {
+public class Room1Controller {
 
   // @FXML private Rectangle door;
   // @FXML private Rectangle window;
@@ -130,6 +130,6 @@ public class RoomController {
 
   @FXML
   public void changeRoot() throws IOException {
-    App.setRoot("room");
+    App.setRoot("room1");
   }
 }
