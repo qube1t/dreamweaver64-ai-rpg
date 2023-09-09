@@ -5,20 +5,23 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.components.Character;
 
 /** Controller class for the room view. */
-public class RoomController {
+public class Room1Controller {
 
-  @FXML private Rectangle door;
-  @FXML private Rectangle window;
-  @FXML private Rectangle vase;
+  // @FXML private Rectangle door;
+  // @FXML private Rectangle window;
+  // @FXML private Rectangle vase;
+
+  @FXML private Character character;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
+    character.enableMobility(null, null);
   }
 
   /**
@@ -29,6 +32,23 @@ public class RoomController {
   @FXML
   public void onKeyPressed(KeyEvent event) {
     System.out.println("key " + event.getCode() + " pressed");
+
+    String letter = event.getCode().toString();
+
+    if (letter.equals("W")) {
+      character.setAction(0);
+    } else if (letter.equals("A")) {
+      character.setAction(1);
+    }
+    if (letter.equals("S")) {
+      character.setAction(2);
+    } else if (letter.equals("D")) {
+      character.setAction(3);
+    }
+
+    // move after animating as it will change direction of character
+    if (!character.isAnimating()) character.startAnimation();
+    character.move();
   }
 
   /**
@@ -39,6 +59,10 @@ public class RoomController {
   @FXML
   public void onKeyReleased(KeyEvent event) {
     System.out.println("key " + event.getCode() + " released");
+    String letter = event.getCode().toString();
+    if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
+      character.endAnimation();
+    }
   }
 
   /**
@@ -68,7 +92,7 @@ public class RoomController {
 
     if (!GameState.isRiddleResolved) {
       showDialog("Info", "Riddle", "You need to resolve the riddle!");
-      App.setRoot("chat");
+      // App.setRoot("chat");
       return;
     }
 
@@ -102,5 +126,10 @@ public class RoomController {
   @FXML
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
+  }
+
+  @FXML
+  public void changeRoot() throws IOException {
+    App.setRoot("room1");
   }
 }
