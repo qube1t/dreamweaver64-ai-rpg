@@ -27,6 +27,8 @@ public class Room1Controller {
     obsts.add(0, rect1);
     // Initialization code goes here
     character.enableMobility(obsts);
+    character.setLayoutX(250);
+    character.setLayoutY(250);
   }
 
   /**

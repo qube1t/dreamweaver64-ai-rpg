@@ -100,7 +100,7 @@ public class Character extends AnchorPane {
     animation =
         new SpriteAnimation(
             active_img,
-            Duration.millis(1000),
+            Duration.millis(800),
             count,
             columns,
             offset_x,
