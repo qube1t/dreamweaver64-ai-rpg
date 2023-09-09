@@ -1,9 +1,11 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
@@ -16,11 +18,15 @@ public class Room1Controller {
   // @FXML private Rectangle vase;
 
   @FXML private Character character;
+  @FXML private Rectangle rect1;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
+
+    ArrayList<Rectangle> obsts = new ArrayList<Rectangle>();
+    obsts.add(0, rect1);
     // Initialization code goes here
-    character.enableMobility(null, null);
+    character.enableMobility(obsts);
   }
 
   /**

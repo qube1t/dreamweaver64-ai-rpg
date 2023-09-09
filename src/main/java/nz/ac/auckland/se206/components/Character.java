@@ -17,6 +17,11 @@ import nz.ac.auckland.se206.mobility.SpriteAnimation;
 
 public class Character extends AnchorPane {
   @FXML private ImageView active_img;
+  @FXML private Rectangle playerBound;
+
+  public Rectangle getPlayerBound() {
+    return playerBound;
+  }
 
   private int columns; // =   4;
   private int count; // =  11;
@@ -104,7 +109,7 @@ public class Character extends AnchorPane {
             frame_height);
   }
 
-  public void enableMobility(Rectangle playerBound, List<Rectangle> obstacles) {
+  public void enableMobility(List<Rectangle> obstacles) {
     movement = new CharacterMovement(this, playerBound, obstacles);
   }
 

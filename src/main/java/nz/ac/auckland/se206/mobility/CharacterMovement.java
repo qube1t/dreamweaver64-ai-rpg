@@ -11,13 +11,15 @@ public class CharacterMovement {
 
   public CharacterMovement(AnchorPane player, Rectangle playerBound, List<Rectangle> obstacles) {
     this.player = player;
-    // this.playerBound = playerBound;
+    this.playerBound = playerBound;
     this.obstacles = obstacles;
   }
 
   protected boolean checkCollision() {
     for (Rectangle obstacle : obstacles) {
-      if (player.getBoundsInParent().intersects(obstacle.getBoundsInParent())) {
+      if (player
+          .localToParent(playerBound.getBoundsInParent())
+          .intersects(obstacle.getBoundsInParent())) {
         return true;
       }
     }
@@ -53,11 +55,11 @@ public class CharacterMovement {
     // playerBound.setY(playerBound.getY() + dy);
 
     // Return to the old position if there is a collision
-    // if (checkCollision()) {
-    //   player.setLayoutX(oldX);
-    //   player.setLayoutY(oldY);
-    // playerBound.setX(oldBoundX);
-    // playerBound.setY(oldBoundY);
-    // }
+    if (checkCollision()) {
+      player.setLayoutX(oldX);
+      player.setLayoutY(oldY);
+      //   playerBound.setX(oldBoundX);
+      //   playerBound.setY(oldBoundY);
+    }
   }
 }
