@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -22,47 +21,6 @@ public class Room1Controller {
   public void initialize() {
     // Initialization code goes here
     character.enableMobility(null, null);
-  }
-
-  /**
-   * Handles the key pressed event.
-   *
-   * @param event the key event
-   */
-  @FXML
-  public void onKeyPressed(KeyEvent event) {
-    System.out.println("key " + event.getCode() + " pressed");
-
-    String letter = event.getCode().toString();
-
-    if (letter.equals("W")) {
-      character.setAction(0);
-    } else if (letter.equals("A")) {
-      character.setAction(1);
-    }
-    if (letter.equals("S")) {
-      character.setAction(2);
-    } else if (letter.equals("D")) {
-      character.setAction(3);
-    }
-
-    // move after animating as it will change direction of character
-    if (!character.isAnimating()) character.startAnimation();
-    character.move();
-  }
-
-  /**
-   * Handles the key released event.
-   *
-   * @param event the key event
-   */
-  @FXML
-  public void onKeyReleased(KeyEvent event) {
-    System.out.println("key " + event.getCode() + " released");
-    String letter = event.getCode().toString();
-    if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
-      character.endAnimation();
-    }
   }
 
   /**
