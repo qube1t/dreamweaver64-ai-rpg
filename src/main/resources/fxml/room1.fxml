@@ -17,7 +17,7 @@
       </ImageView>
       <Pane>
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="86.0" layoutY="316.0" onMouseClicked="#changeRoot" stroke="BLACK" strokeType="INSIDE" width="77.0" />
+            <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="86.0" layoutY="316.0" onMouseClicked="#changeRoot" stroke="BLACK" strokeType="INSIDE" width="77.0" />
             <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
          </children>
       </Pane>
