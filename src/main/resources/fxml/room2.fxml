@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
+   <children>
+      <ImageView fitHeight="549.0" fitWidth="549.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/rooms/room2/backShipMap.png" />
+         </image>
+      </ImageView>
+      <Pane>
+         <children>
+            <ImageView fitHeight="549.0" fitWidth="549.0" layoutX="-2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/rooms/room2/frontShipMap.png" />
+               </image>
+            </ImageView>
+            <Rectangle fx:id="yellowBox" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="55.0" layoutY="317.0" onMouseClicked="#onClickYellow" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="greyBox" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="39.0" layoutY="383.0" onMouseClicked="#onClickGrey" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="purpleBox" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="193.0" layoutY="394.0" onMouseClicked="#onClickPurple" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="whiteBox" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="292.0" layoutY="356.0" onMouseClicked="#onClickWhite" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="turBox" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="270.0" layoutY="405.0" onMouseClicked="#onClickTur" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="greenBox" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="424.0" layoutY="322.0" onMouseClicked="#onClickGreen" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle fx:id="blueBox" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="452.0" layoutY="372.0" onMouseClicked="#onClickBlue" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+         </children>
+      </Pane>
+   </children>
+</StackPane>
