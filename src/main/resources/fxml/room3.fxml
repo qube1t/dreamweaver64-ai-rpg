@@ -2,22 +2,27 @@
 
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="500.0" stroke="BLACK" strokeType="INSIDE" width="700.0" />
-      <ImageView fitHeight="500.0" fitWidth="500.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="800.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
+      <ImageView fitHeight="700.0" fitWidth="700.0" layoutX="60.0" layoutY="100.0">
          <image>
             <Image url="@../images/rooms/room3/layer1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="500.0" fitWidth="500.0">
+      <ImageView fitHeight="700.0" fitWidth="700.0" layoutX="60.0" layoutY="100.0">
          <image>
             <Image url="@../images/rooms/room3/l2_3.png" />
          </image>
       </ImageView>
+      <ImageView fitHeight="119.0" fitWidth="191.0" layoutX="315.0" layoutY="194.0">
+         <image>
+            <Image url="@../images/rooms/room3/777_FSX.png" />
+         </image>
+      </ImageView>
    </children>
-</StackPane>
+</Pane>
