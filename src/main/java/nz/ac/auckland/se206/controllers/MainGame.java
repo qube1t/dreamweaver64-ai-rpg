@@ -6,48 +6,33 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.Character;
 
 public class MainGame {
 
   @FXML private Pane game_pane;
-  @FXML private Character character;
+  @FXML private static Character character;
   @FXML private Pane outer_pane;
+  @FXML private static Pane initialised_game_pane;
 
   public void initialize() throws IOException {
-    // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/room.fxml"));
-    // fxmlLoader.setController(new RoomController());
 
     System.out.println(1);
-    Region room1 = (Region) FXMLLoader.load(getClass().getResource("/fxml/room1.fxml"));
+    initialised_game_pane = game_pane;
+    setGameRoom("room1");
+
+    System.out.println(character);
+  }
+
+  public static void setGameRoom(String roomN) throws IOException {
+    Region room1 = (Region) FXMLLoader.load(App.class.getResource("/fxml/" + roomN + ".fxml"));
     room1.setScaleShape(true);
     character = (Character) room1.lookup("#character");
 
-    // game_pane
-    //     .widthProperty()
-    //     .addListener(
-    //         (obsWidth, oldW, newW) -> {
-    //           if (oldW != newW) {
-    //             // int sca
-    //           }
-    //         });
-
-    // game_pane.prefWidthProperty().bind(outer_pane.widthProperty());
-    // game_pane.prefHeightProperty().bind(outer_pane.heightProperty());
-
-    game_pane.getChildren().add(room1);
-
-    // System.out.println(
-    //     ((Pane) ((Pane) game_pane.getChildren().get(0)).getChildren().get(1)).getChildren());
-    System.out.println(character);
-    //     game_pane
-    //         .sceneProperty()
-    //         .addListener(
-    //             (observableScene, oldScene, newScene) -> {
-    //               if (oldScene == null && newScene != null) {
-    //                 System.out.println(game_pane.getScene().getWidth());
-    //               }
-    //             });
+    if (initialised_game_pane.getChildren().size() != 0)
+      initialised_game_pane.getChildren().set(0, room1);
+    else initialised_game_pane.getChildren().add(0, room1);
   }
 
   /**
