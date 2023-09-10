@@ -19,7 +19,7 @@
             <Image url="@../images/rooms/room3/l2_3.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="119.0" fitWidth="191.0" layoutX="315.0" layoutY="194.0">
+      <ImageView fx:id="Aircraft" fitHeight="118.0" fitWidth="189.0" layoutX="315.0" layoutY="194.0">
          <image>
             <Image url="@../images/rooms/room3/777_FSX.png" />
          </image>
