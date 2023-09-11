@@ -10,11 +10,12 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#press" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room3SubController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="700.0" stroke="BLACK" strokeType="INSIDE" width="1000.0" />
-      <ImageView fitHeight="550.0" fitWidth="360.0" layoutX="641.0" layoutY="-3.0">
+      <ImageView fx:id="CentralDisplayUnit" fitHeight="550.0" fitWidth="360.0" layoutX="641.0" layoutY="-3.0">
          <image>
             <Image url="@../images/rooms/room3/CDU_FMC.png" />
          </image>
       </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="216.0" layoutX="699.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="243.0" />
       <Text fx:id="mapTxt" fill="WHITE" layoutX="8.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT THE CORRECT ROUTE TO PROCEED">
          <font>
             <Font name="Verdana" size="27.0" />
@@ -83,14 +84,18 @@
       <Rectangle fx:id="eight8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="712.0" layoutY="487.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="nine9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="749.0" layoutY="485.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="zero0" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="712.0" layoutY="523.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="224.0" layoutX="697.0" layoutY="29.0" stroke="BLACK" strokeType="INSIDE" width="246.0" />
-      <Text fx:id="displayInput" fill="#11ee66" layoutX="713.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="201.46533203125">
+      <Text fx:id="displayOutput" fill="#11ee66" layoutX="719.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="201.46533203125">
          <font>
-            <Font size="27.0" />
+            <Font name="Helvetica" size="23.0" />
+         </font>
+      </Text>
+      <Text fx:id="displayInput" fill="WHITE" layoutX="705.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="225.9111328125">
+         <font>
+            <Font name="Helvetica" size="18.0" />
          </font>
       </Text>
       <Rectangle fx:id="delete" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="863.0" layoutY="523.0" onMouseClicked="#handleDeleteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <ImageView fx:id="currentFlightPlan" fitHeight="550.0" fitWidth="412.0" layoutX="82.0" layoutY="46.0">
+      <ImageView fx:id="currentFlightPlan" fitHeight="550.0" fitWidth="412.0" layoutX="112.0" layoutY="6.0">
          <image>
             <Image url="@../images/rooms/room3/current_flight_plan.png" />
          </image>
@@ -100,5 +105,11 @@
             <Image url="@../images/rooms/room3/lock.png" />
          </image>
       </ImageView>
+      <Rectangle fx:id="execute" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="923.0" layoutY="318.0" onMouseClicked="#handleExecuteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
+      <Text fx:id="errorMessage" fill="RED" layoutX="728.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="189.30633544921875">
+         <font>
+            <Font name="Helvetica" size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

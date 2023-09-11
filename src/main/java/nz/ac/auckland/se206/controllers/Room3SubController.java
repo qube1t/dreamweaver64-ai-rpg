@@ -17,10 +17,9 @@ public class Room3SubController {
   @FXML
   private Rectangle a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
   @FXML private Rectangle one1, two2, three3, four4, five5, six6, seven7, eight8, nine9, zero0;
-  @FXML private Rectangle slash, clear, delete;
-  @FXML private Text displayInput, mapTxt;
-  @FXML private ImageView lock;
-  @FXML private ImageView currentFlightPlan, im1, im2, im3, im4;
+  @FXML private Rectangle slash, clear, delete, execute;
+  @FXML private Text displayInput, displayOutput, mapTxt, errorMessage;
+  @FXML private ImageView currentFlightPlan, im1, im2, im3, im4, lock, CentralDisplayUnit;
   protected int currentSelection;
   protected List<Rectangle> allButtons;
 
@@ -30,11 +29,13 @@ public class Room3SubController {
     img4.setVisible(false);
     currentFlightPlan.setVisible(false);
     currentSelection = 1;
+    CentralDisplayUnit.setOpacity(0.3);
 
     List<Rectangle> allButtons =
         Arrays.asList(
-            a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, q, r, s, t, u, v, w, x, y, z, slash, clear,
-            delete, one1, two2, three3, four4, five5, six6, seven7, eight8, nine9, zero0);
+            a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, q, r, s, t, u, v, w, x, y, z, slash,
+            execute, clear, delete, one1, two2, three3, four4, five5, six6, seven7, eight8, nine9,
+            zero0);
     this.allButtons = allButtons;
     for (Rectangle letter : allButtons) {
       letter.setDisable(true);
@@ -49,27 +50,27 @@ public class Room3SubController {
     System.out.println("Letter clicked: " + upperLetter);
 
     // Append the clicked letter to the existing text
-    String currentText = displayInput.getText();
-    displayInput.setText(currentText + upperLetter);
+    String currentText = displayOutput.getText();
+    displayOutput.setText(currentText + upperLetter);
   }
 
   @FXML
   private void handleSlashClick(MouseEvent event) {
-    String currentText = displayInput.getText();
-    displayInput.setText(currentText + "/");
+    String currentText = displayOutput.getText();
+    displayOutput.setText(currentText + "/");
   }
 
   @FXML
   private void handleDeleteClick(MouseEvent event) {
-    String currentText = displayInput.getText();
+    String currentText = displayOutput.getText();
     if (currentText.length() > 0) {
-      displayInput.setText(currentText.substring(0, currentText.length() - 1));
+      displayOutput.setText(currentText.substring(0, currentText.length() - 1));
     }
   }
 
   @FXML
   private void handleClearClick(MouseEvent event) {
-    displayInput.setText("");
+    displayOutput.setText("");
   }
 
   @FXML
@@ -77,18 +78,20 @@ public class Room3SubController {
     Rectangle numberRectangle = (Rectangle) event.getSource();
     String number = numberRectangle.getId(); // Get the ID of the clicked rectangle
     // last character of the string is the number
-    String currentText = displayInput.getText();
+    String currentText = displayOutput.getText();
     if (currentText.length() > 0) {
-      displayInput.setText(currentText + number.substring(number.length() - 1));
+      displayOutput.setText(currentText + number.substring(number.length() - 1));
     }
   }
 
   protected void enableFlightCDU() {
+    CentralDisplayUnit.setOpacity(1);
     lock.setVisible(false);
     lock.setDisable(true);
     for (Rectangle button : allButtons) {
       button.setDisable(false);
     }
+    displayInput.setText("ENTER DEP / DEST AIRPORT CODE E.g.WLG/AKL THEN PRESS EXEC");
   }
 
   protected void disableMap() {
@@ -110,6 +113,27 @@ public class Room3SubController {
     img2.setDisable(true);
     img3.setDisable(true);
     img4.setDisable(true);
+  }
+
+  @FXML
+  /**
+   * Handle execute button click
+   *
+   * @param event
+   */
+  public void handleExecuteClick() {
+    String currentInput = displayOutput.getText();
+    if (currentInput.contains("HND/SYD")) {
+      displayInput.setVisible(true);
+      errorMessage.setVisible(false);
+      displayInput.setText("CONGRATULATIONS! THE AIRCRAFT CODE IS QR16 GOOD LUCK ON YOUR ESCAPE!");
+      displayOutput.setText("");
+    } else {
+      displayInput.setVisible(false);
+      // Change input text to red by adding the CSS style class
+      errorMessage.setText("INCORRECT AIRPORT CODE TRY AGAIN");
+      displayOutput.setText("");
+    }
   }
 
   /**
