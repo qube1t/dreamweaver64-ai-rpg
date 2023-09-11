@@ -7,7 +7,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#press" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room3SubController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="700.0" stroke="BLACK" strokeType="INSIDE" width="1000.0" />
@@ -16,7 +15,7 @@
             <Image url="@../images/rooms/room3/CDU_FMC.png" />
          </image>
       </ImageView>
-      <Text fill="WHITE" layoutX="8.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT THE CORRECT ROUTE TO PROCEED">
+      <Text fx:id="mapTxt" fill="WHITE" layoutX="8.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT THE CORRECT ROUTE TO PROCEED">
          <font>
             <Font name="Verdana" size="27.0" />
          </font>
@@ -25,22 +24,22 @@
       <Rectangle fx:id="img2" arcHeight="5.0" arcWidth="5.0" fill="#c156ff" height="268.0" layoutX="313.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="256.0" />
       <Rectangle fx:id="img3" arcHeight="5.0" arcWidth="5.0" fill="#c156ff" height="268.0" layoutX="32.0" layoutY="344.0" stroke="BLACK" strokeType="INSIDE" width="256.0" />
       <Rectangle fx:id="img4" arcHeight="5.0" arcWidth="5.0" fill="#c156ff" height="268.0" layoutX="313.0" layoutY="344.0" stroke="BLACK" strokeType="INSIDE" width="256.0" />
-      <ImageView fitHeight="256.0" fitWidth="242.0" layoutX="39.0" layoutY="65.0">
+      <ImageView fx:id="im1" fitHeight="256.0" fitWidth="242.0" layoutX="39.0" layoutY="65.0">
          <image>
             <Image url="@../images/rooms/room3/map_1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="256.0" fitWidth="242.0" layoutX="320.0" layoutY="65.0">
+      <ImageView fx:id="im2" fitHeight="256.0" fitWidth="242.0" layoutX="320.0" layoutY="65.0">
          <image>
             <Image url="@../images/rooms/room3/map_2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="256.0" fitWidth="242.0" layoutX="39.0" layoutY="350.0">
+      <ImageView fx:id="im3" fitHeight="256.0" fitWidth="242.0" layoutX="39.0" layoutY="350.0">
          <image>
             <Image url="@../images/rooms/room3/map_3.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="256.0" fitWidth="242.0" layoutX="321.0" layoutY="350.0">
+      <ImageView fx:id="im4" fitHeight="256.0" fitWidth="242.0" layoutX="321.0" layoutY="350.0">
          <image>
             <Image url="@../images/rooms/room3/map_4.png" />
          </image>
@@ -91,6 +90,11 @@
          </font>
       </Text>
       <Rectangle fx:id="delete" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="863.0" layoutY="523.0" onMouseClicked="#handleDeleteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <ImageView fx:id="currentFlightPlan" fitHeight="550.0" fitWidth="412.0" layoutX="82.0" layoutY="46.0">
+         <image>
+            <Image url="@../images/rooms/room3/current_flight_plan.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="lock" fitHeight="100.0" fitWidth="200.0" layoutX="714.0" layoutY="294.0">
          <image>
             <Image url="@../images/rooms/room3/lock.png" />

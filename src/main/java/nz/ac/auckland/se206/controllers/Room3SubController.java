@@ -18,8 +18,9 @@ public class Room3SubController {
   private Rectangle a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
   @FXML private Rectangle one1, two2, three3, four4, five5, six6, seven7, eight8, nine9, zero0;
   @FXML private Rectangle slash, clear, delete;
-  @FXML private Text displayInput;
+  @FXML private Text displayInput, mapTxt;
   @FXML private ImageView lock;
+  @FXML private ImageView currentFlightPlan, im1, im2, im3, im4;
   protected int currentSelection;
   protected List<Rectangle> allButtons;
 
@@ -27,6 +28,7 @@ public class Room3SubController {
     img2.setVisible(false);
     img3.setVisible(false);
     img4.setVisible(false);
+    currentFlightPlan.setVisible(false);
     currentSelection = 1;
 
     List<Rectangle> allButtons =
@@ -87,6 +89,27 @@ public class Room3SubController {
     for (Rectangle button : allButtons) {
       button.setDisable(false);
     }
+  }
+
+  protected void disableMap() {
+    currentFlightPlan.setVisible(true);
+    mapTxt.setVisible(false);
+    im1.setVisible(false);
+    im2.setVisible(false);
+    im3.setVisible(false);
+    im4.setVisible(false);
+    img1.setVisible(false);
+    img2.setVisible(false);
+    img3.setVisible(false);
+    img4.setVisible(false);
+    im1.setDisable(true);
+    im2.setDisable(true);
+    im3.setDisable(true);
+    im4.setDisable(true);
+    img1.setDisable(true);
+    img2.setDisable(true);
+    img3.setDisable(true);
+    img4.setDisable(true);
   }
 
   /**
@@ -157,6 +180,7 @@ public class Room3SubController {
         if (currentSelection == 1) {
           System.out.println("1");
         } else if (currentSelection == 2) {
+          disableMap();
           enableFlightCDU();
           System.out.println("2");
 
