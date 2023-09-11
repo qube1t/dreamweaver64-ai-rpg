@@ -1,8 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Random;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
@@ -10,166 +11,186 @@ import nz.ac.auckland.se206.GameState;
 
 public class Room2Controller {
 
-  @FXML private Rectangle yellowBox;
-  @FXML private Rectangle greyBox;
-  @FXML private Rectangle purpleBox;
-  @FXML private Rectangle whiteBox;
-  @FXML private Rectangle turBox;
-  @FXML private Rectangle greenBox;
-  @FXML private Rectangle blueBox;
-  @FXML private Rectangle recL1;
-  @FXML private Rectangle recL2;
-  @FXML private Rectangle recL3;
-  @FXML private Rectangle recL4;
-  @FXML private Rectangle recL5;
-  @FXML private Rectangle recL51;
-  @FXML private Rectangle recL52;
-  @FXML private Rectangle recL53;
-  @FXML private Rectangle recL54;
-  @FXML private Rectangle recL55;
+  @FXML private Rectangle box1;
+  @FXML private Rectangle box2;
+  @FXML private Rectangle box3;
+  @FXML private Rectangle box4;
+  @FXML private Rectangle box5;
+  @FXML private Rectangle box6;
+  @FXML private Rectangle box7;
+  @FXML private Rectangle box8;
+  @FXML private Rectangle doorToRoom1;
+  @FXML private ImageView foundKey;
 
-  /** Initializes the room view, it is called when the room loads. */
+  private int[] realTreasures;
+
+  /** 
+   * Initializes the room view, it is called when the room loads. 
+   */
   public void initialize() {
-    showDialog("Info", "Pirate's Ship Dream", "story,,");
+    setRandomBox();
   }
 
   /**
-   * Displays a dialog box with the given title, header text, and message.
-   *
-   * @param title the title of the dialog box
-   * @param headerText the header text of the dialog box
-   * @param message the message content of the dialog box
+   * Set the random treasure box
    */
-  private void showDialog(String title, String headerText, String message) {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle(title);
-    alert.setHeaderText(headerText);
-    alert.setContentText(message);
-    alert.showAndWait();
+  private void setRandomBox() {
+    realTreasures = new Random().ints(1, 7).distinct().limit(2).toArray();
   }
 
   /**
-   * Handles the click event on the yellow box.
-   *
-   * @param event the mouse event
-   * @throws IOException if there is an error loading the chat view
+   * Get the random treasure box and put the riddle or password in it
+   * @param numOfBox
+   * @throws IOException
    */
-  @FXML
-  public void onClickYellow(MouseEvent event) throws IOException {
-    System.out.println("Yellow treasure box clicked");
-
-    if (!GameState.isRiddleResolved) {
-      // App.setRoot("chat");
-      if (GameState.isRiddleResolved) {
-        // App.setRoot("memory");
+  private void getRandomBox(int numOfBox) throws IOException {
+    if (numOfBox == realTreasures[0]) {
+      if (!GameState.isTreasureFound) {
+        //find the treasure
+      } else {
+        if (!GameState.isRiddleResolved) {
+          App.setRoot("chat");
+        } else {
+          // App.setRoot("memory");
+        }
       }
-    } else {
-      // App.setRoot("memory");
+      
+    } else if (numOfBox == realTreasures[1]) {
+      App.setRoot("password");
+      if (GameState.isKeyFound) {
+        foundKey.setVisible(true);
+      }
     }
-    GameState.attemptToOpenTreasure--;
-    checkAttempt();
   }
 
   /**
-   * Handles the click event on the grey box.
+   * Handles the click event on the treasure box 1.
    *
    * @param event the mouse event
-   * @throws IOException if there is an error loading the chat view
+   * @throws IOException
    */
   @FXML
-  public void onClickGrey(MouseEvent event) throws IOException {
-    System.out.println("Grey treasure box clicked");
-    showDialog("Info", "Wrong", "This is an empty box!");
-    GameState.attemptToOpenTreasure--;
-    checkAttempt();
+  public void onClickBox1(MouseEvent event) throws IOException {
+    System.out.println("Treasure box1 clicked");
+    getRandomBox(1);
+    // GameState.attemptToOpenTreasure--;
+    // checkAttempt();
   }
 
   /**
-   * Handles the click event on the purple box.
+   * Handles the click event on the treasure box 2.
    *
    * @param event the mouse event
-   * @throws IOException if there is an error loading the chat view
+   * @throws IOException
    */
   @FXML
-  public void onClickPurple(MouseEvent event) throws IOException {
-    System.out.println("Purple treasure box clicked");
-    GameState.attemptToOpenTreasure--;
-    checkAttempt();
+  public void onClickBox2(MouseEvent event) throws IOException {
+    System.out.println("Treasure box2 clicked");
+    getRandomBox(2);
+    // GameState.attemptToOpenTreasure--;
+    // checkAttempt();
   }
 
   /**
-   * Handles the click event on the white box.
+   * Handles the click event on the treasure box 3.
    *
    * @param event the mouse event
-   * @throws IOException if there is an error loading the chat view
+   * @throws IOException
    */
   @FXML
-  public void onClickWhite(MouseEvent event) throws IOException {
-    System.out.println("White treasure box clicked");
-    if (!GameState.isKeyFound) {
-        App.setRoot("password");
-    } else {
-        showDialog("Info", "Key", "Key found!");
-    }
-    GameState.attemptToOpenTreasure--;
-    checkAttempt();
+  public void onClickBox3(MouseEvent event) throws IOException {
+    System.out.println("Treasure box3 clicked");
+    getRandomBox(3);
+    // GameState.attemptToOpenTreasure--;
+    // checkAttempt();
   }
 
   /**
-   * Handles the click event on the tur box.
+   * Handles the click event on the treasure box 4.
    *
    * @param event the mouse event
-   * @throws IOException if there is an error loading the chat view
+   * @throws IOException
    */
   @FXML
-  public void onClickTur(MouseEvent event) throws IOException {
-    System.out.println("Tur treasure box clicked");
-    GameState.attemptToOpenTreasure--;
-    checkAttempt();
+  public void onClickBox4(MouseEvent event) throws IOException {
+    System.out.println("Treasure box4 clicked");
+    getRandomBox(4);
+    // GameState.attemptToOpenTreasure--;
+    // checkAttempt();
   }
 
   /**
-   * Handles the click event on the green box.
+   * Handles the click event on the treasure box 5.
    *
    * @param event the mouse event
-   * @throws IOException if there is an error loading the chat view
+   * @throws IOException
    */
   @FXML
-  public void onClickGreen(MouseEvent event) throws IOException {
-    System.out.println("Green treasure box clicked");
-    GameState.attemptToOpenTreasure--;
-    checkAttempt();
+  public void onClickBox5(MouseEvent event) throws IOException {
+    System.out.println("Treasure box5 clicked");
+    getRandomBox(5);
+    // GameState.attemptToOpenTreasure--;
+    // checkAttempt();
   }
 
   /**
-   * Handles the click event on the blue box.
+   * Handles the click event on the treasure box 6.
    *
    * @param event the mouse event
-   * @throws IOException if there is an error loading the chat view
+   * @throws IOException
    */
   @FXML
-  public void onClickBlue(MouseEvent event) throws IOException {
-    System.out.println("Blue treasure box clicked");
-    GameState.attemptToOpenTreasure--;
-    checkAttempt();
+  public void onClickBox6(MouseEvent event) throws IOException {
+    System.out.println("Treasure box6 clicked");
+    getRandomBox(6);
+    // GameState.attemptToOpenTreasure--;
+    // checkAttempt();
   }
 
-  private void checkAttempt() {
-    if (GameState.attemptToOpenTreasure == 4) {
-        recL1.setVisible(true);
-    } else if (GameState.attemptToOpenTreasure == 3) {
-        recL2.setVisible(true);
-    } else if (GameState.attemptToOpenTreasure == 2) {
-        recL3.setVisible(true);
-    } else if (GameState.attemptToOpenTreasure == 1) {
-        recL4.setVisible(true);
-    } else if (GameState.attemptToOpenTreasure == 0) {
-        recL5.setVisible(true);
-        recL51.setVisible(true);
-        recL52.setVisible(true);
-        recL53.setVisible(true);
-        recL54.setVisible(true);
-        recL55.setVisible(true);
-    }
+  /**
+   * Handles the click event on the treasure box 7.
+   *
+   * @param event the mouse event
+   * @throws IOException
+   */
+  @FXML
+  public void onClickBox7(MouseEvent event) throws IOException {
+    System.out.println("Treasure box7 clicked");
+    getRandomBox(7);
+    // GameState.attemptToOpenTreasure--;
+    // checkAttempt();
+  }
+
+  /**
+   * check how many times the player clicked the treasure box
+   */
+  //private void checkAttempt() {
+  //  if (GameState.attemptToOpenTreasure == 4) {
+  //    recL1.setVisible(true);
+  //  } else if (GameState.attemptToOpenTreasure == 3) {
+  //    recL2.setVisible(true);
+  //  } else if (GameState.attemptToOpenTreasure == 2) {
+  //    recL3.setVisible(true);
+  //  } else if (GameState.attemptToOpenTreasure == 1) {
+  //    recL4.setVisible(true);
+  //  } else if (GameState.attemptToOpenTreasure == 0) {
+  //    recL5.setVisible(true);
+  //    recL51.setVisible(true);
+  //    recL52.setVisible(true);
+  //    recL53.setVisible(true);
+  //    recL54.setVisible(true);
+  //    recL55.setVisible(true);
+  //  }
+  // }
+
+  /**
+   * Handles the click event on the door.
+   *
+   * @param event the mouse event
+   * @throws IOException
+   */
+  @FXML
+  public void onClickDoor(MouseEvent event) throws IOException {
+    App.setRoot("room1");
   }
 }
