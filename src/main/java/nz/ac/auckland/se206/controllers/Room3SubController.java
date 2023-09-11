@@ -1,6 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.util.Arrays;
+import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -16,14 +19,24 @@ public class Room3SubController {
   @FXML private Rectangle one1, two2, three3, four4, five5, six6, seven7, eight8, nine9, zero0;
   @FXML private Rectangle slash, clear, delete;
   @FXML private Text displayInput;
+  @FXML private ImageView lock;
   protected int currentSelection;
+  protected List<Rectangle> allButtons;
 
   public void initialize() {
-    img1.setVisible(true);
     img2.setVisible(false);
     img3.setVisible(false);
     img4.setVisible(false);
     currentSelection = 1;
+
+    List<Rectangle> allButtons =
+        Arrays.asList(
+            a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, q, r, s, t, u, v, w, x, y, z, slash, clear,
+            delete, one1, two2, three3, four4, five5, six6, seven7, eight8, nine9, zero0);
+    this.allButtons = allButtons;
+    for (Rectangle letter : allButtons) {
+      letter.setDisable(true);
+    }
   }
 
   @FXML
@@ -65,6 +78,14 @@ public class Room3SubController {
     String currentText = displayInput.getText();
     if (currentText.length() > 0) {
       displayInput.setText(currentText + number.substring(number.length() - 1));
+    }
+  }
+
+  protected void enableFlightCDU() {
+    lock.setVisible(false);
+    lock.setDisable(true);
+    for (Rectangle button : allButtons) {
+      button.setDisable(false);
     }
   }
 
@@ -136,7 +157,9 @@ public class Room3SubController {
         if (currentSelection == 1) {
           System.out.println("1");
         } else if (currentSelection == 2) {
+          enableFlightCDU();
           System.out.println("2");
+
         } else if (currentSelection == 3) {
           System.out.println("3");
         } else if (currentSelection == 4) {

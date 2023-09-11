@@ -11,7 +11,7 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#press" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room3SubController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="700.0" stroke="BLACK" strokeType="INSIDE" width="1000.0" />
-      <ImageView fitHeight="550.0" fitWidth="360.0" layoutX="640.0">
+      <ImageView fitHeight="550.0" fitWidth="360.0" layoutX="641.0" layoutY="-3.0">
          <image>
             <Image url="@../images/rooms/room3/CDU_FMC.png" />
          </image>
@@ -56,7 +56,7 @@
       <Rectangle fx:id="j" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="936.0" layoutY="387.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="k" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="790.0" layoutY="420.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="l" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="825.0" layoutY="421.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="M" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="862.0" layoutY="419.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="m" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="862.0" layoutY="419.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="n" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="898.0" layoutY="420.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="o" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="936.0" layoutY="421.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="p" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="789.0" layoutY="456.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
@@ -91,5 +91,10 @@
          </font>
       </Text>
       <Rectangle fx:id="delete" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="863.0" layoutY="523.0" onMouseClicked="#handleDeleteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <ImageView fx:id="lock" fitHeight="100.0" fitWidth="200.0" layoutX="714.0" layoutY="294.0">
+         <image>
+            <Image url="@../images/rooms/room3/lock.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
