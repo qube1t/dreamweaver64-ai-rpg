@@ -13,8 +13,8 @@ public class Room3SubController {
   @FXML private Rectangle img1, img2, img3, img4;
   @FXML
   private Rectangle a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
-  @FXML private Rectangle one, two, three, four, five, six, seven, eight, nine, zero;
-  @FXML private Rectangle slash, clear;
+  @FXML private Rectangle one1, two2, three3, four4, five5, six6, seven7, eight8, nine9, zero0;
+  @FXML private Rectangle slash, clear, delete;
   @FXML private Text displayInput;
   protected int currentSelection;
 
@@ -29,18 +29,43 @@ public class Room3SubController {
   @FXML
   private void handleLetterClick(MouseEvent event) {
     Rectangle letterRectangle = (Rectangle) event.getSource();
-    String letter = letterRectangle.getId(); // Get the ID of the clicked rectangle
-    System.out.println("Letter clicked: " + letter);
-    displayInput.setText(letter);
-    // Add your logic to process the clicked letter here
+    String upperLetter =
+        letterRectangle.getId().toUpperCase(); // Get the ID of the clicked rectangle
+    System.out.println("Letter clicked: " + upperLetter);
+
+    // Append the clicked letter to the existing text
+    String currentText = displayInput.getText();
+    displayInput.setText(currentText + upperLetter);
+  }
+
+  @FXML
+  private void handleSlashClick(MouseEvent event) {
+    String currentText = displayInput.getText();
+    displayInput.setText(currentText + "/");
+  }
+
+  @FXML
+  private void handleDeleteClick(MouseEvent event) {
+    String currentText = displayInput.getText();
+    if (currentText.length() > 0) {
+      displayInput.setText(currentText.substring(0, currentText.length() - 1));
+    }
+  }
+
+  @FXML
+  private void handleClearClick(MouseEvent event) {
+    displayInput.setText("");
   }
 
   @FXML
   private void handleNumberClick(MouseEvent event) {
     Rectangle numberRectangle = (Rectangle) event.getSource();
     String number = numberRectangle.getId(); // Get the ID of the clicked rectangle
-    System.out.println("Number clicked: " + number);
-    // Add your logic to process the clicked number here
+    // last character of the string is the number
+    String currentText = displayInput.getText();
+    if (currentText.length() > 0) {
+      displayInput.setText(currentText + number.substring(number.length() - 1));
+    }
   }
 
   /**

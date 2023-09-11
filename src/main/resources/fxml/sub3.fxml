@@ -55,14 +55,14 @@
       <Rectangle fx:id="i" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="899.0" layoutY="384.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="j" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="936.0" layoutY="387.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="k" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="790.0" layoutY="420.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="k1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="825.0" layoutY="421.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="l" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="825.0" layoutY="421.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="M" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="862.0" layoutY="419.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="n" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="898.0" layoutY="420.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="o" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="936.0" layoutY="421.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="p" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="789.0" layoutY="456.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="q" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="826.0" layoutY="454.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="r" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="862.0" layoutY="453.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="s" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="898.0" layoutY="454.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="p" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="789.0" layoutY="456.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="q" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="826.0" layoutY="454.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="r" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="862.0" layoutY="453.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="s" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="898.0" layoutY="454.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="t" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="939.0" layoutY="455.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="u" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="790.0" layoutY="489.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="v" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="828.0" layoutY="489.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
@@ -70,25 +70,26 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="899.0" layoutY="489.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" fx:id="x" />
       <Rectangle fx:id="y" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="938.0" layoutY="488.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="z" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="790.0" layoutY="523.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="slash" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="903.0" layoutY="524.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="19.0" />
-      <Rectangle fx:id="clear" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="939.0" layoutY="524.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="slash" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="903.0" layoutY="524.0" onMouseClicked="#handleSlashClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="19.0" />
+      <Rectangle fx:id="clear" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="939.0" layoutY="524.0" onMouseClicked="#handleClearClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="e" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="19.0" layoutX="941.0" layoutY="353.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
       <Rectangle fx:id="a" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="791.0" layoutY="351.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="one" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="675.0" layoutY="420.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="two" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="712.0" layoutY="419.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="three" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="748.0" layoutY="419.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="four" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="674.0" layoutY="455.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="five" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="711.0" layoutY="453.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="six" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="748.0" layoutY="456.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="seven" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="675.0" layoutY="489.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="eight" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="712.0" layoutY="487.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="nine" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="749.0" layoutY="485.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <Rectangle fx:id="zero" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="712.0" layoutY="523.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="one1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="675.0" layoutY="420.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="two2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="712.0" layoutY="419.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="three3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="748.0" layoutY="419.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="four4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="674.0" layoutY="455.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="five5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="711.0" layoutY="453.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="six6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="748.0" layoutY="456.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="seven7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="675.0" layoutY="489.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="eight8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="712.0" layoutY="487.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="nine9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="749.0" layoutY="485.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Rectangle fx:id="zero0" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="712.0" layoutY="523.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="224.0" layoutX="697.0" layoutY="29.0" stroke="BLACK" strokeType="INSIDE" width="246.0" />
-      <Text fx:id="displayInput" fill="#0fcd58" layoutX="713.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="201.46533203125">
+      <Text fx:id="displayInput" fill="#11ee66" layoutX="713.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="201.46533203125">
          <font>
-            <Font size="24.0" />
+            <Font size="27.0" />
          </font>
       </Text>
+      <Rectangle fx:id="delete" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="863.0" layoutY="523.0" onMouseClicked="#handleDeleteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
    </children>
 </Pane>
