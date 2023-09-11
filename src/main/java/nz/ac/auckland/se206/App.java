@@ -48,7 +48,7 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
     Pane root = (Pane) loadFxml("room3");
-    scene = new Scene(root, 700, 700);
+    scene = new Scene(root, 1000, 800);
     stage.setScene(scene);
     stage.show();
 

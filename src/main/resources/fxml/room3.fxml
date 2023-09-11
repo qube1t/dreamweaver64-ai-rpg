@@ -5,24 +5,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
+<!--<?import nz.ac.auckland.se206.components.Character?>-->
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room3Controller">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="800.0" stroke="BLACK" strokeType="INSIDE" width="800.0" />
-      <ImageView fitHeight="700.0" fitWidth="700.0" layoutX="60.0" layoutY="100.0">
+      <ImageView fitHeight="280.0" fitWidth="335.0" layoutX="-5.0" layoutY="169.0">
          <image>
-            <Image url="@../images/rooms/room3/layer1.png" />
+            <Image url="@../images/rooms/room3/flight%20plan.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="700.0" fitWidth="700.0" layoutX="60.0" layoutY="100.0">
+      <ImageView fitHeight="593.0" fitWidth="666.0" layoutX="334.0">
          <image>
-            <Image url="@../images/rooms/room3/l2_3.png" />
+            <Image url="@../images/rooms/room3/tower_latest.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="Aircraft" fitHeight="118.0" fitWidth="189.0" layoutX="315.0" layoutY="194.0">
-         <image>
-            <Image url="@../images/rooms/room3/777_FSX.png" />
-         </image>
-      </ImageView>
+      <Rectangle fx:id="ob1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="200.0" layoutX="429.0" layoutY="352.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+      <!--<Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />-->
    </children>
 </Pane>

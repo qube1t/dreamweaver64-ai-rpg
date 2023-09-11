@@ -1,70 +1,68 @@
 package nz.ac.auckland.se206.controllers;
 
-import javafx.animation.ScaleTransition;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.components.Character;
 
 public class Room3Controller {
-  @FXML private ImageView Aircraft;
 
-  // Zooms in the aircraft image when click on it and click again to zoom out.
-  /**
-   * This method creates the zoom in animation for the aircraft image.
-   *
-   * @param imageView the image view of the aircraft
-   * @return the zoom in animation
-   */
-  private ScaleTransition createZoomInAnimation(ImageView imageView) {
-    ScaleTransition animation = new ScaleTransition(Duration.seconds(1), imageView);
-    animation.setFromX(1.0); // Start from the original size
-    animation.setFromY(1.0);
-    animation.setToX(2.0); // Zoom-in to 2 times the original size
-    animation.setToY(2.0);
-    animation.setRate(-1);
-    return animation;
+  @FXML private Character character;
+  @FXML private Rectangle ob1;
+
+  public void initialize() {
+    ArrayList<Rectangle> obsts = new ArrayList<Rectangle>();
+    obsts.add(0, ob1);
+    // Initialization code goes here
+    character.enableMobility(obsts);
+    character.setLayoutX(250);
+    character.setLayoutY(250);
   }
 
   /**
-   * Handles the click event on the painting.
+   * Handles the key pressed event.
    *
-   * @param event the mouse event
+   * @param event the key event
    */
   @FXML
-  public void onClickAircraft(MouseEvent event) {
-    handleAircraftClick(event.getSource()); // Pass the source of the event
+  public void onKeyPressed(KeyEvent event) {
+    // System.out.println("key " + event.getCode() + " pressed");
+
+    String letter = event.getCode().toString();
+
+    if (letter.equals("W")) {
+      character.setAction(0);
+      System.out.println("W pressed");
+    } else if (letter.equals("A")) {
+      System.out.println("A pressed");
+      character.setAction(1);
+    }
+    if (letter.equals("S")) {
+      System.out.println("S pressed");
+      character.setAction(2);
+    } else if (letter.equals("D")) {
+      character.setAction(3);
+    }
+
+    // move after animating as it will change direction of character
+    if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
+      if (!character.isAnimating()) character.startAnimation();
+      character.move();
+    }
   }
 
   /**
-   * Implments the logic for handling the click event on the painting.
+   * Handles the key released event.
    *
-   * @param source the source of the event
+   * @param event the key event
    */
-  private void handleAircraftClick(Object source) {
-    ImageView paintingImageView = null;
-
-    if (source instanceof ImageView) {
-      paintingImageView = (ImageView) source;
-    }
-
-    if (paintingImageView != null) {
-      ScaleTransition zoomInAnimation = null;
-
-      // If the painting is already zoomed-in, zoom-out
-      if (zoomInAnimation.getRate() == -1) {
-        zoomInAnimation.setRate(1); // Set the animation rate to 1 to zoom-in
-        System.out.println("zoom in");
-      } else {
-        // If the painting is already zoomed-in, zoom-out
-        zoomInAnimation.setRate(-1); // Set the animation rate to -1 to zoom-out
-        System.out.println("zoom out");
-      }
-
-      // Set the onFinished event of the zoomInAnimation to trigger the AI response
-      zoomInAnimation.setOnFinished(finishedEvent -> {});
-
-      zoomInAnimation.play();
+  @FXML
+  public void onKeyReleased(KeyEvent event) {
+    // System.out.println("key " + event.getCode() + " released");
+    String letter = event.getCode().toString();
+    if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
+      character.endAnimation();
     }
   }
 }
