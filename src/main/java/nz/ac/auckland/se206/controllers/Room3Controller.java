@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.ArrayList;
 import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.Character;
@@ -24,6 +25,7 @@ public class Room3Controller {
       desk1,
       desk2;
   @FXML private Character character;
+  @FXML private ImageView radar_image, radar_computer;
 
   public void initialize() {
     ArrayList<Rectangle> obsts = new ArrayList<Rectangle>();

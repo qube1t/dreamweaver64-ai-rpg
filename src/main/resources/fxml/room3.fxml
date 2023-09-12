@@ -34,6 +34,21 @@
       <Rectangle fx:id="boundary4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="191.0" layoutX="575.0" layoutY="159.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="16.0" />
       <Rectangle fx:id="boundary5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="521.0" layoutY="351.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="61.0" />
       <Rectangle fx:id="book" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="396.0" layoutY="204.0" onMouseClicked="#onClickBook" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+      <ImageView fx:id="radar_image" fitHeight="135.0" fitWidth="147.0" layoutX="249.0" layoutY="169.0">
+         <image>
+            <Image url="@../images/rooms/room3/radar.gif" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="radar_computer" fitHeight="307.0" fitWidth="247.0" layoutX="196.0" layoutY="134.0">
+         <image>
+            <Image url="@../images/rooms/room3/computer_radar.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="63.0" fitWidth="108.0" layoutX="260.0" layoutY="195.0">
+         <image>
+            <Image url="@../images/rooms/room3/position-on-radar.png" />
+         </image>
+      </ImageView>
 <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
    </children>
 </Pane>
