@@ -1,0 +1,9 @@
+.list-cell {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+.list-cell:inactive {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}

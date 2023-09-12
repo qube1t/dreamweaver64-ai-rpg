@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<StackPane fx:id="main_pane" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="934" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
+<StackPane fx:id="main_pane" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="759.0" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
    <children>
-      <VBox>
+      <VBox prefHeight="811.0" prefWidth="706.0">
          <children>
             <AnchorPane prefHeight="104.0" style="-fx-border-color: pink;" />
             <AnchorPane fx:id="game_pane" prefHeight="475.0" style="-fx-border-color: blue; -fx-background-color: black;" />
-            <AnchorPane prefHeight="122.0" style="-fx-border-color: green;" />
+            <AnchorPane prefHeight="122.0" style="-fx-border-color: green;">
+            <children><ListView fx:id="chat" blendMode="LIGHTEN" focusTraversable="false" layoutX="21.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="168.0" prefWidth="540.0" style="-fx-background-color: black; -fx-border-color: orange; -fx-border-width: 4px;" stylesheets="@../css/chat.css">
+</ListView></children>
+            </AnchorPane>
          </children>
       </VBox>
    </children>
