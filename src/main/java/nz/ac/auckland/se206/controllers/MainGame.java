@@ -1,11 +1,14 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.components.Character;
 
 public class MainGame {
@@ -13,11 +16,13 @@ public class MainGame {
   @FXML private Pane game_pane;
   @FXML private Character character;
   @FXML private Pane outer_pane;
+  @FXML public ImageView lastFlightPlan;
+  private static MainGame instance;
 
   public void initialize() throws IOException {
     // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/room.fxml"));
     // fxmlLoader.setController(new RoomController());
-
+    instance = this;
     System.out.println(1);
     Region room1 = (Region) FXMLLoader.load(getClass().getResource("/fxml/room3.fxml"));
 
@@ -49,6 +54,22 @@ public class MainGame {
     //                 System.out.println(game_pane.getScene().getWidth());
     //               }
     //             });
+
+    lastFlightPlan.setVisible(false);
+    System.out.println("plan");
+  }
+
+  public void fadeInFlightPlan() {
+    lastFlightPlan.setVisible(true); // Make sure it's visible before starting the animation
+
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), lastFlightPlan);
+    fadeTransition.setFromValue(0.0);
+    fadeTransition.setToValue(1.0);
+    fadeTransition.play();
+  }
+
+  public static MainGame getInstance() {
+    return instance;
   }
 
   /**

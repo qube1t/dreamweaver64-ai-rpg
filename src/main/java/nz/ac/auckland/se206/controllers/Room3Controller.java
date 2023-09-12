@@ -55,4 +55,11 @@ public class Room3Controller {
     // Switch to the chat view to solve the riddle.
     App.setUi("sub3");
   }
+
+  @FXML
+  public void onClickBook() {
+    System.out.println("Book clicked");
+    MainGame mainGame = MainGame.getInstance();
+    mainGame.fadeInFlightPlan();
+  }
 }
