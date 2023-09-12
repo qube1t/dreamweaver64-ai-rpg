@@ -28,7 +28,13 @@ public class Room1Controller {
   @FXML private Rectangle rect11;
   @FXML private Rectangle rect12;
   @FXML private Rectangle rect13;
-  private MainGame parentController;
+  @FXML private Rectangle rect14;
+  @FXML private Rectangle rect15;
+  @FXML private Rectangle rect16;
+  @FXML private Rectangle rect17;
+  @FXML private Rectangle rect19;
+  @FXML private Rectangle rect20;
+  @FXML private Rectangle rect21;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -37,16 +43,12 @@ public class Room1Controller {
         new ArrayList<Rectangle>(
             Arrays.asList(
                 rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
-                rect12, rect13));
+                rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21));
     // obsts.add(0, rect1);
     // Initialization code goes here
     character.enableMobility(obsts);
     character.setLayoutX(250);
     character.setLayoutY(250);
-  }
-
-  public void setParentController(MainGame parentController) {
-    this.parentController = parentController;
   }
 
   @FXML
