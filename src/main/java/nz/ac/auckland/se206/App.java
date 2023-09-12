@@ -18,9 +18,31 @@ import javafx.stage.Stage;
 public class App extends Application {
 
   private static Scene scene;
+  private static Parent Room3Root;
+  private static Parent Room3SubRoot;
 
   public static void main(final String[] args) {
     launch();
+  }
+
+  public static void setUi(String fxml) {
+    Parent root = null;
+    if (fxml.equals("sub3")) {
+      // First time loading the game, create a new instance of the game.
+      if (Room3SubRoot == null) {
+        try {
+          Room3SubRoot = loadFxml("sub3");
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+      root = Room3SubRoot;
+
+      if (root != null) {
+        scene.setRoot(root);
+        root.requestFocus();
+      }
+    }
   }
 
   public static void setRoot(String fxml) throws IOException {
@@ -47,7 +69,7 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    Pane root = (Pane) loadFxml("sub3");
+    Pane root = (Pane) loadFxml("room3");
     scene = new Scene(root, 1000, 700);
     stage.setScene(scene);
     stage.show();
