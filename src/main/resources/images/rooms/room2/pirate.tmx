@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="6" height="9" tilewidth="8" tileheight="8" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="Download16431" tilewidth="8" tileheight="8" tilecount="17472" columns="104">
+  <image source="Download16431.png" width="832" height="1344"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="6" height="9">
+  <data encoding="csv">
+1666,1667,1668,1669,1670,1671,
+1770,1771,1772,1773,1774,1775,
+1874,1875,1876,1877,1878,1879,
+1978,1979,1980,1981,1982,1983,
+2082,2083,2084,2085,2086,2087,
+2186,2187,2188,2189,2190,2191,
+2290,2291,2292,2293,2294,2295,
+2394,2395,2396,2397,2398,2399,
+2498,2499,2500,2501,2502,2503
+</data>
+ </layer>
+</map>

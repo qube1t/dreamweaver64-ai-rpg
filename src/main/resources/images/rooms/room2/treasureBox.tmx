@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="10" height="6" tilewidth="4" tileheight="4" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" name="treasureBox" tilewidth="4" tileheight="4" tilecount="7680" columns="80">
+  <image source="treasure_chests_32x32.png" width="320" height="384"/>
+ </tileset>
+ <layer id="1" name="Tile Layer 1" width="10" height="6">
+  <data encoding="csv">
+146,147,148,1427,1428,1429,1430,149,150,151,
+226,227,228,1507,1508,1509,1510,229,230,231,
+306,307,308,1587,1588,1589,1590,309,310,311,
+386,387,388,1667,1668,1669,1670,389,390,391,
+466,467,468,1747,1748,1749,1750,469,470,471,
+546,547,548,1827,1828,1829,1830,549,550,551
+</data>
+ </layer>
+</map>
