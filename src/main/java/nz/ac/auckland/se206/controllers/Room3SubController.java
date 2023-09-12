@@ -3,11 +3,13 @@ package nz.ac.auckland.se206.controllers;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.Character;
 
 public class Room3SubController {
@@ -20,6 +22,7 @@ public class Room3SubController {
   @FXML private Rectangle slash, clear, delete, execute;
   @FXML private Text displayInput, displayOutput, mapTxt, errorMessage;
   @FXML private ImageView currentFlightPlan, im1, im2, im3, im4, lock, CentralDisplayUnit;
+  @FXML private Button back;
   protected int currentSelection;
   protected List<Rectangle> allButtons;
 
@@ -40,6 +43,11 @@ public class Room3SubController {
     for (Rectangle letter : allButtons) {
       letter.setDisable(true);
     }
+  }
+
+  @FXML
+  private void onGoBack() {
+    App.setUi("room3");
   }
 
   @FXML

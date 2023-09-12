@@ -37,11 +37,21 @@ public class App extends Application {
         }
       }
       root = Room3SubRoot;
-
-      if (root != null) {
-        scene.setRoot(root);
-        root.requestFocus();
+    } else if (fxml.equals("room3")) {
+      // First time loading the game, create a new instance of the game.
+      if (Room3Root == null) {
+        try {
+          Room3Root = loadFxml("room3");
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
       }
+      root = Room3Root;
+    }
+
+    if (root != null) {
+      scene.setRoot(root);
+      root.requestFocus();
     }
   }
 
