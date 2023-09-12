@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -23,6 +24,8 @@ public class MainGame {
   @FXML private ImageView speechBubble;
   @FXML private ScrollPane bubbleTextPane;
   @FXML private Label bubbleText;
+  @FXML private ListView<Label> chat;
+  Text bubbleChatText = new Text("text");
 
   public void initialize() throws IOException {
     // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/room.fxml"));
@@ -33,32 +36,16 @@ public class MainGame {
     room1.setScaleShape(true);
     character = (Character) room1.lookup("#character");
 
-    // game_pane
-    //     .widthProperty()
-    //     .addListener(
-    //         (obsWidth, oldW, newW) -> {
-    //           if (oldW != newW) {
-    //             // int sca
-    //           }
-    //         });
-
-    // game_pane.prefWidthProperty().bind(outer_pane.widthProperty());
-    // game_pane.prefHeightProperty().bind(outer_pane.heightProperty());
-
     game_pane.getChildren().add(0, room1);
 
-    // System.out.println(
-    //     ((Pane) ((Pane) game_pane.getChildren().get(0)).getChildren().get(1)).getChildren());
     System.out.println(character);
+
+    // setting up bubble chat
+    bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
+    bubbleTextPane.setFitToWidth(true);
+    bubbleTextPane.setContent(bubbleChatText);
+
     addChat("hello");
-    //     game_pane
-    //         .sceneProperty()
-    //         .addListener(
-    //             (observableScene, oldScene, newScene) -> {
-    //               if (oldScene == null && newScene != null) {
-    //                 System.out.println(game_pane.getScene().getWidth());
-    //               }
-    //             });
   }
 
   /**
@@ -124,9 +111,13 @@ public class MainGame {
   }
 
   private void addChat(String text) {
-    Text textObj = new Text(text);
-    textObj.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
-    bubbleTextPane.setFitToWidth(true);
-    bubbleTextPane.setContent(textObj);
+
+    bubbleChatText.setText(text);
+
+    Label label = new Label(text);
+    label.setWrapText(true);
+    label.getStyleClass().add("chat-text-announcement");
+    label.setMaxWidth(500);
+    chat.getItems().add(0, label);
   }
 }

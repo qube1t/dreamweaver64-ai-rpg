@@ -7,3 +7,22 @@
     -fx-background-color: black;
     -fx-text-fill: white;
 }
+
+.chat-text {
+    -fx-text-fill: #eaa03a;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-color: #000000;
+    -fx-font-family: "Palatino";
+    -fx-padding: 5px;
+    -fx-word-wrap: break-word;
+}
+
+.chat-text-announcement {
+    -fx-text-fill: lightgrey;
+    -fx-font-size: 14px;
+    -fx-background-color: #000000;
+    -fx-font-family: "Palatino";
+    -fx-padding: 5px;
+    -fx-font-style: italic;
+}
