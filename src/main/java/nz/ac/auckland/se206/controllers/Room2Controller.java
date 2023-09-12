@@ -51,7 +51,12 @@ public class Room2Controller {
       rect25,
       rect26,
       rect27,
-      rect28, rect29, rect30, rect31, rect32, rect33;
+      rect28,
+      rect29,
+      rect30,
+      rect31,
+      rect32,
+      rect33;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -95,17 +100,17 @@ public class Room2Controller {
     character.enableMobility(obsts);
     character.setLayoutX(60);
     character.setLayoutY(250);
-
-    box1.disableProperty().setValue(true);
-    box2.disableProperty().setValue(true);
-    box3.disableProperty().setValue(true);
-    box4.disableProperty().setValue(true);
-    box5.disableProperty().setValue(true);
   }
 
-  @FXML public void onTradeKey() {
+  @FXML
+  public void onTradeKey() {
     if (GameState.isItemFound) {
+      // depending on the item, put image of the item at the top and give the item to pirate using
+      // drag
       GameState.isBoxKeyFound = true;
+    } else {
+      // write this sentance in chat box or pirate's speech bubble
+      System.out.println("Find the item to trade with pirate");
     }
   }
 
@@ -116,27 +121,28 @@ public class Room2Controller {
    * @throws IOException
    */
   private void getRandomBox(int numOfBox) throws IOException {
-    int treasure = new Random().nextInt(5-1+1) + 1;
+    int treasure = new Random().nextInt(5) + 1;
     if (GameState.isBoxKeyFound) {
-      box1.disableProperty().setValue(false);
-      box2.disableProperty().setValue(false);
-      box3.disableProperty().setValue(false);
-      box4.disableProperty().setValue(false);
-      box5.disableProperty().setValue(false);
+        box1.setDisable(false);
+        box2.setDisable(false);
+        box3.setDisable(false);
+        box4.setDisable(false);
+        box5.setDisable(false);
+      if (numOfBox == treasure) {
+        System.out.println("Correct treasure box clicked");
+        App.setRoot("treasure_box");
+      } else {
+        // write this sentance in chat box
+        System.out.println("Wrong treasure box clicked. Find correct one");
+        box1.setDisable(true);
+        box2.setDisable(true);
+        box3.setDisable(true);
+        box4.setDisable(true);
+        box5.setDisable(true);
+      }
     } else {
+      // write this sentance in chat box or pirate's speech bubble
       System.out.println("Find the item to trade with pirate");
-      return;
-    }
-    if (numOfBox == treasure) {
-      System.out.println("Correct treasure box clicked");
-      App.setRoot("treasurebox");
-    } else {
-      System.out.println("Wrong treasure box clicked. Find correct one");
-      box1.disableProperty().setValue(true);
-      box2.disableProperty().setValue(true);
-      box3.disableProperty().setValue(true);
-      box4.disableProperty().setValue(true);
-      box5.disableProperty().setValue(true);
     }
   }
 
@@ -148,7 +154,7 @@ public class Room2Controller {
    */
   @FXML
   public void onClickBox1(MouseEvent event) throws IOException {
-    System.out.println("Treasure box1 clicked");
+    System.out.println("First treasure box clicked");
     getRandomBox(1);
   }
 
@@ -160,7 +166,7 @@ public class Room2Controller {
    */
   @FXML
   public void onClickBox2(MouseEvent event) throws IOException {
-    System.out.println("Treasure box2 clicked");
+    System.out.println("Second teasure box clicked");
     getRandomBox(2);
   }
 
@@ -172,7 +178,7 @@ public class Room2Controller {
    */
   @FXML
   public void onClickBox3(MouseEvent event) throws IOException {
-    System.out.println("Treasure box3 clicked");
+    System.out.println("Third treasure box clicked");
     getRandomBox(3);
   }
 
@@ -184,7 +190,7 @@ public class Room2Controller {
    */
   @FXML
   public void onClickBox4(MouseEvent event) throws IOException {
-    System.out.println("Treasure box4 clicked");
+    System.out.println("Fourth treasure box clicked");
     getRandomBox(4);
   }
 
@@ -196,7 +202,7 @@ public class Room2Controller {
    */
   @FXML
   public void onClickBox5(MouseEvent event) throws IOException {
-    System.out.println("Treasure box5 clicked");
+    System.out.println("Fifth treasure box clicked");
     getRandomBox(5);
   }
 
