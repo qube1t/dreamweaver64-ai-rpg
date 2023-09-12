@@ -3,9 +3,13 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.components.Character;
 
 public class MainGame {
@@ -13,6 +17,12 @@ public class MainGame {
   @FXML private Pane game_pane;
   @FXML private Character character;
   @FXML private Pane outer_pane;
+  @FXML private Label chat_toggle_btn;
+  @FXML private Pane aiCharacterPane;
+  @FXML private Pane chatPane;
+  @FXML private ImageView speechBubble;
+  @FXML private ScrollPane bubbleTextPane;
+  @FXML private Label bubbleText;
 
   public void initialize() throws IOException {
     // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/room.fxml"));
@@ -35,11 +45,12 @@ public class MainGame {
     // game_pane.prefWidthProperty().bind(outer_pane.widthProperty());
     // game_pane.prefHeightProperty().bind(outer_pane.heightProperty());
 
-    game_pane.getChildren().add(room1);
+    game_pane.getChildren().add(0, room1);
 
     // System.out.println(
     //     ((Pane) ((Pane) game_pane.getChildren().get(0)).getChildren().get(1)).getChildren());
     System.out.println(character);
+    addChat("hello");
     //     game_pane
     //         .sceneProperty()
     //         .addListener(
@@ -93,7 +104,29 @@ public class MainGame {
     }
   }
 
-  static double divideByNumber(Number n1, Number n2) {
-    return Double.parseDouble(n1.toString()) / (Double.parseDouble(n2.toString()));
+  @FXML
+  private void toggleChat() {
+    if (chatPane.isDisable()) {
+      // chatPane is hidden -> show it
+      chatPane.setDisable(false);
+      chatPane.setOpacity(0.5);
+      chat_toggle_btn.setText("Hide Chat");
+
+      speechBubble.setVisible(false);
+      bubbleTextPane.setVisible(false);
+    } else {
+      // hide chatPane
+      chatPane.setDisable(true);
+      chatPane.setOpacity(0);
+      chat_toggle_btn.setText("Show Chat");
+      outer_pane.requestFocus();
+    }
+  }
+
+  private void addChat(String text) {
+    Text textObj = new Text(text);
+    textObj.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
+    bubbleTextPane.setFitToWidth(true);
+    bubbleTextPane.setContent(textObj);
   }
 }
