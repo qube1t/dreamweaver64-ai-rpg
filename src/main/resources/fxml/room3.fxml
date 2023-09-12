@@ -21,7 +21,7 @@
       </ImageView>
       <Rectangle fx:id="computer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="296.0" layoutY="271.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
       <Rectangle fx:id="boundary1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" layoutX="25.0" layoutY="354.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="499.0" />
-      <Rectangle fx:id="boundary2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="165.0" layoutX="76.0" layoutY="20.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="391.0" />
+      <Rectangle fx:id="boundary2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" layoutX="76.0" layoutY="20.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="391.0" />
       <Rectangle fx:id="gate" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" layoutX="525.0" layoutY="162.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
       <Rectangle fx:id="radar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="187.0" layoutY="211.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="92.0" />
       <Rectangle fx:id="computer2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="330.0" layoutY="269.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="53.0" />
@@ -33,7 +33,7 @@
       <Rectangle fx:id="boundary3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="352.0" layoutX="2.0" layoutY="81.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
       <Rectangle fx:id="boundary4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="191.0" layoutX="575.0" layoutY="159.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="16.0" />
       <Rectangle fx:id="boundary5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="521.0" layoutY="351.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="61.0" />
-      <Rectangle fx:id="book" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="397.0" layoutY="204.0" onMouseClicked="#onClickBook" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="31.0" />
-      <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
+      <Rectangle fx:id="book" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="396.0" layoutY="204.0" onMouseClicked="#onClickBook" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+<Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
    </children>
 </Pane>
