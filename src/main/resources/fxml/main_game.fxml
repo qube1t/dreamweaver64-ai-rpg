@@ -41,7 +41,7 @@
                   <children>
                         <ListView fx:id="chat" blendMode="LIGHTEN" focusTraversable="false" layoutX="-2.0" layoutY="6.0" maxHeight="-Infinity" prefHeight="98.0" prefWidth="611.0" style="-fx-background-color: black; -fx-border-color: orange; -fx-border-width: 4px;" stylesheets="@../css/chat.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0">
 </ListView>
-                        <TextField layoutX="5.0" layoutY="110.0" prefHeight="28.0" prefWidth="562.0" promptText="Talk with AI. Click enter to send." style="-fx-background-color: black; -fx-border-color: grey; -fx-text-fill: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" />
+                        <TextField fx:id="chatInput" layoutX="5.0" layoutY="110.0" onKeyPressed="#keyPressedChatInput" prefHeight="28.0" prefWidth="562.0" promptText="Talk with AI. Click enter to send." style="-fx-background-color: black; -fx-border-color: grey; -fx-text-fill: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" />
                      </children>
                      <StackPane.margin>
                         <Insets bottom="40.0" left="100.0" />

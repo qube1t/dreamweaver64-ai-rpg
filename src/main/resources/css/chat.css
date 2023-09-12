@@ -14,7 +14,7 @@
     -fx-font-weight: bold;
     -fx-background-color: #000000;
     -fx-font-family: "Palatino";
-    -fx-padding: 5px;
+    -fx-margin: 5px;
     -fx-word-wrap: break-word;
 }
 

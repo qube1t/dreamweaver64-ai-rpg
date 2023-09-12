@@ -1,12 +1,16 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
@@ -25,6 +29,8 @@ public class MainGame {
   @FXML private ScrollPane bubbleTextPane;
   @FXML private Label bubbleText;
   @FXML private ListView<Label> chat;
+  @FXML private TextField chatInput;
+
   Text bubbleChatText = new Text("text");
 
   public void initialize() throws IOException {
@@ -96,7 +102,7 @@ public class MainGame {
     if (chatPane.isDisable()) {
       // chatPane is hidden -> show it
       chatPane.setDisable(false);
-      chatPane.setOpacity(0.5);
+      chatPane.setOpacity(0.7);
       chat_toggle_btn.setText("Hide Chat");
 
       speechBubble.setVisible(false);
@@ -110,14 +116,31 @@ public class MainGame {
     }
   }
 
+  @FXML
+  private void keyPressedChatInput(KeyEvent ke){
+     if (ke.getCode().equals(KeyCode.ENTER)) {
+      addChat(chatInput.getText());
+      chatInput.setText("");
+      outer_pane.requestFocus();
+     }
+  }
+
   private void addChat(String text) {
 
+    // adding to bubble
     bubbleChatText.setText(text);
 
+    if (chatPane.isDisable()) speechBubble.setVisible(true);
+
+    // adding to chatbox
     Label label = new Label(text);
     label.setWrapText(true);
-    label.getStyleClass().add("chat-text-announcement");
+    label.getStyleClass().add("chat-text");
     label.setMaxWidth(500);
-    chat.getItems().add(0, label);
+
+    List<Label> items = chat.getItems();
+    int index = items.size();
+    items.add(label);
+    chat.scrollTo(index);
   }
 }
