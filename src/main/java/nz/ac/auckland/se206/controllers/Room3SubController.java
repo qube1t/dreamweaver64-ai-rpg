@@ -25,6 +25,7 @@ public class Room3SubController {
   @FXML private Button back;
   protected int currentSelection;
   protected List<Rectangle> allButtons;
+  protected int finalSelction;
 
   public void initialize() {
     img2.setVisible(false);
@@ -154,6 +155,9 @@ public class Room3SubController {
     // Handle arrow key presses
     switch (event.getCode()) {
       case LEFT:
+        if (finalSelction == 2) {
+          break;
+        }
         System.out.println("left");
         if (currentSelection == 2) {
           img2.setVisible(false);
@@ -170,6 +174,9 @@ public class Room3SubController {
         }
         break;
       case RIGHT:
+        if (finalSelction == 2) {
+          break;
+        }
         System.out.println("right");
         if (currentSelection == 1) {
           img1.setVisible(false);
@@ -186,6 +193,9 @@ public class Room3SubController {
         }
         break;
       case UP:
+        if (finalSelction == 2) {
+          break;
+        }
         System.out.println("up");
         if (currentSelection == 3) {
           img3.setVisible(false);
@@ -198,6 +208,9 @@ public class Room3SubController {
         }
         break;
       case DOWN:
+        if (finalSelction == 2) {
+          break;
+        }
         System.out.println("down");
         if (currentSelection == 1) {
           img1.setVisible(false);
@@ -208,6 +221,7 @@ public class Room3SubController {
           img4.setVisible(true);
           currentSelection = 4;
         }
+        break;
       case ENTER:
         if (currentSelection == 1) {
           System.out.println("1");
@@ -216,6 +230,7 @@ public class Room3SubController {
           enableFlightCDU();
           System.out.println("2");
 
+          finalSelction = 2;
         } else if (currentSelection == 3) {
           System.out.println("3");
         } else if (currentSelection == 4) {
