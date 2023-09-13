@@ -9,6 +9,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
 
 public class Room3Controller {
@@ -37,22 +38,19 @@ public class Room3Controller {
 
   public void initialize() {
 
+    // Set the inital correct treasure box
+    GameState.currentBox = 2;
+
     // Add all the obstacles to the list
     ArrayList<Rectangle> obsts = new ArrayList<Rectangle>();
-    obsts.add(0, computer);
-    obsts.add(1, computer2);
-    obsts.add(2, chair1);
-    obsts.add(3, chair2);
-    obsts.add(4, gate);
-    obsts.add(5, radar);
-    obsts.add(6, desk1);
-    obsts.add(7, desk2);
-    obsts.add(8, depBoard);
-    obsts.add(9, boundary1);
-    obsts.add(10, boundary2);
-    obsts.add(11, boundary3);
-    obsts.add(12, boundary4);
-    obsts.add(13, boundary5);
+    Rectangle[] rectangles = {
+      computer, computer2, chair1, chair2, gate, radar, desk1, desk2, depBoard, boundary1,
+      boundary2, boundary3, boundary4, boundary5
+    };
+
+    for (Rectangle rectangle : rectangles) {
+      obsts.add(rectangle);
+    }
 
     character.enableMobility(obsts);
     character.setLayoutX(530);
@@ -63,25 +61,37 @@ public class Room3Controller {
     // Set radar computer invisible initially
     radar_computer.setVisible(false);
     radar_image.setVisible(false);
+    box1.setVisible(false);
+    box2.setVisible(false);
+    box3.setVisible(false);
+    box4.setVisible(false);
+    box5.setVisible(false);
 
     // Set the radar computer boolean to false initially
     isRadarComputerOpen = false;
   }
 
   public void fadeInRadar() {
-    radar_computer.setVisible(true);
-    radar_image.setVisible(true);
 
-    FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(1), radar_computer);
-    FadeTransition fadeTransition3 = new FadeTransition(Duration.seconds(1), radar_image);
+    Circle[] points = {box1, box2, box3, box4, box5};
+    ImageView[] radarObjects = {radar_computer, radar_image};
 
-    fadeTransition1.setFromValue(0.0);
-    fadeTransition1.setToValue(1.0);
-    fadeTransition3.setFromValue(0.0);
-    fadeTransition3.setToValue(1.0);
+    for (Circle point : points) {
+      point.setVisible(true);
 
-    fadeTransition1.play();
-    fadeTransition3.play();
+      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), point);
+      fadeTransition.setFromValue(0.0);
+      fadeTransition.setToValue(1.0);
+      fadeTransition.play();
+    }
+
+    for (ImageView imageView : radarObjects) {
+      imageView.setVisible(true);
+      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), imageView);
+      fadeTransition.setFromValue(0.0);
+      fadeTransition.setToValue(1.0);
+      fadeTransition.play();
+    }
   }
 
   @FXML
@@ -123,6 +133,11 @@ public class Room3Controller {
     if (isRadarComputerOpen) {
       radar_computer.setVisible(false);
       radar_image.setVisible(false);
+      box1.setVisible(false);
+      box2.setVisible(false);
+      box3.setVisible(false);
+      box4.setVisible(false);
+      box5.setVisible(false);
 
       isRadarComputerOpen = false;
     }
@@ -133,18 +148,30 @@ public class Room3Controller {
    *
    * @return the snumber of the box that has been changed
    */
-  protected int changePointColor() {
-    int random = (int) (Math.random() * 5);
-    if (random == 0) {
-      box1.setFill(javafx.scene.paint.Color.RED);
-    } else if (random == 1) {
-      box2.setFill(javafx.scene.paint.Color.RED);
+  protected int changePointColor(int currentBox) {
+    // Change the color of the current box to green
+    box1.setStyle("-fx-fill: #0b941b");
+    box2.setStyle("-fx-fill: #0b941b");
+    box3.setStyle("-fx-fill: #0b941b");
+    box4.setStyle("-fx-fill: #0b941b");
+    box5.setStyle("-fx-fill: #0b941b");
+
+    int random = (int) (Math.random() * 5) + 1;
+    // Use while loop to ensure a different box is selected
+    while (random == currentBox) {
+      random = (int) (Math.random() * 5) + 1;
+    }
+    // Change the color of the box
+    if (random == 1) {
+      box1.setStyle("-fx-fill: red");
     } else if (random == 2) {
-      box3.setFill(javafx.scene.paint.Color.RED);
+      box2.setStyle("-fx-fill: red");
     } else if (random == 3) {
-      box4.setFill(javafx.scene.paint.Color.RED);
+      box3.setStyle("-fx-fill: red");
     } else if (random == 4) {
-      box5.setFill(javafx.scene.paint.Color.RED);
+      box4.setStyle("-fx-fill: red");
+    } else if (random == 5) {
+      box5.setStyle("-fx-fill: red");
     }
     return random;
   }
@@ -152,6 +179,7 @@ public class Room3Controller {
   @FXML
   public void onClickDoor() {
     System.out.println("Door clicked");
-    changePointColor();
+    GameState.currentBox = changePointColor(GameState.currentBox);
+    System.out.println(GameState.currentBox);
   }
 }

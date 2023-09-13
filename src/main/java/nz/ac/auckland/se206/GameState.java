@@ -10,4 +10,6 @@ public class GameState {
   public static boolean isKeyFound = false;
 
   public static boolean isPreviousFlightPlanFound = false;
+
+  public static int currentBox;
 }
