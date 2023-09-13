@@ -34,7 +34,21 @@ public class MainGame {
     //   initialised_game_pane.getChildren().set(0, room1);
     //   // System.out.println(initialised_game_pane.getChildren().size());
     // } else
+    Pane backgroundBlur = new Pane();
+    backgroundBlur.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
+    backgroundBlur.setOnMouseClicked(
+        e -> {
+          removeOverlay();
+        });
+    initialised_game_pane.getChildren().add(backgroundBlur);
     initialised_game_pane.getChildren().add(room1);
+  }
+
+  public static void removeOverlay() {
+    if (initialised_game_pane.getChildren().size() > 1) {
+      initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
+      initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
+    }
   }
 
   /**
@@ -58,8 +72,7 @@ public class MainGame {
     } else if (letter.equals("D")) {
       character.setAction(3);
     } else if (letter.equals("ESCAPE")) {
-      if (initialised_game_pane.getChildren().size() > 1)
-        initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
+      removeOverlay();
     }
 
     // move after animating as it will change direction of character
