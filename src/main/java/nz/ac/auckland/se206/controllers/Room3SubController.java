@@ -2,6 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.Arrays;
 import java.util.List;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -9,6 +12,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.components.Character;
 
@@ -93,6 +97,24 @@ public class Room3SubController {
     }
   }
 
+  protected void typeTextEffect(Text text, String message, int delay) {
+    text.setText(""); // Clear the text first
+    int messageLength = message.length();
+
+    Timeline timeline = new Timeline();
+
+    for (int i = 0; i < messageLength; i++) {
+      final int index = i;
+      KeyFrame keyFrame =
+          new KeyFrame(
+              Duration.millis(delay * i),
+              new KeyValue(text.textProperty(), message.substring(0, index + 1)));
+      timeline.getKeyFrames().add(keyFrame);
+    }
+
+    timeline.play();
+  }
+
   protected void enableFlightCDU() {
     CentralDisplayUnit.setOpacity(1);
     lock.setVisible(false);
@@ -100,7 +122,9 @@ public class Room3SubController {
     for (Rectangle button : allButtons) {
       button.setDisable(false);
     }
-    displayInput.setText("ENTER DEP / DEST AIRPORT CODE E.g.WLG/AKL THEN PRESS EXEC");
+    String message = "ENTER DEP / DEST AIRPORT CODE E.g.WLG/AKL THEN PRESS EXEC";
+    int typingDelay = 50;
+    typeTextEffect(displayInput, message, typingDelay);
   }
 
   protected void disableMap() {

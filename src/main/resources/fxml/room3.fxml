@@ -2,6 +2,7 @@
 
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
@@ -34,6 +35,7 @@
       <Rectangle fx:id="boundary4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="191.0" layoutX="575.0" layoutY="159.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="16.0" />
       <Rectangle fx:id="boundary5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="521.0" layoutY="351.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="61.0" />
       <Rectangle fx:id="book" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="396.0" layoutY="204.0" onMouseClicked="#onClickBook" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
+      <AnchorPane fx:id="radarPane" layoutX="203.0" layoutY="149.0" prefHeight="290.0" prefWidth="231.0" />
       <ImageView fx:id="radar_computer" fitHeight="307.0" fitWidth="247.0" layoutX="196.0" layoutY="134.0">
          <image>
             <Image url="@../images/rooms/room3/computer_radar.png" />

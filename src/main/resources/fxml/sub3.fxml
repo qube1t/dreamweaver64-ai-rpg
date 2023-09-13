@@ -89,7 +89,7 @@
             <Font name="Helvetica" size="23.0" />
          </font>
       </Text>
-      <Text fx:id="displayInput" fill="WHITE" layoutX="705.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="225.9111328125">
+      <Text fx:id="displayInput" fill="WHITE" layoutX="725.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="189.30633544921875">
          <font>
             <Font name="Helvetica" size="18.0" />
          </font>

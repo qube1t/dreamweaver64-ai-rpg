@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
@@ -28,6 +29,7 @@ public class Room3Controller {
       desk1,
       desk2;
   @FXML private Character character;
+  @FXML private AnchorPane radarPane;
   @FXML private ImageView radar_image, radar_computer, radar_points, map;
   private boolean isRadarComputerOpen;
 
@@ -54,10 +56,7 @@ public class Room3Controller {
     character.setLayoutX(530);
     character.setLayoutY(210);
 
-    // Set mouse transparent for the radar computer
-    radar_computer.setMouseTransparent(true);
-    radar_points.setMouseTransparent(true);
-    radar_image.setMouseTransparent(true);
+    radarPane.setMouseTransparent(true);
 
     // Set radar computer invisible initially
     radar_computer.setVisible(false);
