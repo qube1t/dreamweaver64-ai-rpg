@@ -4,6 +4,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
 <?import nz.ac.auckland.se206.components.Character?>
@@ -23,7 +24,7 @@
       <Rectangle fx:id="computer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="296.0" layoutY="271.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
       <Rectangle fx:id="boundary1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" layoutX="25.0" layoutY="354.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="499.0" />
       <Rectangle fx:id="boundary2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" layoutX="76.0" layoutY="20.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="391.0" />
-      <Rectangle fx:id="gate" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" layoutX="525.0" layoutY="162.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
+      <Rectangle fx:id="gate" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" layoutX="525.0" layoutY="162.0" onMouseClicked="#onClickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
       <Rectangle fx:id="radar" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="187.0" layoutY="211.0" onMouseClicked="#onClickRadar" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="92.0" />
       <Rectangle fx:id="computer2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="330.0" layoutY="269.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="53.0" />
       <Rectangle fx:id="chair1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="19.0" layoutX="226.0" layoutY="234.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="14.0" />
@@ -36,22 +37,22 @@
       <Rectangle fx:id="boundary5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="521.0" layoutY="351.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="61.0" />
       <Rectangle fx:id="book" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="396.0" layoutY="204.0" onMouseClicked="#onClickBook" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="32.0" />
       <AnchorPane fx:id="radarPane" layoutX="203.0" layoutY="149.0" prefHeight="290.0" prefWidth="231.0" />
-      <ImageView fx:id="radar_computer" fitHeight="307.0" fitWidth="247.0" layoutX="196.0" layoutY="134.0">
-         <image>
-            <Image url="@../images/rooms/room3/computer_radar.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="radar_image" fitHeight="135.0" fitWidth="147.0" layoutX="249.0" layoutY="169.0">
+      <ImageView fx:id="radar_image" fitHeight="159.0" fitWidth="174.0" layoutX="194.0" layoutY="146.0">
          <image>
             <Image url="@../images/rooms/room3/radar.gif" />
          </image>
       </ImageView>
-      <ImageView fx:id="radar_points" fitHeight="63.0" fitWidth="108.0" layoutX="260.0" layoutY="195.0">
+      <ImageView fx:id="radar_computer" fitHeight="363.0" fitWidth="298.0" layoutX="128.0" layoutY="107.0">
          <image>
-            <Image url="@../images/rooms/room3/position-on-radar.png" />
+            <Image url="@../images/rooms/room3/computer_radar.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="protectRadarComputer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="124.0" layoutX="229.0" layoutY="302.0" onMouseClicked="#onClickProtectRadar" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="187.0" />
+      <Circle fx:id="box1" fill="#0b941b" layoutX="257.0" layoutY="207.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
+      <Circle fx:id="box2" fill="#0b941b" layoutX="247.0" layoutY="242.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
+      <Circle fx:id="box3" fill="#0b941b" layoutX="269.0" layoutY="225.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
+      <Circle fx:id="box4" fill="#0b941b" layoutX="308.0" layoutY="253.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
+      <Circle fx:id="box5" fill="#0b941b" layoutX="319.0" layoutY="234.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
 <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
    </children>
 </Pane>

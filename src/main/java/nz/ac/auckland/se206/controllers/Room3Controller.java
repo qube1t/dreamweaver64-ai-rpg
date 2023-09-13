@@ -5,6 +5,7 @@ import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
@@ -28,9 +29,10 @@ public class Room3Controller {
       depBoard,
       desk1,
       desk2;
+  @FXML private Circle box1, box2, box3, box4, box5;
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
-  @FXML private ImageView radar_image, radar_computer, radar_points, map;
+  @FXML private ImageView radar_image, radar_computer, map;
   private boolean isRadarComputerOpen;
 
   public void initialize() {
@@ -60,7 +62,6 @@ public class Room3Controller {
 
     // Set radar computer invisible initially
     radar_computer.setVisible(false);
-    radar_points.setVisible(false);
     radar_image.setVisible(false);
 
     // Set the radar computer boolean to false initially
@@ -69,22 +70,17 @@ public class Room3Controller {
 
   public void fadeInRadar() {
     radar_computer.setVisible(true);
-    radar_points.setVisible(true);
     radar_image.setVisible(true);
 
     FadeTransition fadeTransition1 = new FadeTransition(Duration.seconds(1), radar_computer);
-    FadeTransition fadeTransition2 = new FadeTransition(Duration.seconds(1), radar_points);
     FadeTransition fadeTransition3 = new FadeTransition(Duration.seconds(1), radar_image);
 
     fadeTransition1.setFromValue(0.0);
     fadeTransition1.setToValue(1.0);
-    fadeTransition2.setFromValue(0.0);
-    fadeTransition2.setToValue(1.0);
     fadeTransition3.setFromValue(0.0);
     fadeTransition3.setToValue(1.0);
 
     fadeTransition1.play();
-    fadeTransition2.play();
     fadeTransition3.play();
   }
 
@@ -126,10 +122,36 @@ public class Room3Controller {
 
     if (isRadarComputerOpen) {
       radar_computer.setVisible(false);
-      radar_points.setVisible(false);
       radar_image.setVisible(false);
 
       isRadarComputerOpen = false;
     }
+  }
+
+  /**
+   * This method randomly select one of the boxes and change its color to red
+   *
+   * @return the snumber of the box that has been changed
+   */
+  protected int changePointColor() {
+    int random = (int) (Math.random() * 5);
+    if (random == 0) {
+      box1.setFill(javafx.scene.paint.Color.RED);
+    } else if (random == 1) {
+      box2.setFill(javafx.scene.paint.Color.RED);
+    } else if (random == 2) {
+      box3.setFill(javafx.scene.paint.Color.RED);
+    } else if (random == 3) {
+      box4.setFill(javafx.scene.paint.Color.RED);
+    } else if (random == 4) {
+      box5.setFill(javafx.scene.paint.Color.RED);
+    }
+    return random;
+  }
+
+  @FXML
+  public void onClickDoor() {
+    System.out.println("Door clicked");
+    changePointColor();
   }
 }
