@@ -18,6 +18,11 @@
                         <Image url="@../images/rooms/room3/previous_flight_plan_newest.png" />
                      </image>
                   </ImageView>
+                  <ImageView fitHeight="400.0" fitWidth="356.0" layoutX="635.0" layoutY="30.0">
+                     <image>
+                        <Image url="@../images/rooms/room3/dep_board.png" />
+                     </image>
+                  </ImageView>
                </children></AnchorPane>
             <AnchorPane prefHeight="122.0" style="-fx-border-color: green;" />
          </children>
