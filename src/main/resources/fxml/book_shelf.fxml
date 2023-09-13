@@ -5,9 +5,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="459.0" style="-fx-background-image: url(&quot;https://static.vecteezy.com/system/resources/thumbnails/000/164/590/small_2x/WOODGRAIN.jpg&quot;);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="459.0" style="-fx-background-image: url(&quot;https://static.vecteezy.com/system/resources/thumbnails/000/164/590/small_2x/WOODGRAIN.jpg&quot;);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookShelfController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="459.0" layoutY="-1.0" pickOnBounds="true">
          <image>
@@ -29,18 +30,22 @@
             <Image url="@../images/wood_texture.jpeg" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#51ff1f" height="112.0" layoutX="52.0" layoutY="14.0" rotate="24.8" stroke="BLACK" strokeType="INSIDE" width="26.0" />
+      <Rectangle fx:id="book1_rect" arcHeight="5.0" arcWidth="5.0" fill="#51ff1f" height="112.0" layoutX="52.0" layoutY="14.0" rotate="24.8" stroke="BLACK" strokeType="INSIDE" width="26.0" />
       <Label fx:id="lbl_book1" layoutX="14.0" layoutY="60.0" prefHeight="17.0" prefWidth="100.0" rotate="-65.2" text="book1" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="103.0" layoutX="100.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+      <Rectangle fx:id="book2_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="103.0" layoutX="100.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
       <Label fx:id="lbl_book2" layoutX="66.0" layoutY="65.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" text="book2" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffb41f" height="112.0" layoutX="130.0" layoutY="13.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+      <Rectangle fx:id="book3_rect" arcHeight="5.0" arcWidth="5.0" fill="#ffb41f" height="112.0" layoutX="130.0" layoutY="13.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
       <Label fx:id="lbl_book3" layoutX="96.0" layoutY="65.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" text="book3" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a2c6e8" height="27.0" layoutX="144.0" layoutY="222.0" stroke="BLACK" strokeType="INSIDE" width="96.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1ff8ff" height="88.0" layoutX="243.0" layoutY="162.0" stroke="BLACK" strokeType="INSIDE" width="22.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7cff1f" height="103.0" layoutX="271.0" layoutY="147.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#845fc7" height="98.0" layoutX="309.0" layoutY="151.0" rotate="-13.5" stroke="BLACK" strokeType="INSIDE" width="33.0" />
-      <Label fx:id="lbl_book4" layoutX="150.0" layoutY="227.0" prefHeight="17.0" prefWidth="84.0" text="book4" />
-      <Label fx:id="lbl_book5" layoutX="219.0" layoutY="198.0" prefHeight="17.0" prefWidth="71.0" rotate="-90.0" text="book5" />
+      <Rectangle fx:id="book4_rect" arcHeight="5.0" arcWidth="5.0" fill="#a2c6e8" height="27.0" layoutX="144.0" layoutY="222.0" stroke="BLACK" strokeType="INSIDE" width="96.0" />
+      <Rectangle fx:id="book5_rect" arcHeight="5.0" arcWidth="5.0" fill="#1ff8ff" height="88.0" layoutX="243.0" layoutY="162.0" stroke="BLACK" strokeType="INSIDE" width="22.0" />
+      <Rectangle fx:id="book6_rect" arcHeight="5.0" arcWidth="5.0" fill="#7cff1f" height="103.0" layoutX="271.0" layoutY="147.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+      <Rectangle fx:id="book7_rect" arcHeight="5.0" arcWidth="5.0" fill="#845fc7" height="98.0" layoutX="309.0" layoutY="151.0" rotate="-13.5" stroke="BLACK" strokeType="INSIDE" width="33.0" />
+      <Label fx:id="lbl_book4" layoutX="150.0" layoutY="227.0" prefHeight="17.0" prefWidth="84.0" text="Brave New World">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_book5" layoutX="219.0" layoutY="198.0" prefHeight="17.0" prefWidth="71.0" rotate="-90.0" text="Dracula" />
       <Label fx:id="lbl_book6" layoutX="237.0" layoutY="189.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" text="book6" />
       <Label fx:id="lbl_book7" layoutX="284.0" layoutY="192.0" prefHeight="17.0" prefWidth="84.0" rotate="-103.5" text="book7" />
    </children>
