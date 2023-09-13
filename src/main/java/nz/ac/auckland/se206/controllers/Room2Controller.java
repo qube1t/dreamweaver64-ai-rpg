@@ -2,8 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -18,10 +18,17 @@ public class Room2Controller {
   @FXML private Rectangle box3;
   @FXML private Rectangle box4;
   @FXML private Rectangle box5;
+  @FXML private Rectangle pirate;
 
   @FXML private Rectangle doorToRoom1;
-  @FXML private ImageView pirate;
 
+  @FXML private ImageView book;
+  @FXML private ImageView boxKey;
+  @FXML private ImageView gottenBoxKey;
+
+  @FXML private ImageView treasureBox;
+  @FXML private ImageView treasure;
+  @FXML private Button btnClose;
   @FXML private Character character;
   @FXML
   private Rectangle rect1,
@@ -100,17 +107,21 @@ public class Room2Controller {
     character.enableMobility(obsts);
     character.setLayoutX(60);
     character.setLayoutY(250);
+    boxKey.setVisible(true);
+    if (GameState.isBookFound) {
+      book.setVisible(true);
+    }
   }
 
   @FXML
-  public void onTradeKey() {
-    if (GameState.isItemFound) {
-      // depending on the item, put image of the item at the top and give the item to pirate using
-      // drag
+  public void onGetTrade(MouseEvent event) throws IOException {
+    if (GameState.isBookFound) {
       GameState.isBoxKeyFound = true;
+      boxKey.setVisible(false);
+      gottenBoxKey.setVisible(true);
     } else {
       // write this sentance in chat box or pirate's speech bubble
-      System.out.println("Find the item to trade with pirate");
+      System.out.println("Find the item to trade with pirate to open the boxes");
     }
   }
 
@@ -121,16 +132,27 @@ public class Room2Controller {
    * @throws IOException
    */
   private void getRandomBox(int numOfBox) throws IOException {
-    int treasure = new Random().nextInt(5) + 1;
+    int noOftreasure = (int) (Math.random() * 5 + 1);
+    System.out.println("Number of treasure box: " + noOftreasure);
     if (GameState.isBoxKeyFound) {
         box1.setDisable(false);
         box2.setDisable(false);
         box3.setDisable(false);
         box4.setDisable(false);
         box5.setDisable(false);
-      if (numOfBox == treasure) {
+      if (numOfBox == noOftreasure) {
         System.out.println("Correct treasure box clicked");
-        App.setRoot("treasure_box");
+        treasureBox.setDisable(false);
+        treasure.setDisable(false);
+        btnClose.setDisable(false);
+        treasureBox.setVisible(true);
+        treasure.setVisible(true);
+        btnClose.setVisible(true);
+        box1.setDisable(true);
+        box2.setDisable(true);
+        box3.setDisable(true);
+        box4.setDisable(true);
+        box5.setDisable(true);
       } else {
         // write this sentance in chat box
         System.out.println("Wrong treasure box clicked. Find correct one");
@@ -144,6 +166,22 @@ public class Room2Controller {
       // write this sentance in chat box or pirate's speech bubble
       System.out.println("Find the item to trade with pirate");
     }
+  }
+
+  @FXML
+  public void onGetTreasure(MouseEvent event) throws IOException {
+    GameState.isTreasureFound = true;
+    treasure.setVisible(false);
+  }
+
+  @FXML 
+  public void onCloseBox() {
+    treasureBox.setVisible(false);
+    treasure.setVisible(false);
+    btnClose.setVisible(false);
+    treasureBox.setDisable(true);
+    treasure.setDisable(true);
+    btnClose.setDisable(true);
   }
 
   /**
