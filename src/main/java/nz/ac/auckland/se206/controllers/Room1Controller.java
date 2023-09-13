@@ -55,4 +55,9 @@ public class Room1Controller {
   public void changeRoot() throws IOException {
     MainGame.setGameRoom("room1");
   }
+
+  @FXML
+  private void openBookShelf() throws IOException {
+    MainGame.setGameRoom("book_shelf");
+  }
 }

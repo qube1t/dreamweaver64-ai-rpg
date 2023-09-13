@@ -30,9 +30,11 @@ public class MainGame {
     room1.setScaleShape(true);
     character = (Character) room1.lookup("#character");
 
-    if (initialised_game_pane.getChildren().size() != 0)
-      initialised_game_pane.getChildren().set(0, room1);
-    else initialised_game_pane.getChildren().add(0, room1);
+    // if (initialised_game_pane.getChildren().size() == 0) {
+    //   initialised_game_pane.getChildren().set(0, room1);
+    //   // System.out.println(initialised_game_pane.getChildren().size());
+    // } else
+    initialised_game_pane.getChildren().add(room1);
   }
 
   /**
@@ -55,6 +57,9 @@ public class MainGame {
       character.setAction(2);
     } else if (letter.equals("D")) {
       character.setAction(3);
+    } else if (letter.equals("ESCAPE")) {
+      if (initialised_game_pane.getChildren().size() > 1)
+        initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
     }
 
     // move after animating as it will change direction of character
