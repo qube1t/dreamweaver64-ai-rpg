@@ -29,7 +29,9 @@ public class InventoryController {
   private Thread timeLimitThread;
   private Thread progressBarThread;
 
-  public void initialize() {}
+  public void initialize() {
+
+  }
 
   /**
    * Handles the start game button.
@@ -60,6 +62,11 @@ public class InventoryController {
     }
   }
 
+  /**
+   * Sets the progress bar.
+   * 
+   * @param timeLimit
+   */
   private void setProgressBar(int timeLimit) {
     Task<Void> task =
         new Task<Void>() {
@@ -87,6 +94,11 @@ public class InventoryController {
     progressBarThread.start();
   }
 
+  /**
+   * Sets the time limit.
+   * 
+   * @param timeLimit
+   */
   private void setTimeLimit(int timeLimit) {
     Task<Void> task =
         new Task<Void>() {
@@ -112,10 +124,38 @@ public class InventoryController {
     timeLimitThread.start();
   }
 
+  /**
+   * Handles the time limit reached event.
+   */
   private void handleTimeLimitReached() {
     GameState.timeLimitReached = true;
     if (!GameState.isPlayerWon) {
       System.out.println("time limit reached");
+    }
+  }
+
+  /**
+   * Sets the item to be found.
+   * 
+   * @param item the item to be found
+   */
+  public void showGottenItem() {
+    if (GameState.isBookFound) {
+        item1.setOpacity(1);
+    } else if (GameState.isBoxKeyFound) {
+        item2.setOpacity(1);
+    } else if (GameState.isAccessKeyFound) {
+        item3.setOpacity(1);
+    } else if (GameState.isTreasureFound) {
+        item4.setOpacity(1);
+    } else if (GameState.isDecryptKeyFound) {
+        item5.setOpacity(1);
+    } else if (GameState.isItem6Found) {
+        item6.setOpacity(1);
+    } else if (GameState.isItem7Found) {
+        item7.setOpacity(1);
+    } else if (GameState.isItem8Found) {
+        item8.setOpacity(1);
     }
   }
 }
