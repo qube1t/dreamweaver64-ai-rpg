@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
 
 public class Room2Controller {
@@ -66,6 +65,15 @@ public class Room2Controller {
       rect32,
       rect33;
 
+  /** Indicates whether the treasure has been found. */
+  public static boolean isTreasureFound = false;
+
+  /** Indicates whether the item has been found to trade with pirate. */
+  public static boolean isBookFound = true;
+
+  /** Indicates whether the key has been found. */
+  public static boolean isBoxKeyFound = false;
+
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
 
@@ -109,15 +117,15 @@ public class Room2Controller {
     character.setLayoutX(60);
     character.setLayoutY(250);
     boxKey.setVisible(true);
-    if (GameState.isBookFound) {
+    if (isBookFound) {
       book.setVisible(true);
     }
   }
 
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException {
-    if (GameState.isBookFound) {
-      GameState.isBoxKeyFound = true;
+    if (isBookFound) {
+      isBoxKeyFound = true;
       boxKey.setVisible(false);
       gottenBoxKey.setVisible(true);
     } else {
@@ -135,12 +143,12 @@ public class Room2Controller {
   private void getRandomBox(int numOfBox) throws IOException {
     int noOftreasure = (int) (Math.random() * 5 + 1);
     System.out.println("Number of treasure box: " + noOftreasure);
-    if (GameState.isBoxKeyFound) {
-        box1.setDisable(false);
-        box2.setDisable(false);
-        box3.setDisable(false);
-        box4.setDisable(false);
-        box5.setDisable(false);
+    if (isBoxKeyFound) {
+      box1.setDisable(false);
+      box2.setDisable(false);
+      box3.setDisable(false);
+      box4.setDisable(false);
+      box5.setDisable(false);
       if (numOfBox == noOftreasure) {
         System.out.println("Correct treasure box clicked");
         treasureBox.setDisable(false);
@@ -171,12 +179,12 @@ public class Room2Controller {
 
   @FXML
   public void onGetTreasure(MouseEvent event) throws IOException {
-    GameState.isTreasureFound = true;
+    isTreasureFound = true;
     treasure.setVisible(false);
     gottenTreasure.setVisible(true);
   }
 
-  @FXML 
+  @FXML
   public void onCloseBox() {
     treasureBox.setVisible(false);
     treasure.setVisible(false);
