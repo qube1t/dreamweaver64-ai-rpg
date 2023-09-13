@@ -19,6 +19,7 @@ public class App extends Application {
 
   private static Scene scene;
   private static Parent Room3Root;
+  private static Parent MainGameRoot;
   private static Parent Room3SubRoot;
 
   public static void main(final String[] args) {
@@ -47,6 +48,15 @@ public class App extends Application {
         }
       }
       root = Room3Root;
+    } else if (fxml.equals("main_game")) {
+      if (MainGameRoot == null) {
+        try {
+          MainGameRoot = loadFxml("main_game");
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+      root = MainGameRoot;
     }
 
     if (root != null) {

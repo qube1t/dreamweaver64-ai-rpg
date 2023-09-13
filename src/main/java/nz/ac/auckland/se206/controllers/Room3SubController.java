@@ -47,7 +47,7 @@ public class Room3SubController {
 
   @FXML
   private void onGoBack() {
-    App.setUi("room3");
+    App.setUi("main_game");
   }
 
   @FXML

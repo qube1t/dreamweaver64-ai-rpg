@@ -12,4 +12,5 @@ public class GameState {
   public static boolean isPreviousFlightPlanOpen = false;
 
   public static boolean isPreviousFlightPlanFound = false;
+
 }
