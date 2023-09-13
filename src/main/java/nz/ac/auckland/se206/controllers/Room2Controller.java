@@ -25,6 +25,7 @@ public class Room2Controller {
   @FXML private ImageView book;
   @FXML private ImageView boxKey;
   @FXML private ImageView gottenBoxKey;
+  @FXML private ImageView gottenTreasure;
 
   @FXML private ImageView treasureBox;
   @FXML private ImageView treasure;
@@ -172,6 +173,7 @@ public class Room2Controller {
   public void onGetTreasure(MouseEvent event) throws IOException {
     GameState.isTreasureFound = true;
     treasure.setVisible(false);
+    gottenTreasure.setVisible(true);
   }
 
   @FXML 
