@@ -94,7 +94,7 @@ public class App extends Application {
     stage.setScene(scene);
     stage.show();
 
-    letterbox(scene, root);
+    // letterbox(scene, root);
 
     // stage.setFullScreen(true);
 
