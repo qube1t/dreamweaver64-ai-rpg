@@ -11,7 +11,7 @@
       <VBox prefHeight="705.0" prefWidth="706.0">
          <children>
 
-<!--             <AnchorPane prefHeight="104.0" style="-fx-border-color: pink;" />
+            <!-- <AnchorPane prefHeight="104.0" style="-fx-border-color: pink;" />
             <AnchorPane fx:id="game_pane" prefHeight="475.0" style="-fx-border-color: blue; -fx-background-color: black;">
                <children>
                   <ImageView fx:id="lastFlightPlan" fitHeight="400.0" fitWidth="300.0" layoutX="697.0" layoutY="30.0">
