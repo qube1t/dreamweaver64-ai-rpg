@@ -49,6 +49,10 @@ public class Room3Controller {
 
   public void initialize() {
 
+    lastFlightPlan.setVisible(false);
+    departureBoard.setVisible(false);
+    System.out.println("plan");
+
     // Initialize the radar points and radarObjects to a list.
     this.radarPoints = new Circle[] {box1, box2, box3, box4, box5};
     this.radarObjects = new ImageView[] {radar_image, radar_computer};
@@ -135,16 +139,25 @@ public class Room3Controller {
 
   @FXML
   public void onClickDepBoard() {
-    System.out.println("DepBoard clicked");
-    GameState.isDepBoardOpen = true;
-    if (GameState.isPreviousFlightPlanOpen) {
-      System.out.println("Previous flight plan is open");
-      GameState.isPreviousFlightPlanOpen = false;
-      fadeOutFlightPlan();
-      fadeInDepBoard();
+
+    // If the departure board is currently open, then close it
+    if (GameState.isDepBoardOpen) {
+      GameState.isDepBoardOpen = false;
+      fadeOutDepBoard();
     } else {
-      fadeInDepBoard();
+      // If the departure board is not open, then open it
+      GameState.isDepBoardOpen = true;
+      if (GameState.isPreviousFlightPlanOpen) {
+        System.out.println("Previous flight plan is open");
+        GameState.isPreviousFlightPlanOpen = false;
+        fadeOutFlightPlan();
+        fadeInDepBoard();
+      } else {
+        fadeInDepBoard();
+      }
     }
+
+    System.out.println("DepBoard clicked");
   }
 
   @FXML
@@ -171,15 +184,24 @@ public class Room3Controller {
   }
 
   @FXML
+  /**
+   * This method is called when the book is clicked It will open the flight plan if it is not open
+   * and if the flight plan is open, then it will close the flight plan
+   */
   public void onClickBook() {
     System.out.println("Book clicked");
-    GameState.isPreviousFlightPlanOpen = true;
-    if (GameState.isDepBoardOpen) {
-      GameState.isDepBoardOpen = false;
-      fadeOutDepBoard();
-      fadeInFlightPlan();
+    if (GameState.isPreviousFlightPlanOpen) {
+      GameState.isPreviousFlightPlanOpen = false;
+      fadeOutFlightPlan();
     } else {
-      fadeInFlightPlan();
+      if (GameState.isDepBoardOpen) {
+        GameState.isDepBoardOpen = false;
+        fadeOutDepBoard();
+        fadeInFlightPlan();
+      } else {
+        fadeInFlightPlan();
+      }
+      GameState.isPreviousFlightPlanOpen = true;
     }
   }
 
@@ -209,7 +231,7 @@ public class Room3Controller {
    *
    * @return the snumber of the box that has been changed
    */
-  protected int changePointColor(int currentBox) {
+  protected int changeCorrectBox(int currentBox) {
     // Change the color of the current box to green
     box1.setStyle("-fx-fill: #0b941b");
     box2.setStyle("-fx-fill: #0b941b");
@@ -240,21 +262,21 @@ public class Room3Controller {
   @FXML
   public void onClickDoor() {
     System.out.println("Door clicked");
-    GameState.currentBox = changePointColor(GameState.currentBox);
+    GameState.currentBox = changeCorrectBox(GameState.currentBox);
     System.out.println(GameState.currentBox);
   }
 
   public void fadeInFlightPlan() {
     lastFlightPlan.setVisible(true); // Set to visible before starting the animation
 
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), lastFlightPlan);
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), lastFlightPlan);
     fadeTransition.setFromValue(0.0);
     fadeTransition.setToValue(1.0);
     fadeTransition.play();
   }
 
   public void fadeOutFlightPlan() {
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), lastFlightPlan);
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), lastFlightPlan);
     fadeTransition.setFromValue(1.0);
     fadeTransition.setToValue(0.0);
     fadeTransition.play();
@@ -267,14 +289,14 @@ public class Room3Controller {
   public void fadeInDepBoard() {
     departureBoard.setVisible(true); // Set to visible before starting the animation
 
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), departureBoard);
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), departureBoard);
     fadeTransition.setFromValue(0.0);
     fadeTransition.setToValue(1.0);
     fadeTransition.play();
   }
 
   public void fadeOutDepBoard() {
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), departureBoard);
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), departureBoard);
     fadeTransition.setFromValue(1.0);
     fadeTransition.setToValue(0.0);
     fadeTransition.play();
