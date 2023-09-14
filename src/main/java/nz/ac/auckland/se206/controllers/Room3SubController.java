@@ -14,6 +14,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
 
 public class Room3SubController {
@@ -250,6 +251,10 @@ public class Room3SubController {
         if (currentSelection == 1) {
           System.out.println("1");
         } else if (currentSelection == 2) {
+          if (GameState.isCorrectRouteFound) {
+            break;
+          }
+          GameState.isCorrectRouteFound = true;
           disableMap();
           enableFlightCDU();
           System.out.println("2");

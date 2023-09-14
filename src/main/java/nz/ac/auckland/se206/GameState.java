@@ -11,6 +11,7 @@ public class GameState {
 
   public static boolean isPreviousFlightPlanOpen = false;
   public static boolean isDepBoardOpen = false;
+  public static boolean isCorrectRouteFound = false;
 
   public static int currentBox;
 }
