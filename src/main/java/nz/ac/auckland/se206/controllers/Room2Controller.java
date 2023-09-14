@@ -70,14 +70,9 @@ public class Room2Controller {
                 rect23, rect24, rect25, rect26, rect27, rect28, rect29, rect30, rect31, rect32,
                 rect33));
 
-    // Initialization code goes here
     character.enableMobility(obsts);
     character.setLayoutX(60);
     character.setLayoutY(250);
-    // boxKey.setVisible(true);
-    // if (GameState.isBookFound) {
-    //   book.setOpacity(1);
-    // }
   }
 
   @FXML

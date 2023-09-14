@@ -2,10 +2,11 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.GameState;
 
 public class TreasureBoxController {
@@ -13,9 +14,10 @@ public class TreasureBoxController {
     @FXML private ImageView imgTreasure;
     @FXML private ImageView clickedTreasure;
     @FXML private TextArea message;
-    @FXML private Rectangle treasure;
+    @FXML private Button treasure;
 
     public void initialize() {
+        treasure.setDisable(false);
         if (GameState.isTreasureFound) {
             clickedTreasure.setVisible(false);
             message.setVisible(false);
@@ -24,7 +26,7 @@ public class TreasureBoxController {
     }
 
     @FXML
-    void onGetTreasure(MouseEvent event) throws IOException{
+    void onGetTreasure(ActionEvent event) throws IOException{
         GameState.isTreasureFound = true;
         clickedTreasure.setVisible(true);
         message.setVisible(true);
