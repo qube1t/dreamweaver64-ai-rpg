@@ -1,14 +1,11 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
@@ -19,8 +16,6 @@ public class MainGame {
   @FXML private static Character character;
   @FXML private Pane outer_pane;
 
-  @FXML private ImageView lastFlightPlan;
-  @FXML private ImageView depBoard;
   private static MainGame instance;
 
   @FXML private static Pane initialised_game_pane;
@@ -29,7 +24,7 @@ public class MainGame {
 
     System.out.println(1);
     initialised_game_pane = game_pane;
-    addOverlay("room1", true);
+    addOverlay("room3", true);
     Helper.setBooksInRoom1();
     instance = this;
 
@@ -52,46 +47,6 @@ public class MainGame {
         });
     initialised_game_pane.getChildren().add(backgroundBlur);
     initialised_game_pane.getChildren().add(room1);
-  }
-
-  public void fadeInFlightPlan() {
-    lastFlightPlan.setVisible(true); // Set to visible before starting the animation
-
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), lastFlightPlan);
-    fadeTransition.setFromValue(0.0);
-    fadeTransition.setToValue(1.0);
-    fadeTransition.play();
-  }
-
-  public void fadeOutFlightPlan() {
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), lastFlightPlan);
-    fadeTransition.setFromValue(1.0);
-    fadeTransition.setToValue(0.0);
-    fadeTransition.play();
-    fadeTransition.setOnFinished(
-        event -> {
-          lastFlightPlan.setVisible(false);
-        });
-  }
-
-  public void fadeInDepBoard() {
-    depBoard.setVisible(true); // Set to visible before starting the animation
-
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), depBoard);
-    fadeTransition.setFromValue(0.0);
-    fadeTransition.setToValue(1.0);
-    fadeTransition.play();
-  }
-
-  public void fadeOutDepBoard() {
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), depBoard);
-    fadeTransition.setFromValue(1.0);
-    fadeTransition.setToValue(0.0);
-    fadeTransition.play();
-    fadeTransition.setOnFinished(
-        event -> {
-          depBoard.setVisible(false);
-        });
   }
 
   public static MainGame getInstance() {

@@ -39,6 +39,8 @@ public class Room3Controller {
   @FXML private Circle box1, box2, box3, box4, box5;
   private Circle[] radarPoints;
   private ImageView[] radarObjects;
+  @FXML private ImageView lastFlightPlan;
+  @FXML private ImageView departureBoard;
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
   @FXML private ImageView radar_image, radar_computer, map;
@@ -134,15 +136,14 @@ public class Room3Controller {
   @FXML
   public void onClickDepBoard() {
     System.out.println("DepBoard clicked");
-    MainGame mainGame = MainGame.getInstance();
     GameState.isDepBoardOpen = true;
     if (GameState.isPreviousFlightPlanOpen) {
       System.out.println("Previous flight plan is open");
       GameState.isPreviousFlightPlanOpen = false;
-      mainGame.fadeOutFlightPlan();
-      mainGame.fadeInDepBoard();
+      fadeOutFlightPlan();
+      fadeInDepBoard();
     } else {
-      mainGame.fadeInDepBoard();
+      fadeInDepBoard();
     }
   }
 
@@ -172,14 +173,13 @@ public class Room3Controller {
   @FXML
   public void onClickBook() {
     System.out.println("Book clicked");
-    MainGame mainGame = MainGame.getInstance();
     GameState.isPreviousFlightPlanOpen = true;
     if (GameState.isDepBoardOpen) {
       GameState.isDepBoardOpen = false;
-      mainGame.fadeOutDepBoard();
-      mainGame.fadeInFlightPlan();
+      fadeOutDepBoard();
+      fadeInFlightPlan();
     } else {
-      mainGame.fadeInFlightPlan();
+      fadeInFlightPlan();
     }
   }
 
@@ -242,5 +242,45 @@ public class Room3Controller {
     System.out.println("Door clicked");
     GameState.currentBox = changePointColor(GameState.currentBox);
     System.out.println(GameState.currentBox);
+  }
+
+  public void fadeInFlightPlan() {
+    lastFlightPlan.setVisible(true); // Set to visible before starting the animation
+
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), lastFlightPlan);
+    fadeTransition.setFromValue(0.0);
+    fadeTransition.setToValue(1.0);
+    fadeTransition.play();
+  }
+
+  public void fadeOutFlightPlan() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), lastFlightPlan);
+    fadeTransition.setFromValue(1.0);
+    fadeTransition.setToValue(0.0);
+    fadeTransition.play();
+    fadeTransition.setOnFinished(
+        event -> {
+          lastFlightPlan.setVisible(false);
+        });
+  }
+
+  public void fadeInDepBoard() {
+    departureBoard.setVisible(true); // Set to visible before starting the animation
+
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), departureBoard);
+    fadeTransition.setFromValue(0.0);
+    fadeTransition.setToValue(1.0);
+    fadeTransition.play();
+  }
+
+  public void fadeOutDepBoard() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), departureBoard);
+    fadeTransition.setFromValue(1.0);
+    fadeTransition.setToValue(0.0);
+    fadeTransition.play();
+    fadeTransition.setOnFinished(
+        event -> {
+          departureBoard.setVisible(false);
+        });
   }
 }

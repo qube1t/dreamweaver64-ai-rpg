@@ -56,6 +56,20 @@
       <Circle fx:id="box3" fill="#0b941b" layoutX="269.0" layoutY="225.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
       <Circle fx:id="box4" fill="#0b941b" layoutX="308.0" layoutY="253.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
       <Circle fx:id="box5" fill="#0b941b" layoutX="319.0" layoutY="234.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
+      <AnchorPane layoutX="598.0" prefHeight="509.0" prefWidth="298.0">
+         <children>
+            <ImageView fx:id="departureBoard" fitHeight="308.0" fitWidth="278.0" layoutX="20.0" layoutY="87.0">
+               <image>
+                  <Image url="@../images/rooms/room3/dep_board.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="lastFlightPlan" fitHeight="400.0" fitWidth="296.0" layoutX="11.0" layoutY="41.0">
+               <image>
+                  <Image url="@../images/rooms/room3/previous_flight_plan_newest.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
 <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
    </children>
 </Pane>
