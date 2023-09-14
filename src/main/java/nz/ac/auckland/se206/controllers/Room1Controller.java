@@ -53,11 +53,11 @@ public class Room1Controller {
 
   @FXML
   public void changeRoot() throws IOException {
-    MainGame.setGameRoom("room1");
+    MainGame.addOverlay("room1", true);
   }
 
   @FXML
   private void openBookShelf() throws IOException {
-    MainGame.setGameRoom("book_shelf");
+    MainGame.addOverlay("book_shelf", false);
   }
 }
