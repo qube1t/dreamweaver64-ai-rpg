@@ -8,32 +8,32 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
     <children>
-      <ImageView fitHeight="500.0" fitWidth="500.0">
+      <ImageView fitHeight="700.0" fitWidth="700.0">
          <image>
             <Image url="@../images/rooms/start_menu/gameStartBackground.png" />
          </image>
       </ImageView>
-        <Button layoutX="162.0" layoutY="343.0" onAction="#startGame" text="START GAME" textAlignment="CENTER" textFill="#0d3bb9">
+        <Button layoutX="229.0" layoutY="502.0" text="START GAME" textAlignment="CENTER" textFill="#0d3bb9">
          <font>
-            <Font name="Impact" size="25.0" />
+            <Font name="Impact" size="35.0" />
          </font></Button>
-         <ComboBox fx:id="timeLimitComboBox" layoutX="239.0" layoutY="237.0" prefWidth="120" />
-      <Label layoutX="127.0" layoutY="236.0" text="TIME LIMIT:" textFill="#ff0707">
-         <font>
-            <Font name="Impact" size="23.0" />
-         </font>
-      </Label>
-      <Label layoutX="126.0" layoutY="145.0" text="DIFFICULTY:">
-         <font>
-            <Font name="Impact" size="23.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="timeLimitComboBox1" layoutX="240.0" layoutY="146.0" prefWidth="120" />
-      <Label layoutX="74.0" layoutY="66.0" text="ESCAPE ROOM TEAM 31" textFill="#572f90">
+         <ComboBox fx:id="timeLimit" layoutX="367.0" layoutY="316.0" prefWidth="120" promptText="2 Minutes" />
+      <Label layoutX="127.0" layoutY="304.0" text="TIME LIMIT:" textFill="#dd0a0a">
          <font>
             <Font name="Impact" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="124.0" layoutY="168.0" text="DIFFICULTY:">
+         <font>
+            <Font name="Impact" size="40.0" />
+         </font>
+      </Label>
+      <ComboBox fx:id="difficulty" layoutX="369.0" layoutY="180.0" prefWidth="120" promptText="EASY" />
+      <Label layoutX="120.0" layoutY="61.0" text="ESCAPE ROOM TEAM 31" textFill="#572f90">
+         <font>
+            <Font name="Impact" size="55.0" />
          </font>
       </Label>
     </children>
