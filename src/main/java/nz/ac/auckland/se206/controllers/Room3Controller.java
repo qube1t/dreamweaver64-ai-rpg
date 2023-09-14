@@ -2,6 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.ArrayList;
 import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -31,15 +34,23 @@ public class Room3Controller {
       desk1,
       desk2;
   @FXML private Circle box1, box2, box3, box4, box5;
+  private Circle[] radarPoints;
+  private ImageView[] radarObjects;
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
   @FXML private ImageView radar_image, radar_computer, map;
   private boolean isRadarComputerOpen;
+  private Timeline radarAnimation;
 
   public void initialize() {
 
+    // Initialize the radar points and radarObjects to a list.
+    this.radarPoints = new Circle[] {box1, box2, box3, box4, box5};
+    this.radarObjects = new ImageView[] {radar_image, radar_computer};
+
     // Set the inital correct treasure box
     GameState.currentBox = 2;
+    box2.setStyle("-fx-fill: red");
 
     // Add all the obstacles to the list
     ArrayList<Rectangle> obsts = new ArrayList<Rectangle>();
@@ -67,31 +78,54 @@ public class Room3Controller {
     box4.setVisible(false);
     box5.setVisible(false);
 
+    // Initialize the radarAnimation timeline
+    this.radarAnimation =
+        new Timeline(
+            new KeyFrame(Duration.seconds(0), event -> fadeInRadarPoints()),
+            new KeyFrame(Duration.seconds(1), event -> fadeOutRadarPoints()));
+    radarAnimation.setCycleCount(Timeline.INDEFINITE);
+    radarAnimation.setOnFinished(
+        event -> {
+          // Restart the animation when it completes
+          radarAnimation.play();
+        });
+
     // Set the radar computer boolean to false initially
     isRadarComputerOpen = false;
   }
 
+  public void fadeInRadarPoints() {
+    for (Circle radarPoint : radarPoints) {
+      radarPoint.setVisible(true);
+      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), radarPoint);
+      fadeTransition.setFromValue(0.0);
+      fadeTransition.setToValue(1.0);
+      fadeTransition.setInterpolator(Interpolator.LINEAR); // Use linear interpolation
+      fadeTransition.play();
+    }
+  }
+
+  public void fadeOutRadarPoints() {
+    for (Circle radarPoint : radarPoints) {
+
+      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.5), radarPoint);
+      fadeTransition.setFromValue(1.0);
+      fadeTransition.setToValue(0.0);
+      fadeTransition.setInterpolator(Interpolator.LINEAR); // Use linear interpolation
+      fadeTransition.play();
+    }
+  }
+
   public void fadeInRadar() {
 
-    Circle[] points = {box1, box2, box3, box4, box5};
-    ImageView[] radarObjects = {radar_computer, radar_image};
-
-    for (Circle point : points) {
-      point.setVisible(true);
-
-      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), point);
+    for (ImageView obj : radarObjects) {
+      obj.setVisible(true);
+      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), obj);
       fadeTransition.setFromValue(0.0);
       fadeTransition.setToValue(1.0);
       fadeTransition.play();
     }
-
-    for (ImageView imageView : radarObjects) {
-      imageView.setVisible(true);
-      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), imageView);
-      fadeTransition.setFromValue(0.0);
-      fadeTransition.setToValue(1.0);
-      fadeTransition.play();
-    }
+    radarAnimation.play();
   }
 
   @FXML
@@ -112,9 +146,9 @@ public class Room3Controller {
 
   @FXML
   public void onClickRadar() {
+    isRadarComputerOpen = true;
     System.out.println("Radar clicked");
     fadeInRadar();
-    isRadarComputerOpen = true;
   }
 
   @FXML
@@ -131,16 +165,18 @@ public class Room3Controller {
     // computer
 
     if (isRadarComputerOpen) {
-      radar_computer.setVisible(false);
-      radar_image.setVisible(false);
-      box1.setVisible(false);
-      box2.setVisible(false);
-      box3.setVisible(false);
-      box4.setVisible(false);
-      box5.setVisible(false);
-
-      isRadarComputerOpen = false;
+      if (isRadarComputerOpen) {
+        radarAnimation.stop(); // Stop the radar animation
+        isRadarComputerOpen = false;
+      }
     }
+    radar_computer.setVisible(false);
+    radar_image.setVisible(false);
+    box1.setVisible(false);
+    box2.setVisible(false);
+    box3.setVisible(false);
+    box4.setVisible(false);
+    box5.setVisible(false);
   }
 
   /**
