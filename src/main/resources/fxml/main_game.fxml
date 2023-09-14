@@ -4,13 +4,12 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <StackPane fx:id="main_pane" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="934" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
    <children>
       <VBox>
          <children>
-            <AnchorPane prefHeight="104.0" style="-fx-border-color: pink;" />
-            <AnchorPane fx:id="game_pane" prefHeight="475.0" style="-fx-border-color: blue; -fx-background-color: black;" />
+            <AnchorPane onMouseClicked="#clickHeader" prefHeight="104.0" style="-fx-border-color: pink;" />
+            <StackPane fx:id="game_pane" minHeight="-Infinity" prefHeight="685.0" style="-fx-border-color: blue; -fx-background-color: black;" />
             <AnchorPane prefHeight="122.0" style="-fx-border-color: green;" />
          </children>
       </VBox>
