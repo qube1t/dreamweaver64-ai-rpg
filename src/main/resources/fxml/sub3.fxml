@@ -17,9 +17,9 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="216.0" layoutX="699.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="243.0" />
-      <Text fx:id="mapTxt" fill="WHITE" layoutX="8.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT THE CORRECT ROUTE TO PROCEED">
+      <Text fx:id="mapTxt" fill="WHITE" layoutX="24.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT THE CORRECT ROUTE TO PROCEED" wrappingWidth="591.2939453125">
          <font>
-            <Font name="Verdana" size="27.0" />
+            <Font name="Verdana" size="25.0" />
          </font>
       </Text>
       <Rectangle fx:id="img1" arcHeight="5.0" arcWidth="5.0" fill="#c156ff" height="268.0" layoutX="32.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="256.0" />
@@ -95,7 +95,7 @@
          </font>
       </Text>
       <Rectangle fx:id="delete" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="863.0" layoutY="523.0" onMouseClicked="#handleDeleteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-      <ImageView fx:id="currentFlightPlan" fitHeight="550.0" fitWidth="412.0" layoutX="112.0" layoutY="6.0">
+      <ImageView fx:id="currentFlightPlan" fitHeight="550.0" fitWidth="412.0" layoutX="114.0" layoutY="20.0">
          <image>
             <Image url="@../images/rooms/room3/current_flight_plan.png" />
          </image>
@@ -112,5 +112,10 @@
          </font>
       </Text>
       <Button fx:id="back" layoutX="14.0" layoutY="661.0" mnemonicParsing="false" onMouseClicked="#onGoBack" text="BACK" />
+      <ImageView fitHeight="885.0" fitWidth="55.0" layoutX="578.0" layoutY="-98.0">
+         <image>
+            <Image url="@../images/rooms/room3/pillar.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

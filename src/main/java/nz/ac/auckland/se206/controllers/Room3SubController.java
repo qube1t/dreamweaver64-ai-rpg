@@ -162,6 +162,10 @@ public class Room3SubController {
       errorMessage.setVisible(false);
       displayInput.setText("CONGRATULATIONS! THE AIRCRAFT CODE IS QR16 GOOD LUCK ON YOUR ESCAPE!");
       displayOutput.setText("");
+      // Disable the input field and execute button
+      displayOutput.setDisable(true);
+      displayOutput.setVisible(false);
+      execute.setDisable(true);
     } else {
       displayInput.setVisible(false);
       // Change input text to red by adding the CSS style class
