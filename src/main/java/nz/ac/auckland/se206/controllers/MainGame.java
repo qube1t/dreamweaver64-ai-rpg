@@ -7,6 +7,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
 
 public class MainGame {
@@ -20,20 +21,16 @@ public class MainGame {
 
     System.out.println(1);
     initialised_game_pane = game_pane;
-    setGameRoom("room1");
-
-    System.out.println(character);
+    addOverlay("room1", true);
+    Helper.setBooksInRoom1();
   }
 
-  public static void setGameRoom(String roomN) throws IOException {
+  public static void addOverlay(String roomN, boolean isRoom) throws IOException {
     Region room1 = (Region) FXMLLoader.load(App.class.getResource("/fxml/" + roomN + ".fxml"));
     room1.setScaleShape(true);
-    character = (Character) room1.lookup("#character");
 
-    // if (initialised_game_pane.getChildren().size() == 0) {
-    //   initialised_game_pane.getChildren().set(0, room1);
-    //   // System.out.println(initialised_game_pane.getChildren().size());
-    // } else
+    if (isRoom) character = (Character) room1.lookup("#character");
+
     Pane backgroundBlur = new Pane();
     backgroundBlur.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
     backgroundBlur.setOnMouseClicked(
@@ -45,7 +42,7 @@ public class MainGame {
   }
 
   public static void removeOverlay() {
-    if (initialised_game_pane.getChildren().size() > 1) {
+    if (initialised_game_pane.getChildren().size() > 2) {
       initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
       initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
     }
@@ -96,7 +93,8 @@ public class MainGame {
     }
   }
 
-  static double divideByNumber(Number n1, Number n2) {
-    return Double.parseDouble(n1.toString()) / (Double.parseDouble(n2.toString()));
+  @FXML
+  private void clickHeader() {
+    BookShelfController.returnBook();
   }
 }
