@@ -9,10 +9,12 @@ public class GameState {
   /** Indicates whether the key has been found. */
   public static boolean isKeyFound = false;
 
+
   public static boolean isPreviousFlightPlanOpen = false;
   public static boolean isDepBoardOpen = false;
   public static boolean isCorrectRouteFound = false;
 
+  /** Indicates the location of the treasure box. */
   public static int currentBox;
 
   public static String[] booksInRoom1 = new String[7];
@@ -28,12 +30,4 @@ public class GameState {
 
   /** Indicates whether the treasure has found */
   public static boolean isTreasureFound = false;
-
-  /** Indicates whether the wrong treasure box has clicked */
-  public static boolean isWrongTreasurBoxClicked = false;
-
-  /** Indicates whether the radar computer has checked */
-  public static boolean isRadarComputerChecked = false;
-
-  public static int boxLocation;
 }

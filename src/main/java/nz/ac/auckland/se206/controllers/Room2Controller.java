@@ -98,7 +98,7 @@ public class Room2Controller {
     // int noOfTreasure = (int) (Math.random() * 5) + 1;
     int boxLocation = GameState.currentBox;
     System.out.println("Number of treasure box: " + boxLocation);
-    if (GameState.isBoxKeyFound || GameState.isRadarComputerChecked) {
+    if (GameState.isBoxKeyFound) {
       box1.setDisable(false);
       box2.setDisable(false);
       box3.setDisable(false);
@@ -109,7 +109,6 @@ public class Room2Controller {
         MainGame.addOverlay("treasure_box", false);
       } else {
         // write this sentance in chat box
-        GameState.isWrongTreasurBoxClicked = true;
         System.out.println("Wrong treasure box clicked. Find correct one");
       }
       box1.setDisable(true);
