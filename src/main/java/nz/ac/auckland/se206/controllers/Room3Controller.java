@@ -32,7 +32,10 @@ public class Room3Controller {
       boundary5,
       depBoard,
       desk1,
-      desk2;
+      desk2,
+      bound1,
+      bound2,
+      bound3;
   @FXML private Circle box1, box2, box3, box4, box5;
   private Circle[] radarPoints;
   private ImageView[] radarObjects;
@@ -56,7 +59,7 @@ public class Room3Controller {
     ArrayList<Rectangle> obsts = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
       computer, computer2, chair1, chair2, gate, radar, desk1, desk2, depBoard, boundary1,
-      boundary2, boundary3, boundary4, boundary5
+      boundary2, boundary3, boundary4, boundary5, bound1, bound2, bound3
     };
 
     for (Rectangle rectangle : rectangles) {
