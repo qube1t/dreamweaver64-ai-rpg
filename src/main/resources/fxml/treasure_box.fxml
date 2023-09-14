@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.TreasureBoxController">
+   <children>
+      <ImageView fitHeight="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/rooms/room2/openedTreasureBox.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="87.0" fitWidth="117.0" layoutX="192.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/rooms/room2/parchment.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="clickedTreasure" fitHeight="234.0" fitWidth="314.0" layoutX="94.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/rooms/room2/parchment.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="message" layoutX="165.0" layoutY="140.0" prefHeight="120.0" prefWidth="171.0" visible="false" />
+      <Rectangle fx:id="treasure" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="87.0" layoutX="192.0" layoutY="125.0" onMouseClicked="#onGetTreasure" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="116.0" />
+   </children>
+</AnchorPane>
