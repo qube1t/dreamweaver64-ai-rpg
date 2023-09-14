@@ -8,7 +8,7 @@
    <children>
       <VBox>
          <children>
-            <AnchorPane prefHeight="104.0" style="-fx-border-color: pink;" />
+            <AnchorPane onMouseClicked="#clickHeader" prefHeight="104.0" style="-fx-border-color: pink;" />
             <StackPane fx:id="game_pane" minHeight="-Infinity" prefHeight="685.0" style="-fx-border-color: blue; -fx-background-color: black;" />
             <AnchorPane prefHeight="122.0" style="-fx-border-color: green;" />
          </children>
