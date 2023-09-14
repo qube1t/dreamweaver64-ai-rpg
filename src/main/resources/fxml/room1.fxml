@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<?import nz.ac.auckland.se206.components.Character?>
+
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room1Controller">
    <children>
@@ -17,6 +16,7 @@
       </ImageView>
       <Pane>
          <children>
+
             <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="30.0" layoutX="30.0" layoutY="337.0" onMouseClicked="#changeRoot" stroke="BLACK" strokeType="INSIDE" visible="false" width="32.0" />
             <Rectangle fx:id="rect2" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="37.0" layoutX="62.0" layoutY="322.0" onMouseClicked="#changeRoot" stroke="BLACK" strokeType="INSIDE" visible="false" width="174.0" />
             <Rectangle fx:id="rect3" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="30.0" layoutX="241.0" layoutY="219.0" onMouseClicked="#changeRoot" stroke="BLACK" strokeType="INSIDE" visible="false" width="26.0" />

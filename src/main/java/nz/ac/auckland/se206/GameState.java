@@ -9,5 +9,13 @@ public class GameState {
   /** Indicates whether the key has been found. */
   public static boolean isKeyFound = false;
 
+
+  public static boolean isPreviousFlightPlanOpen = false;
+  public static boolean isDepBoardOpen = false;
+  public static boolean isCorrectRouteFound = false;
+
+  public static int currentBox;
+
   public static String[] booksInRoom1 = new String[7];
+
 }

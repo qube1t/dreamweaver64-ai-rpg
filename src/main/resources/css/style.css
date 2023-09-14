@@ -1,0 +1,4 @@
+.error-text {
+    -fx-fill: red;
+    /* Set text color to red */
+}
