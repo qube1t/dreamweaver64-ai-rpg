@@ -118,7 +118,7 @@ public class Room2Controller {
     character.setLayoutY(250);
     boxKey.setVisible(true);
     if (isBookFound) {
-      book.setVisible(true);
+      book.setOpacity(1);;
     }
   }
 
@@ -126,8 +126,8 @@ public class Room2Controller {
   public void onGetTrade(MouseEvent event) throws IOException {
     if (isBookFound) {
       isBoxKeyFound = true;
-      boxKey.setVisible(false);
-      gottenBoxKey.setVisible(true);
+      boxKey.setOpacity(0);;
+      gottenBoxKey.setOpacity(1);;
     } else {
       // write this sentance in chat box or pirate's speech bubble
       System.out.println("Find the item to trade with pirate to open the boxes");
@@ -141,7 +141,7 @@ public class Room2Controller {
    * @throws IOException
    */
   private void getRandomBox(int numOfBox) throws IOException {
-    int noOftreasure = (int) (Math.random() * 5 + 1);
+    int noOftreasure = 3;
     System.out.println("Number of treasure box: " + noOftreasure);
     if (isBoxKeyFound) {
       box1.setDisable(false);
@@ -151,12 +151,11 @@ public class Room2Controller {
       box5.setDisable(false);
       if (numOfBox == noOftreasure) {
         System.out.println("Correct treasure box clicked");
-        treasureBox.setDisable(false);
         treasure.setDisable(false);
         btnClose.setDisable(false);
-        treasureBox.setVisible(true);
-        treasure.setVisible(true);
-        btnClose.setVisible(true);
+        treasureBox.setOpacity(1);
+        treasure.setOpacity(1);
+        btnClose.setOpacity(1);
         box1.setDisable(true);
         box2.setDisable(true);
         box3.setDisable(true);
@@ -180,16 +179,15 @@ public class Room2Controller {
   @FXML
   public void onGetTreasure(MouseEvent event) throws IOException {
     isTreasureFound = true;
-    treasure.setVisible(false);
-    gottenTreasure.setVisible(true);
+    treasure.setOpacity(0);;
+    gottenTreasure.setOpacity(1);;
   }
 
   @FXML
   public void onCloseBox() {
-    treasureBox.setVisible(false);
-    treasure.setVisible(false);
-    btnClose.setVisible(false);
-    treasureBox.setDisable(true);
+    treasureBox.setOpacity(0);
+    treasure.setOpacity(0);
+    btnClose.setOpacity(0);
     treasure.setDisable(true);
     btnClose.setDisable(true);
   }
