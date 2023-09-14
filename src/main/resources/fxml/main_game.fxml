@@ -10,7 +10,8 @@
    <children>
       <VBox prefHeight="705.0" prefWidth="706.0">
          <children>
-            <AnchorPane prefHeight="104.0" style="-fx-border-color: pink;" />
+
+<!--             <AnchorPane prefHeight="104.0" style="-fx-border-color: pink;" />
             <AnchorPane fx:id="game_pane" prefHeight="475.0" style="-fx-border-color: blue; -fx-background-color: black;">
                <children>
                   <ImageView fx:id="lastFlightPlan" fitHeight="400.0" fitWidth="300.0" layoutX="697.0" layoutY="30.0">
@@ -23,7 +24,10 @@
                         <Image url="@../images/rooms/room3/dep_board.png" />
                      </image>
                   </ImageView>
-               </children></AnchorPane>
+               </children></AnchorPane> -->
+
+            <AnchorPane onMouseClicked="#clickHeader" prefHeight="104.0" style="-fx-border-color: pink;" />
+            <StackPane fx:id="game_pane" minHeight="-Infinity" prefHeight="685.0" style="-fx-border-color: blue; -fx-background-color: black;" />
             <AnchorPane prefHeight="122.0" style="-fx-border-color: green;" />
          </children>
       </VBox>
