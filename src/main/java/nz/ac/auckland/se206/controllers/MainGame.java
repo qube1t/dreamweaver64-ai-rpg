@@ -16,7 +16,8 @@ public class MainGame {
   @FXML private Pane game_pane;
   @FXML private Character character;
   @FXML private Pane outer_pane;
-  @FXML public ImageView lastFlightPlan;
+  @FXML private ImageView lastFlightPlan;
+  @FXML private ImageView depBoard;
   private static MainGame instance;
 
   public void initialize() throws IOException {
@@ -56,16 +57,48 @@ public class MainGame {
     //             });
 
     lastFlightPlan.setVisible(false);
+    depBoard.setVisible(false);
     System.out.println("plan");
   }
 
   public void fadeInFlightPlan() {
-    lastFlightPlan.setVisible(true); // Make sure it's visible before starting the animation
+    lastFlightPlan.setVisible(true); // Set to visible before starting the animation
 
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), lastFlightPlan);
     fadeTransition.setFromValue(0.0);
     fadeTransition.setToValue(1.0);
     fadeTransition.play();
+  }
+
+  public void fadeOutFlightPlan() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), lastFlightPlan);
+    fadeTransition.setFromValue(1.0);
+    fadeTransition.setToValue(0.0);
+    fadeTransition.play();
+    fadeTransition.setOnFinished(
+        event -> {
+          lastFlightPlan.setVisible(false);
+        });
+  }
+
+  public void fadeInDepBoard() {
+    depBoard.setVisible(true); // Set to visible before starting the animation
+
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), depBoard);
+    fadeTransition.setFromValue(0.0);
+    fadeTransition.setToValue(1.0);
+    fadeTransition.play();
+  }
+
+  public void fadeOutDepBoard() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), depBoard);
+    fadeTransition.setFromValue(1.0);
+    fadeTransition.setToValue(0.0);
+    fadeTransition.play();
+    fadeTransition.setOnFinished(
+        event -> {
+          depBoard.setVisible(false);
+        });
   }
 
   public static MainGame getInstance() {

@@ -129,6 +129,21 @@ public class Room3Controller {
   }
 
   @FXML
+  public void onClickDepBoard() {
+    System.out.println("DepBoard clicked");
+    MainGame mainGame = MainGame.getInstance();
+    GameState.isDepBoardOpen = true;
+    if (GameState.isPreviousFlightPlanOpen) {
+      System.out.println("Previous flight plan is open");
+      GameState.isPreviousFlightPlanOpen = false;
+      mainGame.fadeOutFlightPlan();
+      mainGame.fadeInDepBoard();
+    } else {
+      mainGame.fadeInDepBoard();
+    }
+  }
+
+  @FXML
   public void onClickComputer() {
     System.out.println("Gate clicked");
     // Set the scene to room3Sub
@@ -155,7 +170,14 @@ public class Room3Controller {
   public void onClickBook() {
     System.out.println("Book clicked");
     MainGame mainGame = MainGame.getInstance();
-    mainGame.fadeInFlightPlan();
+    GameState.isPreviousFlightPlanOpen = true;
+    if (GameState.isDepBoardOpen) {
+      GameState.isDepBoardOpen = false;
+      mainGame.fadeOutDepBoard();
+      mainGame.fadeInFlightPlan();
+    } else {
+      mainGame.fadeInFlightPlan();
+    }
   }
 
   @FXML
