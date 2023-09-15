@@ -25,7 +25,7 @@ public class Room3SubController {
   private Rectangle a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
   @FXML private Rectangle one1, two2, three3, four4, five5, six6, seven7, eight8, nine9, zero0;
   @FXML private Rectangle slash, clear, delete, execute;
-  @FXML private Text displayInput, displayOutput, mapTxt, errorMessage;
+  @FXML private Text displayInput, displayOutput, mapTxt;
   @FXML private ImageView currentFlightPlan, im1, im2, im3, im4, lock, CentralDisplayUnit;
   @FXML private Button back;
   protected int currentSelection;
@@ -158,18 +158,38 @@ public class Room3SubController {
   public void handleExecuteClick() {
     String currentInput = displayOutput.getText();
     if (currentInput.contains("HND/SYD")) {
+      // Aircraft code has been found.
+      GameState.isAircraftCodeFound = true;
       displayInput.setVisible(true);
-      errorMessage.setVisible(false);
+
+      // Create a TextFlow to hold different styled Text elements
+      // TextFlow messageFlow = new TextFlow();
+
+      // Create a Text element for the "CONGRATULATIONS! THE AIRCRAFT CODE IS " part
+      // Text messagePart1 = new Text("CONGRATULATIONS! THE AIRCRAFT CODE IS ");
+
+      // Create a Text element for the "QR16" part and apply styling
+      // Text codePart = new Text("QR16");
+      // codePart.setFill(Color.RED);
+      // codePart.setFont(Font.font("System", FontWeight.BOLD, 14));
+
+      // Create a Text element for the " GOOD LUCK ON YOUR ESCAPE!" part
+      // Text messagePart2 = new Text(" GOOD LUCK ON YOUR ESCAPE!");
+
+      // Add the Text elements to the TextFlow
+      // messageFlow.getChildren().addAll(messagePart1, codePart, messagePart2);
+
+      // Set the styled TextFlow as the content of displayInput
       displayInput.setText("CONGRATULATIONS! THE AIRCRAFT CODE IS QR16 GOOD LUCK ON YOUR ESCAPE!");
+
+      // Clear the input field and disable it along with the execute button
       displayOutput.setText("");
-      // Disable the input field and execute button
       displayOutput.setDisable(true);
-      displayOutput.setVisible(false);
       execute.setDisable(true);
     } else {
-      displayInput.setVisible(false);
-      // Change input text to red by adding the CSS style class
-      errorMessage.setText("INCORRECT AIRPORT CODE TRY AGAIN");
+      // Display an error message
+      displayInput.setStyle("-fx-text-fill: red;");
+      displayInput.setText("INCORRECT AIRPORT CODE TRY AGAIN");
       displayOutput.setText("");
     }
   }

@@ -39,6 +39,9 @@ public class Room3Controller {
   @FXML private Circle box1, box2, box3, box4, box5;
   private Circle[] radarPoints;
   private ImageView[] radarObjects;
+  private ArrayList<Rectangle> obsts;
+  @FXML private ImageView lastFlightPlan;
+  @FXML private ImageView departureBoard;
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
   @FXML private ImageView radar_image, radar_computer, map;
@@ -47,23 +50,33 @@ public class Room3Controller {
 
   public void initialize() {
 
+    // Call the set radar point color method to set the most up to date correct box
+    if (GameState.currentBox == -1) {
+      // Generate a random number between 1 and 5
+      int randomBox = (int) (Math.random() * 5 + 1);
+      changeCorrectBox(randomBox);
+      GameState.currentBox = randomBox;
+    } else {
+      changeCorrectBox(GameState.currentBox);
+    }
+
+    lastFlightPlan.setVisible(false);
+    departureBoard.setVisible(false);
+    System.out.println("plan");
+
     // Initialize the radar points and radarObjects to a list.
     this.radarPoints = new Circle[] {box1, box2, box3, box4, box5};
     this.radarObjects = new ImageView[] {radar_image, radar_computer};
 
-    // Set the inital correct treasure box
-    GameState.currentBox = 2;
-    box2.setStyle("-fx-fill: red");
-
-    // Add all the obstacles to the list
-    ArrayList<Rectangle> obsts = new ArrayList<Rectangle>();
+    // Initialize the obsts list
+    this.obsts = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
       computer, computer2, chair1, chair2, gate, radar, desk1, desk2, depBoard, boundary1,
       boundary2, boundary3, boundary4, boundary5, bound1, bound2, bound3
     };
 
     for (Rectangle rectangle : rectangles) {
-      obsts.add(rectangle);
+      this.obsts.add(rectangle);
     }
 
     character.enableMobility(obsts);
@@ -133,17 +146,25 @@ public class Room3Controller {
 
   @FXML
   public void onClickDepBoard() {
-    System.out.println("DepBoard clicked");
-    MainGame mainGame = MainGame.getInstance();
-    GameState.isDepBoardOpen = true;
-    if (GameState.isPreviousFlightPlanOpen) {
-      System.out.println("Previous flight plan is open");
-      GameState.isPreviousFlightPlanOpen = false;
-      mainGame.fadeOutFlightPlan();
-      mainGame.fadeInDepBoard();
+
+    // If the departure board is currently open, then close it
+    if (GameState.isDepBoardOpen) {
+      GameState.isDepBoardOpen = false;
+      fadeOutDepBoard();
     } else {
-      mainGame.fadeInDepBoard();
+      // If the departure board is not open, then open it
+      GameState.isDepBoardOpen = true;
+      if (GameState.isPreviousFlightPlanOpen) {
+        System.out.println("Previous flight plan is open");
+        GameState.isPreviousFlightPlanOpen = false;
+        fadeOutFlightPlan();
+        fadeInDepBoard();
+      } else {
+        fadeInDepBoard();
+      }
     }
+
+    System.out.println("DepBoard clicked");
   }
 
   @FXML
@@ -170,18 +191,40 @@ public class Room3Controller {
   }
 
   @FXML
+  /**
+   * This method is called when the book is clicked It will open the flight plan if it is not open
+   * and if the flight plan is open, then it will close the flight plan
+   */
   public void onClickBook() {
     System.out.println("Book clicked");
-    MainGame mainGame = MainGame.getInstance();
-    GameState.isPreviousFlightPlanOpen = true;
-    if (GameState.isDepBoardOpen) {
-      GameState.isDepBoardOpen = false;
-      mainGame.fadeOutDepBoard();
-      mainGame.fadeInFlightPlan();
+    if (GameState.isPreviousFlightPlanOpen) {
+      GameState.isPreviousFlightPlanOpen = false;
+      fadeOutFlightPlan();
     } else {
-      mainGame.fadeInFlightPlan();
+      if (GameState.isDepBoardOpen) {
+        GameState.isDepBoardOpen = false;
+        fadeOutDepBoard();
+        fadeInFlightPlan();
+      } else {
+        fadeInFlightPlan();
+      }
+      GameState.isPreviousFlightPlanOpen = true;
     }
   }
+
+  // protected void handleGuessCity() {
+  // guessCity.setDisable(false);
+  // String city = guessCity.getText();
+  // if (city.equalsIgnoreCase("Tokyo")) {
+  // System.out.println("Correct");
+  // guessCity.setVisible(false);
+  // guessCity.setDisable(true);
+  // GameState.isCityFound = true;
+  // } else {
+  // System.out.println("Wrong");
+  // guessCity.setText("Wrong");
+  // }
+  // }
 
   @FXML
   public void onCloseObject() {
@@ -209,7 +252,7 @@ public class Room3Controller {
    *
    * @return the snumber of the box that has been changed
    */
-  protected int changePointColor(int currentBox) {
+  public void changeCorrectBox(int currentBox) {
     // Change the color of the current box to green
     box1.setStyle("-fx-fill: #0b941b");
     box2.setStyle("-fx-fill: #0b941b");
@@ -217,30 +260,63 @@ public class Room3Controller {
     box4.setStyle("-fx-fill: #0b941b");
     box5.setStyle("-fx-fill: #0b941b");
 
-    int random = (int) (Math.random() * 5) + 1;
-    // Use while loop to ensure a different box is selected
-    while (random == currentBox) {
-      random = (int) (Math.random() * 5) + 1;
-    }
     // Change the color of the box
-    if (random == 1) {
+    if (currentBox == 1) {
       box1.setStyle("-fx-fill: red");
-    } else if (random == 2) {
+    } else if (currentBox == 2) {
       box2.setStyle("-fx-fill: red");
-    } else if (random == 3) {
+    } else if (currentBox == 3) {
       box3.setStyle("-fx-fill: red");
-    } else if (random == 4) {
+    } else if (currentBox == 4) {
       box4.setStyle("-fx-fill: red");
-    } else if (random == 5) {
+    } else if (currentBox == 5) {
       box5.setStyle("-fx-fill: red");
     }
-    return random;
   }
 
   @FXML
   public void onClickDoor() {
     System.out.println("Door clicked");
-    GameState.currentBox = changePointColor(GameState.currentBox);
     System.out.println(GameState.currentBox);
+  }
+
+  public void fadeInFlightPlan() {
+    lastFlightPlan.setVisible(true); // Set to visible before starting the animation
+
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), lastFlightPlan);
+    fadeTransition.setFromValue(0.0);
+    fadeTransition.setToValue(1.0);
+    fadeTransition.play();
+  }
+
+  public void fadeOutFlightPlan() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), lastFlightPlan);
+    fadeTransition.setFromValue(1.0);
+    fadeTransition.setToValue(0.0);
+    fadeTransition.play();
+    fadeTransition.setOnFinished(
+        event -> {
+          lastFlightPlan.setVisible(false);
+        });
+  }
+
+  public void fadeInDepBoard() {
+    departureBoard.setVisible(true); // Set to visible before starting the animation
+
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), departureBoard);
+    fadeTransition.setFromValue(0.0);
+    fadeTransition.setToValue(1.0);
+    fadeTransition.play();
+  }
+
+  public void fadeOutDepBoard() {
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), departureBoard);
+    fadeTransition.setFromValue(1.0);
+    fadeTransition.setToValue(0.0);
+    fadeTransition.play();
+    fadeTransition.setOnFinished(
+        event -> {
+          departureBoard.setVisible(false);
+        });
   }
 }
