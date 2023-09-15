@@ -50,6 +50,16 @@ public class Room3Controller {
 
   public void initialize() {
 
+    // Call the set radar point color method to set the most up to date correct box
+    if (GameState.currentBox == -1) {
+      // Generate a random number between 1 and 5
+      int randomBox = (int) (Math.random() * 5 + 1);
+      changeCorrectBox(randomBox);
+      GameState.currentBox = randomBox;
+    } else {
+      changeCorrectBox(GameState.currentBox);
+    }
+
     lastFlightPlan.setVisible(false);
     departureBoard.setVisible(false);
     System.out.println("plan");
@@ -57,10 +67,6 @@ public class Room3Controller {
     // Initialize the radar points and radarObjects to a list.
     this.radarPoints = new Circle[] {box1, box2, box3, box4, box5};
     this.radarObjects = new ImageView[] {radar_image, radar_computer};
-
-    // Set the inital correct treasure box
-    GameState.currentBox = 2;
-    box2.setStyle("-fx-fill: red");
 
     // Initialize the obsts list
     this.obsts = new ArrayList<Rectangle>();
@@ -246,7 +252,7 @@ public class Room3Controller {
    *
    * @return the snumber of the box that has been changed
    */
-  public int changeCorrectBox(int currentBox) {
+  public void changeCorrectBox(int currentBox) {
     // Change the color of the current box to green
     box1.setStyle("-fx-fill: #0b941b");
     box2.setStyle("-fx-fill: #0b941b");
@@ -254,31 +260,23 @@ public class Room3Controller {
     box4.setStyle("-fx-fill: #0b941b");
     box5.setStyle("-fx-fill: #0b941b");
 
-    int random = (int) (Math.random() * 5) + 1;
-    // Use while loop to ensure a different box is selected
-    while (random == currentBox) {
-      random = (int) (Math.random() * 5) + 1;
-    }
     // Change the color of the box
-    if (random == 1) {
+    if (currentBox == 1) {
       box1.setStyle("-fx-fill: red");
-    } else if (random == 2) {
+    } else if (currentBox == 2) {
       box2.setStyle("-fx-fill: red");
-    } else if (random == 3) {
+    } else if (currentBox == 3) {
       box3.setStyle("-fx-fill: red");
-    } else if (random == 4) {
+    } else if (currentBox == 4) {
       box4.setStyle("-fx-fill: red");
-    } else if (random == 5) {
+    } else if (currentBox == 5) {
       box5.setStyle("-fx-fill: red");
     }
-    GameState.currentBox = random;
-    return random;
   }
 
   @FXML
   public void onClickDoor() {
     System.out.println("Door clicked");
-    GameState.currentBox = changeCorrectBox(GameState.currentBox);
     System.out.println(GameState.currentBox);
   }
 

@@ -19,7 +19,7 @@ public class GameState {
   /** Indicates wheter the aircraft code has been found */
   public static boolean isAircraftCodeFound = false;
 
-  public static int currentBox;
+  public static int currentBox = -1;
 
   public static String[] booksInRoom1 = new String[7];
 }
