@@ -6,7 +6,6 @@ import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.GameState;
@@ -23,11 +22,9 @@ public class InventoryController {
   @FXML private ImageView item8;
 
   @FXML private TextArea timer;
-  @FXML private ProgressBar progressBar;
   @FXML private Button btnStart; 
 
   private Thread timeLimitThread;
-  private Thread progressBarThread;
 
   public void initialize() {
 
@@ -46,52 +43,16 @@ public class InventoryController {
     if (GameState.chosenTime == 2) {
       timer.setText("120");
       setTimeLimit(120);
-      setProgressBar(120);
     } else if (GameState.chosenTime == 4) {
       timer.setText("240");
-      setProgressBar(240);
       setTimeLimit(240);
     } else if (GameState.chosenTime == 6) {
       timer.setText("360");
-      setProgressBar(360);
       setTimeLimit(360);
     } else {
       timer.setText("5");
-      setProgressBar(5);
       setTimeLimit(5);
     }
-  }
-
-  /**
-   * Sets the progress bar.
-   * 
-   * @param timeLimit
-   */
-  private void setProgressBar(int timeLimit) {
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            for (int i = 0; i <= timeLimit; i++) {
-              if (GameState.isPlayerWon || GameState.timeLimitReached) {
-                break;
-              }
-              double progress = 1.0 - ((double) i / timeLimit);
-              Platform.runLater(() -> progressBar.setProgress(progress));
-              updateProgress(i, timeLimit);
-              try {
-                Thread.sleep(1000);
-              } catch (InterruptedException e) {
-                return null;
-              }
-            }
-            Platform.runLater(() -> handleTimeLimitReached());
-            return null;
-          }
-        };
-    progressBarThread = new Thread(task);
-    progressBarThread.setDaemon(true);
-    progressBarThread.start();
   }
 
   /**
