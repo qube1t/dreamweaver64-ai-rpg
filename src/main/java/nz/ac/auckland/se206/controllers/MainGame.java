@@ -14,13 +14,18 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+
 import javafx.scene.text.Text;
+
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Helper;
+
 import nz.ac.auckland.se206.components.Character;
 
 public class MainGame {
 
   @FXML private Pane game_pane;
-  @FXML private Character character;
+  @FXML private static Character character;
   @FXML private Pane outer_pane;
   @FXML private Label chat_toggle_btn;
   @FXML private Pane aiCharacterPane;
@@ -33,25 +38,54 @@ public class MainGame {
 
   Text bubbleChatText = new Text("text");
 
+  private static MainGame instance;
+
+  @FXML private static Pane initialised_game_pane;
+
   public void initialize() throws IOException {
-    // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/room.fxml"));
-    // fxmlLoader.setController(new RoomController());
 
     System.out.println(1);
-    Region room1 = (Region) FXMLLoader.load(getClass().getResource("/fxml/room1.fxml"));
-    room1.setScaleShape(true);
-    character = (Character) room1.lookup("#character");
+    initialised_game_pane = game_pane;
 
-    game_pane.getChildren().add(0, room1);
+    addOverlay("room2", true);
 
-    System.out.println(character);
-
-    // setting up bubble chat
+    Helper.setBooksInRoom1();
+    instance = this;
+        // setting up bubble chat
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
 
     addChat("hello");
+  }
+
+  public static void addOverlay(String roomN, boolean isRoom) throws IOException {
+    Region room1 = (Region) FXMLLoader.load(App.class.getResource("/fxml/" + roomN + ".fxml"));
+    room1.setScaleShape(true);
+
+
+    if (isRoom) character = (Character) room1.lookup("#character");
+
+    Pane backgroundBlur = new Pane();
+    backgroundBlur.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
+    backgroundBlur.setOnMouseClicked(
+        e -> {
+          removeOverlay();
+        });
+    initialised_game_pane.getChildren().add(backgroundBlur);
+    initialised_game_pane.getChildren().add(room1);
+  }
+
+  public static MainGame getInstance() {
+    return instance;
+  }
+
+  public static void removeOverlay() {
+    if (initialised_game_pane.getChildren().size() > 2) {
+      initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
+      initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
+      initialised_game_pane.requestFocus();
+    }
   }
 
   /**
@@ -74,6 +108,8 @@ public class MainGame {
       character.setAction(2);
     } else if (letter.equals("D")) {
       character.setAction(3);
+    } else if (letter.equals("ESCAPE")) {
+      removeOverlay();
     }
 
     // move after animating as it will change direction of character
@@ -98,6 +134,7 @@ public class MainGame {
   }
 
   @FXML
+
   private void toggleChat() {
     if (chatPane.isDisable()) {
       // chatPane is hidden -> show it
@@ -142,5 +179,9 @@ public class MainGame {
     int index = items.size();
     items.add(label);
     chat.scrollTo(index);
+  }
+
+  private void clickHeader() {
+    BookShelfController.returnBook();
   }
 }
