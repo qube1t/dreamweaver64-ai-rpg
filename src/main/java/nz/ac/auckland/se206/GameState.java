@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206;
 
+import javafx.scene.image.ImageView;
+
 /** Represents the state of the game. */
 public class GameState {
 
@@ -44,4 +46,14 @@ public class GameState {
 
   /** Indicates whether the item8 has found */
   public static boolean isItem8Found = false;
+
+  public static boolean isPreviousFlightPlanOpen = false;
+  public static boolean isDepBoardOpen = false;
+  public static boolean isCorrectRouteFound = false;
+
+  public static int currentBox;
+
+  public static String[] booksInRoom1 = new String[7];
+
+  static ImageView[] items;
 }

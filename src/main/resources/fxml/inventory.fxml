@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InventoryController">
    <children>
       <ImageView fitWidth="709.0" pickOnBounds="true" preserveRatio="true">
@@ -16,42 +15,42 @@
             <Image url="@../images/main_game/inventory/inventory_pane.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="item1" fitWidth="40.0" layoutX="16.0" layoutY="17.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="item1" fitWidth="40.0" layoutX="16.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/main_game/inventory/key.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="item2" fitWidth="40.0" layoutX="87.0" layoutY="17.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="item2" fitWidth="40.0" layoutX="87.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/main_game/inventory/key.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="item3" fitWidth="40.0" layoutX="159.0" layoutY="17.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="item3" fitWidth="40.0" layoutX="159.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/main_game/inventory/key.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="item4" fitWidth="40.0" layoutX="229.0" layoutY="17.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="item4" fitWidth="40.0" layoutX="229.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/main_game/inventory/key.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="item5" fitWidth="40.0" layoutX="299.0" layoutY="15.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="item5" fitWidth="40.0" layoutX="299.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/main_game/inventory/key.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="item6" fitWidth="40.0" layoutX="371.0" layoutY="17.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="item6" fitWidth="40.0" layoutX="371.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/main_game/inventory/key.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="item7" fitWidth="40.0" layoutX="441.0" layoutY="17.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="item7" fitWidth="40.0" layoutX="441.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/main_game/inventory/key.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="item8" fitWidth="40.0" layoutX="512.0" layoutY="17.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="item8" fitWidth="40.0" layoutX="512.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/main_game/inventory/key.png" />
          </image>

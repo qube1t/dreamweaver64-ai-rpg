@@ -24,7 +24,7 @@ public class InventoryController {
 
   @FXML private TextArea timer;
   @FXML private ProgressBar progressBar;
-  @FXML private Button btnStart;
+  @FXML private Button btnStart; 
 
   private Thread timeLimitThread;
   private Thread progressBarThread;
@@ -141,21 +141,21 @@ public class InventoryController {
    */
   public void showGottenItem() {
     if (GameState.isBookFound) {
-        item1.setOpacity(1);
+        item1.setVisible(true);
     } else if (GameState.isBoxKeyFound) {
-        item2.setOpacity(1);
+        item2.setVisible(true);
     } else if (GameState.isAccessKeyFound) {
-        item3.setOpacity(1);
+        item3.setVisible(true);
     } else if (GameState.isTreasureFound) {
-        item4.setOpacity(1);
+        item4.setVisible(true);
     } else if (GameState.isDecryptKeyFound) {
-        item5.setOpacity(1);
+        item5.setVisible(true);
     } else if (GameState.isItem6Found) {
-        item6.setOpacity(1);
+        item6.setVisible(true);
     } else if (GameState.isItem7Found) {
-        item7.setOpacity(1);
+        item7.setVisible(true);
     } else if (GameState.isItem8Found) {
-        item8.setOpacity(1);
+        item8.setVisible(true);
     }
   }
 }
