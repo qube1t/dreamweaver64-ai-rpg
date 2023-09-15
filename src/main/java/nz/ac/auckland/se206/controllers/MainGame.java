@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -14,12 +13,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
-
 import javafx.scene.text.Text;
-
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Helper;
-
 import nz.ac.auckland.se206.components.Character;
 
 public class MainGame {
@@ -51,7 +47,7 @@ public class MainGame {
 
     Helper.setBooksInRoom1();
     instance = this;
-        // setting up bubble chat
+    // setting up bubble chat
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
@@ -63,7 +59,6 @@ public class MainGame {
     Region room1 = (Region) FXMLLoader.load(App.class.getResource("/fxml/" + roomN + ".fxml"));
     room1.setScaleShape(true);
 
-
     if (isRoom) character = (Character) room1.lookup("#character");
 
     Pane backgroundBlur = new Pane();
@@ -72,8 +67,8 @@ public class MainGame {
         e -> {
           removeOverlay();
         });
-    initialised_game_pane.getChildren().add(backgroundBlur);
-    initialised_game_pane.getChildren().add(room1);
+    initialised_game_pane.getChildren().add(0, backgroundBlur);
+    initialised_game_pane.getChildren().add(1, room1);
   }
 
   public static MainGame getInstance() {
@@ -81,9 +76,13 @@ public class MainGame {
   }
 
   public static void removeOverlay() {
-    if (initialised_game_pane.getChildren().size() > 2) {
-      initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
-      initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
+    if (initialised_game_pane.getChildren().size() > 4) {
+      initialised_game_pane
+          .getChildren()
+          .remove(initialised_game_pane.getChildren().size() - 1 - 2);
+      initialised_game_pane
+          .getChildren()
+          .remove(initialised_game_pane.getChildren().size() - 1 - 2);
       initialised_game_pane.requestFocus();
     }
   }
@@ -134,7 +133,6 @@ public class MainGame {
   }
 
   @FXML
-
   private void toggleChat() {
     if (chatPane.isDisable()) {
       // chatPane is hidden -> show it
@@ -154,12 +152,12 @@ public class MainGame {
   }
 
   @FXML
-  private void keyPressedChatInput(KeyEvent ke){
-     if (ke.getCode().equals(KeyCode.ENTER)) {
+  private void keyPressedChatInput(KeyEvent ke) {
+    if (ke.getCode().equals(KeyCode.ENTER)) {
       addChat(chatInput.getText());
       chatInput.setText("");
       outer_pane.requestFocus();
-     }
+    }
   }
 
   private void addChat(String text) {
