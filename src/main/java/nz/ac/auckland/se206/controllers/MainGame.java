@@ -27,10 +27,6 @@ public class MainGame {
     addOverlay("room3", true);
     Helper.setBooksInRoom1();
     instance = this;
-
-    // lastFlightPlan.setVisible(false);
-    // depBoard.setVisible(false);
-    // System.out.println("plan");
   }
 
   public static void addOverlay(String roomN, boolean isRoom) throws IOException {

@@ -84,14 +84,14 @@
       <Rectangle fx:id="eight8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="712.0" layoutY="487.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="nine9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="749.0" layoutY="485.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
       <Rectangle fx:id="zero0" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="712.0" layoutY="523.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+      <Text fx:id="displayInput" fill="#12b03c" layoutX="735.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="169.21630859375">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Text>
       <Text fx:id="displayOutput" fill="#11ee66" layoutX="719.0" layoutY="212.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="201.46533203125">
          <font>
             <Font name="Helvetica" size="23.0" />
-         </font>
-      </Text>
-      <Text fx:id="displayInput" fill="WHITE" layoutX="725.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="189.30633544921875">
-         <font>
-            <Font name="Helvetica" size="18.0" />
          </font>
       </Text>
       <Rectangle fx:id="delete" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="863.0" layoutY="523.0" onMouseClicked="#handleDeleteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
@@ -106,11 +106,6 @@
          </image>
       </ImageView>
       <Rectangle fx:id="execute" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="923.0" layoutY="318.0" onMouseClicked="#handleExecuteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
-      <Text fx:id="errorMessage" fill="RED" layoutX="728.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="189.30633544921875">
-         <font>
-            <Font name="Helvetica" size="18.0" />
-         </font>
-      </Text>
       <Button fx:id="back" layoutX="14.0" layoutY="661.0" mnemonicParsing="false" onMouseClicked="#onGoBack" text="BACK" />
       <ImageView fitHeight="885.0" fitWidth="55.0" layoutX="578.0" layoutY="-98.0">
          <image>

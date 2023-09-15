@@ -205,6 +205,20 @@ public class Room3Controller {
     }
   }
 
+  // protected void handleGuessCity() {
+  // guessCity.setDisable(false);
+  // String city = guessCity.getText();
+  // if (city.equalsIgnoreCase("Tokyo")) {
+  // System.out.println("Correct");
+  // guessCity.setVisible(false);
+  // guessCity.setDisable(true);
+  // GameState.isCityFound = true;
+  // } else {
+  // System.out.println("Wrong");
+  // guessCity.setText("Wrong");
+  // }
+  // }
+
   @FXML
   public void onCloseObject() {
     System.out.println("Map clicked");
