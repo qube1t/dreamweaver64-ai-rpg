@@ -19,7 +19,7 @@ public class MainGame {
     // fxmlLoader.setController(new RoomController());
 
     System.out.println(1);
-    Region room1 = (Region) FXMLLoader.load(getClass().getResource("/fxml/start_menu.fxml"));
+    Region room1 = (Region) FXMLLoader.load(getClass().getResource("/fxml/room1.fxml"));
     room1.setScaleShape(true);
     character = (Character) room1.lookup("#character");
 

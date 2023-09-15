@@ -1,8 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import nz.ac.auckland.se206.App;
 
 public class StartMenuController {
   @FXML private ComboBox<String> difficulty;
@@ -23,5 +25,12 @@ public class StartMenuController {
 
     System.out.println(
         "Game started with" + difficulty + " difficulty and " + timeLimit + " time limit");
+
+    // Transition to the main game view
+    try {
+      App.setRoot("main_game");
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }
