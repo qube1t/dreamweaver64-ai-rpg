@@ -11,6 +11,11 @@ public class GameState {
   /** Indicates whether the key has been found. */
   public static boolean isKeyFound = false;
 
+
+  public static String[] gameMode;
+
+  public static boolean winTheGame = false;
+
   /** Indicates whether the game has started. */
   public static boolean isGameStarted = false;
 
@@ -63,4 +68,5 @@ public class GameState {
   public static boolean isItem8Found = false;
 
   public static ImageView[] items;
+
 }
