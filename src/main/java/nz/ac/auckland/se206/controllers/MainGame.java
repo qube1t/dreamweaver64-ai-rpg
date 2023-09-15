@@ -29,7 +29,7 @@ public class MainGame {
 
     System.out.println(1);
     initialised_game_pane = game_pane;
-    addOverlay("room1", true);
+    addOverlay("room2", true);
     Helper.setBooksInRoom1();
     instance = this;
 
@@ -102,6 +102,7 @@ public class MainGame {
     if (initialised_game_pane.getChildren().size() > 2) {
       initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
       initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
+      initialised_game_pane.requestFocus();
     }
   }
 

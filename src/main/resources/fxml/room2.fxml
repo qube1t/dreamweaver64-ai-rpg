@@ -2,15 +2,16 @@
 
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 
 <?import nz.ac.auckland.se206.components.Character?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
    <children>
-      <ImageView fitHeight="549.0" fitWidth="549.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/rooms/room2/backShipMap.png" />
          </image>
@@ -88,21 +89,21 @@
             <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
          </children>
       </Pane>
-      <ImageView fitHeight="549.0" fitWidth="549.0" layoutX="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/rooms/room2/frontShipMap.png" />
          </image>
       </ImageView>
-      <Pane layoutX="50.0" layoutY="100.0" prefHeight="300.0" prefWidth="400.0">
+      <Pane>
          <children>
-            <Rectangle fx:id="box1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="82.0" layoutY="89.0" onMouseClicked="#onClickBox1" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-            <Rectangle fx:id="box2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="59.0" layoutY="234.0" onMouseClicked="#onClickBox2" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-            <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="127.0" layoutY="152.0" onMouseClicked="#onClickBox3" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-            <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="258.0" layoutY="261.0" onMouseClicked="#onClickBox4" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-            <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="350.0" layoutY="188.0" onMouseClicked="#onClickBox5" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-            <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="10.0" layoutY="117.0" onMouseClicked="#onClickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
-            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="53.0" layoutX="333.0" layoutY="41.0" onMouseClicked="#onGetTrade" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
+            <Rectangle fx:id="box1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="132.0" layoutY="188.0" onMouseClicked="#onClickBox1" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
+            <Rectangle fx:id="box2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="110.0" layoutY="334.0" onMouseClicked="#onClickBox2" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
+            <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="176.0" layoutY="251.0" onMouseClicked="#onClickBox3" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
+            <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="310.0" layoutY="360.0" onMouseClicked="#onClickBox4" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
+            <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="399.0" layoutY="288.0" onMouseClicked="#onClickBox5" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
+            <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="64.0" layoutY="219.0" onMouseClicked="#onClickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
+            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="53.0" layoutX="382.0" layoutY="141.0" onMouseClicked="#onGetTrade" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
          </children>
       </Pane>
    </children>
-</AnchorPane>
+</StackPane>
