@@ -39,6 +39,7 @@ public class Room3Controller {
   @FXML private Circle box1, box2, box3, box4, box5;
   private Circle[] radarPoints;
   private ImageView[] radarObjects;
+  private ArrayList<Rectangle> obsts;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
   @FXML private Character character;
@@ -61,15 +62,15 @@ public class Room3Controller {
     GameState.currentBox = 2;
     box2.setStyle("-fx-fill: red");
 
-    // Add all the obstacles to the list
-    ArrayList<Rectangle> obsts = new ArrayList<Rectangle>();
+    // Initialize the obsts list
+    this.obsts = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
       computer, computer2, chair1, chair2, gate, radar, desk1, desk2, depBoard, boundary1,
       boundary2, boundary3, boundary4, boundary5, bound1, bound2, bound3
     };
 
     for (Rectangle rectangle : rectangles) {
-      obsts.add(rectangle);
+      this.obsts.add(rectangle);
     }
 
     character.enableMobility(obsts);
@@ -245,7 +246,7 @@ public class Room3Controller {
    *
    * @return the snumber of the box that has been changed
    */
-  protected int changeCorrectBox(int currentBox) {
+  public int changeCorrectBox(int currentBox) {
     // Change the color of the current box to green
     box1.setStyle("-fx-fill: #0b941b");
     box2.setStyle("-fx-fill: #0b941b");
@@ -270,6 +271,7 @@ public class Room3Controller {
     } else if (random == 5) {
       box5.setStyle("-fx-fill: red");
     }
+    GameState.currentBox = random;
     return random;
   }
 
