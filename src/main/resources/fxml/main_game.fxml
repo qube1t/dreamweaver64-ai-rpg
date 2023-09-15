@@ -1,17 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
-<StackPane fx:id="main_pane" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="934" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
+<StackPane fx:id="outer_pane" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="537.0" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
    <children>
-      <VBox>
+      <VBox prefHeight="560.0" prefWidth="706.0">
          <children>
-            <AnchorPane prefHeight="104.0" style="-fx-border-color: pink;" />
-            <AnchorPane fx:id="game_pane" prefHeight="475.0" style="-fx-border-color: blue; -fx-background-color: black;" />
-            <AnchorPane prefHeight="122.0" style="-fx-border-color: green;" />
+            <AnchorPane prefHeight="62.0" prefWidth="706.0" style="-fx-border-color: pink;" />
+            <StackPane fx:id="game_pane" prefHeight="475.0" style="-fx-border-color: blue; -fx-background-color: black;">
+               <children>
+                  <AnchorPane fx:id="aiCharacterPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="152.0" prefWidth="389.0" StackPane.alignment="BOTTOM_LEFT">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                     <children>
+                        <ImageView fitHeight="120.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0">
+                           <image>
+                              <Image url="@../images/Subject.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="chat_toggle_btn" layoutX="103.0" layoutY="173.0" onMouseClicked="#toggleChat" style="-fx-background-color: blue; -fx-label-padding: 5;" text="Show Chat" textFill="#cdd3f8" AnchorPane.bottomAnchor="8.0" />
+                        <ImageView fx:id="speechBubble" fitHeight="108.0" fitWidth="374.0" layoutX="15.0" layoutY="-60.0" pickOnBounds="true" AnchorPane.bottomAnchor="100.0">
+                           <image>
+                              <Image url="@../images/speech_bubble.png" />
+                           </image>
+                        </ImageView>
+                        <ScrollPane fx:id="bubbleTextPane" layoutX="41.0" layoutY="10.0" minWidth="300.0" prefHeight="50.0" prefWidth="331.0" style="-fx-background-color: white;" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="chatPane" disable="true" maxHeight="-Infinity" opacity="0.0" prefHeight="144.0" prefWidth="704.0" style="-fx-border-color: green; -fx-background-color: black;" AnchorPane.bottomAnchor="0.0" StackPane.alignment="BOTTOM_CENTER">
+                  <children>
+                        <ListView fx:id="chat" blendMode="LIGHTEN" focusTraversable="false" layoutX="-2.0" layoutY="6.0" maxHeight="-Infinity" prefHeight="98.0" prefWidth="611.0" style="-fx-background-color: black; -fx-border-color: orange; -fx-border-width: 4px;" stylesheets="@../css/chat.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0">
+</ListView>
+                        <TextField fx:id="chatInput" layoutX="5.0" layoutY="110.0" onKeyPressed="#keyPressedChatInput" prefHeight="28.0" prefWidth="562.0" promptText="Talk with AI. Click enter to send." style="-fx-background-color: black; -fx-border-color: grey; -fx-text-fill: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" />
+                     </children>
+                     <StackPane.margin>
+                        <Insets bottom="40.0" left="100.0" />
+                     </StackPane.margin>
+                  </AnchorPane>
+               </children></StackPane>
+
+<!-- <StackPane fx:id="main_pane" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="934" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
+   <children>
+      <VBox prefHeight="705.0" prefWidth="706.0">
+         <children> -->
+
+
+<!--             <AnchorPane onMouseClicked="#clickHeader" prefHeight="104.0" style="-fx-border-color: pink;" />
+            <StackPane fx:id="game_pane" minHeight="-Infinity" prefHeight="685.0" style="-fx-border-color: blue; -fx-background-color: black;" />
+            <AnchorPane prefHeight="122.0" style="-fx-border-color: green;" /> -->
+
          </children>
       </VBox>
    </children>

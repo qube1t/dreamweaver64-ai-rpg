@@ -18,9 +18,51 @@ import javafx.stage.Stage;
 public class App extends Application {
 
   private static Scene scene;
+  private static Parent Room3Root;
+  private static Parent MainGameRoot;
+  private static Parent Room3SubRoot;
 
   public static void main(final String[] args) {
     launch();
+  }
+
+  public static void setUi(String fxml) {
+    Parent root = null;
+    if (fxml.equals("sub3")) {
+      // First time loading the game, create a new instance of the game.
+      if (Room3SubRoot == null) {
+        try {
+          Room3SubRoot = loadFxml("sub3");
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+      root = Room3SubRoot;
+    } else if (fxml.equals("room3")) {
+      // First time loading the game, create a new instance of the game.
+      if (Room3Root == null) {
+        try {
+          Room3Root = loadFxml("room3");
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+      root = Room3Root;
+    } else if (fxml.equals("main_game")) {
+      if (MainGameRoot == null) {
+        try {
+          MainGameRoot = loadFxml("main_game");
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+      }
+      root = MainGameRoot;
+    }
+
+    if (root != null) {
+      scene.setRoot(root);
+      root.requestFocus();
+    }
   }
 
   public static void setRoot(String fxml) throws IOException {
@@ -47,12 +89,15 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    Pane root = (Pane) loadFxml("end_menu");
-    scene = new Scene(root, 706, 934);
+
+    Pane root = (Pane) loadFxml("start_menu");
+
+    scene = new Scene(root, 1000, 700);
+
     stage.setScene(scene);
     stage.show();
 
-    letterbox(scene, root);
+    // letterbox(scene, root);
 
     // stage.setFullScreen(true);
 

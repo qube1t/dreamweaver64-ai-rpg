@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InventoryController">
+   <children>
+      <ImageView fitWidth="709.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/main_game/inventory/inventory_pane.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="item1" fitWidth="40.0" layoutX="16.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/main_game/inventory/key.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="item2" fitWidth="40.0" layoutX="87.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/main_game/inventory/key.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="item3" fitWidth="40.0" layoutX="159.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/main_game/inventory/key.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="item4" fitWidth="40.0" layoutX="229.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/main_game/inventory/key.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="item5" fitWidth="40.0" layoutX="299.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/main_game/inventory/key.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="item6" fitWidth="40.0" layoutX="371.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/main_game/inventory/key.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="item7" fitWidth="40.0" layoutX="441.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/main_game/inventory/key.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="item8" fitWidth="40.0" layoutX="512.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/main_game/inventory/key.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="timer" layoutX="612.0" layoutY="15.0" prefHeight="40.0" prefWidth="65.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="15.0" />
+      <Button fx:id="btnStart" layoutX="336.0" layoutY="82.0" mnemonicParsing="false" onAction="#onStartGame" text="START">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

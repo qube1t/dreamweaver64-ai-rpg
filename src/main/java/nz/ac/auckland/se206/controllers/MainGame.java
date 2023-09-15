@@ -1,53 +1,92 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import javafx.scene.text.Text;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
 
 public class MainGame {
 
   @FXML private Pane game_pane;
-  @FXML private Character character;
+  @FXML private static Character character;
   @FXML private Pane outer_pane;
+  @FXML private Label chat_toggle_btn;
+  @FXML private Pane aiCharacterPane;
+  @FXML private Pane chatPane;
+  @FXML private ImageView speechBubble;
+  @FXML private ScrollPane bubbleTextPane;
+  @FXML private Label bubbleText;
+  @FXML private ListView<Label> chat;
+  @FXML private TextField chatInput;
+
+  Text bubbleChatText = new Text("text");
+
+  private static MainGame instance;
+
+  @FXML private static Pane initialised_game_pane;
 
   public void initialize() throws IOException {
-    // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/room.fxml"));
-    // fxmlLoader.setController(new RoomController());
 
     System.out.println(1);
-    Region room1 = (Region) FXMLLoader.load(getClass().getResource("/fxml/room1.fxml"));
+    initialised_game_pane = game_pane;
+
+    addOverlay("room1", true);
+
+    Helper.setBooksInRoom1();
+    instance = this;
+    // setting up bubble chat
+    bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
+    bubbleTextPane.setFitToWidth(true);
+    bubbleTextPane.setContent(bubbleChatText);
+
+    addChat("hello");
+  }
+
+  public static void addOverlay(String roomN, boolean isRoom) throws IOException {
+    Region room1 = (Region) FXMLLoader.load(App.class.getResource("/fxml/" + roomN + ".fxml"));
     room1.setScaleShape(true);
-    character = (Character) room1.lookup("#character");
 
-    // game_pane
-    //     .widthProperty()
-    //     .addListener(
-    //         (obsWidth, oldW, newW) -> {
-    //           if (oldW != newW) {
-    //             // int sca
-    //           }
-    //         });
+    if (isRoom) character = (Character) room1.lookup("#character");
 
-    // game_pane.prefWidthProperty().bind(outer_pane.widthProperty());
-    // game_pane.prefHeightProperty().bind(outer_pane.heightProperty());
+    Pane backgroundBlur = new Pane();
+    backgroundBlur.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
+    backgroundBlur.setOnMouseClicked(
+        e -> {
+          removeOverlay();
+        });
+    initialised_game_pane
+        .getChildren()
+        .add(initialised_game_pane.getChildren().size() - 2, backgroundBlur);
+    initialised_game_pane.getChildren().add(initialised_game_pane.getChildren().size() - 2, room1);
+  }
 
-    game_pane.getChildren().add(room1);
+  public static MainGame getInstance() {
+    return instance;
+  }
 
-    // System.out.println(
-    //     ((Pane) ((Pane) game_pane.getChildren().get(0)).getChildren().get(1)).getChildren());
-    System.out.println(character);
-    //     game_pane
-    //         .sceneProperty()
-    //         .addListener(
-    //             (observableScene, oldScene, newScene) -> {
-    //               if (oldScene == null && newScene != null) {
-    //                 System.out.println(game_pane.getScene().getWidth());
-    //               }
-    //             });
+  public static void removeOverlay() {
+    if (initialised_game_pane.getChildren().size() > 4) {
+      initialised_game_pane
+          .getChildren()
+          .remove(initialised_game_pane.getChildren().size() - 1 - 2);
+      initialised_game_pane
+          .getChildren()
+          .remove(initialised_game_pane.getChildren().size() - 1 - 2);
+      initialised_game_pane.requestFocus();
+    }
   }
 
   /**
@@ -70,6 +109,8 @@ public class MainGame {
       character.setAction(2);
     } else if (letter.equals("D")) {
       character.setAction(3);
+    } else if (letter.equals("ESCAPE")) {
+      removeOverlay();
     }
 
     // move after animating as it will change direction of character
@@ -93,7 +134,54 @@ public class MainGame {
     }
   }
 
-  static double divideByNumber(Number n1, Number n2) {
-    return Double.parseDouble(n1.toString()) / (Double.parseDouble(n2.toString()));
+  @FXML
+  private void toggleChat() {
+    if (chatPane.isDisable()) {
+      // chatPane is hidden -> show it
+      chatPane.setDisable(false);
+      chatPane.setOpacity(0.7);
+      chat_toggle_btn.setText("Hide Chat");
+
+      speechBubble.setVisible(false);
+      bubbleTextPane.setVisible(false);
+    } else {
+      // hide chatPane
+      chatPane.setDisable(true);
+      chatPane.setOpacity(0);
+      chat_toggle_btn.setText("Show Chat");
+      outer_pane.requestFocus();
+    }
+  }
+
+  @FXML
+  private void keyPressedChatInput(KeyEvent ke) {
+    if (ke.getCode().equals(KeyCode.ENTER)) {
+      addChat(chatInput.getText());
+      chatInput.setText("");
+      outer_pane.requestFocus();
+    }
+  }
+
+  private void addChat(String text) {
+
+    // adding to bubble
+    bubbleChatText.setText(text);
+
+    if (chatPane.isDisable()) speechBubble.setVisible(true);
+
+    // adding to chatbox
+    Label label = new Label(text);
+    label.setWrapText(true);
+    label.getStyleClass().add("chat-text");
+    label.setMaxWidth(500);
+
+    List<Label> items = chat.getItems();
+    int index = items.size();
+    items.add(label);
+    chat.scrollTo(index);
+  }
+
+  private void clickHeader() {
+    BookShelfController.returnBook();
   }
 }
