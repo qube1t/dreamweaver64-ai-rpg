@@ -16,15 +16,11 @@ public class GameState {
   public static boolean isCorrectRouteFound = false;
   public static boolean isCityFound = false;
 
-
   /** Indicates wheter the aircraft code has been found */
   public static boolean isAircraftCodeFound = false;
 
   /** Indicates the location of the treasure box. */
-  public static int currentBox;
-
   public static int currentBox = -1;
-
 
   public static String[] booksInRoom1 = new String[7];
 
@@ -39,5 +35,4 @@ public class GameState {
 
   /** Indicates whether the treasure has found */
   public static boolean isTreasureFound = false;
-
 }
