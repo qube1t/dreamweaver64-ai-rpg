@@ -6,48 +6,57 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
 
 public class MainGame {
 
   @FXML private Pane game_pane;
-  @FXML private Character character;
+  @FXML private static Character character;
   @FXML private Pane outer_pane;
 
+  private static MainGame instance;
+
+  @FXML private static Pane initialised_game_pane;
+
   public void initialize() throws IOException {
-    // FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/room.fxml"));
-    // fxmlLoader.setController(new RoomController());
 
     System.out.println(1);
-    Region room1 = (Region) FXMLLoader.load(getClass().getResource("/fxml/room1.fxml"));
+    initialised_game_pane = game_pane;
+
+    addOverlay("room2", true);
+
+    Helper.setBooksInRoom1();
+    instance = this;
+  }
+
+  public static void addOverlay(String roomN, boolean isRoom) throws IOException {
+    Region room1 = (Region) FXMLLoader.load(App.class.getResource("/fxml/" + roomN + ".fxml"));
     room1.setScaleShape(true);
-    character = (Character) room1.lookup("#character");
 
-    // game_pane
-    //     .widthProperty()
-    //     .addListener(
-    //         (obsWidth, oldW, newW) -> {
-    //           if (oldW != newW) {
-    //             // int sca
-    //           }
-    //         });
+    if (isRoom) character = (Character) room1.lookup("#character");
 
-    // game_pane.prefWidthProperty().bind(outer_pane.widthProperty());
-    // game_pane.prefHeightProperty().bind(outer_pane.heightProperty());
+    Pane backgroundBlur = new Pane();
+    backgroundBlur.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
+    backgroundBlur.setOnMouseClicked(
+        e -> {
+          removeOverlay();
+        });
+    initialised_game_pane.getChildren().add(backgroundBlur);
+    initialised_game_pane.getChildren().add(room1);
+  }
 
-    game_pane.getChildren().add(room1);
+  public static MainGame getInstance() {
+    return instance;
+  }
 
-    // System.out.println(
-    //     ((Pane) ((Pane) game_pane.getChildren().get(0)).getChildren().get(1)).getChildren());
-    System.out.println(character);
-    //     game_pane
-    //         .sceneProperty()
-    //         .addListener(
-    //             (observableScene, oldScene, newScene) -> {
-    //               if (oldScene == null && newScene != null) {
-    //                 System.out.println(game_pane.getScene().getWidth());
-    //               }
-    //             });
+  public static void removeOverlay() {
+    if (initialised_game_pane.getChildren().size() > 2) {
+      initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
+      initialised_game_pane.getChildren().remove(initialised_game_pane.getChildren().size() - 1);
+      initialised_game_pane.requestFocus();
+    }
   }
 
   /**
@@ -70,6 +79,8 @@ public class MainGame {
       character.setAction(2);
     } else if (letter.equals("D")) {
       character.setAction(3);
+    } else if (letter.equals("ESCAPE")) {
+      removeOverlay();
     }
 
     // move after animating as it will change direction of character
@@ -93,7 +104,8 @@ public class MainGame {
     }
   }
 
-  static double divideByNumber(Number n1, Number n2) {
-    return Double.parseDouble(n1.toString()) / (Double.parseDouble(n2.toString()));
+  @FXML
+  private void clickHeader() {
+    BookShelfController.returnBook();
   }
 }

@@ -23,8 +23,23 @@ public class GameState {
   /** Indicates whether the player has won */
   public static boolean isPlayerWon = false;
 
+  /** These fileds are used in room3 */
+  public static boolean isPreviousFlightPlanOpen = false;
+
+  public static boolean isDepBoardOpen = false;
+  public static boolean isCorrectRouteFound = false;
+  public static boolean isCityFound = false;
+
+  /** Indicates wheter the aircraft code has been found */
+  public static boolean isAircraftCodeFound = false;
+
+  /** Indicates the location of the treasure box. */
+  public static int currentBox = -1;
+
+  public static String[] booksInRoom1 = new String[7];
+
   /** Indicates whether the book has found to trade with pirate */
-  public static boolean isBookFound = false;
+  public static boolean isBookFound = true;
 
   /** Indicates whether the box key has found to open the treasure box */
   public static boolean isBoxKeyFound = false;
@@ -47,13 +62,5 @@ public class GameState {
   /** Indicates whether the item8 has found */
   public static boolean isItem8Found = false;
 
-  public static boolean isPreviousFlightPlanOpen = false;
-  public static boolean isDepBoardOpen = false;
-  public static boolean isCorrectRouteFound = false;
-
-  public static int currentBox;
-
-  public static String[] booksInRoom1 = new String[7];
-
-  static ImageView[] items;
+  public static ImageView[] items;
 }
