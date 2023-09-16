@@ -13,4 +13,16 @@ public class Helper {
           "Beloved"
         };
   }
+
+  public static void changeTreasureBox(int currentBoxNumber) {
+
+    // Generate a random number between 1 and 5
+    int boxNumber = (int) (Math.random() * 5) + 1;
+
+    // If the random number is the same as the box number, generate a new random number
+    while (boxNumber == currentBoxNumber) {
+      boxNumber = (int) (Math.random() * 5) + 1;
+    }
+    GameState.currentBox = boxNumber;
+  }
 }

@@ -11,7 +11,7 @@ public class GameState {
   /** Indicates whether the key has been found. */
   public static boolean isKeyFound = false;
 
-
+  /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
 
   public static boolean winTheGame = false;
@@ -68,5 +68,4 @@ public class GameState {
   public static boolean isItem8Found = false;
 
   public static ImageView[] items;
-
 }
