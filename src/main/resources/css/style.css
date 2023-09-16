@@ -1,22 +1,7 @@
-.bubble-speech-room3 {
-    -fx-background-color: #f3f3f3;
-    /* Background color */
-    -fx-background-radius: 20px;
-    /* Rounded corners */
-    -fx-padding: 10px;
-    /* Padding inside the bubble */
-    -fx-border-color: #999999;
-    /* Border color */
-    -fx-border-width: 2px;
-    /* Border width */
-    -fx-border-radius: 20px;
-    /* Rounded border */
-}
-
 .bubble {
     -fx-padding: 10px;
     -fx-background-color: lightblue;
     -fx-border-color: navy;
     -fx-border-width: 2px;
-    -fx-shape: "M12 1c-6.628 0-12 4.573-12 10.213 0 2.39.932 4.591 2.427 6.164l-2.427 5.623 7.563-2.26c9.495 2.598 16.437-3.251 16.437-9.527 0-5.64-5.372-10.213-12-10.213z";
+    -fx-shape: "M24 1h-24v16.981h4v5.019l7-5.019h13z";
 }

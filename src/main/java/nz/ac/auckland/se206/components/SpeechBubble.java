@@ -9,7 +9,7 @@ public class SpeechBubble extends HBox {
   private Label displayedText;
 
   public SpeechBubble(String message) {
-    this(message, Pos.TOP_CENTER);
+    this(message, Pos.TOP_LEFT);
   }
 
   public SpeechBubble(String message, Pos position) {
@@ -17,14 +17,11 @@ public class SpeechBubble extends HBox {
     this.displayedText.setPadding(new Insets(10));
     this.displayedText.setWrapText(true);
     configureSpeechBubble(position);
-    this.displayedText.setMaxWidth(Double.MAX_VALUE); // Allow the text to expand horizontally
+    this.displayedText.setMaxWidth(100); // Allow the text to expand horizontally
 
     // Debugging statements
     System.out.println("Text: " + message);
     System.out.println("Visibility: " + displayedText.isVisible());
-
-    // Display the speech bubble
-    displayedText.setText(message);
   }
 
   private void configureSpeechBubble(Pos position) {
