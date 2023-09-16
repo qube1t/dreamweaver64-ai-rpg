@@ -99,6 +99,8 @@ public class App extends Application {
     stage.setScene(scene);
     stage.show();
 
+    // Add the style css file
+    scene.getStylesheets().add("/css/style.css");
     // letterbox(scene, root);
 
     // stage.setFullScreen(true);

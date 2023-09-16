@@ -44,7 +44,7 @@ public class MainGame {
     System.out.println(1);
     initialised_game_pane = game_pane;
 
-    addOverlay("room1", true);
+    addOverlay("room3", true);
 
     Helper.setBooksInRoom1();
     Helper.changeTreasureBox(GameState.currentBox);

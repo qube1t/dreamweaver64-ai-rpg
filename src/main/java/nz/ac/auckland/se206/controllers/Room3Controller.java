@@ -8,12 +8,14 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.components.SpeechBubble;
 
 public class Room3Controller {
 
@@ -40,6 +42,7 @@ public class Room3Controller {
   private Circle[] radarPoints;
   private ImageView[] radarObjects;
   private ArrayList<Rectangle> obsts;
+  @FXML private HBox chatBubble;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
   @FXML private Character character;
@@ -49,6 +52,10 @@ public class Room3Controller {
   private Timeline radarAnimation;
 
   public void initialize() {
+
+    // Initialize speech bubble
+    SpeechBubble chat = new SpeechBubble("Hello");
+    chatBubble.getChildren().add(chat);
 
     // Call the set radar point color method to set the most up to date correct box
     if (GameState.currentBox == -1) {
