@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 
-<?import nz.ac.auckland.se206.components.Character?>
+<!--<?import nz.ac.auckland.se206.components.Character?>-->
 
 <StackPane maxHeight="550.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room3Controller">
    <children>
@@ -44,12 +44,12 @@
             <Rectangle fx:id="bound2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="392.0" layoutY="285.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
             <AnchorPane fx:id="radarPane" layoutX="127.0" layoutY="104.0">
                <children>
-                  <ImageView fx:id="radar_image" fitHeight="159.0" fitWidth="176.0" layoutX="65.0" layoutY="42.0">
+                  <ImageView fx:id="radar_image" fitHeight="159.0" fitWidth="176.0" layoutX="65.0" layoutY="42.0" opacity="0.0">
                      <image>
                         <Image url="@../images/rooms/room3/radar.gif" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="radar_computer" fitHeight="363.0" fitWidth="298.0">
+                  <ImageView fx:id="radar_computer" fitHeight="363.0" fitWidth="298.0" opacity="0.0">
                      <image>
                         <Image url="@../images/rooms/room3/computer_radar.png" />
                      </image>
@@ -77,6 +77,11 @@
                </children>
             </AnchorPane>
       <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
+            <ImageView fitHeight="70.0" fitWidth="70.0" layoutX="34.0" layoutY="239.0">
+               <image>
+                  <Image url="@../images/rooms/room3/facing_left.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>
