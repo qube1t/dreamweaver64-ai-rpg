@@ -16,4 +16,9 @@ public class Helper {
     }
     return matchesList;
   }
+
+  // https://www.baeldung.com/java-generating-random-numbers-in-range
+  public static int getRandomNumber(int min, int max) {
+    return (int) ((Math.random() * (max - min)) + min);
+  }
 }
