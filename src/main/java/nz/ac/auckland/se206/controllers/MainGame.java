@@ -176,6 +176,9 @@ public class MainGame {
     label.setWrapText(true);
     label.getStyleClass().add("chat-text");
     // label.setMaxWidth(500);
+    // label.setMaxWidth(chat.getWidth() - 20);
+    label.prefWidthProperty().bind(chat.widthProperty().subtract(50));
+    label.setBorder(null);
 
     List<Label> items = chat.getItems();
     int index = items.size();
