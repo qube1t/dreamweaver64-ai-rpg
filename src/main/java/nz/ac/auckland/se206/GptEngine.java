@@ -31,8 +31,9 @@ public class GptEngine {
 
       chatCompletionRequest.addMessage(result.getChatMessage());
 
-      List<String> chatEntry = Helper.getBetweenChar(result.getChatMessage().getContent(), "*");
+      List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*");
       if (chatEntry.size() > 0) GameState.mainGame.addChat(chatEntry.get(0));
+
       return result.getChatMessage();
     } catch (ApiProxyException e) {
       // TODO handle exception appropriately

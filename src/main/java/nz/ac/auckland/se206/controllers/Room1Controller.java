@@ -77,7 +77,7 @@ public class Room1Controller {
                     "Produce a list of 7 books that have less than 7 characters in their title as"
                         + " an array"))
             .getContent();
-    List<String> matchesList = Helper.getBetweenChar(list, "\"");
+    List<String> matchesList = Helper.getTextBetweenChar(list, "\"");
 
     GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
     // System.out.println(list);

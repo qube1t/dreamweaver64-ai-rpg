@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Helper {
-  public static List<String> getBetweenChar(String str, String c) {
+  public static List<String> getTextBetweenChar(String str, String c) {
     List<String> matchesList = new ArrayList<String>();
     Pattern pattern = Pattern.compile("\\" + c + "(.*?)\\" + c);
     Matcher m1 = pattern.matcher(str);
