@@ -110,7 +110,7 @@
          <font>
             <Font name="Impact" size="18.0" />
          </font></Button>
-      <Rectangle fx:id="errorWindow" arcHeight="5.0" arcWidth="5.0" fill="#95a2ae" height="161.0" layoutX="173.0" layoutY="245.0" stroke="BLACK" strokeType="INSIDE" width="274.0" />
+      <Rectangle fx:id="errorWindow" arcHeight="5.0" arcWidth="5.0" fill="#95a2ae" height="161.0" layoutX="173.0" layoutY="245.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: red; -fx-stroke-width: 4;" width="274.0" />
       <Text fx:id="errorText" fill="#ab1414" layoutX="222.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong Choice" wrappingWidth="173.4056178874721">
          <font>
             <Font name="Impact" size="29.0" />

@@ -53,7 +53,6 @@ public class MainGame {
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
-
     addChat("hello");
   }
 

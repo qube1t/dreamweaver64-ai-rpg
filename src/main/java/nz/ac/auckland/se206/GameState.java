@@ -41,6 +41,9 @@ public class GameState {
   /** Indicates the location of the treasure box. */
   public static int currentBox = -1;
 
+  /** Indicates the aircraft code */
+  public static String aircraftCode = "";
+
   public static String[] booksInRoom1 = new String[7];
 
   /** Indicates whether the book has found to trade with pirate */

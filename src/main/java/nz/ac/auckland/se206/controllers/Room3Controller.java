@@ -6,16 +6,15 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
-import nz.ac.auckland.se206.components.SpeechBubble;
 
 public class Room3Controller {
 
@@ -42,7 +41,8 @@ public class Room3Controller {
   private Circle[] radarPoints;
   private ImageView[] radarObjects;
   private ArrayList<Rectangle> obsts;
-  @FXML private HBox chatBubble;
+  @FXML private AnchorPane chatBubble;
+  @FXML private TextArea gptResponse;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
   @FXML private Character character;
@@ -50,12 +50,27 @@ public class Room3Controller {
   @FXML private ImageView radar_image, radar_computer, map;
   private boolean isRadarComputerOpen;
   private Timeline radarAnimation;
+  private GptManager gptManager;
 
   public void initialize() {
+    // Initialize the GptManager
+    this.gptManager = new GptManager();
 
-    // Initialize speech bubble
-    SpeechBubble chat = new SpeechBubble("Hello");
-    chatBubble.getChildren().add(chat);
+    // Configure the chat bubble
+    gptResponse.setWrapText(true);
+    gptResponse.setEditable(false);
+
+    // Set the chat bubble to be invisible initially
+    chatBubble.setVisible(false);
+    gptResponse.setVisible(false);
+
+    // Set the aircaraft code and assign to game state
+    if (GameState.aircraftCode == null) {
+      GameState.aircraftCode =
+          gptManager.getGptResponseAsString(
+              "Generate an aircraft code for the game with 2 letters and 2 numbers, reply directly"
+                  + " with the code and do not include any other text. Example reply: AC19");
+    }
 
     // Call the set radar point color method to set the most up to date correct box
     if (GameState.currentBox == -1) {
@@ -153,7 +168,7 @@ public class Room3Controller {
 
   @FXML
   public void onClickDepBoard() {
-
+    System.out.println("DepBoard clicked");
     // If the departure board is currently open, then close it
     if (GameState.isDepBoardOpen) {
       GameState.isDepBoardOpen = false;
@@ -170,8 +185,6 @@ public class Room3Controller {
         fadeInDepBoard();
       }
     }
-
-    System.out.println("DepBoard clicked");
   }
 
   @FXML
