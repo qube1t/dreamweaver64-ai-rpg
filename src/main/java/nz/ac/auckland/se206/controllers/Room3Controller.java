@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 
 public class Room3Controller {
 
@@ -67,9 +68,7 @@ public class Room3Controller {
     // Set the aircaraft code and assign to game state
     if (GameState.aircraftCode == null) {
       GameState.aircraftCode =
-          gptManager.getGptResponseAsString(
-              "Generate an aircraft code for the game with 2 letters and 2 numbers, reply directly"
-                  + " with the code and do not include any other text. Example reply: AC19");
+          gptManager.getGptResponseAsString(GptPromptEngineeringRoom3.getAircraftCode());
     }
 
     // Call the set radar point color method to set the most up to date correct box

@@ -195,7 +195,10 @@ public class Room3SubController {
       // messageFlow.getChildren().addAll(messagePart1, codePart, messagePart2);
 
       // Set the styled TextFlow as the content of displayInput
-      displayInput.setText("CONGRATULATIONS! THE AIRCRAFT CODE IS QR16 GOOD LUCK ON YOUR ESCAPE!");
+      displayInput.setText(
+          "CONGRATULATIONS! THE AIRCRAFT CODE IS"
+              + GameState.aircraftCode
+              + "GOOD LUCK ON YOUR ESCAPE!");
 
       // Clear the input field and disable it along with the execute button
       displayOutput.setText("");
