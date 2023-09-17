@@ -70,16 +70,38 @@ public class Room1Controller {
 
   private void initGpt() throws ApiProxyException {
     // shelf setup
-    String list =
-        GptEngine.runGpt(
+
+    GptEngine.runGpt(
+        new ChatMessage(
+            "user",
+            "Produce a list of 7 books that have less than 7 characters in their title as"
+                + " an array"),
+        (str) -> {
+          List<String> matchesList = Helper.getTextBetweenChar(str, "\"");
+          GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
+
+          String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));
+          System.out.println(ansBook);
+          // riddle for book
+
+          try {
+            GptEngine.runGpt(
                 new ChatMessage(
                     "user",
-                    "Produce a list of 7 books that have less than 7 characters in their title as"
-                        + " an array"))
-            .getContent();
-    List<String> matchesList = Helper.getTextBetweenChar(list, "\"");
+                    "Give a riddle in the form of a quote from"
+                        + ansBook
+                        + " in 1 sentence. Say this"
+                        + " riddle with pirate colloquial. surround the quote with the character %"
+                        + " with no quotation marks"),
+                (_str) -> {
+                  System.out.println(_str);
+                });
+          } catch (ApiProxyException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        });
 
-    GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
     // System.out.println(list);
 
     // true answer
@@ -89,20 +111,8 @@ public class Room1Controller {
     //                 "user", "Now select one of the books and only give me its index as an
     // integer"))
     //         .getContent();
-    String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));
 
-    // riddle for book
-    String riddle =
-        GptEngine.runGpt(
-                new ChatMessage(
-                    "user",
-                    "Give a riddle in the form of a quote from"
-                        + ansBook
-                        + " in 1 sentence. Say this"
-                        + " riddle with pirate colloquial. surround the quote with the character %"
-                        + " with no quotation marks"))
-            .getContent();
-    System.out.println(riddle);
+    // System.out.println(riddle);
   }
 
   @FXML
