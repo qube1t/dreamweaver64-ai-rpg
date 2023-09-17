@@ -15,7 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.Helper;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
 
 public class MainGame {
@@ -40,12 +40,13 @@ public class MainGame {
 
   public void initialize() throws IOException {
 
+    GameState.mainGame = this;
     System.out.println(1);
     initialised_game_pane = game_pane;
 
     addOverlay("room1", true);
 
-    Helper.setBooksInRoom1();
+    // Helper.setBooksInRoom1();
     instance = this;
     // setting up bubble chat
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
@@ -162,10 +163,11 @@ public class MainGame {
     }
   }
 
-  private void addChat(String text) {
+  public void addChat(String text) {
 
     // adding to bubble
     bubbleChatText.setText(text);
+    bubbleTextPane.setContent(bubbleChatText);
 
     if (chatPane.isDisable()) speechBubble.setVisible(true);
 
@@ -173,7 +175,7 @@ public class MainGame {
     Label label = new Label(text);
     label.setWrapText(true);
     label.getStyleClass().add("chat-text");
-    label.setMaxWidth(500);
+    // label.setMaxWidth(500);
 
     List<Label> items = chat.getItems();
     int index = items.size();
