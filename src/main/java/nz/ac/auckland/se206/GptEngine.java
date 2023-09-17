@@ -14,6 +14,7 @@ public class GptEngine {
   private static boolean active = false;
   private static Thread activeThread;
   private static Queue<ChatMessage> promptQueue = new LinkedList<>();
+  private static Queue<GptResultAction> promptFuncQueue = new LinkedList<>();
 
   public GptEngine() {
     if (chatCompletionRequest == null)
@@ -30,29 +31,35 @@ public class GptEngine {
    */
   public static void runGpt(ChatMessage msg, GptResultAction myFunc) throws ApiProxyException {
     promptQueue.add(msg);
-    if (!active) startNewThread(myFunc);
+    promptFuncQueue.add(myFunc);
+    if (!active) startNewThread();
   }
 
-  private static void startNewThread(GptResultAction myFunc) {
+  private static void startNewThread() {
     activeThread =
         new Thread(
             () -> {
               System.out.println(Thread.currentThread().getId());
               active = true;
               ChatMessage nextPrompt = promptQueue.poll();
+              GptResultAction myFunc = promptFuncQueue.poll();
+
               while (nextPrompt != null) {
                 try {
                   chatCompletionRequest.addMessage(nextPrompt);
                   ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+
                   gptCompletion(chatCompletionResult, myFunc);
                 } catch (Exception e) {
                   e.printStackTrace();
                 }
                 nextPrompt = promptQueue.poll();
+                myFunc = promptFuncQueue.poll();
                 if (nextPrompt == null) {
                   try {
                     Thread.sleep(2000);
                     nextPrompt = promptQueue.poll();
+                    myFunc = promptFuncQueue.poll();
                   } catch (InterruptedException e) {
                     e.printStackTrace();
                   }
@@ -65,15 +72,14 @@ public class GptEngine {
 
   private static void gptCompletion(
       ChatCompletionResult chatCompletionResult, GptResultAction myFunc) throws Exception {
-    System.out.println(
-        chatCompletionResult.getChoices().iterator().next().getChatMessage().getContent());
-    Choice result = chatCompletionResult.getChoices().iterator().next();
+        Choice result = chatCompletionResult.getChoices().iterator().next();
+        System.out.println(result.getChatMessage().getContent());
 
     chatCompletionRequest.addMessage(result.getChatMessage());
 
     myFunc.call(result.getChatMessage().getContent());
 
-    List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*");
-    if (chatEntry.size() > 0) GameState.mainGame.addChat(chatEntry.get(0));
+    // List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*");
+    // if (chatEntry.size() > 0) GameState.mainGame.addChat(chatEntry.get(0));
   }
 }
