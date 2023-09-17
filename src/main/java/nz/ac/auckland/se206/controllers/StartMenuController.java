@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptEngine;
 
 public class StartMenuController {
   @FXML private ComboBox<String> difficulty;
@@ -16,6 +17,7 @@ public class StartMenuController {
   public void initialize() {
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
+    new GptEngine();
   }
 
   @FXML
