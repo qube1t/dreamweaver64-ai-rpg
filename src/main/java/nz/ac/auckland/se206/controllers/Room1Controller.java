@@ -3,9 +3,16 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the room view. */
 public class Room1Controller {
@@ -36,8 +43,14 @@ public class Room1Controller {
   @FXML private Rectangle rect20;
   @FXML private Rectangle rect21;
 
-  /** Initializes the room view, it is called when the room loads. */
-  public void initialize() {
+  static boolean gptInit = false;
+
+  /**
+   * Initializes the room view, it is called when the room loads.
+   *
+   * @throws ApiProxyException
+   */
+  public void initialize() throws ApiProxyException {
 
     ArrayList<Rectangle> obsts =
         new ArrayList<Rectangle>(
@@ -49,6 +62,51 @@ public class Room1Controller {
     character.enableMobility(obsts);
     character.setLayoutX(250);
     character.setLayoutY(250);
+
+    if (!gptInit) {
+      initGpt();
+      gptInit = true;
+    }
+  }
+
+  private void initGpt() throws ApiProxyException {
+    // shelf setup
+    String list =
+        GptEngine.runGpt(
+                new ChatMessage(
+                    "user",
+                    "Produce a list of 7 books that have less than 7 characters in their title as"
+                        + " an array"))
+            .getContent();
+    List<String> matchesList = new ArrayList<String>();
+    Pattern pattern = Pattern.compile("\"(.*?)\"");
+    Matcher m1 = pattern.matcher(list);
+
+    while (m1.find()) {
+      matchesList.add(m1.group().replace("\"", ""));
+    }
+
+    GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
+    // System.out.println(list);
+
+    // true answer
+    String ansBook =
+        GptEngine.runGpt(
+                new ChatMessage(
+                    "user", "Now select one of the books and only give me its index as an integer"))
+            .getContent();
+    System.out.println(matchesList.get(Integer.parseInt(ansBook)));
+
+    // riddle for book
+    String riddle =
+        GptEngine.runGpt(
+                new ChatMessage(
+                    "user",
+                    "Give a riddle in the form of a quote from this book in 1 sentence. Say this"
+                        + " riddle with pirate colloquial. surround the quote with the character %"
+                        + " with no quotation marks"))
+            .getContent();
+    System.out.println(riddle);
   }
 
   @FXML
@@ -57,7 +115,8 @@ public class Room1Controller {
   }
 
   @FXML
-  private void openBookShelf() throws IOException {
+  private void openBookShelf() throws IOException, ApiProxyException {
+
     MainGame.addOverlay("book_shelf", false);
   }
 }
