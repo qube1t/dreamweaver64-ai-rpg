@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206;
 
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.controllers.MainGame;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -11,8 +12,9 @@ public class GameState {
   /** Indicates whether the key has been found. */
   public static boolean isKeyFound = false;
 
-
   public static String[] gameMode;
+
+  public static MainGame mainGame;
 
   public static boolean winTheGame = false;
 
@@ -68,5 +70,4 @@ public class GameState {
   public static boolean isItem8Found = false;
 
   public static ImageView[] items;
-
 }
