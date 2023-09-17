@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#press" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room3SubController">
+<Pane fx:id="mainScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#press" prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room3SubController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="700.0" stroke="BLACK" strokeType="INSIDE" width="1000.0" />
       <ImageView fx:id="CentralDisplayUnit" fitHeight="550.0" fitWidth="360.0" layoutX="641.0" layoutY="-3.0">
@@ -17,9 +17,9 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="216.0" layoutX="699.0" layoutY="34.0" stroke="BLACK" strokeType="INSIDE" width="243.0" />
-      <Text fx:id="mapTxt" fill="WHITE" layoutX="24.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT THE CORRECT ROUTE TO PROCEED" wrappingWidth="591.2939453125">
+      <Text fx:id="mapTxt" fill="#f2f2f2" layoutX="24.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECT THE CORRECT ROUTE PRESS ENTER TO PROCEED" wrappingWidth="591.2939453125">
          <font>
-            <Font name="Verdana" size="25.0" />
+            <Font name="Impact" size="26.0" />
          </font>
       </Text>
       <Rectangle fx:id="img1" arcHeight="5.0" arcWidth="5.0" fill="#c156ff" height="268.0" layoutX="32.0" layoutY="59.0" stroke="BLACK" strokeType="INSIDE" width="256.0" />
@@ -106,11 +106,20 @@
          </image>
       </ImageView>
       <Rectangle fx:id="execute" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="923.0" layoutY="318.0" onMouseClicked="#handleExecuteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
-      <Button fx:id="back" layoutX="14.0" layoutY="661.0" mnemonicParsing="false" onMouseClicked="#onGoBack" text="BACK" />
-      <ImageView fitHeight="885.0" fitWidth="55.0" layoutX="578.0" layoutY="-98.0">
-         <image>
-            <Image url="@../images/rooms/room3/pillar.png" />
-         </image>
-      </ImageView>
+      <Button fx:id="back" layoutX="916.0" layoutY="645.0" mnemonicParsing="false" onMouseClicked="#onGoBack" prefHeight="41.0" prefWidth="69.0" style="-fx-background-color: lightblue;" text="BACK">
+         <font>
+            <Font name="Impact" size="18.0" />
+         </font></Button>
+      <Rectangle fx:id="errorWindow" arcHeight="5.0" arcWidth="5.0" fill="#95a2ae" height="161.0" layoutX="173.0" layoutY="245.0" stroke="BLACK" strokeType="INSIDE" width="274.0" />
+      <Text fx:id="errorText" fill="#ab1414" layoutX="222.0" layoutY="289.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wrong Choice" wrappingWidth="173.4056178874721">
+         <font>
+            <Font name="Impact" size="29.0" />
+         </font>
+      </Text>
+      <Button fx:id="tryAgain" layoutX="275.0" layoutY="347.0" mnemonicParsing="false" onMouseClicked="#onClickTryAgain" text="TRY AGAIN">
+         <font>
+            <Font name="Impact" size="13.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

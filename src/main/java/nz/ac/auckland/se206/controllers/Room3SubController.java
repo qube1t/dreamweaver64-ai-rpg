@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
@@ -18,6 +19,11 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
 
 public class Room3SubController {
+  @FXML private Pane mainScene;
+
+  @FXML private Rectangle errorWindow;
+  @FXML private Text errorText;
+  @FXML private Button tryAgain;
 
   @FXML private Character character;
   @FXML private Rectangle img1, img2, img3, img4;
@@ -33,6 +39,9 @@ public class Room3SubController {
   protected int finalSelction;
 
   public void initialize() {
+
+    disableErrorMessage();
+
     img2.setVisible(false);
     img3.setVisible(false);
     img4.setVisible(false);
@@ -72,6 +81,12 @@ public class Room3SubController {
   private void handleSlashClick(MouseEvent event) {
     String currentText = displayOutput.getText();
     displayOutput.setText(currentText + "/");
+  }
+
+  @FXML
+  private void onClickTryAgain() {
+    disableErrorMessage();
+    mainScene.requestFocus();
   }
 
   @FXML
@@ -274,6 +289,7 @@ public class Room3SubController {
       case ENTER:
         if (currentSelection == 1) {
           System.out.println("1");
+          enableErrorMessage();
         } else if (currentSelection == 2) {
           if (GameState.isCorrectRouteFound) {
             break;
@@ -286,12 +302,26 @@ public class Room3SubController {
           finalSelction = 2;
         } else if (currentSelection == 3) {
           System.out.println("3");
+          enableErrorMessage();
         } else if (currentSelection == 4) {
           System.out.println("4");
+          enableErrorMessage();
         }
         break;
       default:
         break;
     }
+  }
+
+  private void enableErrorMessage() {
+    errorWindow.setVisible(true);
+    errorText.setVisible(true);
+    tryAgain.setVisible(true);
+  }
+
+  private void disableErrorMessage() {
+    errorWindow.setVisible(false);
+    errorText.setVisible(false);
+    tryAgain.setVisible(false);
   }
 }
