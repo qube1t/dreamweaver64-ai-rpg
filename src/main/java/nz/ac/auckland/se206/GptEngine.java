@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -39,22 +38,33 @@ public class GptEngine {
     activeThread =
         new Thread(
             () -> {
-              System.out.println(Thread.currentThread().getId());
+              System.out.println("GptEngine Thread " + Thread.currentThread().getId());
+
               active = true;
+
+              // get the next prompt and function to call
               ChatMessage nextPrompt = promptQueue.poll();
               GptResultAction myFunc = promptFuncQueue.poll();
 
               while (nextPrompt != null) {
                 try {
+
+                  // adds prompt to conversation and execs
                   chatCompletionRequest.addMessage(nextPrompt);
                   ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
 
-                  gptCompletion(chatCompletionResult, myFunc);
+                  // performs onfinish tasks
+                  onGptCompletion(chatCompletionResult, myFunc);
                 } catch (Exception e) {
                   e.printStackTrace();
                 }
+
+                // get the next prompt and function to call
                 nextPrompt = promptQueue.poll();
                 myFunc = promptFuncQueue.poll();
+
+                // if there is no next prompt, wait for 2 seconds and check again
+                // TODO do as much testing as possible
                 if (nextPrompt == null) {
                   try {
                     Thread.sleep(2000);
@@ -70,7 +80,7 @@ public class GptEngine {
     activeThread.start();
   }
 
-  private static void gptCompletion(
+  private static void onGptCompletion(
       ChatCompletionResult chatCompletionResult, GptResultAction myFunc) throws Exception {
         Choice result = chatCompletionResult.getChoices().iterator().next();
         System.out.println(result.getChatMessage().getContent());

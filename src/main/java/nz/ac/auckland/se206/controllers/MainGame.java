@@ -53,7 +53,7 @@ public class MainGame {
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
 
-    addChat("hello");
+    addChat("test");
   }
 
   public static void addOverlay(String roomN, boolean isRoom) throws IOException {
