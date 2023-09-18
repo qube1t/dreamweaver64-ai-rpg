@@ -74,7 +74,7 @@ public class MainGame {
     backgroundBlur.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
     backgroundBlur.setOnMouseClicked(
         e -> {
-          removeOverlay();
+          removeOverlay(false);
         });
     initialised_game_pane
         .getChildren()
@@ -86,8 +86,10 @@ public class MainGame {
     return instance;
   }
 
-  public static void removeOverlay() {
-    if (initialised_game_pane.getChildren().size() > 4) {
+  public static void removeOverlay(boolean alsoRooms) {
+    int sub = 0;
+    if (alsoRooms) sub = 2;
+    if (initialised_game_pane.getChildren().size() > 4 - sub) {
       initialised_game_pane
           .getChildren()
           .remove(initialised_game_pane.getChildren().size() - 1 - 2);
@@ -119,7 +121,7 @@ public class MainGame {
     } else if (letter.equals("D")) {
       character.setAction(3);
     } else if (letter.equals("ESCAPE")) {
-      removeOverlay();
+      removeOverlay(false);
     }
 
     // move after animating as it will change direction of character
