@@ -11,6 +11,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class GptEngine {
   private static ChatCompletionRequest chatCompletionRequest;
   private static boolean active = false;
+  private static int stage = 0;
   private static Thread activeThread;
   private static Queue<ChatMessage> promptQueue = new LinkedList<>();
   private static Queue<GptResultAction> promptFuncQueue = new LinkedList<>();
@@ -82,6 +83,7 @@ public class GptEngine {
 
   private static void onGptCompletion(
       ChatCompletionResult chatCompletionResult, GptResultAction myFunc) throws Exception {
+        stage++;
         Choice result = chatCompletionResult.getChoices().iterator().next();
         System.out.println(result.getChatMessage().getContent());
 

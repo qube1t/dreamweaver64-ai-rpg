@@ -41,8 +41,10 @@ public class Room1Controller {
   @FXML private Rectangle rect19;
   @FXML private Rectangle rect20;
   @FXML private Rectangle rect21;
+  @FXML private Rectangle shelf_btn;
 
   static boolean gptInit = false;
+  static int gptStage = 0;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -82,6 +84,7 @@ public class Room1Controller {
 
           String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));
           System.out.println(ansBook);
+          gptStage++;
           // riddle for book
 
           try {
@@ -94,7 +97,7 @@ public class Room1Controller {
                         + " riddle with pirate colloquial. surround the quote with the character %"
                         + " with no quotation marks"),
                 (_str) -> {
-                  System.out.println(_str);
+                  List<String> pirateDialogue = Helper.getTextBetweenChar(str, "%");
                 });
           } catch (ApiProxyException e) {
             // TODO Auto-generated catch block
@@ -102,17 +105,6 @@ public class Room1Controller {
           }
         });
 
-    // System.out.println(list);
-
-    // true answer
-    // String ansBook =
-    //     GptEngine.runGpt(
-    //             new ChatMessage(
-    //                 "user", "Now select one of the books and only give me its index as an
-    // integer"))
-    //         .getContent();
-
-    // System.out.println(riddle);
   }
 
   @FXML
@@ -122,7 +114,7 @@ public class Room1Controller {
 
   @FXML
   private void openBookShelf() throws IOException, ApiProxyException {
-
+    if (gptStage == 1)
     MainGame.addOverlay("book_shelf", false);
   }
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -6,7 +7,6 @@
 <?import javafx.scene.shape.Rectangle?>
 
 <?import nz.ac.auckland.se206.components.Character?>
-
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room1Controller">
    <children>
@@ -48,7 +48,7 @@
       </ImageView>
       <Pane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="76.0" layoutX="268.0" layoutY="86.0" onMouseClicked="#openBookShelf" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" width="50.0" />
+            <Rectangle fx:id="shelf_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="76.0" layoutX="268.0" layoutY="86.0" onMouseClicked="#openBookShelf" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" width="50.0" />
          </children>
       </Pane>
    </children>
