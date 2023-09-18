@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.Rectangle?>
 
 <fx:root type="AnchorPane" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <Circle fx:id="proximityBound" centerX="22.5" fill="DODGERBLUE" layoutX="8.0" layoutY="38.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+   <Circle fx:id="proximityBound" centerX="22.5" fill="#ede76d96" layoutX="8.0" layoutY="38.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
       <ImageView fx:id="active_img" fitHeight="64.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" />
       <Rectangle fx:id="playerBound" fill="#1f96ff47" height="20" layoutX="22.5" layoutY="30" stroke="WHITE" width="20" />
 </fx:root>
