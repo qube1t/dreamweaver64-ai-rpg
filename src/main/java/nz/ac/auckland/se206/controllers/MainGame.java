@@ -1,13 +1,18 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -15,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
 
@@ -23,6 +29,16 @@ public class MainGame {
   @FXML private Pane game_pane;
   @FXML private static Character character;
   @FXML private Pane outer_pane;
+   private static Label timer_initiated;
+  @FXML private Label timer;
+  @FXML private static ImageView item1;
+  @FXML private static ImageView item2;
+  @FXML private static ImageView item3;
+  @FXML private static ImageView item4;
+  @FXML private static ImageView item5;
+  @FXML private static ImageView item6;
+  @FXML private static ImageView item7;
+  @FXML private static ImageView item8;
   @FXML private Label chat_toggle_btn;
   @FXML private Pane aiCharacterPane;
   @FXML private Pane chatPane;
@@ -35,15 +51,19 @@ public class MainGame {
   Text bubbleChatText = new Text("text");
 
   private static MainGame instance;
+  private static Thread timeLimitThread;
+  private static List<Image> obtainedItems = new ArrayList<>();
 
   @FXML private static Pane initialised_game_pane;
 
   public void initialize() throws IOException {
 
+    timer_initiated = timer;
+
     System.out.println(1);
     initialised_game_pane = game_pane;
 
-    addOverlay("room1", true);
+    addOverlay("room2", true);
 
     Helper.setBooksInRoom1();
     instance = this;
@@ -183,5 +203,86 @@ public class MainGame {
 
   private void clickHeader() {
     BookShelfController.returnBook();
+  }
+
+  public static void getTimeLimitForGameMode(String timeLimit){
+    GameState.isGameStarted = true;
+    System.out.println("start game");
+    switch (timeLimit) {
+      case "2 minutes":
+        timer_initiated.setText("120");
+        setTimeLimit(120);
+        break;
+      case "4 minutes":
+        timer_initiated.setText("240");
+        setTimeLimit(240);
+        break;
+      case "6 minutes":
+        timer_initiated.setText("360");
+        setTimeLimit(360);
+        break;
+      default:
+        timer_initiated.setText("120");
+        setTimeLimit(120);
+        break;
+    }
+  }
+
+  /**
+   * Sets the time limit.
+   * 
+   * @param timeLimit
+   */
+  private static void setTimeLimit(int timeLimit) {
+    Task<Void> task =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
+              if (GameState.winTheGame || GameState.timeLimitReached) {
+                break;
+              }
+              int time = currentTime; 
+              Platform.runLater(() -> timer_initiated.setText(String.valueOf(time)));
+              try {
+                Thread.sleep(1000);
+              } catch (InterruptedException e) {
+                return null;
+              }
+            }
+            Platform.runLater(() -> handleTimeLimitReached());
+            return null;
+          }
+        };
+    timeLimitThread = new Thread(task);
+    timeLimitThread.setDaemon(true);
+    timeLimitThread.start();
+  }
+
+  /**
+   * Handles the time limit reached event.
+   */
+  private static void handleTimeLimitReached() {
+    GameState.timeLimitReached = true;
+    if (!GameState.winTheGame) {
+      System.out.println("time limit reached");
+    }
+  }
+
+  private static void updateInventoryUI() {
+    List<ImageView> inventoryItems =
+        List.of(item1, item2, item3, item4, item5, item6, item7, item8);
+    for (int i = 0; i < inventoryItems.size(); i++) {
+      if (i < inventoryItems.size()) {
+        inventoryItems.get(i).setImage(obtainedItems.get(i));
+      } else {
+        inventoryItems.get(i).setImage(null);
+      }
+    }
+  }
+
+  public static void addObtainedItem(Image itemImage) {
+    obtainedItems.add(itemImage);
+    updateInventoryUI();
   }
 }

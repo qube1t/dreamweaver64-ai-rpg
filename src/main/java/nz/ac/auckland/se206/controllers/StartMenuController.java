@@ -43,6 +43,8 @@ public class StartMenuController {
     // Transition to the main game view
     try {
       App.setRoot("main_game");
+      GameState.isGameStarted = true;
+      MainGame.getTimeLimitForGameMode(timeLimit);
     } catch (IOException e) {
       e.printStackTrace();
     }
