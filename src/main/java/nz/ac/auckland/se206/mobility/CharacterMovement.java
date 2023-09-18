@@ -44,8 +44,10 @@ public class CharacterMovement {
           .localToParent(proximityBound.getBoundsInParent())
           .intersects(interactable.getBoundsInParent())) {
         interactable.setVisible(true);
+        interactable.getStyleClass().add("action-btn");
       } else {
         interactable.setVisible(false);
+        interactable.getStyleClass().remove("action-btn");
       }
     }
   }
