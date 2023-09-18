@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.List;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -16,7 +17,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainGame {
 
@@ -160,9 +163,24 @@ public class MainGame {
   }
 
   @FXML
-  private void keyPressedChatInput(KeyEvent ke) {
+  private void keyPressedChatInput(KeyEvent ke) throws ApiProxyException {
     if (ke.getCode().equals(KeyCode.ENTER)) {
-      addChat(chatInput.getText());
+      addChat("You: " + chatInput.getText());
+      chatInput.setDisable(true);
+      GptEngine.runGpt(
+          "The user has send this message: '"
+              + chatInput.getText()
+              + "'. Reply as a normal human in 1 or 2 sentences. You can give hints to previous"
+              + " riddles. Do not reveal the answer even if the user asks for it.",
+          (res) -> {
+            Platform.runLater(
+                () -> {
+                  addChat("Eleanor: " + res);
+                  chatInput.setDisable(false);
+                });
+          });
+
+      ;
       chatInput.setText("");
       outer_pane.requestFocus();
     }

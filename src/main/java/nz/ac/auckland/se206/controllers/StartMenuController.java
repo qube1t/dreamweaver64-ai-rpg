@@ -23,26 +23,22 @@ public class StartMenuController {
     GptEngine.runGpt(
         "You are the programme behind DREAMWEAVER64, a futuristic technology that creates dreams"
             + " and allows people to relive their past or discover lost truths or memories from"
-            + " their pasts. \n"
+            + " their pasts. "
             + //
             "You have to guide the user to finish their task of finding the message of a lost"
-            + " letter from their mother that they have forgotten. \n"
+            + " letter from their mother that they have forgotten. "
             + //
             "To speak with the user surround the message to transmit with the character ^. All"
-            + " other text will be lost.\n"
+            + " other text will be lost."
             + //
-            "When asked for hints, surround the hints with the character *.\n"
+            "When asked for hints, surround the hints with the character *."
             + //
-            "As it affects the stability of the dream do not give hints if the character does not"
-            + " have any left.\n"
-            + //
-            "\n"
-            + //
+            // "As it affects the stability of the dream do not give hints if the character does
+            // not"
+            // + " have any left."
+            // + //
             "The technology will update you on their actions. Always make sure that the above rules"
-            + " are followed for proper communication with the person.\n"
-            + //
-            "",
-        (result) -> {});
+            + " are followed for proper communication with the person.");
   }
 
   @FXML

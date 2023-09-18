@@ -10,6 +10,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the room view. */
@@ -73,8 +74,7 @@ public class Room1Controller {
     // shelf setup
 
     GptEngine.runGpt(
-        "Produce a list of 7 books that have less than 7 characters in their title as"
-            + " an array",
+        GptPromptEngineeringRoom1.get7Books(),
         str -> {
           List<String> matchesList = Helper.getTextBetweenChar(str, "\"");
           GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
@@ -87,11 +87,7 @@ public class Room1Controller {
 
           try {
             GptEngine.runGpt(
-                "Give a riddle in the form of a quote from"
-                    + ansBook
-                    + " in 1 sentence. Say this"
-                    + " riddle with pirate colloquial. surround the quote with the character %"
-                    + " with no quotation marks",
+                GptPromptEngineeringRoom1.getRiddleForPirate(ansBook),
                 (_str) -> {
                   List<String> pirateDialogue = Helper.getTextBetweenChar(str, "%");
                 });
