@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.components.Character;
 
@@ -36,6 +37,8 @@ public class Room1Controller {
   @FXML private Rectangle rect20;
   @FXML private Rectangle rect21;
 
+  @FXML private Pane interactablePane;
+
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
 
@@ -46,7 +49,7 @@ public class Room1Controller {
                 rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21));
     // obsts.add(0, rect1);
     // Initialization code goes here
-    character.enableMobility(obsts);
+    character.enableMobility(obsts, interactablePane.getChildren());
     character.setLayoutX(250);
     character.setLayoutY(250);
   }
