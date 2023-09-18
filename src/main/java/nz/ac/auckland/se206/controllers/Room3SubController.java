@@ -290,10 +290,7 @@ public class Room3SubController {
         }
         break;
       case ENTER:
-        if (currentSelection == 1) {
-          System.out.println("1");
-          enableErrorMessage();
-        } else if (currentSelection == 2) {
+        if (currentSelection == 2) {
           if (GameState.isCorrectRouteFound) {
             break;
           }
@@ -301,14 +298,11 @@ public class Room3SubController {
           disableMap();
           enableFlightCDU();
           System.out.println("2");
-
           finalSelction = 2;
-        } else if (currentSelection == 3) {
-          System.out.println("3");
+        } else {
+          System.out.println("wrong");
           enableErrorMessage();
-        } else if (currentSelection == 4) {
-          System.out.println("4");
-          enableErrorMessage();
+          GameState.wrongChoice++;
         }
         break;
       default:

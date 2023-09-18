@@ -42,37 +42,64 @@ public class Room3Controller {
       bound2,
       bound3;
   @FXML private Circle box1, box2, box3, box4, box5;
-  private Circle[] radarPoints;
-  private ImageView[] radarObjects;
-  private ArrayList<Rectangle> obsts;
-  @FXML private AnchorPane chatBubble;
-  @FXML private TextArea gptResponse;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
+  @FXML private ImageView radar_image, radar_computer, map;
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
-  @FXML private ImageView radar_image, radar_computer, map;
+  @FXML private AnchorPane chatBubblePane;
+  @FXML private TextArea npcResponse;
+
   private boolean isRadarComputerOpen;
   private Timeline radarAnimation;
+  private Circle[] radarPoints;
+  private ImageView[] radarSystem;
+  private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
 
+    // Set character postion and movement.
+    character.enableMobility(obstacles);
+    character.setLayoutX(530);
+    character.setLayoutY(210);
+
+    // Initialize the radar points and radarObjects to a list.
+    this.radarPoints = new Circle[] {box1, box2, box3, box4, box5};
+    this.radarSystem = new ImageView[] {radar_image, radar_computer};
+
+    // Set the radar computer boolean to false initially
+    isRadarComputerOpen = false;
+
+    // Disable radar system initially
+    disableRadarSystem();
+
     // Configure the chat bubble
-    gptResponse.setWrapText(true);
-    gptResponse.setEditable(false);
+    npcResponse.setWrapText(true);
+    npcResponse.setEditable(false);
 
     // Set the chat bubble to invisible initially
-    chatBubble.setVisible(false);
-    gptResponse.setVisible(false);
+    chatBubblePane.setVisible(false);
+    npcResponse.setVisible(false);
 
     GptEngine.runGpt(
         new ChatMessage("user", GptPromptEngineeringRoom3.npcWelcomeMessage()),
         (result) -> {
           System.out.println(result);
-          chatBubble.setVisible(true);
-          gptResponse.setVisible(true);
-          gptResponse.setText(result);
+          // Handle the result as needed
+          System.out.println("first");
+          chatBubblePane.setVisible(true);
+          npcResponse.setVisible(true);
+          npcResponse.setText(result);
         });
+
+    // GptEngine.runGpt(
+    // new ChatMessage("user", GptPromptEngineeringRoom3.getAircraftCode()),
+    // (result) -> {
+    //  System.out.println("second");
+    // System.out.println(result);
+    // });
+
+    // Start a new thread to get the aircraft code
 
     // Set the aircaraft code and assign to game state
     // if (GameState.aircraftCode == null) {
@@ -90,39 +117,25 @@ public class Room3Controller {
       changeCorrectBox(GameState.currentBox);
     }
 
+    // Set both images to invisible initially
     lastFlightPlan.setVisible(false);
     departureBoard.setVisible(false);
-    System.out.println("plan");
-
-    // Initialize the radar points and radarObjects to a list.
-    this.radarPoints = new Circle[] {box1, box2, box3, box4, box5};
-    this.radarObjects = new ImageView[] {radar_image, radar_computer};
 
     // Initialize the obsts list
-    this.obsts = new ArrayList<Rectangle>();
+    this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
       computer, computer2, chair1, chair2, gate, radar, desk1, desk2, depBoard, boundary1,
       boundary2, boundary3, boundary4, boundary5, bound1, bound2, bound3
     };
 
     for (Rectangle rectangle : rectangles) {
-      this.obsts.add(rectangle);
+      this.obstacles.add(rectangle);
     }
 
-    character.enableMobility(obsts);
-    character.setLayoutX(530);
-    character.setLayoutY(210);
-
     radarPane.setMouseTransparent(true);
-
-    // Set radar computer invisible initially
-    radar_computer.setVisible(false);
-    radar_image.setVisible(false);
-    box1.setVisible(false);
-    box2.setVisible(false);
-    box3.setVisible(false);
-    box4.setVisible(false);
-    box5.setVisible(false);
+    radar_computer.setMouseTransparent(true);
+    radar_image.setMouseTransparent(true);
+    protectRadarComputer.setMouseTransparent(true);
 
     // Initialize the radarAnimation timeline
     this.radarAnimation =
@@ -135,43 +148,6 @@ public class Room3Controller {
           // Restart the animation when it completes
           radarAnimation.play();
         });
-
-    // Set the radar computer boolean to false initially
-    isRadarComputerOpen = false;
-  }
-
-  public void fadeInRadarPoints() {
-    for (Circle radarPoint : radarPoints) {
-      radarPoint.setVisible(true);
-      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), radarPoint);
-      fadeTransition.setFromValue(0.0);
-      fadeTransition.setToValue(1.0);
-      fadeTransition.setInterpolator(Interpolator.LINEAR); // Use linear interpolation
-      fadeTransition.play();
-    }
-  }
-
-  public void fadeOutRadarPoints() {
-    for (Circle radarPoint : radarPoints) {
-
-      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.5), radarPoint);
-      fadeTransition.setFromValue(1.0);
-      fadeTransition.setToValue(0.0);
-      fadeTransition.setInterpolator(Interpolator.LINEAR); // Use linear interpolation
-      fadeTransition.play();
-    }
-  }
-
-  public void fadeInRadar() {
-
-    for (ImageView obj : radarObjects) {
-      obj.setVisible(true);
-      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), obj);
-      fadeTransition.setFromValue(0.0);
-      fadeTransition.setToValue(1.0);
-      fadeTransition.play();
-    }
-    radarAnimation.play();
   }
 
   @FXML
@@ -215,7 +191,7 @@ public class Room3Controller {
   public void onClickRadar() {
     isRadarComputerOpen = true;
     System.out.println("Radar clicked");
-    fadeInRadar();
+    fadeInRadarComputer();
   }
 
   @FXML
@@ -308,7 +284,17 @@ public class Room3Controller {
     System.out.println(GameState.currentBox);
   }
 
-  public void fadeInFlightPlan() {
+  protected void disableRadarSystem() {
+    radar_computer.setVisible(false);
+    radar_image.setVisible(false);
+    box1.setVisible(false);
+    box2.setVisible(false);
+    box3.setVisible(false);
+    box4.setVisible(false);
+    box5.setVisible(false);
+  }
+
+  protected void fadeInFlightPlan() {
     lastFlightPlan.setVisible(true); // Set to visible before starting the animation
 
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), lastFlightPlan);
@@ -317,7 +303,7 @@ public class Room3Controller {
     fadeTransition.play();
   }
 
-  public void fadeOutFlightPlan() {
+  protected void fadeOutFlightPlan() {
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), lastFlightPlan);
     fadeTransition.setFromValue(1.0);
     fadeTransition.setToValue(0.0);
@@ -328,7 +314,7 @@ public class Room3Controller {
         });
   }
 
-  public void fadeInDepBoard() {
+  protected void fadeInDepBoard() {
     departureBoard.setVisible(true); // Set to visible before starting the animation
 
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), departureBoard);
@@ -337,7 +323,7 @@ public class Room3Controller {
     fadeTransition.play();
   }
 
-  public void fadeOutDepBoard() {
+  protected void fadeOutDepBoard() {
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), departureBoard);
     fadeTransition.setFromValue(1.0);
     fadeTransition.setToValue(0.0);
@@ -346,5 +332,39 @@ public class Room3Controller {
         event -> {
           departureBoard.setVisible(false);
         });
+  }
+
+  protected void fadeInRadarPoints() {
+    for (Circle radarPoint : radarPoints) {
+      radarPoint.setVisible(true);
+      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), radarPoint);
+      fadeTransition.setFromValue(0.0);
+      fadeTransition.setToValue(1.0);
+      fadeTransition.setInterpolator(Interpolator.LINEAR); // Use linear interpolation
+      fadeTransition.play();
+    }
+  }
+
+  protected void fadeOutRadarPoints() {
+    for (Circle radarPoint : radarPoints) {
+
+      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.5), radarPoint);
+      fadeTransition.setFromValue(1.0);
+      fadeTransition.setToValue(0.0);
+      fadeTransition.setInterpolator(Interpolator.LINEAR); // Use linear interpolation
+      fadeTransition.play();
+    }
+  }
+
+  protected void fadeInRadarComputer() {
+
+    for (ImageView obj : radarSystem) {
+      obj.setVisible(true);
+      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), obj);
+      fadeTransition.setFromValue(0.0);
+      fadeTransition.setToValue(1.0);
+      fadeTransition.play();
+    }
+    radarAnimation.play();
   }
 }

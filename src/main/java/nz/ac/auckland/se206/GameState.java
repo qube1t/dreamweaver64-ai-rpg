@@ -25,6 +25,9 @@ public class GameState {
   /** Indicates the time limit that player has chosen */
   public static int chosenTime;
 
+  /** Indicates the wrong choice that the player has entered in room3 minigame */
+  public static int wrongChoice = 0;
+
   /** Indicates whether the time limit has reached */
   public static boolean timeLimitReached = false;
 
