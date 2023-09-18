@@ -29,8 +29,9 @@ public class GptEngine {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  public static void runGpt(ChatMessage msg, GptResultAction myFunc) throws ApiProxyException {
-    promptQueue.add(msg);
+  public static void runGpt(String msg, GptResultAction myFunc) throws ApiProxyException {
+    ChatMessage chatmsg = new ChatMessage("user", msg);
+    promptQueue.add(chatmsg);
     promptFuncQueue.add(myFunc);
     if (!active) startNewThread();
   }
@@ -53,6 +54,8 @@ public class GptEngine {
                   // adds prompt to conversation and execs
                   chatCompletionRequest.addMessage(nextPrompt);
                   ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+
+                  stage++;
 
                   // performs onfinish tasks
                   onGptCompletion(chatCompletionResult, myFunc);
@@ -83,15 +86,16 @@ public class GptEngine {
 
   private static void onGptCompletion(
       ChatCompletionResult chatCompletionResult, GptResultAction myFunc) throws Exception {
-        stage++;
-        Choice result = chatCompletionResult.getChoices().iterator().next();
-        System.out.println(result.getChatMessage().getContent());
+    stage++;
+    Choice result = chatCompletionResult.getChoices().iterator().next();
+    System.out.println(result.getChatMessage().getContent());
 
     chatCompletionRequest.addMessage(result.getChatMessage());
 
     myFunc.call(result.getChatMessage().getContent());
 
-    // List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*");
+    // List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(),
+    // "*");
     // if (chatEntry.size() > 0) GameState.mainGame.addChat(chatEntry.get(0));
   }
 }
