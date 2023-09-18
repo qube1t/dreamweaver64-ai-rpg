@@ -98,12 +98,28 @@ public class Room1Controller {
   }
 
   @FXML
-  public void changeRoot() throws IOException {
-    MainGame.addOverlay("room1", true);
+  public void goToLeftRoom() throws IOException {
+    MainGame.removeOverlay(true);
+    MainGame.addOverlay("room3", true);
   }
 
   @FXML
   private void openBookShelf() throws IOException, ApiProxyException {
-    if (gptStage == 1) MainGame.addOverlay("book_shelf", false);
+    MainGame.addOverlay("book_shelf", false);
   }
+
+  @FXML
+  private void goToRightRoom() throws IOException {
+    MainGame.removeOverlay(true);
+    MainGame.addOverlay("room2", true);
+  }
+
+  @FXML
+  private void openMainDoor() {}
+
+  @FXML
+  private void onClickCrockeries() {}
+
+  @FXML
+  private void onClickFurnace() {}
 }
