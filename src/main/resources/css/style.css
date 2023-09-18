@@ -6,7 +6,7 @@
     -fx-shape: "M24 1h-24v16.981h4v5.019l7-5.019h13z";
 }
 
-.transparent-textarea {
-    -fx-control-inner-background: transparent;
-    -fx-text-fill: black;
+* {
+    -fx-focus-color: transparent;
+    -fx-border-style: none;
 }

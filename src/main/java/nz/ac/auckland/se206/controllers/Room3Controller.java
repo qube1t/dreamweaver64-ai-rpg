@@ -14,8 +14,11 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3Controller {
 
@@ -51,29 +54,35 @@ public class Room3Controller {
   @FXML private ImageView radar_image, radar_computer, map;
   private boolean isRadarComputerOpen;
   private Timeline radarAnimation;
-  private GptManager gptManager;
 
-  public void initialize() {
-    // Initialize the GptManager
-    this.gptManager = new GptManager();
+  public void initialize() throws ApiProxyException {
 
     // Configure the chat bubble
     gptResponse.setWrapText(true);
     gptResponse.setEditable(false);
 
-    // Set the chat bubble to be invisible initially
+    // Set the chat bubble to invisible initially
     chatBubble.setVisible(false);
     gptResponse.setVisible(false);
 
+    GptEngine.runGpt(
+        new ChatMessage("user", GptPromptEngineeringRoom3.npcWelcomeMessage()),
+        (result) -> {
+          System.out.println(result);
+          chatBubble.setVisible(true);
+          gptResponse.setVisible(true);
+          gptResponse.setText(result);
+        });
+
     // Set the aircaraft code and assign to game state
-    if (GameState.aircraftCode == null) {
-      GameState.aircraftCode =
-          gptManager.getGptResponseAsString(GptPromptEngineeringRoom3.getAircraftCode());
-    }
+    // if (GameState.aircraftCode == null) {
+    // GameState.aircraftCode =
+    // gptManager.getGptResponseAsString(GptPromptEngineeringRoom3.getAircraftCode());
+    // }
 
     // Call the set radar point color method to set the most up to date correct box
     if (GameState.currentBox == -1) {
-      // Generate a random number between 1 and 5
+      // Generate a random number between 1 and 5 if the correct treasure box is not set
       int randomBox = (int) (Math.random() * 5 + 1);
       changeCorrectBox(randomBox);
       GameState.currentBox = randomBox;
