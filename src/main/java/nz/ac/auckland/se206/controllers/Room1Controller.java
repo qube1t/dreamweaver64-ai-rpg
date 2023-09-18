@@ -10,7 +10,6 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
-import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the room view. */
@@ -74,37 +73,32 @@ public class Room1Controller {
     // shelf setup
 
     GptEngine.runGpt(
-        new ChatMessage(
-            "user",
-            "Produce a list of 7 books that have less than 7 characters in their title as"
-                + " an array"),
-        (str) -> {
+        "Produce a list of 7 books that have less than 7 characters in their title as"
+            + " an array",
+        str -> {
           List<String> matchesList = Helper.getTextBetweenChar(str, "\"");
           GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
 
           String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));
           System.out.println(ansBook);
-          gptStage++;
+          // gptStage++;
+          MainGame.enableInteractPane();
           // riddle for book
 
           try {
             GptEngine.runGpt(
-                new ChatMessage(
-                    "user",
-                    "Give a riddle in the form of a quote from"
-                        + ansBook
-                        + " in 1 sentence. Say this"
-                        + " riddle with pirate colloquial. surround the quote with the character %"
-                        + " with no quotation marks"),
+                "Give a riddle in the form of a quote from"
+                    + ansBook
+                    + " in 1 sentence. Say this"
+                    + " riddle with pirate colloquial. surround the quote with the character %"
+                    + " with no quotation marks",
                 (_str) -> {
                   List<String> pirateDialogue = Helper.getTextBetweenChar(str, "%");
                 });
           } catch (ApiProxyException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
           }
         });
-
   }
 
   @FXML
@@ -114,7 +108,6 @@ public class Room1Controller {
 
   @FXML
   private void openBookShelf() throws IOException, ApiProxyException {
-    if (gptStage == 1)
-    MainGame.addOverlay("book_shelf", false);
+    if (gptStage == 1) MainGame.addOverlay("book_shelf", false);
   }
 }

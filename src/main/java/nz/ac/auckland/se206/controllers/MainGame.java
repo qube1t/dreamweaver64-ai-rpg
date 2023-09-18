@@ -31,18 +31,21 @@ public class MainGame {
   @FXML private Label bubbleText;
   @FXML private ListView<Label> chat;
   @FXML private TextField chatInput;
+  @FXML private Pane interact_pane;
 
   Text bubbleChatText = new Text("text");
 
   private static MainGame instance;
 
   @FXML private static Pane initialised_game_pane;
+  private static Pane initialised_interact_pane;
 
   public void initialize() throws IOException {
 
     GameState.mainGame = this;
     System.out.println(1);
     initialised_game_pane = game_pane;
+    initialised_interact_pane = interact_pane;
 
     addOverlay("room1", true);
 
@@ -52,6 +55,8 @@ public class MainGame {
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
+
+    disableInteractPane();
 
     addChat("test");
   }
@@ -184,6 +189,16 @@ public class MainGame {
     int index = items.size();
     items.add(label);
     chat.scrollTo(index);
+  }
+
+  public static void enableInteractPane() {
+    initialised_interact_pane.setDisable(false);
+    initialised_interact_pane.setOpacity(1);
+  }
+
+  public static void disableInteractPane() {
+    initialised_interact_pane.setDisable(true);
+    initialised_interact_pane.setOpacity(0);
   }
 
   private void clickHeader() {
