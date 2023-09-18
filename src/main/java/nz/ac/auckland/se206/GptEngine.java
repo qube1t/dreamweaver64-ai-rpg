@@ -92,10 +92,14 @@ public class GptEngine {
 
     chatCompletionRequest.addMessage(result.getChatMessage());
 
-    myFunc.call(result.getChatMessage().getContent());
+    if (myFunc != null) myFunc.call(result.getChatMessage().getContent());
 
     // List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(),
     // "*");
     // if (chatEntry.size() > 0) GameState.mainGame.addChat(chatEntry.get(0));
+  }
+
+  public static void runGpt(String string) throws ApiProxyException {
+    runGpt(string, null);
   }
 }
