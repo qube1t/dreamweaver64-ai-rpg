@@ -29,16 +29,24 @@ public class MainGame {
   @FXML private Pane game_pane;
   @FXML private static Character character;
   @FXML private Pane outer_pane;
-   private static Label timer_initiated;
+  private static Label timer_initiated;
   @FXML private Label timer;
-  @FXML private static ImageView item1;
-  @FXML private static ImageView item2;
-  @FXML private static ImageView item3;
-  @FXML private static ImageView item4;
-  @FXML private static ImageView item5;
-  @FXML private static ImageView item6;
-  @FXML private static ImageView item7;
-  @FXML private static ImageView item8;
+  private static ImageView item1_initiated;
+  private static ImageView item2_initiated;
+  private static ImageView item3_initiated;
+  private static ImageView item4_initiated;
+  private static ImageView item5_initiated;
+  private static ImageView item6_initiated;
+  private static ImageView item7_initiated;
+  private static ImageView item8_initaited;
+  @FXML private ImageView item1;
+  @FXML private ImageView item2;
+  @FXML private ImageView item3;
+  @FXML private ImageView item4;
+  @FXML private ImageView item5;
+  @FXML private ImageView item6;
+  @FXML private ImageView item7;
+  @FXML private ImageView item8;
   @FXML private Label chat_toggle_btn;
   @FXML private Pane aiCharacterPane;
   @FXML private Pane chatPane;
@@ -59,6 +67,14 @@ public class MainGame {
   public void initialize() throws IOException {
 
     timer_initiated = timer;
+    item1_initiated = item1;
+    item2_initiated = item2;
+    item3_initiated = item3;
+    item4_initiated = item4;
+    item5_initiated = item5;
+    item6_initiated = item6;
+    item7_initiated = item7;
+    item8_initaited = item8;
 
     System.out.println(1);
     initialised_game_pane = game_pane;
@@ -271,10 +287,13 @@ public class MainGame {
 
   private static void updateInventoryUI() {
     List<ImageView> inventoryItems =
-        List.of(item1, item2, item3, item4, item5, item6, item7, item8);
+        List.of(item1_initiated, item2_initiated, item3_initiated, item4_initiated, item5_initiated, item6_initiated, item7_initiated, item8_initaited);
     for (int i = 0; i < inventoryItems.size(); i++) {
-      if (i < inventoryItems.size()) {
+      if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i));
+        inventoryItems.get(i).setFitWidth(35);
+        inventoryItems.get(i).setPreserveRatio(true);
+        inventoryItems.get(i).setSmooth(true);
       } else {
         inventoryItems.get(i).setImage(null);
       }

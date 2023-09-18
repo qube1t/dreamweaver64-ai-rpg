@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -81,7 +82,9 @@ public class Room2Controller {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
       System.out.println("Box key found");
-      // gottenBoxKey.setOpacity(1);
+      Image keyImage = new Image("/images/key.png");
+      MainGame.addObtainedItem(keyImage);
+      System.out.println("Box key obtained");
     } else {
       // write this sentance in chat box or pirate's speech bubble
       System.out.println("Find the item to trade with pirate to open the boxes");
