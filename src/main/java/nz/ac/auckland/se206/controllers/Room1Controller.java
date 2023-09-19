@@ -106,6 +106,7 @@ public class Room1Controller {
   @FXML
   private void openBookShelf() throws IOException, ApiProxyException {
     MainGame.addOverlay("book_shelf", false);
+    GameState.eleanorAi.runGpt("User update: User has opened book shelf");
   }
 
   @FXML
@@ -115,11 +116,17 @@ public class Room1Controller {
   }
 
   @FXML
-  private void openMainDoor() {}
+  private void openMainDoor() throws ApiProxyException {
+    GameState.eleanorAi.runGpt("User update: User has tried to open main exit without solving the mission");
+  }
 
   @FXML
-  private void onClickCrockeries() {}
+  private void onClickCrockeries() throws ApiProxyException {
+    GameState.eleanorAi.runGpt("User update: User has opened crockeries");
+  }
 
   @FXML
-  private void onClickFurnace() {}
+  private void onClickFurnace() throws ApiProxyException {
+    GameState.eleanorAi.runGpt("User update: opened the furnace");
+  }
 }

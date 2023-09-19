@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -97,9 +98,9 @@ public class GptEngine {
 
     if (myFunc != null) myFunc.call(result.getChatMessage().getContent());
 
-    // List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(),
-    // "*");
-    // if (chatEntry.size() > 0) GameState.mainGame.addChat(chatEntry.get(0));
+    List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(),
+    "^");
+    if (chatEntry.size() > 0) GameState.mainGame.addChat(chatEntry.get(0));
   }
 
   public void runGpt(String string) throws ApiProxyException {
