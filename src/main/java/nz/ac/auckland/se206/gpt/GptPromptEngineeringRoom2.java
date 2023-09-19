@@ -6,14 +6,9 @@ import nz.ac.auckland.se206.GameState;
 public class GptPromptEngineeringRoom2 {
 
   public static String npcIntro() {
-    return "Pirate: Greet playersrc/main/java/nz/ac/auckland/se206/gpt/GptPromptEngineeringRoom2.java."
-        + "say \"hello\". and if "
+    return "Pirate: Greet player with pirate colloquialism. Your duty is guiding treasure. If "
         + !GameState.isBoxKeyFound
-        + "say \"give me something to trade with me\""
-        + "and if "
-        + GameState.isBoxKeyFound
-        + !GameState.isTreasureFound
-        + "say \"find a treasure\"";
+        + "say give me something to trade with me with pirate colloquialism.";
   }
 
   public static String foundBoxKey() {

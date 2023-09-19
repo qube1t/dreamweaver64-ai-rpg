@@ -28,7 +28,7 @@ public class Room2Controller {
 
   @FXML private Rectangle doorToRoom1;
   @FXML private ImageView boxKey;
-  @FXML private ImageView chatBubble;
+  @FXML private ImageView speech_bubble;
   @FXML private Label gptResponse;
 
   @FXML private Character character;
@@ -73,8 +73,6 @@ public class Room2Controller {
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
 
-  private Boolean bubbleClosed = false;
-
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     ArrayList<Rectangle> obsts =
@@ -89,58 +87,50 @@ public class Room2Controller {
     character.setLayoutX(60);
     character.setLayoutY(250);
 
+    speech_bubble = new ImageView();
+    gptResponse = new Label();
+    gptResponse.setWrapText(true);
+    gptResponse.setText("Hi");
+
     if (!gptInit) {
       try {
         initGpt();
-        gptInit = true;
       } catch (ApiProxyException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
+      gptInit = true;
     }
-
-    chatBubble.setVisible(false);
-    gptResponse.setVisible(false);
   }
 
   private void initGpt() throws ApiProxyException {
-    chatBubble.setVisible(false);
-    gptResponse.setVisible(false);
-
     GptEngine.runGpt(
         new ChatMessage("user", GptPromptEngineeringRoom2.npcIntro()),
         (st) -> {
-          chatBubble.setVisible(true);
-          gptResponse.setVisible(true);
+          this.gptResponse.setWrapText(true);
           gptResponse.setText(st);
         });
-
-    
   }
 
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException {
-    if (!bubbleClosed) {
-      chatBubble.setVisible(false);
+    if (gptInit) {
+      speech_bubble.setVisible(false);
       gptResponse.setVisible(false);
     }
-    if (GameState.isBookFound) {
+    if (GameState.isBookFound && !GameState.isBoxKeyFound) {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
-      System.out.println("Box key found");
       try {
         GptEngine.runGpt(
             new ChatMessage("user", GptPromptEngineeringRoom2.foundBoxKey()),
             (st) -> {
-              List<String> pirateDialogue = Helper.getTextBetweenChar(st, "%");
+              List<String> findBoxKey = Helper.getTextBetweenChar(st, "%");
             });
       } catch (ApiProxyException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
-    } else {
-      // write this sentance in chat box or pirate's speech bubble
-      System.out.println("Find the item to trade with pirate to open the boxes");
     }
   }
 
@@ -151,8 +141,8 @@ public class Room2Controller {
    * @throws IOException
    */
   private void getRandomBox(int numOfBox) throws IOException {
-    if (!bubbleClosed) {
-      chatBubble.setVisible(false);
+    if (gptInit) {
+      speech_bubble.setVisible(false);
       gptResponse.setVisible(false);
     }
     int boxLocation = GameState.currentBox;
