@@ -13,7 +13,7 @@ public class DraggableLetter extends Label {
     super(text);
     this.hbox = hbox;
 
-    Font font = Font.font("Arial", 40);
+    Font font = Font.font("Arial", 45);
     setFont(font);
 
     setOnDragDetected(

@@ -34,7 +34,15 @@ public class GptPromptEngineeringRoom3 {
         + " the NPC in the room within 30 words and not include any hint";
   }
 
-  public static String getUnarrangedCity() {
-    return "Generate a popular city that is less than 8 characters";
+  public static String getRandomCity() {
+    return "Generate a popular city that is less than 8 characters, only reply with the city name"
+        + " example 'Seoul'";
+  }
+
+  public static String getIntroPuzzleMessage() {
+    return "Now the player enters the puzzle game in room3 after clicking the book which given a"
+        + " unarranged destnation city name and the player need to drag and change the"
+        + " position of the letter until the correct city name. Write a 10 words welcome"
+        + " message.";
   }
 }

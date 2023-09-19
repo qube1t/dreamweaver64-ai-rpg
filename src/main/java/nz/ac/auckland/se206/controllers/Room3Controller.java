@@ -11,7 +11,10 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3Controller {
@@ -62,20 +65,28 @@ public class Room3Controller {
     //   System.out.println(result);
     // });
 
-    // // Generate the unarranged city name when room3 loads
-    // if (GameState.unarrangedCityName == "") {
-    //   GptEngine.runGpt(
-    //       new ChatMessage("user", GptPromptEngineeringRoom3.getUnarrangedCity()),
-    //       (result) -> {
-    //         System.out.println(result);
-    //         // Make the city name unarranged
+    // Generate the unarranged city name when room3 loads
+    if ((GameState.unarrangedCityName == "" || GameState.arrangedCityName.length() > 8)) {
+      GptEngine.runGpt(
+          new ChatMessage("user", GptPromptEngineeringRoom3.getRandomCity()),
+          (result) -> {
+            System.out.println(result);
+            GameState.arrangedCityName = result;
+            // Make the city name unarranged
+            GameState.unarrangedCityName = makeUnarrangedCityName(result);
+            System.out.println(GameState.unarrangedCityName);
+          });
+    }
 
-    //         GameState.unarrangedCityName = makeUnarrangedCityName(result);
-    //         System.out.println(GameState.unarrangedCityName);
-    //       });
-    // }
+    if (GameState.introMessage == "") {
+      GptEngine.runGpt(
+          new ChatMessage("user", GptPromptEngineeringRoom3.getIntroPuzzleMessage()),
+          (result) -> {
+            System.out.println(result);
 
-    GameState.unarrangedCityName = "TOKYO";
+            GameState.introMessage = result;
+          });
+    }
 
     // Set both images to invisible initially
     lastFlightPlan.setVisible(false);

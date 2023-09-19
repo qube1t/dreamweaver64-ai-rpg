@@ -48,9 +48,13 @@ public class GameState {
   public static int currentBox = -1;
 
   public static String unarrangedCityName = "";
+  public static String arrangedCityName = "";
 
   /** Indicates the aircraft code */
   public static String aircraftCode = "";
+
+  /** Indicates the introduction message when first enter the puzzle in Room3 */
+  public static String introMessage = "";
 
   public static String[] booksInRoom1 = new String[7];
 
