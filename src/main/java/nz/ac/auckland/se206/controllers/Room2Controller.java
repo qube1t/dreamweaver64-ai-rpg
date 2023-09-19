@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -71,6 +70,9 @@ public class Room2Controller {
   private static boolean gptInit = false;
   private static int gptStage = 0;
 
+  private int wrongBoxClicked = 0;
+  private int correctBoxClicked = 0;
+
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     ArrayList<Rectangle> obsts =
@@ -104,14 +106,15 @@ public class Room2Controller {
     gptResponse.setVisible(false);
 
     GptEngine.runGpt(
-        new ChatMessage("user", GptPromptEngineeringRoom2.npcIntro()), (st) -> {
+        new ChatMessage("user", GptPromptEngineeringRoom2.npcIntro()),
+        (st) -> {
           chatBubble.setVisible(true);
           gptResponse.setVisible(true);
           gptResponse.setText(st);
         });
-    
-        chatBubble.setVisible(false);
-        gptResponse.setVisible(false);
+
+    chatBubble.setVisible(false);
+    gptResponse.setVisible(false);
   }
 
   @FXML
@@ -121,9 +124,11 @@ public class Room2Controller {
       boxKey.setVisible(false);
       System.out.println("Box key found");
       try {
-        GptEngine.runGpt(new ChatMessage("user", GptPromptEngineeringRoom2.foundBoxKey()), (st) -> {
-        List<String> pirateDialogue = Helper.getTextBetweenChar(st, "%");
-      });
+        GptEngine.runGpt(
+            new ChatMessage("user", GptPromptEngineeringRoom2.foundBoxKey()),
+            (st) -> {
+              List<String> pirateDialogue = Helper.getTextBetweenChar(st, "%");
+            });
       } catch (ApiProxyException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
@@ -155,7 +160,19 @@ public class Room2Controller {
         MainGame.addOverlay("treasure_box", false);
       } else {
         // write this sentance in chat box
-        System.out.println("Wrong treasure box clicked. Find correct one");
+        if (wrongBoxClicked == 0) {
+          try {
+            GptEngine.runGpt(
+                new ChatMessage("user", GptPromptEngineeringRoom2.clickWrongBox()),
+                (st) -> {
+                  List<String> clickWrongBox = Helper.getTextBetweenChar(st, "%");
+                });
+          } catch (ApiProxyException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+          wrongBoxClicked++;
+        }
       }
       box1.setDisable(true);
       box2.setDisable(true);

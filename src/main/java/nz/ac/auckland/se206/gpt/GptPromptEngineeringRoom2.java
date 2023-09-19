@@ -17,6 +17,12 @@ public class GptPromptEngineeringRoom2 {
   }
 
   public static String foundBoxKey() {
-    return "Pirate: Gave the key to open the treasure box. The players are able to open the treasure boxes and get treasure";
+    return "Computer: Gave the key to open the treasure box. The players are able to open the"
+        + " treasure boxes and get treasure";
+  }
+
+  public static String clickWrongBox() {
+    return "Computer: Players clicked wrong treasure box. All treasure boxes are not clickable"
+               + " again";
   }
 }
