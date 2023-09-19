@@ -6,7 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GptEngine;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartMenuController {
@@ -20,25 +20,7 @@ public class StartMenuController {
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
     // new GptEngine();
 
-    GameState.eleanorAi.runGpt(
-        "You are the programme behind DREAMWEAVER64, a futuristic technology that creates dreams"
-            + " and allows people to relive their past or discover lost truths or memories from"
-            + " their pasts. "
-            + //
-            "You have to guide the user to finish their task of finding the message of a lost"
-            + " letter from their mother that they have forgotten. "
-            + //
-            "To speak with the user surround the message to transmit with the character ^. All"
-            + " other text will be lost."
-            + //
-            "When asked for hints, surround the hints with the character *."
-            + //
-            // "As it affects the stability of the dream do not give hints if the character does
-            // not"
-            // + " have any left."
-            // + //
-            "The technology will update you on their actions. Always make sure that the above rules"
-            + " are followed for proper communication with the person.");
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom1.gameIntro());
   }
 
   @FXML

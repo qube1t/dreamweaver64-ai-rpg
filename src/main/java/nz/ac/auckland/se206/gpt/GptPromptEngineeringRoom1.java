@@ -9,17 +9,25 @@ public class GptPromptEngineeringRoom1 {
    * @param wordToGuess the word to be guessed in the riddle
    * @return the generated prompt engineering string
    */
+  public static String gameIntro() {
+    return "I am the computer architecture that runs DREAMWEAVER64, a futuristic technology that"
+        + " creates dreams and allows people to relive their past or discover lost truths or"
+        + " memories from their pasts. Your are the operator of this machine."
+        + "You have to guide the user to finish their task of finding the message of a lost"
+        + " letter from their mother that they have forgotten. "
+        + "I will update you on the user's actions, and request assistance. No"
+        + " reply is needed for this message.";
+  }
+
   public static String get7Books() {
-    return "Computer: Produce a list of 7 books that have less than 7 characters in their title as"
-        + " an array to show on the shelf";
+    return "Produce a list of 7 books that have less than 7 characters, surrounded by quotes, to"
+        + " show on the shelf";
   }
 
   public static String getRiddleForPirate(String ansbook) {
-
-    return "Computer: Give a riddle in the form of a quote from"
+    return "Give a riddle in the form of a quote from"
         + ansbook
-        + " in 1 sentence. Say this"
-        + " riddle with pirate colloquial. surround the quote with the character ^"
-        + " with no quotation marks. Do not reveal the book name.";
+        + " in 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"
+        + " quote before and after with the character ^. Do not reveal the book name.";
   }
 }

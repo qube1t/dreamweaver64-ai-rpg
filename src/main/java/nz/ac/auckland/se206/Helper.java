@@ -10,9 +10,12 @@ public class Helper {
     List<String> matchesList = new ArrayList<String>();
     Pattern pattern = Pattern.compile("\\" + c + "(.*?)\\" + c);
     Matcher m1 = pattern.matcher(str);
+    // System.out.println(str);
 
     while (m1.find()) {
-      matchesList.add(m1.group().replace(c, ""));
+      String match = m1.group();
+      matchesList.add(match.replace(c, ""));
+      System.out.println(match.replace(c, ""));
     }
     return matchesList;
   }
