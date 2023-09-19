@@ -25,4 +25,9 @@ public class GptPromptEngineeringRoom2 {
     return "Computer: Players clicked wrong treasure box. All treasure boxes are not clickable"
                + " again";
   }
+
+  public static String clickCorrectBox() {
+    return "Computer: Players clicked correct treasure box. The treasure box is opened and the"
+               + " treasure is shown";
+  }
 }

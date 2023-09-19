@@ -156,8 +156,20 @@ public class Room2Controller {
       box4.setDisable(false);
       box5.setDisable(false);
       if (numOfBox == boxLocation) {
-        System.out.println("Correct treasure box clicked");
         MainGame.addOverlay("treasure_box", false);
+        if (correctBoxClicked == 0) {
+          try {
+            GptEngine.runGpt(
+                new ChatMessage("user", GptPromptEngineeringRoom2.clickCorrectBox()),
+                (st) -> {
+                  List<String> clickCorrectBox = Helper.getTextBetweenChar(st, "/");
+                });
+          } catch (ApiProxyException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+          correctBoxClicked++;
+        }
       } else {
         // write this sentance in chat box
         if (wrongBoxClicked == 0) {
@@ -165,14 +177,14 @@ public class Room2Controller {
             GptEngine.runGpt(
                 new ChatMessage("user", GptPromptEngineeringRoom2.clickWrongBox()),
                 (st) -> {
-                  List<String> clickWrongBox = Helper.getTextBetweenChar(st, "%");
+                  List<String> clickWrongBox = Helper.getTextBetweenChar(st, "/");
                 });
           } catch (ApiProxyException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
           }
-          wrongBoxClicked++;
         }
+        wrongBoxClicked++;
       }
       box1.setDisable(true);
       box2.setDisable(true);
