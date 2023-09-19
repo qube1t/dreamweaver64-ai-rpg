@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
 
@@ -190,6 +189,7 @@ public class Room2Controller {
    */
   @FXML
   public void onClickDoor(MouseEvent event) throws IOException {
-    App.setRoot("room1");
+    MainGame.removeOverlay(true);
+    MainGame.addOverlay("room1", true);
   }
 }
