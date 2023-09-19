@@ -121,6 +121,10 @@ public class Room3Controller {
     for (int i = 0; i < length; i++) {
       unarrangedCityName += cityName.charAt(randomNumbers[i]);
     }
+
+    if (unarrangedCityName.equals(cityName)) {
+      return makeUnarrangedCityName(cityName);
+    }
     return unarrangedCityName.toUpperCase();
   }
 
