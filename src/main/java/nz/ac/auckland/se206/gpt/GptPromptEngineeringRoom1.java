@@ -19,13 +19,20 @@ public class GptPromptEngineeringRoom1 {
         + " reply is needed for this message.";
   }
 
+  public static String gameInstructions() {
+    return "Give the user intructions on the mission. The dream will collapses after their"
+        + " allocated time, and the mission aborted. They will revisit their past memories"
+        + " to recover a lost letter from their mother. Maximum of 2 sentences. Surround the"
+        + " sentences to be shown to the user with #";
+  }
+
   public static String get7Books() {
-    return "Produce a list of 7 books that have less than 7 characters, surrounded by quotes, to"
-        + " show on the shelf";
+    return "This is the loading stage. Produce a list of 7 books that have less than 7 characters,"
+               + " surrounded by quotes, to show on the shelf";
   }
 
   public static String getRiddleForPirate(String ansbook) {
-    return "Give a riddle in the form of a quote from"
+    return "This is the loading stage. Give a riddle in the form of a quote from"
         + ansbook
         + " in 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"
         + " quote before and after with the character ^. Do not reveal the book name.";

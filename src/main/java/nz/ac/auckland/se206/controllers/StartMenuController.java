@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -21,6 +22,12 @@ public class StartMenuController {
     // new GptEngine();
 
     GameState.eleanorAi.runGpt(GptPromptEngineeringRoom1.gameIntro());
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom1.gameInstructions(),
+        s -> {
+          GameState.instructionMsg = s;
+          Platform.runLater(() -> startButton.setDisable(false));
+        });
   }
 
   @FXML

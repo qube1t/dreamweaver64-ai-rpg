@@ -13,6 +13,7 @@ public class GameState {
   public static boolean isRiddleResolved = false;
 
   // pirate riddle
+  public static String instructionMsg = null;
   public static String pirateRiddle = null;
 
   /** Indicates whether the key has been found. */

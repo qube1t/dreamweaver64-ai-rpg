@@ -13,7 +13,6 @@
 
 <StackPane fx:id="outer_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="537.0" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
    <children>
-      <Label text="Room Loading" textFill="WHITE" />
       <VBox fx:id="interact_pane" prefHeight="560.0" prefWidth="706.0">
          <children>
             <AnchorPane prefHeight="62.0" prefWidth="706.0" style="-fx-border-color: pink;" />
