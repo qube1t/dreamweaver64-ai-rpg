@@ -89,27 +89,7 @@ public class Room2Controller {
 
     speech_bubble = new ImageView();
     gptResponse = new Label();
-    gptResponse.setWrapText(true);
-    gptResponse.setText("Hi");
-
-    if (!gptInit) {
-      try {
-        initGpt();
-      } catch (ApiProxyException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-      gptInit = true;
-    }
-  }
-
-  private void initGpt() throws ApiProxyException {
-    GptEngine.runGpt(
-        new ChatMessage("user", GptPromptEngineeringRoom2.npcIntro()),
-        (st) -> {
-          this.gptResponse.setWrapText(true);
-          gptResponse.setText(st);
-        });
+    gptResponse.setText("Pirate : Find the key to open the treasure box");
   }
 
   @FXML
