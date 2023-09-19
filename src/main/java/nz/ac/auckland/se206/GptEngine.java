@@ -3,6 +3,7 @@ package nz.ac.auckland.se206;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+import javafx.application.Platform;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
@@ -88,19 +89,22 @@ public class GptEngine {
     activeThread.start();
   }
 
-  private void onGptCompletion(
-      ChatCompletionResult chatCompletionResult, GptResultAction myFunc) throws Exception {
+  private void onGptCompletion(ChatCompletionResult chatCompletionResult, GptResultAction myFunc)
+      throws Exception {
     stage++;
     Choice result = chatCompletionResult.getChoices().iterator().next();
-    System.out.println(result.getChatMessage().getContent());
+    // System.out.println(result.getChatMessage().getContent());
 
     chatCompletionRequest.addMessage(result.getChatMessage());
 
     if (myFunc != null) myFunc.call(result.getChatMessage().getContent());
 
-    List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(),
-    "^");
-    if (chatEntry.size() > 0) GameState.mainGame.addChat(chatEntry.get(0));
+    List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*");
+    if (chatEntry.size() > 0)
+      Platform.runLater(
+          () -> {
+            GameState.mainGame.addChat(chatEntry.get(0).replaceAll("\"", ""), true);
+          });
   }
 
   public void runGpt(String string) throws ApiProxyException {
