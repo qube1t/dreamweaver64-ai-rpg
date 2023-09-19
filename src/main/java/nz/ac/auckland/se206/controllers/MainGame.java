@@ -17,7 +17,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -61,7 +60,7 @@ public class MainGame {
 
     disableInteractPane();
 
-    addChat("test");
+    // addChat("test");
   }
 
   public static void addOverlay(String roomN, boolean isRoom) throws IOException {
@@ -76,6 +75,7 @@ public class MainGame {
         e -> {
           removeOverlay(false);
         });
+
     initialised_game_pane
         .getChildren()
         .add(initialised_game_pane.getChildren().size() - 2, backgroundBlur);
@@ -167,7 +167,7 @@ public class MainGame {
   @FXML
   private void keyPressedChatInput(KeyEvent ke) throws ApiProxyException {
     if (ke.getCode().equals(KeyCode.ENTER)) {
-      addChat("You: " + chatInput.getText());
+      addChat("You: " + chatInput.getText(), false);
       chatInput.setDisable(true);
       GameState.eleanorAi.runGpt(
           "The user has send this message: '"
@@ -177,7 +177,7 @@ public class MainGame {
           (res) -> {
             Platform.runLater(
                 () -> {
-                  addChat("Eleanor: " + res);
+                  addChat(res, true);
                   chatInput.setDisable(false);
                 });
           });
@@ -188,16 +188,20 @@ public class MainGame {
     }
   }
 
-  public void addChat(String text) {
+  public void addChat(String text, boolean isEleanor) {
 
     // adding to bubble
     bubbleChatText.setText(text);
     bubbleTextPane.setContent(bubbleChatText);
 
-    if (chatPane.isDisable()) speechBubble.setVisible(true);
+    if (chatPane.isDisable()) {
+      speechBubble.setVisible(true);
+      bubbleTextPane.setVisible(true);
+    }
 
     // adding to chatbox
-    Label label = new Label(text);
+    String chatPrefix = isEleanor ? "Eleanor: " : "";
+    Label label = new Label(chatPrefix + text);
     label.setWrapText(true);
     label.getStyleClass().add("chat-text");
     // label.setMaxWidth(500);
