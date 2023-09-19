@@ -1,12 +1,15 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.List;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.text.Font;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -17,6 +20,7 @@ public class StartMenuController {
   @FXML Button startButton;
 
   public void initialize() throws ApiProxyException {
+    
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
     // new GptEngine();
@@ -25,7 +29,10 @@ public class StartMenuController {
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.gameInstructions(),
         s -> {
-          GameState.instructionMsg = s;
+          List<String> pirateDialogue = Helper.getTextBetweenChar(s, "#");
+          if (pirateDialogue.size() > 0) {
+            GameState.instructionMsg = s;
+          }
           Platform.runLater(() -> startButton.setDisable(false));
         });
   }

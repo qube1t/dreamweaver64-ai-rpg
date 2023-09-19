@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
@@ -91,7 +92,8 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-
+    Font.loadFont(App.class.getResource("/fonts/Abaddon Bold.ttf").toString(), 14);
+    Font.loadFont(App.class.getResource("/fonts/Abaddon Light.ttf").toString(), 14);
     Pane root = (Pane) loadFxml("start_menu");
 
     scene = new Scene(root, 1000, 700);
