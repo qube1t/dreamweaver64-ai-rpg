@@ -5,11 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
@@ -96,20 +94,6 @@ public class Room2Controller {
 
     chatBubble.setVisible(false);
     gptResponse.setVisible(false);
-
-    pirate.setOnMouseEntered(event -> {
-      try {
-        npcGPT();
-      } catch (ApiProxyException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
-    });
-
-    pirate.setOnMouseExited(event -> {
-      chatBubble.setVisible(false);
-      gptResponse.setVisible(false);
-  });
   }
 
   private void initGpt() throws ApiProxyException {
@@ -119,53 +103,10 @@ public class Room2Controller {
 
     GptEngine.runGpt(
         new ChatMessage("user", GptPromptEngineeringRoom2.npcIntro()), (st) -> {
-          System.out.println("GptEngine Thread " + Thread.currentThread().getId());
           chatBubble.setVisible(true);
           gptResponse.setVisible(true);
           gptResponse.setText(st);
         });
-  }
-
-  private void npcGPT() throws ApiProxyException {
-    gptResponse.setWrapText(true);
-    if (!GameState.isBoxKeyFound) {
-      try {
-      GptEngine.runGpt(
-          new ChatMessage(
-              "user", GptPromptEngineeringRoom2.npcFindItem()),
-          (_st) -> {
-            chatBubble.setVisible(true);
-            gptResponse.setVisible(true);
-            gptResponse.setText(_st);
-          });
-      } catch (ApiProxyException e) {
-        e.printStackTrace();
-      }
-    } else if (GameState.isBoxKeyFound && !GameState.isTreasureFound) {
-      try {
-        GptEngine.runGpt (
-          new ChatMessage("user", GptPromptEngineeringRoom2.npcFindTreasure()), (st) -> {
-            chatBubble.setVisible(true);
-            gptResponse.setVisible(true);
-            gptResponse.setText(st);
-          }
-        );
-      } catch (ApiProxyException e) {
-        e.printStackTrace();
-      }
-    } else if (GameState.isBoxKeyFound && GameState.isTreasureFound) {
-      try {
-        GptEngine.runGpt (
-          new ChatMessage("user", GptPromptEngineeringRoom2.npcMoveNextStage()), (result) -> {
-            chatBubble.setVisible(true);
-            gptResponse.setVisible(true);
-            gptResponse.setText(result);
-          }
-        );
-      } catch (ApiProxyException e) {
-        e.printStackTrace();
-      }
-    }
   }
 
   @FXML
