@@ -3,6 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -10,6 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptEngine;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
@@ -85,11 +88,11 @@ public class Room2Controller {
     if (!gptInit) {
       try {
         initGpt();
+        gptInit = true;
       } catch (ApiProxyException e) {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
-      gptInit = true;
     }
 
     chatBubble.setVisible(false);
@@ -97,7 +100,6 @@ public class Room2Controller {
   }
 
   private void initGpt() throws ApiProxyException {
-    gptResponse.setWrapText(true);
     chatBubble.setVisible(false);
     gptResponse.setVisible(false);
 
@@ -107,6 +109,9 @@ public class Room2Controller {
           gptResponse.setVisible(true);
           gptResponse.setText(st);
         });
+    
+        chatBubble.setVisible(false);
+        gptResponse.setVisible(false);
   }
 
   @FXML
@@ -115,6 +120,14 @@ public class Room2Controller {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
       System.out.println("Box key found");
+      try {
+        GptEngine.runGpt(new ChatMessage("user", GptPromptEngineeringRoom2.foundBoxKey()), (st) -> {
+        List<String> pirateDialogue = Helper.getTextBetweenChar(st, "%");
+      });
+      } catch (ApiProxyException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     } else {
       // write this sentance in chat box or pirate's speech bubble
       System.out.println("Find the item to trade with pirate to open the boxes");

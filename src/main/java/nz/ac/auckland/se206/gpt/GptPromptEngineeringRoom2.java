@@ -15,4 +15,8 @@ public class GptPromptEngineeringRoom2 {
         + !GameState.isTreasureFound
         + "say \"find a treasure\" with pirate colloquial";
   }
+
+  public static String foundBoxKey() {
+    return "Pirate: Gave the key to open the treasure box. The players are able to open the treasure boxes and get treasure";
+  }
 }
