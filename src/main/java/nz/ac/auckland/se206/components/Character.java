@@ -41,14 +41,14 @@ public class Character extends AnchorPane {
     return animating;
   }
 
-  private int action = 0;
+  private static int action = 0;
 
   public int getAction() {
     return action;
   }
 
-  public void setAction(int action) {
-    this.action = action;
+  public void setAction(int a) {
+    action = a;
     // this.offset_y = offset_y + 64 * action;
 
     if (animating != true) initElements();

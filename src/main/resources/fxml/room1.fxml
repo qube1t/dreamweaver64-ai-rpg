@@ -53,7 +53,7 @@
             <Rectangle fx:id="right_door_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="627.0" layoutY="453.0" onMouseClicked="#goToRightRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="18.0" />
             <Rectangle fx:id="shelf_btn1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="364.0" layoutY="58.0" onMouseClicked="#openMainDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="39.0" />
             <Rectangle fx:id="crockery_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="394.0" layoutY="394.0" onMouseClicked="#onClickCrockeries" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="39.0" />
-            <Rectangle fx:id="furnace_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="45.0" layoutX="547.0" layoutY="408.0" onMouseClicked="#onClickFurnace" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="39.0" />
+            <Rectangle fx:id="chest_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="272.0" layoutY="363.0" onMouseClicked="#onClickChest" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="39.0" />
          </children>
       </Pane>
    </children>
