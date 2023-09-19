@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptEngine;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartMenuController {
   @FXML private ComboBox<String> difficulty;
@@ -13,9 +15,10 @@ public class StartMenuController {
 
   @FXML Button startButton;
 
-  public void initialize() {
+  public void initialize() throws ApiProxyException {
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
+    new GptEngine();
   }
 
   @FXML

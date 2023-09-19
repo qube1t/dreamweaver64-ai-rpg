@@ -4,12 +4,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room2Controller {
 
@@ -22,6 +28,8 @@ public class Room2Controller {
 
   @FXML private Rectangle doorToRoom1;
   @FXML private ImageView boxKey;
+  @FXML private ImageView chatBubble;
+  @FXML private Label gptResponse;
 
   @FXML private Character character;
   @FXML
@@ -59,9 +67,11 @@ public class Room2Controller {
       rect32,
       rect33;
 
+  private static boolean gptInit = false;
+  private static int gptStage = 0;
+
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
-
     ArrayList<Rectangle> obsts =
         new ArrayList<Rectangle>(
             Arrays.asList(
@@ -73,6 +83,89 @@ public class Room2Controller {
     character.enableMobility(obsts);
     character.setLayoutX(60);
     character.setLayoutY(250);
+
+    if (!gptInit) {
+      try {
+        initGpt();
+      } catch (ApiProxyException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      gptInit = true;
+    }
+
+    chatBubble.setVisible(false);
+    gptResponse.setVisible(false);
+
+    pirate.setOnMouseEntered(event -> {
+      try {
+        npcGPT();
+      } catch (ApiProxyException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+    });
+
+    pirate.setOnMouseExited(event -> {
+      chatBubble.setVisible(false);
+      gptResponse.setVisible(false);
+  });
+  }
+
+  private void initGpt() throws ApiProxyException {
+    gptResponse.setWrapText(true);
+    chatBubble.setVisible(false);
+    gptResponse.setVisible(false);
+
+    GptEngine.runGpt(
+        new ChatMessage("user", GptPromptEngineeringRoom2.npcIntro()), (st) -> {
+          System.out.println("GptEngine Thread " + Thread.currentThread().getId());
+          chatBubble.setVisible(true);
+          gptResponse.setVisible(true);
+          gptResponse.setText(st);
+        });
+  }
+
+  private void npcGPT() throws ApiProxyException {
+    gptResponse.setWrapText(true);
+    if (!GameState.isBoxKeyFound) {
+      try {
+      GptEngine.runGpt(
+          new ChatMessage(
+              "user", GptPromptEngineeringRoom2.npcFindItem()),
+          (_st) -> {
+            chatBubble.setVisible(true);
+            gptResponse.setVisible(true);
+            gptResponse.setText(_st);
+          });
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
+    } else if (GameState.isBoxKeyFound && !GameState.isTreasureFound) {
+      try {
+        GptEngine.runGpt (
+          new ChatMessage("user", GptPromptEngineeringRoom2.npcFindTreasure()), (st) -> {
+            chatBubble.setVisible(true);
+            gptResponse.setVisible(true);
+            gptResponse.setText(st);
+          }
+        );
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
+    } else if (GameState.isBoxKeyFound && GameState.isTreasureFound) {
+      try {
+        GptEngine.runGpt (
+          new ChatMessage("user", GptPromptEngineeringRoom2.npcMoveNextStage()), (result) -> {
+            chatBubble.setVisible(true);
+            gptResponse.setVisible(true);
+            gptResponse.setText(result);
+          }
+        );
+      } catch (ApiProxyException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   @FXML
@@ -81,7 +174,6 @@ public class Room2Controller {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
       System.out.println("Box key found");
-      // gottenBoxKey.setOpacity(1);
     } else {
       // write this sentance in chat box or pirate's speech bubble
       System.out.println("Find the item to trade with pirate to open the boxes");
@@ -190,6 +282,7 @@ public class Room2Controller {
    */
   @FXML
   public void onClickDoor(MouseEvent event) throws IOException {
-    App.setRoot("room1");
+    MainGame.removeOverlay();
+    MainGame.addOverlay("room1", true);
   }
 }
