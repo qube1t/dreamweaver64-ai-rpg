@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -35,7 +36,11 @@ public class Room3Controller {
       desk2,
       bound1,
       bound2,
-      bound3;
+      bound3,
+      book,
+      clickableComputer,
+      clickableRadar,
+      clickableDoor;
   @FXML private Circle box1, box2, box3, box4, box5;
   private Circle[] radarPoints;
   private ImageView[] radarObjects;
@@ -45,6 +50,7 @@ public class Room3Controller {
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
   @FXML private ImageView radar_image, radar_computer, map;
+  @FXML private Pane clickPane;
   private boolean isRadarComputerOpen;
   private Timeline radarAnimation;
 
@@ -79,7 +85,7 @@ public class Room3Controller {
       this.obsts.add(rectangle);
     }
 
-    character.enableMobility(obsts);
+    character.enableMobility(obsts, clickPane.getChildren());
     character.setLayoutX(530);
     character.setLayoutY(210);
 
@@ -191,11 +197,7 @@ public class Room3Controller {
   }
 
   @FXML
-  /**
-   * This method is called when the book is clicked It will open the flight plan if it is not open
-   * and if the flight plan is open, then it will close the flight plan
-   */
-  public void onClickBook() {
+  public void clickBookEvent() {
     System.out.println("Book clicked");
     if (GameState.isPreviousFlightPlanOpen) {
       GameState.isPreviousFlightPlanOpen = false;
