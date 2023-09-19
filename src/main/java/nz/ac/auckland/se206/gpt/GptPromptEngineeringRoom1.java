@@ -28,7 +28,7 @@ public class GptPromptEngineeringRoom1 {
 
   public static String get7Books() {
     return "This is the loading stage. Produce a list of 7 books that have less than 7 characters,"
-               + " surrounded by quotes, to show on the shelf";
+        + " surrounded by quotes, to show on the shelf";
   }
 
   public static String getRiddleForPirate(String ansbook) {

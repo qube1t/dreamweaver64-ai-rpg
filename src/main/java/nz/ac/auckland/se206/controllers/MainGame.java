@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.List;
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -222,12 +223,26 @@ public class MainGame {
 
   public static void enableInteractPane() {
     initialised_interact_pane.setDisable(false);
-    initialised_interact_pane.setOpacity(1);
+    FadeTransition ft = new FadeTransition();
+    ft.setDuration(javafx.util.Duration.millis(500));
+    ft.setNode(initialised_game_pane);
+    ft.setFromValue(0);
+    ft.setToValue(1);
+    ft.play();
   }
 
+  // maybe cfreate a diff func?
   public static void disableInteractPane() {
+    FadeTransition ft = new FadeTransition();
+    ft.setDuration(javafx.util.Duration.millis(500));
+    ft.setNode(initialised_game_pane);
+    ft.setFromValue(1.0);
+    ft.setToValue(0);
+    ft.setAutoReverse(true);
+    ft.setCycleCount(1);
+    ft.play();
     initialised_interact_pane.setDisable(true);
-    initialised_interact_pane.setOpacity(0);
+    // initialised_interact_pane.setOpacity(0);
   }
 
   private void clickHeader() {

@@ -16,7 +16,7 @@
       <VBox fx:id="interact_pane" prefHeight="560.0" prefWidth="706.0">
          <children>
             <AnchorPane prefHeight="62.0" prefWidth="706.0" style="-fx-border-color: pink;" />
-            <StackPane fx:id="game_pane" prefHeight="475.0" style="-fx-border-color: blue; -fx-background-color: black;">
+            <StackPane fx:id="game_pane" opacity="0.0" prefHeight="475.0" style="-fx-border-color: blue; -fx-background-color: black;">
                <children>
                   <AnchorPane fx:id="aiCharacterPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="152.0" prefWidth="389.0" StackPane.alignment="BOTTOM_LEFT">
                      <StackPane.margin>

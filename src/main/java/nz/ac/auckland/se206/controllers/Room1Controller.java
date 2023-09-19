@@ -76,6 +76,7 @@ public class Room1Controller {
 
   @FXML
   public void goToLeftRoom() throws IOException {
+    MainGame.disableInteractPane();
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room3", true);
   }
@@ -89,6 +90,7 @@ public class Room1Controller {
 
   @FXML
   private void goToRightRoom() throws IOException {
+    MainGame.disableInteractPane();
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room2", true);
   }

@@ -6,7 +6,6 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.text.Font;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
@@ -20,7 +19,7 @@ public class StartMenuController {
   @FXML Button startButton;
 
   public void initialize() throws ApiProxyException {
-    
+
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
     // new GptEngine();
@@ -31,7 +30,7 @@ public class StartMenuController {
         s -> {
           List<String> pirateDialogue = Helper.getTextBetweenChar(s, "#");
           if (pirateDialogue.size() > 0) {
-            GameState.instructionMsg = s;
+            GameState.instructionMsg = pirateDialogue.get(0);
           }
           Platform.runLater(() -> startButton.setDisable(false));
         });
