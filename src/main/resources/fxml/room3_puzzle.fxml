@@ -31,6 +31,11 @@
             <Font name="Impact" size="20.0" />
          </font>
       </Button>
-      <ProgressBar fx:id="load" layoutX="151.0" layoutY="38.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" />
+      <ProgressBar fx:id="load" layoutX="145.0" layoutY="65.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" />
+      <Label fx:id="loadText" layoutX="163.0" layoutY="48.0" text="Checking...." textFill="RED">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -51,4 +51,10 @@ public class GptPromptEngineeringRoom3 {
         + " a 10 words message to tell the player that the city name is wrong and need to"
         + " rearrange again.";
   }
+
+  public static String correctPuzzleRoom3() {
+    return "Now the player rearranged the city name and it is the correct city name, generate a 10"
+        + " words message to tell the player that the city name is correct and reveal the"
+        + " IATA code of the city.";
+  }
 }
