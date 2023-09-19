@@ -32,5 +32,6 @@ public class TreasureBoxController {
         message.setVisible(true);
         message.setText("mom");
         imgTreasure.setVisible(false);
+        treasure.setDisable(true);
     }
 }
