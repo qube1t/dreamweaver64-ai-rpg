@@ -47,6 +47,8 @@ public class GameState {
   /** Indicates the location of the treasure box. */
   public static int currentBox = -1;
 
+  public static String unarrangedCityName = "";
+
   /** Indicates the aircraft code */
   public static String aircraftCode = "";
 

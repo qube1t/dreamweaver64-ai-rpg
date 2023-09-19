@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DestnationPuzzleController">
+   <children>
+      <ImageView fitHeight="400.0" fitWidth="400.0">
+         <image>
+            <Image url="@../images/rooms/room3/blur.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="unarrangedCityName" layoutX="75.0" layoutY="85.0" prefHeight="33.0" prefWidth="227.0" textAlignment="CENTER" textFill="#a80e72">
+         <font>
+            <Font name="Times New Roman Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="132.0" layoutY="46.0" prefHeight="17.0" prefWidth="135.0" text="Oops...The destnation " />
+      <TextArea layoutX="97.0" layoutY="193.0" prefHeight="82.0" prefWidth="200.0" style="-fx-background-color: none;" />
+   </children>
+</AnchorPane>

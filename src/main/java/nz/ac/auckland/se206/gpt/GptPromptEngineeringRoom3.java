@@ -33,4 +33,8 @@ public class GptPromptEngineeringRoom3 {
         + " departature board and the previous flight log. Generate a general welcome message for"
         + " the NPC in the room within 30 words and not include any hint";
   }
+
+  public static String getUnarrangedCity() {
+    return "Generate a popular city that is less than 8 characters";
+  }
 }

@@ -2,11 +2,10 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -46,8 +45,6 @@ public class Room3Controller {
   @FXML private ImageView departureBoard;
   @FXML private ImageView map;
   @FXML private Character character;
-  @FXML private AnchorPane chatBubblePane;
-  @FXML private TextArea npcResponse;
   @FXML private Pane clickPane;
 
   private ArrayList<Rectangle> obstacles;
@@ -67,6 +64,19 @@ public class Room3Controller {
         (result) -> {
           System.out.println(result);
         });
+
+    // Generate the unarranged city name when room3 loads
+    if (GameState.unarrangedCityName == "") {
+      GptEngine.runGpt(
+          new ChatMessage("user", GptPromptEngineeringRoom3.getUnarrangedCity()),
+          (result) -> {
+            System.out.println(result);
+            // Make the city name unarranged
+
+            GameState.unarrangedCityName = makeUnarrangedCityName(result);
+            System.out.println(GameState.unarrangedCityName);
+          });
+    }
 
     // Set both images to invisible initially
     lastFlightPlan.setVisible(false);
@@ -109,6 +119,26 @@ public class Room3Controller {
     }
   }
 
+  protected String makeUnarrangedCityName(String cityName) {
+    String unarrangedCityName = "";
+    int length = cityName.length();
+    int[] randomNumbers = new int[length];
+    for (int i = 0; i < length; i++) {
+      randomNumbers[i] = i;
+    }
+    Random random = new Random();
+    for (int i = 0; i < length; i++) {
+      int randomIndexToSwap = random.nextInt(length);
+      int temp = randomNumbers[randomIndexToSwap];
+      randomNumbers[randomIndexToSwap] = randomNumbers[i];
+      randomNumbers[i] = temp;
+    }
+    for (int i = 0; i < length; i++) {
+      unarrangedCityName += cityName.charAt(randomNumbers[i]);
+    }
+    return unarrangedCityName.toUpperCase();
+  }
+
   @FXML
   public void onClickComputer() {
     System.out.println("Computer clicked");
@@ -127,21 +157,22 @@ public class Room3Controller {
    * This method is called when the book is clicked It will open the flight plan if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
-  public void clickBookEvent() {
+  public void clickBookEvent() throws IOException {
     System.out.println("Book clicked");
-    if (GameState.isPreviousFlightPlanOpen) {
-      GameState.isPreviousFlightPlanOpen = false;
-      fadeOutFlightPlan();
-    } else {
-      if (GameState.isDepBoardOpen) {
-        GameState.isDepBoardOpen = false;
-        fadeOutDepBoard();
-        fadeInFlightPlan();
-      } else {
-        fadeInFlightPlan();
-      }
-      GameState.isPreviousFlightPlanOpen = true;
-    }
+    MainGame.addOverlay("room3_puzzle", false);
+    // if (GameState.isPreviousFlightPlanOpen) {
+    // GameState.isPreviousFlightPlanOpen = false;
+    // fadeOutFlightPlan();
+    // } else {
+    //  if (GameState.isDepBoardOpen) {
+    //  GameState.isDepBoardOpen = false;
+    //  fadeOutDepBoard();
+    //  fadeInFlightPlan();
+    // } else {
+    //  fadeInFlightPlan();
+    // }
+    // GameState.isPreviousFlightPlanOpen = true;
+    // }
   }
 
   @FXML
