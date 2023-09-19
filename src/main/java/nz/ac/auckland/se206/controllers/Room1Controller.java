@@ -101,13 +101,15 @@ public class Room1Controller {
   }
 
   @FXML
-  private void onClickCrockeries() throws ApiProxyException {
+  private void onClickCrockeries() throws ApiProxyException, IOException {
+    MainGame.addOverlay("crockery_shelf", false);
     GameState.eleanorAi.runGpt(
         "User update, User has opened crockeries, but they are not accessible. No reply needed");
   }
 
   @FXML
-  private void onClickFurnace() throws ApiProxyException {
+  private void onClickChest() throws ApiProxyException, IOException {
+    MainGame.addOverlay("chest", false);
     GameState.eleanorAi.runGpt(
         "User update: opened the furnace, but there is nothing to see there. No reply needed.");
   }
