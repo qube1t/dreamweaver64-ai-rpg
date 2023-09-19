@@ -1,16 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
@@ -30,7 +27,6 @@ public class Room3Controller {
       chair2,
       gate,
       radar,
-      protectRadarComputer,
       boundary1,
       boundary2,
       boundary3,
@@ -46,41 +42,17 @@ public class Room3Controller {
       clickableComputer,
       clickableRadar,
       clickableDoor;
-  @FXML private Circle box1, box2, box3, box4, box5;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
-  @FXML private ImageView radar_image, radar_computer, map;
+  @FXML private ImageView map;
   @FXML private Character character;
-  @FXML private AnchorPane radarPane;
   @FXML private AnchorPane chatBubblePane;
   @FXML private TextArea npcResponse;
   @FXML private Pane clickPane;
 
-  private boolean isRadarComputerOpen;
-  private Timeline radarAnimation;
-  private Circle[] radarPoints;
-  private ImageView[] radarSystem;
   private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
-
-    // Initialize the radar points and radarObjects to a list.
-    this.radarPoints = new Circle[] {box1, box2, box3, box4, box5};
-    this.radarSystem = new ImageView[] {radar_image, radar_computer};
-
-    // Set the radar computer boolean to false initially
-    isRadarComputerOpen = false;
-
-    // Disable radar system initially
-    disableRadarSystem();
-
-    // Configure the chat bubble
-    // npcResponse.setWrapText(true);
-    // npcResponse.setEditable(false);
-
-    // Set the chat bubble to invisible initially
-    // chatBubblePane.setVisible(false);
-    // npcResponse.setVisible(false);
 
     GptEngine.runGpt(
         new ChatMessage("user", GptPromptEngineeringRoom3.npcWelcomeMessage()),
@@ -95,16 +67,6 @@ public class Room3Controller {
         (result) -> {
           System.out.println(result);
         });
-
-    // Call the set radar point color method to set the most up to date correct box
-    if (GameState.currentBox == -1) {
-      // Generate a random number between 1 and 5 if the correct treasure box is not set
-      int randomBox = (int) (Math.random() * 5 + 1);
-      changeCorrectBox(randomBox);
-      GameState.currentBox = randomBox;
-    } else {
-      changeCorrectBox(GameState.currentBox);
-    }
 
     // Set both images to invisible initially
     lastFlightPlan.setVisible(false);
@@ -124,23 +86,6 @@ public class Room3Controller {
     character.enableMobility(obstacles, clickPane.getChildren());
     character.setLayoutX(530);
     character.setLayoutY(210);
-
-    radarPane.setMouseTransparent(true);
-    radar_computer.setMouseTransparent(true);
-    radar_image.setMouseTransparent(true);
-    protectRadarComputer.setMouseTransparent(true);
-
-    // Initialize the radarAnimation timeline
-    this.radarAnimation =
-        new Timeline(
-            new KeyFrame(Duration.seconds(0), event -> fadeInRadarPoints()),
-            new KeyFrame(Duration.seconds(1), event -> fadeOutRadarPoints()));
-    radarAnimation.setCycleCount(Timeline.INDEFINITE);
-    radarAnimation.setOnFinished(
-        event -> {
-          // Restart the animation when it completes
-          radarAnimation.play();
-        });
   }
 
   @FXML
@@ -166,25 +111,15 @@ public class Room3Controller {
 
   @FXML
   public void onClickComputer() {
-    System.out.println("Gate clicked");
+    System.out.println("Computer clicked");
     // Set the scene to room3Sub
     // Switch to the chat view to solve the riddle.
     App.setUi("sub3");
   }
 
   @FXML
-  public void onClickProtectRadar() {
-    if (isRadarComputerOpen) {
-      protectRadarComputer.setVisible(true);
-      protectRadarComputer.setDisable(false);
-    }
-  }
-
-  @FXML
-  public void onClickRadar() {
-    isRadarComputerOpen = true;
-    System.out.println("Radar clicked");
-    fadeInRadarComputer();
+  public void onClickRadar() throws IOException {
+    MainGame.addOverlay("radar_computer", false);
   }
 
   @FXML
@@ -209,82 +144,10 @@ public class Room3Controller {
     }
   }
 
-  // protected void handleGuessCity() {
-  // guessCity.setDisable(false);
-  // String city = guessCity.getText();
-  // if (city.equalsIgnoreCase("Tokyo")) {
-  // System.out.println("Correct");
-  // guessCity.setVisible(false);
-  // guessCity.setDisable(true);
-  // GameState.isCityFound = true;
-  // } else {
-  // System.out.println("Wrong");
-  // guessCity.setText("Wrong");
-  // }
-  // }
-
-  @FXML
-  public void onCloseObject() {
-    System.out.println("Map clicked");
-    // If the radar computer is currently open and player clicks on the map, then close the radar
-    // computer
-
-    if (isRadarComputerOpen) {
-      if (isRadarComputerOpen) {
-        radarAnimation.stop(); // Stop the radar animation
-        isRadarComputerOpen = false;
-      }
-    }
-    radar_computer.setVisible(false);
-    radar_image.setVisible(false);
-    box1.setVisible(false);
-    box2.setVisible(false);
-    box3.setVisible(false);
-    box4.setVisible(false);
-    box5.setVisible(false);
-  }
-
-  /**
-   * This method randomly select one of the boxes and change its color to red
-   *
-   * @return the snumber of the box that has been changed
-   */
-  public void changeCorrectBox(int currentBox) {
-    // Change the color of the current box to green
-    box1.setStyle("-fx-fill: #0b941b");
-    box2.setStyle("-fx-fill: #0b941b");
-    box3.setStyle("-fx-fill: #0b941b");
-    box4.setStyle("-fx-fill: #0b941b");
-    box5.setStyle("-fx-fill: #0b941b");
-
-    // Change the color of the box
-    if (currentBox == 1) {
-      box1.setStyle("-fx-fill: red");
-    } else if (currentBox == 2) {
-      box2.setStyle("-fx-fill: red");
-    } else if (currentBox == 3) {
-      box3.setStyle("-fx-fill: red");
-    } else if (currentBox == 4) {
-      box4.setStyle("-fx-fill: red");
-    } else if (currentBox == 5) {
-      box5.setStyle("-fx-fill: red");
-    }
-  }
-
   @FXML
   public void onClickDoor() {
     System.out.println("Door clicked");
     System.out.println(GameState.currentBox);
-  }
-
-  protected void disableRadarSystem() {
-    radar_computer.setVisible(false);
-    radar_image.setVisible(false);
-    box1.setVisible(false);
-    box2.setVisible(false);
-    box3.setVisible(false);
-    box4.setVisible(false);
-    box5.setVisible(false);
   }
 
   protected void fadeInFlightPlan() {
@@ -325,39 +188,5 @@ public class Room3Controller {
         event -> {
           departureBoard.setVisible(false);
         });
-  }
-
-  protected void fadeInRadarPoints() {
-    for (Circle radarPoint : radarPoints) {
-      radarPoint.setVisible(true);
-      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), radarPoint);
-      fadeTransition.setFromValue(0.0);
-      fadeTransition.setToValue(1.0);
-      fadeTransition.setInterpolator(Interpolator.LINEAR); // Use linear interpolation
-      fadeTransition.play();
-    }
-  }
-
-  protected void fadeOutRadarPoints() {
-    for (Circle radarPoint : radarPoints) {
-
-      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.5), radarPoint);
-      fadeTransition.setFromValue(1.0);
-      fadeTransition.setToValue(0.0);
-      fadeTransition.setInterpolator(Interpolator.LINEAR); // Use linear interpolation
-      fadeTransition.play();
-    }
-  }
-
-  protected void fadeInRadarComputer() {
-
-    for (ImageView obj : radarSystem) {
-      obj.setVisible(true);
-      FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), obj);
-      fadeTransition.setFromValue(0.0);
-      fadeTransition.setToValue(1.0);
-      fadeTransition.play();
-    }
-    radarAnimation.play();
   }
 }

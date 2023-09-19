@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RadarController">
+   <children>
+      <ImageView fitHeight="157.0" fitWidth="180.0" layoutX="62.0" layoutY="43.0">
+         <image>
+            <Image url="@../images/rooms/room3/radar.gif" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="363.0" fitWidth="298.0">
+         <image>
+            <Image url="@../images/rooms/room3/computer_radar.png" />
+         </image>
+      </ImageView>
+      <Circle fx:id="box1" fill="#0b941b" layoutX="131.0" layoutY="100.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
+      <Circle fx:id="box2" fill="#0b941b" layoutX="117.0" layoutY="140.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
+      <Circle fx:id="box3" fill="#0b941b" layoutX="144.0" layoutY="115.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
+      <Circle fx:id="box5" fill="#0b941b" layoutX="193.0" layoutY="128.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
+      <Circle fx:id="box4" fill="#0b941b" layoutX="170.0" layoutY="155.0" radius="5.0" stroke="#0b941b" strokeType="INSIDE" />
+      
+   </children>
+</AnchorPane>
