@@ -7,7 +7,6 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
@@ -129,16 +128,16 @@ public class Room3Controller {
   }
 
   @FXML
-  public void onClickComputer() {
+  public void onClickComputer() throws IOException {
     System.out.println("Computer clicked");
     // Set the scene to room3Sub
     // Switch to the chat view to solve the riddle.
-    App.setUi("sub3");
+    MainGame.addOverlay("sub3", false);
   }
 
   @FXML
   public void onClickRadar() throws IOException {
-    MainGame.addOverlay("radar_computer", false);
+    MainGame.addOverlay("sub3", false);
   }
 
   @FXML

@@ -6,48 +6,29 @@ import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
 
-public class Room3SubController {
-  @FXML private Pane mainScene;
+public class Room3CentralDisplayUnitController {
 
-  @FXML private Rectangle errorWindow;
   @FXML private Text errorText;
-  @FXML private Button tryAgain;
 
   @FXML private Character character;
-  @FXML private Rectangle img1, img2, img3, img4;
   @FXML
   private Rectangle a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
   @FXML private Rectangle one1, two2, three3, four4, five5, six6, seven7, eight8, nine9, zero0;
   @FXML private Rectangle slash, clear, delete, execute;
-  @FXML private Text displayInput, displayOutput, mapTxt;
-  @FXML private ImageView currentFlightPlan, im1, im2, im3, im4, lock, CentralDisplayUnit;
-  @FXML private Button back;
-  protected int currentSelection;
+  @FXML private Text displayInput, displayOutput;
+  @FXML private ImageView lock, CentralDisplayUnit;
   protected List<Rectangle> allButtons;
-  protected int finalSelction;
 
   public void initialize() {
-
-    disableErrorMessage();
-
-    img2.setVisible(false);
-    img3.setVisible(false);
-    img4.setVisible(false);
-    currentFlightPlan.setVisible(false);
-    currentSelection = 1;
-    CentralDisplayUnit.setOpacity(0.3);
+    System.out.println("Room3CentralDisplayUnitController initialized");
 
     List<Rectangle> allButtons =
         Arrays.asList(
@@ -55,14 +36,21 @@ public class Room3SubController {
             execute, clear, delete, one1, two2, three3, four4, five5, six6, seven7, eight8, nine9,
             zero0);
     this.allButtons = allButtons;
-    for (Rectangle letter : allButtons) {
-      letter.setDisable(true);
-    }
+
+    // if (!GameState.isPuzzleInRoom3Solved) {
+    //   CentralDisplayUnit.setOpacity(0.3);
+
+    //   for (Rectangle button : allButtons) {
+    //     button.setDisable(true);
+    //   }
+    // } else {
+    //   enableFlightCDU();
+    // }
   }
 
   @FXML
-  private void onGoBack() {
-    App.setUi("main_game");
+  private void test() {
+    System.out.println("test");
   }
 
   @FXML
@@ -84,12 +72,6 @@ public class Room3SubController {
   }
 
   @FXML
-  private void onClickTryAgain() {
-    disableErrorMessage();
-    mainScene.requestFocus();
-  }
-
-  @FXML
   private void handleDeleteClick(MouseEvent event) {
     String currentText = displayOutput.getText();
     if (currentText.length() > 0) {
@@ -100,6 +82,11 @@ public class Room3SubController {
   @FXML
   private void handleClearClick(MouseEvent event) {
     displayOutput.setText("");
+  }
+
+  @FXML
+  private void handleMenuClick(MouseEvent event) {
+    MainGame.removeOverlay();
   }
 
   @FXML
@@ -141,27 +128,6 @@ public class Room3SubController {
     String message = "ENTER DEP / DEST AIRPORT CODE E.g.WLG/AKL THEN PRESS EXEC";
     int typingDelay = 50;
     typeTextEffect(displayInput, message, typingDelay);
-  }
-
-  protected void disableMap() {
-    currentFlightPlan.setVisible(true);
-    mapTxt.setVisible(false);
-    im1.setVisible(false);
-    im2.setVisible(false);
-    im3.setVisible(false);
-    im4.setVisible(false);
-    img1.setVisible(false);
-    img2.setVisible(false);
-    img3.setVisible(false);
-    img4.setVisible(false);
-    im1.setDisable(true);
-    im2.setDisable(true);
-    im3.setDisable(true);
-    im4.setDisable(true);
-    img1.setDisable(true);
-    img2.setDisable(true);
-    img3.setDisable(true);
-    img4.setDisable(true);
   }
 
   @FXML
@@ -210,115 +176,5 @@ public class Room3SubController {
       displayInput.setText("INCORRECT AIRPORT CODE TRY AGAIN");
       displayOutput.setText("");
     }
-  }
-
-  /**
-   * Handles the key pressed event.
-   *
-   * @param event the key event
-   */
-  @FXML
-  public void press(KeyEvent event) {
-    // Handle arrow key presses
-    switch (event.getCode()) {
-      case LEFT:
-        if (finalSelction == 2) {
-          break;
-        }
-        System.out.println("left");
-        if (currentSelection == 2) {
-          img2.setVisible(false);
-          img1.setVisible(true);
-          currentSelection = 1;
-        } else if (currentSelection == 3) {
-          img3.setVisible(false);
-          img2.setVisible(true);
-          currentSelection = 2;
-        } else if (currentSelection == 4) {
-          img4.setVisible(false);
-          img3.setVisible(true);
-          currentSelection = 3;
-        }
-        break;
-      case RIGHT:
-        if (finalSelction == 2) {
-          break;
-        }
-        System.out.println("right");
-        if (currentSelection == 1) {
-          img1.setVisible(false);
-          img2.setVisible(true);
-          currentSelection = 2;
-        } else if (currentSelection == 2) {
-          img2.setVisible(false);
-          img3.setVisible(true);
-          currentSelection = 3;
-        } else if (currentSelection == 3) {
-          img3.setVisible(false);
-          img4.setVisible(true);
-          currentSelection = 4;
-        }
-        break;
-      case UP:
-        if (finalSelction == 2) {
-          break;
-        }
-        System.out.println("up");
-        if (currentSelection == 3) {
-          img3.setVisible(false);
-          img1.setVisible(true);
-          currentSelection = 1;
-        } else if (currentSelection == 4) {
-          img4.setVisible(false);
-          img2.setVisible(true);
-          currentSelection = 2;
-        }
-        break;
-      case DOWN:
-        if (finalSelction == 2) {
-          break;
-        }
-        System.out.println("down");
-        if (currentSelection == 1) {
-          img1.setVisible(false);
-          img3.setVisible(true);
-          currentSelection = 3;
-        } else if (currentSelection == 2) {
-          img2.setVisible(false);
-          img4.setVisible(true);
-          currentSelection = 4;
-        }
-        break;
-      case ENTER:
-        if (currentSelection == 2) {
-          if (GameState.isCorrectRouteFound) {
-            break;
-          }
-          GameState.isCorrectRouteFound = true;
-          disableMap();
-          enableFlightCDU();
-          System.out.println("2");
-          finalSelction = 2;
-        } else {
-          System.out.println("wrong");
-          enableErrorMessage();
-          GameState.wrongChoice++;
-        }
-        break;
-      default:
-        break;
-    }
-  }
-
-  private void enableErrorMessage() {
-    errorWindow.setVisible(true);
-    errorText.setVisible(true);
-    tryAgain.setVisible(true);
-  }
-
-  private void disableErrorMessage() {
-    errorWindow.setVisible(false);
-    errorText.setVisible(false);
-    tryAgain.setVisible(false);
   }
 }

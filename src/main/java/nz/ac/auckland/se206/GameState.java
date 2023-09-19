@@ -50,6 +50,9 @@ public class GameState {
   public static String unarrangedCityName = "";
   public static String arrangedCityName = "";
 
+  /** Indicates whether the puzzle in room 3 solved. */
+  public static boolean isPuzzleInRoom3Solved = false;
+
   /** Indicates the aircraft code */
   public static String aircraftCode = "";
 
