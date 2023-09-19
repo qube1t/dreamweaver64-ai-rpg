@@ -43,7 +43,7 @@ public class MainGame {
     System.out.println(1);
     initialised_game_pane = game_pane;
 
-    addOverlay("room3", true);
+    addOverlay("room2", true);
 
     Helper.setBooksInRoom1();
     instance = this;

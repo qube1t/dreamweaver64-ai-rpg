@@ -6,6 +6,7 @@ import java.util.Arrays;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -22,6 +23,7 @@ public class Room2Controller {
 
   @FXML private Rectangle doorToRoom1;
   @FXML private ImageView boxKey;
+  @FXML private Pane interactablePane;
 
   @FXML private Character character;
   @FXML
@@ -70,7 +72,7 @@ public class Room2Controller {
                 rect23, rect24, rect25, rect26, rect27, rect28, rect29, rect30, rect31, rect32,
                 rect33));
 
-    character.enableMobility(obsts);
+    character.enableMobility(obsts, interactablePane.getChildren());
     character.setLayoutX(60);
     character.setLayoutY(250);
   }
