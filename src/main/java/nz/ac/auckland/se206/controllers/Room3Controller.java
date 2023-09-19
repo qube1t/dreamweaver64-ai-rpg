@@ -92,20 +92,12 @@ public class Room3Controller {
           npcResponse.setText(result);
         });
 
-    // GptEngine.runGpt(
-    // new ChatMessage("user", GptPromptEngineeringRoom3.getAircraftCode()),
-    // (result) -> {
-    //  System.out.println("second");
-    // System.out.println(result);
-    // });
-
-    // Start a new thread to get the aircraft code
-
-    // Set the aircaraft code and assign to game state
-    // if (GameState.aircraftCode == null) {
-    // GameState.aircraftCode =
-    // gptManager.getGptResponseAsString(GptPromptEngineeringRoom3.getAircraftCode());
-    // }
+    GptEngine.runGpt(
+        new ChatMessage("user", GptPromptEngineeringRoom3.getAircraftCode()),
+        (result) -> {
+          System.out.println("second");
+          System.out.println(result);
+        });
 
     // Call the set radar point color method to set the most up to date correct box
     if (GameState.currentBox == -1) {

@@ -32,7 +32,12 @@ public class GptEngine {
   public static void runGpt(ChatMessage msg, GptResultAction myFunc) throws ApiProxyException {
     promptQueue.add(msg);
     promptFuncQueue.add(myFunc);
-    if (!active) startNewThread();
+    System.out.println(promptQueue.size());
+
+    if (!active) {
+      active = true;
+      startNewThread();
+    }
   }
 
   private static void startNewThread() {
