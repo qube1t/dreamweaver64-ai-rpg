@@ -1,18 +1,30 @@
 package nz.ac.auckland.se206.mobility;
 
 import java.util.List;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 public class CharacterMovement {
   private AnchorPane player;
   private Rectangle playerBound;
+  private Circle proximityBound;
   List<Rectangle> obstacles;
+  private ObservableList<Node> interactables;
 
-  public CharacterMovement(AnchorPane player, Rectangle playerBound, List<Rectangle> obstacles) {
+  public CharacterMovement(
+      AnchorPane player,
+      Rectangle playerBound,
+      Circle proximityBound,
+      List<Rectangle> obstacles,
+      ObservableList<Node> interactables) {
     this.player = player;
     this.playerBound = playerBound;
+    this.proximityBound = proximityBound;
     this.obstacles = obstacles;
+    this.interactables = interactables;
   }
 
   protected boolean checkCollision() {
@@ -24,6 +36,20 @@ public class CharacterMovement {
       }
     }
     return false;
+  }
+
+  private void checkProximity() {
+    for (Node interactable : interactables) {
+      if (player
+          .localToParent(proximityBound.getBoundsInParent())
+          .intersects(interactable.getBoundsInParent())) {
+        interactable.setVisible(true);
+        interactable.getStyleClass().add("action-btn");
+      } else {
+        interactable.setVisible(false);
+        interactable.getStyleClass().remove("action-btn");
+      }
+    }
   }
 
   public void movePlayer(int action) {
@@ -61,5 +87,7 @@ public class CharacterMovement {
       //   playerBound.setX(oldBoundX);
       //   playerBound.setY(oldBoundY);
     }
+
+    checkProximity();
   }
 }

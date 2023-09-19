@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.util.List;
 import javafx.animation.Animation;
 import javafx.beans.NamedArg;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.mobility.CharacterMovement;
@@ -18,6 +21,7 @@ import nz.ac.auckland.se206.mobility.SpriteAnimation;
 public class Character extends AnchorPane {
   @FXML private ImageView active_img;
   @FXML private Rectangle playerBound;
+  @FXML private Circle proximityBound;
 
   public Rectangle getPlayerBound() {
     return playerBound;
@@ -109,8 +113,8 @@ public class Character extends AnchorPane {
             frame_height);
   }
 
-  public void enableMobility(List<Rectangle> obstacles) {
-    movement = new CharacterMovement(this, playerBound, obstacles);
+  public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
+    movement = new CharacterMovement(this, playerBound, proximityBound, obstacles, observableList);
   }
 
   public void move() {
