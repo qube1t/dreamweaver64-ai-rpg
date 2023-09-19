@@ -73,6 +73,8 @@ public class Room2Controller {
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
 
+  private Boolean bubbleClosed = false;
+
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     ArrayList<Rectangle> obsts =
@@ -113,12 +115,15 @@ public class Room2Controller {
           gptResponse.setText(st);
         });
 
-    chatBubble.setVisible(false);
-    gptResponse.setVisible(false);
+    
   }
 
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException {
+    if (!bubbleClosed) {
+      chatBubble.setVisible(false);
+      gptResponse.setVisible(false);
+    }
     if (GameState.isBookFound) {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
@@ -146,7 +151,10 @@ public class Room2Controller {
    * @throws IOException
    */
   private void getRandomBox(int numOfBox) throws IOException {
-    // int noOfTreasure = (int) (Math.random() * 5) + 1;
+    if (!bubbleClosed) {
+      chatBubble.setVisible(false);
+      gptResponse.setVisible(false);
+    }
     int boxLocation = GameState.currentBox;
     System.out.println("Number of treasure box: " + boxLocation);
     if (GameState.isBoxKeyFound) {
