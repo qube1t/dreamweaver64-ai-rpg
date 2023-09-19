@@ -6,8 +6,14 @@ import nz.ac.auckland.se206.controllers.MainGame;
 /** Represents the state of the game. */
 public class GameState {
 
+  // AI
+  public static GptEngine eleanorAi = new GptEngine();
+
   /** Indicates whether the riddle has been resolved. */
   public static boolean isRiddleResolved = false;
+
+  // pirate riddle
+  public static String pirateRiddle = null;
 
   /** Indicates whether the key has been found. */
   public static boolean isKeyFound = false;

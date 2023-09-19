@@ -9,12 +9,12 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class GptEngine {
-  private static ChatCompletionRequest chatCompletionRequest;
-  private static boolean active = false;
-  private static int stage = 0;
-  private static Thread activeThread;
-  private static Queue<ChatMessage> promptQueue = new LinkedList<>();
-  private static Queue<GptResultAction> promptFuncQueue = new LinkedList<>();
+  private ChatCompletionRequest chatCompletionRequest;
+  private boolean active = false;
+  private int stage = 0;
+  private Thread activeThread;
+  private Queue<ChatMessage> promptQueue = new LinkedList<>();
+  private Queue<GptResultAction> promptFuncQueue = new LinkedList<>();
 
   public GptEngine() {
     if (chatCompletionRequest == null)
@@ -29,14 +29,17 @@ public class GptEngine {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  public static void runGpt(String msg, GptResultAction myFunc) throws ApiProxyException {
+  public void runGpt(String msg, GptResultAction myFunc) throws ApiProxyException {
     ChatMessage chatmsg = new ChatMessage("user", msg);
     promptQueue.add(chatmsg);
     promptFuncQueue.add(myFunc);
-    if (!active) startNewThread();
+    if (!active) {
+      active = true;
+      startNewThread();
+    }
   }
 
-  private static void startNewThread() {
+  private void startNewThread() {
     activeThread =
         new Thread(
             () -> {
@@ -84,7 +87,7 @@ public class GptEngine {
     activeThread.start();
   }
 
-  private static void onGptCompletion(
+  private void onGptCompletion(
       ChatCompletionResult chatCompletionResult, GptResultAction myFunc) throws Exception {
     stage++;
     Choice result = chatCompletionResult.getChoices().iterator().next();
@@ -99,7 +102,7 @@ public class GptEngine {
     // if (chatEntry.size() > 0) GameState.mainGame.addChat(chatEntry.get(0));
   }
 
-  public static void runGpt(String string) throws ApiProxyException {
+  public void runGpt(String string) throws ApiProxyException {
     runGpt(string, null);
   }
 }

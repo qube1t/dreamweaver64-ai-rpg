@@ -73,7 +73,7 @@ public class Room1Controller {
   private void initGpt() throws ApiProxyException {
     // shelf setup
 
-    GptEngine.runGpt(
+    GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.get7Books(),
         str -> {
           List<String> matchesList = Helper.getTextBetweenChar(str, "\"");
@@ -86,7 +86,7 @@ public class Room1Controller {
           // riddle for book
 
           try {
-            GptEngine.runGpt(
+            GameState.eleanorAi.runGpt(
                 GptPromptEngineeringRoom1.getRiddleForPirate(ansBook),
                 (_str) -> {
                   List<String> pirateDialogue = Helper.getTextBetweenChar(str, "%");

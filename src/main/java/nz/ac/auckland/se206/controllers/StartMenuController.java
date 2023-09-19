@@ -18,9 +18,9 @@ public class StartMenuController {
   public void initialize() throws ApiProxyException {
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
-    new GptEngine();
+    // new GptEngine();
 
-    GptEngine.runGpt(
+    GameState.eleanorAi.runGpt(
         "You are the programme behind DREAMWEAVER64, a futuristic technology that creates dreams"
             + " and allows people to relive their past or discover lost truths or memories from"
             + " their pasts. "

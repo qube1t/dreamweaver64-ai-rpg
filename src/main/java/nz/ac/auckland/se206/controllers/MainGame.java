@@ -169,7 +169,7 @@ public class MainGame {
     if (ke.getCode().equals(KeyCode.ENTER)) {
       addChat("You: " + chatInput.getText());
       chatInput.setDisable(true);
-      GptEngine.runGpt(
+      GameState.eleanorAi.runGpt(
           "The user has send this message: '"
               + chatInput.getText()
               + "'. Reply as a normal human in 1 or 2 sentences. You can give hints to previous"
