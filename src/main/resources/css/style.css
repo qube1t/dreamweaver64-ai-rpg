@@ -26,3 +26,10 @@
     -fx-cursor: hand;
     -fx-border-width: 0.2;
 }
+
+.letter-frame {
+    -fx-background-color: lightgray;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}

@@ -11,10 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
-import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3Controller {
@@ -51,32 +48,34 @@ public class Room3Controller {
 
   public void initialize() throws ApiProxyException {
 
-    GptEngine.runGpt(
-        new ChatMessage("user", GptPromptEngineeringRoom3.npcWelcomeMessage()),
-        (result) -> {
-          System.out.println(result);
-          // Handle the result as needed
-          System.out.println("result");
-        });
+    // //GptEngine.runGpt(
+    //    // new ChatMessage("user", GptPromptEngineeringRoom3.npcWelcomeMessage()),
+    //     (result) -> {
+    //       System.out.println(result);
+    //       // Handle the result as needed
+    //       System.out.println("result");
+    //     });
 
-    GptEngine.runGpt(
-        new ChatMessage("user", GptPromptEngineeringRoom3.getAircraftCode()),
-        (result) -> {
-          System.out.println(result);
-        });
+    // GptEngine.runGpt(
+    //  new ChatMessage("user", GptPromptEngineeringRoom3.getAircraftCode()),
+    // (result) -> {
+    //   System.out.println(result);
+    // });
 
-    // Generate the unarranged city name when room3 loads
-    if (GameState.unarrangedCityName == "") {
-      GptEngine.runGpt(
-          new ChatMessage("user", GptPromptEngineeringRoom3.getUnarrangedCity()),
-          (result) -> {
-            System.out.println(result);
-            // Make the city name unarranged
+    // // Generate the unarranged city name when room3 loads
+    // if (GameState.unarrangedCityName == "") {
+    //   GptEngine.runGpt(
+    //       new ChatMessage("user", GptPromptEngineeringRoom3.getUnarrangedCity()),
+    //       (result) -> {
+    //         System.out.println(result);
+    //         // Make the city name unarranged
 
-            GameState.unarrangedCityName = makeUnarrangedCityName(result);
-            System.out.println(GameState.unarrangedCityName);
-          });
-    }
+    //         GameState.unarrangedCityName = makeUnarrangedCityName(result);
+    //         System.out.println(GameState.unarrangedCityName);
+    //       });
+    // }
+
+    GameState.unarrangedCityName = "TOKYO";
 
     // Set both images to invisible initially
     lastFlightPlan.setVisible(false);
