@@ -111,6 +111,6 @@ public class Room1Controller {
   private void onClickChest() throws ApiProxyException, IOException {
     MainGame.addOverlay("chest", false);
     GameState.eleanorAi.runGpt(
-        "User update: opened the furnace, but there is nothing to see there. No reply needed.");
+        "User update: opened the chest, but there is nothing to see there. No reply needed.");
   }
 }
