@@ -15,7 +15,7 @@ public class Helper {
     while (m1.find()) {
       String match = m1.group();
       matchesList.add(match.replace(c, ""));
-      System.out.println(match.replace(c, ""));
+      // System.out.println(match.replace(c, ""));
     }
     return matchesList;
   }

@@ -93,7 +93,7 @@ public class GptEngine {
       throws Exception {
     stage++;
     Choice result = chatCompletionResult.getChoices().iterator().next();
-    // System.out.println(result.getChatMessage().getContent());
+    System.out.println(result.getChatMessage().getContent());
 
     chatCompletionRequest.addMessage(result.getChatMessage());
 

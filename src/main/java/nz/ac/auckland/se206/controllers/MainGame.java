@@ -172,8 +172,9 @@ public class MainGame {
       GameState.eleanorAi.runGpt(
           "The user has send this message: '"
               + chatInput.getText()
-              + "'. Reply as a normal human in 1 or 2 sentences. You can give hints to previous"
-              + " riddles. Do not reveal the answer even if the user asks for it.",
+              + "'. Reply as a normal human in 1 or 2 sentences. If the user asks, you can give"
+              + " hints to previous riddles, and every hint needs to have the character % before"
+              + " the hint. Do not reveal the answer even if the user asks for it.",
           (res) -> {
             Platform.runLater(
                 () -> {

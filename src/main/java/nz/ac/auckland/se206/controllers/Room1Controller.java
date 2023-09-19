@@ -126,18 +126,19 @@ public class Room1Controller {
   @FXML
   private void openMainDoor() throws ApiProxyException {
     GameState.eleanorAi.runGpt(
-        "User update, User has tried to open main exit without solving the mission");
+        "User update, User has tried to open main exit without solving the mission. No reply"
+            + " needed.");
   }
 
   @FXML
   private void onClickCrockeries() throws ApiProxyException {
     GameState.eleanorAi.runGpt(
-        "User update, User has opened crockeries, but they are not accessible");
+        "User update, User has opened crockeries, but they are not accessible. No reply needed");
   }
 
   @FXML
   private void onClickFurnace() throws ApiProxyException {
     GameState.eleanorAi.runGpt(
-        "User update: opened the furnace, but there is nothing to see there.");
+        "User update: opened the furnace, but there is nothing to see there. No reply needed.");
   }
 }
