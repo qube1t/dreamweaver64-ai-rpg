@@ -10,3 +10,19 @@
     -fx-focus-color: transparent;
     -fx-border-style: none;
 }
+
+.error-text {
+    -fx-fill: red;
+    /* Set text color to red */
+}
+
+.action-btn {
+    -fx-opacity: 0;
+}
+
+.action-btn:hover {
+    -fx-opacity: 1;
+    -fx-fill: transparent;
+    -fx-cursor: hand;
+    -fx-border-width: 0.2;
+}

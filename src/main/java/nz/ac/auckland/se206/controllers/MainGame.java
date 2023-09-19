@@ -15,7 +15,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
 
@@ -47,12 +46,12 @@ public class MainGame {
     addOverlay("room3", true);
 
     Helper.setBooksInRoom1();
-    Helper.changeTreasureBox(GameState.currentBox);
     instance = this;
     // setting up bubble chat
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
+
     addChat("hello");
   }
 

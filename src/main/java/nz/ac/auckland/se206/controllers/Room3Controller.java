@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -40,7 +41,11 @@ public class Room3Controller {
       desk2,
       bound1,
       bound2,
-      bound3;
+      bound3,
+      book,
+      clickableComputer,
+      clickableRadar,
+      clickableDoor;
   @FXML private Circle box1, box2, box3, box4, box5;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
@@ -49,6 +54,7 @@ public class Room3Controller {
   @FXML private AnchorPane radarPane;
   @FXML private AnchorPane chatBubblePane;
   @FXML private TextArea npcResponse;
+  @FXML private Pane clickPane;
 
   private boolean isRadarComputerOpen;
   private Timeline radarAnimation;
@@ -57,11 +63,6 @@ public class Room3Controller {
   private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
-
-    // Set character postion and movement.
-    character.enableMobility(obstacles);
-    character.setLayoutX(530);
-    character.setLayoutY(210);
 
     // Initialize the radar points and radarObjects to a list.
     this.radarPoints = new Circle[] {box1, box2, box3, box4, box5};
@@ -74,28 +75,24 @@ public class Room3Controller {
     disableRadarSystem();
 
     // Configure the chat bubble
-    npcResponse.setWrapText(true);
-    npcResponse.setEditable(false);
+    // npcResponse.setWrapText(true);
+    // npcResponse.setEditable(false);
 
     // Set the chat bubble to invisible initially
-    chatBubblePane.setVisible(false);
-    npcResponse.setVisible(false);
+    // chatBubblePane.setVisible(false);
+    // npcResponse.setVisible(false);
 
     GptEngine.runGpt(
         new ChatMessage("user", GptPromptEngineeringRoom3.npcWelcomeMessage()),
         (result) -> {
           System.out.println(result);
           // Handle the result as needed
-          System.out.println("first");
-          chatBubblePane.setVisible(true);
-          npcResponse.setVisible(true);
-          npcResponse.setText(result);
+          System.out.println("result");
         });
 
     GptEngine.runGpt(
         new ChatMessage("user", GptPromptEngineeringRoom3.getAircraftCode()),
         (result) -> {
-          System.out.println("second");
           System.out.println(result);
         });
 
@@ -123,6 +120,10 @@ public class Room3Controller {
     for (Rectangle rectangle : rectangles) {
       this.obstacles.add(rectangle);
     }
+
+    character.enableMobility(obstacles, clickPane.getChildren());
+    character.setLayoutX(530);
+    character.setLayoutY(210);
 
     radarPane.setMouseTransparent(true);
     radar_computer.setMouseTransparent(true);
@@ -191,7 +192,7 @@ public class Room3Controller {
    * This method is called when the book is clicked It will open the flight plan if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
-  public void onClickBook() {
+  public void clickBookEvent() {
     System.out.println("Book clicked");
     if (GameState.isPreviousFlightPlanOpen) {
       GameState.isPreviousFlightPlanOpen = false;
