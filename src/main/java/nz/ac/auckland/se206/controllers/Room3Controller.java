@@ -3,12 +3,10 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptEngine;
@@ -41,8 +39,6 @@ public class Room3Controller {
       clickableComputer,
       clickableRadar,
       clickableDoor;
-  @FXML private ImageView lastFlightPlan;
-  @FXML private ImageView departureBoard;
   @FXML private ImageView map;
   @FXML private Character character;
   @FXML private Pane clickPane;
@@ -87,11 +83,6 @@ public class Room3Controller {
             GameState.introMessage = result;
           });
     }
-
-    // Set both images to invisible initially
-    lastFlightPlan.setVisible(false);
-    departureBoard.setVisible(false);
-
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
@@ -111,22 +102,6 @@ public class Room3Controller {
   @FXML
   public void onClickDepBoard() {
     System.out.println("DepBoard clicked");
-    // If the departure board is currently open, then close it
-    if (GameState.isDepBoardOpen) {
-      GameState.isDepBoardOpen = false;
-      fadeOutDepBoard();
-    } else {
-      // If the departure board is not open, then open it
-      GameState.isDepBoardOpen = true;
-      if (GameState.isPreviousFlightPlanOpen) {
-        System.out.println("Previous flight plan is open");
-        GameState.isPreviousFlightPlanOpen = false;
-        fadeOutFlightPlan();
-        fadeInDepBoard();
-      } else {
-        fadeInDepBoard();
-      }
-    }
   }
 
   protected String makeUnarrangedCityName(String cityName) {
@@ -189,45 +164,5 @@ public class Room3Controller {
   public void onClickDoor() {
     System.out.println("Door clicked");
     System.out.println(GameState.currentBox);
-  }
-
-  protected void fadeInFlightPlan() {
-    lastFlightPlan.setVisible(true); // Set to visible before starting the animation
-
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), lastFlightPlan);
-    fadeTransition.setFromValue(0.0);
-    fadeTransition.setToValue(1.0);
-    fadeTransition.play();
-  }
-
-  protected void fadeOutFlightPlan() {
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), lastFlightPlan);
-    fadeTransition.setFromValue(1.0);
-    fadeTransition.setToValue(0.0);
-    fadeTransition.play();
-    fadeTransition.setOnFinished(
-        event -> {
-          lastFlightPlan.setVisible(false);
-        });
-  }
-
-  protected void fadeInDepBoard() {
-    departureBoard.setVisible(true); // Set to visible before starting the animation
-
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), departureBoard);
-    fadeTransition.setFromValue(0.0);
-    fadeTransition.setToValue(1.0);
-    fadeTransition.play();
-  }
-
-  protected void fadeOutDepBoard() {
-    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(0.5), departureBoard);
-    fadeTransition.setFromValue(1.0);
-    fadeTransition.setToValue(0.0);
-    fadeTransition.play();
-    fadeTransition.setOnFinished(
-        event -> {
-          departureBoard.setVisible(false);
-        });
   }
 }

@@ -45,4 +45,10 @@ public class GptPromptEngineeringRoom3 {
         + " position of the letter until the correct city name. Write a 10 words welcome"
         + " message.";
   }
+
+  public static String wrongPuzzleRoom3() {
+    return "Now the player rearranged the city name but it is not the correct city name, generate"
+        + " a 10 words message to tell the player that the city name is wrong and need to"
+        + " rearrange again.";
+  }
 }

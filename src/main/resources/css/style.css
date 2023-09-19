@@ -33,3 +33,12 @@
     -fx-border-width: 1px;
     -fx-padding: 5px;
 }
+
+.colorful-border {
+    -fx-border-color: red, green, blue, orange;
+    /* Specify border colors */
+    -fx-border-width: 3px;
+    /* Specify border width */
+    -fx-border-style: solid;
+    /* Specify border style (solid, dashed, etc.) */
+}

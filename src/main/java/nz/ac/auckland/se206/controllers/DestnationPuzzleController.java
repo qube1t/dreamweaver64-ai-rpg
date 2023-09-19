@@ -1,21 +1,25 @@
 package nz.ac.auckland.se206.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.DraggableLetter;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class DestnationPuzzleController {
   @FXML private Label introduction;
   @FXML private AnchorPane puzzlePane;
   @FXML private HBox letterBox;
-  @FXML private Button submit;
+  @FXML private ProgressBar load;
 
   public void initialize() throws ApiProxyException {
     String cityName = GameState.unarrangedCityName;
@@ -42,7 +46,8 @@ public class DestnationPuzzleController {
   }
 
   @FXML
-  protected void onClickSubmit() {
+  public void onClickSubmit() throws ApiProxyException {
+    System.out.println("submit");
     // Get the current text of the puzzle
     String currentText = "";
 
@@ -53,9 +58,22 @@ public class DestnationPuzzleController {
       currentText += draggableLetter.getText();
     }
     System.out.println(currentText);
+
     if (currentText.equalsIgnoreCase(GameState.arrangedCityName)) {
       System.out.println("correct");
     } else {
+      // Clear the current message in the introduction and set a loading bar
+      introduction.setText("");
+      GptEngine.runGpt(
+          new ChatMessage("user", GptPromptEngineeringRoom3.wrongPuzzleRoom3()),
+          (result) -> {
+            System.out.println(result);
+            Platform.runLater(
+                () -> {
+                  // Update the introduction label with the incorrect answer message
+                  introduction.setText(result);
+                });
+          });
       System.out.println("incorrect");
     }
   }

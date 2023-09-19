@@ -94,7 +94,7 @@ public class App extends Application {
 
     Pane root = (Pane) loadFxml("start_menu");
 
-    scene = new Scene(root, 1000, 700);
+    scene = new Scene(root, 700, 550);
 
     stage.setScene(scene);
     stage.show();

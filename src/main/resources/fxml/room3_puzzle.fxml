@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,20 +16,21 @@
             <Image url="@../images/rooms/room3/blur.png" />
          </image>
       </ImageView>
-      <Label fx:id="introduction" layoutX="52.0" layoutY="21.0" prefHeight="88.0" prefWidth="285.0" style="-fx-border-color: red; -fx-border-width: 2;" textAlignment="CENTER" textFill="#5d0eab" wrapText="true">
+      <Label fx:id="introduction" layoutX="52.0" layoutY="21.0" prefHeight="88.0" prefWidth="285.0" style="-fx-border-color: red; -fx-border-width: 2;" textAlignment="CENTER" textFill="#15dae4" wrapText="true">
          <font>
             <Font name="Impact" size="17.0" />
          </font></Label>
-      <HBox fx:id="letterBox" layoutX="1.0" layoutY="167.0" prefHeight="60.0" prefWidth="398.0" />
-      <Button fx:id="submit" layoutX="153.0" layoutY="312.0" mnemonicParsing="false" onMouseClicked="#onClickSubmit" style="-fx-background-color: LIGHTBLUE;" text="SUBMIT" textAlignment="CENTER" textFill="#5d0eab">
-         <font>
-            <Font name="Impact" size="19.0" />
-         </font>
-      </Button>
+      <HBox fx:id="letterBox" layoutX="1.0" layoutY="131.0" prefHeight="60.0" prefWidth="398.0" />
       <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="15.0" prefWidth="37.0" text="CLOSE" textFill="#250000">
          <font>
             <Font name="Impact" size="8.0" />
          </font>
       </Button>
+      <Button layoutX="156.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#onClickSubmit" style="-fx-background-color: #15dae4;" text="SUBMIT">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Button>
+      <ProgressBar fx:id="load" layoutX="151.0" layoutY="38.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" />
    </children>
 </AnchorPane>
