@@ -87,7 +87,7 @@ public class Room3CentralDisplayUnitController {
 
   @FXML
   private void handleMenuClick(MouseEvent event) {
-    MainGame.removeOverlay();
+    MainGame.removeOverlay(false);
   }
 
   @FXML

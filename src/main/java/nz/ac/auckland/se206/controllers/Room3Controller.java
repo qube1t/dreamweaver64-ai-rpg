@@ -79,7 +79,7 @@ public class Room3Controller {
             GameState.arrangedCityName = result;
             // Make the city name unarranged
             GameState.unarrangedCityName = makeUnarrangedCityName(result);
-            System.out.println(GameState.unarrangedCityName);
+            // System.out.println(GameState.unarrangedCityName);
           });
     }
 
@@ -89,6 +89,7 @@ public class Room3Controller {
             System.out.println(result);
 
             GameState.introMessage = result;
+            MainGame.enableInteractPane();
           });
     }
     // Initialize the obsts list
