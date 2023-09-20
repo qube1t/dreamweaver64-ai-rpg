@@ -8,8 +8,15 @@ import nz.ac.auckland.se206.controllers.MainGame;
 /** Represents the state of the game. */
 public class GameState {
 
+  // AI
+  public static GptEngine eleanorAi = new GptEngine();
+
   /** Indicates whether the riddle has been resolved. */
   public static boolean isRiddleResolved = false;
+
+  // pirate riddle
+  public static String instructionMsg = null;
+  public static String pirateRiddle = null;
 
   /** Indicates whether the key has been found. */
   public static boolean isKeyFound = false;
@@ -33,12 +40,12 @@ public class GameState {
   /** Indicates whether the time limit has reached */
   public static boolean timeLimitReached = false;
 
-  /** Indicates whether the player has won */
-  public static boolean isPlayerWon = false;
+  /** These fields are used in room1 */
+  // public static String[] booksInRoom1 = new String[7];
 
-  /** These fileds are used in room3 */
+
+  /** These fields are used in room3 */
   public static boolean isPreviousFlightPlanOpen = false;
-
   public static boolean isDepBoardOpen = false;
   public static boolean isCorrectRouteFound = false;
   public static boolean isCityFound = false;
@@ -75,9 +82,6 @@ public class GameState {
 
   /** Indicates whether the box key has found to open the treasure box */
   public static boolean isBoxKeyFound = false;
-
-  /** Indicates whether the access key has found to access the computer */
-  public static boolean isAccessKeyFound = false;
 
   /** Indicates whether the treasure has found */
   public static boolean isTreasureFound = false;

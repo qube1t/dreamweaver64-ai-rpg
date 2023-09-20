@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="700.0" prefWidth="700.0">
@@ -19,7 +18,7 @@
                   <Image url="@../images/rooms/start_menu/gameStartBackground.png" />
                </image>
             </ImageView>
-              <Button fx:id="startButton" layoutX="229.0" layoutY="502.0" onMouseClicked="#onClickStartButton" text="START GAME" textAlignment="CENTER" textFill="#0d3bb9">
+              <Button fx:id="startButton" disable="true" layoutX="229.0" layoutY="502.0" onMouseClicked="#onClickStartButton" text="START GAME" textAlignment="CENTER" textFill="#0d3bb9">
                <font>
                   <Font name="Impact" size="35.0" />
                </font>
@@ -30,15 +29,15 @@
                   <Font name="Impact" size="40.0" />
                </font>
             </Label>
-            <Label layoutX="124.0" layoutY="168.0" text="DIFFICULTY:">
+            <Label layoutX="124.0" layoutY="168.0" style="-fx-font-family: &quot;Abaddon Light&quot;;" text="DIFFICULTY:">
                <font>
                   <Font name="Impact" size="40.0" />
                </font>
             </Label>
             <ComboBox fx:id="difficulty" layoutX="369.0" layoutY="180.0" prefWidth="120" promptText="EASY" />
-            <Label layoutX="120.0" layoutY="61.0" text="ESCAPE ROOM TEAM 31" textFill="#572f90">
+            <Label layoutX="120.0" layoutY="61.0" style="-fx-font-family: &quot;Abaddon Bold&quot;;" text="ESCAPE ROOM TEAM 31" textFill="#572f90">
                <font>
-                  <Font name="Impact" size="55.0" />
+                  <Font name="Abaddon Bold" size="55.0" />
                </font>
             </Label>
           </children>

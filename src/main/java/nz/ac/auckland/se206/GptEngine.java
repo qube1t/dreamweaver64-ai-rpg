@@ -1,7 +1,10 @@
 package nz.ac.auckland.se206;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
+import javafx.application.Platform;
+
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
@@ -9,12 +12,13 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class GptEngine {
-  private static ChatCompletionRequest chatCompletionRequest;
-  private static boolean active = false;
-  private static int stage = 0;
-  private static Thread activeThread;
-  private static Queue<ChatMessage> promptQueue = new LinkedList<>();
-  private static Queue<GptResultAction> promptFuncQueue = new LinkedList<>();
+  private ChatCompletionRequest chatCompletionRequest;
+  private boolean active = false;
+  private int stage = 0;
+  private Thread activeThread;
+  private Queue<ChatMessage> promptQueue = new LinkedList<>();
+  private Queue<GptResultAction> promptFuncQueue = new LinkedList<>();
+
 
   public GptEngine() {
     if (chatCompletionRequest == null)
@@ -22,6 +26,7 @@ public class GptEngine {
           new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
   }
 
+  
   /**
    * Runs the GPT model with a given chat message.
    *
@@ -29,18 +34,17 @@ public class GptEngine {
    * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  public static void runGpt(ChatMessage msg, GptResultAction myFunc) throws ApiProxyException {
-    promptQueue.add(msg);
+  public void runGpt(String msg, GptResultAction myFunc) throws ApiProxyException {
+    ChatMessage chatmsg = new ChatMessage("user", msg);
+    promptQueue.add(chatmsg);
     promptFuncQueue.add(myFunc);
-    System.out.println(promptQueue.size());
-
     if (!active) {
       active = true;
       startNewThread();
     }
   }
 
-  private static void startNewThread() {
+  private void startNewThread() {
     activeThread =
         new Thread(
             () -> {
@@ -58,6 +62,9 @@ public class GptEngine {
                   // adds prompt to conversation and execs
                   chatCompletionRequest.addMessage(nextPrompt);
                   ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+
+                  stage++;
+
 
                   // performs onfinish tasks
                   onGptCompletion(chatCompletionResult, myFunc);
@@ -86,18 +93,26 @@ public class GptEngine {
     activeThread.start();
   }
 
-  private static void onGptCompletion(
-      ChatCompletionResult chatCompletionResult, GptResultAction myFunc) throws Exception {
+
+  private void onGptCompletion(ChatCompletionResult chatCompletionResult, GptResultAction myFunc)
+      throws Exception {
     stage++;
     Choice result = chatCompletionResult.getChoices().iterator().next();
-    // System.out.println(result.getChatMessage().getContent());
+    System.out.println(result.getChatMessage().getContent());
 
     chatCompletionRequest.addMessage(result.getChatMessage());
 
-    myFunc.call(result.getChatMessage().getContent());
+    if (myFunc != null) myFunc.call(result.getChatMessage().getContent());
 
-    // List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(),
-    // "*");
-    // if (chatEntry.size() > 0) GameState.mainGame.addChat(chatEntry.get(0));
+    List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*");
+    if (chatEntry.size() > 0)
+      Platform.runLater(
+          () -> {
+            GameState.mainGame.addChat(chatEntry.get(0).replaceAll("\"", ""), true);
+          });
+  }
+
+  public void runGpt(String string) throws ApiProxyException {
+    runGpt(string, null);
   }
 }

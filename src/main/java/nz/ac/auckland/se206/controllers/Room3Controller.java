@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptEngine;
@@ -38,9 +40,18 @@ public class Room3Controller {
       clickableComputer,
       clickableRadar,
       clickableDoor;
-  @FXML private ImageView map;
+
+  @FXML private Circle box1, box2, box3, box4, box5;
+  private Circle[] radarPoints;
+  private ImageView[] radarObjects;
+  private ArrayList<Rectangle> obsts;
+  @FXML private ImageView lastFlightPlan;
+  @FXML private ImageView departureBoard;
   @FXML private Character character;
+  @FXML private AnchorPane radarPane;
+  @FXML private ImageView radar_image, radar_computer, map;
   @FXML private Pane clickPane;
+  private boolean isRadarComputerOpen;
 
   private ArrayList<Rectangle> obstacles;
 
@@ -62,8 +73,7 @@ public class Room3Controller {
 
     // Generate the unarranged city name when room3 loads
     if ((GameState.unarrangedCityName == "" || GameState.arrangedCityName.length() > 8)) {
-      GptEngine.runGpt(
-          new ChatMessage("user", GptPromptEngineeringRoom3.getRandomCity()),
+      GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.getRandomCity(),
           (result) -> {
             System.out.println(result);
             GameState.arrangedCityName = result;
@@ -74,8 +84,7 @@ public class Room3Controller {
     }
 
     if (GameState.introMessage == "") {
-      GptEngine.runGpt(
-          new ChatMessage("user", GptPromptEngineeringRoom3.getIntroPuzzleMessage()),
+      GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
           (result) -> {
             System.out.println(result);
 
@@ -94,6 +103,7 @@ public class Room3Controller {
     }
 
     character.enableMobility(obstacles, clickPane.getChildren());
+
     character.setLayoutX(530);
     character.setLayoutY(210);
   }
@@ -154,6 +164,7 @@ public class Room3Controller {
    * and if the flight plan is open, then it will close the flight plan
    */
   public void clickBookEvent() throws IOException {
+
     System.out.println("Book clicked");
     MainGame.addOverlay("room3_puzzle", false);
     // if (GameState.isPreviousFlightPlanOpen) {
@@ -172,8 +183,10 @@ public class Room3Controller {
   }
 
   @FXML
-  public void onClickDoor() {
+  public void onClickDoor() throws IOException {
     System.out.println("Door clicked");
     System.out.println(GameState.currentBox);
+    MainGame.removeOverlay(true);
+    MainGame.addOverlay("room1", true);
   }
 }
