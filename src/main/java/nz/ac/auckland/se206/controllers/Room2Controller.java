@@ -93,6 +93,8 @@ public class Room2Controller {
     speech_bubble = new ImageView();
     gptResponse = new Label();
     gptResponse.setText("Pirate : Find the key to open the treasure box");
+
+    MainGame.enableInteractPane();
   }
 
   @FXML
@@ -105,8 +107,8 @@ public class Room2Controller {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
       try {
-        GptEngine.runGpt(
-            new ChatMessage("user", GptPromptEngineeringRoom2.foundBoxKey()),
+        GameState.eleanorAi.runGpt(
+            GptPromptEngineeringRoom2.foundBoxKey(),
             (st) -> {
               List<String> findBoxKey = Helper.getTextBetweenChar(st, "%");
             });
@@ -147,8 +149,8 @@ public class Room2Controller {
         MainGame.addOverlay("treasure_box", false);
         if (correctBoxClicked == 0) {
           try {
-            GptEngine.runGpt(
-                new ChatMessage("user", GptPromptEngineeringRoom2.clickCorrectBox()),
+            GameState.eleanorAi.runGpt(
+                GptPromptEngineeringRoom2.clickCorrectBox(),
                 (st) -> {
                   List<String> clickCorrectBox = Helper.getTextBetweenChar(st, "/");
                 });
@@ -162,8 +164,7 @@ public class Room2Controller {
         // write this sentance in chat box
         if (wrongBoxClicked == 0) {
           try {
-            GptEngine.runGpt(
-                new ChatMessage("user", GptPromptEngineeringRoom2.clickWrongBox()),
+            GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.clickWrongBox(),
                 (st) -> {
                   List<String> clickWrongBox = Helper.getTextBetweenChar(st, "/");
                 });
