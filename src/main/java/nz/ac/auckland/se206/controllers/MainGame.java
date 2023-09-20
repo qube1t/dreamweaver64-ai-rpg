@@ -284,8 +284,10 @@ public class MainGame {
     // initialised_interact_pane.setOpacity(0);
   }
 
-  private void clickHeader() {
-    BookShelfController.returnBook();
+  @FXML
+  private void clickedOuterPane() {
+    speechBubble.setVisible(false);
+    bubbleTextPane.setVisible(false);
   }
 
   public static void getTimeLimitForGameMode(String timeLimit) {
