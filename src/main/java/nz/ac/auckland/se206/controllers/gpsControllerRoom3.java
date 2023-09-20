@@ -26,18 +26,18 @@ public class gpsControllerRoom3 {
     this.cityPoints = new Circle[] {point1, point2, point3, point4, point5};
     this.cityLabels = new Text[] {label1, label2, label3, label4, label5};
 
-    GameState.currentLocatiions = cityLabels;
+    GameState.currentCities = cityLabels;
 
     // initalize current city if it is not set
-    if (GameState.currentCity == -1) {
+    if (GameState.currentCityIndex == -1) {
 
       // generate a number between 1 and 5
       int randomCity = (int) (Math.random() * 5 + 1);
-      GameState.currentCity = randomCity;
+      GameState.currentCityIndex = randomCity;
       this.currentCity = randomCity;
     }
 
-    this.currentCity = GameState.currentCity;
+    this.currentCity = GameState.currentCityIndex;
 
     this.currentCityPoint = cityPoints[currentCity - 1];
     this.currentCityLabel = cityLabels[currentCity - 1];
