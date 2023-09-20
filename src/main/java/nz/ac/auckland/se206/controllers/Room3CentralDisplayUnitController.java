@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -172,7 +173,7 @@ public class Room3CentralDisplayUnitController {
     System.out.println(firstThreeDeparture + "/" + firstThreeDestnation);
 
     // Correct code has been entered
-    if (currentInput.equalsIgnoreCase(firstThreeDestnation + "/" + firstThreeDeparture)) {
+    if (currentInput.equalsIgnoreCase(firstThreeDeparture + "/" + firstThreeDestnation)) {
       // Aircraft code has been found.
       GameState.isAircraftCodeFound = true;
       displayInput.setText("");
@@ -200,6 +201,11 @@ public class Room3CentralDisplayUnitController {
                   // Update the introduction label with the correct answer message
                   displayInput.setText(
                       "CONGRATULATIONS! AIRCRAFT CODE UNLOCKED: " + GameState.aircraftCode);
+
+                  // Set the aircraft code image to inventory.
+                  Image aircraftCode = new Image("/images/aircraftCode.png");
+                  MainGame.addObtainedItem(aircraftCode);
+                  System.out.println("Aircraft code unlocked");
                 });
           });
 
