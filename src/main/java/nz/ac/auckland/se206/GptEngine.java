@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 import javafx.application.Platform;
-
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
@@ -19,14 +18,12 @@ public class GptEngine {
   private Queue<ChatMessage> promptQueue = new LinkedList<>();
   private Queue<GptResultAction> promptFuncQueue = new LinkedList<>();
 
-
   public GptEngine() {
     if (chatCompletionRequest == null)
       chatCompletionRequest =
           new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
   }
 
-  
   /**
    * Runs the GPT model with a given chat message.
    *
@@ -65,7 +62,6 @@ public class GptEngine {
 
                   stage++;
 
-
                   // performs onfinish tasks
                   onGptCompletion(chatCompletionResult, myFunc);
                 } catch (Exception e) {
@@ -93,7 +89,6 @@ public class GptEngine {
     activeThread.start();
   }
 
-
   private void onGptCompletion(ChatCompletionResult chatCompletionResult, GptResultAction myFunc)
       throws Exception {
     stage++;
@@ -108,7 +103,16 @@ public class GptEngine {
     if (chatEntry.size() > 0)
       Platform.runLater(
           () -> {
-            GameState.mainGame.addChat(chatEntry.get(0).replaceAll("\"", ""), true);
+            String msg = chatEntry.get(0).replaceAll("\"", "");
+            int noOfHints = Helper.countOccurences(msg, "%");
+            msg = msg.replaceAll("%", "");
+
+            if (noOfHints > 0) {
+              if (GameState.hintsRemaining - noOfHints >= 0) GameState.hintsRemaining -= noOfHints;
+              else GameState.hintsRemaining = 0;
+            }
+
+            GameState.mainGame.addChat(msg, true);
           });
   }
 
