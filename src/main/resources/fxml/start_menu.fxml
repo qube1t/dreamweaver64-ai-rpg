@@ -18,7 +18,7 @@
                   <Image url="@../images/rooms/start_menu/gameStartBackground.png" />
                </image>
             </ImageView>
-              <Button fx:id="startButton" disable="true" layoutX="229.0" layoutY="502.0" onMouseClicked="#onClickStartButton" text="START GAME" textAlignment="CENTER" textFill="#0d3bb9">
+              <Button fx:id="startButton" layoutX="229.0" layoutY="502.0" onMouseClicked="#onClickStartButton" text="START GAME" textAlignment="CENTER" textFill="#0d3bb9">
                <font>
                   <Font name="Impact" size="35.0" />
                </font>
