@@ -34,7 +34,7 @@ public class BookShelfController {
           book1_rect, book2_rect, book3_rect, book4_rect, book5_rect, book6_rect, book7_rect
         };
 
-    for (int i = 0; i < lbl_books.length; i++) {
+    for (int i = 0; i < GameState.booksInRoom1.length; i++) {
       Label lbl_book = lbl_books[i];
       if (GameState.booksInRoom1[i] != null) lbl_book.setText(GameState.booksInRoom1[i]);
       else {

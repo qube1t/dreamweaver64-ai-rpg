@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -277,9 +278,11 @@ public class Room3Controller {
   }
 
   @FXML
-  public void onClickDoor() {
+  public void onClickDoor() throws IOException {
     System.out.println("Door clicked");
     System.out.println(GameState.currentBox);
+    MainGame.removeOverlay(true);
+    MainGame.addOverlay("room1", true);
   }
 
   public void fadeInFlightPlan() {

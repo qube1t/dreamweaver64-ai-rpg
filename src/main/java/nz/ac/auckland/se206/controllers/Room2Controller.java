@@ -253,7 +253,7 @@ public class Room2Controller {
    */
   @FXML
   public void onClickDoor(MouseEvent event) throws IOException {
-    MainGame.removeOverlay();
+    MainGame.removeOverlay(true);
     MainGame.addOverlay("room1", true);
   }
 }

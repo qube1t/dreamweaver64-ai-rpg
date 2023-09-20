@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
+
 import javafx.concurrent.Task;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -21,8 +24,11 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+
 import nz.ac.auckland.se206.Helper;
+
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainGame {
 
@@ -55,6 +61,7 @@ public class MainGame {
   @FXML private Label bubbleText;
   @FXML private ListView<Label> chat;
   @FXML private TextField chatInput;
+  @FXML private Pane interact_pane;
 
   Text bubbleChatText = new Text("text");
 
@@ -63,8 +70,12 @@ public class MainGame {
   private static List<Image> obtainedItems = new ArrayList<>();
 
   @FXML private static Pane initialised_game_pane;
+  private static Pane initialised_interact_pane;
 
   public void initialize() throws IOException {
+
+
+    GameState.mainGame = this;
 
     timer_initiated = timer;
     item1_initiated = item1;
@@ -78,17 +89,24 @@ public class MainGame {
 
     System.out.println(1);
     initialised_game_pane = game_pane;
+    initialised_interact_pane = interact_pane;
+
+    outer_pane
+        .getChildren()
+        .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
     addOverlay("room2", true);
 
-    Helper.setBooksInRoom1();
+    // Helper.setBooksInRoom1();
     instance = this;
     // setting up bubble chat
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
 
-    addChat("hello");
+    disableInteractPane();
+
+    // addChat("test");
   }
 
   public static void addOverlay(String roomN, boolean isRoom) throws IOException {
@@ -101,8 +119,9 @@ public class MainGame {
     backgroundBlur.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
     backgroundBlur.setOnMouseClicked(
         e -> {
-          removeOverlay();
+          removeOverlay(false);
         });
+
     initialised_game_pane
         .getChildren()
         .add(initialised_game_pane.getChildren().size() - 2, backgroundBlur);
@@ -113,8 +132,10 @@ public class MainGame {
     return instance;
   }
 
-  public static void removeOverlay() {
-    if (initialised_game_pane.getChildren().size() > 4) {
+  public static void removeOverlay(boolean alsoRooms) {
+    int sub = 0;
+    if (alsoRooms) sub = 2;
+    if (initialised_game_pane.getChildren().size() > 4 - sub) {
       initialised_game_pane
           .getChildren()
           .remove(initialised_game_pane.getChildren().size() - 1 - 2);
@@ -146,7 +167,7 @@ public class MainGame {
     } else if (letter.equals("D")) {
       character.setAction(3);
     } else if (letter.equals("ESCAPE")) {
-      removeOverlay();
+      removeOverlay(false);
     }
 
     // move after animating as it will change direction of character
@@ -190,31 +211,79 @@ public class MainGame {
   }
 
   @FXML
-  private void keyPressedChatInput(KeyEvent ke) {
+  private void keyPressedChatInput(KeyEvent ke) throws ApiProxyException {
     if (ke.getCode().equals(KeyCode.ENTER)) {
-      addChat(chatInput.getText());
+      addChat("You: " + chatInput.getText(), false);
+      chatInput.setDisable(true);
+      GameState.eleanorAi.runGpt(
+          "The user has send this message: '"
+              + chatInput.getText()
+              + "'. Reply as a normal human in 1 or 2 sentences. If the user asks, you can give"
+              + " hints to previous riddles, and every hint needs to have the character % before"
+              + " the hint. Do not reveal the answer even if the user asks for it.",
+          (res) -> {
+            Platform.runLater(
+                () -> {
+                  addChat(res, true);
+                  chatInput.setDisable(false);
+                });
+          });
+
+      ;
       chatInput.setText("");
       outer_pane.requestFocus();
     }
   }
 
-  private void addChat(String text) {
+  public void addChat(String text, boolean isEleanor) {
 
     // adding to bubble
     bubbleChatText.setText(text);
+    bubbleTextPane.setContent(bubbleChatText);
 
-    if (chatPane.isDisable()) speechBubble.setVisible(true);
+    if (chatPane.isDisable()) {
+      speechBubble.setVisible(true);
+      bubbleTextPane.setVisible(true);
+    }
 
     // adding to chatbox
-    Label label = new Label(text);
+    String chatPrefix = isEleanor ? "Eleanor: " : "";
+    Label label = new Label(chatPrefix + text);
     label.setWrapText(true);
     label.getStyleClass().add("chat-text");
-    label.setMaxWidth(500);
+    // label.setMaxWidth(500);
+    // label.setMaxWidth(chat.getWidth() - 20);
+    label.prefWidthProperty().bind(chat.widthProperty().subtract(50));
+    label.setBorder(null);
 
     List<Label> items = chat.getItems();
     int index = items.size();
     items.add(label);
     chat.scrollTo(index);
+  }
+
+  public static void enableInteractPane() {
+    initialised_interact_pane.setDisable(false);
+    FadeTransition ft = new FadeTransition();
+    ft.setDuration(javafx.util.Duration.millis(500));
+    ft.setNode(initialised_game_pane);
+    ft.setFromValue(0);
+    ft.setToValue(1);
+    ft.play();
+  }
+
+  // maybe cfreate a diff func?
+  public static void disableInteractPane() {
+    FadeTransition ft = new FadeTransition();
+    ft.setDuration(javafx.util.Duration.millis(500));
+    ft.setNode(initialised_game_pane);
+    ft.setFromValue(1.0);
+    ft.setToValue(0);
+    ft.setAutoReverse(true);
+    ft.setCycleCount(1);
+    ft.play();
+    initialised_interact_pane.setDisable(true);
+    // initialised_interact_pane.setOpacity(0);
   }
 
   private void clickHeader() {
