@@ -8,7 +8,9 @@
 
 <?import nz.ac.auckland.se206.components.Character?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room1Controller">
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room1Controller">
    <children>
       <ImageView fitHeight="700" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -46,7 +48,7 @@
             <Image url="@../images/rooms/room1/foreground.png" />
          </image>
       </ImageView>
-      <Pane prefHeight="200.0" prefWidth="200.0">
+      <Pane fx:id="interactablePane" prefHeight="200.0" prefWidth="200.0">
          <children>
             <Rectangle fx:id="shelf_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="272.0" layoutY="90.0" onMouseClicked="#openBookShelf" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="39.0" />
             <Rectangle fx:id="left_door_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="30.0" layoutY="363.0" onMouseClicked="#goToLeftRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="18.0" />

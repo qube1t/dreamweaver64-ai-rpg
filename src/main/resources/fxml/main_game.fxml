@@ -15,7 +15,23 @@
    <children>
       <VBox fx:id="interact_pane" prefHeight="560.0" prefWidth="706.0">
          <children>
-            <AnchorPane prefHeight="62.0" prefWidth="706.0" style="-fx-border-color: pink;" />
+            <AnchorPane prefHeight="62.0" prefWidth="706.0" style="-fx-border-color: pink;">
+               <children>
+                  <ImageView fitHeight="120.0" fitWidth="706.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../images/main_game/inventory/inventory_pane.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="item1" fitHeight="35.0" fitWidth="35.0" layoutX="37.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item2" fitHeight="35.0" fitWidth="35.0" layoutX="96.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item3" fitHeight="35.0" fitWidth="35.0" layoutX="155.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item4" fitHeight="35.0" fitWidth="35.0" layoutX="214.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item5" fitHeight="35.0" fitWidth="35.0" layoutX="273.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item6" fitHeight="35.0" fitWidth="35.0" layoutX="330.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item7" fitHeight="35.0" fitWidth="35.0" layoutX="390.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item8" fitHeight="35.0" fitWidth="35.0" layoutX="450.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="timer" layoutX="590.0" layoutY="14.0" prefHeight="35.0" prefWidth="72.0" text="120" textFill="WHITE" />
+               </children></AnchorPane>
             <StackPane fx:id="game_pane" opacity="0.0" prefHeight="475.0" style="-fx-border-color: blue; -fx-background-color: black;">
                <children>
                   <AnchorPane fx:id="aiCharacterPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="152.0" prefWidth="389.0" StackPane.alignment="BOTTOM_LEFT">
@@ -24,17 +40,20 @@
                      </StackPane.margin>
                      <children>
                         <ImageView fitHeight="144.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0">
+
                            <image>
-                              <Image url="@../images/Subject.png" />
+                              <Image url="@../images/ai_img.png" />
                            </image>
                         </ImageView>
                         <Label fx:id="chat_toggle_btn" layoutX="103.0" layoutY="173.0" onMouseClicked="#toggleChat" style="-fx-background-color: blue; -fx-label-padding: 5;" text="Show Chat" textFill="#cdd3f8" AnchorPane.bottomAnchor="8.0" />
                         <ImageView fx:id="speechBubble" fitHeight="130.0" fitWidth="374.0" layoutX="26.0" pickOnBounds="true" visible="false" AnchorPane.bottomAnchor="107.0">
+
                            <image>
-                              <Image url="@../images/speech_bubble.png" />
+                              <Image url="@../images/chat_speech_bubble.png" />
                            </image>
                         </ImageView>
                         <ScrollPane fx:id="bubbleTextPane" fitToHeight="true" fitToWidth="true" layoutX="52.0" layoutY="7.0" minWidth="300.0" prefHeight="68.0" prefWidth="331.0" style="-fx-background-color: white;" visible="false" />
+
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="chatPane" disable="true" maxHeight="-Infinity" opacity="0.0" prefHeight="144.0" prefWidth="704.0" style="-fx-border-color: green; -fx-background-color: black;" AnchorPane.bottomAnchor="0.0" StackPane.alignment="BOTTOM_CENTER">

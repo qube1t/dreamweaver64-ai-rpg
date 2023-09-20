@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javafx.fxml.FXML;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
@@ -46,13 +47,11 @@ public class Room1Controller {
   static boolean gptInit = false;
   static int gptStage = 0;
 
-  /**
-   * Initializes the room view, it is called when the room loads.
-   *
-   * @throws ApiProxyException
-   */
-  public void initialize() throws ApiProxyException {
 
+  @FXML private Pane interactablePane;
+
+  /** Initializes the room view, it is called when the room loads. */
+  public void initialize() throws ApiProxyException {
     ArrayList<Rectangle> obsts =
         new ArrayList<Rectangle>(
             Arrays.asList(
@@ -60,7 +59,7 @@ public class Room1Controller {
                 rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21));
     // obsts.add(0, rect1);
     // Initialization code goes here
-    character.enableMobility(obsts);
+    character.enableMobility(obsts, interactablePane.getChildren());
     character.setLayoutX(250);
     character.setLayoutY(250);
 

@@ -24,4 +24,20 @@ public class Helper {
   public static int getRandomNumber(int min, int max) {
     return (int) ((Math.random() * (max - min)) + min);
   }
+
+  public static List<String> getTextBetweenChar(String str, String c) {
+    List<String> matchesList = new ArrayList<String>();
+    Pattern pattern = Pattern.compile("\\" + c + "(.*?)\\" + c);
+    Matcher m1 = pattern.matcher(str);
+
+    while (m1.find()) {
+      matchesList.add(m1.group().replace(c, ""));
+    }
+    return matchesList;
+  }
+
+  // https://www.baeldung.com/java-generating-random-numbers-in-range
+  public static int getRandomNumber(int min, int max) {
+    return (int) ((Math.random() * (max - min)) + min);
+  }
 }
