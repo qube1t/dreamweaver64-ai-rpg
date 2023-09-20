@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.SplashController">
+   <children>
+      <ImageView fitHeight="144.0" fitWidth="149.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/brand_logo.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="time_txt" alignment="CENTER" prefHeight="42.0" prefWidth="600.0" text="Presents" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font size="19.0" />
+         </font>
+         <padding>
+            <Insets bottom="30.0" top="10.0" />
+         </padding>
+      </Label>
+      <ProgressBar fx:id="progressBar" prefHeight="19.0" prefWidth="340.0" progress="0.0" />
+   </children>
+</VBox>

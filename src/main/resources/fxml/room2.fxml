@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -102,6 +103,12 @@
             <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="399.0" layoutY="288.0" onMouseClicked="#onClickBox5" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
             <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="64.0" layoutY="219.0" onMouseClicked="#onClickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
             <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="53.0" layoutX="382.0" layoutY="141.0" onMouseClicked="#onGetTrade" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
+            <ImageView fx:id="speech_bubble" fitHeight="87.0" fitWidth="161.0" layoutX="367.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="gptResponse" alignment="CENTER" layoutX="377.0" layoutY="55.0" prefHeight="47.0" prefWidth="132.0" text="Hello!" textAlignment="CENTER" wrapText="true" />
          </children>
       </Pane>
    </children>

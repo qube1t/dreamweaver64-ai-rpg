@@ -3,7 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -24,6 +24,8 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.ObtainedItemsWithId;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainGame {
 
@@ -56,6 +58,7 @@ public class MainGame {
   @FXML private Label bubbleText;
   @FXML private ListView<Label> chat;
   @FXML private TextField chatInput;
+  @FXML private Pane interact_pane;
 
   Text bubbleChatText = new Text("text");
 
@@ -64,8 +67,15 @@ public class MainGame {
   static List<ObtainedItemsWithId> obtainedItems = new ArrayList<>();
 
   @FXML private static Pane initialised_game_pane;
+  private static Pane initialised_interact_pane;
 
   public void initialize() throws IOException {
+    chatPane.setMouseTransparent(true);
+    bubbleTextPane.setMouseTransparent(true);
+    aiCharacterPane.setMouseTransparent(true);
+    // chat_toggle_btn.setMouseTransparent(false);
+
+    GameState.mainGame = this;
 
     timer_initiated = timer;
     item1_initiated = item1;
@@ -79,17 +89,24 @@ public class MainGame {
 
     System.out.println(1);
     initialised_game_pane = game_pane;
+    initialised_interact_pane = interact_pane;
 
-    addOverlay("room2", true);
+    outer_pane
+        .getChildren()
+        .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
-    Helper.setBooksInRoom1();
+    addOverlay("room1", true);
+
+    // Helper.setBooksInRoom1();
     instance = this;
     // setting up bubble chat
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
 
-    addChat("hello");
+    // disableInteractPane();
+
+    // addChat("test");
   }
 
   public static void addOverlay(String roomN, boolean isRoom) throws IOException {
@@ -102,26 +119,29 @@ public class MainGame {
     backgroundBlur.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
     backgroundBlur.setOnMouseClicked(
         e -> {
-          removeOverlay();
+          removeOverlay(false);
         });
+
     initialised_game_pane
         .getChildren()
-        .add(initialised_game_pane.getChildren().size() - 2, backgroundBlur);
-    initialised_game_pane.getChildren().add(initialised_game_pane.getChildren().size() - 2, room1);
+        .add(initialised_game_pane.getChildren().size() - 3, backgroundBlur);
+    initialised_game_pane.getChildren().add(initialised_game_pane.getChildren().size() - 3, room1);
   }
 
   public static MainGame getInstance() {
     return instance;
   }
 
-  public static void removeOverlay() {
-    if (initialised_game_pane.getChildren().size() > 4) {
+  public static void removeOverlay(boolean alsoRooms) {
+    int sub = 0;
+    if (alsoRooms) sub = 2;
+    if (initialised_game_pane.getChildren().size() > 5 - sub) {
       initialised_game_pane
           .getChildren()
-          .remove(initialised_game_pane.getChildren().size() - 1 - 2);
+          .remove(initialised_game_pane.getChildren().size() - 1 - 3);
       initialised_game_pane
           .getChildren()
-          .remove(initialised_game_pane.getChildren().size() - 1 - 2);
+          .remove(initialised_game_pane.getChildren().size() - 1 - 3);
       initialised_game_pane.requestFocus();
     }
   }
@@ -147,7 +167,7 @@ public class MainGame {
     } else if (letter.equals("D")) {
       character.setAction(3);
     } else if (letter.equals("ESCAPE")) {
-      removeOverlay();
+      removeOverlay(false);
     }
 
     // move after animating as it will change direction of character
@@ -173,6 +193,7 @@ public class MainGame {
 
   @FXML
   private void toggleChat() {
+    System.out.println("toggle chat");
     if (chatPane.isDisable()) {
       // chatPane is hidden -> show it
       chatPane.setDisable(false);
@@ -181,36 +202,58 @@ public class MainGame {
 
       speechBubble.setVisible(false);
       bubbleTextPane.setVisible(false);
+      chatPane.setMouseTransparent(false);
     } else {
       // hide chatPane
       chatPane.setDisable(true);
       chatPane.setOpacity(0);
       chat_toggle_btn.setText("Show Chat");
       outer_pane.requestFocus();
+      chatPane.setMouseTransparent(true);
     }
   }
 
   @FXML
-  private void keyPressedChatInput(KeyEvent ke) {
+  private void keyPressedChatInput(KeyEvent ke) throws ApiProxyException {
     if (ke.getCode().equals(KeyCode.ENTER)) {
-      addChat(chatInput.getText());
+      addChat("You: " + chatInput.getText(), false);
+      chatInput.setDisable(true);
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom1.getChatMessageFromUser(chatInput.getText()),
+          (res) -> {
+            Platform.runLater(
+                () -> {
+                  addChat(res, true);
+                  chatInput.setDisable(false);
+                });
+          });
+
+      ;
       chatInput.setText("");
       outer_pane.requestFocus();
     }
   }
 
-  private void addChat(String text) {
+  public void addChat(String text, boolean isEleanor) {
 
     // adding to bubble
     bubbleChatText.setText(text);
+    bubbleTextPane.setContent(bubbleChatText);
 
-    if (chatPane.isDisable()) speechBubble.setVisible(true);
+    if (chatPane.isDisable()) {
+      speechBubble.setVisible(true);
+      bubbleTextPane.setVisible(true);
+    }
 
     // adding to chatbox
-    Label label = new Label(text);
+    String chatPrefix = isEleanor ? "Eleanor: " : "";
+    Label label = new Label(chatPrefix + text);
     label.setWrapText(true);
     label.getStyleClass().add("chat-text");
-    label.setMaxWidth(500);
+    // label.setMaxWidth(500);
+    // label.setMaxWidth(chat.getWidth() - 20);
+    label.prefWidthProperty().bind(chat.widthProperty().subtract(50));
+    label.setBorder(null);
 
     List<Label> items = chat.getItems();
     int index = items.size();
@@ -218,11 +261,36 @@ public class MainGame {
     chat.scrollTo(index);
   }
 
+  public static void enableInteractPane() {
+    initialised_interact_pane.setVisible(true);
+    initialised_interact_pane.setDisable(false);
+    FadeTransition ft = new FadeTransition();
+    ft.setDuration(javafx.util.Duration.millis(500));
+    ft.setNode(initialised_interact_pane);
+    ft.setFromValue(0);
+    ft.setToValue(1);
+    ft.play();
+  }
+
+  // maybe cfreate a diff func?
+  public static void disableInteractPane() {
+    FadeTransition ft = new FadeTransition();
+    ft.setDuration(javafx.util.Duration.millis(500));
+    ft.setNode(initialised_interact_pane);
+    ft.setFromValue(1.0);
+    ft.setToValue(0);
+    // ft.setAutoReverse(true);
+    // ft.setCycleCount(1);
+    ft.play();
+    initialised_interact_pane.setDisable(true);
+    // initialised_interact_pane.setOpacity(0);
+  }
+
   private void clickHeader() {
     BookShelfController.returnBook();
   }
 
-  public static void getTimeLimitForGameMode(String timeLimit){
+  public static void getTimeLimitForGameMode(String timeLimit) {
     GameState.isGameStarted = true;
     System.out.println("start game");
     switch (timeLimit) {
@@ -247,7 +315,7 @@ public class MainGame {
 
   /**
    * Sets the time limit.
-   * 
+   *
    * @param timeLimit
    */
   private static void setTimeLimit(int timeLimit) {
@@ -259,7 +327,7 @@ public class MainGame {
               if (GameState.winTheGame || GameState.timeLimitReached) {
                 break;
               }
-              int time = currentTime; 
+              int time = currentTime;
               Platform.runLater(() -> timer_initiated.setText(String.valueOf(time)));
               try {
                 Thread.sleep(1000);
@@ -276,9 +344,7 @@ public class MainGame {
     timeLimitThread.start();
   }
 
-  /**
-   * Handles the time limit reached event.
-   */
+  /** Handles the time limit reached event. */
   private static void handleTimeLimitReached() {
     GameState.timeLimitReached = true;
     if (!GameState.winTheGame) {
@@ -288,7 +354,15 @@ public class MainGame {
 
   private static void updateInventoryUI() {
     List<ImageView> inventoryItems =
-        List.of(item1_initiated, item2_initiated, item3_initiated, item4_initiated, item5_initiated, item6_initiated, item7_initiated, item8_initaited);
+        List.of(
+            item1_initiated,
+            item2_initiated,
+            item3_initiated,
+            item4_initiated,
+            item5_initiated,
+            item6_initiated,
+            item7_initiated,
+            item8_initaited);
     for (int i = 0; i < inventoryItems.size(); i++) {
       if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());

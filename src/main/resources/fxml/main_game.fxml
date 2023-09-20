@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="outer_pane" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="537.0" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
+<StackPane fx:id="outer_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="537.0" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
    <children>
-      <VBox prefHeight="560.0" prefWidth="706.0">
+      <VBox fx:id="interact_pane" disable="true" prefHeight="560.0" prefWidth="706.0" visible="false">
          <children>
             <AnchorPane prefHeight="62.0" prefWidth="706.0" style="-fx-border-color: pink;">
                <children>
@@ -39,18 +39,20 @@
                         <Insets />
                      </StackPane.margin>
                      <children>
-                        <ImageView fitHeight="120.0" fitWidth="87.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0">
+                        <ImageView fitHeight="144.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0">
+
                            <image>
-                              <Image url="@../images/Subject.png" />
+                              <Image url="@../images/ai_img.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="chat_toggle_btn" layoutX="103.0" layoutY="173.0" onMouseClicked="#toggleChat" style="-fx-background-color: blue; -fx-label-padding: 5;" text="Show Chat" textFill="#cdd3f8" AnchorPane.bottomAnchor="8.0" />
-                        <ImageView fx:id="speechBubble" fitHeight="108.0" fitWidth="374.0" layoutX="15.0" layoutY="-60.0" pickOnBounds="true" AnchorPane.bottomAnchor="100.0">
+                        <ImageView fx:id="speechBubble" fitHeight="130.0" fitWidth="374.0" layoutX="26.0" pickOnBounds="true" visible="false" AnchorPane.bottomAnchor="107.0">
+
                            <image>
-                              <Image url="@../images/speech_bubble.png" />
+                              <Image url="@../images/chat_speech_bubble.png" />
                            </image>
                         </ImageView>
-                        <ScrollPane fx:id="bubbleTextPane" layoutX="41.0" layoutY="10.0" minWidth="300.0" prefHeight="50.0" prefWidth="331.0" style="-fx-background-color: white;" />
+                        <ScrollPane fx:id="bubbleTextPane" fitToHeight="true" fitToWidth="true" layoutX="52.0" layoutY="7.0" minWidth="300.0" prefHeight="68.0" prefWidth="331.0" style="-fx-background-color: white;" visible="false" />
+
                      </children>
                   </AnchorPane>
                   <AnchorPane fx:id="chatPane" disable="true" maxHeight="-Infinity" opacity="0.0" prefHeight="144.0" prefWidth="704.0" style="-fx-border-color: green; -fx-background-color: black;" AnchorPane.bottomAnchor="0.0" StackPane.alignment="BOTTOM_CENTER">
@@ -62,6 +64,11 @@
                      <StackPane.margin>
                         <Insets bottom="40.0" left="100.0" />
                      </StackPane.margin>
+                  </AnchorPane>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="200.0" StackPane.alignment="BOTTOM_LEFT">
+                     <children>
+                        <Label fx:id="chat_toggle_btn" onMouseClicked="#toggleChat" style="-fx-background-color: blue; -fx-label-padding: 5;" text="Show Chat" textFill="#cdd3f8" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="0.0" />
+                     </children>
                   </AnchorPane>
                </children></StackPane>
 
