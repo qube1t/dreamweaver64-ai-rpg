@@ -119,6 +119,7 @@ public class Room1Controller {
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room2", true);
   }
+  
   @FXML
   private void openBookShelf() throws IOException, ApiProxyException {
     MainGame.addOverlay("book_shelf", false);
@@ -128,10 +129,13 @@ public class Room1Controller {
 
 
   @FXML
-  private void openMainDoor() throws ApiProxyException {
+  private void openMainDoor() throws ApiProxyException, IOException {
     GameState.eleanorAi.runGpt(
         "User update, User has tried to open main exit without solving the mission. No reply"
             + " needed.");
+    if (GameState.winTheGame) {
+      MainGame.addOverlay("end_menu", false);
+    }
   }
 
   @FXML
