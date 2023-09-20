@@ -39,8 +39,6 @@ public class Room3Controller {
       clickableRadar,
       clickableDoor;
   @FXML private Circle box1, box2, box3, box4, box5;
-  private Circle[] radarPoints;
-  private ImageView[] radarObjects;
   private ArrayList<Rectangle> obsts;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
@@ -48,25 +46,10 @@ public class Room3Controller {
   @FXML private AnchorPane radarPane;
   @FXML private ImageView radar_image, radar_computer, map;
   @FXML private Pane clickPane;
-  private boolean isRadarComputerOpen;
 
   private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
-
-    // //GptEngine.runGpt(
-    //    // new ChatMessage("user", GptPromptEngineeringRoom3.npcWelcomeMessage()),
-    //     (result) -> {
-    //       System.out.println(result);
-    //       // Handle the result as needed
-    //       System.out.println("result");
-    //     });
-
-    // GptEngine.runGpt(
-    //  new ChatMessage("user", GptPromptEngineeringRoom3.getAircraftCode()),
-    // (result) -> {
-    //   System.out.println(result);
-    // });
 
     // Generate the arranged city name and make it unarranged when room3 loads
     if ((GameState.arrangedDestnationCity == ""
@@ -90,9 +73,10 @@ public class Room3Controller {
             System.out.println(result);
 
             GameState.puzzleIntroMessageRoom3 = result;
-            MainGame.enableInteractPane();
           });
     }
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.room3WelcomeMessage());
+    MainGame.enableInteractPane();
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
@@ -135,24 +119,26 @@ public class Room3Controller {
   }
 
   @FXML
-  public void onClickComputer() throws IOException {
+  public void onClickComputer() throws IOException, ApiProxyException {
     System.out.println("Computer clicked");
-    // System.out.println(GameState.currentLocatiions[GameState.currentCity - 1]);
-    // System.out.println(GameState.arrangedCityName);
-    // Set the scene to room3Sub
-    // Switch to the chat view to solve the riddle.
     MainGame.addOverlay("sub3", false);
   }
 
   @FXML
-  public void onClickLocation() throws IOException {
+  public void onClickLocation() throws IOException, ApiProxyException {
     System.out.println("Location clicked");
     MainGame.addOverlay("gps_current", false);
+    GameState.eleanorAi.runGpt(
+        "User update: User has opened the world map and achnowledge the current location. No need"
+            + " to respond to this message.");
   }
 
   @FXML
-  public void onClickRadar() throws IOException {
+  public void onClickRadar() throws IOException, ApiProxyException {
     MainGame.addOverlay("radar_computer", false);
+    GameState.eleanorAi.runGpt(
+        "User update: User has opened the radar computer and the red point indicates the correct"
+            + " treasure box location in another room. No need to respond to this message.");
   }
 
   @FXML
@@ -160,23 +146,13 @@ public class Room3Controller {
    * This method is called when the book is clicked It will open the flight plan if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
-  public void clickBookEvent() throws IOException {
+  public void clickBookEvent() throws IOException, ApiProxyException {
 
     System.out.println("Book clicked");
     MainGame.addOverlay("room3_puzzle", false);
-    // if (GameState.isPreviousFlightPlanOpen) {
-    // GameState.isPreviousFlightPlanOpen = false;
-    // fadeOutFlightPlan();
-    // } else {
-    //  if (GameState.isDepBoardOpen) {
-    //  GameState.isDepBoardOpen = false;
-    //  fadeOutDepBoard();
-    //  fadeInFlightPlan();
-    // } else {
-    //  fadeInFlightPlan();
-    // }
-    // GameState.isPreviousFlightPlanOpen = true;
-    // }
+    GameState.eleanorAi.runGpt(
+        "User update: User has opened the unarranged word puzzle. The word indicates the destnation"
+            + " city. No reply is needed for this message.");
   }
 
   @FXML

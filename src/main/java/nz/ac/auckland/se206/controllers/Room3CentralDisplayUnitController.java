@@ -5,6 +5,7 @@ import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -13,6 +14,8 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3CentralDisplayUnitController {
 
@@ -137,21 +140,41 @@ public class Room3CentralDisplayUnitController {
    *
    * @param event
    */
-  public void handleExecuteClick() {
+  public void handleExecuteClick() throws ApiProxyException {
     String currentInput = displayOutput.getText();
     String firstThreeDestnation = GameState.arrangedDestnationCity.substring(0, 3).toUpperCase();
     String firstThreeDeparture =
         GameState.currentCities[GameState.currentCityIndex - 1].getText().substring(0, 3);
     System.out.println(firstThreeDestnation + "/" + firstThreeDeparture);
     if (currentInput.equalsIgnoreCase(firstThreeDestnation + "/" + firstThreeDeparture)) {
+      GameState.eleanorAi.runGpt(
+          "User update: User has now correctly entered the destnation city and current city and"
+              + " obtained the aircraft code needed to decrypt the letter in another roon. No need"
+              + " to response to this message.");
       // Aircraft code has been found.
       GameState.isAircraftCodeFound = true;
       displayInput.setVisible(true);
 
-      displayInput.setText(
-          "CONGRATULATIONS! THE AIRCRAFT CODE IS"
-              + GameState.aircraftCode
-              + "GOOD LUCK ON YOUR ESCAPE!");
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.getAircraftCode(),
+          (result) -> {
+            System.out.println(result);
+            Platform.runLater(
+                () -> {
+                  // Find the start and end indices of the aircraft code within single quotes
+                  int startIndex = result.indexOf("^");
+                  int endIndex = result.indexOf("^", startIndex + 1);
+
+                  if (startIndex != -1 && endIndex != -1) {
+                    // Extract the aircraft code
+                    GameState.aircraftCode = result.substring(startIndex + 1, endIndex);
+                    System.out.println("Aircraft code: " + GameState.aircraftCode);
+                  }
+                  // Update the introduction label with the correct answer message
+                  displayInput.setText(
+                      "CONGRATULATIONS! THE AIRCRAFT CODE IS " + GameState.aircraftCode);
+                });
+          });
 
       // Clear the input field and disable it along with the execute button
       displayOutput.setText("");
@@ -160,7 +183,7 @@ public class Room3CentralDisplayUnitController {
     } else {
       // Display an error message
       displayInput.setStyle("-fx-text-fill: red;");
-      displayInput.setText("INCORRECT AIRPORT CODE TRY AGAIN");
+      displayInput.setText("INCORRECT ANSWER TRY AGAIN");
       displayOutput.setText("");
     }
   }
