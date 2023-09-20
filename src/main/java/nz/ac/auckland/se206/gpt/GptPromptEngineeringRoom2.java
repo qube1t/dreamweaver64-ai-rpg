@@ -19,10 +19,10 @@ public class GptPromptEngineeringRoom2 {
   }
 
   public static String generateFinalUnencrypted() {
-    return "This is the loading stage. Give the contents of the lost message to be shown to the user. The contents of the letter needs to be between the character +. it has to be 2 sentences long. maybe foretelling some prophecy. should try to reveal some fact";
+    return "This is the loading stage. Give the contents of the lost message to be shown to the user. The contents of the letter needs to be between the character +. it has to be only 2 sentences long. maybe foretelling some prophecy. should try to reveal some fact";
   }
 
   public static String generateFinalEncrypted() {
-    return "This is the loading stage. Randomly encrypt the recovered letter with numbers and letters, and only return the encryption with the character + before and after. ";
+    return "This is the loading stage. Return meaningless encryption of 2 sentences, and only return the encryption with the character + before and after. ";
   }
 }
