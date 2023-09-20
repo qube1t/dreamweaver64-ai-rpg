@@ -80,11 +80,6 @@ public class Room2Controller {
     character.setLayoutX(60);
     character.setLayoutY(250);
 
-    speech_bubble = new ImageView();
-    gptResponse = new Label();
-
-    speech_bubble.setVisible(true);
-    gptResponse.setVisible(true);
     gptResponse.setText(GameState.pirateRiddle);
 
     if (GameState.isBoxKeyFound) {
@@ -95,10 +90,10 @@ public class Room2Controller {
 
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
-    if (!GameState.isBookFound) {
+    if (!GameState.isBookFound && GameState.pirateRiddle != null) { 
+      System.out.println("Pirate clicked");     
       speech_bubble.setVisible(true);
       gptResponse.setVisible(true);
-      gptResponse.setText(GameState.pirateRiddle);
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
