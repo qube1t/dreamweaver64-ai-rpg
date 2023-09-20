@@ -35,6 +35,8 @@ public class MainGame {
   @FXML private Pane outer_pane;
   private static Label timer_initiated;
   @FXML private Label timer;
+  private static Label hint_initiated;
+  @FXML private Label hint_count;
   private static ImageView item1_initiated;
   private static ImageView item2_initiated;
   private static ImageView item3_initiated;
@@ -80,6 +82,7 @@ public class MainGame {
     GameState.mainGame = this;
 
     timer_initiated = timer;
+    hint_initiated = hint_count;
     item1_initiated = item1;
     item2_initiated = item2;
     item3_initiated = item3;
@@ -296,7 +299,7 @@ public class MainGame {
     BookShelfController.returnBook();
   }
 
-  public static void getTimeLimitForGameMode(String timeLimit){
+  public static void getTimeLimit(String timeLimit){
     GameState.isGameStarted = true;
     System.out.println("start game");
     switch (timeLimit) {
@@ -366,6 +369,20 @@ public class MainGame {
         e.printStackTrace();
       }
     }
+  }
+
+  static void setHintCount(String difficulty) {
+    if (difficulty.equals("EASY")) {
+      hint_initiated.setText("Unlimited");      
+    } else if (difficulty.equals("MEDIUM")) {
+      hint_initiated.setText("5");
+    } else if (difficulty.equals("HARD")) {
+      hint_initiated.setText("None");
+    }
+  }
+
+  private static void updateHintCount() {
+    hint_initiated.setText(Integer.toString(GameState.hintsRemaining));
   }
 
   private static void updateInventoryUI() {

@@ -23,6 +23,7 @@ public class GameState {
 
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
+  public static int hintsRemaining;
 
   public static MainGame mainGame;
 
