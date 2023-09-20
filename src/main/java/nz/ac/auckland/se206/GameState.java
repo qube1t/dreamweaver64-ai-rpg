@@ -42,8 +42,9 @@ public class GameState {
   /** Indicates whether the time limit has reached */
   public static boolean timeLimitReached = false;
 
-  /** These fields are used in room1 */
-  // public static String[] booksInRoom1 = new String[7];
+
+  public static int hintsRemaining = -1;
+
 
   /** These fields are used in room3 */
   public static boolean isPreviousFlightPlanOpen = false;

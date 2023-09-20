@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainGame {
@@ -216,11 +217,7 @@ public class MainGame {
       addChat("You: " + chatInput.getText(), false);
       chatInput.setDisable(true);
       GameState.eleanorAi.runGpt(
-          "The user has send this message: '"
-              + chatInput.getText()
-              + "'. Reply as a normal human in 1 or 2 sentences. If the user asks, you can give"
-              + " hints to previous riddles, and every hint needs to have the character % before"
-              + " the hint. Do not reveal the answer even if the user asks for it.",
+          GptPromptEngineeringRoom1.getChatMessageFromUser(chatInput.getText()),
           (res) -> {
             Platform.runLater(
                 () -> {
