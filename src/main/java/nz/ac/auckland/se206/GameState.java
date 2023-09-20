@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.MainGame;
 
 /** Represents the state of the game. */
@@ -44,11 +46,15 @@ public class GameState {
   /** Indicates wheter the aircraft code has been found */
   public static boolean isAircraftCodeFound = false;
 
+  public static int currentCity = -1;
+
   /** Indicates the location of the treasure box. */
   public static int currentBox = -1;
 
   public static String unarrangedCityName = "";
   public static String arrangedCityName = "";
+
+  public static Text[] currentLocatiions;
 
   /** Indicates whether the puzzle in room 3 solved. */
   public static boolean isPuzzleInRoom3Solved = false;
@@ -58,6 +64,9 @@ public class GameState {
 
   /** Indicates the introduction message when first enter the puzzle in Room3 */
   public static String introMessage = "";
+
+  /** Stores the created instance of overlay */
+  public static Pane overlay;
 
   public static String[] booksInRoom1 = new String[7];
 

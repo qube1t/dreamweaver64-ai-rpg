@@ -64,39 +64,34 @@ public class DestnationPuzzleController {
     }
     System.out.println(currentText);
 
-    // Bug here, shouldn't start a new thread.
-    if (currentText.equalsIgnoreCase(GameState.arrangedCityName)) {
-      System.out.println("correct");
-      // Clear the current message in the introduction and set a loading bar
-      introduction.setText("");
-      // Show the progress bar while waiting for the AI response
-      loadText.setVisible(true);
-      load.setVisible(true);
-      load.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+    introduction.setText("");
+    loadText.setVisible(true);
+    load.setVisible(true);
+    load.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
+
+    // Handle the case where the user has entered the correct answer
+    if (GameState.arrangedCityName.equalsIgnoreCase(currentText)) {
+      GameState.isPuzzleInRoom3Solved = true;
       GptEngine.runGpt(
           new ChatMessage("user", GptPromptEngineeringRoom3.correctPuzzleRoom3()),
           (result) -> {
             System.out.println(result);
+
             Platform.runLater(
                 () -> {
                   // Hide the progress bar
                   load.setVisible(false);
                   loadText.setVisible(false);
-                  // Update the introduction label with the incorrect answer message
+                  // Update the introduction label with the correct answer message
                   introduction.setText(result);
                 });
           });
     } else {
-      // Clear the current message in the introduction and set a loading bar
-      introduction.setText("");
-      // Show the progress bar while waiting for the AI response
-      loadText.setVisible(true);
-      load.setVisible(true);
-      load.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
       GptEngine.runGpt(
           new ChatMessage("user", GptPromptEngineeringRoom3.wrongPuzzleRoom3()),
           (result) -> {
             System.out.println(result);
+
             Platform.runLater(
                 () -> {
                   // Hide the progress bar
@@ -106,7 +101,6 @@ public class DestnationPuzzleController {
                   introduction.setText(result);
                 });
           });
-      System.out.println("incorrect");
     }
   }
 

@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="400.0" fitWidth="400.0">
          <image>
-            <Image url="@../images/rooms/room3/blur.png" />
+            <Image url="@../images/rooms/room3/slow_square_earth.gif" />
          </image>
       </ImageView>
       <Label fx:id="introduction" layoutX="52.0" layoutY="21.0" prefHeight="88.0" prefWidth="285.0" style="-fx-border-color: red; -fx-border-width: 2;" textAlignment="CENTER" textFill="#15dae4" wrapText="true">
@@ -21,9 +21,9 @@
             <Font name="Impact" size="17.0" />
          </font></Label>
       <HBox fx:id="letterBox" layoutX="1.0" layoutY="131.0" prefHeight="60.0" prefWidth="398.0" />
-      <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="15.0" prefWidth="37.0" text="CLOSE" textFill="#250000">
+      <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="24.0" prefWidth="48.0" text="EXIT" textFill="#250000">
          <font>
-            <Font name="Impact" size="8.0" />
+            <Font name="Impact" size="12.0" />
          </font>
       </Button>
       <Button layoutX="156.0" layoutY="223.0" mnemonicParsing="false" onMouseClicked="#onClickSubmit" style="-fx-background-color: #15dae4;" text="SUBMIT">

@@ -130,14 +130,22 @@ public class Room3Controller {
   @FXML
   public void onClickComputer() throws IOException {
     System.out.println("Computer clicked");
+    // System.out.println(GameState.currentLocatiions[GameState.currentCity - 1]);
+    // System.out.println(GameState.arrangedCityName);
     // Set the scene to room3Sub
     // Switch to the chat view to solve the riddle.
     MainGame.addOverlay("sub3", false);
   }
 
   @FXML
+  public void onClickLocation() throws IOException {
+    System.out.println("Location clicked");
+    MainGame.addOverlay("gps_current", false);
+  }
+
+  @FXML
   public void onClickRadar() throws IOException {
-    MainGame.addOverlay("sub3", false);
+    MainGame.addOverlay("radar_computer", false);
   }
 
   @FXML

@@ -37,15 +37,16 @@ public class Room3CentralDisplayUnitController {
             zero0);
     this.allButtons = allButtons;
 
-    // if (!GameState.isPuzzleInRoom3Solved) {
-    //   CentralDisplayUnit.setOpacity(0.3);
+    if (!GameState.isPuzzleInRoom3Solved) {
+      CentralDisplayUnit.setOpacity(0.6);
+      displayOutput.setText("LOCKED");
 
-    //   for (Rectangle button : allButtons) {
-    //     button.setDisable(true);
-    //   }
-    // } else {
-    //   enableFlightCDU();
-    // }
+      for (Rectangle button : allButtons) {
+        button.setDisable(true);
+      }
+    } else {
+      enableFlightCDU();
+    }
   }
 
   @FXML
@@ -125,7 +126,7 @@ public class Room3CentralDisplayUnitController {
     for (Rectangle button : allButtons) {
       button.setDisable(false);
     }
-    String message = "ENTER DEP / DEST AIRPORT CODE E.g.WLG/AKL THEN PRESS EXEC";
+    String message = "ENTER THE FIRST THREE LETTER OF DEP / DEST CITY THEN PRESS EXECUTE.g.AUC/SYD";
     int typingDelay = 50;
     typeTextEffect(displayInput, message, typingDelay);
   }
@@ -138,29 +139,13 @@ public class Room3CentralDisplayUnitController {
    */
   public void handleExecuteClick() {
     String currentInput = displayOutput.getText();
-    if (currentInput.contains("HND/SYD")) {
+    String firstThreeDestnation = GameState.arrangedCityName.substring(0, 2);
+    String firstThreeDeparture = GameState.currentLocatiions[GameState.currentCity - 1].getText();
+    if (currentInput.equalsIgnoreCase(firstThreeDestnation + "/" + firstThreeDeparture)) {
       // Aircraft code has been found.
       GameState.isAircraftCodeFound = true;
       displayInput.setVisible(true);
 
-      // Create a TextFlow to hold different styled Text elements
-      // TextFlow messageFlow = new TextFlow();
-
-      // Create a Text element for the "CONGRATULATIONS! THE AIRCRAFT CODE IS " part
-      // Text messagePart1 = new Text("CONGRATULATIONS! THE AIRCRAFT CODE IS ");
-
-      // Create a Text element for the "QR16" part and apply styling
-      // Text codePart = new Text("QR16");
-      // codePart.setFill(Color.RED);
-      // codePart.setFont(Font.font("System", FontWeight.BOLD, 14));
-
-      // Create a Text element for the " GOOD LUCK ON YOUR ESCAPE!" part
-      // Text messagePart2 = new Text(" GOOD LUCK ON YOUR ESCAPE!");
-
-      // Add the Text elements to the TextFlow
-      // messageFlow.getChildren().addAll(messagePart1, codePart, messagePart2);
-
-      // Set the styled TextFlow as the content of displayInput
       displayInput.setText(
           "CONGRATULATIONS! THE AIRCRAFT CODE IS"
               + GameState.aircraftCode

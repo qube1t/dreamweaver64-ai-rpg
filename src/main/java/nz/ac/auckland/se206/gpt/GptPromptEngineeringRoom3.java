@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.gpt;
 
+
 public class GptPromptEngineeringRoom3 {
 
   /**
@@ -36,13 +37,13 @@ public class GptPromptEngineeringRoom3 {
 
   public static String getRandomCity() {
     return "Generate a popular city that is less than 8 characters, only reply with the city name"
-        + " example 'Seoul'";
+        + " example 'london'";
   }
 
   public static String getIntroPuzzleMessage() {
-    return "Now the player enters the puzzle game in room3 after clicking the book which given a"
+    return "Now the player enters the puzzle game after clicking the book which given a"
         + " unarranged destnation city name and the player need to drag and change the"
-        + " position of the letter until the correct city name. Write a 10 words welcome"
+        + " position of the letter until the correct destnation city. Write a 10 words welcome"
         + " message.";
   }
 
@@ -53,8 +54,7 @@ public class GptPromptEngineeringRoom3 {
   }
 
   public static String correctPuzzleRoom3() {
-    return "Now the player rearranged the city name and it is the correct city name, generate a 10"
-        + " words message to tell the player that the city name is correct and reveal the"
-        + " IATA code of the city.";
+    return "Now the player rearranged the city name and it is the correct city name, say correct"
+        + " and congrats the player about the achievement.";
   }
 }

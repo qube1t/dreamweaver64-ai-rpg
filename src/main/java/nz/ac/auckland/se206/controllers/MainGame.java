@@ -39,6 +39,10 @@ public class MainGame {
   @FXML private static Pane initialised_game_pane;
 
   public void initialize() throws IOException {
+    chatPane.setMouseTransparent(true);
+    bubbleTextPane.setMouseTransparent(true);
+    aiCharacterPane.setMouseTransparent(true);
+    chat_toggle_btn.setMouseTransparent(false);
 
     System.out.println(1);
     initialised_game_pane = game_pane;
@@ -136,6 +140,7 @@ public class MainGame {
 
   @FXML
   private void toggleChat() {
+    System.out.println("toggle chat");
     if (chatPane.isDisable()) {
       // chatPane is hidden -> show it
       chatPane.setDisable(false);

@@ -46,11 +46,12 @@
          <children>
             <Pane fx:id="clickPane">
                <children>
-                  <Rectangle fx:id="book" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="392.0" layoutY="201.0" onMouseClicked="#clickBookEvent" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="44.0" />
+                  <Rectangle fx:id="book" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="20.0" layoutX="392.0" layoutY="201.0" onMouseClicked="#clickBookEvent" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="44.0" />
                   <Rectangle fx:id="clickableComputer" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="17.0" layoutX="292.0" layoutY="265.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="35.0" />
                   <Rectangle fx:id="clickableRadar" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="25.0" layoutX="198.0" layoutY="205.0" onMouseClicked="#onClickRadar" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="81.0" />
                   <Rectangle fx:id="clickableComputer1" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="17.0" layoutX="120.0" layoutY="343.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" width="61.0" />
                   <Rectangle fx:id="clickableDoor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="51.0" layoutX="524.0" layoutY="190.0" onMouseClicked="#onClickDoor" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="48.0" />
+                  <Rectangle fx:id="clickableComputer2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="35.0" layoutX="384.0" layoutY="266.0" onMouseClicked="#onClickLocation" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="5.0" width="37.0" />
                </children>
             </Pane>
          </children>
