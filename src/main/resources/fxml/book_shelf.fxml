@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="459.0" style="-fx-background-image: url(&quot;https://static.vecteezy.com/system/resources/thumbnails/000/164/590/small_2x/WOODGRAIN.jpg&quot;);" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookShelfController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="459.0" style="-fx-background-image: url(&quot;https://static.vecteezy.com/system/resources/thumbnails/000/164/590/small_2x/WOODGRAIN.jpg&quot;);" styleClass="book-shelf" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookShelfController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="459.0" layoutY="-1.0" pickOnBounds="true">
          <image>
@@ -30,9 +30,9 @@
          </image>
       </ImageView>
       <Rectangle fx:id="book1_rect" arcHeight="5.0" arcWidth="5.0" fill="#51ff1f" height="112.0" layoutX="52.0" layoutY="14.0" rotate="24.8" stroke="BLACK" strokeType="INSIDE" width="26.0" />
-      <Label fx:id="lbl_book1" layoutX="14.0" layoutY="60.0" prefHeight="17.0" prefWidth="100.0" rotate="-65.2" text="book1" />
+      <Label fx:id="lbl_book1" layoutX="14.0" layoutY="60.0" prefHeight="17.0" prefWidth="100.0" rotate="-65.2" styleClass="book-shelf" text="book1" />
       <Rectangle fx:id="book2_rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="103.0" layoutX="100.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
-      <Label fx:id="lbl_book2" layoutX="66.0" layoutY="65.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" text="book2" />
+      <Label fx:id="lbl_book2" layoutX="66.0" layoutY="65.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" styleClass="book-shelf" stylesheets="@../css/style.css" text="book2" />
       <Rectangle fx:id="book3_rect" arcHeight="5.0" arcWidth="5.0" fill="#ffb41f" height="112.0" layoutX="130.0" layoutY="13.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
       <Label fx:id="lbl_book3" layoutX="96.0" layoutY="65.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" text="book3" />
       <Rectangle fx:id="book4_rect" arcHeight="5.0" arcWidth="5.0" fill="#a2c6e8" height="27.0" layoutX="144.0" layoutY="222.0" stroke="BLACK" strokeType="INSIDE" width="96.0" />

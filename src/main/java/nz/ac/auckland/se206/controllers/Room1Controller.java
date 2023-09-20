@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -46,8 +45,6 @@ public class Room1Controller {
 
   static boolean gptInit = false;
   static int gptStage = 0;
-
-
 
   @FXML private Pane interactablePane;
 
@@ -119,14 +116,13 @@ public class Room1Controller {
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room2", true);
   }
-  
+
   @FXML
   private void openBookShelf() throws IOException, ApiProxyException {
     MainGame.addOverlay("book_shelf", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened book shelf. No reply is needed for this message.");
   }
-
 
   @FXML
   private void openMainDoor() throws ApiProxyException, IOException {
