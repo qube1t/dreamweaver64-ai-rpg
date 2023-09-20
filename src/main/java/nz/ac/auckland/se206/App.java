@@ -94,7 +94,7 @@ public class App extends Application {
   public void start(final Stage stage) throws IOException {
     Font.loadFont(App.class.getResource("/fonts/Abaddon Bold.ttf").toString(), 14);
     Font.loadFont(App.class.getResource("/fonts/Abaddon Light.ttf").toString(), 14);
-    Pane root = (Pane) loadFxml("start_menu");
+    Pane root = (Pane) loadFxml("splash_screen");
 
     scene = new Scene(root, 800, 700);
 
