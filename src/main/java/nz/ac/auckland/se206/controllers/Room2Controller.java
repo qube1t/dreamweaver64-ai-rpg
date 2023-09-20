@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -76,8 +78,9 @@ public class Room2Controller {
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
 
-  /** Initializes the room view, it is called when the room loads. */
-  public void initialize() {
+  /** Initializes the room view, it is called when the room loads. 
+   * @throws ApiProxyException*/
+  public void initialize() throws ApiProxyException {
     ArrayList<Rectangle> obsts =
         new ArrayList<Rectangle>(
             Arrays.asList(
@@ -94,7 +97,18 @@ public class Room2Controller {
     gptResponse = new Label();
     gptResponse.setText("Pirate : Find the key to open the treasure box");
 
-    MainGame.enableInteractPane();
+    if (!gptInit) {
+      initGpt();
+      gptInit = true;
+    }
+    
+    // MainGame.enableInteractPane();
+  }
+
+  private void initGpt() throws ApiProxyException {
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalUnencrypted(), s -> GameState.finalMsg = s);
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalEncrypted(), s -> {GameState.encryptedFinalMsg = s; Platform.runLater(() -> MainGame.enableInteractPane());});
+
   }
 
   @FXML

@@ -102,4 +102,8 @@ public class GameState {
   public static ImageView[] items;
 
   public static String takenBook;
+
+public static String finalMsg;
+
+public static String encryptedFinalMsg;
 }
