@@ -16,7 +16,7 @@
             <Image url="@../images/rooms/room3/slow_square_earth.gif" />
          </image>
       </ImageView>
-      <Label fx:id="introduction" layoutX="52.0" layoutY="21.0" prefHeight="88.0" prefWidth="285.0" style="-fx-border-color: red; -fx-border-width: 2;" textAlignment="CENTER" textFill="#15dae4" wrapText="true">
+      <Label fx:id="introduction" layoutX="52.0" layoutY="21.0" prefHeight="88.0" prefWidth="285.0" style="-fx-border-color: red; -fx-border-width: 2;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" textAlignment="CENTER" textFill="#15dae4" wrapText="true">
          <font>
             <Font name="Impact" size="17.0" />
          </font></Label>
@@ -32,7 +32,7 @@
          </font>
       </Button>
       <ProgressBar fx:id="load" layoutX="145.0" layoutY="65.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" style="-fx-background-color: red;" />
-      <Label fx:id="loadText" layoutX="163.0" layoutY="48.0" text="Checking...." textFill="RED">
+      <Label fx:id="loadText" layoutX="157.0" layoutY="40.0" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" text="CHECKING..." textFill="RED">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

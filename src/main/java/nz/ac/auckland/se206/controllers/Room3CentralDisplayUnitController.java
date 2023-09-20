@@ -32,7 +32,8 @@ public class Room3CentralDisplayUnitController {
   @FXML private ProgressIndicator progress;
   protected List<Rectangle> allButtons;
 
-  public void initialize() {
+  public void initialize() throws ApiProxyException {
+
     progress.setVisible(false);
     System.out.println("Room3CentralDisplayUnitController initialized");
 
@@ -43,15 +44,34 @@ public class Room3CentralDisplayUnitController {
             zero0);
     this.allButtons = allButtons;
 
-    if (!GameState.isPuzzleInRoom3Solved) {
-      CentralDisplayUnit.setOpacity(0.6);
+    if (GameState.isPuzzleInRoom3Solved && GameState.isWorldMapOpened) {
+      enableFlightCDU();
+    } else {
+      CentralDisplayUnit.setOpacity(0.7);
       displayOutput.setText("LOCKED");
 
       for (Rectangle button : allButtons) {
         button.setDisable(true);
       }
-    } else {
-      enableFlightCDU();
+      GameState.eleanorAi.runGpt(
+          "User update: the user clicks on the flight computer but it is locked due to either not"
+              + " solved the puzzle or not yet opened the world map to discover the current"
+              + " location. Give player a short message to indicates it is locked, surrounded by ##"
+              + " . ",
+          (result) -> {
+            Platform.runLater(
+                () -> {
+                  // Find the start and end indices of the aircraft code within single quotes
+                  int startIndex = result.indexOf("#");
+                  int endIndex = result.indexOf("#", startIndex + 1);
+
+                  if (startIndex != -1 && endIndex != -1) {
+                    // Extract the aircraft code
+                    String message = result.substring(startIndex + 1, endIndex);
+                    System.out.println(message);
+                  }
+                });
+          });
     }
   }
 
@@ -132,7 +152,8 @@ public class Room3CentralDisplayUnitController {
     for (Rectangle button : allButtons) {
       button.setDisable(false);
     }
-    String message = "ENTER THE FIRST THREE LETTER OF DEP / DEST CITY THEN PRESS EXECUTE.g.AUC/SYD";
+    String message =
+        "ENTER THE FIRST THREE LETTER OF DEP / DEST CITY THEN PRESS EXECUTE. E.g.AUC/SYD";
     int typingDelay = 50;
     typeTextEffect(displayInput, message, typingDelay);
   }

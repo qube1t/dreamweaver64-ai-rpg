@@ -22,16 +22,17 @@ public class GptPromptEngineeringRoom3 {
    * @return
    */
   public static String room3WelcomeMessage() {
-    return "The player now entered room3 that is an air traffic control tower.The player needs to"
-        + " interact with different objects including solving a puzzle to get the aircraft"
-        + " code to decrypt letter in room2.You need to achknowledge the current state of"
-        + " the game. Give the user intructions on the mission with maximum 2 sentences, not"
-        + " including any hints. Surround the sentences to be shown to the user with #.";
+    return "User update: The user now entered room3 that is an air traffic control tower.The player"
+        + " needs to interact with different objects including solving a puzzle to get the"
+        + " aircraft code to decrypt letter in another rooom.You need to achknowledge the"
+        + " current state of the game. Give the user intructions on the mission with maximum"
+        + " 2 sentences, not including any hints. Surround the sentences to be shown to the"
+        + " user with #.";
   }
 
   public static String getRandomCity() {
-    return "Generate a popular city that is less than 10 characters, only reply with the city name"
-        + " example 'london'";
+    return "Generate a random city that is less than 10 characters, only reply with the city name"
+        + " surrounded by # example #london#";
   }
 
   public static String getIntroPuzzleMessage() {

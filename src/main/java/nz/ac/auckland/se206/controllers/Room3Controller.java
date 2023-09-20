@@ -39,7 +39,6 @@ public class Room3Controller {
       clickableRadar,
       clickableDoor;
   @FXML private Circle box1, box2, box3, box4, box5;
-  private ArrayList<Rectangle> obsts;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
   @FXML private Character character;
@@ -57,11 +56,16 @@ public class Room3Controller {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getRandomCity(),
           (result) -> {
-            System.out.println(result);
-            GameState.arrangedDestnationCity = result;
-            // Make the city name unarranged
-            GameState.unarrangedDestnationCity = makeUnarrangedCityName(result);
-            // System.out.println(GameState.unarrangedCityName);
+            // Get the city surrounded by #
+            // Find the start and end indices of the aircraft code within single quotes
+            int startIndex = result.indexOf("#");
+            int endIndex = result.indexOf("#", startIndex + 1);
+
+            if (startIndex != -1 && endIndex != -1)
+              GameState.arrangedDestnationCity = result.substring(startIndex + 1, endIndex);
+
+            GameState.unarrangedDestnationCity =
+                makeUnarrangedCityName(GameState.arrangedDestnationCity);
           });
     }
 
@@ -71,12 +75,12 @@ public class Room3Controller {
           GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
           (result) -> {
             System.out.println(result);
-
             GameState.puzzleIntroMessageRoom3 = result;
           });
     }
     GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.room3WelcomeMessage());
     MainGame.enableInteractPane();
+
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
@@ -112,9 +116,8 @@ public class Room3Controller {
       unarrangedCityName += cityName.charAt(randomNumbers[i]);
     }
 
-    if (unarrangedCityName.equals(cityName)) {
-      return makeUnarrangedCityName(cityName);
-    }
+    if (unarrangedCityName.equals(cityName)) return makeUnarrangedCityName(cityName);
+
     return unarrangedCityName.toUpperCase();
   }
 
@@ -126,6 +129,8 @@ public class Room3Controller {
 
   @FXML
   public void onClickLocation() throws IOException, ApiProxyException {
+    if (!GameState.isWorldMapOpened) GameState.isWorldMapOpened = true;
+
     System.out.println("Location clicked");
     MainGame.addOverlay("gps_current", false);
     GameState.eleanorAi.runGpt(
