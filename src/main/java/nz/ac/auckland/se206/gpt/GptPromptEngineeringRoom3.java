@@ -9,9 +9,10 @@ public class GptPromptEngineeringRoom3 {
    * @return the generated prompt engineering string
    */
   public static String getAircraftCode() {
-    return "The player now has correctly entered the required information for unloack aircraft"
-        + " code. Congrats the player and generate a aircraft code with 2 letters and 2"
-        + " numbers, the aircraft code must surround with ^.";
+    return "User update: The player now has correctly entered the correct departature and"
+        + " destnation city and now unlocks the aircraft code. Response with congrats the"
+        + " player and generate a aircraft code with 2 letters and 2 numbers, the aircraft"
+        + " code must surround with ^.";
   }
 
   /**

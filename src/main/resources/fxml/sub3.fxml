@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -74,6 +75,7 @@
             </ImageView>
             <Rectangle fx:id="execute" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="254.0" layoutY="293.0" onMouseClicked="#handleExecuteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
             <Rectangle fx:id="menu" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="24.0" layoutX="32.0" layoutY="316.0" onMouseClicked="#handleMenuClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
+            <ProgressIndicator fx:id="progress" layoutX="147.0" layoutY="109.0" prefHeight="60.0" prefWidth="27.0" progress="0.0" style="-fx-background-color: red;" />
          </children>
       </Pane>
    </children>
