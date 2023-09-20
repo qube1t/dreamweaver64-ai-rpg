@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.GameState;
 
@@ -33,5 +34,8 @@ public class TreasureBoxController {
         message.setText("mom");
         imgTreasure.setVisible(false);
         treasure.setDisable(true);
+        Image treasureImage = new Image("/images/treasure.png");
+        MainGame.addObtainedItem(treasureImage);
+        System.out.println("Treasure obtained");
     }
 }

@@ -6,8 +6,10 @@ import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GptEngine;
@@ -30,6 +32,7 @@ public class Room2Controller {
   @FXML private ImageView boxKey;
   @FXML private ImageView speech_bubble;
   @FXML private Label gptResponse;
+  @FXML private Pane interactablePane;
 
   @FXML private Character character;
   @FXML
@@ -83,7 +86,7 @@ public class Room2Controller {
                 rect23, rect24, rect25, rect26, rect27, rect28, rect29, rect30, rect31, rect32,
                 rect33));
 
-    character.enableMobility(obsts);
+    character.enableMobility(obsts, interactablePane.getChildren());
     character.setLayoutX(60);
     character.setLayoutY(250);
 
@@ -111,6 +114,13 @@ public class Room2Controller {
         // TODO Auto-generated catch block
         e.printStackTrace();
       }
+      System.out.println("Box key found");
+      Image keyImage = new Image("/images/key.png");
+      MainGame.addObtainedItem(keyImage);
+      System.out.println("Box key obtained");
+    } else {
+      // write this sentance in chat box or pirate's speech bubble
+      System.out.println("Find the item to trade with pirate to open the boxes");
     }
   }
 

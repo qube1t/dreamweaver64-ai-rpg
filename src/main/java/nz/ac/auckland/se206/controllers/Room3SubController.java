@@ -7,6 +7,7 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -160,6 +161,9 @@ public class Room3SubController {
     if (currentInput.contains("HND/SYD")) {
       // Aircraft code has been found.
       GameState.isAircraftCodeFound = true;
+      Image aircreaftImage = new Image("/images/Subject.png");
+      MainGame.addObtainedItem(aircreaftImage);
+      System.out.println("Aircraft code obtained");
       displayInput.setVisible(true);
 
       // Create a TextFlow to hold different styled Text elements
