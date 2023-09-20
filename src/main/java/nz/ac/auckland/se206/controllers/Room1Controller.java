@@ -48,7 +48,6 @@ public class Room1Controller {
   static int gptStage = 0;
 
 
-  @FXML private Pane interactablePane;
 
   @FXML private Pane interactablePane;
 
