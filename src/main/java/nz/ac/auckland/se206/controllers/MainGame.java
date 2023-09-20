@@ -104,7 +104,7 @@ public class MainGame {
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
 
-    disableInteractPane();
+    // disableInteractPane();
 
     // addChat("test");
   }
@@ -263,10 +263,11 @@ public class MainGame {
   }
 
   public static void enableInteractPane() {
+    initialised_interact_pane.setVisible(true);
     initialised_interact_pane.setDisable(false);
     FadeTransition ft = new FadeTransition();
     ft.setDuration(javafx.util.Duration.millis(500));
-    ft.setNode(initialised_game_pane);
+    ft.setNode(initialised_interact_pane);
     ft.setFromValue(0);
     ft.setToValue(1);
     ft.play();
@@ -276,11 +277,11 @@ public class MainGame {
   public static void disableInteractPane() {
     FadeTransition ft = new FadeTransition();
     ft.setDuration(javafx.util.Duration.millis(500));
-    ft.setNode(initialised_game_pane);
+    ft.setNode(initialised_interact_pane);
     ft.setFromValue(1.0);
     ft.setToValue(0);
-    ft.setAutoReverse(true);
-    ft.setCycleCount(1);
+    // ft.setAutoReverse(true);
+    // ft.setCycleCount(1);
     ft.play();
     initialised_interact_pane.setDisable(true);
     // initialised_interact_pane.setOpacity(0);
