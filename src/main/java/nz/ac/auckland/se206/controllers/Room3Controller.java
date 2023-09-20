@@ -10,9 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
-import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -42,16 +40,12 @@ public class Room3Controller {
       clickableDoor;
 
   @FXML private Circle box1, box2, box3, box4, box5;
-  private Circle[] radarPoints;
-  private ImageView[] radarObjects;
-  private ArrayList<Rectangle> obsts;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
   @FXML private ImageView radar_image, radar_computer, map;
   @FXML private Pane clickPane;
-  private boolean isRadarComputerOpen;
 
   private ArrayList<Rectangle> obstacles;
 

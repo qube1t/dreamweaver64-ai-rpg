@@ -12,10 +12,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
-import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -71,8 +69,6 @@ public class Room2Controller {
       rect33;
 
   private static boolean gptInit = false;
-  private static int gptStage = 0;
-
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
 
@@ -94,15 +90,15 @@ public class Room2Controller {
     gptResponse = new Label();
     gptResponse.setText("Pirate : Find the key to open the treasure box");
 
+    if (GameState.isBoxKeyFound) {
+      boxKey.setVisible(false);
+    }
+
     MainGame.enableInteractPane();
   }
 
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException {
-    if (gptInit) {
-      speech_bubble.setVisible(false);
-      gptResponse.setVisible(false);
-    }
     if (GameState.isBookFound && !GameState.isBoxKeyFound) {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
@@ -120,9 +116,6 @@ public class Room2Controller {
       Image keyImage = new Image("/images/key.png");
       MainGame.addObtainedItem(keyImage, "treasure box key");
       System.out.println("Box key obtained");
-    } else {
-      // write this sentance in chat box or pirate's speech bubble
-      System.out.println("Find the item to trade with pirate to open the boxes");
     }
   }
 
