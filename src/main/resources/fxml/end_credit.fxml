@@ -8,12 +8,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndCreditController">
    <children>
       <HBox layoutX="49.982421875" layoutY="50.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
          <children>
-            <VBox prefHeight="320.0" prefWidth="542.0">
+            <VBox fx:id="contentVBox" prefHeight="320.0" prefWidth="542.0">
                <children>
                   <Label alignment="CENTER" prefHeight="32.0" prefWidth="501.0" text="IMAGE" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -81,7 +80,7 @@
                   </Label>
                </children>
             </VBox>
-            <ScrollBar orientation="VERTICAL" />
+            <ScrollBar fx:id="scrollbar" orientation="VERTICAL" />
          </children>
       </HBox>
    </children>
