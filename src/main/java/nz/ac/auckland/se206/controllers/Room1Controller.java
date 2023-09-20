@@ -134,6 +134,7 @@ public class Room1Controller {
         "User update, User has tried to open main exit without solving the mission. No reply"
             + " needed.");
     if (GameState.winTheGame) {
+      GameState.endTime = System.currentTimeMillis();
       MainGame.addOverlay("end_menu", false);
     }
   }

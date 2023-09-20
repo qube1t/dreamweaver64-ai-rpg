@@ -11,6 +11,7 @@ import nz.ac.auckland.se206.GameState;
 public class EndMenuController {
   @FXML private Button exit;
   @FXML private Text WinOrLose;
+  @FXML private Text timeLeft;
   @FXML private Label attribution;
 
   public void initialize() {
@@ -18,6 +19,8 @@ public class EndMenuController {
     // Set the text to display based on whether the player won or lost
     if (GameState.winTheGame) {
       WinOrLose.setText("You Escaped!");
+      long time = (GameState.endTime - GameState.startTime) / 1000;
+      timeLeft = new Text("Time Left: " + time);
     } else {
       WinOrLose.setText("Time's Up! You Lose!");
     }
