@@ -76,7 +76,7 @@ public class MainGame {
     chatPane.setMouseTransparent(true);
     bubbleTextPane.setMouseTransparent(true);
     aiCharacterPane.setMouseTransparent(true);
-    chat_toggle_btn.setMouseTransparent(false);
+    // chat_toggle_btn.setMouseTransparent(false);
 
 
     GameState.mainGame = this;
@@ -99,7 +99,7 @@ public class MainGame {
         .getChildren()
         .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
-    addOverlay("room3", true);
+    addOverlay("room1", true);
 
     // Helper.setBooksInRoom1();
     instance = this;
@@ -128,8 +128,8 @@ public class MainGame {
 
     initialised_game_pane
         .getChildren()
-        .add(initialised_game_pane.getChildren().size() - 2, backgroundBlur);
-    initialised_game_pane.getChildren().add(initialised_game_pane.getChildren().size() - 2, room1);
+        .add(initialised_game_pane.getChildren().size() - 3, backgroundBlur);
+    initialised_game_pane.getChildren().add(initialised_game_pane.getChildren().size() - 3, room1);
   }
 
   public static MainGame getInstance() {
@@ -139,13 +139,13 @@ public class MainGame {
   public static void removeOverlay(boolean alsoRooms) {
     int sub = 0;
     if (alsoRooms) sub = 2;
-    if (initialised_game_pane.getChildren().size() > 4 - sub) {
+    if (initialised_game_pane.getChildren().size() > 5 - sub) {
       initialised_game_pane
           .getChildren()
-          .remove(initialised_game_pane.getChildren().size() - 1 - 2);
+          .remove(initialised_game_pane.getChildren().size() - 1 - 3);
       initialised_game_pane
           .getChildren()
-          .remove(initialised_game_pane.getChildren().size() - 1 - 2);
+          .remove(initialised_game_pane.getChildren().size() - 1 - 3);
       initialised_game_pane.requestFocus();
     }
   }
@@ -206,12 +206,14 @@ public class MainGame {
 
       speechBubble.setVisible(false);
       bubbleTextPane.setVisible(false);
+      chatPane.setMouseTransparent(false);
     } else {
       // hide chatPane
       chatPane.setDisable(true);
       chatPane.setOpacity(0);
       chat_toggle_btn.setText("Show Chat");
       outer_pane.requestFocus();
+      chatPane.setMouseTransparent(true);
     }
   }
 

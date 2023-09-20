@@ -45,7 +45,6 @@
                               <Image url="@../images/ai_img.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="chat_toggle_btn" layoutX="103.0" layoutY="173.0" onMouseClicked="#toggleChat" style="-fx-background-color: blue; -fx-label-padding: 5;" text="Show Chat" textFill="#cdd3f8" AnchorPane.bottomAnchor="8.0" />
                         <ImageView fx:id="speechBubble" fitHeight="130.0" fitWidth="374.0" layoutX="26.0" pickOnBounds="true" visible="false" AnchorPane.bottomAnchor="107.0">
 
                            <image>
@@ -65,6 +64,11 @@
                      <StackPane.margin>
                         <Insets bottom="40.0" left="100.0" />
                      </StackPane.margin>
+                  </AnchorPane>
+                  <AnchorPane maxHeight="-Infinity" maxWidth="200.0" StackPane.alignment="BOTTOM_LEFT">
+                     <children>
+                        <Label fx:id="chat_toggle_btn" onMouseClicked="#toggleChat" style="-fx-background-color: blue; -fx-label-padding: 5;" text="Show Chat" textFill="#cdd3f8" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="0.0" />
+                     </children>
                   </AnchorPane>
                </children></StackPane>
 
