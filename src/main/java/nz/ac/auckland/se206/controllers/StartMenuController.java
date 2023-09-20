@@ -45,6 +45,7 @@ public class StartMenuController {
       App.setRoot("main_game");
       GameState.isGameStarted = true;
       MainGame.getTimeLimitForGameMode(timeLimit);
+      GameState.startTime = System.currentTimeMillis();
     } catch (IOException e) {
       e.printStackTrace();
     }

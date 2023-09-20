@@ -11,6 +11,9 @@ public class GameState {
 
   public static String[] gameMode;
 
+  public static long startTime;
+  public static long endTime;
+
   public static boolean winTheGame = false;
 
   /** Indicates whether the game has started. */

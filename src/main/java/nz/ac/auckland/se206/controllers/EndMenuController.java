@@ -13,7 +13,13 @@ public class EndMenuController {
   @FXML private Text WinOrLose;
 
   public void initialize() {
-
+    GameState.endTime = System.currentTimeMillis();
+    try {
+      MainGame.addOverlay("end_credit", false);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     // Set the text to display based on whether the player won or lost
     if (GameState.winTheGame) {
       WinOrLose.setText("You Escaped!");
