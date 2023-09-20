@@ -2,7 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 
 public class BookShelfController {
@@ -50,6 +52,12 @@ public class BookShelfController {
             if (!hasTakenOneBook()) {
               lbl_book.setVisible(false);
               book_rect.setVisible(false);
+              if (GameState.booksInRoom1[index] == GameState.trueBook) {
+                GameState.isBookFound = true;
+              }
+              Image bookImage =
+                  new Image(App.class.getResource("/images/rooms/room1/book.png").toString());
+              MainGame.addObtainedItem(bookImage);
               GameState.booksInRoom1[index] = null;
             } else {
               returnBook();
