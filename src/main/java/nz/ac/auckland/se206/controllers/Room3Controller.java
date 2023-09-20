@@ -78,8 +78,13 @@ public class Room3Controller {
             GameState.puzzleIntroMessageRoom3 = result;
           });
     }
-    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.room3WelcomeMessage());
-    MainGame.enableInteractPane();
+
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom3.room3WelcomeMessage(),
+        (result) -> {
+          System.out.println(result);
+          MainGame.enableInteractPane();
+        });
 
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();

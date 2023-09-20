@@ -27,7 +27,7 @@ public class GptPromptEngineeringRoom3 {
         + " aircraft code to decrypt letter in another rooom.You need to achknowledge the"
         + " current state of the game. Give the user intructions on the mission with maximum"
         + " 2 sentences, not including any hints. Surround the response to be displayed to"
-        + " the player to the user with #.";
+        + " the player to the user with *.";
   }
 
   public static String getRandomCity() {
@@ -39,17 +39,17 @@ public class GptPromptEngineeringRoom3 {
     return "Now the player enters the puzzle game after clicking the book which given a"
         + " unarranged destnation city name and the player need to drag and change the"
         + " position of the letter until the correct destnation city. Write a 10 words welcome"
-        + " message.";
+        + " message and do not surround the message with *.";
   }
 
   public static String wrongPuzzleRoom3() {
     return "Now the player rearranged the city name but it is not the correct city name, generate"
         + " a 10 words message to tell the player that the city name is wrong and need to"
-        + " rearrange again.";
+        + " rearrange again do not surrounded with *.";
   }
 
   public static String correctPuzzleRoom3() {
     return "Now the player rearranged the city name and it is the correct city name, say correct"
-        + " and congrats the player about the achievement.";
+        + " and congrats the player about the achievement and do not surrounded with *";
   }
 }
