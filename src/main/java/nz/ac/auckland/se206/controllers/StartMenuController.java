@@ -65,7 +65,6 @@ public class StartMenuController {
         GameState.hintsRemaining = 0;
         break;
     }
-    MainGame.setHintCount(difficulty);
 
     System.out.println(
         "Game started with"
@@ -79,6 +78,7 @@ public class StartMenuController {
       App.setRoot("main_game");
       GameState.isGameStarted = true;
       MainGame.getTimeLimit(timeLimit);
+      MainGame.setHintCount(difficulty);
     } catch (IOException e) {
       e.printStackTrace();
     }

@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.MainGame;
@@ -31,10 +30,7 @@ public class GameState {
 
   /** Indicates whether the game has started. */
   public static boolean isGameStarted = false;
-
-  /** Indicates the time limit that player has chosen */
-  public static int chosenTime;
-
+  
   /** Indicates the wrong choice that the player has entered in room3 minigame */
   public static int wrongChoice = 0;
 
@@ -98,6 +94,4 @@ public class GameState {
 
   /** Indicates whether the item8 has found */
   public static boolean isItem8Found = false;
-
-  public static ImageView[] items;
 }

@@ -3,12 +3,9 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-
 import javafx.concurrent.Task;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -30,21 +27,12 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainGame {
 
-  @FXML private Pane game_pane;
   @FXML private static Character character;
+  @FXML private static Pane initialised_game_pane;
+  @FXML private Pane game_pane;
   @FXML private Pane outer_pane;
-  private static Label timer_initiated;
   @FXML private Label timer;
-  private static Label hint_initiated;
   @FXML private Label hint_count;
-  private static ImageView item1_initiated;
-  private static ImageView item2_initiated;
-  private static ImageView item3_initiated;
-  private static ImageView item4_initiated;
-  private static ImageView item5_initiated;
-  private static ImageView item6_initiated;
-  private static ImageView item7_initiated;
-  private static ImageView item8_initaited;
   @FXML private ImageView item1;
   @FXML private ImageView item2;
   @FXML private ImageView item3;
@@ -63,21 +51,29 @@ public class MainGame {
   @FXML private TextField chatInput;
   @FXML private Pane interact_pane;
 
-  Text bubbleChatText = new Text("text");
-
   private static MainGame instance;
   private static Thread timeLimitThread;
   private static List<ObtainedItemsWithId> obtainedItems = new ArrayList<>();
-
-  @FXML private static Pane initialised_game_pane;
   private static Pane initialised_interact_pane;
+
+  private static Label timer_initiated;
+  private static Label hint_initiated;
+  private static ImageView item1_initiated;
+  private static ImageView item2_initiated;
+  private static ImageView item3_initiated;
+  private static ImageView item4_initiated;
+  private static ImageView item5_initiated;
+  private static ImageView item6_initiated;
+  private static ImageView item7_initiated;
+  private static ImageView item8_initaited;
+
+  Text bubbleChatText = new Text("text");
 
   public void initialize() throws IOException {
     chatPane.setMouseTransparent(true);
     bubbleTextPane.setMouseTransparent(true);
     aiCharacterPane.setMouseTransparent(true);
     // chat_toggle_btn.setMouseTransparent(false);
-
 
     GameState.mainGame = this;
 
@@ -101,6 +97,7 @@ public class MainGame {
         .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
     addOverlay("room1", true);
+    GameState.isGameStarted = true;
 
     // Helper.setBooksInRoom1();
     instance = this;
@@ -110,7 +107,6 @@ public class MainGame {
     bubbleTextPane.setContent(bubbleChatText);
 
     // disableInteractPane();
-
     // addChat("test");
   }
 
@@ -236,8 +232,6 @@ public class MainGame {
                   chatInput.setDisable(false);
                 });
           });
-
-      ;
       chatInput.setText("");
       outer_pane.requestFocus();
     }
@@ -299,8 +293,7 @@ public class MainGame {
     BookShelfController.returnBook();
   }
 
-  public static void getTimeLimit(String timeLimit){
-    GameState.isGameStarted = true;
+  public static void getTimeLimit(String timeLimit) {
     System.out.println("start game");
     switch (timeLimit) {
       case "2 minutes":
@@ -324,7 +317,7 @@ public class MainGame {
 
   /**
    * Sets the time limit.
-   * 
+   *
    * @param timeLimit
    */
   private static void setTimeLimit(int timeLimit) {
@@ -339,7 +332,8 @@ public class MainGame {
               int time = currentTime;
               int minutes = time / 60;
               int seconds = time % 60;
-              Platform.runLater(() -> timer_initiated.setText(minutes + " minutes " + seconds + " seconds left"));
+              Platform.runLater(
+                  () -> timer_initiated.setText(minutes + " minutes " + seconds + " seconds left"));
               try {
                 Thread.sleep(1000);
               } catch (InterruptedException e) {
@@ -355,9 +349,7 @@ public class MainGame {
     timeLimitThread.start();
   }
 
-  /**
-   * Handles the time limit reached event.
-   */
+  /** Handles the time limit reached event. */
   private static void handleTimeLimitReached() {
     GameState.timeLimitReached = true;
     if (!GameState.winTheGame) {
@@ -372,12 +364,19 @@ public class MainGame {
   }
 
   static void setHintCount(String difficulty) {
-    if (difficulty.equals("EASY")) {
-      hint_initiated.setText("Unlimited");      
-    } else if (difficulty.equals("MEDIUM")) {
-      hint_initiated.setText("5");
-    } else if (difficulty.equals("HARD")) {
-      hint_initiated.setText("None");
+    switch (difficulty) {
+      case "EASY":
+        hint_initiated.setText("Unlimited");
+        break;
+      case "MEDIUM":
+        hint_initiated.setText("5");
+        break;
+      case "HARD":
+        hint_initiated.setText("None");
+        break;
+      default:
+        hint_initiated.setText("Unlimited");
+        break;
     }
   }
 
@@ -387,7 +386,15 @@ public class MainGame {
 
   private static void updateInventoryUI() {
     List<ImageView> inventoryItems =
-        List.of(item1_initiated, item2_initiated, item3_initiated, item4_initiated, item5_initiated, item6_initiated, item7_initiated, item8_initaited);
+        List.of(
+            item1_initiated,
+            item2_initiated,
+            item3_initiated,
+            item4_initiated,
+            item5_initiated,
+            item6_initiated,
+            item7_initiated,
+            item8_initaited);
     for (int i = 0; i < inventoryItems.size(); i++) {
       if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());

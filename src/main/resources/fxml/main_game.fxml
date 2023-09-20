@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <StackPane fx:id="outer_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="537.0" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
    <children>
@@ -22,15 +23,23 @@
                         <Image url="@../images/main_game/inventory/inventory_pane.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="item1" fitHeight="35.0" fitWidth="35.0" layoutX="37.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item2" fitHeight="35.0" fitWidth="35.0" layoutX="96.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item3" fitHeight="35.0" fitWidth="35.0" layoutX="155.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item4" fitHeight="35.0" fitWidth="35.0" layoutX="214.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item5" fitHeight="35.0" fitWidth="35.0" layoutX="273.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item6" fitHeight="35.0" fitWidth="35.0" layoutX="330.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item7" fitHeight="35.0" fitWidth="35.0" layoutX="390.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item8" fitHeight="35.0" fitWidth="35.0" layoutX="450.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="timer" layoutX="590.0" layoutY="14.0" prefHeight="35.0" prefWidth="72.0" text="120" textFill="WHITE" />
+                  <ImageView fx:id="item1" fitHeight="35.0" fitWidth="35.0" layoutX="29.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item2" fitHeight="35.0" fitWidth="35.0" layoutX="81.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item3" fitHeight="35.0" fitWidth="35.0" layoutX="131.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item4" fitHeight="35.0" fitWidth="35.0" layoutX="181.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item5" fitHeight="35.0" fitWidth="35.0" layoutX="231.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item6" fitHeight="35.0" fitWidth="35.0" layoutX="282.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item7" fitHeight="35.0" fitWidth="35.0" layoutX="332.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item8" fitHeight="35.0" fitWidth="35.0" layoutX="383.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="timer" alignment="CENTER" layoutX="589.0" layoutY="9.0" prefHeight="35.0" prefWidth="93.0" text="120" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font></Label>
+                  <Label fx:id="hint_count" alignment="CENTER" layoutX="468.0" layoutY="9.0" prefHeight="35.0" prefWidth="93.0" text="Hint" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="8.0">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
             <StackPane fx:id="game_pane" prefHeight="475.0" style="-fx-border-color: blue; -fx-background-color: black;">
                <children>
