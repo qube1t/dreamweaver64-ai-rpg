@@ -12,37 +12,22 @@ public class InstructionsLoad {
   @FXML private Label instruct_txt;
   @FXML private Label time_txt;
 
-  public void initialize() throws ApiProxyException {
-    instruct_txt.setText(nz.ac.auckland.se206.GameState.instructionMsg);
-    time_txt.setText(
-        "You have " + Integer.parseInt(GameState.gameMode[1].replaceAll("[\\D]", "")) + " mins.");
+  private static Label initialised_instruct_txt;
+  private static Label initialised_time_txt;
 
+  public void initialize() throws ApiProxyException {
+    initialised_instruct_txt = instruct_txt;
+    initialised_time_txt = time_txt;
+
+    
     // loading
     // shelf setup
-    GameState.eleanorAi.runGpt(
-        GptPromptEngineeringRoom1.get7Books(),
-        str -> {
-          List<String> matchesList = Helper.getTextBetweenChar(str, "\"");
-          GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
-
-          String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));
-          System.out.println(ansBook);
-          // gptStage++;
-          MainGame.enableInteractPane();
-          // riddle for book
-
-          try {
-            GameState.eleanorAi.runGpt(
-                GptPromptEngineeringRoom1.getRiddleForPirate(ansBook),
-                (_str) -> {
-                  List<String> pirateDialogue = Helper.getTextBetweenChar(_str, "^");
-                  if (pirateDialogue.size() > 0) {
-                    GameState.pirateRiddle = pirateDialogue.get(0).replaceAll("\"", "");
-                  }
-                });
-          } catch (ApiProxyException e) {
-            e.printStackTrace();
-          }
-        });
+    setTexts(nz.ac.auckland.se206.GameState.instructionMsg, Integer.parseInt(GameState.gameMode[1].replaceAll("[\\D]", "")));
+  }
+  
+  public static void setTexts(String a, int b) {
+    initialised_instruct_txt.setText(a);
+    initialised_time_txt.setText(
+        "You have " + b + " mins.");
   }
 }

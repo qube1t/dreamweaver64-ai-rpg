@@ -3,10 +3,14 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the room view. */
@@ -68,6 +72,32 @@ public class Room1Controller {
 
   private void initGpt() throws ApiProxyException {
     GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom1.get7Books(),
+        str -> {
+          List<String> matchesList = Helper.getTextBetweenChar(str, "\"");
+          GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
+
+          String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));
+          System.out.println(ansBook);
+          // gptStage++;
+          MainGame.enableInteractPane();
+          // riddle for book
+
+          try {
+            GameState.eleanorAi.runGpt(
+                GptPromptEngineeringRoom1.getRiddleForPirate(ansBook),
+                (_str) -> {
+                  List<String> pirateDialogue = Helper.getTextBetweenChar(_str, "^");
+                  if (pirateDialogue.size() > 0) {
+                    GameState.pirateRiddle = pirateDialogue.get(0).replaceAll("\"", "");
+                  }
+                });
+          } catch (ApiProxyException e) {
+            e.printStackTrace();
+          }
+        });
+
+    GameState.eleanorAi.runGpt(
         "The user has entered their childhood home. In this room they are encouraged to look"
             + " around. You can talk to the user. Only the chunk of text surrounded with the"
             + " character * before and after will be shown to the user. Keep the message 1"
@@ -76,11 +106,19 @@ public class Room1Controller {
 
   @FXML
   public void goToLeftRoom() throws IOException {
+    InstructionsLoad.setTexts("", 0);
     MainGame.disableInteractPane();
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room3", true);
   }
 
+  @FXML
+  private void goToRightRoom() throws IOException {
+    InstructionsLoad.setTexts("", 0);
+    MainGame.disableInteractPane();
+    MainGame.removeOverlay(true);
+    MainGame.addOverlay("room2", true);
+  }
   @FXML
   private void openBookShelf() throws IOException, ApiProxyException {
     MainGame.addOverlay("book_shelf", false);
@@ -88,12 +126,6 @@ public class Room1Controller {
         "User update: User has opened book shelf. No reply is needed for this message.");
   }
 
-  @FXML
-  private void goToRightRoom() throws IOException {
-    MainGame.disableInteractPane();
-    MainGame.removeOverlay(true);
-    MainGame.addOverlay("room2", true);
-  }
 
   @FXML
   private void openMainDoor() throws ApiProxyException {
