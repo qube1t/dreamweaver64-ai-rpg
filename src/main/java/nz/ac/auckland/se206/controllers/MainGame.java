@@ -366,22 +366,22 @@ public class MainGame {
   static void setHintCount(String difficulty) {
     switch (difficulty) {
       case "EASY":
-        hint_initiated.setText("Unlimited");
+        hint_initiated.setText("Hint: \u221E");
         break;
       case "MEDIUM":
-        hint_initiated.setText("5");
+        hint_initiated.setText("Hint: 5");
         break;
       case "HARD":
-        hint_initiated.setText("None");
+        hint_initiated.setText("Hint: None");
         break;
       default:
-        hint_initiated.setText("Unlimited");
+        hint_initiated.setText("Hint: \u221E");
         break;
     }
   }
 
   private static void updateHintCount() {
-    hint_initiated.setText(Integer.toString(GameState.hintsRemaining));
+    hint_initiated.setText("Hint: " + Integer.toString(GameState.hintsRemaining));
   }
 
   private static void updateInventoryUI() {

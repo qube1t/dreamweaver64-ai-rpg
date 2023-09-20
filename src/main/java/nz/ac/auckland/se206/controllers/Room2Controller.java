@@ -83,18 +83,20 @@ public class Room2Controller {
 
     speech_bubble = new ImageView();
     gptResponse = new Label();
-    gptResponse.setText("Pirate : Find the key to open the treasure box");
 
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
     }
-
     MainGame.enableInteractPane();
   }
 
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
-    if (GameState.isBookFound && !GameState.isBoxKeyFound) {
+    if (!GameState.isBookFound) {
+      speech_bubble.setVisible(true);
+      gptResponse.setVisible(true);
+      gptResponse.setText(GameState.pirateRiddle);
+    } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
       GameState.eleanorAi.runGpt(
@@ -130,7 +132,8 @@ public class Room2Controller {
         if (correctBoxClicked == 0) {
           try {
             GameState.eleanorAi.runGpt(
-                "User update: User has found the correct treasure box. No reply is needed for this message.");
+                "User update: User has found the correct treasure box. No reply is needed for this"
+                    + " message.");
           } catch (ApiProxyException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -142,7 +145,8 @@ public class Room2Controller {
         if (wrongBoxClicked == 0) {
           try {
             GameState.eleanorAi.runGpt(
-                "User update: User has found the wrong treasure box. No reply is needed for this message.");
+                "User update: User has found the wrong treasure box. No reply is needed for this"
+                    + " message.");
           } catch (ApiProxyException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
