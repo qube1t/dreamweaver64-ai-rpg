@@ -26,13 +26,13 @@ public class GptPromptEngineeringRoom3 {
         + " needs to interact with different objects including solving a puzzle to get the"
         + " aircraft code to decrypt letter in another rooom.You need to achknowledge the"
         + " current state of the game. Give the user intructions on the mission with maximum"
-        + " 2 sentences, not including any hints. Surround the sentences to be shown to the"
-        + " user with #.";
+        + " 2 sentences, not including any hints. Surround the response to be displayed to"
+        + " the player to the user with #.";
   }
 
   public static String getRandomCity() {
     return "Generate a random city that is less than 10 characters, only reply with the city name"
-        + " surrounded by # example #london#";
+        + " surrounded by ^, example ^Paris^";
   }
 
   public static String getIntroPuzzleMessage() {

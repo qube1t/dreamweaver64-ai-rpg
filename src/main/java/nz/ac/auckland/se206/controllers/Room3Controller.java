@@ -58,8 +58,8 @@ public class Room3Controller {
           (result) -> {
             // Get the city surrounded by #
             // Find the start and end indices of the aircraft code within single quotes
-            int startIndex = result.indexOf("#");
-            int endIndex = result.indexOf("#", startIndex + 1);
+            int startIndex = result.indexOf("^");
+            int endIndex = result.indexOf("^", startIndex + 1);
 
             if (startIndex != -1 && endIndex != -1)
               GameState.arrangedDestnationCity = result.substring(startIndex + 1, endIndex);
