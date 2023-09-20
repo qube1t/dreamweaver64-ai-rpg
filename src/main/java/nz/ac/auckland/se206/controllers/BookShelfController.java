@@ -49,19 +49,19 @@ public class BookShelfController {
       int index = i;
       lbl_books[i].setOnMouseClicked(
           e -> {
+            GameState.takenBook = lbl_book.getText();
+            if (hasTakenOneBook()) returnBook();
+            lbl_book.setVisible(false);
+            book_rect.setVisible(false);
+            if (GameState.booksInRoom1[index] == GameState.trueBook) {
+              GameState.isBookFound = true;
+            }
             if (!hasTakenOneBook()) {
-              lbl_book.setVisible(false);
-              book_rect.setVisible(false);
-              if (GameState.booksInRoom1[index] == GameState.trueBook) {
-                GameState.isBookFound = true;
-              }
               Image bookImage =
                   new Image(App.class.getResource("/images/rooms/room1/book.png").toString());
               MainGame.addObtainedItem(bookImage);
-              GameState.booksInRoom1[index] = null;
-            } else {
-              returnBook();
             }
+            GameState.booksInRoom1[index] = null;
           });
     }
   }
@@ -84,8 +84,9 @@ public class BookShelfController {
       if (GameState.booksInRoom1[i] == null) {
         lbl_books[i].setVisible(true);
         book_rects[i].setVisible(true);
-        GameState.booksInRoom1[i] = lbl_books[i].getText();
-        // lbl_book.setText(GameState.booksInRoom1[i]);
+        GameState.booksInRoom1[i] = GameState.takenBook;
+        GameState.takenBook = null;
+        lbl_books[i].setText(GameState.booksInRoom1[i]);
         break;
       }
     }

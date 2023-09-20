@@ -100,4 +100,6 @@ public class GameState {
   public static boolean isItem8Found = false;
 
   public static ImageView[] items;
+
+  public static String takenBook;
 }
