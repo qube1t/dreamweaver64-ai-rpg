@@ -49,18 +49,24 @@ public class BookShelfController {
       int index = i;
       lbl_books[i].setOnMouseClicked(
           e -> {
+            boolean oneWasTaken = hasTakenOneBook();
+            if (oneWasTaken) returnBook();
             GameState.takenBook = lbl_book.getText();
-            if (hasTakenOneBook()) returnBook();
-            lbl_book.setVisible(false);
-            book_rect.setVisible(false);
+
             if (GameState.booksInRoom1[index] == GameState.trueBook) {
               GameState.isBookFound = true;
             }
-            if (!hasTakenOneBook()) {
+            else {
+              GameState.isBookFound = false;
+            }
+
+            if (!oneWasTaken) {
               Image bookImage =
-                  new Image(App.class.getResource("/images/rooms/room1/book.png").toString());
+              new Image(App.class.getResource("/images/rooms/room1/book.png").toString());
               MainGame.addObtainedItem(bookImage);
             }
+            lbl_book.setVisible(false);
+            book_rect.setVisible(false);
             GameState.booksInRoom1[index] = null;
           });
     }
