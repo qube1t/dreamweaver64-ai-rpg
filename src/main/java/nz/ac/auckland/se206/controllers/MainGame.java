@@ -411,4 +411,14 @@ public class MainGame {
     obtainedItems.add(new ObtainedItemsWithId(itemImage, itemId));
     updateInventoryUI();
   }
+
+  public static void removeObtainedItem(String itemId) {
+    for (int i = 0; i < obtainedItems.size(); i++) {
+      if (obtainedItems.get(i).getId().equals(itemId)) {
+        obtainedItems.remove(i);
+        break;
+      }
+    }
+    updateInventoryUI();
+  }
 }

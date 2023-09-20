@@ -63,7 +63,6 @@ public class Room2Controller {
       rect32,
       rect33;
 
-  private static boolean gptInit = false;
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
 
@@ -84,6 +83,10 @@ public class Room2Controller {
     speech_bubble = new ImageView();
     gptResponse = new Label();
 
+    speech_bubble.setVisible(true);
+    gptResponse.setVisible(true);
+    gptResponse.setText(GameState.pirateRiddle);
+
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
     }
@@ -103,6 +106,7 @@ public class Room2Controller {
           "User update: User has found the treasure box key. No reply is needed for this message.");
       System.out.println("Box key found");
       Image keyImage = new Image("/images/key.png");
+      MainGame.removeObtainedItem("book");
       MainGame.addObtainedItem(keyImage, "treasure box key");
       System.out.println("Box key obtained");
     }
@@ -115,10 +119,6 @@ public class Room2Controller {
    * @throws IOException
    */
   private void getRandomBox(int numOfBox) throws IOException {
-    if (gptInit) {
-      speech_bubble.setVisible(false);
-      gptResponse.setVisible(false);
-    }
     int boxLocation = GameState.currentBox;
     System.out.println("Number of treasure box: " + boxLocation);
     if (GameState.isBoxKeyFound) {
@@ -154,11 +154,6 @@ public class Room2Controller {
         }
         wrongBoxClicked++;
       }
-      box1.setDisable(true);
-      box2.setDisable(true);
-      box3.setDisable(true);
-      box4.setDisable(true);
-      box5.setDisable(true);
     }
   }
 
