@@ -29,7 +29,11 @@ public class EndCreditController {
     long timeTaken = GameState.endTime - GameState.startTime;
     game_mode.setText("Game Mode: " + GameState.gameMode[0]);
     time_limit.setText("Time Limit: " + GameState.gameMode[1]);
-    time_taken.setText("Time Taken: " + timeTaken + " seconds");
+    if (GameState.winTheGame) {
+        time_taken.setText("Time Taken: " + timeTaken + " seconds");
+    } else {
+        time_taken.setText("Time Limit Exceeded");
+    }
   }
 
   private void getItem() {
