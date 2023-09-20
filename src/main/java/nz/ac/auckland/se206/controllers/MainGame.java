@@ -333,8 +333,10 @@ public class MainGame {
               if (GameState.winTheGame || GameState.timeLimitReached) {
                 break;
               }
-              int time = currentTime; 
-              Platform.runLater(() -> timer_initiated.setText(String.valueOf(time)));
+              int time = currentTime;
+              int minutes = time / 60;
+              int seconds = time % 60;
+              Platform.runLater(() -> timer_initiated.setText(minutes + " minutes " + seconds + " seconds left"));
               try {
                 Thread.sleep(1000);
               } catch (InterruptedException e) {
