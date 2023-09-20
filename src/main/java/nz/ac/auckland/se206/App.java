@@ -95,7 +95,7 @@ public class App extends Application {
     // Font.loadFont(App.class.getResource("/fonts/Abaddon Light.ttf").toString(), 14);
     Pane root = (Pane) loadFxml("start_menu");
 
-    scene = new Scene(root, 800, 700);
+    scene = new Scene(root, 700, 750);
 
     stage.setScene(scene);
     stage.show();
