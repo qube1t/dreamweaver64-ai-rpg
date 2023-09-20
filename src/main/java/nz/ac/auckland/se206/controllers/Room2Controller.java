@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -12,9 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
-import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room2Controller {
@@ -25,13 +22,11 @@ public class Room2Controller {
   @FXML private Rectangle box4;
   @FXML private Rectangle box5;
   @FXML private Rectangle pirate;
-
   @FXML private Rectangle doorToRoom1;
   @FXML private ImageView boxKey;
   @FXML private ImageView speech_bubble;
   @FXML private Label gptResponse;
   @FXML private Pane interactablePane;
-
   @FXML private Character character;
   @FXML
   private Rectangle rect1,
@@ -98,20 +93,12 @@ public class Room2Controller {
   }
 
   @FXML
-  public void onGetTrade(MouseEvent event) throws IOException {
+  public void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
     if (GameState.isBookFound && !GameState.isBoxKeyFound) {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
-      try {
-        GameState.eleanorAi.runGpt(
-            GptPromptEngineeringRoom2.foundBoxKey(),
-            (st) -> {
-              List<String> findBoxKey = Helper.getTextBetweenChar(st, "%");
-            });
-      } catch (ApiProxyException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
+      GameState.eleanorAi.runGpt(
+          "User update: User has found the treasure box key. No reply is needed for this message.");
       System.out.println("Box key found");
       Image keyImage = new Image("/images/key.png");
       MainGame.addObtainedItem(keyImage, "treasure box key");
@@ -143,10 +130,7 @@ public class Room2Controller {
         if (correctBoxClicked == 0) {
           try {
             GameState.eleanorAi.runGpt(
-                GptPromptEngineeringRoom2.clickCorrectBox(),
-                (st) -> {
-                  List<String> clickCorrectBox = Helper.getTextBetweenChar(st, "/");
-                });
+                "User update: User has found the correct treasure box. No reply is needed for this message.");
           } catch (ApiProxyException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -157,10 +141,8 @@ public class Room2Controller {
         // write this sentance in chat box
         if (wrongBoxClicked == 0) {
           try {
-            GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.clickWrongBox(),
-                (st) -> {
-                  List<String> clickWrongBox = Helper.getTextBetweenChar(st, "/");
-                });
+            GameState.eleanorAi.runGpt(
+                "User update: User has found the wrong treasure box. No reply is needed for this message.");
           } catch (ApiProxyException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -173,9 +155,6 @@ public class Room2Controller {
       box3.setDisable(true);
       box4.setDisable(true);
       box5.setDisable(true);
-    } else {
-      // write this sentance in chat box or pirate's speech bubble
-      System.out.println("Find the item to trade with pirate");
     }
   }
 

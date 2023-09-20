@@ -9,7 +9,7 @@
 
 <?import nz.ac.auckland.se206.components.Character?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" stylesheets="@../css/style.css" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
    <children>
       <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -96,13 +96,13 @@
       </ImageView>
       <Pane fx:id="interactablePane">
          <children>
-            <Rectangle fx:id="box1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="132.0" layoutY="188.0" onMouseClicked="#onClickBox1" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-            <Rectangle fx:id="box2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="110.0" layoutY="334.0" onMouseClicked="#onClickBox2" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-            <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="176.0" layoutY="251.0" onMouseClicked="#onClickBox3" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-            <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="310.0" layoutY="360.0" onMouseClicked="#onClickBox4" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-            <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" layoutX="399.0" layoutY="288.0" onMouseClicked="#onClickBox5" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-            <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="82.0" layoutX="64.0" layoutY="219.0" onMouseClicked="#onClickDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
-            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="53.0" layoutX="382.0" layoutY="141.0" onMouseClicked="#onGetTrade" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
+            <Rectangle fx:id="box1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff65" height="26.0" layoutX="132.0" layoutY="188.0" onMouseClicked="#onClickBox1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="44.0" />
+            <Rectangle fx:id="box2" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="26.0" layoutX="108.0" layoutY="334.0" onMouseClicked="#onClickBox2" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="44.0" />
+            <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="26.0" layoutX="176.0" layoutY="251.0" onMouseClicked="#onClickBox3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="44.0" />
+            <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="26.0" layoutX="309.0" layoutY="360.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="44.0" />
+            <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="26.0" layoutX="399.0" layoutY="288.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="44.0" />
+            <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="82.0" layoutX="56.0" layoutY="219.0" onMouseClicked="#onClickDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
+            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="#ffffff67" height="59.0" layoutX="380.0" layoutY="137.0" onMouseClicked="#onGetTrade" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="37.0" />
             <ImageView fx:id="speech_bubble" fitHeight="87.0" fitWidth="161.0" layoutX="367.0" layoutY="46.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/speechBubble.png" />
