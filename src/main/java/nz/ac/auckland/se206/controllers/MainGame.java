@@ -22,6 +22,7 @@ import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
+import nz.ac.auckland.se206.ObtainedItemsWithId;
 import nz.ac.auckland.se206.components.Character;
 
 public class MainGame {
@@ -60,7 +61,7 @@ public class MainGame {
 
   private static MainGame instance;
   private static Thread timeLimitThread;
-  private static List<Image> obtainedItems = new ArrayList<>();
+  static List<ObtainedItemsWithId> obtainedItems = new ArrayList<>();
 
   @FXML private static Pane initialised_game_pane;
 
@@ -290,7 +291,8 @@ public class MainGame {
         List.of(item1_initiated, item2_initiated, item3_initiated, item4_initiated, item5_initiated, item6_initiated, item7_initiated, item8_initaited);
     for (int i = 0; i < inventoryItems.size(); i++) {
       if (obtainedItems.size() > i) {
-        inventoryItems.get(i).setImage(obtainedItems.get(i));
+        inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());
+        inventoryItems.get(i).setId(obtainedItems.get(i).getId());
         inventoryItems.get(i).setFitWidth(35);
         inventoryItems.get(i).setPreserveRatio(true);
         inventoryItems.get(i).setSmooth(true);
@@ -300,8 +302,8 @@ public class MainGame {
     }
   }
 
-  public static void addObtainedItem(Image itemImage) {
-    obtainedItems.add(itemImage);
+  public static void addObtainedItem(Image itemImage, String itemId) {
+    obtainedItems.add(new ObtainedItemsWithId(itemImage, itemId));
     updateInventoryUI();
   }
 }

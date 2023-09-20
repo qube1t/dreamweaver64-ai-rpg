@@ -85,7 +85,7 @@ public class Room2Controller {
       boxKey.setVisible(false);
       System.out.println("Box key found");
       Image keyImage = new Image("/images/key.png");
-      MainGame.addObtainedItem(keyImage);
+      MainGame.addObtainedItem(keyImage, "Treasure box key");
       System.out.println("Box key obtained");
     } else {
       // write this sentance in chat box or pirate's speech bubble

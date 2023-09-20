@@ -34,7 +34,7 @@ public class TreasureBoxController {
         message.setText("mom");
         imgTreasure.setVisible(false);
         Image treasureImage = new Image("/images/treasure.png");
-        MainGame.addObtainedItem(treasureImage);
+        MainGame.addObtainedItem(treasureImage, "treasure");
         System.out.println("Treasure obtained");
     }
 }
