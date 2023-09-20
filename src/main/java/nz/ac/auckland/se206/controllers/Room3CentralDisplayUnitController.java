@@ -139,8 +139,10 @@ public class Room3CentralDisplayUnitController {
    */
   public void handleExecuteClick() {
     String currentInput = displayOutput.getText();
-    String firstThreeDestnation = GameState.arrangedCityName.substring(0, 2);
-    String firstThreeDeparture = GameState.currentLocatiions[GameState.currentCity - 1].getText();
+    String firstThreeDestnation = GameState.arrangedDestnationCity.substring(0, 3).toUpperCase();
+    String firstThreeDeparture =
+        GameState.currentCities[GameState.currentCityIndex - 1].getText().substring(0, 3);
+    System.out.println(firstThreeDestnation + "/" + firstThreeDeparture);
     if (currentInput.equalsIgnoreCase(firstThreeDestnation + "/" + firstThreeDeparture)) {
       // Aircraft code has been found.
       GameState.isAircraftCodeFound = true;

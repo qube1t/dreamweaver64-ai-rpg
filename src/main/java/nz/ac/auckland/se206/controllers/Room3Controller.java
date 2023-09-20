@@ -10,9 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.components.Character;
-import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -40,7 +38,6 @@ public class Room3Controller {
       clickableComputer,
       clickableRadar,
       clickableDoor;
-
   @FXML private Circle box1, box2, box3, box4, box5;
   private Circle[] radarPoints;
   private ImageView[] radarObjects;
@@ -71,24 +68,28 @@ public class Room3Controller {
     //   System.out.println(result);
     // });
 
-    // Generate the unarranged city name when room3 loads
-    if ((GameState.unarrangedCityName == "" || GameState.arrangedCityName.length() > 8)) {
-      GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.getRandomCity(),
+    // Generate the arranged city name and make it unarranged when room3 loads
+    if ((GameState.arrangedDestnationCity == ""
+        || GameState.arrangedDestnationCity.length() > 11)) {
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.getRandomCity(),
           (result) -> {
             System.out.println(result);
-            GameState.arrangedCityName = result;
+            GameState.arrangedDestnationCity = result;
             // Make the city name unarranged
-            GameState.unarrangedCityName = makeUnarrangedCityName(result);
+            GameState.unarrangedDestnationCity = makeUnarrangedCityName(result);
             // System.out.println(GameState.unarrangedCityName);
           });
     }
 
-    if (GameState.introMessage == "") {
-      GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
+    // Generate the intro message for the puzzle
+    if (GameState.puzzleIntroMessageRoom3 == "") {
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
           (result) -> {
             System.out.println(result);
 
-            GameState.introMessage = result;
+            GameState.puzzleIntroMessageRoom3 = result;
             MainGame.enableInteractPane();
           });
     }
@@ -107,11 +108,6 @@ public class Room3Controller {
 
     character.setLayoutX(530);
     character.setLayoutY(210);
-  }
-
-  @FXML
-  public void onClickDepBoard() {
-    System.out.println("DepBoard clicked");
   }
 
   protected String makeUnarrangedCityName(String cityName) {

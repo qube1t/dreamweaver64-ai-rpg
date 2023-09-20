@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.gpt;
 
-
 public class GptPromptEngineeringRoom3 {
 
   /**
@@ -36,7 +35,7 @@ public class GptPromptEngineeringRoom3 {
   }
 
   public static String getRandomCity() {
-    return "Generate a popular city that is less than 8 characters, only reply with the city name"
+    return "Generate a popular city that is less than 10 characters, only reply with the city name"
         + " example 'london'";
   }
 
