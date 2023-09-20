@@ -3,12 +3,9 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.animation.FadeTransition;
 import javafx.application.Platform;
-
 import javafx.concurrent.Task;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -24,10 +21,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-
-import nz.ac.auckland.se206.Helper;
-
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainGame {
@@ -77,7 +72,6 @@ public class MainGame {
     bubbleTextPane.setMouseTransparent(true);
     aiCharacterPane.setMouseTransparent(true);
     // chat_toggle_btn.setMouseTransparent(false);
-
 
     GameState.mainGame = this;
 
@@ -223,11 +217,7 @@ public class MainGame {
       addChat("You: " + chatInput.getText(), false);
       chatInput.setDisable(true);
       GameState.eleanorAi.runGpt(
-          "The user has send this message: '"
-              + chatInput.getText()
-              + "'. Reply as a normal human in 1 or 2 sentences. If the user asks, you can give"
-              + " hints to previous riddles, and every hint needs to have the character % before"
-              + " the hint. Do not reveal the answer even if the user asks for it.",
+          GptPromptEngineeringRoom1.getChatMessageFromUser(chatInput.getText()),
           (res) -> {
             Platform.runLater(
                 () -> {
@@ -298,7 +288,7 @@ public class MainGame {
     BookShelfController.returnBook();
   }
 
-  public static void getTimeLimitForGameMode(String timeLimit){
+  public static void getTimeLimitForGameMode(String timeLimit) {
     GameState.isGameStarted = true;
     System.out.println("start game");
     switch (timeLimit) {
@@ -323,7 +313,7 @@ public class MainGame {
 
   /**
    * Sets the time limit.
-   * 
+   *
    * @param timeLimit
    */
   private static void setTimeLimit(int timeLimit) {
@@ -335,7 +325,7 @@ public class MainGame {
               if (GameState.winTheGame || GameState.timeLimitReached) {
                 break;
               }
-              int time = currentTime; 
+              int time = currentTime;
               Platform.runLater(() -> timer_initiated.setText(String.valueOf(time)));
               try {
                 Thread.sleep(1000);
@@ -352,9 +342,7 @@ public class MainGame {
     timeLimitThread.start();
   }
 
-  /**
-   * Handles the time limit reached event.
-   */
+  /** Handles the time limit reached event. */
   private static void handleTimeLimitReached() {
     GameState.timeLimitReached = true;
     if (!GameState.winTheGame) {
@@ -364,7 +352,15 @@ public class MainGame {
 
   private static void updateInventoryUI() {
     List<ImageView> inventoryItems =
-        List.of(item1_initiated, item2_initiated, item3_initiated, item4_initiated, item5_initiated, item6_initiated, item7_initiated, item8_initaited);
+        List.of(
+            item1_initiated,
+            item2_initiated,
+            item3_initiated,
+            item4_initiated,
+            item5_initiated,
+            item6_initiated,
+            item7_initiated,
+            item8_initaited);
     for (int i = 0; i < inventoryItems.size(); i++) {
       if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i));
