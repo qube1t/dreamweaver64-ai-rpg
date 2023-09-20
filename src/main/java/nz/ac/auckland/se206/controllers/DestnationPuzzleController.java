@@ -72,8 +72,7 @@ public class DestnationPuzzleController {
     // Handle the case where the user has entered the correct answer
     if (GameState.arrangedCityName.equalsIgnoreCase(currentText)) {
       GameState.isPuzzleInRoom3Solved = true;
-      GptEngine.runGpt(
-          new ChatMessage("user", GptPromptEngineeringRoom3.correctPuzzleRoom3()),
+      GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.correctPuzzleRoom3(),
           (result) -> {
             System.out.println(result);
 
@@ -87,8 +86,7 @@ public class DestnationPuzzleController {
                 });
           });
     } else {
-      GptEngine.runGpt(
-          new ChatMessage("user", GptPromptEngineeringRoom3.wrongPuzzleRoom3()),
+      GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.wrongPuzzleRoom3(),
           (result) -> {
             System.out.println(result);
 
@@ -106,6 +104,6 @@ public class DestnationPuzzleController {
 
   @FXML
   protected void onClickClose() {
-    MainGame.removeOverlay();
+    MainGame.removeOverlay(false);
   }
 }
