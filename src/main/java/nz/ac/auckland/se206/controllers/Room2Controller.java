@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -28,6 +30,7 @@ public class Room2Controller {
   @FXML private Label gptResponse;
   @FXML private Pane interactablePane;
   @FXML private Character character;
+  @FXML private ScrollPane speechBubbleScrollPane;
   @FXML
   private Rectangle rect1,
       rect2,
@@ -80,7 +83,16 @@ public class Room2Controller {
     character.setLayoutX(60);
     character.setLayoutY(250);
 
-    gptResponse.setText(GameState.pirateRiddle);
+    speechBubbleScrollPane = (ScrollPane) interactablePane.lookup("#speechBubbleScrollPane");
+    if (speechBubbleScrollPane != null) {
+      speechBubbleScrollPane.setContent(gptResponse);      
+      speechBubbleScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+      speechBubbleScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+    }
+
+    speechBubbleScrollPane.setVisible(false);
+    speech_bubble.setVisible(false);
+    gptResponse.setVisible(false);
 
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
@@ -91,7 +103,9 @@ public class Room2Controller {
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) { 
-      System.out.println("Pirate clicked");     
+      System.out.println("Pirate clicked"); 
+      speechBubbleScrollPane.setVisible(true);
+      gptResponse.setText(GameState.pirateRiddle);    
       speech_bubble.setVisible(true);
       gptResponse.setVisible(true);
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {

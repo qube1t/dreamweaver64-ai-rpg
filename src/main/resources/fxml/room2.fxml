@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -103,12 +104,16 @@
             <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="26.0" layoutX="399.0" layoutY="288.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="44.0" />
             <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="82.0" layoutX="56.0" layoutY="219.0" onMouseClicked="#onClickDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
             <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="#ffffff67" height="59.0" layoutX="380.0" layoutY="137.0" onMouseClicked="#onGetTrade" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="37.0" />
-            <ImageView fx:id="speech_bubble" fitHeight="118.0" fitWidth="220.0" layoutX="339.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="speech_bubble" fitHeight="118.0" fitWidth="207.0" layoutX="336.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/speechBubble.png" />
                </image>
             </ImageView>
-            <Label fx:id="gptResponse" alignment="CENTER" layoutX="350.0" layoutY="22.0" prefHeight="72.0" prefWidth="186.0" text="Hello!" textAlignment="CENTER" wrapText="true" />
+            <ScrollPane fx:id="speechBubbleScrollPane" layoutX="353.0" layoutY="24.0" prefHeight="72.0" prefWidth="180.0">
+              <content>
+                  <Label fx:id="gptResponse" alignment="CENTER" prefHeight="100.0" prefWidth="163.0" text="Hello!" textAlignment="CENTER" wrapText="true" />
+              </content>
+            </ScrollPane>
          </children>
       </Pane>
    </children>
