@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.MainGame;
 
 /** Represents the state of the game. */
@@ -19,6 +21,7 @@ public class GameState {
   /** Indicates whether the key has been found. */
   public static boolean isKeyFound = false;
 
+  /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
 
   public static MainGame mainGame;
@@ -28,11 +31,17 @@ public class GameState {
   /** Indicates whether the game has started. */
   public static boolean isGameStarted = false;
 
+  /** Indicates the time limit that player has chosen */
+  public static int chosenTime;
+
+  /** Indicates the wrong choice that the player has entered in room3 minigame */
+  public static int wrongChoice = 0;
+
   /** Indicates whether the time limit has reached */
   public static boolean timeLimitReached = false;
 
   /** These fields are used in room1 */
-  public static String[] booksInRoom1 = new String[7];
+  // public static String[] booksInRoom1 = new String[7];
 
 
   /** These fields are used in room3 */
@@ -44,10 +53,29 @@ public class GameState {
   /** Indicates wheter the aircraft code has been found */
   public static boolean isAircraftCodeFound = false;
 
+  public static int currentCity = -1;
 
-  /** These fields are used in room2 */
   /** Indicates the location of the treasure box. */
   public static int currentBox = -1;
+
+  public static String unarrangedCityName = "";
+  public static String arrangedCityName = "";
+
+  public static Text[] currentLocatiions;
+
+  /** Indicates whether the puzzle in room 3 solved. */
+  public static boolean isPuzzleInRoom3Solved = false;
+
+  /** Indicates the aircraft code */
+  public static String aircraftCode = "";
+
+  /** Indicates the introduction message when first enter the puzzle in Room3 */
+  public static String introMessage = "";
+
+  /** Stores the created instance of overlay */
+  public static Pane overlay;
+
+  public static String[] booksInRoom1 = new String[7];
 
   /** Indicates whether the book has found to trade with pirate */
   public static boolean isBookFound = true;
@@ -71,5 +99,4 @@ public class GameState {
   public static boolean isItem8Found = false;
 
   public static ImageView[] items;
-
 }

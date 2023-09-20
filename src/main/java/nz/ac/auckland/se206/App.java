@@ -96,11 +96,13 @@ public class App extends Application {
     Font.loadFont(App.class.getResource("/fonts/Abaddon Light.ttf").toString(), 14);
     Pane root = (Pane) loadFxml("start_menu");
 
-    scene = new Scene(root, 1000, 700);
+    scene = new Scene(root, 800, 700);
 
     stage.setScene(scene);
     stage.show();
 
+    // Add the style css file
+    scene.getStylesheets().add("/css/style.css");
     // letterbox(scene, root);
 
     // stage.setFullScreen(true);

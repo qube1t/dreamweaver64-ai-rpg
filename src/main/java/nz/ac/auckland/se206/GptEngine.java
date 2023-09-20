@@ -25,6 +25,7 @@ public class GptEngine {
       chatCompletionRequest =
           new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
   }
+
   
   /**
    * Runs the GPT model with a given chat message.

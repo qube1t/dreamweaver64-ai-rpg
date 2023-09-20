@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.gpsControllerRoom3">
+   <children>
+      <ImageView fitHeight="296.0" fitWidth="512.0" layoutX="14.0" layoutY="14.0">
+         <image>
+            <Image url="@../images/rooms/room3/map_on_computer.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="451.0" fitWidth="550.0" layoutX="-4.0" layoutY="4.0">
+         <image>
+            <Image url="@../images/rooms/room3/computer_transparent.png" />
+         </image>
+      </ImageView>
+      <Circle fx:id="point1" fill="DODGERBLUE" layoutX="382.0" layoutY="37.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="label1" fill="#29c348" layoutX="330.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEATTLE" wrappingWidth="48.86767791114971">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+      </Text>
+      <Circle fx:id="point5" fill="DODGERBLUE" layoutX="163.0" layoutY="78.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="label5" fill="#29c348" layoutX="170.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOKYO" wrappingWidth="44.39050505958721">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+      </Text>
+      <Circle fx:id="point3" fill="DODGERBLUE" layoutX="109.0" layoutY="258.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="label3" fill="#29c348" layoutX="62.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERTH" wrappingWidth="41.22216246925518">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+      </Text>
+      <Text fx:id="label2" fill="#29c348" layoutX="426.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOUSTON" wrappingWidth="56.02520964943096">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+      </Text>
+      <Circle fx:id="point2" fill="DODGERBLUE" layoutX="444.0" layoutY="94.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="label4" fill="#29c348" layoutX="62.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BEIJING" wrappingWidth="49.93511412941143">
+         <font>
+            <Font name="Impact" size="15.0" />
+         </font>
+      </Text>
+      <Circle fx:id="point4" fill="DODGERBLUE" layoutX="107.0" layoutY="63.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+   </children>
+</AnchorPane>

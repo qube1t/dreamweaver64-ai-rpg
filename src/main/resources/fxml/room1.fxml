@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<?import nz.ac.auckland.se206.components.Character?>
+<!-- <?import nz.ac.auckland.se206.components.Character?> -->
 
 
 

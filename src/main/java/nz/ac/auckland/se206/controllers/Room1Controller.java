@@ -50,6 +50,8 @@ public class Room1Controller {
 
   @FXML private Pane interactablePane;
 
+  @FXML private Pane interactablePane;
+
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() throws ApiProxyException {
     ArrayList<Rectangle> obsts =
