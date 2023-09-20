@@ -85,7 +85,6 @@ public class MainGame {
     item7_initiated = item7;
     item8_initaited = item8;
 
-    System.out.println(1);
     initialised_game_pane = game_pane;
     initialised_interact_pane = interact_pane;
 
@@ -104,7 +103,17 @@ public class MainGame {
 
     // disableInteractPane();
 
-    // addChat("test");
+    GameState.mediaPlayer.setCycleCount(99);
+    GameState.mediaPlayer.play();
+
+    // mediaPlayer.setOnEndOfMedia(
+    //     new Runnable() {
+    //       @Override
+    //       public void run() {
+    //         mediaPlayer.seek(Duration.ZERO);
+    //         mediaPlayer.play();
+    //       }
+    //     });
   }
 
   public static void addOverlay(String roomN, boolean isRoom) throws IOException {

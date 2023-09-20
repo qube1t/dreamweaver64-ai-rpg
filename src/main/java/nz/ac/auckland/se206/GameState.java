@@ -2,6 +2,8 @@ package nz.ac.auckland.se206;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.MainGame;
 
@@ -10,6 +12,10 @@ public class GameState {
 
   // AI
   public static GptEngine eleanorAi = new GptEngine();
+  public static AudioClip mediaPlayer =
+      new AudioClip(
+          (new Media(App.class.getResource("/sounds/blue_space_v0_8_32_kbps.mp3").toString()))
+              .getSource());
 
   /** Indicates whether the riddle has been resolved. */
   public static boolean isRiddleResolved = false;

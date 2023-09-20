@@ -141,5 +141,12 @@
 			<artifactId>javax.json</artifactId>
 			<version>1.0.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.openjfx/javafx.media -->
+<dependency>
+    <groupId>org.openjfx</groupId>
+    <artifactId>javafx-media</artifactId>
+    <version>21</version>
+    <type>pom</type>
+</dependency>
 	</dependencies>
 </project>
