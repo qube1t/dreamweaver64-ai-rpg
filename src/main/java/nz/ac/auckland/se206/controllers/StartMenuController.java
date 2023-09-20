@@ -8,11 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GptEngine;
-
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
-
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartMenuController {
@@ -38,7 +35,6 @@ public class StartMenuController {
           }
           Platform.runLater(() -> startButton.setDisable(false));
         });
-
   }
 
   @FXML
@@ -56,6 +52,19 @@ public class StartMenuController {
     }
 
     GameState.gameMode = new String[] {difficulty, timeLimit};
+
+    switch (difficulty) {
+      case "EASY":
+        GameState.hintsRemaining = -1;
+        break;
+      case "MEDIUM":
+        GameState.hintsRemaining = 5;
+        break;
+      case "HARD":
+        GameState.hintsRemaining = 0;
+        break;
+    }
+
     System.out.println(
         "Game started with"
             + GameState.gameMode[0]

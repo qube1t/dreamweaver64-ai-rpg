@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.gpt;
 
+import nz.ac.auckland.se206.GameState;
+
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineeringRoom1 {
 
@@ -35,6 +37,21 @@ public class GptPromptEngineeringRoom1 {
     return "This is the loading stage. Give a riddle in the form of a quote from"
         + ansbook
         + " in 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"
-        + " quote before and after with the character ^. Do not reveal the book name.";
+        + " quote before and after with the character ^. The user needs to identify the book. Do"
+        + " not reveal the book name.";
+  }
+
+  public static String getChatMessageFromUser(String chatInput) {
+    if (GameState.hintsRemaining == 0) {
+      return "The user has send this message: '"
+          + chatInput
+          + "'. Reply as a normal human in 1 or 2 sentences. You cannot give hints to any riddle."
+          + " But you can remind them of the current state of the dream.";
+    }
+    return "The user has send this message: '"
+        + chatInput
+        + "'. Reply as a normal human in 1 or 2 sentences. If the user asks for hints, you"
+        + " can give hints to previous riddles, with the character @"
+        + " before every hint. Do not reveal the answer even if the user asks for it.";
   }
 }
