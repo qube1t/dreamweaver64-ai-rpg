@@ -41,8 +41,6 @@ public class MainGame {
   @FXML private ImageView item4;
   @FXML private ImageView item5;
   @FXML private ImageView item6;
-  @FXML private ImageView item7;
-  @FXML private ImageView item8;
   @FXML private Label chat_toggle_btn;
   @FXML private Pane aiCharacterPane;
   @FXML private Pane chatPane;
@@ -67,8 +65,6 @@ public class MainGame {
   private static ImageView item4_initiated;
   private static ImageView item5_initiated;
   private static ImageView item6_initiated;
-  private static ImageView item7_initiated;
-  private static ImageView item8_initaited;
 
   Text bubbleChatText = new Text("text");
 
@@ -88,8 +84,6 @@ public class MainGame {
     item4_initiated = item4;
     item5_initiated = item5;
     item6_initiated = item6;
-    item7_initiated = item7;
-    item8_initaited = item8;
 
     System.out.println(1);
     initialised_game_pane = game_pane;
@@ -104,7 +98,6 @@ public class MainGame {
     GameState.isGameStarted = true;
     getTimeLimit();
     setHintCount();
-
 
     // Helper.setBooksInRoom1();
     instance = this;
@@ -426,9 +419,7 @@ public class MainGame {
             item3_initiated,
             item4_initiated,
             item5_initiated,
-            item6_initiated,
-            item7_initiated,
-            item8_initaited);
+            item6_initiated);
     for (int i = 0; i < inventoryItems.size(); i++) {
       if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());

@@ -5,7 +5,7 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.GameState;
@@ -14,7 +14,7 @@ public class TreasureBoxController {
 
     @FXML private ImageView imgTreasure;
     @FXML private ImageView clickedTreasure;
-    @FXML private TextArea message;
+    @FXML private Label message;
     @FXML private Button treasure;
 
     public void initialize() {
