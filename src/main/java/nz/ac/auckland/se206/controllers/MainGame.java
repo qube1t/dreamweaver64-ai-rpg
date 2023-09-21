@@ -31,7 +31,7 @@ public class MainGame {
   @FXML private static Character character;
   @FXML private static Pane initialised_game_pane;
   @FXML private Pane game_pane;
-  @FXML private Pane outer_pane;
+  @FXML Pane outer_pane;
   @FXML private Label timer;
   @FXML private Label hint_count;
   @FXML private ImageView item1;
@@ -94,14 +94,14 @@ public class MainGame {
     initialised_game_pane = game_pane;
     initialised_interact_pane = interact_pane;
 
-    GameState.startTime = System.currentTimeMillis();
-
     outer_pane
         .getChildren()
         .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
     addOverlay("room1", true);
     GameState.isGameStarted = true;
+    getTimeLimit();
+    setHintCount();
 
     // Helper.setBooksInRoom1();
     instance = this;
@@ -290,13 +290,9 @@ public class MainGame {
     // initialised_interact_pane.setOpacity(0);
   }
 
-  private void clickHeader() {
-    BookShelfController.returnBook();
-  }
-
-  public static void getTimeLimit(String timeLimit) {
+  public void getTimeLimit() {
     System.out.println("start game");
-    switch (timeLimit) {
+    switch (GameState.gameMode[1]) {
       case "2 minutes":
         timer_initiated.setText("120");
         setTimeLimit(120);
@@ -321,12 +317,12 @@ public class MainGame {
    *
    * @param timeLimit
    */
-  private static void setTimeLimit(int timeLimit) {
+  private void setTimeLimit(int timeLimit) {
     Task<Void> task =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
+            for (int currentTime = 5; currentTime >= 0; currentTime--) {
               if (GameState.winTheGame || GameState.timeLimitReached) {
                 break;
               }
@@ -336,15 +332,22 @@ public class MainGame {
               Platform.runLater(
                   () -> {
                     timer_initiated.setText(minutes + " : " + seconds);
-                updateHintCount();}
-                  );
+                    updateHintCount();
+                  });
               try {
                 Thread.sleep(1000);
               } catch (InterruptedException e) {
                 return null;
               }
             }
-            Platform.runLater(() -> handleTimeLimitReached());
+            Platform.runLater(() -> {
+              try {
+                handleTimeLimitReached();
+              } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+              }
+            });
             return null;
           }
         };
@@ -353,22 +356,20 @@ public class MainGame {
     timeLimitThread.start();
   }
 
-  /** Handles the time limit reached event. */
-  private static void handleTimeLimitReached() {
+  /** Handles the time limit reached event. 
+   * @throws IOException */ 
+  private void handleTimeLimitReached() throws IOException {
     GameState.timeLimitReached = true;
     if (!GameState.winTheGame) {
       System.out.println("time limit reached");
-      try {
-        MainGame.addOverlay("end_menu", false);
-      } catch (IOException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-      }
+      outer_pane
+        .getChildren()
+        .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
     }
   }
 
-  static void setHintCount(String difficulty) {
-    switch (difficulty) {
+  private void setHintCount() {
+    switch (GameState.gameMode[0]) {
       case "EASY":
         hint_initiated.setText("Hint: \u221E");
         break;
@@ -384,7 +385,7 @@ public class MainGame {
     }
   }
 
-  private static void updateHintCount() {
+  private void updateHintCount() {
     hint_initiated.setText("Hint: " + Integer.toString(GameState.hintsRemaining));
   }
 
