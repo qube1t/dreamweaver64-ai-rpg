@@ -24,6 +24,7 @@ public class Room2Controller {
   @FXML private Rectangle box5;
   @FXML private Rectangle pirate;
   @FXML private Rectangle doorToRoom1;
+  @FXML private Rectangle doorToRoom3;
   @FXML private ImageView boxKey;
   @FXML private ImageView speech_bubble;
   @FXML private Label gptResponse;
@@ -63,7 +64,8 @@ public class Room2Controller {
       rect30,
       rect31,
       rect32,
-      rect33;
+      rect33,
+      rect34;
 
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
@@ -76,7 +78,7 @@ public class Room2Controller {
                 rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
                 rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21, rect22,
                 rect23, rect24, rect25, rect26, rect27, rect28, rect29, rect30, rect31, rect32,
-                rect33));
+                rect33, rect34));
 
     character.enableMobility(obsts, interactablePane.getChildren());
     character.setLayoutX(60);
@@ -234,8 +236,20 @@ public class Room2Controller {
    * @throws IOException
    */
   @FXML
-  public void onClickDoor(MouseEvent event) throws IOException {
+  public void onOpenRoom1(MouseEvent event) throws IOException {
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room1", true);
+  }
+
+  /**
+   * Handles the click event on the door.
+   *
+   * @param event the mouse event
+   * @throws IOException
+   */
+  @FXML
+  public void onOpenRoom3(MouseEvent event) throws IOException {
+    MainGame.removeOverlay(true);
+    MainGame.addOverlay("room3", true);
   }
 }

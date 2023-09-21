@@ -322,7 +322,7 @@ public class MainGame {
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            for (int currentTime = 5; currentTime >= 0; currentTime--) {
+            for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
               if (GameState.winTheGame || GameState.timeLimitReached) {
                 break;
               }
@@ -364,7 +364,7 @@ public class MainGame {
       System.out.println("time limit reached");
       outer_pane
         .getChildren()
-        .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
+        .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
     }
   }
 

@@ -52,6 +52,7 @@
             <Rectangle fx:id="rect31" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="66.0" layoutY="360.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
             <Rectangle fx:id="rect32" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="261.0" layoutX="14.0" layoutY="134.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="4.0" />
             <Rectangle fx:id="rect33" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="261.0" layoutX="609.0" layoutY="131.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="4.0" />
+            <Rectangle fx:id="rect34" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="192.0" layoutX="552.0" layoutY="152.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="19.0" />
             <ImageView fitWidth="55.0" layoutX="149.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/rooms/room2/treasureBox.png" />
@@ -102,7 +103,7 @@
             <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="202.0" layoutY="257.0" onMouseClicked="#onClickBox3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="55.0" />
             <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="350.0" layoutY="384.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="55.0" />
             <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="456.0" layoutY="300.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="55.0" />
-            <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="66.0" layoutY="216.0" onMouseClicked="#onClickDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
+            <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="66.0" layoutY="216.0" onMouseClicked="#onOpenRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
             <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="#ffffff67" height="66.0" layoutX="447.0" layoutY="126.0" onMouseClicked="#onGetTrade" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="44.0" />
             <ImageView fx:id="speech_bubble" fitHeight="119.0" fitWidth="196.0" layoutX="410.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -114,6 +115,7 @@
                   <Label fx:id="gptResponse" alignment="CENTER" prefHeight="94.0" prefWidth="154.0" text="Hello!" textAlignment="CENTER" wrapText="true" />
               </content>
             </ScrollPane>
+            <Rectangle fx:id="doorToRoom3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="544.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
          </children>
       </Pane>
    </children>

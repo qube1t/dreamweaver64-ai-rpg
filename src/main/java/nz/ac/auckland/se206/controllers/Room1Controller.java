@@ -135,7 +135,7 @@ public class Room1Controller {
     if (GameState.winTheGame) {
       GameState.mainGame.outer_pane
         .getChildren()
-        .add(1, (Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
+        .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
       
     }
   }
