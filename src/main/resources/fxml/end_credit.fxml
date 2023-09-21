@@ -8,16 +8,15 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndCreditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndCreditController">
 
    <children>
-      <HBox layoutX="89.0" layoutY="40.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
+      <HBox layoutX="89.0" layoutY="40.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
          <children>
             <VBox fx:id="contentVBox" prefHeight="520.0" prefWidth="612.0">
                <children>
 
-                  <Label alignment="CENTER" prefHeight="32.0" prefWidth="501.0" styleClass="centralDisplayUnitOutput" text="IMAGE" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="590.0" styleClass="centralDisplayUnitOutput" text="IMAGE" textAlignment="CENTER" textFill="WHITE">
 
                      <font>
                         <Font name="Impact" size="35.0" />

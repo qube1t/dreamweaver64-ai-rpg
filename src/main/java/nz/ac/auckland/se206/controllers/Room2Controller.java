@@ -33,6 +33,7 @@ public class Room2Controller {
   @FXML private ImageView speech_bubble;
   @FXML private Label gptResponse;
   @FXML private Pane interactablePane;
+  @FXML private Pane piratePane;
   @FXML private Character character;
   @FXML private ScrollPane speechBubbleScrollPane;
   @FXML
@@ -105,6 +106,24 @@ public class Room2Controller {
         character.setLayoutY(250);
     }
 
+    switch (GameState.prevRoom) {
+      case 1:
+        character.setLayoutX(70);
+        character.setLayoutY(250);
+        break;
+      case 3:
+        character.setLayoutX(460);
+        character.setLayoutY(250);
+        break;
+      default:
+        character.setLayoutX(70);
+        character.setLayoutY(250);
+    }
+
+    GameState.prevRoom = 2;
+
+    piratePane.setVisible(false);
+
     speechBubbleScrollPane = (ScrollPane) interactablePane.lookup("#speechBubbleScrollPane");
     if (speechBubbleScrollPane != null) {
       speechBubbleScrollPane.setContent(gptResponse);
@@ -112,15 +131,21 @@ public class Room2Controller {
       speechBubbleScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     }
 
-    if (!gptInit) {
-      initGpt();
-      gptInit = true;
+    if (!GameState.isRoom2FirstEntered) {
+      GameState.isRoom2FirstEntered = true;
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom2.room2WelcomeMessage(),
+          (result) -> {
+            MainGame.enableInteractPane();
+          });
     } else {
-
       MainGame.enableInteractPane();
     }
 
-    GameState.prevRoom = 2;
+    if (!gptInit) {
+      initGpt();
+      gptInit = true;
+    } else
     speechBubbleScrollPane.setVisible(false);
     speech_bubble.setVisible(false);
     gptResponse.setVisible(false);
@@ -137,7 +162,6 @@ public class Room2Controller {
           List<String> msg = Helper.getTextBetweenChar(s, "+");
           if (msg.size() > 0) GameState.encryptedFinalMsg = msg.get(0);
           else GameState.encryptedFinalMsg = s;
-          Platform.runLater(() -> MainGame.enableInteractPane());
         });
 
     GameState.eleanorAi.runGpt(
@@ -146,19 +170,16 @@ public class Room2Controller {
           List<String> msg = Helper.getTextBetweenChar(s, "+");
           if (msg.size() > 0) GameState.finalMsg = msg.get(0);
         });
-
-    // MainGame.enableInteractPane();
-
   }
 
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) {
-      System.out.println("Pirate clicked");
-      speechBubbleScrollPane.setVisible(true);
       gptResponse.setText(GameState.pirateRiddle);
+      piratePane.setVisible(true);
       speech_bubble.setVisible(true);
       gptResponse.setVisible(true);
+      speechBubbleScrollPane.setVisible(true);
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
@@ -166,11 +187,8 @@ public class Room2Controller {
           "User update: User has found the treasure box key. No reply is needed for this message.");
       System.out.println("Box key found");
       Image keyImage = new Image("/images/key.png");
-
       MainGame.removeObtainedItem("book");
       MainGame.addObtainedItem(keyImage, "treasure box key");
-
-      System.out.println("Box key obtained");
     }
   }
 
@@ -179,8 +197,9 @@ public class Room2Controller {
    *
    * @param numOfBox
    * @throws IOException
+   * @throws ApiProxyException
    */
-  private void getRandomBox(int numOfBox) throws IOException {
+  private void getRandomBox(int numOfBox) throws IOException, ApiProxyException {
     int boxLocation = GameState.currentBox;
     System.out.println("Number of treasure box: " + boxLocation);
     if (GameState.isBoxKeyFound) {
@@ -189,33 +208,41 @@ public class Room2Controller {
       box3.setDisable(false);
       box4.setDisable(false);
       box5.setDisable(false);
-
       if (numOfBox == boxLocation) {
         MainGame.addOverlay("treasure_box", false);
         GameState.isEncryptedMessageFound = true;
         if (correctBoxClicked == 0) {
-          try {
-            GameState.eleanorAi.runGpt(
-                "User update: User has found the correct treasure box. No reply is needed for this"
-                    + " message.");
-          } catch (ApiProxyException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-          }
+          GameState.eleanorAi.runGpt(
+              GptPromptEngineeringRoom2.getPirateRightResponse(),
+              (result) -> {
+                piratePane.setVisible(true);
+                speech_bubble.setVisible(true);
+                gptResponse.setVisible(true);
+                speechBubbleScrollPane.setVisible(true);
+                Platform.runLater(
+                    () -> {
+                      gptResponse.setText(result);
+                    });
+              });
           correctBoxClicked++;
         }
       } else {
         // write this sentance in chat box
         if (wrongBoxClicked == 0) {
-          try {
-            GameState.eleanorAi.runGpt(
-                "User update: User has found the wrong treasure box. No reply is needed for this"
-                    + " message.");
-
-          } catch (ApiProxyException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-          }
+          GameState.eleanorAi.runGpt(
+              GptPromptEngineeringRoom2.getPirateWrongResponse(),
+              (result) -> {
+                piratePane.setVisible(true);
+                speech_bubble.setVisible(true);
+                gptResponse.setVisible(true);
+                speechBubbleScrollPane.setVisible(true);
+                Platform.runLater(
+                    () -> {
+                      gptResponse.setText(result);
+                    });
+              });
+            Helper.changeTreasureBox(GameState.currentBox);
+            System.out.println(GameState.currentBox);
         }
         wrongBoxClicked++;
       }
@@ -227,9 +254,10 @@ public class Room2Controller {
    *
    * @param event the mouse event
    * @throws IOException
+   * @throws ApiProxyException
    */
   @FXML
-  public void onClickBox1(MouseEvent event) throws IOException {
+  public void onClickBox1(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("First treasure box clicked");
     getRandomBox(1);
   }
@@ -239,9 +267,10 @@ public class Room2Controller {
    *
    * @param event the mouse event
    * @throws IOException
+   * @throws ApiProxyException
    */
   @FXML
-  public void onClickBox2(MouseEvent event) throws IOException {
+  public void onClickBox2(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("Second teasure box clicked");
     getRandomBox(2);
   }
@@ -251,9 +280,10 @@ public class Room2Controller {
    *
    * @param event the mouse event
    * @throws IOException
+   * @throws ApiProxyException
    */
   @FXML
-  public void onClickBox3(MouseEvent event) throws IOException {
+  public void onClickBox3(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("Third treasure box clicked");
     getRandomBox(3);
   }
@@ -263,9 +293,10 @@ public class Room2Controller {
    *
    * @param event the mouse event
    * @throws IOException
+   * @throws ApiProxyException
    */
   @FXML
-  public void onClickBox4(MouseEvent event) throws IOException {
+  public void onClickBox4(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("Fourth treasure box clicked");
     getRandomBox(4);
   }
@@ -275,9 +306,10 @@ public class Room2Controller {
    *
    * @param event the mouse event
    * @throws IOException
+   * @throws ApiProxyException
    */
   @FXML
-  public void onClickBox5(MouseEvent event) throws IOException {
+  public void onClickBox5(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("Fifth treasure box clicked");
     getRandomBox(5);
   }
@@ -302,6 +334,7 @@ public class Room2Controller {
    */
   @FXML
   public void onOpenRoom3(MouseEvent event) throws IOException {
+
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room3", true);
   }

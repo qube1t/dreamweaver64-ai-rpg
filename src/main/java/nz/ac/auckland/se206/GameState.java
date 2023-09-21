@@ -27,6 +27,7 @@ public class GameState {
 
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
+
   public static int hintsRemaining;
 
   public static boolean isWorldMapOpened = false;
@@ -83,9 +84,7 @@ public class GameState {
   /** Indicates whether the book has found to trade with pirate */
   public static boolean isBookFound = false;
 
-
   public static String trueBook = null;
-
 
   /** Indicates whether the box key has found to open the treasure box */
   public static boolean isBoxKeyFound = false;
@@ -95,8 +94,9 @@ public class GameState {
 
   public static String takenBook;
 
-public static String finalMsg;
+  public static String finalMsg;
 
-public static String encryptedFinalMsg;
+  public static String encryptedFinalMsg;
 
+  public static boolean isRoom2FirstEntered = false;
 }

@@ -7,41 +7,30 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: Black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndMenuController">
    <children>
-      <ImageView fitHeight="700.0" fitWidth="700.0">
-         <image>
-            <Image url="@../images/rooms/start_menu/gameStartBackground.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="exit" layoutX="283.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#onClickExit" prefHeight="58.0" prefWidth="134.0" styleClass="startEndTitle" text="EXIT" textFill="#9a0e64">
+      <Button fx:id="exit" layoutX="283.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#onClickExit" prefHeight="58.0" prefWidth="134.0" styleClass="startEndTitle" text="EXIT" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="283.0">
 
          <font>
             <Font name="Impact" size="44.0" />
          </font>
          <padding>
-            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>
       </Button>
-      <Text fx:id="WinOrLose" fill="WHITE" layoutX="138.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="startEndTitle" textAlignment="CENTER" wrappingWidth="430.02872720271455" AnchorPane.leftAnchor="132.0" AnchorPane.rightAnchor="132.0" AnchorPane.topAnchor="70.648437705">
+      <Text fx:id="WinOrLose" fill="WHITE" layoutX="135.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="startEndTitle" textAlignment="CENTER" wrappingWidth="430.02872720271455" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="70.0">
          <font>
             <Font name="Impact" size="40.0" />
          </font>
       </Text>
 
-      <Label fx:id="attribution" layoutX="531.0" layoutY="606.0" onMouseClicked="#onOpenEndCredit" prefHeight="36.0" prefWidth="135.0" styleClass="chooseLevel" text="ATTRIBUTION" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="34.0">
+      <Label fx:id="attribution" alignment="CENTER" layoutX="531.0" layoutY="606.0" onMouseClicked="#onOpenEndCredit" styleClass="chooseLevel" text="ATTRIBUTION" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
 
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-
-      <Text fx:id="timeLeft" layoutX="135.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="startEndTitle" textAlignment="CENTER" wrappingWidth="430.02872720271455">
-         <font>
-            <Font name="Impact" size="40.0" />
-         </font>
-      </Text>
+      <Label fx:id="letter" alignment="CENTER" layoutX="100.0" layoutY="160.0" prefHeight="270.0" prefWidth="500.0" textFill="WHITE" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0" />
 
    </children>
 </AnchorPane>
