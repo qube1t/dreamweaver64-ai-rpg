@@ -29,29 +29,52 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainGame {
 
-  @FXML private static Character character;
-  @FXML private static Pane initialised_game_pane;
-  @FXML private Pane game_pane;
-  @FXML Pane outer_pane;
-  @FXML private Label timer;
-  @FXML private Label hint_count;
-  @FXML private ImageView item1;
-  @FXML private ImageView item2;
-  @FXML private ImageView item3;
-  @FXML private ImageView item4;
-  @FXML private ImageView item5;
-  @FXML private ImageView item6;
-  @FXML private ImageView item7;
-  @FXML private ImageView item8;
-  @FXML private Label chat_toggle_btn;
-  @FXML private Pane aiCharacterPane;
-  @FXML private Pane chatPane;
-  @FXML private ImageView speechBubble;
-  @FXML private ScrollPane bubbleTextPane;
-  @FXML private Label bubbleText;
-  @FXML private ListView<Label> chat;
-  @FXML private TextField chatInput;
-  @FXML private Pane interact_pane;
+  @FXML
+  private static Character character;
+  @FXML
+  private static Pane initialised_game_pane;
+  @FXML
+  private Pane game_pane;
+  @FXML
+  Pane outer_pane;
+  @FXML
+  private Label timer;
+  @FXML
+  private Label hint_count;
+  @FXML
+  private ImageView item1;
+  @FXML
+  private ImageView item2;
+  @FXML
+  private ImageView item3;
+  @FXML
+  private ImageView item4;
+  @FXML
+  private ImageView item5;
+  @FXML
+  private ImageView item6;
+  @FXML
+  private ImageView item7;
+  @FXML
+  private ImageView item8;
+  @FXML
+  private Label chat_toggle_btn;
+  @FXML
+  private Pane aiCharacterPane;
+  @FXML
+  private Pane chatPane;
+  @FXML
+  private ImageView speechBubble;
+  @FXML
+  private ScrollPane bubbleTextPane;
+  @FXML
+  private Label bubbleText;
+  @FXML
+  private ListView<Label> chat;
+  @FXML
+  private TextField chatInput;
+  @FXML
+  private Pane interact_pane;
 
   private static MainGame instance;
   private static Thread timeLimitThread;
@@ -76,7 +99,6 @@ public class MainGame {
     chatPane.setMouseTransparent(true);
     bubbleTextPane.setMouseTransparent(true);
     aiCharacterPane.setMouseTransparent(true);
-    // chat_toggle_btn.setMouseTransparent(false);
 
     GameState.mainGame = this;
 
@@ -105,24 +127,24 @@ public class MainGame {
     getTimeLimit();
     setHintCount();
 
-
-    // Helper.setBooksInRoom1();
     instance = this;
     // setting up bubble chat
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
 
-    // disableInteractPane();
-    // addChat("test");
   }
 
   public static void addOverlay(String roomN, boolean isRoom) throws IOException {
+    // adds overlay to the game pane
     Region room1 = (Region) FXMLLoader.load(App.class.getResource("/fxml/" + roomN + ".fxml"));
     room1.setScaleShape(true);
 
-    if (isRoom) character = (Character) room1.lookup("#character");
+    if (isRoom) {
+      character = (Character) room1.lookup("#character");
+    }
 
+    // adding blur background
     Pane backgroundBlur = new Pane();
     backgroundBlur.setStyle("-fx-background-color: rgba(0, 0, 0, 0.5);");
     backgroundBlur.setOnMouseClicked(
@@ -130,6 +152,7 @@ public class MainGame {
           removeOverlay(false);
         });
 
+    // adding both to game pane
     initialised_game_pane
         .getChildren()
         .add(initialised_game_pane.getChildren().size() - 3, backgroundBlur);
@@ -141,8 +164,12 @@ public class MainGame {
   }
 
   public static void removeOverlay(boolean alsoRooms) {
+    // removing overlay
     int sub = 0;
-    if (alsoRooms) sub = 2;
+    if (alsoRooms){
+      // removing rooms as well
+      sub = 2;
+    }
     if (initialised_game_pane.getChildren().size() > 5 - sub) {
       initialised_game_pane
           .getChildren()
@@ -161,10 +188,10 @@ public class MainGame {
    */
   @FXML
   public void onKeyPressed(KeyEvent event) {
-    // System.out.println("key " + event.getCode() + " pressed");
-
+    // on key pressed
     String letter = event.getCode().toString();
 
+    // character movement
     if (letter.equals("W")) {
       character.setAction(0);
     } else if (letter.equals("A")) {
@@ -175,12 +202,14 @@ public class MainGame {
     } else if (letter.equals("D")) {
       character.setAction(3);
     } else if (letter.equals("ESCAPE")) {
+      // overlay removal
       removeOverlay(false);
     }
 
     // move after animating as it will change direction of character
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
-      if (!character.isAnimating()) character.startAnimation();
+      if (!character.isAnimating())
+        character.startAnimation();
       character.move();
     }
   }
@@ -224,13 +253,17 @@ public class MainGame {
   @FXML
   private void keyPressedChatInput(KeyEvent ke) throws ApiProxyException {
     if (ke.getCode().equals(KeyCode.ENTER)) {
+      // adding to chat when entered
       addChat("You: " + chatInput.getText(), false);
       chatInput.setDisable(true);
+
+      // getting response from eleanor
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom1.getChatMessageFromUser(chatInput.getText()),
           (res) -> {
             Platform.runLater(
                 () -> {
+                  // counting hints
                   int noOfHints = Helper.countOccurences(res, "~");
                   String msg = res.replaceAll("~", "");
                   System.out.println("hints contained" + noOfHints);
@@ -239,9 +272,10 @@ public class MainGame {
                     if (GameState.hintsRemaining - 1 >= 0) {
                       GameState.hintsRemaining -= 1;
                       System.out.println("Hints remaining: " + GameState.hintsRemaining);
-                    }
-                    else GameState.hintsRemaining = 0;
+                    } else
+                      GameState.hintsRemaining = 0;
                   }
+                  
                   addChat(msg, true);
                   chatInput.setDisable(false);
                 });
@@ -268,8 +302,6 @@ public class MainGame {
     Label label = new Label(chatPrefix + text);
     label.setWrapText(true);
     label.getStyleClass().add("chat-text");
-    // label.setMaxWidth(500);
-    // label.setMaxWidth(chat.getWidth() - 20);
     label.prefWidthProperty().bind(chat.widthProperty().subtract(50));
     label.setBorder(null);
 
@@ -280,6 +312,7 @@ public class MainGame {
   }
 
   public static void enableInteractPane() {
+    // fade in interact pane
     initialised_interact_pane.setVisible(true);
     initialised_interact_pane.setDisable(false);
     FadeTransition ft = new FadeTransition();
@@ -290,27 +323,22 @@ public class MainGame {
     ft.play();
   }
 
-  // maybe cfreate a diff func?
+
   public static void disableInteractPane() {
-    // FadeTransition ft = new FadeTransition();
-    // ft.setDuration(javafx.util.Duration.millis(500));
-    // ft.setNode(initialised_interact_pane);
-    // ft.setFromValue(1.0);
-    // ft.setToValue(0);
-    // // ft.setAutoReverse(true);
-    // // ft.setCycleCount(1);
-    // ft.play();
+    // fade out interact pane
     initialised_interact_pane.setDisable(true);
     initialised_interact_pane.setOpacity(0);
   }
 
   @FXML
   private void clickedOuterPane() {
+    // hide chat bubble
     speechBubble.setVisible(false);
     bubbleTextPane.setVisible(false);
   }
 
   public void getTimeLimit() {
+    // getting time limit from game mode
     System.out.println("start game");
     switch (GameState.gameMode[1]) {
       case "2 minutes":
@@ -338,59 +366,63 @@ public class MainGame {
    * @param timeLimit
    */
   private void setTimeLimit(int timeLimit) {
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
-              if (GameState.winTheGame || GameState.timeLimitReached) {
-                break;
-              }
-              int time = currentTime;
-              int minutes = time / 60;
-              int seconds = time % 60;
-              String formattedTime = String.format("%02d:%02d", minutes, seconds);
-              Platform.runLater(
-                  () -> {
+    Task<Void> task = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
+          if (GameState.winTheGame || GameState.timeLimitReached) {
+            break;
+          }
+          int time = currentTime;
+          int minutes = time / 60;
+          int seconds = time % 60;
+          String formattedTime = String.format("%02d:%02d", minutes, seconds);
+          Platform.runLater(
+              () -> {
 
-                    timer_initiated.setText(formattedTime);
-                    updateHintCount();
-                  });
-              try {
-                Thread.sleep(1000);
-              } catch (InterruptedException e) {
-                return null;
-              }
-            }
-            Platform.runLater(() -> {
-              try {
-                handleTimeLimitReached();
-              } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-              }
-            });
+                timer_initiated.setText(formattedTime);
+                // update hint count every cycle
+                updateHintCount();
+              });
+          try {
+            Thread.sleep(1000);
+          } catch (InterruptedException e) {
             return null;
           }
-        };
+        }
+        Platform.runLater(() -> {
+          try {
+            handleTimeLimitReached();
+          } catch (IOException e) {
+            e.printStackTrace();
+          }
+        });
+        return null;
+      }
+    };
     timeLimitThread = new Thread(task);
     timeLimitThread.setDaemon(true);
     timeLimitThread.start();
   }
 
-  /** Handles the time limit reached event. 
-   * @throws IOException */ 
+  /**
+   * Handles the time limit reached event.
+   * 
+   * @throws IOException
+   */
   private void handleTimeLimitReached() throws IOException {
+    // time limit reached
     GameState.timeLimitReached = true;
     if (!GameState.winTheGame) {
       System.out.println("time limit reached");
       outer_pane
-        .getChildren()
-        .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
+          .getChildren()
+          .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
     }
   }
 
   private void setHintCount() {
+    // setting hint count
     switch (GameState.gameMode[0]) {
       case "EASY":
         hint_initiated.setText("Hint: \u221E");
@@ -419,16 +451,15 @@ public class MainGame {
   }
 
   private static void updateInventoryUI() {
-    List<ImageView> inventoryItems =
-        List.of(
-            item1_initiated,
-            item2_initiated,
-            item3_initiated,
-            item4_initiated,
-            item5_initiated,
-            item6_initiated,
-            item7_initiated,
-            item8_initaited);
+    List<ImageView> inventoryItems = List.of(
+        item1_initiated,
+        item2_initiated,
+        item3_initiated,
+        item4_initiated,
+        item5_initiated,
+        item6_initiated,
+        item7_initiated,
+        item8_initaited);
     for (int i = 0; i < inventoryItems.size(); i++) {
       if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());
