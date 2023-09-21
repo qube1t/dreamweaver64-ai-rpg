@@ -76,6 +76,7 @@ public class Room2Controller {
   private Boolean correctBoxClicked = false;
   private static boolean gptInit;
   private Boolean boxClickedWithoutKey = false;
+  private Boolean firstWrongBookClicked = true;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -166,14 +167,33 @@ public class Room2Controller {
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) {
-      gptResponse.setText(GameState.pirateRiddle);
-      piratePane.setVisible(true);
+      if (GameState.takenBook != null && firstWrongBookClicked) {
+        firstWrongBookClicked = false;
+        GameState.eleanorAi.runGpt(
+            GptPromptEngineeringRoom2.getPirateWrongResponse(),
+            (result) -> {
+              Platform.runLater(
+                  () -> {
+                    gptResponse.setText(result);
+                    piratePane.setVisible(true);
+                  });
+            });
+      } else {
+        gptResponse.setText(GameState.pirateRiddle);
+        piratePane.setVisible(true);
+      }
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
       GameState.eleanorAi.runGpt(
-          "User update: User has found the treasure box key. No reply is needed for this message.");
-      System.out.println("Box key found");
+          GptPromptEngineeringRoom2.getPirateRightResponse(),
+          (result) -> {
+            Platform.runLater(
+                () -> {
+                  gptResponse.setText(result);
+                  piratePane.setVisible(true);
+                });
+          });
       Image keyImage = new Image("/images/key.png");
       MainGame.removeObtainedItem("book");
       MainGame.addObtainedItem(keyImage, "treasure box key");
@@ -238,10 +258,10 @@ public class Room2Controller {
             GptPromptEngineeringRoom2.getPirateNoKeyResponse(),
             (result) -> {
               Platform.runLater(
-                    () -> {
-                      gptResponse.setText(result);
-                      piratePane.setVisible(true);
-                    });
+                  () -> {
+                    gptResponse.setText(result);
+                    piratePane.setVisible(true);
+                  });
             });
       }
     }
