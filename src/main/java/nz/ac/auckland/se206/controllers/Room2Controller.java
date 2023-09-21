@@ -106,20 +106,6 @@ public class Room2Controller {
         character.setLayoutY(250);
     }
 
-    switch (GameState.prevRoom) {
-      case 1:
-        character.setLayoutX(70);
-        character.setLayoutY(250);
-        break;
-      case 3:
-        character.setLayoutX(460);
-        character.setLayoutY(250);
-        break;
-      default:
-        character.setLayoutX(70);
-        character.setLayoutY(250);
-    }
-
     GameState.prevRoom = 2;
 
     piratePane.setVisible(false);
@@ -321,6 +307,11 @@ public class Room2Controller {
    */
   @FXML
   public void onOpenRoom1(MouseEvent event) throws IOException {
+    // go to the right room
+    InstructionsLoad.setTexts("", 0);
+
+    // disable interact pane for transition
+    MainGame.disableInteractPane();
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room1", true);
   }
@@ -334,6 +325,11 @@ public class Room2Controller {
   @FXML
   public void onOpenRoom3(MouseEvent event) throws IOException {
 
+    // go to the right room
+    InstructionsLoad.setTexts("", 0);
+
+    // disable interact pane for transition
+    MainGame.disableInteractPane();
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room3", true);
   }

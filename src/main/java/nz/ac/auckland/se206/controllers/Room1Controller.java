@@ -62,6 +62,9 @@ public class Room1Controller {
     if (!gptInit) {
       initGpt();
       gptInit = true;
+    } else {
+      // enable interact pane
+      MainGame.enableInteractPane();
     }
 
     // set character position
