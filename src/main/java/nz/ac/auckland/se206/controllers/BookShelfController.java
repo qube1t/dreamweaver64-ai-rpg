@@ -55,6 +55,7 @@ public class BookShelfController {
 
             if (GameState.booksInRoom1[index] == GameState.trueBook) {
               GameState.isBookFound = true;
+              System.out.println("true book found");
             }
             else {
               GameState.isBookFound = false;

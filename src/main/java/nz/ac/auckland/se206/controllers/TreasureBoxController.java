@@ -31,7 +31,7 @@ public class TreasureBoxController {
         GameState.isTreasureFound = true;
         clickedTreasure.setVisible(true);
         message.setVisible(true);
-        message.setText("mom");
+        message.setText(GameState.encryptedFinalMsg);
         imgTreasure.setVisible(false);
         treasure.setDisable(true);
         Image treasureImage = new Image("/images/treasure.png");
