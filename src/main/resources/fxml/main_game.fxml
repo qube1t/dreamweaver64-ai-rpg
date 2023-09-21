@@ -16,7 +16,7 @@
 <StackPane fx:id="outer_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" onMouseClicked="#clickedOuterPane" prefHeight="537.0" prefWidth="706" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
 
    <children>
-      <VBox fx:id="interact_pane" disable="true" prefHeight="560.0" prefWidth="706.0">
+      <VBox fx:id="interact_pane" disable="true" prefHeight="560.0" prefWidth="706.0" visible="false">
          <children>
             <AnchorPane prefHeight="50.0" prefWidth="700.0" style="-fx-border-color: pink;">
                <children>
