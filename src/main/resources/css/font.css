@@ -1,0 +1,45 @@
+@font-face {
+    font-family: 'Abaddon Bold';
+    src: url("../fonts/Abaddon_Bold.ttf");
+}
+
+@font-face {
+    font-family: 'Abaddon Light';
+    src: url("../fonts/Abaddon_Light.ttf");
+}
+
+.instructions {
+    -fx-font-family: 'Abaddon Light';
+    -fx-font-size: 19px;
+}
+
+
+.startEndTitle {
+    -fx-font-family: 'Abaddon Bold';
+    -fx-font-size: 44px;
+}
+
+.chooseLevel {
+    -fx-font-family: 'Abaddon Bold';
+    -fx-font-size: 25px;
+}
+
+.centralDisplayUnitInput {
+    -fx-font-family: 'Abaddon Bold';
+    -fx-font-size: 17px;
+}
+
+.centralDisplayUnitOutput {
+    -fx-font-family: 'Abaddon Bold';
+    -fx-font-ssize: 20px;
+}
+
+.currentLocations {
+    -fx-font-family: 'Abaddon Bold';
+    -fx-font-size: 18px;
+}
+
+.aiInputField {
+    -fx-font-family: 'Abaddon Light';
+    -fx-font-size: 13px;
+}

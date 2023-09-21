@@ -4,20 +4,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="CENTER" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InstructionsLoad">
+<VBox alignment="CENTER" style="-fx-background-color: black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.InstructionsLoad">
    <children>
-      <Label alignment="CENTER" prefHeight="25.0" prefWidth="600.0" text="Your dream is being built." textAlignment="CENTER" textFill="WHITE">
+      <Label alignment="CENTER" prefHeight="25.0" prefWidth="600.0" styleClass="instructions" text="Your dream is being built." textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label fx:id="instruct_txt" alignment="CENTER" prefHeight="106.0" prefWidth="600.0" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label fx:id="instruct_txt" alignment="CENTER" prefHeight="106.0" prefWidth="600.0" styleClass="instructions" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="19.0" />
          </font>
       </Label>
-      <Label fx:id="time_txt" alignment="CENTER" prefHeight="42.0" prefWidth="600.0" text="You have - minutes." textAlignment="CENTER" textFill="WHITE" wrapText="true">
+      <Label fx:id="time_txt" alignment="CENTER" prefHeight="42.0" prefWidth="600.0" styleClass="instructions" text="You have - minutes." textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font size="19.0" />
          </font>

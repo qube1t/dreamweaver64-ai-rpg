@@ -4,17 +4,17 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
-
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartMenuController {
   @FXML private ComboBox<String> difficulty;
   @FXML private ComboBox<String> timeLimit;
+  @FXML private Label title, difficultyLabel, timeLimitLabel;
 
   @FXML Button startButton;
 
@@ -24,6 +24,7 @@ public class StartMenuController {
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
 
     // new GptEngine();
+
   }
 
   @FXML
@@ -65,7 +66,12 @@ public class StartMenuController {
     try {
       App.setRoot("main_game");
       GameState.isGameStarted = true;
-      MainGame.getTimeLimitForGameMode(timeLimit);
+
+      GameState.startTime = System.currentTimeMillis();
+
+      MainGame.getTimeLimit(timeLimit);
+      MainGame.setHintCount(difficulty);
+
     } catch (IOException e) {
       e.printStackTrace();
     }

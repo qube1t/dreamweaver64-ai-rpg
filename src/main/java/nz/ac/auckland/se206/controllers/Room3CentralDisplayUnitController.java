@@ -5,7 +5,10 @@ import java.util.List;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
@@ -13,6 +16,8 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3CentralDisplayUnitController {
 
@@ -25,9 +30,12 @@ public class Room3CentralDisplayUnitController {
   @FXML private Rectangle slash, clear, delete, execute;
   @FXML private Text displayInput, displayOutput;
   @FXML private ImageView lock, CentralDisplayUnit;
+  @FXML private ProgressIndicator progress;
   protected List<Rectangle> allButtons;
 
-  public void initialize() {
+  public void initialize() throws ApiProxyException {
+
+    progress.setVisible(false);
     System.out.println("Room3CentralDisplayUnitController initialized");
 
     List<Rectangle> allButtons =
@@ -37,15 +45,34 @@ public class Room3CentralDisplayUnitController {
             zero0);
     this.allButtons = allButtons;
 
-    if (!GameState.isPuzzleInRoom3Solved) {
-      CentralDisplayUnit.setOpacity(0.6);
+    if (GameState.isPuzzleInRoom3Solved && GameState.isWorldMapOpened) {
+      enableFlightCDU();
+    } else {
+      CentralDisplayUnit.setOpacity(0.7);
       displayOutput.setText("LOCKED");
 
       for (Rectangle button : allButtons) {
         button.setDisable(true);
       }
-    } else {
-      enableFlightCDU();
+      GameState.eleanorAi.runGpt(
+          "User update: the user clicks on the flight computer but it is locked due to either not"
+              + " solved the puzzle or not yet opened the world map to discover the current"
+              + " location. Give player a short message to indicates it is locked, surrounded by ##"
+              + " . ",
+          (result) -> {
+            Platform.runLater(
+                () -> {
+                  // Find the start and end indices of the aircraft code within single quotes
+                  int startIndex = result.indexOf("#");
+                  int endIndex = result.indexOf("#", startIndex + 1);
+
+                  if (startIndex != -1 && endIndex != -1) {
+                    // Extract the aircraft code
+                    String message = result.substring(startIndex + 1, endIndex);
+                    System.out.println(message);
+                  }
+                });
+          });
     }
   }
 
@@ -126,7 +153,8 @@ public class Room3CentralDisplayUnitController {
     for (Rectangle button : allButtons) {
       button.setDisable(false);
     }
-    String message = "ENTER THE FIRST THREE LETTER OF DEP / DEST CITY THEN PRESS EXECUTE.g.AUC/SYD";
+    String message =
+        "ENTER THE FIRST THREE LETTER OF DEP / DEST CITY THEN PRESS EXECUTE. E.g.AUC/SYD";
     int typingDelay = 50;
     typeTextEffect(displayInput, message, typingDelay);
   }
@@ -137,19 +165,49 @@ public class Room3CentralDisplayUnitController {
    *
    * @param event
    */
-  public void handleExecuteClick() {
+  public void handleExecuteClick() throws ApiProxyException {
     String currentInput = displayOutput.getText();
-    String firstThreeDestnation = GameState.arrangedCityName.substring(0, 2);
-    String firstThreeDeparture = GameState.currentLocatiions[GameState.currentCity - 1].getText();
-    if (currentInput.equalsIgnoreCase(firstThreeDestnation + "/" + firstThreeDeparture)) {
+    String firstThreeDestnation = GameState.arrangedDestnationCity.substring(0, 3).toUpperCase();
+    String firstThreeDeparture =
+        GameState.currentCities[GameState.currentCityIndex - 1].getText().substring(0, 3);
+    System.out.println(firstThreeDeparture + "/" + firstThreeDestnation);
+
+    // Correct code has been entered
+    if (currentInput.equalsIgnoreCase(firstThreeDeparture + "/" + firstThreeDestnation)) {
       // Aircraft code has been found.
       GameState.isAircraftCodeFound = true;
+      displayInput.setText("");
       displayInput.setVisible(true);
+      progress.setVisible(true);
+      progress.setProgress(ProgressIndicator.INDETERMINATE_PROGRESS);
 
-      displayInput.setText(
-          "CONGRATULATIONS! THE AIRCRAFT CODE IS"
-              + GameState.aircraftCode
-              + "GOOD LUCK ON YOUR ESCAPE!");
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.getAircraftCode(),
+          (result) -> {
+            System.out.println(result);
+            Platform.runLater(
+                () -> {
+                  // Hide the progress indicator
+                  progress.setVisible(false);
+                  // Find the start and end indices of the aircraft code within single quotes
+                  int startIndex = result.indexOf("^");
+                  int endIndex = result.indexOf("^", startIndex + 1);
+
+                  if (startIndex != -1 && endIndex != -1) {
+                    // Extract the aircraft code
+                    GameState.aircraftCode = result.substring(startIndex + 1, endIndex);
+                    System.out.println("Aircraft code: " + GameState.aircraftCode);
+                  }
+                  // Update the introduction label with the correct answer message
+                  displayInput.setText(
+                      "CONGRATULATIONS! AIRCRAFT CODE UNLOCKED: " + GameState.aircraftCode);
+
+                  // Set the aircraft code image to inventory.
+                  Image aircraftCode = new Image("/images/aircraftCode.png");
+                  MainGame.addObtainedItem(aircraftCode, "aircraft code");
+                  System.out.println("Aircraft code unlocked");
+                });
+          });
 
       // Clear the input field and disable it along with the execute button
       displayOutput.setText("");
@@ -158,7 +216,11 @@ public class Room3CentralDisplayUnitController {
     } else {
       // Display an error message
       displayInput.setStyle("-fx-text-fill: red;");
-      displayInput.setText("INCORRECT AIRPORT CODE TRY AGAIN");
+
+      GameState.eleanorAi.runGpt(
+          "User update: the user entered the first three letters of departature and"
+              + " destnation cities in the flight computer but it is incorrect. Do not respond.");
+      displayInput.setText("INCORRECT ANSWER TRY AGAIN");
       displayOutput.setText("");
     }
   }

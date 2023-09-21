@@ -162,7 +162,8 @@ public class Room3SubController {
       // Aircraft code has been found.
       GameState.isAircraftCodeFound = true;
       Image aircreaftImage = new Image("/images/Subject.png");
-      MainGame.addObtainedItem(aircreaftImage);
+
+      MainGame.addObtainedItem(aircreaftImage, "aircraft code");
       System.out.println("Aircraft code obtained");
       displayInput.setVisible(true);
 
