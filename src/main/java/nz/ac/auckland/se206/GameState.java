@@ -99,4 +99,6 @@ public class GameState {
   public static String encryptedFinalMsg;
 
   public static boolean isRoom2FirstEntered = false;
+
+  public static boolean hasDecrypted;
 }

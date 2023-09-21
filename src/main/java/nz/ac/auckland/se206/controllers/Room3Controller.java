@@ -204,7 +204,7 @@ public class Room3Controller {
       // Set the aircraft code image to inventory.
       Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
       MainGame.addObtainedItem(decryptedLetter, "decryptedLetter");
-      GameState.winTheGame = true;
+      GameState.hasDecrypted = true;
     } else {
 
       GameState.eleanorAi.runGpt(

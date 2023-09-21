@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -158,11 +156,13 @@ public class Room1Controller {
     GameState.eleanorAi.runGpt(
         "User update, User has tried to open main exit without solving the mission. No reply"
             + " needed.");
-    if (GameState.winTheGame) {
-      GameState.mainGame
-          .outer_pane
-          .getChildren()
-          .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
+    if (GameState.hasDecrypted) {
+      GameState.winTheGame = true;
+      App.setRoot("end_menu");
+      // GameState.mainGame
+      //     .outer_pane
+      //     .getChildren()
+      //     .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
     }
   }
 
