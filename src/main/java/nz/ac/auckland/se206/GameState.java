@@ -24,8 +24,6 @@ public class GameState {
   public static String[] gameMode;
   public static int hintsRemaining;
 
-  public static long startTime;
-  public static long endTime;
 
   public static boolean isWorldMapOpened = false;
   public static MainGame mainGame;
@@ -44,7 +42,6 @@ public class GameState {
   public static boolean timeLimitReached = false;
 
 
-  public static int hintsRemaining = -1;
 
 
   /** These fields are used in room3 */

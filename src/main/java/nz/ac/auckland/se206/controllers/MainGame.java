@@ -334,7 +334,10 @@ public class MainGame {
               int minutes = time / 60;
               int seconds = time % 60;
               Platform.runLater(
-                  () -> timer_initiated.setText(minutes + " minutes " + seconds + " seconds left"));
+                  () -> {
+                    timer_initiated.setText(minutes + " : " + seconds);
+                updateHintCount();}
+                  );
               try {
                 Thread.sleep(1000);
               } catch (InterruptedException e) {
