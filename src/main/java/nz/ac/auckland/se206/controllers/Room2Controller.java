@@ -74,7 +74,7 @@ public class Room2Controller {
 
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
-  private boolean gptInit;
+  private static boolean gptInit;
 
   /** Initializes the room view, it is called when the room loads. 
    * @throws ApiProxyException */
@@ -102,10 +102,19 @@ public class Room2Controller {
     if (!gptInit) {
       initGpt();
       gptInit = true;
+    }else{
+
+    MainGame.enableInteractPane();
     }
     
     GameState.prevRoom = 2;
-    // MainGame.enableInteractPane();
+    speechBubbleScrollPane.setVisible(false);
+    speech_bubble.setVisible(false);
+    gptResponse.setVisible(false);
+  
+    if (GameState.isBoxKeyFound) {
+      boxKey.setVisible(false);
+    }
   }
 
   private void initGpt() throws ApiProxyException {
@@ -122,14 +131,6 @@ public class Room2Controller {
     });
 
 
-
-    speechBubbleScrollPane.setVisible(false);
-    speech_bubble.setVisible(false);
-    gptResponse.setVisible(false);
-
-    if (GameState.isBoxKeyFound) {
-      boxKey.setVisible(false);
-    }
     // MainGame.enableInteractPane();
 
   }

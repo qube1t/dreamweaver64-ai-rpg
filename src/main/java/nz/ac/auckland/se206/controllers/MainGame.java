@@ -278,16 +278,16 @@ public class MainGame {
 
   // maybe cfreate a diff func?
   public static void disableInteractPane() {
-    FadeTransition ft = new FadeTransition();
-    ft.setDuration(javafx.util.Duration.millis(500));
-    ft.setNode(initialised_interact_pane);
-    ft.setFromValue(1.0);
-    ft.setToValue(0);
-    // ft.setAutoReverse(true);
-    // ft.setCycleCount(1);
-    ft.play();
+    // FadeTransition ft = new FadeTransition();
+    // ft.setDuration(javafx.util.Duration.millis(500));
+    // ft.setNode(initialised_interact_pane);
+    // ft.setFromValue(1.0);
+    // ft.setToValue(0);
+    // // ft.setAutoReverse(true);
+    // // ft.setCycleCount(1);
+    // ft.play();
     initialised_interact_pane.setDisable(true);
-    // initialised_interact_pane.setOpacity(0);
+    initialised_interact_pane.setOpacity(0);
   }
 
   @FXML

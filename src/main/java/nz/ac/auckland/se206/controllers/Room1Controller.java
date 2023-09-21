@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -77,7 +79,6 @@ public class Room1Controller {
       default:
     character.setLayoutX(250);
     character.setLayoutY(250);
-
     }
 
     GameState.prevRoom = 1;
@@ -119,17 +120,19 @@ public class Room1Controller {
   }
 
   @FXML
-  public void goToLeftRoom() throws IOException {
+  public void goToLeftRoom() throws IOException, InterruptedException {
     InstructionsLoad.setTexts("", 0);
     MainGame.disableInteractPane();
+    // Thread.sleep(500);
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room3", true);
   }
 
   @FXML
-  private void goToRightRoom() throws IOException {
+  private void goToRightRoom() throws IOException, InterruptedException {
     InstructionsLoad.setTexts("", 0);
     MainGame.disableInteractPane();
+    // Thread.sleep(500);
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room2", true);
   }
