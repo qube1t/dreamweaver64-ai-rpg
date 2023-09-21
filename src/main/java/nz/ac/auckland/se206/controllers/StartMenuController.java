@@ -66,8 +66,12 @@ public class StartMenuController {
     try {
       App.setRoot("main_game");
       GameState.isGameStarted = true;
+
+      GameState.startTime = System.currentTimeMillis();
+
       MainGame.getTimeLimit(timeLimit);
       MainGame.setHintCount(difficulty);
+
     } catch (IOException e) {
       e.printStackTrace();
     }

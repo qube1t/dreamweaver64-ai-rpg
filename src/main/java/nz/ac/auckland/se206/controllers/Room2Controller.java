@@ -115,8 +115,10 @@ public class Room2Controller {
           "User update: User has found the treasure box key. No reply is needed for this message.");
       System.out.println("Box key found");
       Image keyImage = new Image("/images/key.png");
+
       MainGame.removeObtainedItem("book");
       MainGame.addObtainedItem(keyImage, "treasure box key");
+
       System.out.println("Box key obtained");
     }
   }

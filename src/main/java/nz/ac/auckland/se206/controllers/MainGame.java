@@ -54,6 +54,7 @@ public class MainGame {
 
   private static MainGame instance;
   private static Thread timeLimitThread;
+
   private static List<ObtainedItemsWithId> obtainedItems = new ArrayList<>();
   private static Pane initialised_interact_pane;
 
@@ -398,6 +399,8 @@ public class MainGame {
     for (int i = 0; i < inventoryItems.size(); i++) {
       if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());
+
+        inventoryItems.get(i).setId(obtainedItems.get(i).getId());
         inventoryItems.get(i).setFitWidth(35);
         inventoryItems.get(i).setPreserveRatio(true);
         inventoryItems.get(i).setSmooth(true);
@@ -409,6 +412,7 @@ public class MainGame {
 
   public static void addObtainedItem(Image itemImage, String itemId) {
     obtainedItems.add(new ObtainedItemsWithId(itemImage, itemId));
+
     updateInventoryUI();
   }
 

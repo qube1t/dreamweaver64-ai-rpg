@@ -24,8 +24,10 @@ public class GameState {
   public static String[] gameMode;
   public static int hintsRemaining;
 
-  public static boolean isWorldMapOpened = false;
+  public static long startTime;
+  public static long endTime;
 
+  public static boolean isWorldMapOpened = false;
   public static MainGame mainGame;
 
   public static boolean winTheGame = false;
