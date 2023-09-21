@@ -83,9 +83,20 @@ public class GameState {
   /** Indicates whether the book has found to trade with pirate */
   public static boolean isBookFound = false;
 
+
+  public static String trueBook = null;
+
+
   /** Indicates whether the box key has found to open the treasure box */
   public static boolean isBoxKeyFound = false;
 
   /** Indicates whether the treasure has found */
   public static boolean isTreasureFound = false;
+
+  public static String takenBook;
+
+public static String finalMsg;
+
+public static String encryptedFinalMsg;
+
 }

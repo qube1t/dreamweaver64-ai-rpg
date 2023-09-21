@@ -3,6 +3,10 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import javafx.application.Platform;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
@@ -69,8 +73,9 @@ public class Room2Controller {
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
 
-  /** Initializes the room view, it is called when the room loads. */
-  public void initialize() {
+  /** Initializes the room view, it is called when the room loads. 
+   * @throws ApiProxyException */
+  public void initialize() throws ApiProxyException {
     ArrayList<Rectangle> obsts =
         new ArrayList<Rectangle>(
             Arrays.asList(
@@ -90,6 +95,29 @@ public class Room2Controller {
       speechBubbleScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     }
 
+
+    if (!gptInit) {
+      initGpt();
+      gptInit = true;
+    }
+    
+    // MainGame.enableInteractPane();
+  }
+
+  private void initGpt() throws ApiProxyException {
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalUnencrypted(), s -> {
+      List<String> msg = Helper.getTextBetweenChar(s, "+");
+    if (msg.size() > 0) GameState.finalMsg = msg.get(0); 
+    });
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalEncrypted(), s -> {
+      
+      List<String> msg = Helper.getTextBetweenChar(s, "+");
+    if (msg.size() > 0) GameState.encryptedFinalMsg = msg.get(0); 
+    else GameState.encryptedFinalMsg = s;
+      Platform.runLater(() -> MainGame.enableInteractPane());
+    });
+
+
     speechBubbleScrollPane.setVisible(false);
     speech_bubble.setVisible(false);
     gptResponse.setVisible(false);
@@ -98,6 +126,7 @@ public class Room2Controller {
       boxKey.setVisible(false);
     }
     MainGame.enableInteractPane();
+
   }
 
   @FXML
