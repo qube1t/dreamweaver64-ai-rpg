@@ -12,7 +12,9 @@
       <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="760.0" prefWidth="700.0" styleClass="startEndTitle" stylesheets="@../css/font.css">
           <children>
 
-              <Button fx:id="startButton" layoutX="203.0" layoutY="543.0" onMouseClicked="#onClickStartButton" styleClass="startEndTitle" text="START GAME" textAlignment="CENTER">
+
+              <Button fx:id="startButton" disable="false" layoutX="203.0" layoutY="543.0" onMouseClicked="#onClickStartButton" styleClass="startEndTitle" text="START GAME" textAlignment="CENTER">
+
 
             </Button>
                <ComboBox fx:id="timeLimit" layoutX="379.0" layoutY="378.0" prefHeight="41.0" prefWidth="196.0" promptText="2 minutes" styleClass="chooseLevel" stylesheets="@../css/font.css" />

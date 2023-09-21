@@ -56,23 +56,9 @@ public class Room3CentralDisplayUnitController {
       }
       GameState.eleanorAi.runGpt(
           "User update: the user clicks on the flight computer but it is locked due to either not"
-              + " solved the puzzle or not yet opened the world map to discover the current"
-              + " location. Give player a short message to indicates it is locked, surrounded by ##"
-              + " . ",
-          (result) -> {
-            Platform.runLater(
-                () -> {
-                  // Find the start and end indices of the aircraft code within single quotes
-                  int startIndex = result.indexOf("#");
-                  int endIndex = result.indexOf("#", startIndex + 1);
-
-                  if (startIndex != -1 && endIndex != -1) {
-                    // Extract the aircraft code
-                    String message = result.substring(startIndex + 1, endIndex);
-                    System.out.println(message);
-                  }
-                });
-          });
+              + " solved the puzzle and not yet opened the world map to discover the current"
+              + " location. Give player a short message to indicates it is locked and do not"
+              + " include any hint of next step, surrounded by *");
     }
   }
 
@@ -196,16 +182,17 @@ public class Room3CentralDisplayUnitController {
                   if (startIndex != -1 && endIndex != -1) {
                     // Extract the aircraft code
                     GameState.aircraftCode = result.substring(startIndex + 1, endIndex);
-                    System.out.println("Aircraft code: " + GameState.aircraftCode);
                   }
                   // Update the introduction label with the correct answer message
                   displayInput.setText(
                       "CONGRATULATIONS! AIRCRAFT CODE UNLOCKED: " + GameState.aircraftCode);
 
                   // Set the aircraft code image to inventory.
-                  Image aircraftCode = new Image("/images/aircraftCode.png");
-                  MainGame.addObtainedItem(aircraftCode, "aircraft code");
-                  System.out.println("Aircraft code unlocked");
+
+                  Image aircraftCode = new Image("/images/aircraft_code.png");
+                  MainGame.addObtainedItem(aircraftCode);
+                  System.out.println("Aircraft code unlocked" + GameState.aircraftCode);
+
                 });
           });
 
@@ -218,8 +205,8 @@ public class Room3CentralDisplayUnitController {
       displayInput.setStyle("-fx-text-fill: red;");
 
       GameState.eleanorAi.runGpt(
-          "User update: the user entered the first three letters of departature and"
-              + " destnation cities in the flight computer but it is incorrect. Do not respond.");
+          "User update: the player needs to enter the first three letters of current city /"
+              + " destnation cityin the flight computer but now  it is incorrect. Do not respond.");
       displayInput.setText("INCORRECT ANSWER TRY AGAIN");
       displayOutput.setText("");
     }

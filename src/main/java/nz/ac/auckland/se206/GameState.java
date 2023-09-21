@@ -13,6 +13,11 @@ public class GameState {
   /** Indicates whether the riddle has been resolved. */
   public static boolean isRiddleResolved = false;
 
+  /** Indicates if room3 has first entered */
+  public static boolean isRoom3FirstEntered = false;
+
+  public static boolean isEncryptedMessageFound = false;
+
   // pirate riddle
   public static String instructionMsg = null;
   public static String pirateRiddle = null;
@@ -43,11 +48,6 @@ public class GameState {
 
 
 
-
-  /** These fields are used in room3 */
-  public static boolean isPreviousFlightPlanOpen = false;
-
-  public static boolean isDepBoardOpen = false;
   public static boolean isCorrectRouteFound = false;
   public static boolean isCityFound = false;
 
@@ -57,7 +57,10 @@ public class GameState {
   /** Indicates the location of the treasure box. */
   public static int currentBox = -1;
 
+  /** Indicates the unarranged city name for puzzle game. */
   public static String unarrangedDestnationCity = "";
+
+  /** Indicates the arranged city name for the puzzle game. */
   public static String arrangedDestnationCity = "";
 
   /** Indicates the correct city index */

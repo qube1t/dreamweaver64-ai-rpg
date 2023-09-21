@@ -173,6 +173,7 @@ public class Room2Controller {
 
       if (numOfBox == boxLocation) {
         MainGame.addOverlay("treasure_box", false);
+        GameState.isEncryptedMessageFound = true;
         if (correctBoxClicked == 0) {
           try {
             GameState.eleanorAi.runGpt(
@@ -189,8 +190,11 @@ public class Room2Controller {
         if (wrongBoxClicked == 0) {
           try {
             GameState.eleanorAi.runGpt(
+
+
                 "User update: User has found the wrong treasure box. No reply is needed for this"
                     + " message.");
+
           } catch (ApiProxyException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

@@ -101,7 +101,9 @@ public class MainGame {
         .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
     addOverlay("room1", true);
+
     GameState.isGameStarted = true;
+
 
     // Helper.setBooksInRoom1();
     instance = this;
