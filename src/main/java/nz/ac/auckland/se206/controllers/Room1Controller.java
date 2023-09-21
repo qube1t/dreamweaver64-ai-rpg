@@ -32,7 +32,7 @@ public class Room1Controller {
   @FXML private Rectangle rect9;
   @FXML private Rectangle rect10;
   @FXML private Rectangle rect11;
-  @FXML private Rectangle rect12;
+  // @FXML private Rectangle rect12;
   @FXML private Rectangle rect13;
   @FXML private Rectangle rect14;
   @FXML private Rectangle rect15;
@@ -54,7 +54,7 @@ public class Room1Controller {
         new ArrayList<Rectangle>(
             Arrays.asList(
                 rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
-                rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21));
+                 rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21));
     // obsts.add(0, rect1);
     // Initialization code goes here
     character.enableMobility(obsts, interactablePane.getChildren());
