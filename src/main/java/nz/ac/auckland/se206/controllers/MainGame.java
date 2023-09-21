@@ -99,9 +99,11 @@ public class MainGame {
         .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
     addOverlay("room1", true);
+
     GameState.isGameStarted = true;
     getTimeLimit();
     setHintCount();
+
 
     // Helper.setBooksInRoom1();
     instance = this;
@@ -288,6 +290,12 @@ public class MainGame {
     ft.play();
     initialised_interact_pane.setDisable(true);
     // initialised_interact_pane.setOpacity(0);
+  }
+
+  @FXML
+  private void clickedOuterPane() {
+    speechBubble.setVisible(false);
+    bubbleTextPane.setVisible(false);
   }
 
   public void getTimeLimit() {

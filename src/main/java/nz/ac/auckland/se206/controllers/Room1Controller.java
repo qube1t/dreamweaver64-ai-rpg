@@ -78,6 +78,7 @@ public class Room1Controller {
           GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
 
           String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));
+          GameState.trueBook = ansBook;
           System.out.println(ansBook);
           // gptStage++;
           MainGame.enableInteractPane();
