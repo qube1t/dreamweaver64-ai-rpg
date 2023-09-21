@@ -75,8 +75,8 @@ public class Room1Controller {
         character.setLayoutY(362);
         break;
       default:
-        character.setLayoutX(250);
-        character.setLayoutY(250);
+        character.setLayoutX(498);
+        character.setLayoutY(522);
     }
 
     GameState.prevRoom = 1;

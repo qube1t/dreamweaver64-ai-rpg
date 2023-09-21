@@ -98,7 +98,7 @@ public class Room2Controller {
         character.setLayoutY(250);
         break;
       case 3:
-        character.setLayoutX(492);
+        character.setLayoutX(486);
         character.setLayoutY(242);
         break;
       default:
@@ -145,8 +145,7 @@ public class Room2Controller {
     if (!gptInit) {
       initGpt();
       gptInit = true;
-    } else
-    speechBubbleScrollPane.setVisible(false);
+    } else speechBubbleScrollPane.setVisible(false);
     speech_bubble.setVisible(false);
     gptResponse.setVisible(false);
 
@@ -241,8 +240,8 @@ public class Room2Controller {
                       gptResponse.setText(result);
                     });
               });
-            Helper.changeTreasureBox(GameState.currentBox);
-            System.out.println(GameState.currentBox);
+          Helper.changeTreasureBox(GameState.currentBox);
+          System.out.println(GameState.currentBox);
         }
         wrongBoxClicked++;
       }
