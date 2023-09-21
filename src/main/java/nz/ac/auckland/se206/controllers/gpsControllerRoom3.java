@@ -69,6 +69,8 @@ public class gpsControllerRoom3 {
 
     // Start the animation
     radarAnimation.play();
+
+    System.out.println("Current city is " + GameState.currentCities[currentCity - 1].getText());
   }
 
   protected void fadeInRadarPoints(Circle city) {
