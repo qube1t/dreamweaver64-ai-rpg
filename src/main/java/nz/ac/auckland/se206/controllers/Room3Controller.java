@@ -107,8 +107,21 @@ public class Room3Controller {
 
     character.enableMobility(obstacles, clickPane.getChildren());
 
+
+
+    switch(GameState.prevRoom){
+      case 1:
     character.setLayoutX(530);
     character.setLayoutY(210);
+        break;
+      case 2:
+        character.setLayoutX(90);
+        character.setLayoutY(154);
+        break;
+      default:
+    character.setLayoutX(530);
+    character.setLayoutY(210);
+    }
 
     GameState.prevRoom=3;
   }

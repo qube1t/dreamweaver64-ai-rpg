@@ -89,8 +89,21 @@ public class Room2Controller {
                 rect33, rect34));
 
     character.enableMobility(obsts, interactablePane.getChildren());
-    character.setLayoutX(60);
+
+    switch(GameState.prevRoom){
+      case 1:
+        character.setLayoutX(60);
     character.setLayoutY(250);
+        break;
+      case 3:
+        character.setLayoutX(492);
+        character.setLayoutY(242);
+        break;
+      default:
+character.setLayoutX(60);
+    character.setLayoutY(250);
+    }
+    
 
     speechBubbleScrollPane = (ScrollPane) interactablePane.lookup("#speechBubbleScrollPane");
     if (speechBubbleScrollPane != null) {
