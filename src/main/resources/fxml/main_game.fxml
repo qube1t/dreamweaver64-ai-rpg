@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<StackPane fx:id="outer_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" onMouseClicked="#clickedOuterPane" prefHeight="537.0" prefWidth="706" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
+<StackPane fx:id="outer_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" onMouseClicked="#clickedOuterPane" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
 
    <children>
       <VBox fx:id="interact_pane" disable="true" prefHeight="560.0" prefWidth="706.0">
@@ -25,19 +24,17 @@
                         <Image url="@../images/main_game/inventory/inventory_pane.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="item1" fitHeight="35.0" fitWidth="35.0" layoutX="29.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item2" fitHeight="35.0" fitWidth="35.0" layoutX="81.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item3" fitHeight="35.0" fitWidth="35.0" layoutX="131.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item4" fitHeight="35.0" fitWidth="35.0" layoutX="181.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item5" fitHeight="35.0" fitWidth="35.0" layoutX="231.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item6" fitHeight="35.0" fitWidth="35.0" layoutX="282.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item7" fitHeight="35.0" fitWidth="35.0" layoutX="332.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true" />
-                  <ImageView fx:id="item8" fitHeight="35.0" fitWidth="35.0" layoutX="383.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
-                  <Label fx:id="timer" alignment="CENTER" layoutX="589.0" layoutY="9.0" prefHeight="35.0" prefWidth="93.0" styleClass="chooseLevel" text="120" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0">
+                  <ImageView fx:id="item1" fitHeight="35.0" fitWidth="35.0" layoutX="32.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item2" fitHeight="35.0" fitWidth="35.0" layoutX="86.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item3" fitHeight="35.0" fitWidth="35.0" layoutX="140.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item4" fitHeight="35.0" fitWidth="35.0" layoutX="194.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item5" fitHeight="35.0" fitWidth="35.0" layoutX="248.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="item6" fitHeight="35.0" fitWidth="35.0" layoutX="301.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+                  <Label fx:id="timer" alignment="CENTER" layoutX="589.0" layoutY="9.0" prefHeight="35.0" prefWidth="93.0" styleClass="chooseLevel" text="120" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="8.0">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
-                  <Label fx:id="hint_count" alignment="CENTER" layoutX="468.0" layoutY="9.0" prefHeight="35.0" prefWidth="93.0" styleClass="chooseLevel" text="Hint" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="8.0">
+                  <Label fx:id="hint_count" alignment="CENTER" layoutX="468.0" layoutY="9.0" prefHeight="35.0" prefWidth="93.0" styleClass="chooseLevel" text="Hint" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="8.0">
 
                      <font>
                         <Font size="15.0" />
@@ -81,7 +78,7 @@
                   </AnchorPane>
                   <AnchorPane maxHeight="-Infinity" maxWidth="221.0" prefHeight="33.0" prefWidth="221.0" StackPane.alignment="BOTTOM_LEFT">
                      <children>
-                        <Label fx:id="chat_toggle_btn" onMouseClicked="#toggleChat" style="-fx-background-color: blue; -fx-label-padding: 5;" styleClass="centralDisplayUnitInput" text="Show Chat" textFill="#cdd3f8" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="0.0" />
+                        <Label fx:id="chat_toggle_btn" onMouseClicked="#toggleChat" style="-fx-background-color: blue; -fx-label-padding: 5;" styleClass="centralDisplayUnitInput" text="Show Chat" textFill="#cdd3f8" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="133.0" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </children></StackPane>
