@@ -81,12 +81,16 @@ public class Room3Controller {
           });
     }
 
-    GameState.eleanorAi.runGpt(
-        GptPromptEngineeringRoom3.room3WelcomeMessage(),
-        (result) -> {
-          System.out.println(result);
-          MainGame.enableInteractPane();
-        });
+    // Only displays the welcome message to Room3 if the plauyer first enters the room
+    if (!GameState.isRoom3FirstEntered) {
+      GameState.isRoom3FirstEntered = true;
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.room3WelcomeMessage(),
+          (result) -> {
+            System.out.println(result);
+            MainGame.enableInteractPane();
+          });
+    }
 
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();

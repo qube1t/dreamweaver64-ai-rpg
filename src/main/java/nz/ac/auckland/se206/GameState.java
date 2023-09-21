@@ -14,6 +14,9 @@ public class GameState {
   /** Indicates whether the riddle has been resolved. */
   public static boolean isRiddleResolved = false;
 
+  /** Indicates if room3 has first entered */
+  public static boolean isRoom3FirstEntered = false;
+
   // pirate riddle
   public static String instructionMsg = null;
   public static String pirateRiddle = null;
@@ -42,9 +45,7 @@ public class GameState {
   /** Indicates whether the time limit has reached */
   public static boolean timeLimitReached = false;
 
-
   public static int hintsRemaining = -1;
-
 
   /** These fields are used in room3 */
   public static boolean isPreviousFlightPlanOpen = false;
