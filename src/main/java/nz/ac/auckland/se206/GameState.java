@@ -29,13 +29,10 @@ public class GameState {
   public static String[] gameMode;
   public static int hintsRemaining;
 
-
   public static boolean isWorldMapOpened = false;
   public static MainGame mainGame;
 
   public static boolean winTheGame = false;
-  public static long startTime = 0;
-  public static long endTime = 0;
 
   /** Indicates whether the game has started. */
   public static boolean isGameStarted = false;
@@ -45,8 +42,6 @@ public class GameState {
 
   /** Indicates whether the time limit has reached */
   public static boolean timeLimitReached = false;
-
-
 
   public static boolean isCorrectRouteFound = false;
   public static boolean isCityFound = false;
