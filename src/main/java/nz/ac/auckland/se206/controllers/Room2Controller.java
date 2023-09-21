@@ -17,7 +17,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room2Controller {
@@ -72,6 +74,7 @@ public class Room2Controller {
 
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
+  private boolean gptInit;
 
   /** Initializes the room view, it is called when the room loads. 
    * @throws ApiProxyException */
@@ -125,7 +128,7 @@ public class Room2Controller {
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
     }
-    MainGame.enableInteractPane();
+    // MainGame.enableInteractPane();
 
   }
 
@@ -167,6 +170,7 @@ public class Room2Controller {
       box3.setDisable(false);
       box4.setDisable(false);
       box5.setDisable(false);
+
       if (numOfBox == boxLocation) {
         MainGame.addOverlay("treasure_box", false);
         if (correctBoxClicked == 0) {
