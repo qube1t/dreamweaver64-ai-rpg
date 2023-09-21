@@ -24,6 +24,6 @@
          </image>
       </ImageView>
       <Label fx:id="message" alignment="CENTER" layoutX="161.0" layoutY="140.0" prefHeight="120.0" prefWidth="180.0" visible="false" wrapText="true" />
-      <Button fx:id="treasure" disable="true" layoutX="193.0" layoutY="125.0" mnemonicParsing="false" onAction="#onGetTreasure" opacity="0.0" prefHeight="87.0" prefWidth="116.0" text="Button" />
+      <Button fx:id="treasure" layoutX="193.0" layoutY="125.0" mnemonicParsing="false" onAction="#onGetTreasure" opacity="0.0" prefHeight="87.0" prefWidth="116.0" text="Button" />
    </children>
 </AnchorPane>

@@ -198,7 +198,6 @@ public class Room2Controller {
       box5.setDisable(false);
       if (numOfBox == boxLocation) {
         MainGame.addOverlay("treasure_box", false);
-        GameState.isEncryptedMessageFound = true;
         if (!correctBoxClicked) {
           correctBoxClicked = true;
           GameState.eleanorAi.runGpt(

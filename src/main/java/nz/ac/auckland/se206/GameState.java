@@ -23,9 +23,6 @@ public class GameState {
   public static String instructionMsg = null;
   public static String pirateRiddle = null;
 
-  /** Indicates whether the key has been found. */
-  public static boolean isKeyFound = false;
-
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
 
@@ -89,9 +86,6 @@ public class GameState {
 
   /** Indicates whether the box key has found to open the treasure box */
   public static boolean isBoxKeyFound = false;
-
-  /** Indicates whether the treasure has found */
-  public static boolean isTreasureFound = false;
 
   public static String takenBook;
 
