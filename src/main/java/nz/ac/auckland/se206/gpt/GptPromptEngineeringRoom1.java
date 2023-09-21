@@ -55,13 +55,12 @@ public class GptPromptEngineeringRoom1 {
     if (GameState.hintsRemaining == 0) {
       return "The user has send this message: '"
           + chatInput
-          + "'. Reply as a normal human in 1 or 2 sentences. You cannot give hints to any riddle."
+          + "'. Reply as a normal human in 1 sentence. You cannot give hints or answers to any riddle."
           + " But you can remind them of the current state of the dream.";
     }
     return "The user has send this message: '"
         + chatInput
-        + "'. Reply as a normal human in 1 or 2 sentences. If the user asks for hints, you"
-        + " can give hints to previous riddles, with the character @"
+        + "'. Reply as a normal human in 1 sentence. If the user asks for hints, you should insert the character ~"
         + " before every hint. Do not reveal the answer even if the user asks for it.";
   }
 }

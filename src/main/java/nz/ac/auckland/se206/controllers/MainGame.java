@@ -21,6 +21,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.ObtainedItemsWithId;
 import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
@@ -228,7 +229,18 @@ public class MainGame {
           (res) -> {
             Platform.runLater(
                 () -> {
-                  addChat(res, true);
+                  int noOfHints = Helper.countOccurences(res, "~");
+                  String msg = res.replaceAll("~", "");
+                  System.out.println("hints contained" + noOfHints);
+
+                  if (noOfHints > 0) {
+                    if (GameState.hintsRemaining - 1 >= 0) {
+                      GameState.hintsRemaining -= 1;
+                      System.out.println("Hints remaining: " + GameState.hintsRemaining);
+                    }
+                    else GameState.hintsRemaining = 0;
+                  }
+                  addChat(msg, true);
                   chatInput.setDisable(false);
                 });
           });
@@ -338,7 +350,8 @@ public class MainGame {
               Platform.runLater(
                   () -> {
                     timer_initiated.setText(minutes + " : " + seconds);
-                updateHintCount();}
+                updateHintCount();
+              }
                   );
               try {
                 Thread.sleep(1000);
