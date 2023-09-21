@@ -19,8 +19,8 @@
             <Image url="@../images/rooms/room3/computer_transparent.png" />
          </image>
       </ImageView>
-      <Circle fx:id="point1" fill="DODGERBLUE" layoutX="384.0" layoutY="46.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text fx:id="label1" fill="#29c348" layoutX="306.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="OAKLAND" wrappingWidth="74.53900359474346">
+      <Circle fx:id="point1" fill="DODGERBLUE" layoutX="385.0" layoutY="35.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="label1" fill="#29c348" layoutX="305.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="SEATTLE" wrappingWidth="74.53900359474346">
          <font>
             <Font name="Impact" size="15.0" />
          </font>
@@ -31,18 +31,18 @@
             <Font name="Impact" size="15.0" />
          </font>
       </Text>
-      <Circle fx:id="point3" fill="DODGERBLUE" layoutX="109.0" layoutY="258.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text fx:id="label3" fill="#29c348" layoutX="57.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="PERTH" wrappingWidth="50.91941283546612">
+      <Circle fx:id="point3" fill="DODGERBLUE" layoutX="188.0" layoutY="267.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="label3" fill="#29c348" layoutX="185.0" layoutY="261.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="SYDNEY" wrappingWidth="60.568369134294244">
          <font>
             <Font name="Impact" size="15.0" />
          </font>
       </Text>
-      <Text fx:id="label2" fill="#29c348" layoutX="424.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="HOUSTON" wrappingWidth="73.16775725685284">
+      <Text fx:id="label2" fill="#29c348" layoutX="430.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="CHICAGO" wrappingWidth="73.16775725685284">
          <font>
             <Font name="Impact" size="15.0" />
          </font>
       </Text>
-      <Circle fx:id="point2" fill="DODGERBLUE" layoutX="444.0" layoutY="94.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="point2" fill="DODGERBLUE" layoutX="466.0" layoutY="56.0" radius="4.0" stroke="BLACK" strokeType="INSIDE" />
       <Text fx:id="label4" fill="#29c348" layoutX="42.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="SHANGHAI" wrappingWidth="76.34907363258526">
          <font>
             <Font name="Impact" size="15.0" />

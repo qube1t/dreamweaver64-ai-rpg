@@ -61,7 +61,9 @@
                            </image>
                         </ImageView>
 
-                        <ScrollPane fx:id="bubbleTextPane" fitToHeight="true" fitToWidth="true" layoutX="36.0" layoutY="7.0" minWidth="300.0" prefHeight="82.0" prefWidth="348.0" style="-fx-background-color: white;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" />
+
+                        <ScrollPane fx:id="bubbleTextPane" fitToHeight="true" fitToWidth="true" layoutX="52.0" layoutY="7.0" minWidth="300.0" prefHeight="68.0" prefWidth="331.0" style="-fx-background-color: white;" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" visible="false" />
+
 
 
                      </children>

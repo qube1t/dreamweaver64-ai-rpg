@@ -10,9 +10,8 @@ public class GptPromptEngineeringRoom3 {
    */
   public static String getAircraftCode() {
     return "User update: The player now has correctly entered the correct departature and"
-        + " destnation city and now unlocks the aircraft code. Response with congrats the"
-        + " player and generate a aircraft code with 2 letters and 2 numbers, the aircraft"
-        + " code must surround with ^.";
+        + " destnation city and now unlocks the aircraft code. Generate a aircraft code that is"
+        + " 2 letters and 2 numbers, the aircraft code must surround with ^.";
   }
 
   /**
@@ -22,17 +21,22 @@ public class GptPromptEngineeringRoom3 {
    * @return
    */
   public static String room3WelcomeMessage() {
-    return "User update: The user now entered room3 that is an air traffic control tower.The player"
-        + " needs to interact with different objects including solving a puzzle to get the"
-        + " aircraft code to decrypt letter in another rooom.You need to achknowledge the"
-        + " current state of the game. Give the user intructions on the mission with maximum"
-        + " 2 sentences, not including any hints. Surround the response to be displayed to"
-        + " the player to the user with *.";
+    return "User update: Give the user a short welcome message, do not include any information of"
+        + " next step and surround the message to be displayed to user with * based on the"
+        + " mission below.The user now entered one of the three rooms that is an air traffic"
+        + " control tower.The user needs to interact with different objects including"
+        + " solving a puzzle to get the aircraft code. The aircraft code combined with"
+        + " encrypted message in another room is required to decrypt the letter in this room"
+        + " to successfully escape.You need to achknowledge the current state of the game"
+        + " and I will give you user action updates.";
   }
 
   public static String getRandomCity() {
-    return "Generate a random city that is less than 10 characters, only reply with the city name"
-        + " surrounded by ^, example ^Paris^";
+    return "Generate 1 random and real city name that is must be different from the example"
+        + " provided and different from any previous response in your memory. The city is"
+        + " only one word and less than 10 characters, the city name will be used in a puzzle"
+        + " game in this room, only reply with the city name surrounded between ^, example"
+        + "  ^Chicago^ ^Delhi^ ^Paris^ ^Tokyo^ ^Seattle^ ^Shanghai^ ^London^ ^Sydney^ ";
   }
 
   public static String getIntroPuzzleMessage() {
@@ -43,13 +47,14 @@ public class GptPromptEngineeringRoom3 {
   }
 
   public static String wrongPuzzleRoom3() {
-    return "Now the player rearranged the city name but it is not the correct city name, generate"
-        + " a 10 words message to tell the player that the city name is wrong and need to"
-        + " rearrange again do not surrounded with *.";
+    return "User update: Now the user rearranged the city name but it is not the correct city name,"
+        + " generate a 10 words message to tell the user that the city name is wrong and"
+        + " need to rearrange again do not surrounded with *.";
   }
 
   public static String correctPuzzleRoom3() {
-    return "Now the player rearranged the city name and it is the correct city name, say correct"
-        + " and congrats the player about the achievement and do not surrounded with *";
+    return "User update: Now the user rearranged the city name and it is the correct city name, say"
+        + " correct and congrats the user about the achievement and do not surrounded with"
+        + " *";
   }
 }

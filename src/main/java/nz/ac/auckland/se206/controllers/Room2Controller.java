@@ -125,6 +125,7 @@ public class Room2Controller {
           GptPromptEngineeringRoom2.room2WelcomeMessage(),
           (result) -> {
             MainGame.enableInteractPane();
+            System.out.println("true book is " + GameState.trueBook);
           });
     } else {
       MainGame.enableInteractPane();
@@ -133,7 +134,9 @@ public class Room2Controller {
     if (!gptInit) {
       initGpt();
       gptInit = true;
+
     }
+
 
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
@@ -243,6 +246,8 @@ public class Room2Controller {
                       piratePane.setVisible(true);
                     });
               });
+
+
         }
         Helper.changeTreasureBox(GameState.currentBox);
       }

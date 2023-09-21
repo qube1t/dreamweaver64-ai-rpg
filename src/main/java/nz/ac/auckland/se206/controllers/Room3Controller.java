@@ -43,21 +43,18 @@ public class Room3Controller {
   @FXML private Circle box1, box2, box3, box4, box5;
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
-  @FXML private ImageView map;
+  @FXML public ImageView map, paperImage;
   @FXML private Pane clickPane;
 
   private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
 
-    // Generate the arranged city name and make it unarranged when room3 loads
-    if ((GameState.arrangedDestnationCity == ""
-        || GameState.arrangedDestnationCity.length() > 11)) {
+    if (GameState.arrangedDestnationCity == "") {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getRandomCity(),
           (result) -> {
-            // Get the city surrounded by #
-            // Find the start and end indices of the aircraft code within single quotes
+            System.out.println(result);
             int startIndex = result.indexOf("^");
             int endIndex = result.indexOf("^", startIndex + 1);
 
@@ -68,11 +65,11 @@ public class Room3Controller {
                 makeUnarrangedCityName(GameState.arrangedDestnationCity);
           });
     }
-
     // Only displays the welcome message to Room3 if the plauyer first enters the room
     if (!GameState.isRoom3FirstEntered) {
 
       GameState.isRoom3FirstEntered = true;
+
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.room3WelcomeMessage(),
           (result) -> {
@@ -172,8 +169,11 @@ public class Room3Controller {
     System.out.println("destnation city is " + GameState.arrangedDestnationCity);
     MainGame.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
-        "User update: User has opened the unarranged word puzzle. The word indicates the destnation"
-            + " city. No reply is needed for this message.");
+        "User update: User has opened the unarranged word puzzle game. The correct city"
+            + " name is "
+            + GameState.arrangedDestnationCity
+            + ". No reply is needed for this message. If the user ask for hints, give hint without"
+            + " revealing the city name.");
   }
 
   @FXML
@@ -181,7 +181,8 @@ public class Room3Controller {
     MainGame.addOverlay("radar_computer", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened the radar computer and the red point indicates the correct"
-            + " treasure box location in another room. No need to respond to this message.");
+            + " location for treasure box location in another room. If the user ask for hints give"
+            + " the hints. No need to respond to this message.");
   }
 
   @FXML
@@ -202,20 +203,27 @@ public class Room3Controller {
    */
   public void clickPaperEvent() throws IOException, ApiProxyException {
     if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
+      paperImage.setVisible(false);
       System.out.println("Decrypted letter released");
+
       GameState.eleanorAi.runGpt(
-          "User update: User has successfully decrypted the letter based on the objects he got."
-              + " Send a response to user surrounded by * .");
+          "User update: User has successfully decrypted the letter based on the objects he got. He"
+              + " can no2 click the main door to exit. Send a response to user without revealing"
+              + " the exit / main door and surrounded with * .");
       // Set the aircraft code image to inventory.
       Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
+
+      MainGame.removeObtainedItem("aircraftCode");
+      MainGame.removeObtainedItem("treasure");
       MainGame.addObtainedItem(decryptedLetter, "decryptedLetter");
       GameState.hasDecrypted = true;
     } else {
 
       GameState.eleanorAi.runGpt(
-          "User update: User has clicked on the encrypted letter and fail to open. He needs to get"
-              + " both encrypted message and aircraft code to decrypt. Send a response to user"
-              + " surrounded by *.");
+          "User update: User has clicked on the encrypted letter and fail to decrypt. He needs to"
+              + " get both encrypted message and aircraft code to decrypt. Send a response to user"
+              + " without revaling any step. If the user ask for hints give him. Only the message"
+              + " surrounded with * will send to user .");
     }
   }
 
