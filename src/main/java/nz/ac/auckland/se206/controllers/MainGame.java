@@ -329,9 +329,10 @@ public class MainGame {
               int time = currentTime;
               int minutes = time / 60;
               int seconds = time % 60;
+              String formattedTime = String.format("%02d:%02d", minutes, seconds);
               Platform.runLater(
                   () -> {
-                    timer_initiated.setText(minutes + " : " + seconds);
+                    timer_initiated.setText(formattedTime);
                     updateHintCount();
                   });
               try {
@@ -386,7 +387,11 @@ public class MainGame {
   }
 
   private void updateHintCount() {
-    hint_initiated.setText("Hint: " + Integer.toString(GameState.hintsRemaining));
+    if (GameState.gameMode[0].equals("MEDIUM")) {
+      hint_initiated.setText("Hint: " + Integer.toString(GameState.hintsRemaining));
+    } else {
+      return;
+    }
   }
 
   private static void updateInventoryUI() {
