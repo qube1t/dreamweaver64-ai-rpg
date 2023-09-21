@@ -57,7 +57,7 @@ public class Room3CentralDisplayUnitController {
       GameState.eleanorAi.runGpt(
           "User update: the user clicks on the flight computer but it is locked due to either not"
               + " solved the puzzle or not yet opened the world map to discover the current"
-              + " location. Give player a short message to indicates it is locked, surrounded by ##"
+              + " location. Give player a short message to indicates it is locked, surrounded by ^"
               + " . ",
           (result) -> {
             Platform.runLater(
