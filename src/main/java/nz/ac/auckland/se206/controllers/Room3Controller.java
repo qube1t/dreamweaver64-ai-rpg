@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -34,10 +35,11 @@ public class Room3Controller {
       bound1,
       bound2,
       bound3,
-      book,
+      paper,
       clickableComputer,
       clickableRadar,
-      clickableDoor;
+      clickableDoor,
+      worldMap;
   @FXML private Circle box1, box2, box3, box4, box5;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
@@ -58,8 +60,8 @@ public class Room3Controller {
           (result) -> {
             // Get the city surrounded by #
             // Find the start and end indices of the aircraft code within single quotes
-            int startIndex = result.indexOf("#");
-            int endIndex = result.indexOf("#", startIndex + 1);
+            int startIndex = result.indexOf("^");
+            int endIndex = result.indexOf("^", startIndex + 1);
 
             if (startIndex != -1 && endIndex != -1)
               GameState.arrangedDestnationCity = result.substring(startIndex + 1, endIndex);
@@ -69,17 +71,24 @@ public class Room3Controller {
           });
     }
 
-    // Generate the intro message for the puzzle
-    if (GameState.puzzleIntroMessageRoom3 == "") {
+    // Only displays the welcome message to Room3 if the plauyer first enters the room
+    if (!GameState.isRoom3FirstEntered) {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
           (result) -> {
             System.out.println(result);
             GameState.puzzleIntroMessageRoom3 = result;
           });
+      GameState.isRoom3FirstEntered = true;
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.room3WelcomeMessage(),
+          (result) -> {
+            System.out.println(result);
+            MainGame.enableInteractPane();
+          });
+    } else {
+      MainGame.enableInteractPane();
     }
-    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.room3WelcomeMessage());
-    MainGame.enableInteractPane();
 
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
@@ -130,14 +139,12 @@ public class Room3Controller {
   }
 
   @FXML
-  public void onClickLocation() throws IOException, ApiProxyException {
-    if (!GameState.isWorldMapOpened) GameState.isWorldMapOpened = true;
-
-    System.out.println("Location clicked");
-    MainGame.addOverlay("gps_current", false);
+  public void onClickPuzzle() throws IOException, ApiProxyException {
+    System.out.println("Puzzle clicked");
+    MainGame.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
-        "User update: User has opened the world map and achnowledge the current location. No need"
-            + " to respond to this message.");
+        "User update: User has opened the unarranged word puzzle. The word indicates the destnation"
+            + " city. No reply is needed for this message.");
   }
 
   @FXML
@@ -149,17 +156,37 @@ public class Room3Controller {
   }
 
   @FXML
+  public void onClickMap() throws IOException, ApiProxyException {
+    if (!GameState.isWorldMapOpened) GameState.isWorldMapOpened = true;
+
+    System.out.println("Location clicked");
+    MainGame.addOverlay("gps_current", false);
+    GameState.eleanorAi.runGpt(
+        "User update: User has opened the world map and achnowledge the current location. No need"
+            + " to respond to this message.");
+  }
+
+  @FXML
   /**
    * This method is called when the book is clicked It will open the flight plan if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
-  public void clickBookEvent() throws IOException, ApiProxyException {
+  public void clickPaperEvent() throws IOException, ApiProxyException {
+    if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
+      System.out.println("Decrypted letter released");
+      GameState.eleanorAi.runGpt(
+          "User update: User has successfully decrypted the letter based on the objects he got."
+              + " Send a response to user surrounded by * .");
+      // Set the aircraft code image to inventory.
+      Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
+      MainGame.addObtainedItem(decryptedLetter, "decrypted letter");
+    } else {
 
-    System.out.println("Book clicked");
-    MainGame.addOverlay("room3_puzzle", false);
-    GameState.eleanorAi.runGpt(
-        "User update: User has opened the unarranged word puzzle. The word indicates the destnation"
-            + " city. No reply is needed for this message.");
+      GameState.eleanorAi.runGpt(
+          "User update: User has clicked on the encrypted letter and fail to open. He needs to get"
+              + " both encrypted message and aircraft code to decrypt. Send a response to user"
+              + " surrounded by *.");
+    }
   }
 
   @FXML

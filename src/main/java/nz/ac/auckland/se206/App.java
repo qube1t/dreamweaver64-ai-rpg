@@ -97,7 +97,7 @@ public class App extends Application {
     Pane root = (Pane) loadFxml("splash_screen");
 
 
-    scene = new Scene(root, 700, 750);
+    scene = new Scene(root, 700, 600);
 
     stage.setScene(scene);
     stage.show();
