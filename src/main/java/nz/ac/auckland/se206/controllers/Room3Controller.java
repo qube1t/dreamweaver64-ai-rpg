@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.fxml.FXML;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -50,14 +49,6 @@ public class Room3Controller {
   private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
-
-    if (!GameState.isAircraftCodeFound && !GameState.isEncryptedMessageFound) {
-      ColorAdjust grayscale = new ColorAdjust();
-      grayscale.setSaturation(-1.0); // Set saturation to -1 for grayscale
-      // Apply the grayscale effect to the paper image.
-      paperImage.setEffect(grayscale);
-      paperImage.setOpacity(0.6);
-    }
 
     if (GameState.arrangedDestnationCity == "") {
       GameState.eleanorAi.runGpt(
@@ -207,15 +198,18 @@ public class Room3Controller {
    */
   public void clickPaperEvent() throws IOException, ApiProxyException {
     if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
-      paperImage.setOpacity(1);
-      paperImage.setEffect(null);
+      paperImage.setVisible(false);
       System.out.println("Decrypted letter released");
+
       GameState.eleanorAi.runGpt(
           "User update: User has successfully decrypted the letter based on the objects he got. He"
-              + " can not click the main dooe to exit Send a response to user without revealing"
-              + " next step and surrounded by * .");
+              + " can no2 click the main door to exit. Send a response to user without revealing"
+              + " the exit / main door and surrounded with * .");
       // Set the aircraft code image to inventory.
       Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
+
+      MainGame.removeObtainedItem("aircraftCode");
+      MainGame.removeObtainedItem("treasure");
       MainGame.addObtainedItem(decryptedLetter, "decryptedLetter");
       GameState.winTheGame = true;
     } else {

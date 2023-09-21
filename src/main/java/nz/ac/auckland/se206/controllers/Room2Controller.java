@@ -137,6 +137,7 @@ public class Room2Controller {
           GptPromptEngineeringRoom2.room2WelcomeMessage(),
           (result) -> {
             MainGame.enableInteractPane();
+            System.out.println("true book is " + GameState.trueBook);
           });
     } else {
       MainGame.enableInteractPane();
@@ -145,8 +146,7 @@ public class Room2Controller {
     if (!gptInit) {
       initGpt();
       gptInit = true;
-    } else
-    speechBubbleScrollPane.setVisible(false);
+    } else speechBubbleScrollPane.setVisible(false);
     speech_bubble.setVisible(false);
     gptResponse.setVisible(false);
 
@@ -241,8 +241,8 @@ public class Room2Controller {
                       gptResponse.setText(result);
                     });
               });
-            Helper.changeTreasureBox(GameState.currentBox);
-            System.out.println(GameState.currentBox);
+          Helper.changeTreasureBox(GameState.currentBox);
+          System.out.println(GameState.currentBox);
         }
         wrongBoxClicked++;
       }
