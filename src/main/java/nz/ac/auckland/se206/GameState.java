@@ -28,6 +28,8 @@ public class GameState {
   public static boolean isWorldMapOpened = false;
   public static MainGame mainGame;
 
+  public static int prevRoom = 1;
+
   public static boolean winTheGame = false;
   public static long startTime = 0;
   public static long endTime = 0;
