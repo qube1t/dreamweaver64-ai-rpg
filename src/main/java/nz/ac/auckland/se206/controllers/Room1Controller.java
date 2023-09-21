@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
@@ -156,7 +154,6 @@ public class Room1Controller {
       GameState.mainGame.outer_pane
         .getChildren()
         .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
-      
     }
   }
 
