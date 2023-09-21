@@ -41,6 +41,16 @@ public class GptPromptEngineeringRoom1 {
         + " not reveal the book name.";
   }
 
+  public static String getPirateWrongResponse(){
+    return "This is the loading stage. Reply in one sentence how a pirate would say wrong answer."
+        + " Surround the sentence before and after with the character ^";
+  }
+
+  public static String getPirateRightResponse(){
+    return "This is the loading stage. Reply in one sentence how a pirate would say correct answer."
+        + " Surround the sentence before and after with the character ^";
+  }
+
   public static String getChatMessageFromUser(String chatInput) {
     if (GameState.hintsRemaining == 0) {
       return "The user has send this message: '"
