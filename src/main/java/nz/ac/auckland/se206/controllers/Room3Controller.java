@@ -152,6 +152,11 @@ public class Room3Controller {
   @FXML
   public void onClickRoom2() throws IOException {
     System.out.println("Room2 clicked");
+    // go to the right room
+    InstructionsLoad.setText();
+
+    // disable interact pane for transition
+    MainGame.disableInteractPane();
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room2", true);
   }
@@ -204,7 +209,7 @@ public class Room3Controller {
       // Set the aircraft code image to inventory.
       Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
       MainGame.addObtainedItem(decryptedLetter, "decryptedLetter");
-      GameState.winTheGame = true;
+      GameState.hasDecrypted = true;
     } else {
 
       GameState.eleanorAi.runGpt(
@@ -218,6 +223,11 @@ public class Room3Controller {
   public void onClickDoor() throws IOException {
     System.out.println("Door clicked");
     System.out.println(GameState.currentBox);
+    // go to the right room
+    InstructionsLoad.setText();
+
+    // disable interact pane for transition
+    MainGame.disableInteractPane();
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room1", true);
   }

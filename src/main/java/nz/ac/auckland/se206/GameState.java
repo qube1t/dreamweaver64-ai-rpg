@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.util.List;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.MainGame;
@@ -99,4 +100,8 @@ public class GameState {
   public static String encryptedFinalMsg;
 
   public static boolean isRoom2FirstEntered = false;
+
+  public static boolean hasDecrypted;
+
+  public static List<String> factsAboutDW64;
 }

@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
+<StackPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" styleClass="startEndTitle" stylesheets="@../css/font.css">
           <children>
-            <ImageView fitHeight="600.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="600.0" fitWidth="700.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/startImg.png" />
                </image>
@@ -32,16 +32,17 @@
                <font>
                   <Font name="Abaddon Light Regular" size="30.0" />
                </font></Label>
-            <Label fx:id="difficultyLabel" alignment="CENTER" layoutX="60.0" layoutY="162.0" styleClass="startEndTitle" text="DIFFICULTY:" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="170.0">
+            <Label fx:id="difficultyLabel" alignment="CENTER" layoutX="70.0" layoutY="238.0" styleClass="startEndTitle" text="DIFFICULTY:" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="238.0">
                <font>
                   <Font size="51.0" />
                </font>
             </Label>
-            <ComboBox fx:id="difficulty" layoutX="402.0" layoutY="179.0" prefHeight="30.0" prefWidth="149.0" promptText="EASY" styleClass="chooseLevel" stylesheets="@../css/font.css" AnchorPane.rightAnchor="130.0" AnchorPane.topAnchor="175.0" />
-            <Label fx:id="title" alignment="CENTER" layoutX="83.0" layoutY="62.0" prefHeight="58.0" prefWidth="434.0" styleClass="startEndTitle" text="ESCAPE ROOM TEAM 31" textFill="WHITE" AnchorPane.bottomAnchor="488.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="50.0">
+            <ComboBox fx:id="difficulty" layoutX="421.0" layoutY="243.0" prefHeight="53.0" prefWidth="196.0" promptText="EASY" styleClass="chooseLevel" stylesheets="@../css/font.css" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="243.0" />
+            <Label fx:id="title" alignment="CENTER" layoutX="80.0" layoutY="42.0" prefHeight="58.0" prefWidth="434.0" styleClass="startEndTitle" text="DreamWeaver64" textFill="WHITE" AnchorPane.bottomAnchor="496.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="42.0">
                <font>
                   <Font name="Abaddon Light Regular" size="16.0" />
                </font></Label>
+            <Label fx:id="txt_instruct" layoutX="70.0" layoutY="116.0" prefHeight="106.0" prefWidth="540.0" styleClass="instructions" textFill="WHITE" wrapText="true" />
           </children>
       </AnchorPane>
    </children>

@@ -12,7 +12,7 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 public class StartMenuController {
   @FXML private ComboBox<String> difficulty;
   @FXML private ComboBox<String> timeLimit;
-  @FXML private Label title, difficultyLabel, timeLimitLabel;
+  @FXML private Label title, difficultyLabel, timeLimitLabel, txt_instruct;
 
   @FXML Button startButton;
 
@@ -20,6 +20,8 @@ public class StartMenuController {
 
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
+
+    txt_instruct.setText(GameState.instructionMsg);
   }
 
   @FXML

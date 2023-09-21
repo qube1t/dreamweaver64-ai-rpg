@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="outer_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" onMouseClicked="#clickedOuterPane" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
+<StackPane fx:id="outer_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" onMouseClicked="#clickedOuterPane" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
 
    <children>
       <VBox fx:id="interact_pane" disable="true" prefHeight="560.0" prefWidth="706.0" visible="false">
@@ -41,7 +41,7 @@
                      </font>
                   </Label>
                </children></AnchorPane>
-            <StackPane fx:id="game_pane" prefHeight="550.0" style="-fx-border-color: blue; -fx-background-color: black;">
+            <StackPane fx:id="game_pane" prefHeight="750.0" style="-fx-border-color: blue; -fx-background-color: black;">
                <children>
                   <AnchorPane fx:id="aiCharacterPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="152.0" prefWidth="389.0" StackPane.alignment="BOTTOM_LEFT">
                      <StackPane.margin>
@@ -54,14 +54,14 @@
                               <Image url="@../images/ai_img.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="speechBubble" fitHeight="130.0" fitWidth="369.0" layoutX="26.0" pickOnBounds="true" visible="false" AnchorPane.bottomAnchor="107.0">
+                        <ImageView fx:id="speechBubble" fitHeight="130.0" fitWidth="369.0" layoutX="26.0" pickOnBounds="true" AnchorPane.bottomAnchor="107.0">
 
                            <image>
                               <Image url="@../images/chat_speech_bubble.png" />
                            </image>
                         </ImageView>
 
-                        <ScrollPane fx:id="bubbleTextPane" fitToHeight="true" fitToWidth="true" layoutX="52.0" layoutY="7.0" minWidth="300.0" prefHeight="68.0" prefWidth="331.0" style="-fx-background-color: white;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" visible="false" />
+                        <ScrollPane fx:id="bubbleTextPane" fitToHeight="true" fitToWidth="true" layoutX="36.0" layoutY="7.0" minWidth="300.0" prefHeight="82.0" prefWidth="348.0" style="-fx-background-color: white;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" />
 
 
                      </children>

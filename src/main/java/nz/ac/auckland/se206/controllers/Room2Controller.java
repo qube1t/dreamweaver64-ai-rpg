@@ -98,25 +98,11 @@ public class Room2Controller {
         character.setLayoutY(250);
         break;
       case 3:
-        character.setLayoutX(492);
+        character.setLayoutX(486);
         character.setLayoutY(242);
         break;
       default:
         character.setLayoutX(60);
-        character.setLayoutY(250);
-    }
-
-    switch (GameState.prevRoom) {
-      case 1:
-        character.setLayoutX(70);
-        character.setLayoutY(250);
-        break;
-      case 3:
-        character.setLayoutX(460);
-        character.setLayoutY(250);
-        break;
-      default:
-        character.setLayoutX(70);
         character.setLayoutY(250);
     }
 
@@ -145,8 +131,7 @@ public class Room2Controller {
     if (!gptInit) {
       initGpt();
       gptInit = true;
-    } else
-    speechBubbleScrollPane.setVisible(false);
+    } else speechBubbleScrollPane.setVisible(false);
     speech_bubble.setVisible(false);
     gptResponse.setVisible(false);
 
@@ -241,8 +226,8 @@ public class Room2Controller {
                       gptResponse.setText(result);
                     });
               });
-            Helper.changeTreasureBox(GameState.currentBox);
-            System.out.println(GameState.currentBox);
+          Helper.changeTreasureBox(GameState.currentBox);
+          System.out.println(GameState.currentBox);
         }
         wrongBoxClicked++;
       }
@@ -322,6 +307,11 @@ public class Room2Controller {
    */
   @FXML
   public void onOpenRoom1(MouseEvent event) throws IOException {
+    // go to the right room
+    InstructionsLoad.setText();
+
+    // disable interact pane for transition
+    MainGame.disableInteractPane();
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room1", true);
   }
@@ -335,6 +325,11 @@ public class Room2Controller {
   @FXML
   public void onOpenRoom3(MouseEvent event) throws IOException {
 
+    // go to the right room
+    InstructionsLoad.setText();
+
+    // disable interact pane for transition
+    MainGame.disableInteractPane();
     MainGame.removeOverlay(true);
     MainGame.addOverlay("room3", true);
   }

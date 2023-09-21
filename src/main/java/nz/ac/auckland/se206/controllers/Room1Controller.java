@@ -5,9 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -42,6 +40,7 @@ public class Room1Controller {
   @FXML private Rectangle rect21;
   @FXML private Rectangle rect22;
   @FXML private Rectangle shelf_btn;
+  @FXML private Rectangle rect71;
 
   // static fields for gpt
   static boolean gptInit = false;
@@ -55,7 +54,8 @@ public class Room1Controller {
         new ArrayList<Rectangle>(
             Arrays.asList(
                 rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
-                rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21, rect22));
+                rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21, rect22,
+                rect71));
     // obsts.add(0, rect1);
     // Initialization code goes here
     character.enableMobility(obsts, interactablePane.getChildren());
@@ -64,6 +64,9 @@ public class Room1Controller {
     if (!gptInit) {
       initGpt();
       gptInit = true;
+    } else {
+      // enable interact pane
+      MainGame.enableInteractPane();
     }
 
     // set character position
@@ -77,8 +80,8 @@ public class Room1Controller {
         character.setLayoutY(362);
         break;
       default:
-        character.setLayoutX(250);
-        character.setLayoutY(250);
+        character.setLayoutX(498);
+        character.setLayoutY(522);
     }
 
     GameState.prevRoom = 1;
@@ -125,7 +128,7 @@ public class Room1Controller {
   @FXML
   public void goToLeftRoom() throws IOException, InterruptedException {
     // go to the left room
-    InstructionsLoad.setTexts("", 0);
+    InstructionsLoad.setText();
 
     // disable interact pane for transition
     MainGame.disableInteractPane();
@@ -136,7 +139,7 @@ public class Room1Controller {
   @FXML
   private void goToRightRoom() throws IOException, InterruptedException {
     // go to the right room
-    InstructionsLoad.setTexts("", 0);
+    InstructionsLoad.setText();
 
     // disable interact pane for transition
     MainGame.disableInteractPane();
@@ -158,11 +161,13 @@ public class Room1Controller {
     GameState.eleanorAi.runGpt(
         "User update, User has tried to open main exit without solving the mission. No reply"
             + " needed.");
-    if (GameState.winTheGame) {
-      GameState.mainGame
-          .outer_pane
-          .getChildren()
-          .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
+    if (GameState.hasDecrypted) {
+      GameState.winTheGame = true;
+      App.setRoot("end_menu");
+      // GameState.mainGame
+      //     .outer_pane
+      //     .getChildren()
+      //     .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
     }
   }
 

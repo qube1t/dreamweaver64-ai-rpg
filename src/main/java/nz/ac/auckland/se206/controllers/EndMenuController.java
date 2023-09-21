@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,7 +19,7 @@ public class EndMenuController {
     // Set the text to display based on whether the player won or lost
     if (GameState.winTheGame) {
       WinOrLose.setText("You Escaped!");
-      letter.setText(GameState.encryptedFinalMsg);
+      letter.setText(GameState.finalMsg);
     } else {
       WinOrLose.setText("Time's Up! You Lose!");
     }

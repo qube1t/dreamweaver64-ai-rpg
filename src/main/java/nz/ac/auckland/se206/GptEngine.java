@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javafx.application.Platform;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -25,18 +24,22 @@ public class GptEngine {
     if (chatCompletionRequest == null)
       chatCompletionRequest =
           new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.5).setMaxTokens(100);
-          
-          Timer timer = new Timer();
-          timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-              if (!active && promptQueue.size() > 0) {
-                active = true;
-                startNewThread();
-              };
+
+    Timer timer = new Timer();
+    timer.scheduleAtFixedRate(
+        new TimerTask() {
+          @Override
+          public void run() {
+            if (!active && promptQueue.size() > 0) {
+              active = true;
+              startNewThread();
             }
-          }, 1000, 1000);
-            }
+            ;
+          }
+        },
+        1000,
+        1000);
+  }
 
   /**
    * Runs the GPT model with a given chat message.
@@ -49,7 +52,7 @@ public class GptEngine {
     ChatMessage chatmsg = new ChatMessage("user", msg);
     promptQueue.add(chatmsg);
     promptFuncQueue.add(myFunc);
-    
+
     if (!active) {
       active = true;
       startNewThread();

@@ -28,6 +28,13 @@ public class GptPromptEngineeringRoom1 {
         + " sentences to be shown to the user with #";
   }
 
+  public static String getFacts() {
+    return "Give at least 2 single sentence warnings and historical facts about DREAMWEAVER64. For"
+               + " eg. changing between rooms fast can affect the structural integrity of the"
+               + " dream. They can be humorous or serious. Surround the sentences before and after"
+               + " with #";
+  }
+
   public static String get7Books() {
     return "This is the loading stage. Produce a list of 7 books that have less than 7 characters,"
         + " surrounded by quotes, to show on the shelf";
@@ -45,12 +52,13 @@ public class GptPromptEngineeringRoom1 {
     if (GameState.hintsRemaining == 0) {
       return "The user has send this message: '"
           + chatInput
-          + "'. Reply as a normal human in 1 sentence. You cannot give hints or answers to any riddle."
-          + " But you can remind them of the current state of the dream.";
+          + "'. Reply as a normal human in 1 sentence. You cannot give hints or answers to any"
+          + " riddle. But you can remind them of the current state of the dream.";
     }
     return "The user has send this message: '"
         + chatInput
-        + "'. Reply as a normal human in 1 sentence. If the user asks for hints, you should insert the character ~"
-        + " before every hint. Do not reveal the answer even if the user asks for it.";
+        + "'. Reply as a normal human in 1 sentence. If the user asks for hints, you should insert"
+        + " the character ~ before every hint. Do not reveal the answer even if the user asks for"
+        + " it.";
   }
 }
