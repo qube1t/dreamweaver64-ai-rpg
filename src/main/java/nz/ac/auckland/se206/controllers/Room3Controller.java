@@ -85,8 +85,8 @@ public class Room3Controller {
         GptPromptEngineeringRoom3.room3WelcomeMessage(),
         (result) -> {
           System.out.println(result);
+          MainGame.enableInteractPane();
         });
-    MainGame.enableInteractPane();
 
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
