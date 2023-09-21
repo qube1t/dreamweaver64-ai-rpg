@@ -90,7 +90,6 @@ public class Room3Controller {
             MainGame.enableInteractPane();
           });
     }
-
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
@@ -177,6 +176,11 @@ public class Room3Controller {
           "User update: User has successfully decrypted the letter based on the objects he got."
               + " Send a response to user surrounded by * .");
     }
+
+    GameState.eleanorAi.runGpt(
+        "User update: User has clicked on the encrypted letter and fail to open. He needs to get"
+            + " both encrypted message and aircraft code to decrypt. Send a response to user"
+            + " surrounded by *.");
   }
 
   @FXML

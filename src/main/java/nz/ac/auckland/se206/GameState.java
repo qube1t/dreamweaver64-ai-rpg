@@ -49,10 +49,6 @@ public class GameState {
 
   public static int hintsRemaining = -1;
 
-  /** These fields are used in room3 */
-  public static boolean isPreviousFlightPlanOpen = false;
-
-  public static boolean isDepBoardOpen = false;
   public static boolean isCorrectRouteFound = false;
   public static boolean isCityFound = false;
 
@@ -62,7 +58,10 @@ public class GameState {
   /** Indicates the location of the treasure box. */
   public static int currentBox = -1;
 
+  /** Indicates the unarranged city name for puzzle game. */
   public static String unarrangedDestnationCity = "";
+
+  /** Indicates the arranged city name for the puzzle game. */
   public static String arrangedDestnationCity = "";
 
   /** Indicates the correct city index */
