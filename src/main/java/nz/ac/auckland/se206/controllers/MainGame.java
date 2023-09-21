@@ -93,6 +93,8 @@ public class MainGame {
     initialised_game_pane = game_pane;
     initialised_interact_pane = interact_pane;
 
+    GameState.startTime = System.currentTimeMillis();
+
     outer_pane
         .getChildren()
         .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));

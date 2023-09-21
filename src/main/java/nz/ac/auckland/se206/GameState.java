@@ -29,6 +29,8 @@ public class GameState {
   public static MainGame mainGame;
 
   public static boolean winTheGame = false;
+  public static long startTime = 0;
+  public static long endTime = 0;
 
   /** Indicates whether the game has started. */
   public static boolean isGameStarted = false;
