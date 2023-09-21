@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
+<StackPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" styleClass="startEndTitle" stylesheets="@../css/font.css">
           <children>

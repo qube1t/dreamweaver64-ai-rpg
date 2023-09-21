@@ -308,7 +308,7 @@ public class Room2Controller {
   @FXML
   public void onOpenRoom1(MouseEvent event) throws IOException {
     // go to the right room
-    InstructionsLoad.setTexts("", 0);
+    InstructionsLoad.setText();
 
     // disable interact pane for transition
     MainGame.disableInteractPane();
@@ -326,7 +326,7 @@ public class Room2Controller {
   public void onOpenRoom3(MouseEvent event) throws IOException {
 
     // go to the right room
-    InstructionsLoad.setTexts("", 0);
+    InstructionsLoad.setText();
 
     // disable interact pane for transition
     MainGame.disableInteractPane();

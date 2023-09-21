@@ -40,6 +40,7 @@ public class Room1Controller {
   @FXML private Rectangle rect21;
   @FXML private Rectangle rect22;
   @FXML private Rectangle shelf_btn;
+  @FXML private Rectangle rect71;
 
   // static fields for gpt
   static boolean gptInit = false;
@@ -53,7 +54,8 @@ public class Room1Controller {
         new ArrayList<Rectangle>(
             Arrays.asList(
                 rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
-                rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21, rect22));
+                rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21, rect22,
+                rect71));
     // obsts.add(0, rect1);
     // Initialization code goes here
     character.enableMobility(obsts, interactablePane.getChildren());
@@ -126,7 +128,7 @@ public class Room1Controller {
   @FXML
   public void goToLeftRoom() throws IOException, InterruptedException {
     // go to the left room
-    InstructionsLoad.setTexts("", 0);
+    InstructionsLoad.setText();
 
     // disable interact pane for transition
     MainGame.disableInteractPane();
@@ -137,7 +139,7 @@ public class Room1Controller {
   @FXML
   private void goToRightRoom() throws IOException, InterruptedException {
     // go to the right room
-    InstructionsLoad.setTexts("", 0);
+    InstructionsLoad.setText();
 
     // disable interact pane for transition
     MainGame.disableInteractPane();

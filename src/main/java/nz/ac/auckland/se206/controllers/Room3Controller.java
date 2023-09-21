@@ -153,7 +153,7 @@ public class Room3Controller {
   public void onClickRoom2() throws IOException {
     System.out.println("Room2 clicked");
     // go to the right room
-    InstructionsLoad.setTexts("", 0);
+    InstructionsLoad.setText();
 
     // disable interact pane for transition
     MainGame.disableInteractPane();
@@ -224,7 +224,7 @@ public class Room3Controller {
     System.out.println("Door clicked");
     System.out.println(GameState.currentBox);
     // go to the right room
-    InstructionsLoad.setTexts("", 0);
+    InstructionsLoad.setText();
 
     // disable interact pane for transition
     MainGame.disableInteractPane();

@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class InstructionsLoad {
@@ -16,15 +17,24 @@ public class InstructionsLoad {
     initialised_instruct_txt = instruct_txt;
     initialised_time_txt = time_txt;
 
-    
     // loading
     // shelf setup
-    setTexts(nz.ac.auckland.se206.GameState.instructionMsg, Integer.parseInt(GameState.gameMode[1].replaceAll("[\\D]", "")));
+    setText();
+    setTime(Integer.parseInt(GameState.gameMode[1].replaceAll("[\\D]", "")) + "");
   }
-  
-  public static void setTexts(String a, int b) {
-    initialised_instruct_txt.setText(a);
-    initialised_time_txt.setText(
-        "You have " + b + " mins.");
+
+  @FXML
+  private void anotherFact() {
+    setText();
+  }
+
+  public static void setText() {
+    System.out.println(GameState.factsAboutDW64);
+    initialised_instruct_txt.setText(
+        GameState.factsAboutDW64.get(Helper.getRandomNumber(0, GameState.factsAboutDW64.size())));
+  }
+
+  public static void setTime(String t) {
+    initialised_time_txt.setText("You have " + t + " mins.");
   }
 }
