@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -44,7 +45,7 @@
             <Rectangle fx:id="rect23" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="501.0" layoutY="78.0" opacity="0.0" rotate="-20.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
             <Rectangle fx:id="rect24" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="53.0" layoutY="443.0" opacity="0.0" rotate="20.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
             <Rectangle fx:id="rect25" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="526.0" layoutY="430.0" opacity="0.0" rotate="-20.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
-            <Rectangle fx:id="rect26" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="66.0" layoutX="452.0" layoutY="125.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
+            <Rectangle fx:id="rect26" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="441.0" layoutY="155.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
             <Rectangle fx:id="rect27" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="164.0" layoutX="556.0" layoutY="159.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="11.0" />
             <Rectangle fx:id="rect28" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="359.0" layoutY="261.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
             <Rectangle fx:id="rect29" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="43.0" layoutX="328.0" layoutY="124.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="26.0" />
@@ -78,12 +79,12 @@
                   <Image url="@../images/rooms/room2/treasureBox.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="76.0" fitWidth="55.0" layoutX="440.0" layoutY="126.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="76.0" fitWidth="55.0" layoutX="432.0" layoutY="147.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/rooms/room2/pirate.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="boxKey" fitHeight="32.0" fitWidth="26.0" layoutX="433.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" rotate="-40.0">
+            <ImageView fx:id="boxKey" fitHeight="32.0" fitWidth="26.0" layoutX="423.0" layoutY="190.0" pickOnBounds="true" preserveRatio="true" rotate="-40.0">
                <image>
                   <Image url="@../images/rooms/room2/key.png" />
                </image>
@@ -103,19 +104,22 @@
             <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="202.0" layoutY="257.0" onMouseClicked="#onClickBox3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="55.0" />
             <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="350.0" layoutY="384.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="55.0" />
             <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="456.0" layoutY="300.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="55.0" />
+            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="#ffffff67" height="59.0" layoutX="426.0" layoutY="156.0" onMouseClicked="#onGetTrade" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="51.0" />
             <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="66.0" layoutY="216.0" onMouseClicked="#onOpenRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
-            <Rectangle fx:id="doorToRoom3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="544.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
-            <Pane fx:id="piratePane" layoutX="395.0" layoutY="17.0" prefHeight="181.0" prefWidth="206.0">
+            <Rectangle fx:id="doorToRoom3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="546.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
+            <Pane fx:id="piratePane" layoutX="416.0" layoutY="10.0">
                <children>
-                  <ImageView fx:id="speech_bubble" fitHeight="121.0" fitWidth="194.0" layoutX="14.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="speech_bubble" fitHeight="118.0" fitWidth="209.0" layoutX="-4.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/speechBubble.png" />
                      </image>
                   </ImageView>
-                  <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="#ffffff67" height="59.0" layoutX="53.0" layoutY="114.0" onMouseClicked="#onGetTrade" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="37.0" />
-                  <ScrollPane fx:id="speechBubbleScrollPane" layoutX="25.0" layoutY="12.0" prefHeight="66.0" prefWidth="173.0">
+                  <ScrollPane fx:id="speechBubbleScrollPane" layoutX="9.0" layoutY="21.0" prefHeight="76.0" prefWidth="180.0">
                     <content>
-                        <Label fx:id="gptResponse" alignment="TOP_CENTER" prefHeight="136.0" prefWidth="154.0" text="Hello!" textAlignment="CENTER" wrapText="true" />
+                        <Label fx:id="gptResponse" alignment="TOP_CENTER" prefHeight="117.0" prefWidth="163.0" textAlignment="CENTER" wrapText="true">
+                           <padding>
+                              <Insets top="3.0" />
+                           </padding></Label>
                     </content>
                   </ScrollPane>
                </children>

@@ -22,6 +22,11 @@ public class GptPromptEngineeringRoom2 {
         + " Surround the sentence before and after with the character ^";
   }
 
+  public static String getPirateNoKeyResponse() {
+    return "This is the loading stage. Reply in one sentence how a pirate would say no key."
+        + " Surround the sentence before and after with the character ^";
+  }
+
   public static String generateFinalUnencrypted() {
     return "This is the loading stage. Give the contents of the lost message to be shown to the"
         + " user. The contents of the letter needs to be between the character +. it has to"

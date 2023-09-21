@@ -72,9 +72,10 @@ public class Room2Controller {
       rect33,
       rect34;
 
-  private int wrongBoxClicked = 0;
-  private int correctBoxClicked = 0;
+  private Boolean wrongBoxClicked = false;
+  private Boolean correctBoxClicked = false;
   private static boolean gptInit;
+  private Boolean boxClickedWithoutKey = false;
 
   /**
    * Initializes the room view, it is called when the room loads.
@@ -94,7 +95,7 @@ public class Room2Controller {
 
     switch (GameState.prevRoom) {
       case 1:
-        character.setLayoutX(60);
+        character.setLayoutX(70);
         character.setLayoutY(250);
         break;
       case 3:
@@ -102,7 +103,7 @@ public class Room2Controller {
         character.setLayoutY(242);
         break;
       default:
-        character.setLayoutX(60);
+        character.setLayoutX(70);
         character.setLayoutY(250);
     }
 
@@ -131,9 +132,7 @@ public class Room2Controller {
     if (!gptInit) {
       initGpt();
       gptInit = true;
-    } else speechBubbleScrollPane.setVisible(false);
-    speech_bubble.setVisible(false);
-    gptResponse.setVisible(false);
+    }
 
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
@@ -145,15 +144,22 @@ public class Room2Controller {
         GptPromptEngineeringRoom2.generateFinalEncrypted(),
         s -> {
           List<String> msg = Helper.getTextBetweenChar(s, "+");
-          if (msg.size() > 0) GameState.encryptedFinalMsg = msg.get(0);
-          else GameState.encryptedFinalMsg = s;
+          if (msg.size() > 0) {
+            GameState.encryptedFinalMsg = msg.get(0);
+          } else {
+            GameState.encryptedFinalMsg = s;
+          }
         });
 
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom2.generateFinalUnencrypted(),
         s -> {
           List<String> msg = Helper.getTextBetweenChar(s, "+");
-          if (msg.size() > 0) GameState.finalMsg = msg.get(0);
+          if (msg.size() > 0) {
+            GameState.finalMsg = msg.get(0);
+          } else {
+            GameState.finalMsg = s;
+          }
         });
   }
 
@@ -162,9 +168,6 @@ public class Room2Controller {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) {
       gptResponse.setText(GameState.pirateRiddle);
       piratePane.setVisible(true);
-      speech_bubble.setVisible(true);
-      gptResponse.setVisible(true);
-      speechBubbleScrollPane.setVisible(true);
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
@@ -196,40 +199,51 @@ public class Room2Controller {
       if (numOfBox == boxLocation) {
         MainGame.addOverlay("treasure_box", false);
         GameState.isEncryptedMessageFound = true;
-        if (correctBoxClicked == 0) {
+        if (!correctBoxClicked) {
+          correctBoxClicked = true;
           GameState.eleanorAi.runGpt(
               GptPromptEngineeringRoom2.getPirateRightResponse(),
               (result) -> {
-                piratePane.setVisible(true);
-                speech_bubble.setVisible(true);
-                gptResponse.setVisible(true);
-                speechBubbleScrollPane.setVisible(true);
                 Platform.runLater(
                     () -> {
                       gptResponse.setText(result);
+                      piratePane.setVisible(true);
                     });
               });
-          correctBoxClicked++;
         }
       } else {
         // write this sentance in chat box
-        if (wrongBoxClicked == 0) {
+        if (!wrongBoxClicked) {
+          wrongBoxClicked = true;
           GameState.eleanorAi.runGpt(
               GptPromptEngineeringRoom2.getPirateWrongResponse(),
               (result) -> {
-                piratePane.setVisible(true);
-                speech_bubble.setVisible(true);
-                gptResponse.setVisible(true);
-                speechBubbleScrollPane.setVisible(true);
                 Platform.runLater(
                     () -> {
                       gptResponse.setText(result);
+                      piratePane.setVisible(true);
                     });
               });
-          Helper.changeTreasureBox(GameState.currentBox);
-          System.out.println(GameState.currentBox);
         }
-        wrongBoxClicked++;
+        Helper.changeTreasureBox(GameState.currentBox);
+      }
+    } else {
+      box1.setDisable(true);
+      box2.setDisable(true);
+      box3.setDisable(true);
+      box4.setDisable(true);
+      box5.setDisable(true);
+      if (!boxClickedWithoutKey) {
+        boxClickedWithoutKey = true;
+        GameState.eleanorAi.runGpt(
+            GptPromptEngineeringRoom2.getPirateNoKeyResponse(),
+            (result) -> {
+              Platform.runLater(
+                    () -> {
+                      gptResponse.setText(result);
+                      piratePane.setVisible(true);
+                    });
+            });
       }
     }
   }
