@@ -57,7 +57,20 @@ public class Room3CentralDisplayUnitController {
     this.allButtons = allButtons;
 
     if (GameState.isPuzzleInRoom3Solved && GameState.isWorldMapOpened) {
-      enableFlightComputer();
+      if (GameState.isAircraftCodeFound) {
+        CentralDisplayUnit.setOpacity(0.7);
+        displayOutput.setText("");
+        // Update the introduction label with the correct answer message
+        displayInput.setText("CONGRATULATIONS! AIRCRAFT CODE UNLOCKED: " + GameState.aircraftCode);
+
+        for (Rectangle button : allButtons) {
+          button.setDisable(true);
+        }
+        displayOutput.setDisable(true);
+      } else {
+        enableFlightComputer();
+      }
+
     } else {
       CentralDisplayUnit.setOpacity(0.7);
       displayOutput.setText("LOCKED");
@@ -190,7 +203,7 @@ public class Room3CentralDisplayUnitController {
     for (Rectangle button : allButtons) {
       button.setDisable(false);
     }
-    String message = "ENTER THE FIRST TWO LETTER OF DEP / DEST CITY THEN PRESS EXECUTE. E.g SY/ME";
+    String message = "ENTER THE FIRST TWO LETTER OF DEP / DEST CITY THEN PRESS EXEC. E.g SY/ME";
     int typingDelay = 50;
     typeTextEffect(displayInput, message, typingDelay);
   }
