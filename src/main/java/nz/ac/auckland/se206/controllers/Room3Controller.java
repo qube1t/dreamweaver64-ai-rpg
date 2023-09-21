@@ -50,8 +50,7 @@ public class Room3Controller {
 
   public void initialize() throws ApiProxyException {
 
-    // Generate the arranged city name and make it unarranged when room3 loads
-    if ((GameState.arrangedDestnationCity == "")) {
+    if (GameState.arrangedDestnationCity == "") {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getRandomCity(),
           (result) -> {
@@ -66,11 +65,11 @@ public class Room3Controller {
                 makeUnarrangedCityName(GameState.arrangedDestnationCity);
           });
     }
-
     // Only displays the welcome message to Room3 if the plauyer first enters the room
     if (!GameState.isRoom3FirstEntered) {
 
       GameState.isRoom3FirstEntered = true;
+
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.room3WelcomeMessage(),
           (result) -> {
@@ -177,7 +176,8 @@ public class Room3Controller {
     MainGame.addOverlay("radar_computer", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened the radar computer and the red point indicates the correct"
-            + " treasure box location in another room. No need to respond to this message.");
+            + " location for treasure box location in another room. If the user ask for hints give"
+            + " the hints. No need to respond to this message.");
   }
 
   @FXML
@@ -200,8 +200,9 @@ public class Room3Controller {
     if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
       System.out.println("Decrypted letter released");
       GameState.eleanorAi.runGpt(
-          "User update: User has successfully decrypted the letter based on the objects he got."
-              + " Send a response to user surrounded by * .");
+          "User update: User has successfully decrypted the letter based on the objects he got. He"
+              + " can not click the main dooe to exit Send a response to user without revealing"
+              + " next step and surrounded by * .");
       // Set the aircraft code image to inventory.
       Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
       MainGame.addObtainedItem(decryptedLetter, "decryptedLetter");
@@ -209,9 +210,10 @@ public class Room3Controller {
     } else {
 
       GameState.eleanorAi.runGpt(
-          "User update: User has clicked on the encrypted letter and fail to open. He needs to get"
-              + " both encrypted message and aircraft code to decrypt. Send a response to user"
-              + " surrounded by *.");
+          "User update: User has clicked on the encrypted letter and fail to decrypt. He needs to"
+              + " get both encrypted message and aircraft code to decrypt. Send a response to user"
+              + " without revaling any step. If the user ask for hints give him. Only the message"
+              + " surrounded with * will send to user .");
     }
   }
 
