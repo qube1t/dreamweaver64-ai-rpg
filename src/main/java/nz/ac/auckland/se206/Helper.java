@@ -29,9 +29,19 @@ public class Helper {
     }
     GameState.currentBox = boxNumber;
   }
+
   // https://www.baeldung.com/java-generating-random-numbers-in-range
   public static int getRandomNumber(int min, int max) {
     return (int) ((Math.random() * (max - min)) + min);
   }
 
+  public static int countOccurences(String str, String c) {
+    int count = 0;
+    for (int i = 0; i < str.length(); i++) {
+      if (str.charAt(i) == c.charAt(0)) {
+        count++;
+      }
+    }
+    return count;
+  }
 }

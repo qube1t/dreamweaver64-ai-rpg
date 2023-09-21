@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206.gpt;
 
-
 public class GptPromptEngineeringRoom3 {
 
   /**
@@ -10,34 +9,30 @@ public class GptPromptEngineeringRoom3 {
    * @return the generated prompt engineering string
    */
   public static String getAircraftCode() {
-    return "Generate an aircraft code for the game with 2 letters and 2 numbers, reply directly"
-        + " with the code and do not include any other text. Example reply: AC19";
+    return "User update: The player now has correctly entered the correct departature and"
+        + " destnation city and now unlocks the aircraft code. Response with congrats the"
+        + " player and generate a aircraft code with 2 letters and 2 numbers, the aircraft"
+        + " code must surround with ^.";
   }
 
   /**
-   * Generates a GPT prompt engineering string for the NPC welcome message.
+   * Generates a GPT prompt engineering string for room3 welcome message.
    *
    * @return the generated prompt engineering string
    * @return
    */
-  public static String npcWelcomeMessage() {
-    return "The player is an escape room game and now entered one of the three rooms that is an"
-        + " air traffic control tower. When he clicks on the radar screen , a radar computer"
-        + " will pop up and the red points on the radar indicates the correct treasure box"
-        + " to discover in another room. When the player clicks on the departature, a flight"
-        + " departature board will display and he needs to find the correct airline matches"
-        + " the aircraft in the scene. And the departature tells the player something about"
-        + " the destination. When the player clicks on the book on the desk, a previous"
-        + " flight plan will display and tells something about the current location. When the"
-        + " player clicks on the computer, will transition to a mini-game, the player needs to"
-        + " find the correct route of the aircraft base on the information given by the"
-        + " departature board and the previous flight log. Generate a general welcome message for"
-        + " the NPC in the room within 30 words and not include any hint";
+  public static String room3WelcomeMessage() {
+    return "User update: The user now entered room3 that is an air traffic control tower.The player"
+        + " needs to interact with different objects including solving a puzzle to get the"
+        + " aircraft code to decrypt letter in another rooom.You need to achknowledge the"
+        + " current state of the game. Give the user intructions on the mission with maximum"
+        + " 2 sentences, not including any hints. Surround the sentences to be shown to the"
+        + " user with #.";
   }
 
   public static String getRandomCity() {
-    return "Generate a popular city that is less than 8 characters, only reply with the city name"
-        + " example 'london'";
+    return "Generate a random city that is less than 10 characters, only reply with the city name"
+        + " surrounded by # example #london#";
   }
 
   public static String getIntroPuzzleMessage() {

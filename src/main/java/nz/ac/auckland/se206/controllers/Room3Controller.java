@@ -38,7 +38,6 @@ public class Room3Controller {
       clickableComputer,
       clickableRadar,
       clickableDoor;
-
   @FXML private Circle box1, box2, box3, box4, box5;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
@@ -51,41 +50,37 @@ public class Room3Controller {
 
   public void initialize() throws ApiProxyException {
 
-    // //GptEngine.runGpt(
-    //    // new ChatMessage("user", GptPromptEngineeringRoom3.npcWelcomeMessage()),
-    //     (result) -> {
-    //       System.out.println(result);
-    //       // Handle the result as needed
-    //       System.out.println("result");
-    //     });
-
-    // GptEngine.runGpt(
-    //  new ChatMessage("user", GptPromptEngineeringRoom3.getAircraftCode()),
-    // (result) -> {
-    //   System.out.println(result);
-    // });
-
-    // Generate the unarranged city name when room3 loads
-    if ((GameState.unarrangedCityName == "" || GameState.arrangedCityName.length() > 8)) {
-      GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.getRandomCity(),
+    // Generate the arranged city name and make it unarranged when room3 loads
+    if ((GameState.arrangedDestnationCity == ""
+        || GameState.arrangedDestnationCity.length() > 11)) {
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.getRandomCity(),
           (result) -> {
-            System.out.println(result);
-            GameState.arrangedCityName = result;
-            // Make the city name unarranged
-            GameState.unarrangedCityName = makeUnarrangedCityName(result);
-            // System.out.println(GameState.unarrangedCityName);
+            // Get the city surrounded by #
+            // Find the start and end indices of the aircraft code within single quotes
+            int startIndex = result.indexOf("#");
+            int endIndex = result.indexOf("#", startIndex + 1);
+
+            if (startIndex != -1 && endIndex != -1)
+              GameState.arrangedDestnationCity = result.substring(startIndex + 1, endIndex);
+
+            GameState.unarrangedDestnationCity =
+                makeUnarrangedCityName(GameState.arrangedDestnationCity);
           });
     }
 
-    if (GameState.introMessage == "") {
-      GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
+    // Generate the intro message for the puzzle
+    if (GameState.puzzleIntroMessageRoom3 == "") {
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
           (result) -> {
             System.out.println(result);
-
-            GameState.introMessage = result;
-            MainGame.enableInteractPane();
+            GameState.puzzleIntroMessageRoom3 = result;
           });
     }
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.room3WelcomeMessage());
+    MainGame.enableInteractPane();
+
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
@@ -101,11 +96,6 @@ public class Room3Controller {
 
     character.setLayoutX(530);
     character.setLayoutY(210);
-  }
-
-  @FXML
-  public void onClickDepBoard() {
-    System.out.println("DepBoard clicked");
   }
 
   protected String makeUnarrangedCityName(String cityName) {
@@ -126,31 +116,34 @@ public class Room3Controller {
       unarrangedCityName += cityName.charAt(randomNumbers[i]);
     }
 
-    if (unarrangedCityName.equals(cityName)) {
-      return makeUnarrangedCityName(cityName);
-    }
+    if (unarrangedCityName.equals(cityName)) return makeUnarrangedCityName(cityName);
+
     return unarrangedCityName.toUpperCase();
   }
 
   @FXML
-  public void onClickComputer() throws IOException {
+  public void onClickComputer() throws IOException, ApiProxyException {
     System.out.println("Computer clicked");
-    // System.out.println(GameState.currentLocatiions[GameState.currentCity - 1]);
-    // System.out.println(GameState.arrangedCityName);
-    // Set the scene to room3Sub
-    // Switch to the chat view to solve the riddle.
     MainGame.addOverlay("sub3", false);
   }
 
   @FXML
-  public void onClickLocation() throws IOException {
+  public void onClickLocation() throws IOException, ApiProxyException {
+    if (!GameState.isWorldMapOpened) GameState.isWorldMapOpened = true;
+
     System.out.println("Location clicked");
     MainGame.addOverlay("gps_current", false);
+    GameState.eleanorAi.runGpt(
+        "User update: User has opened the world map and achnowledge the current location. No need"
+            + " to respond to this message.");
   }
 
   @FXML
-  public void onClickRadar() throws IOException {
+  public void onClickRadar() throws IOException, ApiProxyException {
     MainGame.addOverlay("radar_computer", false);
+    GameState.eleanorAi.runGpt(
+        "User update: User has opened the radar computer and the red point indicates the correct"
+            + " treasure box location in another room. No need to respond to this message.");
   }
 
   @FXML
@@ -158,23 +151,13 @@ public class Room3Controller {
    * This method is called when the book is clicked It will open the flight plan if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
-  public void clickBookEvent() throws IOException {
+  public void clickBookEvent() throws IOException, ApiProxyException {
 
     System.out.println("Book clicked");
     MainGame.addOverlay("room3_puzzle", false);
-    // if (GameState.isPreviousFlightPlanOpen) {
-    // GameState.isPreviousFlightPlanOpen = false;
-    // fadeOutFlightPlan();
-    // } else {
-    //  if (GameState.isDepBoardOpen) {
-    //  GameState.isDepBoardOpen = false;
-    //  fadeOutDepBoard();
-    //  fadeInFlightPlan();
-    // } else {
-    //  fadeInFlightPlan();
-    // }
-    // GameState.isPreviousFlightPlanOpen = true;
-    // }
+    GameState.eleanorAi.runGpt(
+        "User update: User has opened the unarranged word puzzle. The word indicates the destnation"
+            + " city. No reply is needed for this message.");
   }
 
   @FXML

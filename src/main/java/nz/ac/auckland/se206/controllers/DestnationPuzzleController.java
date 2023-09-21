@@ -25,10 +25,10 @@ public class DestnationPuzzleController {
     // Set progress bar to invisible
     load.setVisible(false);
     loadText.setVisible(false);
-    String cityName = GameState.unarrangedCityName;
-    System.out.println(cityName);
-    initializePuzzle(cityName);
-    introduction.setText(GameState.introMessage);
+    String unarrangedPuzzle = GameState.unarrangedDestnationCity;
+    System.out.println(unarrangedPuzzle);
+    initializePuzzle(unarrangedPuzzle);
+    introduction.setText(GameState.puzzleIntroMessageRoom3);
   }
 
   protected void initializePuzzle(String cityName) {
@@ -68,9 +68,10 @@ public class DestnationPuzzleController {
     load.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
 
     // Handle the case where the user has entered the correct answer
-    if (GameState.arrangedCityName.equalsIgnoreCase(currentText)) {
+    if (GameState.arrangedDestnationCity.equalsIgnoreCase(currentText)) {
       GameState.isPuzzleInRoom3Solved = true;
-      GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.correctPuzzleRoom3(),
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.correctPuzzleRoom3(),
           (result) -> {
             System.out.println(result);
 
@@ -84,7 +85,8 @@ public class DestnationPuzzleController {
                 });
           });
     } else {
-      GameState.eleanorAi.runGpt(GptPromptEngineeringRoom3.wrongPuzzleRoom3(),
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.wrongPuzzleRoom3(),
           (result) -> {
             System.out.println(result);
 

@@ -24,6 +24,8 @@ public class GameState {
   public static String[] gameMode;
   public static int hintsRemaining;
 
+  public static boolean isWorldMapOpened = false;
+
   public static MainGame mainGame;
 
   public static boolean winTheGame = false;
@@ -37,12 +39,13 @@ public class GameState {
   /** Indicates whether the time limit has reached */
   public static boolean timeLimitReached = false;
 
-  /** These fields are used in room1 */
-  // public static String[] booksInRoom1 = new String[7];
+
+  public static int hintsRemaining = -1;
 
 
   /** These fields are used in room3 */
   public static boolean isPreviousFlightPlanOpen = false;
+
   public static boolean isDepBoardOpen = false;
   public static boolean isCorrectRouteFound = false;
   public static boolean isCityFound = false;
@@ -50,15 +53,17 @@ public class GameState {
   /** Indicates wheter the aircraft code has been found */
   public static boolean isAircraftCodeFound = false;
 
-  public static int currentCity = -1;
-
   /** Indicates the location of the treasure box. */
   public static int currentBox = -1;
 
-  public static String unarrangedCityName = "";
-  public static String arrangedCityName = "";
+  public static String unarrangedDestnationCity = "";
+  public static String arrangedDestnationCity = "";
 
-  public static Text[] currentLocatiions;
+  /** Indicates the correct city index */
+  public static int currentCityIndex = -1;
+
+  /** The list of current locations */
+  public static Text[] currentCities;
 
   /** Indicates whether the puzzle in room 3 solved. */
   public static boolean isPuzzleInRoom3Solved = false;
@@ -66,8 +71,8 @@ public class GameState {
   /** Indicates the aircraft code */
   public static String aircraftCode = "";
 
-  /** Indicates the introduction message when first enter the puzzle in Room3 */
-  public static String introMessage = "";
+  /** Indicates the introduction message when first enter the puzzle game in Room3 */
+  public static String puzzleIntroMessageRoom3 = "";
 
   /** Stores the created instance of overlay */
   public static Pane overlay;

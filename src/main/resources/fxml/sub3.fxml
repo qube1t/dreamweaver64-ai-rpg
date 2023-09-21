@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ProgressIndicator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="327.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room3CentralDisplayUnitController">
    <children>
-      <Pane fx:id="mainScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="327.0">
+      <Pane fx:id="mainScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="327.0" stylesheets="@../css/font.css">
          <children>
             <ImageView fx:id="CentralDisplayUnit" fitHeight="500.0" fitWidth="327.0">
                <image>
@@ -56,14 +57,14 @@
             <Rectangle fx:id="eight8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="63.0" layoutY="445.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
             <Rectangle fx:id="nine9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="97.0" layoutY="445.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
             <Rectangle fx:id="zero0" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="66.0" layoutY="476.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="19.0" />
-            <Text fx:id="displayInput" fill="#12b03c" layoutX="73.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="169.21630859375">
+            <Text fx:id="displayInput" fill="#12b03c" layoutX="73.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="centralDisplayUnitInput" textAlignment="CENTER" wrappingWidth="169.21630859375">
                <font>
-                  <Font name="Arial" size="15.0" />
+                  <Font name="Abaddon Bold Regular" size="15.0" />
                </font>
             </Text>
-            <Text fx:id="displayOutput" fill="#11ee66" layoutX="60.0" layoutY="193.0" onMouseClicked="#test" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="201.46533203125">
+            <Text fx:id="displayOutput" fill="#11ee66" layoutX="60.0" layoutY="193.0" onMouseClicked="#test" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="centralDisplayUnitOutput" textAlignment="CENTER" wrappingWidth="201.46533203125">
                <font>
-                  <Font name="Helvetica" size="23.0" />
+                  <Font name="Abaddon Bold Regular" size="23.0" />
                </font>
             </Text>
             <Rectangle fx:id="delete" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="203.0" layoutY="477.0" onMouseClicked="#handleDeleteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
@@ -74,6 +75,7 @@
             </ImageView>
             <Rectangle fx:id="execute" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="254.0" layoutY="293.0" onMouseClicked="#handleExecuteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
             <Rectangle fx:id="menu" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="24.0" layoutX="32.0" layoutY="316.0" onMouseClicked="#handleMenuClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
+            <ProgressIndicator fx:id="progress" layoutX="147.0" layoutY="109.0" prefHeight="60.0" prefWidth="27.0" progress="0.0" style="-fx-background-color: red;" />
          </children>
       </Pane>
    </children>
