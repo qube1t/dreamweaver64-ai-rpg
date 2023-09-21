@@ -44,17 +44,14 @@ public class SpriteAnimation extends Transition {
   }
 
   protected void interpolate(double k) {
+    // interpolating through teh sprite sheet
     int index = Math.min((int) Math.floor(k * count), count - 1);
-
-    // if (index == 0) index++;
 
     if (index != lastIndex) {
       final int x = (index % columns) * width + offsetX + 64;
       final int y = (index / columns) * height + offsetY;
       imageView.setViewport(new Rectangle2D(x, y, width, height));
       lastIndex = index;
-    } else {
-      //   System.out.println("index: " + index + " lastIndex: " + lastIndex);
     }
   }
 }

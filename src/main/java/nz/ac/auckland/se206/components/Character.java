@@ -27,12 +27,12 @@ public class Character extends AnchorPane {
     return playerBound;
   }
 
-  private int columns; // =   4;
-  private int count; // =  11;
-  private int offset_x; // =  18;
-  private int offset_y; // =  25;
-  private int frame_width; // = 374;
-  private int frame_height; // = 243;
+  private int columns;
+  private int count;
+  private int offset_x;
+  private int offset_y;
+  private int frame_width;
+  private int frame_height;
 
   private String spriteSheet;
 
@@ -71,6 +71,7 @@ public class Character extends AnchorPane {
       @NamedArg("frame_width") int frame_width,
       @NamedArg("frame_height") int frame_height) {
 
+    // character parameters
     this.spriteSheet = spriteSheet;
     this.columns = columns;
     this.count = count;
@@ -78,8 +79,6 @@ public class Character extends AnchorPane {
     this.offset_y = offset_y;
     this.frame_width = frame_width;
     this.frame_height = frame_height;
-
-    double x = this.getLayoutX();
 
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/character.fxml"));
     fxmlLoader.setRoot(this);
@@ -96,11 +95,13 @@ public class Character extends AnchorPane {
   }
 
   private void initElements() {
+    // init character
     Image sprite_sheet_img = new Image(getClass().getResource(spriteSheet).toExternalForm());
     active_img.setImage(sprite_sheet_img);
     active_img.setViewport(
         new Rectangle2D(offset_x, offset_y + 64 * action, frame_width, frame_height));
 
+    // define animation
     animation =
         new SpriteAnimation(
             active_img,
@@ -114,6 +115,7 @@ public class Character extends AnchorPane {
   }
 
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
+    // create character movement object
     movement = new CharacterMovement(this, playerBound, proximityBound, obstacles, observableList);
   }
 
@@ -138,16 +140,7 @@ public class Character extends AnchorPane {
 
   public void setSpriteSheet(String sprite_sheet) {
     this.spriteSheet = sprite_sheet;
-    // initElements();
   }
-
-  // public ImageView getActive_img() {
-  //     return active_img;
-  // }
-
-  // public void setActive_img(ImageView active_img) {
-  //     this.active_img = active_img;
-  // }
 
   public int getColumns() {
     return columns;

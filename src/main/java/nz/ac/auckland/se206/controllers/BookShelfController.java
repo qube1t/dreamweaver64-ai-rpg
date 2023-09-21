@@ -28,6 +28,7 @@ public class BookShelfController {
   static Rectangle[] book_rects;
 
   public void initialize() {
+    //
     lbl_books =
         new Label[] {lbl_book1, lbl_book2, lbl_book3, lbl_book4, lbl_book5, lbl_book6, lbl_book7};
 
@@ -36,10 +37,12 @@ public class BookShelfController {
           book1_rect, book2_rect, book3_rect, book4_rect, book5_rect, book6_rect, book7_rect
         };
 
+    // setting labels in the bookshelf
     for (int i = 0; i < GameState.booksInRoom1.length; i++) {
       Label lbl_book = lbl_books[i];
-      if (GameState.booksInRoom1[i] != null) lbl_book.setText(GameState.booksInRoom1[i]);
-      else {
+      if (GameState.booksInRoom1[i] != null) {
+        lbl_book.setText(GameState.booksInRoom1[i]);
+      } else {
         lbl_book.setVisible(false);
         book_rects[i].setVisible(false);
         continue;
@@ -56,14 +59,13 @@ public class BookShelfController {
             if (GameState.booksInRoom1[index] == GameState.trueBook) {
               GameState.isBookFound = true;
               System.out.println("true book found");
-            }
-            else {
+            } else {
               GameState.isBookFound = false;
             }
 
             if (!oneWasTaken) {
               Image bookImage =
-              new Image(App.class.getResource("/images/rooms/room1/book.png").toString());
+                  new Image(App.class.getResource("/images/rooms/room1/book.png").toString());
               MainGame.addObtainedItem(bookImage, "book");
             }
             lbl_book.setVisible(false);
