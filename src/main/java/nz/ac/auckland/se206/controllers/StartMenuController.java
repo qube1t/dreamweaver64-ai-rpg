@@ -7,7 +7,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -67,8 +66,12 @@ public class StartMenuController {
     try {
       App.setRoot("main_game");
       GameState.isGameStarted = true;
-      MainGame.getTimeLimitForGameMode(timeLimit);
+
       GameState.startTime = System.currentTimeMillis();
+
+      MainGame.getTimeLimit(timeLimit);
+      MainGame.setHintCount(difficulty);
+
     } catch (IOException e) {
       e.printStackTrace();
     }

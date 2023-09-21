@@ -17,4 +17,3 @@ public class ObtainedItemsWithId {
         return id;
     }
 }
-

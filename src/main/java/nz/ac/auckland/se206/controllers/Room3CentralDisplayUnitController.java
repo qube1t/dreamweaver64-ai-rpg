@@ -204,7 +204,7 @@ public class Room3CentralDisplayUnitController {
 
                   // Set the aircraft code image to inventory.
                   Image aircraftCode = new Image("/images/aircraftCode.png");
-                  MainGame.addObtainedItem(aircraftCode);
+                  MainGame.addObtainedItem(aircraftCode, "aircraft code");
                   System.out.println("Aircraft code unlocked");
                 });
           });
