@@ -105,6 +105,8 @@ public class Room3Controller {
 
     character.setLayoutX(530);
     character.setLayoutY(210);
+
+    GameState.prevRoom=3;
   }
 
   protected String makeUnarrangedCityName(String cityName) {

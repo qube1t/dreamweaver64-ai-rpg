@@ -21,6 +21,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.ObtainedItemsWithId;
 import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
@@ -230,7 +231,18 @@ public class MainGame {
           (res) -> {
             Platform.runLater(
                 () -> {
-                  addChat(res, true);
+                  int noOfHints = Helper.countOccurences(res, "~");
+                  String msg = res.replaceAll("~", "");
+                  System.out.println("hints contained" + noOfHints);
+
+                  if (noOfHints > 0) {
+                    if (GameState.hintsRemaining - 1 >= 0) {
+                      GameState.hintsRemaining -= 1;
+                      System.out.println("Hints remaining: " + GameState.hintsRemaining);
+                    }
+                    else GameState.hintsRemaining = 0;
+                  }
+                  addChat(msg, true);
                   chatInput.setDisable(false);
                 });
           });
@@ -280,16 +292,16 @@ public class MainGame {
 
   // maybe cfreate a diff func?
   public static void disableInteractPane() {
-    FadeTransition ft = new FadeTransition();
-    ft.setDuration(javafx.util.Duration.millis(500));
-    ft.setNode(initialised_interact_pane);
-    ft.setFromValue(1.0);
-    ft.setToValue(0);
-    // ft.setAutoReverse(true);
-    // ft.setCycleCount(1);
-    ft.play();
+    // FadeTransition ft = new FadeTransition();
+    // ft.setDuration(javafx.util.Duration.millis(500));
+    // ft.setNode(initialised_interact_pane);
+    // ft.setFromValue(1.0);
+    // ft.setToValue(0);
+    // // ft.setAutoReverse(true);
+    // // ft.setCycleCount(1);
+    // ft.play();
     initialised_interact_pane.setDisable(true);
-    // initialised_interact_pane.setOpacity(0);
+    initialised_interact_pane.setOpacity(0);
   }
 
   @FXML
@@ -340,6 +352,7 @@ public class MainGame {
               String formattedTime = String.format("%02d:%02d", minutes, seconds);
               Platform.runLater(
                   () -> {
+
                     timer_initiated.setText(formattedTime);
                     updateHintCount();
                   });

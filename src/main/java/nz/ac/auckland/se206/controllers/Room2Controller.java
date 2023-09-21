@@ -75,7 +75,7 @@ public class Room2Controller {
 
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
-  private boolean gptInit;
+  private static boolean gptInit;
 
   /** Initializes the room view, it is called when the room loads. 
    * @throws ApiProxyException */
@@ -103,32 +103,35 @@ public class Room2Controller {
     if (!gptInit) {
       initGpt();
       gptInit = true;
+    }else{
+
+    MainGame.enableInteractPane();
     }
     
-    // MainGame.enableInteractPane();
+    GameState.prevRoom = 2;
+    speechBubbleScrollPane.setVisible(false);
+    speech_bubble.setVisible(false);
+    gptResponse.setVisible(false);
+  
+    if (GameState.isBoxKeyFound) {
+      boxKey.setVisible(false);
+    }
   }
 
   private void initGpt() throws ApiProxyException {
-    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalUnencrypted(), s -> {
-      List<String> msg = Helper.getTextBetweenChar(s, "+");
-    if (msg.size() > 0) GameState.finalMsg = msg.get(0); 
-    });
     GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalEncrypted(), s -> {
-      
       List<String> msg = Helper.getTextBetweenChar(s, "+");
     if (msg.size() > 0) GameState.encryptedFinalMsg = msg.get(0); 
     else GameState.encryptedFinalMsg = s;
       Platform.runLater(() -> MainGame.enableInteractPane());
     });
+    
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalUnencrypted(), s -> {
+      List<String> msg = Helper.getTextBetweenChar(s, "+");
+    if (msg.size() > 0) GameState.finalMsg = msg.get(0); 
+    });
 
 
-    speechBubbleScrollPane.setVisible(false);
-    speech_bubble.setVisible(false);
-    gptResponse.setVisible(false);
-
-    if (GameState.isBoxKeyFound) {
-      boxKey.setVisible(false);
-    }
     // MainGame.enableInteractPane();
 
   }

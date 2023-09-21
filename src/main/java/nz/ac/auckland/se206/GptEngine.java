@@ -116,13 +116,6 @@ public class GptEngine {
       Platform.runLater(
           () -> {
             String msg = chatEntry.get(0).replaceAll("\"", "");
-            int noOfHints = Helper.countOccurences(msg, "%");
-            msg = msg.replaceAll("%", "");
-
-            if (noOfHints > 0) {
-              if (GameState.hintsRemaining - noOfHints >= 0) GameState.hintsRemaining -= noOfHints;
-              else GameState.hintsRemaining = 0;
-            }
 
             GameState.mainGame.addChat(msg, true);
           });
