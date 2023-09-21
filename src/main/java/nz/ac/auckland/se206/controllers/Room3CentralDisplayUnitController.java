@@ -8,8 +8,11 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ProgressIndicator;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -28,13 +31,21 @@ public class Room3CentralDisplayUnitController {
   private Rectangle a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
   @FXML private Rectangle one1, two2, three3, four4, five5, six6, seven7, eight8, nine9, zero0;
   @FXML private Rectangle slash, clear, delete, execute;
-  @FXML private Text displayInput, displayOutput;
+  @FXML private Text displayInput;
+  @FXML private TextField displayOutput;
   @FXML private ImageView lock, CentralDisplayUnit;
   @FXML private ProgressIndicator progress;
 
   protected List<Rectangle> allButtons;
 
   public void initialize() throws ApiProxyException {
+
+    // Add an event filter to the TextField to consume key events
+    displayOutput.addEventFilter(
+        KeyEvent.KEY_TYPED,
+        keyEvent -> {
+          keyEvent.consume();
+        });
 
     progress.setVisible(false);
 
@@ -54,6 +65,7 @@ public class Room3CentralDisplayUnitController {
       for (Rectangle button : allButtons) {
         button.setDisable(true);
       }
+      displayOutput.setDisable(true);
       GameState.eleanorAi.runGpt(
           "User update: User clicks on the flight computer but it is locked due to either not"
               + " solved the puzzle or not opened the world map to discover the current location."
@@ -70,6 +82,32 @@ public class Room3CentralDisplayUnitController {
             .substring(0, 2)
             .toUpperCase();
     if (currentText.equalsIgnoreCase(firstTwoDeparture)) {
+      displayOutput.setText(currentText + "/");
+    }
+  }
+
+  @FXML
+  private void keyPressHandle(KeyEvent event) {
+    System.out.println("Key pressed");
+    // Handle letter key press and number key press to the display output
+    String currentText = displayOutput.getText();
+    String key = event.getText();
+
+    if (event.getCode().isLetterKey()) {
+      key = key.toUpperCase();
+    }
+
+    if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
+      // Add to display output if the key is a letter or number
+      displayOutput.setText(currentText + key);
+      addSlashIfEnteredCurrentCity();
+    } else if (event.getCode().equals(KeyCode.BACK_SPACE)) {
+      if (currentText.length() > 0) {
+        displayOutput.setText(currentText.substring(0, currentText.length() - 1));
+      }
+
+    } else if (event.getCode() == KeyCode.SLASH) {
+      // Handle the slash key ("/")
       displayOutput.setText(currentText + "/");
     }
   }
@@ -99,17 +137,11 @@ public class Room3CentralDisplayUnitController {
     if (currentText.length() > 0) {
       displayOutput.setText(currentText.substring(0, currentText.length() - 1));
     }
-    addSlashIfEnteredCurrentCity();
   }
 
   @FXML
   private void handleClearClick(MouseEvent event) {
     displayOutput.setText("");
-  }
-
-  @FXML
-  private void handleMenuClick(MouseEvent event) {
-    MainGame.removeOverlay(false);
   }
 
   @FXML
@@ -146,7 +178,13 @@ public class Room3CentralDisplayUnitController {
     CentralDisplayUnit.setOpacity(1);
     lock.setVisible(false);
     lock.setDisable(true);
+    displayOutput.setDisable(false);
 
+    displayOutput.requestFocus();
+    Platform.runLater(
+        () -> {
+          displayOutput.requestFocus();
+        });
     // Enable the key press event
 
     for (Rectangle button : allButtons) {
@@ -168,7 +206,9 @@ public class Room3CentralDisplayUnitController {
     String firstTwoDestnation = GameState.arrangedDestnationCity.substring(0, 2).toUpperCase();
     String firstTwoDeparture =
         GameState.currentCities[GameState.currentCityIndex - 1].getText().substring(0, 2);
-    System.out.println(firstTwoDeparture + "/" + firstTwoDestnation);
+
+    System.out.println("EXECUTED: " + currentInput);
+    System.out.println("CORRECT ANSWER: " + firstTwoDeparture + "/" + firstTwoDestnation);
 
     // Correct code has been entered, i.e., first two letters of the departure city and first two
     // letters of the destination city
