@@ -2,7 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 
 public class BookShelfController {
@@ -47,13 +49,25 @@ public class BookShelfController {
       int index = i;
       lbl_books[i].setOnMouseClicked(
           e -> {
-            if (!hasTakenOneBook()) {
-              lbl_book.setVisible(false);
-              book_rect.setVisible(false);
-              GameState.booksInRoom1[index] = null;
-            } else {
-              returnBook();
+            boolean oneWasTaken = hasTakenOneBook();
+            if (oneWasTaken) returnBook();
+            GameState.takenBook = lbl_book.getText();
+
+            if (GameState.booksInRoom1[index] == GameState.trueBook) {
+              GameState.isBookFound = true;
             }
+            else {
+              GameState.isBookFound = false;
+            }
+
+            if (!oneWasTaken) {
+              Image bookImage =
+              new Image(App.class.getResource("/images/rooms/room1/book.png").toString());
+              MainGame.addObtainedItem(bookImage, "book");
+            }
+            lbl_book.setVisible(false);
+            book_rect.setVisible(false);
+            GameState.booksInRoom1[index] = null;
           });
     }
   }
@@ -76,8 +90,9 @@ public class BookShelfController {
       if (GameState.booksInRoom1[i] == null) {
         lbl_books[i].setVisible(true);
         book_rects[i].setVisible(true);
-        GameState.booksInRoom1[i] = lbl_books[i].getText();
-        // lbl_book.setText(GameState.booksInRoom1[i]);
+        GameState.booksInRoom1[i] = GameState.takenBook;
+        GameState.takenBook = null;
+        lbl_books[i].setText(GameState.booksInRoom1[i]);
         break;
       }
     }

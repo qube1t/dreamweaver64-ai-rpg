@@ -23,7 +23,6 @@
                   <BoxBlur iterations="2" />
                </effect>
             </ImageView>
-
               <Button fx:id="startButton" layoutX="177.0" layoutY="437.0" onMouseClicked="#onClickStartButton" prefHeight="70.0" prefWidth="347.0" styleClass="startEndTitle" text="START GAME" textAlignment="CENTER" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="177.0" AnchorPane.rightAnchor="176.0">
                <padding>
                   <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />

@@ -3,6 +3,10 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import javafx.application.Platform;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -12,7 +16,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room2Controller {
@@ -69,9 +75,11 @@ public class Room2Controller {
 
   private int wrongBoxClicked = 0;
   private int correctBoxClicked = 0;
+  private boolean gptInit;
 
-  /** Initializes the room view, it is called when the room loads. */
-  public void initialize() {
+  /** Initializes the room view, it is called when the room loads. 
+   * @throws ApiProxyException */
+  public void initialize() throws ApiProxyException {
     ArrayList<Rectangle> obsts =
         new ArrayList<Rectangle>(
             Arrays.asList(
@@ -91,6 +99,29 @@ public class Room2Controller {
       speechBubbleScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     }
 
+
+    if (!gptInit) {
+      initGpt();
+      gptInit = true;
+    }
+    
+    // MainGame.enableInteractPane();
+  }
+
+  private void initGpt() throws ApiProxyException {
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalUnencrypted(), s -> {
+      List<String> msg = Helper.getTextBetweenChar(s, "+");
+    if (msg.size() > 0) GameState.finalMsg = msg.get(0); 
+    });
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalEncrypted(), s -> {
+      
+      List<String> msg = Helper.getTextBetweenChar(s, "+");
+    if (msg.size() > 0) GameState.encryptedFinalMsg = msg.get(0); 
+    else GameState.encryptedFinalMsg = s;
+      Platform.runLater(() -> MainGame.enableInteractPane());
+    });
+
+
     speechBubbleScrollPane.setVisible(false);
     speech_bubble.setVisible(false);
     gptResponse.setVisible(false);
@@ -98,7 +129,8 @@ public class Room2Controller {
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
     }
-    MainGame.enableInteractPane();
+    // MainGame.enableInteractPane();
+
   }
 
   @FXML
@@ -139,8 +171,10 @@ public class Room2Controller {
       box3.setDisable(false);
       box4.setDisable(false);
       box5.setDisable(false);
+
       if (numOfBox == boxLocation) {
         MainGame.addOverlay("treasure_box", false);
+        GameState.isEncryptedMessageFound = true;
         if (correctBoxClicked == 0) {
           try {
             GameState.eleanorAi.runGpt(
@@ -157,8 +191,11 @@ public class Room2Controller {
         if (wrongBoxClicked == 0) {
           try {
             GameState.eleanorAi.runGpt(
+
+
                 "User update: User has found the wrong treasure box. No reply is needed for this"
                     + " message.");
+
           } catch (ApiProxyException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
