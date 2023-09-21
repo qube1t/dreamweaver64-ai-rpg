@@ -7,9 +7,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndMenuController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndMenuController">
    <children>
-      <Button fx:id="exit" layoutX="301.0" layoutY="492.0" mnemonicParsing="false" onMouseClicked="#onClickExit" text="EXIT" textFill="#970505" AnchorPane.bottomAnchor="80.0">
+      <ImageView fitHeight="700.0" fitWidth="700.0">
+         <image>
+            <Image url="@../images/rooms/start_menu/gameStartBackground.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="exit" layoutX="283.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#onClickExit" prefHeight="58.0" prefWidth="134.0" styleClass="startEndTitle" text="EXIT" textFill="#9a0e64">
+
          <font>
             <Font name="Impact" size="44.0" />
          </font>
@@ -22,12 +29,19 @@
             <Font name="Impact" size="40.0" />
          </font>
       </Text>
-      <Label layoutX="523.0" layoutY="594.0" prefHeight="36.0" prefWidth="135.0" text="ATTRIBUTION" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
+
+      <Label fx:id="attribution" layoutX="531.0" layoutY="606.0" onMouseClicked="#onOpenEndCredit" prefHeight="36.0" prefWidth="135.0" styleClass="chooseLevel" text="ATTRIBUTION" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="58.0" AnchorPane.rightAnchor="34.0">
+
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="letter" alignment="CENTER" layoutX="103.0" layoutY="141.0" prefHeight="260.0" prefWidth="500.0" AnchorPane.topAnchor="150.0" />
-      <Button fx:id="Attribution" layoutX="519.0" layoutY="531.0" mnemonicParsing="false" onAction="#onOpenEndCredit" opacity="0.0" prefHeight="23.0" prefWidth="135.0" text="Button" />
+
+      <Text fx:id="timeLeft" layoutX="135.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="startEndTitle" textAlignment="CENTER" wrappingWidth="430.02872720271455">
+         <font>
+            <Font name="Impact" size="40.0" />
+         </font>
+      </Text>
+
    </children>
 </AnchorPane>

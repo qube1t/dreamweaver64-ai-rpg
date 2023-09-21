@@ -8,13 +8,17 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndCreditController">
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndCreditController">
+
    <children>
       <HBox layoutX="89.0" layoutY="40.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
          <children>
             <VBox fx:id="contentVBox" prefHeight="520.0" prefWidth="612.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="32.0" prefWidth="600.0" text="IMAGE" textAlignment="CENTER" textFill="WHITE">
+
+                  <Label alignment="CENTER" prefHeight="32.0" prefWidth="501.0" styleClass="centralDisplayUnitOutput" text="IMAGE" textAlignment="CENTER" textFill="WHITE">
+
                      <font>
                         <Font name="Impact" size="35.0" />
                      </font>
@@ -22,7 +26,7 @@
                         <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="&quot;Treasure Chest&quot; by Bonsaiheldin (https://opengameart.org/content/treasure-chests-32x32)" textFill="WHITE" wrapText="true">
+                  <Label styleClass="aiInputField" text="&quot;Treasure Chest&quot; by Bonsaiheldin (https://opengameart.org/content/treasure-chests-32x32)" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -30,7 +34,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="&quot;[LPC] Pirates&quot; by bluecarrot16, Fabzy, Nila122, David Conway Jr. (JaidynReiman), Joe White, Matthew Krohn (makrohn), Johannes Sjölund (wulax), Stephen Challener (Redshrike), Marcel van de Steeg (MadMarcel), Thane Brimhall (pennomi), laetissima; commissioned by castelonia. License: CC-BY-SA 3.0. https://opengameart.org/content/lpc-pirates." textFill="WHITE" wrapText="true">
+                  <Label styleClass="aiInputField" text="&quot;[LPC] Pirates&quot; by bluecarrot16, Fabzy, Nila122, David Conway Jr. (JaidynReiman), Joe White, Matthew Krohn (makrohn), Johannes Sjölund (wulax), Stephen Challener (Redshrike), Marcel van de Steeg (MadMarcel), Thane Brimhall (pennomi), laetissima; commissioned by castelonia. License: CC-BY-SA 3.0. https://opengameart.org/content/lpc-pirates." textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -38,7 +42,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="&quot;32x32 Sci-Fi tileset&quot; by Viktor Hahn (Viktor.Hahn@web.de), is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. (http://creativecommons.org/licenses/by-sa/4.0/)" textFill="WHITE" wrapText="true">
+                  <Label styleClass="aiInputField" text="&quot;32x32 Sci-Fi tileset&quot; by Viktor Hahn (Viktor.Hahn@web.de), is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License. (http://creativecommons.org/licenses/by-sa/4.0/)" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -46,7 +50,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="&quot;Dezra's Dragons&quot; (https://opengameart.org/users/dezrasdragons)." textFill="WHITE" wrapText="true">
+                  <Label styleClass="aiInputField" text="&quot;Dezra's Dragons&quot; (https://opengameart.org/users/dezrasdragons)." textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -54,7 +58,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="&quot;LuminousDragonGames&quot; (https://opengameart.org/content/simple-ui-for-game-menu-etc)" textFill="WHITE" wrapText="true">
+                  <Label styleClass="aiInputField" text="&quot;LuminousDragonGames&quot; (https://opengameart.org/content/simple-ui-for-game-menu-etc)" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -62,7 +66,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="&quot;[LPC] House interior and decorations&quot; (https://opengameart.org/content/lpc-house-interior-and-decorations)" textFill="WHITE" wrapText="true">
+                  <Label styleClass="aiInputField" text="&quot;[LPC] House interior and decorations&quot; (https://opengameart.org/content/lpc-house-interior-and-decorations)" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -70,7 +74,7 @@
                         <Insets bottom="5.0" />
                      </VBox.margin>
                   </Label>
-                  <Label text="&quot;Speech Bubble&quot; Public Domain. Created by @BurningwoodM (Twitter Account)" textFill="WHITE" wrapText="true">
+                  <Label styleClass="aiInputField" text="&quot;Speech Bubble&quot; Public Domain. Created by @BurningwoodM (Twitter Account)" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>

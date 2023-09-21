@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -59,6 +60,23 @@ public class Room3CentralDisplayUnitController {
               + " solved the puzzle and not yet opened the world map to discover the current"
               + " location. Give player a short message to indicates it is locked and do not"
               + " include any hint of next step, surrounded by *");
+    }
+  }
+
+  @FXML
+  private void clickKeyEvent(KeyEvent event) {
+    // Request focus on the display output
+    displayOutput.requestFocus();
+    System.out.println("key pressed" + event.getCode());
+    // Set the key pressed to the display output
+    String currentText = displayOutput.getText();
+    // Delete pressed - remove the last character and only accept letter and numbers.
+    if (event.getCode().toString().equals("BACK_SPACE")) {
+      if (currentText.length() > 0) {
+        displayOutput.setText(currentText.substring(0, currentText.length() - 1));
+      }
+    } else if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
+      displayOutput.setText(currentText + event.getText().toUpperCase());
     }
   }
 
@@ -136,6 +154,9 @@ public class Room3CentralDisplayUnitController {
     CentralDisplayUnit.setOpacity(1);
     lock.setVisible(false);
     lock.setDisable(true);
+
+    // Enable the key press event
+
     for (Rectangle button : allButtons) {
       button.setDisable(false);
     }
@@ -190,9 +211,10 @@ public class Room3CentralDisplayUnitController {
                   // Set the aircraft code image to inventory.
 
                   Image aircraftCode = new Image("/images/aircraft_code.png");
-                  MainGame.addObtainedItem(aircraftCode, "aircraft code");
-                  System.out.println("Aircraft code unlocked" + GameState.aircraftCode);
 
+                  MainGame.addObtainedItem(aircraftCode, "aircraftCode");
+
+                  System.out.println("Aircraft code unlocked" + GameState.aircraftCode);
                 });
           });
 

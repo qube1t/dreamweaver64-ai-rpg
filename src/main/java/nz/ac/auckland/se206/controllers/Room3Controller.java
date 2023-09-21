@@ -73,12 +73,7 @@ public class Room3Controller {
 
     // Only displays the welcome message to Room3 if the plauyer first enters the room
     if (!GameState.isRoom3FirstEntered) {
-      GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
-          (result) -> {
-            System.out.println(result);
-            GameState.puzzleIntroMessageRoom3 = result;
-          });
+
       GameState.isRoom3FirstEntered = true;
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.room3WelcomeMessage(),
@@ -88,6 +83,15 @@ public class Room3Controller {
           });
     } else {
       MainGame.enableInteractPane();
+    }
+
+    if (GameState.puzzleIntroMessageRoom3 == "") {
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
+          (result) -> {
+            System.out.println(result);
+            GameState.puzzleIntroMessageRoom3 = result;
+          });
     }
 
     // Initialize the obsts list
@@ -130,6 +134,13 @@ public class Room3Controller {
     if (unarrangedCityName.equals(cityName)) return makeUnarrangedCityName(cityName);
 
     return unarrangedCityName.toUpperCase();
+  }
+
+  @FXML
+  public void onClickRoom2() throws IOException {
+    System.out.println("Room2 clicked");
+    MainGame.removeOverlay(true);
+    MainGame.addOverlay("room2", true);
   }
 
   @FXML
@@ -179,7 +190,9 @@ public class Room3Controller {
               + " Send a response to user surrounded by * .");
       // Set the aircraft code image to inventory.
       Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
-      MainGame.addObtainedItem(decryptedLetter, "decrypted letter");
+
+      MainGame.addObtainedItem(decryptedLetter, "decryptedLetter");
+
     } else {
 
       GameState.eleanorAi.runGpt(

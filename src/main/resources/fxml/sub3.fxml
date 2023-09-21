@@ -43,8 +43,8 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="22.0" layoutX="235.0" layoutY="443.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" fx:id="x" />
             <Rectangle fx:id="y" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="22.0" layoutX="270.0" layoutY="446.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
             <Rectangle fx:id="z" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="137.0" layoutY="477.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-            <Rectangle fx:id="slash" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="238.0" layoutY="474.0" onMouseClicked="#handleSlashClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="19.0" />
-            <Rectangle fx:id="clear" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="272.0" layoutY="477.0" onMouseClicked="#handleClearClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+            <Rectangle fx:id="slash" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="238.0" layoutY="474.0" onMouseClicked="#handleSlashClick" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke-width: 1; -fx-stroke: white; -fx-fill: transparent;" width="19.0" />
+            <Rectangle fx:id="clear" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="270.0" layoutY="475.0" onMouseClicked="#handleClearClick" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: white; -fx-stroke-width: 1; -fx-fill: transparent;" width="23.0" />
             <Rectangle fx:id="e" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="19.0" layoutX="270.0" layoutY="322.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
             <Rectangle fx:id="a" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="134.0" layoutY="320.0" onMouseClicked="#handleLetterClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
             <Rectangle fx:id="one1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="31.0" layoutY="381.0" onMouseClicked="#handleNumberClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
@@ -62,18 +62,18 @@
                   <Font name="Abaddon Bold Regular" size="15.0" />
                </font>
             </Text>
-            <Text fx:id="displayOutput" fill="#11ee66" layoutX="60.0" layoutY="193.0" onMouseClicked="#test" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="centralDisplayUnitOutput" textAlignment="CENTER" wrappingWidth="201.46533203125">
+            <Text fx:id="displayOutput" fill="#11ee66" layoutX="60.0" layoutY="193.0" onKeyPressed="#clickKeyEvent" onMouseClicked="#test" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="centralDisplayUnitOutput" textAlignment="CENTER" wrappingWidth="201.46533203125">
                <font>
                   <Font name="Abaddon Bold Regular" size="23.0" />
                </font>
             </Text>
-            <Rectangle fx:id="delete" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="203.0" layoutY="477.0" onMouseClicked="#handleDeleteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+            <Rectangle fx:id="delete" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="202.0" layoutY="474.0" onMouseClicked="#handleDeleteClick" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: transparent; -fx-stroke: white; -fx-stroke-width: 1;" width="23.0" />
             <ImageView fx:id="lock" fitHeight="100.0" fitWidth="200.0" layoutX="62.0" layoutY="246.0">
                <image>
                   <Image url="@../images/rooms/room3/lock.png" />
                </image>
             </ImageView>
-            <Rectangle fx:id="execute" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="254.0" layoutY="293.0" onMouseClicked="#handleExecuteClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="35.0" />
+            <Rectangle fx:id="execute" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="254.0" layoutY="288.0" onMouseClicked="#handleExecuteClick" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke-width: 2; -fx-stroke: white; -fx-fill: transparent;" width="36.0" />
             <Rectangle fx:id="menu" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="24.0" layoutX="32.0" layoutY="316.0" onMouseClicked="#handleMenuClick" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="33.0" />
             <ProgressIndicator fx:id="progress" layoutX="147.0" layoutY="109.0" prefHeight="60.0" prefWidth="27.0" progress="0.0" style="-fx-background-color: red;" />
          </children>
