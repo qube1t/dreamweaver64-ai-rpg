@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -63,26 +62,16 @@ public class Room3CentralDisplayUnitController {
     }
   }
 
-  @FXML
-  private void clickKeyEvent(KeyEvent event) {
-    // Request focus on the display output
-    displayOutput.requestFocus();
-    System.out.println("key pressed" + event.getCode());
-    // Set the key pressed to the display output
+  protected void addSlashIfEnteredCurrentCity() {
     String currentText = displayOutput.getText();
-    // Delete pressed - remove the last character and only accept letter and numbers.
-    if (event.getCode().toString().equals("BACK_SPACE")) {
-      if (currentText.length() > 0) {
-        displayOutput.setText(currentText.substring(0, currentText.length() - 1));
-      }
-    } else if (event.getCode().isLetterKey() || event.getCode().isDigitKey()) {
-      displayOutput.setText(currentText + event.getText().toUpperCase());
+    String firstThreeDeparture =
+        GameState.currentCities[GameState.currentCityIndex - 1]
+            .getText()
+            .substring(0, 3)
+            .toUpperCase();
+    if (currentText.equalsIgnoreCase(firstThreeDeparture)) {
+      displayOutput.setText(currentText + "/");
     }
-  }
-
-  @FXML
-  private void test() {
-    System.out.println("test");
   }
 
   @FXML
@@ -95,6 +84,7 @@ public class Room3CentralDisplayUnitController {
     // Append the clicked letter to the existing text
     String currentText = displayOutput.getText();
     displayOutput.setText(currentText + upperLetter);
+    addSlashIfEnteredCurrentCity();
   }
 
   @FXML
@@ -109,6 +99,7 @@ public class Room3CentralDisplayUnitController {
     if (currentText.length() > 0) {
       displayOutput.setText(currentText.substring(0, currentText.length() - 1));
     }
+    addSlashIfEnteredCurrentCity();
   }
 
   @FXML
@@ -130,6 +121,7 @@ public class Room3CentralDisplayUnitController {
     if (currentText.length() > 0) {
       displayOutput.setText(currentText + number.substring(number.length() - 1));
     }
+    addSlashIfEnteredCurrentCity();
   }
 
   protected void typeTextEffect(Text text, String message, int delay) {

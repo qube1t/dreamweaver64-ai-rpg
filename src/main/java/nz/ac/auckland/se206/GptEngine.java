@@ -24,13 +24,16 @@ public class GptEngine {
   public GptEngine() {
     if (chatCompletionRequest == null)
       chatCompletionRequest =
-          new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+          new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.5).setMaxTokens(100);
           
           Timer timer = new Timer();
           timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-              if (!active && promptQueue.size() > 0) startNewThread();
+              if (!active && promptQueue.size() > 0) {
+                active = true;
+                startNewThread();
+              };
             }
           }, 1000, 1000);
             }
