@@ -177,7 +177,7 @@ public class Room3Controller {
               + " Send a response to user surrounded by * .");
       // Set the aircraft code image to inventory.
       Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
-      MainGame.addObtainedItem(decryptedLetter);
+      MainGame.addObtainedItem(decryptedLetter, "decrypted letter");
     } else {
 
       GameState.eleanorAi.runGpt(
