@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.fxml.FXML;
+import javafx.scene.effect.ColorAdjust;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -43,12 +44,20 @@ public class Room3Controller {
   @FXML private Circle box1, box2, box3, box4, box5;
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
-  @FXML private ImageView map;
+  @FXML public ImageView map, paperImage;
   @FXML private Pane clickPane;
 
   private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
+
+    if (!GameState.isAircraftCodeFound && !GameState.isEncryptedMessageFound) {
+      ColorAdjust grayscale = new ColorAdjust();
+      grayscale.setSaturation(-1.0); // Set saturation to -1 for grayscale
+      // Apply the grayscale effect to the paper image.
+      paperImage.setEffect(grayscale);
+      paperImage.setOpacity(0.6);
+    }
 
     if (GameState.arrangedDestnationCity == "") {
       GameState.eleanorAi.runGpt(
@@ -198,6 +207,8 @@ public class Room3Controller {
    */
   public void clickPaperEvent() throws IOException, ApiProxyException {
     if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
+      paperImage.setOpacity(1);
+      paperImage.setEffect(null);
       System.out.println("Decrypted letter released");
       GameState.eleanorAi.runGpt(
           "User update: User has successfully decrypted the letter based on the objects he got. He"
