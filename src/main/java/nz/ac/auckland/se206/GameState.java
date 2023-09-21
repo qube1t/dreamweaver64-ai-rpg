@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.MainGame;
@@ -23,6 +22,7 @@ public class GameState {
 
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
+  public static int hintsRemaining;
 
   public static boolean isWorldMapOpened = false;
 
@@ -32,9 +32,6 @@ public class GameState {
 
   /** Indicates whether the game has started. */
   public static boolean isGameStarted = false;
-
-  /** Indicates the time limit that player has chosen */
-  public static int chosenTime;
 
   /** Indicates the wrong choice that the player has entered in room3 minigame */
   public static int wrongChoice = 0;
@@ -83,25 +80,11 @@ public class GameState {
   public static String[] booksInRoom1 = new String[7];
 
   /** Indicates whether the book has found to trade with pirate */
-  public static boolean isBookFound = true;
+  public static boolean isBookFound = false;
 
   /** Indicates whether the box key has found to open the treasure box */
   public static boolean isBoxKeyFound = false;
 
   /** Indicates whether the treasure has found */
   public static boolean isTreasureFound = false;
-
-  /** Indicates whether the decrypt key has found to decrypt the memory */
-  public static boolean isDecryptKeyFound = false;
-
-  /** Indicates whether the item6 has found */
-  public static boolean isItem6Found = false;
-
-  /** Indicates whether the item7 has found */
-  public static boolean isItem7Found = false;
-
-  /** Indicates whether the item8 has found */
-  public static boolean isItem8Found = false;
-
-  public static ImageView[] items;
 }
