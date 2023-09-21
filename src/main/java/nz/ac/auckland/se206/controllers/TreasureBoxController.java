@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,30 +11,39 @@ import nz.ac.auckland.se206.GameState;
 
 public class TreasureBoxController {
 
-    @FXML private ImageView imgTreasure;
-    @FXML private ImageView clickedTreasure;
-    @FXML private Label message;
-    @FXML private Button treasure;
+  @FXML private ImageView imgTreasure;
+  @FXML private ImageView clickedTreasure;
+  @FXML private Label message;
+  @FXML private Button treasure;
 
-    public void initialize() {
-        treasure.setDisable(false);
-        if (GameState.isTreasureFound) {
-            clickedTreasure.setVisible(false);
-            message.setVisible(false);
-            imgTreasure.setVisible(false);
-        }
+  /**
+   * Initialize the treasure box.
+   */
+  public void initialize() {
+    if (GameState.isEncryptedMessageFound) {
+      clickedTreasure.setVisible(false);
+      message.setVisible(false);
+      imgTreasure.setVisible(false);
+      treasure.setDisable(true);
     }
+  }
 
-    @FXML
-    void onGetTreasure(ActionEvent event) throws IOException{
-        GameState.isTreasureFound = true;
-        clickedTreasure.setVisible(true);
-        message.setVisible(true);
-        message.setText(GameState.encryptedFinalMsg);
-        imgTreasure.setVisible(false);
-        treasure.setDisable(true);
-        Image treasureImage = new Image("/images/treasure.png");
-        MainGame.addObtainedItem(treasureImage, "treasure");
-        System.out.println("Treasure obtained");
-    }
+  /**
+   * When the player clicks on the treasure box, the encrypted message will be displayed.
+   * 
+   * @param event
+   * @throws IOException
+   */
+  @FXML
+  void onGetTreasure(ActionEvent event) throws IOException {
+    treasure.setDisable(true);
+    GameState.isEncryptedMessageFound = true;
+    imgTreasure.setVisible(false);
+    message.setText(GameState.encryptedFinalMsg);
+    clickedTreasure.setVisible(true);
+    message.setVisible(true);
+    Image treasureImage = new Image("/images/treasure.png");
+    MainGame.addObtainedItem(treasureImage, "treasure");
+    System.out.println("Treasure obtained");
+  }
 }

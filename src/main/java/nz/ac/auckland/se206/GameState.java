@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.util.List;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.MainGame;
@@ -21,9 +22,6 @@ public class GameState {
   // pirate riddle
   public static String instructionMsg = null;
   public static String pirateRiddle = null;
-
-  /** Indicates whether the key has been found. */
-  public static boolean isKeyFound = false;
 
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
@@ -89,9 +87,6 @@ public class GameState {
   /** Indicates whether the box key has found to open the treasure box */
   public static boolean isBoxKeyFound = false;
 
-  /** Indicates whether the treasure has found */
-  public static boolean isTreasureFound = false;
-
   public static String takenBook;
 
   public static String finalMsg;
@@ -99,4 +94,8 @@ public class GameState {
   public static String encryptedFinalMsg;
 
   public static boolean isRoom2FirstEntered = false;
+
+  public static boolean hasDecrypted;
+
+  public static List<String> factsAboutDW64;
 }

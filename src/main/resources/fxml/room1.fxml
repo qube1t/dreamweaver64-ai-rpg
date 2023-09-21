@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -8,17 +9,21 @@
 
 <?import nz.ac.auckland.se206.components.Character?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room1Controller">
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="500.0" scaleX="0.78" scaleY="0.78" snapToPixel="false" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room1Controller">
    <children>
       <ImageView fitHeight="700" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/rooms/room1/background.png" />
          </image>
+         <StackPane.margin>
+            <Insets />
+         </StackPane.margin>
       </ImageView>
-      <Pane>
+      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="674.0">
          <children>
 
-             <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="30.0" layoutX="30.0" layoutY="337.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="32.0" />
+                               <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="30.0" layoutX="30.0" layoutY="337.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="32.0" />
             <Rectangle fx:id="rect2" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="37.0" layoutX="62.0" layoutY="322.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="174.0" />
             <Rectangle fx:id="rect3" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="30.0" layoutX="241.0" layoutY="219.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="26.0" />
             <Rectangle fx:id="rect4" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="30.0" layoutX="240.0" layoutY="118.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="39.0" />
@@ -40,6 +45,7 @@
             <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
             <Rectangle fx:id="rect12" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="293.0" layoutX="641.0" layoutY="325.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="26.0" />
             <Rectangle fx:id="rect22" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="293.0" layoutY="234.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="32.0" />
+            <Rectangle fx:id="rect71" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="47.0" layoutX="610.0" layoutY="411.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="32.0" />
          </children>
       </Pane>
       <ImageView fitHeight="700" pickOnBounds="true" preserveRatio="true" translateX="1.0">
@@ -47,14 +53,14 @@
             <Image url="@../images/rooms/room1/foreground.png" />
          </image>
       </ImageView>
-      <Pane fx:id="interactablePane" prefHeight="200.0" prefWidth="200.0">
+      <Pane fx:id="interactablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="674.0">
          <children>
-            <Rectangle fx:id="shelf_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="272.0" layoutY="90.0" onMouseClicked="#openBookShelf" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="39.0" />
-            <Rectangle fx:id="left_door_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="30.0" layoutY="363.0" onMouseClicked="#goToLeftRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="18.0" />
-            <Rectangle fx:id="right_door_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="627.0" layoutY="453.0" onMouseClicked="#goToRightRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="18.0" />
-            <Rectangle fx:id="shelf_btn1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="364.0" layoutY="58.0" onMouseClicked="#openMainDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="39.0" />
-            <Rectangle fx:id="crockery_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="394.0" layoutY="394.0" onMouseClicked="#onClickCrockeries" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="39.0" />
-            <Rectangle fx:id="chest_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="272.0" layoutY="363.0" onMouseClicked="#onClickChest" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="39.0" />
+            <Rectangle fx:id="shelf_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="607.0" layoutY="394.0" onMouseClicked="#openBookShelf" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="39.0" />
+            <Rectangle fx:id="left_door_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="30.0" layoutY="363.0" onMouseClicked="#goToLeftRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="18.0" />
+            <Rectangle fx:id="right_door_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="627.0" layoutY="453.0" onMouseClicked="#goToRightRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="18.0" />
+            <Rectangle fx:id="shelf_btn1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="364.0" layoutY="58.0" onMouseClicked="#openMainDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="39.0" />
+            <Rectangle fx:id="crockery_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="273.0" layoutY="92.0" onMouseClicked="#onClickCrockeries" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="39.0" />
+            <Rectangle fx:id="chest_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="272.0" layoutY="363.0" onMouseClicked="#onClickChest" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="39.0" />
          </children>
       </Pane>
    </children>

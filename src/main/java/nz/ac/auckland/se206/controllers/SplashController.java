@@ -15,13 +15,13 @@ public class SplashController {
   @FXML private ProgressBar progressBar;
 
   public void initialize() throws ApiProxyException {
-    progressBar.setProgress(.33);
+    progressBar.setProgress(.25);
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.gameIntro(),
         s -> {
           Platform.runLater(
               () -> {
-                progressBar.setProgress(.66);
+                progressBar.setProgress(.50);
               });
         });
     GameState.eleanorAi.runGpt(
@@ -33,7 +33,18 @@ public class SplashController {
           }
           Platform.runLater(
               () -> {
+                progressBar.setProgress(.75);
+              });
+        });
+
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom1.getFacts(),
+        s -> {
+          GameState.factsAboutDW64 = Helper.getTextBetweenChar(s, "#");
+          Platform.runLater(
+              () -> {
                 progressBar.setProgress(.99);
+
                 try {
                   App.setRoot("start_menu");
                 } catch (IOException e) {

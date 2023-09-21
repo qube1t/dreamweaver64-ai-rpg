@@ -28,6 +28,7 @@ public class CharacterMovement {
   }
 
   protected boolean checkCollision() {
+    // check intersection of inner square with rectangles
     for (Rectangle obstacle : obstacles) {
       if (player
           .localToParent(playerBound.getBoundsInParent())
@@ -39,6 +40,7 @@ public class CharacterMovement {
   }
 
   private void checkProximity() {
+    // check intersection of outer circle with rectangles
     for (Node interactable : interactables) {
       if (player
           .localToParent(proximityBound.getBoundsInParent())
@@ -58,8 +60,6 @@ public class CharacterMovement {
 
     double oldX = player.getLayoutX();
     double oldY = player.getLayoutY();
-    // double oldBoundX = playerBound.getX();
-    // double oldBoundY = playerBound.getY();
 
     // Adjust the character's position based on the keys pressed.
     if (action == 0) {
@@ -77,17 +77,13 @@ public class CharacterMovement {
     // Set the new player positon
     player.setLayoutX(player.getLayoutX() + dx);
     player.setLayoutY(player.getLayoutY() + dy);
-    // playerBound.setX(playerBound.getX() + dx);
-    // playerBound.setY(playerBound.getY() + dy);
-    System.out.println(player.getLayoutX() + dx);
-    System.out.println(player.getLayoutY() + dy);
+    // System.out.println(player.getLayoutX() + dx);
+    // System.out.println(player.getLayoutY() + dy);
 
     // Return to the old position if there is a collision
     if (checkCollision()) {
       player.setLayoutX(oldX);
       player.setLayoutY(oldY);
-      //   playerBound.setX(oldBoundX);
-      //   playerBound.setY(oldBoundY);
     }
 
     checkProximity();
