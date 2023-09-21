@@ -8,18 +8,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndCreditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndCreditController">
    <children>
-      <HBox layoutX="49.982421875" layoutY="50.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="40.0">
+      <HBox layoutX="89.0" layoutY="40.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0">
          <children>
-            <VBox fx:id="contentVBox" prefHeight="320.0" prefWidth="542.0">
+            <VBox fx:id="contentVBox" prefHeight="520.0" prefWidth="612.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="32.0" prefWidth="501.0" text="IMAGE" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" prefHeight="32.0" prefWidth="600.0" text="IMAGE" textAlignment="CENTER" textFill="WHITE">
                      <font>
-                        <Font name="Impact" size="25.0" />
+                        <Font name="Impact" size="35.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
                   <Label text="&quot;Treasure Chest&quot; by Bonsaiheldin (https://opengameart.org/content/treasure-chests-32x32)" textFill="WHITE" wrapText="true">
