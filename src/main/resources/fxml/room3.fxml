@@ -46,6 +46,11 @@
                   <Image url="@../images/rooms/room3/map_on_computer.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="10.0" fitWidth="21.0" layoutX="254.0" layoutY="213.0">
+               <image>
+                  <Image url="@../images/rooms/room3/radar_small_gif.gif" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
       <StackPane>
