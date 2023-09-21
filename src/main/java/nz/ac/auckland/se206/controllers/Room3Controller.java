@@ -50,7 +50,6 @@ public class Room3Controller {
   private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
-    MainGame.enableInteractPane();
 
     // Generate the arranged city name and make it unarranged when room3 loads
     if ((GameState.arrangedDestnationCity == ""
@@ -171,7 +170,14 @@ public class Room3Controller {
    * This method is called when the book is clicked It will open the flight plan if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
-  public void clickPaperEvent() throws IOException, ApiProxyException {}
+  public void clickPaperEvent() throws IOException, ApiProxyException {
+    if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
+      System.out.println("Decrypted letter released");
+      GameState.eleanorAi.runGpt(
+          "User update: User has successfully decrypted the letter based on the objects he got."
+              + " Send a response to user surrounded by * .");
+    }
+  }
 
   @FXML
   public void onClickDoor() throws IOException {

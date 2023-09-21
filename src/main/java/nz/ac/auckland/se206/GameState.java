@@ -17,6 +17,8 @@ public class GameState {
   /** Indicates if room3 has first entered */
   public static boolean isRoom3FirstEntered = false;
 
+  public static boolean isEncryptedMessageFound = false;
+
   // pirate riddle
   public static String instructionMsg = null;
   public static String pirateRiddle = null;
