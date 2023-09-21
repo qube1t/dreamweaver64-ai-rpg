@@ -386,6 +386,9 @@ public class MainGame {
     }
   }
 
+  /**
+   * Updates the hint count.
+   */
   private void updateHintCount() {
     if (GameState.gameMode[0].equals("MEDIUM")) {
       hint_initiated.setText("Hint: " + Integer.toString(GameState.hintsRemaining));
