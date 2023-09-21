@@ -56,8 +56,8 @@ public class Room3CentralDisplayUnitController {
         button.setDisable(true);
       }
       GameState.eleanorAi.runGpt(
-          "User update: the user clicks on the flight computer but it is locked due to either not"
-              + " solved the puzzle and not yet opened the world map to discover the current"
+          "User update: User clicks on the flight computer but it is locked due to either not"
+              + " solved the puzzle or not yet opened the world map to discover the current"
               + " location. Give player a short message to indicates it is locked and do not"
               + " include any hint of next step, surrounded by *");
     }
@@ -65,12 +65,12 @@ public class Room3CentralDisplayUnitController {
 
   protected void addSlashIfEnteredCurrentCity() {
     String currentText = displayOutput.getText();
-    String firstThreeDeparture =
+    String firstTwoDeparture =
         GameState.currentCities[GameState.currentCityIndex - 1]
             .getText()
-            .substring(0, 3)
+            .substring(0, 2)
             .toUpperCase();
-    if (currentText.equalsIgnoreCase(firstThreeDeparture)) {
+    if (currentText.equalsIgnoreCase(firstTwoDeparture)) {
       displayOutput.setText(currentText + "/");
     }
   }
@@ -153,8 +153,7 @@ public class Room3CentralDisplayUnitController {
     for (Rectangle button : allButtons) {
       button.setDisable(false);
     }
-    String message =
-        "ENTER THE FIRST THREE LETTER OF DEP / DEST CITY THEN PRESS EXECUTE. E.g.AUC/SYD";
+    String message = "ENTER THE FIRST TWO LETTER OF DEP / DEST CITY THEN PRESS EXECUTE. E.g SY/ME";
     int typingDelay = 50;
     typeTextEffect(displayInput, message, typingDelay);
   }
@@ -167,13 +166,14 @@ public class Room3CentralDisplayUnitController {
    */
   public void handleExecuteClick() throws ApiProxyException {
     String currentInput = displayOutput.getText();
-    String firstThreeDestnation = GameState.arrangedDestnationCity.substring(0, 3).toUpperCase();
-    String firstThreeDeparture =
-        GameState.currentCities[GameState.currentCityIndex - 1].getText().substring(0, 3);
-    System.out.println(firstThreeDeparture + "/" + firstThreeDestnation);
+    String firstTwoDestnation = GameState.arrangedDestnationCity.substring(0, 2).toUpperCase();
+    String firstTwoDeparture =
+        GameState.currentCities[GameState.currentCityIndex - 1].getText().substring(0, 2);
+    System.out.println(firstTwoDeparture + "/" + firstTwoDestnation);
 
-    // Correct code has been entered
-    if (currentInput.equalsIgnoreCase(firstThreeDeparture + "/" + firstThreeDestnation)) {
+    // Correct code has been entered, i.e., first two letters of the departure city and first two
+    // letters of the destination city
+    if (currentInput.equalsIgnoreCase(firstTwoDeparture + "/" + firstTwoDestnation)) {
       // Aircraft code has been found.
       GameState.isAircraftCodeFound = true;
       displayInput.setText("");
@@ -220,8 +220,9 @@ public class Room3CentralDisplayUnitController {
       displayInput.setStyle("-fx-text-fill: red;");
 
       GameState.eleanorAi.runGpt(
-          "User update: the player needs to enter the first three letters of current city /"
-              + " destnation cityin the flight computer but now  it is incorrect. Do not respond.");
+          "User update: the player needs to enter the first two letters of current city /"
+              + " destnation city in the flight computer but now  it is incorrect. Do not"
+              + " respond.");
       displayInput.setText("INCORRECT ANSWER TRY AGAIN");
       displayOutput.setText("");
     }

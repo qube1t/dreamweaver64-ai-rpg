@@ -51,13 +51,11 @@ public class Room3Controller {
   public void initialize() throws ApiProxyException {
 
     // Generate the arranged city name and make it unarranged when room3 loads
-    if ((GameState.arrangedDestnationCity == ""
-        || GameState.arrangedDestnationCity.length() > 11)) {
+    if ((GameState.arrangedDestnationCity == "")) {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getRandomCity(),
           (result) -> {
-            // Get the city surrounded by #
-            // Find the start and end indices of the aircraft code within single quotes
+            System.out.println(result);
             int startIndex = result.indexOf("^");
             int endIndex = result.indexOf("^", startIndex + 1);
 
@@ -167,8 +165,11 @@ public class Room3Controller {
     System.out.println("destnation city is " + GameState.arrangedDestnationCity);
     MainGame.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
-        "User update: User has opened the unarranged word puzzle. The word indicates the destnation"
-            + " city. No reply is needed for this message.");
+        "User update: User has opened the unarranged word puzzle game. The correct city"
+            + " name is "
+            + GameState.arrangedDestnationCity
+            + ". No reply is needed for this message. If the user ask for hints, give hint without"
+            + " revealing the city name.");
   }
 
   @FXML
