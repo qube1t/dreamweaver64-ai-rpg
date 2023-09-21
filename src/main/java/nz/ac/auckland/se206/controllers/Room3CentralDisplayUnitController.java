@@ -31,6 +31,7 @@ public class Room3CentralDisplayUnitController {
   @FXML private Text displayInput, displayOutput;
   @FXML private ImageView lock, CentralDisplayUnit;
   @FXML private ProgressIndicator progress;
+
   protected List<Rectangle> allButtons;
 
   public void initialize() throws ApiProxyException {
@@ -46,7 +47,7 @@ public class Room3CentralDisplayUnitController {
     this.allButtons = allButtons;
 
     if (GameState.isPuzzleInRoom3Solved && GameState.isWorldMapOpened) {
-      enableFlightCDU();
+      enableFlightComputer();
     } else {
       CentralDisplayUnit.setOpacity(0.7);
       displayOutput.setText("LOCKED");
@@ -142,7 +143,7 @@ public class Room3CentralDisplayUnitController {
     timeline.play();
   }
 
-  protected void enableFlightCDU() {
+  protected void enableFlightComputer() {
     CentralDisplayUnit.setOpacity(1);
     lock.setVisible(false);
     lock.setDisable(true);

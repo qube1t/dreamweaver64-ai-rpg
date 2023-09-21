@@ -4,9 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javafx.application.Platform;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -77,8 +75,11 @@ public class Room2Controller {
   private int correctBoxClicked = 0;
   private static boolean gptInit;
 
-  /** Initializes the room view, it is called when the room loads. 
-   * @throws ApiProxyException */
+  /**
+   * Initializes the room view, it is called when the room loads.
+   *
+   * @throws ApiProxyException
+   */
   public void initialize() throws ApiProxyException {
     ArrayList<Rectangle> obsts =
         new ArrayList<Rectangle>(
@@ -90,60 +91,61 @@ public class Room2Controller {
 
     character.enableMobility(obsts, interactablePane.getChildren());
 
-    switch(GameState.prevRoom){
+    switch (GameState.prevRoom) {
       case 1:
         character.setLayoutX(60);
-    character.setLayoutY(250);
+        character.setLayoutY(250);
         break;
       case 3:
         character.setLayoutX(492);
         character.setLayoutY(242);
         break;
       default:
-character.setLayoutX(60);
-    character.setLayoutY(250);
+        character.setLayoutX(60);
+        character.setLayoutY(250);
     }
-    
 
     speechBubbleScrollPane = (ScrollPane) interactablePane.lookup("#speechBubbleScrollPane");
     if (speechBubbleScrollPane != null) {
-      speechBubbleScrollPane.setContent(gptResponse);      
+      speechBubbleScrollPane.setContent(gptResponse);
       speechBubbleScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
       speechBubbleScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     }
 
-
     if (!gptInit) {
       initGpt();
       gptInit = true;
-    }else{
+    } else {
 
-    MainGame.enableInteractPane();
+      MainGame.enableInteractPane();
     }
-    
+
     GameState.prevRoom = 2;
     speechBubbleScrollPane.setVisible(false);
     speech_bubble.setVisible(false);
     gptResponse.setVisible(false);
-  
+
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
     }
   }
 
   private void initGpt() throws ApiProxyException {
-    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalEncrypted(), s -> {
-      List<String> msg = Helper.getTextBetweenChar(s, "+");
-    if (msg.size() > 0) GameState.encryptedFinalMsg = msg.get(0); 
-    else GameState.encryptedFinalMsg = s;
-      Platform.runLater(() -> MainGame.enableInteractPane());
-    });
-    
-    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.generateFinalUnencrypted(), s -> {
-      List<String> msg = Helper.getTextBetweenChar(s, "+");
-    if (msg.size() > 0) GameState.finalMsg = msg.get(0); 
-    });
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom2.generateFinalEncrypted(),
+        s -> {
+          List<String> msg = Helper.getTextBetweenChar(s, "+");
+          if (msg.size() > 0) GameState.encryptedFinalMsg = msg.get(0);
+          else GameState.encryptedFinalMsg = s;
+          Platform.runLater(() -> MainGame.enableInteractPane());
+        });
 
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom2.generateFinalUnencrypted(),
+        s -> {
+          List<String> msg = Helper.getTextBetweenChar(s, "+");
+          if (msg.size() > 0) GameState.finalMsg = msg.get(0);
+        });
 
     // MainGame.enableInteractPane();
 
@@ -151,10 +153,10 @@ character.setLayoutX(60);
 
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
-    if (!GameState.isBookFound && GameState.pirateRiddle != null) { 
-      System.out.println("Pirate clicked"); 
+    if (!GameState.isBookFound && GameState.pirateRiddle != null) {
+      System.out.println("Pirate clicked");
       speechBubbleScrollPane.setVisible(true);
-      gptResponse.setText(GameState.pirateRiddle);    
+      gptResponse.setText(GameState.pirateRiddle);
       speech_bubble.setVisible(true);
       gptResponse.setVisible(true);
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
@@ -207,8 +209,6 @@ character.setLayoutX(60);
         if (wrongBoxClicked == 0) {
           try {
             GameState.eleanorAi.runGpt(
-
-
                 "User update: User has found the wrong treasure box. No reply is needed for this"
                     + " message.");
 

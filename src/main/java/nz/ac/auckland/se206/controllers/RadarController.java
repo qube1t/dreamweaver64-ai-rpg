@@ -10,6 +10,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 
 public class RadarController {
+
   @FXML private Circle box1, box2, box3, box4, box5;
 
   private Timeline radarAnimation;
