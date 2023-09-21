@@ -110,7 +110,7 @@ public class Room3Controller {
     character.setLayoutX(530);
     character.setLayoutY(210);
 
-    GameState.prevRoom=3;
+    GameState.prevRoom = 3;
   }
 
   protected String makeUnarrangedCityName(String cityName) {
@@ -151,7 +151,7 @@ public class Room3Controller {
 
   @FXML
   public void onClickPuzzle() throws IOException, ApiProxyException {
-    System.out.println("Puzzle clicked");
+    System.out.println("destnation city is " + GameState.arrangedDestnationCity);
     MainGame.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened the unarranged word puzzle. The word indicates the destnation"

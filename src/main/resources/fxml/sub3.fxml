@@ -62,7 +62,7 @@
                   <Font name="Abaddon Bold Regular" size="15.0" />
                </font>
             </Text>
-            <Text fx:id="displayOutput" fill="#11ee66" layoutX="60.0" layoutY="193.0" onKeyPressed="#clickKeyEvent" onMouseClicked="#test" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="centralDisplayUnitOutput" textAlignment="CENTER" wrappingWidth="201.46533203125">
+            <Text fx:id="displayOutput" fill="#11ee66" layoutX="60.0" layoutY="193.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="centralDisplayUnitOutput" textAlignment="CENTER" wrappingWidth="201.46533203125">
                <font>
                   <Font name="Abaddon Bold Regular" size="23.0" />
                </font>
