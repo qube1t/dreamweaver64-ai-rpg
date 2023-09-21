@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="outer_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" onMouseClicked="#clickedOuterPane" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
+<StackPane fx:id="outer_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" onMouseClicked="#clickedOuterPane" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
 
    <children>
       <VBox fx:id="interact_pane" disable="true" prefHeight="560.0" prefWidth="706.0" visible="false">
@@ -61,7 +61,7 @@
                            </image>
                         </ImageView>
 
-                        <ScrollPane fx:id="bubbleTextPane" fitToHeight="true" fitToWidth="true" layoutX="52.0" layoutY="7.0" minWidth="300.0" prefHeight="68.0" prefWidth="331.0" style="-fx-background-color: white;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" visible="false" />
+                        <ScrollPane fx:id="bubbleTextPane" fitToHeight="true" fitToWidth="true" layoutX="52.0" layoutY="7.0" minWidth="300.0" prefHeight="68.0" prefWidth="331.0" style="-fx-background-color: white;" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" visible="false" />
 
 
                      </children>
