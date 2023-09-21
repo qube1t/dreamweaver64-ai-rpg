@@ -34,7 +34,7 @@ public class Room3Controller {
       bound1,
       bound2,
       bound3,
-      book,
+      paper,
       clickableComputer,
       clickableRadar,
       clickableDoor,
@@ -167,7 +167,7 @@ public class Room3Controller {
    * This method is called when the book is clicked It will open the flight plan if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
-  public void clickBookEvent() throws IOException, ApiProxyException {}
+  public void clickPaperEvent() throws IOException, ApiProxyException {}
 
   @FXML
   public void onClickDoor() throws IOException {
