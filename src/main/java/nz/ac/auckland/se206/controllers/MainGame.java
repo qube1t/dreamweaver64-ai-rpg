@@ -21,25 +21,19 @@ import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.ObtainedItemsWithId;
 import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainGame {
 
-  @FXML private Pane game_pane;
   @FXML private static Character character;
+  @FXML private static Pane initialised_game_pane;
+  @FXML private Pane game_pane;
   @FXML private Pane outer_pane;
-  private static Label timer_initiated;
   @FXML private Label timer;
-  private static ImageView item1_initiated;
-  private static ImageView item2_initiated;
-  private static ImageView item3_initiated;
-  private static ImageView item4_initiated;
-  private static ImageView item5_initiated;
-  private static ImageView item6_initiated;
-  private static ImageView item7_initiated;
-  private static ImageView item8_initaited;
+  @FXML private Label hint_count;
   @FXML private ImageView item1;
   @FXML private ImageView item2;
   @FXML private ImageView item3;
@@ -58,14 +52,24 @@ public class MainGame {
   @FXML private TextField chatInput;
   @FXML private Pane interact_pane;
 
-  Text bubbleChatText = new Text("text");
-
   private static MainGame instance;
   private static Thread timeLimitThread;
-  private static List<Image> obtainedItems = new ArrayList<>();
 
-  @FXML private static Pane initialised_game_pane;
+  private static List<ObtainedItemsWithId> obtainedItems = new ArrayList<>();
   private static Pane initialised_interact_pane;
+
+  private static Label timer_initiated;
+  private static Label hint_initiated;
+  private static ImageView item1_initiated;
+  private static ImageView item2_initiated;
+  private static ImageView item3_initiated;
+  private static ImageView item4_initiated;
+  private static ImageView item5_initiated;
+  private static ImageView item6_initiated;
+  private static ImageView item7_initiated;
+  private static ImageView item8_initaited;
+
+  Text bubbleChatText = new Text("text");
 
   public void initialize() throws IOException {
     chatPane.setMouseTransparent(true);
@@ -76,6 +80,7 @@ public class MainGame {
     GameState.mainGame = this;
 
     timer_initiated = timer;
+    hint_initiated = hint_count;
     item1_initiated = item1;
     item2_initiated = item2;
     item3_initiated = item3;
@@ -89,11 +94,16 @@ public class MainGame {
     initialised_game_pane = game_pane;
     initialised_interact_pane = interact_pane;
 
+    GameState.startTime = System.currentTimeMillis();
+
     outer_pane
         .getChildren()
         .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
     addOverlay("room1", true);
+
+    GameState.isGameStarted = true;
+
 
     // Helper.setBooksInRoom1();
     instance = this;
@@ -103,7 +113,6 @@ public class MainGame {
     bubbleTextPane.setContent(bubbleChatText);
 
     // disableInteractPane();
-
     // addChat("test");
   }
 
@@ -225,8 +234,6 @@ public class MainGame {
                   chatInput.setDisable(false);
                 });
           });
-
-      ;
       chatInput.setText("");
       outer_pane.requestFocus();
     }
@@ -285,12 +292,13 @@ public class MainGame {
     // initialised_interact_pane.setOpacity(0);
   }
 
-  private void clickHeader() {
-    BookShelfController.returnBook();
+  @FXML
+  private void clickedOuterPane() {
+    speechBubble.setVisible(false);
+    bubbleTextPane.setVisible(false);
   }
 
-  public static void getTimeLimitForGameMode(String timeLimit) {
-    GameState.isGameStarted = true;
+  public static void getTimeLimit(String timeLimit) {
     System.out.println("start game");
     switch (timeLimit) {
       case "2 minutes":
@@ -327,7 +335,13 @@ public class MainGame {
                 break;
               }
               int time = currentTime;
-              Platform.runLater(() -> timer_initiated.setText(String.valueOf(time)));
+              int minutes = time / 60;
+              int seconds = time % 60;
+              Platform.runLater(
+                  () -> {
+                    timer_initiated.setText(minutes + " : " + seconds);
+                updateHintCount();}
+                  );
               try {
                 Thread.sleep(1000);
               } catch (InterruptedException e) {
@@ -348,7 +362,34 @@ public class MainGame {
     GameState.timeLimitReached = true;
     if (!GameState.winTheGame) {
       System.out.println("time limit reached");
+      try {
+        MainGame.addOverlay("end_menu", false);
+      } catch (IOException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
     }
+  }
+
+  static void setHintCount(String difficulty) {
+    switch (difficulty) {
+      case "EASY":
+        hint_initiated.setText("Hint: \u221E");
+        break;
+      case "MEDIUM":
+        hint_initiated.setText("Hint: 5");
+        break;
+      case "HARD":
+        hint_initiated.setText("Hint: None");
+        break;
+      default:
+        hint_initiated.setText("Hint: \u221E");
+        break;
+    }
+  }
+
+  private static void updateHintCount() {
+    hint_initiated.setText("Hint: " + Integer.toString(GameState.hintsRemaining));
   }
 
   private static void updateInventoryUI() {
@@ -364,7 +405,9 @@ public class MainGame {
             item8_initaited);
     for (int i = 0; i < inventoryItems.size(); i++) {
       if (obtainedItems.size() > i) {
-        inventoryItems.get(i).setImage(obtainedItems.get(i));
+        inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());
+
+        inventoryItems.get(i).setId(obtainedItems.get(i).getId());
         inventoryItems.get(i).setFitWidth(35);
         inventoryItems.get(i).setPreserveRatio(true);
         inventoryItems.get(i).setSmooth(true);
@@ -374,8 +417,19 @@ public class MainGame {
     }
   }
 
-  public static void addObtainedItem(Image itemImage) {
-    obtainedItems.add(itemImage);
+  public static void addObtainedItem(Image itemImage, String itemId) {
+    obtainedItems.add(new ObtainedItemsWithId(itemImage, itemId));
+
+    updateInventoryUI();
+  }
+
+  public static void removeObtainedItem(String itemId) {
+    for (int i = 0; i < obtainedItems.size(); i++) {
+      if (obtainedItems.get(i).getId().equals(itemId)) {
+        obtainedItems.remove(i);
+        break;
+      }
+    }
     updateInventoryUI();
   }
 }

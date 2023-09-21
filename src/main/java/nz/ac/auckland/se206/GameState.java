@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.MainGame;
@@ -28,18 +27,18 @@ public class GameState {
 
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
+  public static int hintsRemaining;
+
 
   public static boolean isWorldMapOpened = false;
-
   public static MainGame mainGame;
 
   public static boolean winTheGame = false;
+  public static long startTime = 0;
+  public static long endTime = 0;
 
   /** Indicates whether the game has started. */
   public static boolean isGameStarted = false;
-
-  /** Indicates the time limit that player has chosen */
-  public static int chosenTime;
 
   /** Indicates the wrong choice that the player has entered in room3 minigame */
   public static int wrongChoice = 0;
@@ -47,7 +46,7 @@ public class GameState {
   /** Indicates whether the time limit has reached */
   public static boolean timeLimitReached = false;
 
-  public static int hintsRemaining = -1;
+
 
   public static boolean isCorrectRouteFound = false;
   public static boolean isCityFound = false;
@@ -85,7 +84,11 @@ public class GameState {
   public static String[] booksInRoom1 = new String[7];
 
   /** Indicates whether the book has found to trade with pirate */
-  public static boolean isBookFound = true;
+  public static boolean isBookFound = false;
+
+
+  public static String trueBook = null;
+
 
   /** Indicates whether the box key has found to open the treasure box */
   public static boolean isBoxKeyFound = false;
@@ -93,17 +96,10 @@ public class GameState {
   /** Indicates whether the treasure has found */
   public static boolean isTreasureFound = false;
 
-  /** Indicates whether the decrypt key has found to decrypt the memory */
-  public static boolean isDecryptKeyFound = false;
+  public static String takenBook;
 
-  /** Indicates whether the item6 has found */
-  public static boolean isItem6Found = false;
+public static String finalMsg;
 
-  /** Indicates whether the item7 has found */
-  public static boolean isItem7Found = false;
+public static String encryptedFinalMsg;
 
-  /** Indicates whether the item8 has found */
-  public static boolean isItem8Found = false;
-
-  public static ImageView[] items;
 }

@@ -35,7 +35,7 @@ public class TreasureBoxController {
         imgTreasure.setVisible(false);
         treasure.setDisable(true);
         Image treasureImage = new Image("/images/treasure.png");
-        MainGame.addObtainedItem(treasureImage);
+        MainGame.addObtainedItem(treasureImage, "treasure");
         System.out.println("Treasure obtained");
     }
 }

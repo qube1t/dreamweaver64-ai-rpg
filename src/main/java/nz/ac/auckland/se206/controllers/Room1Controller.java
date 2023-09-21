@@ -75,6 +75,7 @@ public class Room1Controller {
           GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
 
           String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));
+          GameState.trueBook = ansBook;
           System.out.println(ansBook);
           // gptStage++;
           MainGame.enableInteractPane();
@@ -125,10 +126,14 @@ public class Room1Controller {
   }
 
   @FXML
-  private void openMainDoor() throws ApiProxyException {
+  private void openMainDoor() throws ApiProxyException, IOException {
     GameState.eleanorAi.runGpt(
         "User update, User has tried to open main exit without solving the mission. No reply"
             + " needed.");
+    if (GameState.winTheGame) {
+      GameState.endTime = System.currentTimeMillis();
+      MainGame.addOverlay("end_menu", false);
+    }
   }
 
   @FXML
