@@ -10,10 +10,11 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 
-public class gpsControllerRoom3 {
+public class GpsControllerRoom3 {
 
   @FXML private Text label1, label2, label3, label4, label5;
   @FXML private Circle point1, point2, point3, point4, point5;
+
   private Circle[] cityPoints;
   private Text[] cityLabels;
   private Timeline radarAnimation;

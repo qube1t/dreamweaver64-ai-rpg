@@ -41,11 +41,9 @@ public class Room3Controller {
       clickableDoor,
       worldMap;
   @FXML private Circle box1, box2, box3, box4, box5;
-  @FXML private ImageView lastFlightPlan;
-  @FXML private ImageView departureBoard;
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
-  @FXML private ImageView radar_image, radar_computer, map;
+  @FXML private ImageView map;
   @FXML private Pane clickPane;
 
   private ArrayList<Rectangle> obstacles;
@@ -107,20 +105,20 @@ public class Room3Controller {
 
     character.enableMobility(obstacles, clickPane.getChildren());
 
-
-
-    switch(GameState.prevRoom){
+    switch (GameState.prevRoom) {
       case 1:
-    character.setLayoutX(530);
-    character.setLayoutY(210);
+        character.setLayoutX(530);
+        character.setLayoutY(210);
+
         break;
       case 2:
         character.setLayoutX(90);
         character.setLayoutY(154);
+
         break;
       default:
-    character.setLayoutX(530);
-    character.setLayoutY(210);
+        character.setLayoutX(530);
+        character.setLayoutY(210);
     }
 
     GameState.prevRoom = 3;
@@ -144,7 +142,9 @@ public class Room3Controller {
       unarrangedCityName += cityName.charAt(randomNumbers[i]);
     }
 
-    if (unarrangedCityName.equals(cityName)) return makeUnarrangedCityName(cityName);
+    if (unarrangedCityName.equals(cityName)) {
+      return makeUnarrangedCityName(cityName);
+    }
 
     return unarrangedCityName.toUpperCase();
   }

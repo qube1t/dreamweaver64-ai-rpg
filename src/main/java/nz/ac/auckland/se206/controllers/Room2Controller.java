@@ -92,20 +92,19 @@ public class Room2Controller {
 
     character.enableMobility(obsts, interactablePane.getChildren());
 
-    switch(GameState.prevRoom){
+    switch (GameState.prevRoom) {
       case 1:
         character.setLayoutX(60);
-    character.setLayoutY(250);
+        character.setLayoutY(250);
         break;
       case 3:
         character.setLayoutX(492);
         character.setLayoutY(242);
         break;
       default:
-character.setLayoutX(60);
-    character.setLayoutY(250);
+        character.setLayoutX(60);
+        character.setLayoutY(250);
     }
-    
 
     switch (GameState.prevRoom) {
       case 1:
@@ -146,9 +145,7 @@ character.setLayoutX(60);
     if (!gptInit) {
       initGpt();
       gptInit = true;
-    } else {
-    }
-
+    } else
     speechBubbleScrollPane.setVisible(false);
     speech_bubble.setVisible(false);
     gptResponse.setVisible(false);
