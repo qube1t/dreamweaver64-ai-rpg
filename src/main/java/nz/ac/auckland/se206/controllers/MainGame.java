@@ -384,9 +384,10 @@ public class MainGame {
     GameState.timeLimitReached = true;
     if (!GameState.winTheGame) {
       System.out.println("time limit reached");
-      outer_pane
-          .getChildren()
-          .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
+      // outer_pane
+      //     .getChildren()
+      //     .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
+      App.setRoot("end_menu");
     }
   }
 
