@@ -1,3 +1,16 @@
+.bubble {
+    -fx-padding: 10px;
+    -fx-background-color: lightblue;
+    -fx-border-color: navy;
+    -fx-border-width: 2px;
+    -fx-shape: "M24 1h-24v16.981h4v5.019l7-5.019h13z";
+}
+
+* {
+    -fx-focus-color: transparent;
+    -fx-border-style: none;
+}
+
 .error-text {
     -fx-fill: red;
     /* Set text color to red */
@@ -12,4 +25,20 @@
     -fx-fill: transparent;
     -fx-cursor: hand;
     -fx-border-width: 0.2;
+}
+
+.letter-frame {
+    -fx-background-color: lightgray;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+
+.colorful-border {
+    -fx-border-color: red, green, blue, orange;
+    /* Specify border colors */
+    -fx-border-width: 3px;
+    /* Specify border width */
+    -fx-border-style: solid;
+    /* Specify border style (solid, dashed, etc.) */
 }

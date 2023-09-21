@@ -92,13 +92,18 @@ public class App extends Application {
   @Override
   public void start(final Stage stage) throws IOException {
 
-    Pane root = (Pane) loadFxml("start_menu");
+    // Font.loadFont(App.class.getResource("/fonts/Abaddon Bold.ttf").toString(), 14);
+    // Font.loadFont(App.class.getResource("/fonts/Abaddon Light.ttf").toString(), 14);
+    Pane root = (Pane) loadFxml("splash_screen");
 
-    scene = new Scene(root, 1000, 700);
+
+    scene = new Scene(root, 700, 750);
 
     stage.setScene(scene);
     stage.show();
 
+    // Add the style css file
+    scene.getStylesheets().add("/css/style.css");
     // letterbox(scene, root);
 
     // stage.setFullScreen(true);
