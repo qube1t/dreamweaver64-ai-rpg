@@ -93,7 +93,7 @@ public class MainGame {
         .getChildren()
         .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
-    addOverlay("room1", true);
+    addOverlay("room3", true);
 
     // Helper.setBooksInRoom1();
     instance = this;

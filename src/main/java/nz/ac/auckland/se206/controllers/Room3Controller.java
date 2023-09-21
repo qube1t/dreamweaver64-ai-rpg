@@ -37,7 +37,8 @@ public class Room3Controller {
       book,
       clickableComputer,
       clickableRadar,
-      clickableDoor;
+      clickableDoor,
+      worldMap;
   @FXML private Circle box1, box2, box3, box4, box5;
   @FXML private ImageView lastFlightPlan;
   @FXML private ImageView departureBoard;
@@ -49,6 +50,7 @@ public class Room3Controller {
   private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
+    MainGame.enableInteractPane();
 
     // Generate the arranged city name and make it unarranged when room3 loads
     if ((GameState.arrangedDestnationCity == ""
@@ -83,8 +85,8 @@ public class Room3Controller {
         GptPromptEngineeringRoom3.room3WelcomeMessage(),
         (result) -> {
           System.out.println(result);
-          MainGame.enableInteractPane();
         });
+    MainGame.enableInteractPane();
 
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
@@ -133,14 +135,12 @@ public class Room3Controller {
   }
 
   @FXML
-  public void onClickLocation() throws IOException, ApiProxyException {
-    if (!GameState.isWorldMapOpened) GameState.isWorldMapOpened = true;
-
-    System.out.println("Location clicked");
-    MainGame.addOverlay("gps_current", false);
+  public void onClickPuzzle() throws IOException, ApiProxyException {
+    System.out.println("Puzzle clicked");
+    MainGame.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
-        "User update: User has opened the world map and achnowledge the current location. No need"
-            + " to respond to this message.");
+        "User update: User has opened the unarranged word puzzle. The word indicates the destnation"
+            + " city. No reply is needed for this message.");
   }
 
   @FXML
@@ -152,18 +152,22 @@ public class Room3Controller {
   }
 
   @FXML
+  public void onClickMap() throws IOException, ApiProxyException {
+    if (!GameState.isWorldMapOpened) GameState.isWorldMapOpened = true;
+
+    System.out.println("Location clicked");
+    MainGame.addOverlay("gps_current", false);
+    GameState.eleanorAi.runGpt(
+        "User update: User has opened the world map and achnowledge the current location. No need"
+            + " to respond to this message.");
+  }
+
+  @FXML
   /**
    * This method is called when the book is clicked It will open the flight plan if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
-  public void clickBookEvent() throws IOException, ApiProxyException {
-
-    System.out.println("Book clicked");
-    MainGame.addOverlay("room3_puzzle", false);
-    GameState.eleanorAi.runGpt(
-        "User update: User has opened the unarranged word puzzle. The word indicates the destnation"
-            + " city. No reply is needed for this message.");
-  }
+  public void clickBookEvent() throws IOException, ApiProxyException {}
 
   @FXML
   public void onClickDoor() throws IOException {
