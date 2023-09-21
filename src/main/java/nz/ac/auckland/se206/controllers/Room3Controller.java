@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -70,18 +71,14 @@ public class Room3Controller {
           });
     }
 
-    // Generate the intro message for the puzzle
-    if (GameState.puzzleIntroMessageRoom3 == "") {
+    // Only displays the welcome message to Room3 if the plauyer first enters the room
+    if (!GameState.isRoom3FirstEntered) {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
           (result) -> {
             System.out.println(result);
             GameState.puzzleIntroMessageRoom3 = result;
           });
-    }
-
-    // Only displays the welcome message to Room3 if the plauyer first enters the room
-    if (!GameState.isRoom3FirstEntered) {
       GameState.isRoom3FirstEntered = true;
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.room3WelcomeMessage(),
@@ -89,7 +86,10 @@ public class Room3Controller {
             System.out.println(result);
             MainGame.enableInteractPane();
           });
+    } else {
+      MainGame.enableInteractPane();
     }
+
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
@@ -175,12 +175,16 @@ public class Room3Controller {
       GameState.eleanorAi.runGpt(
           "User update: User has successfully decrypted the letter based on the objects he got."
               + " Send a response to user surrounded by * .");
-    }
+      // Set the aircraft code image to inventory.
+      Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
+      MainGame.addObtainedItem(decryptedLetter);
+    } else {
 
-    GameState.eleanorAi.runGpt(
-        "User update: User has clicked on the encrypted letter and fail to open. He needs to get"
-            + " both encrypted message and aircraft code to decrypt. Send a response to user"
-            + " surrounded by *.");
+      GameState.eleanorAi.runGpt(
+          "User update: User has clicked on the encrypted letter and fail to open. He needs to get"
+              + " both encrypted message and aircraft code to decrypt. Send a response to user"
+              + " surrounded by *.");
+    }
   }
 
   @FXML

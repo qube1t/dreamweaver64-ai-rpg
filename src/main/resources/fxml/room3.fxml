@@ -34,7 +34,7 @@
             <Rectangle fx:id="desk2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="79.0" layoutY="269.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="31.0" />
             <Rectangle fx:id="depBoard" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="22.0" layoutX="117.0" layoutY="341.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="64.0" />
             <Rectangle fx:id="boundary3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="352.0" layoutX="2.0" layoutY="81.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="25.0" />
-            <Rectangle fx:id="boundary4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="191.0" layoutX="575.0" layoutY="159.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="16.0" />
+            <Rectangle fx:id="boundary4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="191.0" layoutX="574.0" layoutY="159.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
             <Rectangle fx:id="boundary5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="521.0" layoutY="351.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="61.0" />
             <Rectangle fx:id="bound1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="271.0" layoutY="285.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="23.0" />
             <Rectangle fx:id="bound3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="10.0" layoutX="168.0" layoutY="219.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="24.0" />

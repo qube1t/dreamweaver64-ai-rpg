@@ -12,10 +12,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
-import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -147,6 +145,7 @@ public class Room2Controller {
       box5.setDisable(false);
       if (numOfBox == boxLocation) {
         MainGame.addOverlay("treasure_box", false);
+        GameState.isEncryptedMessageFound = true;
         if (correctBoxClicked == 0) {
           try {
             GameState.eleanorAi.runGpt(
@@ -164,7 +163,8 @@ public class Room2Controller {
         // write this sentance in chat box
         if (wrongBoxClicked == 0) {
           try {
-            GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.clickWrongBox(),
+            GameState.eleanorAi.runGpt(
+                GptPromptEngineeringRoom2.clickWrongBox(),
                 (st) -> {
                   List<String> clickWrongBox = Helper.getTextBetweenChar(st, "/");
                 });
