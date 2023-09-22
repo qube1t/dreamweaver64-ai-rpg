@@ -174,6 +174,16 @@ public class Room2Controller {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom2.room2WelcomeMessage(),
           (result) -> {
+
+          });
+
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom1.getRiddleForPirate(GameState.trueBook),
+          (str2) -> {
+            List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^");
+            if (pirateDialogue.size() > 0) {
+              GameState.pirateRiddle = pirateDialogue.get(0).replaceAll("\"", "");
+            }
             MainGameController.enableInteractPane();
           });
     } else {

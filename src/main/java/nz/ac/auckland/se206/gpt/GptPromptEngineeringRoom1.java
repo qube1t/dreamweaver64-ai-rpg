@@ -16,7 +16,7 @@ public class GptPromptEngineeringRoom1 {
     return "I am the computer architecture that runs DREAMWEAVER64, a futuristic technology that"
         + " creates dreams and allows people to relive their past or discover lost truths or"
         + " memories from their pasts. Your are the operator of this machine."
-        + "You have to guide the user to finish their task of finding the message of a lost"
+        + "You have to guide the user to finish their mission of finding the message of a lost"
         + " letter from their mother that they have forgotten. "
         + "I will update you on the user's actions, and request assistance. No"
         + " reply is needed for this message.";
@@ -42,12 +42,12 @@ public class GptPromptEngineeringRoom1 {
   }
 
   public static String getRiddleForPirate(String ansbook) {
-    return "This is the loading stage. Give a riddle in the form of a quote from"
+    return "This is the loading stage. Give a riddle in the form of a quote from the book "
         + ansbook
         + " in 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"
         + " quote before and after with the character ^. The user needs to identify the book " + ansbook
-        + " in the other room. Do"
-        + " not reveal the book name.";
+        + " in the other room, later in the game. Do"
+        + " not reveal the book name. You can give hints once the riddle has been asked.";
   }
 
   public static String getChatMessageFromUser(String chatInput) {
@@ -61,7 +61,7 @@ public class GptPromptEngineeringRoom1 {
     return "The user has send this message: '"
         + chatInput
         + "'. Reply as a normal human in 1 sentence. If the user asks for hints you must insert"
-        + " the character ~ before every single hint. Do not reveal the answer even if the user asks for"
+        + " the character ~ before every hint so that it is transmited to them. Do not reveal the answer even if the user asks for"
         + " it.";
   }
 }
