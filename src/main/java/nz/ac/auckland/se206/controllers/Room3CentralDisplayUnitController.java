@@ -223,8 +223,8 @@ public class Room3CentralDisplayUnitController {
   @FXML
   private void handleLetterClick(MouseEvent event) {
     Rectangle letterRectangle = (Rectangle) event.getSource();
-    // Get the ID of the clicked rectangle
-    String upperLetter = letterRectangle.getId().toUpperCase();
+    // Get the ID - last character of the clicked rectangle
+    String upperLetter = letterRectangle.getId().substring(letterRectangle.getId().length() - 1).toUpperCase();
     System.out.println("Letter clicked: " + upperLetter);
 
     // Append the clicked letter to the existing text
