@@ -86,13 +86,19 @@ public class GameState {
   public static boolean isAircraftCodeFound = false;
 
   /** Indicates the location of the treasure box. */
-  public static int currentBox = -1;
+  public static int currentBox = 3;
 
-  /** Indicates the unarranged city name for puzzle game. */
-  public static String unarrangedDestnationCity = "";
+  /** Stored the randomly generated destnation cities */
+  public static String[] destnationCities = new String[8];
+
+  /** Indicates the destnation city index in the array. */
+  public static int destnationCityIndex = -1;
 
   /** Indicates the arranged city name for the puzzle game. */
   public static String arrangedDestnationCity = "";
+
+  /** Indicates the unarranged city name for puzzle game. */
+  public static String unarrangedDestnationCity = "";
 
   /** Indicates the correct city index. */
   public static int currentCityIndex = -1;
