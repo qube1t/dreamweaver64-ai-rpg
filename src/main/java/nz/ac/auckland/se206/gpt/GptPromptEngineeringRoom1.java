@@ -45,8 +45,9 @@ public class GptPromptEngineeringRoom1 {
     return "This is the loading stage. Give a riddle in the form of a quote from"
         + ansbook
         + " in 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"
-        + " quote before and after with the character ^. The user needs to identify the book somewhere in any of the rooms. Do"
-        + " not reveal the book name. In the future if the user asks for hints, you can give them.";
+        + " quote before and after with the character ^. The user needs to identify the book " + ansbook
+        + " in the other room. Do"
+        + " not reveal the book name.";
   }
 
   public static String getChatMessageFromUser(String chatInput) {
@@ -59,8 +60,8 @@ public class GptPromptEngineeringRoom1 {
     }
     return "The user has send this message: '"
         + chatInput
-        + "'. Reply as a normal human in 1 sentence. If the user asks for hints, you should insert"
-        + " the character ~ before every hint. Do not reveal the answer even if the user asks for"
+        + "'. Reply as a normal human in 1 sentence. If the user asks for hints you must insert"
+        + " the character ~ before every single hint. Do not reveal the answer even if the user asks for"
         + " it.";
   }
 }

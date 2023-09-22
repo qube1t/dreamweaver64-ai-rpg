@@ -332,7 +332,7 @@ public class MainGameController {
                       GameState.hintsRemaining = 0;
                     }
                   }
-
+                  // adding chat to chatbox entirely as assumed to be reply to user without *
                   addChat(msg, true);
                   chatInput.setDisable(false);
                 });

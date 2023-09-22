@@ -148,7 +148,7 @@ public class Room1Controller {
   }
 
   @FXML
-  public void goToLeftRoom() throws IOException, InterruptedException {
+  public void goToLeftRoom() throws IOException, InterruptedException, ApiProxyException {
     // go to the left room
     InstructionsLoadController.setText();
 
@@ -156,10 +156,11 @@ public class Room1Controller {
     MainGameController.disableInteractPane();
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room3", true);
+    GameState.eleanorAi.runGpt("User update: User has moved from his home to his work place ATC. No reply is required");
   }
 
   @FXML
-  private void goToRightRoom() throws IOException, InterruptedException {
+  private void goToRightRoom() throws IOException, InterruptedException, ApiProxyException {
     // go to the right room
     InstructionsLoadController.setText();
 
@@ -167,6 +168,7 @@ public class Room1Controller {
     MainGameController.disableInteractPane();
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room2", true);
+    GameState.eleanorAi.runGpt("User update: User has moved from his home to the pirate ship. No reply is required");
   }
 
   @FXML
@@ -194,7 +196,7 @@ public class Room1Controller {
     // crockeries clicked
     MainGameController.addOverlay("crockery_shelf", false);
     GameState.eleanorAi.runGpt(
-        "User update, User has opened crockeries, but they are not accessible. No reply needed");
+        "User update, User has opened an empty book shelf. No reply needed");
   }
 
   @FXML

@@ -208,7 +208,7 @@ public class Room3Controller {
   }
 
   @FXML
-  public void onClickRoom2() throws IOException {
+  public void onClickRoom2() throws IOException, ApiProxyException {
     System.out.println("Room2 clicked");
     // go to the right room
     InstructionsLoadController.setText();
@@ -217,6 +217,7 @@ public class Room3Controller {
     MainGameController.disableInteractPane();
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room2", true);
+    GameState.eleanorAi.runGpt("User update: User has moved from ATC to the pirate ship. No reply is required");
   }
 
   @FXML
@@ -321,7 +322,7 @@ public class Room3Controller {
   }
 
   @FXML
-  public void onClickDoor() throws IOException {
+  public void onClickDoor() throws IOException, ApiProxyException {
     System.out.println("Door clicked");
     System.out.println(GameState.currentBox);
     // go to the right room
@@ -331,5 +332,6 @@ public class Room3Controller {
     MainGameController.disableInteractPane();
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room1", true);
+    GameState.eleanorAi.runGpt("User update: User has moved from ATC to his childhood home room.");
   }
 }

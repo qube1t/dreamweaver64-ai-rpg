@@ -231,7 +231,7 @@ public class Room2Controller {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) {
 
       GameState.eleanorAi.runGpt(
-          "User update: the user has engaged with the pirate, but does not have the correct book. No reply is required");
+          "User update: The pirate has asked the riddle to the user, but has not been solved. You can give hints if the user asks. No reply is required");
 
       // if the player get wrong book, the message will be displayed
       if (GameState.takenBook != null) {
@@ -252,6 +252,9 @@ public class Room2Controller {
         piratePane.setVisible(true);
       }
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
+      GameState.eleanorAi.runGpt(
+          "User update: The user has solved the book riddle. They have received the key. To find the treasure box, they needs to look at the radar. No reply is required");
+
       // if the player get the correct book, the player can trade with pirate
       GameState.isBoxKeyFound = true;
       box1.setDisable(false);
@@ -299,9 +302,9 @@ public class Room2Controller {
               Platform.runLater(
                   () -> {
                     List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                      if (pirateDialogue.size() > 0) {
-                        displayBubble(result.replace("^", ""));
-                      }
+                    if (pirateDialogue.size() > 0) {
+                      displayBubble(result.replace("^", ""));
+                    }
                   });
             });
       } else {
@@ -313,9 +316,9 @@ public class Room2Controller {
               Platform.runLater(
                   () -> {
                     List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                      if (pirateDialogue.size() > 0) {
-                        displayBubble(result.replace("^", ""));
-                      }
+                    if (pirateDialogue.size() > 0) {
+                      displayBubble(result.replace("^", ""));
+                    }
                   });
             });
         Helper.changeTreasureBox(GameState.currentBox);
@@ -334,9 +337,9 @@ public class Room2Controller {
             Platform.runLater(
                 () -> {
                   List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                      if (pirateDialogue.size() > 0) {
-                        displayBubble(result.replace("^", ""));
-                      }
+                  if (pirateDialogue.size() > 0) {
+                    displayBubble(result.replace("^", ""));
+                  }
                 });
           });
     }
@@ -418,15 +421,18 @@ public class Room2Controller {
    *
    * @param event the mouse event
    * @throws IOException
+   * @throws ApiProxyException
    */
   @FXML
-  private void onOpenRoom1(MouseEvent event) throws IOException {
+  private void onOpenRoom1(MouseEvent event) throws IOException, ApiProxyException {
     // go to the right room
     InstructionsLoadController.setText();
     // disable interact pane for transition
     MainGameController.disableInteractPane();
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room1", true);
+    GameState.eleanorAi
+        .runGpt("User update: User has moved from the pirate ship to his childhood home. No reply is required");
   }
 
   /**
@@ -434,14 +440,17 @@ public class Room2Controller {
    *
    * @param event the mouse event
    * @throws IOException
+   * @throws ApiProxyException
    */
   @FXML
-  private void onOpenRoom3(MouseEvent event) throws IOException {
+  private void onOpenRoom3(MouseEvent event) throws IOException, ApiProxyException {
     // go to the right room
     InstructionsLoadController.setText();
     // disable interact pane for transition
     MainGameController.disableInteractPane();
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room3", true);
+    GameState.eleanorAi.runGpt(
+        "User update: User has moved from the pirate ship to his workplace the ATC tower. No reply is required");
   }
 }
