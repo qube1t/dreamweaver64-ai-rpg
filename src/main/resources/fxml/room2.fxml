@@ -89,6 +89,11 @@
                   <Image url="@../images/rooms/room2/key.png" />
                </image>
             </ImageView>
+            <ImageView fx:id="book" fitHeight="32.0" fitWidth="34.0" layoutX="462.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" rotate="20.0" visible="false">
+               <image>
+                  <Image url="@../images/rooms/room1/book.png" />
+               </image>
+            </ImageView>
             <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
          </children>
       </Pane>
@@ -97,6 +102,24 @@
             <Image url="@../images/rooms/room2/frontShipMap.png" />
          </image>
       </ImageView>
+      <Pane fx:id="piratePane">
+         <children>
+            <ImageView fx:id="pirateSpeech" fitHeight="118.0" fitWidth="209.0" layoutX="405.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/speechBubble.png" />
+               </image>
+            </ImageView>
+            <ScrollPane fx:id="speechBubbleScrollPane" layoutX="418.0" layoutY="37.0" prefHeight="76.0" prefWidth="180.0">
+              <content>
+                  <Label fx:id="gptResponse" alignment="TOP_CENTER" prefHeight="113.0" prefWidth="163.0" textAlignment="CENTER" wrapText="true">
+                     <padding>
+                        <Insets top="3.0" />
+                     </padding>
+                  </Label>
+              </content>
+            </ScrollPane>
+         </children>
+      </Pane>
       <Pane fx:id="interactablePane">
          <children>
             <Rectangle fx:id="box1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff65" height="33.0" layoutX="149.0" layoutY="180.0" onMouseClicked="#onClickBox1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="55.0" />
@@ -104,26 +127,9 @@
             <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="202.0" layoutY="257.0" onMouseClicked="#onClickBox3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="55.0" />
             <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="350.0" layoutY="384.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="55.0" />
             <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="456.0" layoutY="300.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="55.0" />
-            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="#ffffff67" height="59.0" layoutX="426.0" layoutY="156.0" onMouseClicked="#onGetTrade" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="51.0" />
+            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="#ffffff67" height="59.0" layoutX="434.0" layoutY="156.0" onMouseClicked="#onGetTrade" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="44.0" />
             <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="66.0" layoutY="216.0" onMouseClicked="#onOpenRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
             <Rectangle fx:id="doorToRoom3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="546.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
-            <Pane fx:id="piratePane" layoutX="416.0" layoutY="10.0">
-               <children>
-                  <ImageView fx:id="pirateSpeech" fitHeight="118.0" fitWidth="209.0" layoutX="-4.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/speechBubble.png" />
-                     </image>
-                  </ImageView>
-                  <ScrollPane fx:id="speechBubbleScrollPane" layoutX="9.0" layoutY="21.0" prefHeight="76.0" prefWidth="180.0">
-                    <content>
-                        <Label fx:id="gptResponse" alignment="TOP_CENTER" prefHeight="117.0" prefWidth="163.0" textAlignment="CENTER" wrapText="true">
-                           <padding>
-                              <Insets top="3.0" />
-                           </padding></Label>
-                    </content>
-                  </ScrollPane>
-               </children>
-            </Pane>
          </children>
       </Pane>
    </children>

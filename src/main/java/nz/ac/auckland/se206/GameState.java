@@ -86,7 +86,7 @@ public class GameState {
   public static boolean isAircraftCodeFound = false;
 
   /** Indicates the location of the treasure box. */
-  public static int currentBox = -1;
+  public static int currentBox = 3;
 
   /** Indicates the unarranged city name for puzzle game. */
   public static String unarrangedDestnationCity = "";
