@@ -10,7 +10,7 @@ public class GptPromptEngineeringRoom3 {
    */
   public static String getAircraftCode() {
     return "User update: The player now has correctly entered the correct departature and"
-        + " destnation city and now unlocks the aircraft code. Generate a aircraft code that is"
+        + " destnation city and now unlocks the aircraft code. Produce an aircraft code that is"
         + " 2 letters and 2 numbers, the aircraft code must surround with ^.";
   }
 
@@ -43,7 +43,7 @@ public class GptPromptEngineeringRoom3 {
    */
   public static String getEightRandomCity() {
     return "Produce a list of 8 random, real city names "
-        + "with one word and must be different from the example provided.and must less than 11 characters "
+        + "with one word and must be different from the example provided and must be less than 11 characters."
         + "Only reply with the"
         + " city name surrounded between ^, example ^Chicago^ ^Delhi^ ^Tokyo^"
         + " ^Seattle^ ^Shanghai^ ^Stockholm^ ^Sydney^ ^Paris^";
