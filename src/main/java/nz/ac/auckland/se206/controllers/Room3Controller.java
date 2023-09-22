@@ -250,6 +250,7 @@ public class Room3Controller {
 
   @FXML
   public void onClickRadar() throws IOException, ApiProxyException {
+    // user clicked radar
     MainGameController.addOverlay("radar_computer", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened the radar computer and the red point"

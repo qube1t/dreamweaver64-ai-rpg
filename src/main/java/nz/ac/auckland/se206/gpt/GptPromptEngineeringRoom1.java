@@ -42,6 +42,7 @@ public class GptPromptEngineeringRoom1 {
   }
 
   public static String getRiddleForPirate(String ansbook) {
+    // asking pirate riddle
     return "This is the loading stage. Give a riddle in the form of a quote from the book "
         + ansbook
         + " in 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"

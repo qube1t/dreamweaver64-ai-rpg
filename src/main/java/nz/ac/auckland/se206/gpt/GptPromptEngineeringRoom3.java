@@ -44,7 +44,8 @@ public class GptPromptEngineeringRoom3 {
    */
   public static String getEightRandomCity() {
     return "Produce a list of 8 random, real city names "
-        + "with one word and must be different from the example provided and must be less than 11 characters."
+        + "with one word and must be different from the example provided"
+        + " and must be less than 11 characters."
         + "Only reply with the"
         + " city name surrounded between ^, example ^Chicago^ ^Delhi^ ^Tokyo^"
         + " ^Seattle^ ^Shanghai^ ^Stockholm^ ^Sydney^ ^Paris^";

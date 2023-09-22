@@ -144,7 +144,8 @@ public class Room1Controller {
     MainGameController.disableInteractPane();
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room3", true);
-    GameState.eleanorAi.runGpt("User update: User has moved from his home to his work place ATC. No reply is required");
+    GameState.eleanorAi.runGpt("User update: User has moved from his home to his work place ATC."
+        + "No reply is required");
   }
 
   @FXML
@@ -156,7 +157,8 @@ public class Room1Controller {
     MainGameController.disableInteractPane();
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room2", true);
-    GameState.eleanorAi.runGpt("User update: User has moved from his home to the pirate ship. No reply is required");
+    GameState.eleanorAi.runGpt("User update: User has moved from his home to the pirate"
+        + " ship. No reply is required");
   }
 
   @FXML
