@@ -9,11 +9,8 @@ import javafx.scene.text.Font;
 
 public class DraggableLetter extends Label {
 
-  private HBox hbox;
-
   public DraggableLetter(String text, HBox hbox) {
     super(text);
-    this.hbox = hbox;
 
     Font font = Font.font("Arial", 45);
     setFont(font);

@@ -14,11 +14,16 @@ import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class DestnationPuzzleController {
-  @FXML private Label introduction;
-  @FXML private AnchorPane puzzlePane;
-  @FXML private HBox letterBox;
-  @FXML private ProgressBar load;
-  @FXML private Label loadText;
+  @FXML
+  private Label introduction;
+  @FXML
+  private AnchorPane puzzlePane;
+  @FXML
+  private HBox letterBox;
+  @FXML
+  private ProgressBar load;
+  @FXML
+  private Label loadText;
 
   public void initialize() throws ApiProxyException {
 
@@ -52,14 +57,15 @@ public class DestnationPuzzleController {
   public void onClickSubmit() throws ApiProxyException {
     System.out.println("submit");
     // Get the current text of the puzzle
-    String currentText = "";
+    StringBuilder sb = new StringBuilder();
 
     // Loop through each letter in the puzzle
     for (int i = 0; i < letterBox.getChildren().size(); i++) {
       StackPane letterFrame = (StackPane) letterBox.getChildren().get(i);
       DraggableLetter draggableLetter = (DraggableLetter) letterFrame.getChildren().get(0);
-      currentText += draggableLetter.getText();
+      sb.append(draggableLetter.getText());
     }
+    String currentText = sb.toString();
     System.out.println(currentText);
 
     introduction.setText("");

@@ -66,6 +66,11 @@ public class GptEngine {
     }
   }
 
+  public void runGpt(String string) throws ApiProxyException {
+    // when there is no function to call
+    runGpt(string, null);
+  }
+
   private void startNewThread() {
     activeThread = new Thread(
         () -> {
@@ -139,10 +144,5 @@ public class GptEngine {
             GameState.mainGame.addChat(msg, true);
           });
     }
-  }
-
-  public void runGpt(String string) throws ApiProxyException {
-    // when there is no function to call
-    runGpt(string, null);
   }
 }

@@ -2,6 +2,9 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.Arrays;
 import java.util.List;
+
+import org.w3c.dom.css.Rect;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -30,58 +33,57 @@ public class Room3CentralDisplayUnitController {
   @FXML
   private Character character;
   @FXML
-  private Rectangle aLetter;
-
+  private Rectangle letterA;
   @FXML
-  private Rectangle bLetter;
+  private Rectangle letterB;
   @FXML
-  private Rectangle cLetter;
+  private Rectangle letterC;
   @FXML
-  private Rectangle dLetter;
+  private Rectangle letterD;
   @FXML
-  private Rectangle eLetter;
+  private Rectangle letterE;
   @FXML
-  private Rectangle fLetter;
+  private Rectangle letterF;
   @FXML
-  private Rectangle gLetter;
+  private Rectangle letterG;
   @FXML
-  private Rectangle hLetter;
+  private Rectangle letterH;
   @FXML
-  private Rectangle iLetter;
+  private Rectangle letterI;
   @FXML
-  private Rectangle jLetter;
+  private Rectangle letterJ;
   @FXML
-  private Rectangle kLetter;
+  private Rectangle letterK;
   @FXML
-  private Rectangle lLetter;
+  private Rectangle letterL;
   @FXML
-  private Rectangle mLetter;
+  private Rectangle letterM;
   @FXML
-  private Rectangle nLetter;
+  private Rectangle letterN;
   @FXML
-  private Rectangle oLetter;
+  private Rectangle letterO;
   @FXML
-  private Rectangle pLetter;
+  private Rectangle letterP;
   @FXML
-  private Rectangle qLetter;
+  private Rectangle letterQ;
   @FXML
-  private Rectangle rLetter;
+  private Rectangle letterR;
   @FXML
-  private Rectangle sLetter;
+  private Rectangle letterS;
   @FXML
-  private Rectangle tLetter;
+  private Rectangle letterT;
   @FXML
-  private Rectangle uLetter;
+  private Rectangle letterU;
   @FXML
-  private Rectangle vLetter;
+  private Rectangle letterV;
   @FXML
-  private Rectangle wLetter;
+  private Rectangle letterW;
   @FXML
-  private Rectangle xLetter;
+  private Rectangle letterX;
   @FXML
-  private Rectangle yLetter;
+  private Rectangle letterY;
   @FXML
-  private Rectangle zLetter;
+  private Rectangle letterZ;
   @FXML
   private Rectangle one1;
   @FXML
@@ -135,9 +137,9 @@ public class Room3CentralDisplayUnitController {
     progress.setVisible(false);
 
     List<Rectangle> allButtons = Arrays.asList(
-        aLetter, bLetter, cLetter, dLetter, eLetter, fLetter, gLetter, hLetter, iLetter, jLetter, kLetter,
-        lLetter, mLetter, nLetter, oLetter, pLetter, qLetter, rLetter, sLetter, tLetter, uLetter, vLetter, wLetter,
-        xLetter, yLetter, zLetter, slash,
+        letterA, letterB, letterC, letterD, letterE, letterF, letterG, letterH, letterI, letterJ, letterK,
+        letterL, letterM, letterN, letterO, letterP, letterQ, letterR, letterS, letterT, letterU,
+        letterV, letterW, letterX, letterY, letterZ, slash,
         execute, clear, delete, one1, two2, three3, four4, five5, six6, seven7, eight8, nine9,
         zero0);
     this.allButtons = allButtons;

@@ -49,6 +49,59 @@ public class MainGame {
   private static ImageView item5Initiated;
   private static ImageView item6Initiated;
 
+  public static MainGame getInstance() {
+    return instance;
+  }
+
+  private static void updateInventoryUi() {
+    // updating inventory ui with initialised images
+
+    List<ImageView> inventoryItems = List.of(
+        item1Initiated,
+        item2Initiated,
+        item3Initiated,
+        item4Initiated,
+        item5Initiated,
+        item6Initiated);
+
+    for (int i = 0; i < inventoryItems.size(); i++) {
+      if (obtainedItems.size() > i) {
+        inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());
+
+        inventoryItems.get(i).setId(obtainedItems.get(i).getId());
+        inventoryItems.get(i).setFitWidth(35);
+        inventoryItems.get(i).setPreserveRatio(true);
+        inventoryItems.get(i).setSmooth(true);
+      } else {
+        inventoryItems.get(i).setImage(null);
+      }
+    }
+  }
+
+  public static void addObtainedItem(Image itemImage, String itemId) {
+    // adding obtained item to inventory
+    obtainedItems.add(new ObtainedItemsWithId(itemImage, itemId));
+
+    updateInventoryUi();
+  }
+
+  public static void removeObtainedItem(String itemId) {
+    // removing obtained item from inventory
+    for (int i = 0; i < obtainedItems.size(); i++) {
+      if (obtainedItems.get(i).getId().equals(itemId)) {
+        obtainedItems.remove(i);
+        break;
+      }
+    }
+    updateInventoryUi();
+  }
+
+  public static void disableInteractPane() {
+    // fade out interact pane
+    initialisedInteractPane.setDisable(true);
+    initialisedInteractPane.setOpacity(0);
+  }
+
   public static void enableInteractPane() {
     // fade in interact pane
     initialisedInteractPane.setVisible(true);
@@ -83,10 +136,6 @@ public class MainGame {
         .getChildren()
         .add(initialisedGamePane.getChildren().size() - 3, backgroundBlur);
     initialisedGamePane.getChildren().add(initialisedGamePane.getChildren().size() - 3, room1);
-  }
-
-  public static MainGame getInstance() {
-    return instance;
   }
 
   public static void removeOverlay(boolean alsoRooms) {
@@ -317,12 +366,6 @@ public class MainGame {
     chat.scrollTo(index);
   }
 
-  public static void disableInteractPane() {
-    // fade out interact pane
-    initialisedInteractPane.setDisable(true);
-    initialisedInteractPane.setOpacity(0);
-  }
-
   @FXML
   private void clickedOuterPane() {
     // hide chat bubble
@@ -442,48 +485,5 @@ public class MainGame {
     } else {
       return;
     }
-  }
-
-  private static void updateInventoryUi() {
-    // updating inventory ui with initialised images
-
-    List<ImageView> inventoryItems = List.of(
-        item1Initiated,
-        item2Initiated,
-        item3Initiated,
-        item4Initiated,
-        item5Initiated,
-        item6Initiated);
-
-    for (int i = 0; i < inventoryItems.size(); i++) {
-      if (obtainedItems.size() > i) {
-        inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());
-
-        inventoryItems.get(i).setId(obtainedItems.get(i).getId());
-        inventoryItems.get(i).setFitWidth(35);
-        inventoryItems.get(i).setPreserveRatio(true);
-        inventoryItems.get(i).setSmooth(true);
-      } else {
-        inventoryItems.get(i).setImage(null);
-      }
-    }
-  }
-
-  public static void addObtainedItem(Image itemImage, String itemId) {
-    // adding obtained item to inventory
-    obtainedItems.add(new ObtainedItemsWithId(itemImage, itemId));
-
-    updateInventoryUi();
-  }
-
-  public static void removeObtainedItem(String itemId) {
-    // removing obtained item from inventory
-    for (int i = 0; i < obtainedItems.size(); i++) {
-      if (obtainedItems.get(i).getId().equals(itemId)) {
-        obtainedItems.remove(i);
-        break;
-      }
-    }
-    updateInventoryUi();
   }
 }

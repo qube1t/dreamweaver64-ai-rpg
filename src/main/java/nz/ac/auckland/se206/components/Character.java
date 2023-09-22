@@ -19,6 +19,9 @@ import nz.ac.auckland.se206.mobility.CharacterMovement;
 import nz.ac.auckland.se206.mobility.SpriteAnimation;
 
 public class Character extends AnchorPane {
+
+  private static int action = 0;
+
   @FXML
   private ImageView activeImg;
   @FXML
@@ -26,7 +29,6 @@ public class Character extends AnchorPane {
   @FXML
   private Circle proximityBound;
 
-  private static int action = 0;
   private int columns;
   private int count;
   private int offsetX;
@@ -96,25 +98,6 @@ public class Character extends AnchorPane {
 
   public String getSpriteSheet() {
     return spriteSheet;
-  }
-
-  private void initElements() {
-    // init character
-    Image spriteSheetImg = new Image(getClass().getResource(spriteSheet).toExternalForm());
-    activeImg.setImage(spriteSheetImg);
-    activeImg.setViewport(
-        new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
-
-    // define animation
-    animation = new SpriteAnimation(
-        activeImg,
-        Duration.millis(800),
-        count,
-        columns,
-        offsetX,
-        offsetY + 64 * action,
-        frameWidth,
-        frameHeight);
   }
 
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
@@ -191,5 +174,24 @@ public class Character extends AnchorPane {
 
   public void setFrameHeight(int frameHeight) {
     this.frameHeight = frameHeight;
+  }
+
+  private void initElements() {
+    // init character
+    Image spriteSheetImg = new Image(getClass().getResource(spriteSheet).toExternalForm());
+    activeImg.setImage(spriteSheetImg);
+    activeImg.setViewport(
+        new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
+
+    // define animation
+    animation = new SpriteAnimation(
+        activeImg,
+        Duration.millis(800),
+        count,
+        columns,
+        offsetX,
+        offsetY + 64 * action,
+        frameWidth,
+        frameHeight);
   }
 }

@@ -170,7 +170,6 @@ public class Room3Controller {
    * @return the unarranged city name
    */
   protected String makeUnarrangedCityName(String cityName) {
-    String unarrangedCityName = "";
     int length = cityName.length();
     int[] randomNumbers = new int[length];
     // Initialize the array of random numbers
@@ -186,9 +185,13 @@ public class Room3Controller {
       randomNumbers[randomIndexToSwap] = randomNumbers[i];
       randomNumbers[i] = temp;
     }
+
+    StringBuilder sb = new StringBuilder();
     for (int i = 0; i < length; i++) {
-      unarrangedCityName += cityName.charAt(randomNumbers[i]);
+      sb.append(cityName.charAt(randomNumbers[i]));
     }
+    String unarrangedCityName = sb.toString();
+    ;
 
     if (unarrangedCityName.equals(cityName)) {
       return makeUnarrangedCityName(cityName);

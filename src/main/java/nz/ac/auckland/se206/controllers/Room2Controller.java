@@ -126,6 +126,7 @@ public class Room2Controller {
   private Boolean correctBoxClicked = false;
   private Boolean boxClickedWithoutKey = false;
   private Boolean firstWrongBookClicked = true;
+  private String pirateMessage = null;
 
   /**
    * Initializes the room 2, it is called when the room loads.
@@ -191,6 +192,11 @@ public class Room2Controller {
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
     }
+
+    if (pirateMessage != null) {
+      gptResponse.setText(pirateMessage);
+      piratePane.setVisible(true);
+    }
   }
 
   /**
@@ -232,7 +238,7 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   @FXML
-  public void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
+  private void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) {
       // if the player get wrong book, the message will be displayed
       if (GameState.takenBook != null && firstWrongBookClicked) {
@@ -242,8 +248,7 @@ public class Room2Controller {
             (result) -> {
               Platform.runLater(
                   () -> {
-                    gptResponse.setText(result);
-                    piratePane.setVisible(true);
+                    pirateMessage = result;
                   });
             });
       } else {
@@ -260,8 +265,7 @@ public class Room2Controller {
           (result) -> {
             Platform.runLater(
                 () -> {
-                  gptResponse.setText(result);
-                  piratePane.setVisible(true);
+                  pirateMessage = result;
                 });
           });
       // add key image to the inventory
@@ -297,8 +301,7 @@ public class Room2Controller {
               (result) -> {
                 Platform.runLater(
                     () -> {
-                      gptResponse.setText(result);
-                      piratePane.setVisible(true);
+                      pirateMessage = result;
                     });
               });
         }
@@ -311,8 +314,7 @@ public class Room2Controller {
               (result) -> {
                 Platform.runLater(
                     () -> {
-                      gptResponse.setText(result);
-                      piratePane.setVisible(true);
+                      pirateMessage = result;
                     });
               });
         }
@@ -332,8 +334,7 @@ public class Room2Controller {
             (result) -> {
               Platform.runLater(
                   () -> {
-                    gptResponse.setText(result);
-                    piratePane.setVisible(true);
+                    pirateMessage = result;
                   });
             });
       }
@@ -348,7 +349,7 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   @FXML
-  public void onClickBox1(MouseEvent event) throws IOException, ApiProxyException {
+  private void onClickBox1(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("First treasure box clicked");
     getRandomBox(1);
   }
@@ -361,7 +362,7 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   @FXML
-  public void onClickBox2(MouseEvent event) throws IOException, ApiProxyException {
+  private void onClickBox2(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("Second teasure box clicked");
     getRandomBox(2);
   }
@@ -374,7 +375,7 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   @FXML
-  public void onClickBox3(MouseEvent event) throws IOException, ApiProxyException {
+  private void onClickBox3(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("Third treasure box clicked");
     getRandomBox(3);
   }
@@ -387,7 +388,7 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   @FXML
-  public void onClickBox4(MouseEvent event) throws IOException, ApiProxyException {
+  private void onClickBox4(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("Fourth treasure box clicked");
     getRandomBox(4);
   }
@@ -400,7 +401,7 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   @FXML
-  public void onClickBox5(MouseEvent event) throws IOException, ApiProxyException {
+  private void onClickBox5(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("Fifth treasure box clicked");
     getRandomBox(5);
   }
@@ -412,7 +413,7 @@ public class Room2Controller {
    * @throws IOException
    */
   @FXML
-  public void onOpenRoom1(MouseEvent event) throws IOException {
+  private void onOpenRoom1(MouseEvent event) throws IOException {
     // go to the right room
     InstructionsLoad.setText();
     // disable interact pane for transition
@@ -428,7 +429,7 @@ public class Room2Controller {
    * @throws IOException
    */
   @FXML
-  public void onOpenRoom3(MouseEvent event) throws IOException {
+  private void onOpenRoom3(MouseEvent event) throws IOException {
     // go to the right room
     InstructionsLoad.setText();
     // disable interact pane for transition
