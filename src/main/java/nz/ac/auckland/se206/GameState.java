@@ -89,7 +89,7 @@ public class GameState {
   public static int currentBox = -1;
 
   /** Stored the randomly generated destnation cities */
-  public static String[] destnationCities = new String[6];
+  public static String[] destnationCities = new String[8];
 
   /** Indicates the destnation city index in the array. */
   public static int destnationCityIndex = -1;

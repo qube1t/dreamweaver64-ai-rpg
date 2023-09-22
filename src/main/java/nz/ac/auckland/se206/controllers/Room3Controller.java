@@ -92,7 +92,7 @@ public class Room3Controller {
     // for the puzzle game if it is not set
     if (GameState.arrangedDestnationCity == "") {
       GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom3.getSevenRandomCity(),
+          GptPromptEngineeringRoom3.getEightRandomCity(),
           (result) -> {
             System.out.println("GPT:" + result);
 
@@ -249,7 +249,7 @@ public class Room3Controller {
     MainGameController.addOverlay("radar_computer", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened the radar computer and the red point indicates the correct"
-            + " location for treasure box location in another room. If the user ask for hints give"
+            + " location for treasure box location in the pirate ship. If the user ask for hints give"
             + " the hints. No need to respond to this message.");
   }
 
@@ -271,7 +271,7 @@ public class Room3Controller {
     MainGameController.addOverlay("gps_current", false);
     // Generate GPT response to keep updated.
     GameState.eleanorAi.runGpt(
-        "User update: User has opened the world map and achnowledge the current location. No need"
+        "User update: User has opened the world map and achnowledge the current city location. No need"
             + " to respond to this message.");
   }
 
@@ -288,7 +288,7 @@ public class Room3Controller {
 
       GameState.eleanorAi.runGpt(
           "User update: User has successfully decrypted the letter based on the objects he got. He"
-              + " can no2 click the main door to exit. Send a response to user without revealing"
+              + " can now click the main door to exit. Send a response to user without revealing"
               + " the exit / main door and surrounded with * .");
       // Set the aircraft code image to inventory.
       Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
@@ -301,7 +301,7 @@ public class Room3Controller {
 
       GameState.eleanorAi.runGpt(
           "User update: User has clicked on the encrypted letter and fail to decrypt. He needs to"
-              + " get both encrypted message and aircraft code to decrypt. Send a response to user"
+              + " get both encrypted message in pirate ship and aircraft code to decrypt. Send a response to user"
               + " without revaling any step. If the user ask for hints give him. Only the message"
               + " surrounded with * will send to user .");
     }

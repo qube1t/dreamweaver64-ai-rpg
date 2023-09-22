@@ -171,7 +171,7 @@ public class Room3CentralDisplayUnitController {
       GameState.eleanorAi.runGpt(
           "User update: User clicks on the flight computer but it is locked due to either not"
               + " solved the puzzle or not opened the world map to discover the current location."
-              + " Give player a short message without revealing any step. Only give hints If the"
+              + " Give player a short message without revealing any step. Only give hints if the"
               + " user ask for it. Only the response surrounded between * will send to user.");
     }
   }
