@@ -240,7 +240,7 @@ public class Room3Controller {
     // Add the puzzle game overlay
     MainGameController.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
-        "User update: User has opened the unarranged word puzzle game. The correct city"
+        "User update: User has opened the unarranged word puzzle game. The correct destnation city"
             + " name is "
             + GameState.arrangedDestnationCity
             + ". No reply is needed for this message. If the user ask for"

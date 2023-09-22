@@ -357,6 +357,9 @@ public class Room3CentralDisplayUnitController {
                   System.out.println("Aircraft code unlocked" + GameState.aircraftCode);
                 });
           });
+      GameState.eleanorAi.runGpt(
+          "User update: the player has unlocked the aircraft code."
+              + "The aircraft code combines with encrypted message discovered in priate ship will be used to decrypt the letter in this room and lead to success . Do not respond.");
 
       // Clear the input field and disable it along with the execute button
       displayOutput.setText("");
