@@ -21,6 +21,8 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room2Controller {
 
+  private static boolean gptInit;
+
   @FXML
   private Rectangle rect1;
   @FXML
@@ -119,8 +121,6 @@ public class Room2Controller {
   private ScrollPane speechBubbleScrollPane;
   @FXML 
   private Label gptResponse;
-
-  private static boolean gptInit;
 
   private Boolean wrongBoxClicked = false;
   private Boolean correctBoxClicked = false;

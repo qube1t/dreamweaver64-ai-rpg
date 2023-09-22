@@ -8,6 +8,22 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 
 public class BookShelfController {
+  private static Label[] lblBooks;
+  private static Rectangle[] bookRects;
+
+  public static void returnBook() {
+    for (int i = 0; i < GameState.booksInRoom1.length; i++) {
+      if (GameState.booksInRoom1[i] == null) {
+        lblBooks[i].setVisible(true);
+        bookRects[i].setVisible(true);
+        GameState.booksInRoom1[i] = GameState.takenBook;
+        GameState.takenBook = null;
+        lblBooks[i].setText(GameState.booksInRoom1[i]);
+        break;
+      }
+    }
+  }
+
   @FXML
   private Label lblBook1;
   @FXML
@@ -37,9 +53,6 @@ public class BookShelfController {
   private Rectangle book6Rect;
   @FXML
   private Rectangle book7Rect;
-
-  static Label[] lblBooks;
-  static Rectangle[] bookRects;
 
   public void initialize() {
     //
@@ -102,16 +115,4 @@ public class BookShelfController {
     return true;
   }
 
-  public static void returnBook() {
-    for (int i = 0; i < GameState.booksInRoom1.length; i++) {
-      if (GameState.booksInRoom1[i] == null) {
-        lblBooks[i].setVisible(true);
-        bookRects[i].setVisible(true);
-        GameState.booksInRoom1[i] = GameState.takenBook;
-        GameState.takenBook = null;
-        lblBooks[i].setText(GameState.booksInRoom1[i]);
-        break;
-      }
-    }
-  }
 }

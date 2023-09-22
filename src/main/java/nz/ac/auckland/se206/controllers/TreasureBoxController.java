@@ -37,7 +37,7 @@ public class TreasureBoxController {
    * @throws IOException
    */
   @FXML
-  void onGetTreasure(ActionEvent event) throws IOException {
+  private void onGetTreasure(ActionEvent event) throws IOException {
     treasure.setDisable(true);
     GameState.isEncryptedMessageFound = true;
     imgTreasure.setVisible(false);

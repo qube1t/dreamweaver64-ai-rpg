@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.VBox;
+import nz.ac.auckland.se206.App;
 
 public class EndCreditController {
 
@@ -40,7 +41,7 @@ public class EndCreditController {
    * @throws IOException
    */
   @FXML
-  void onClickExit(ActionEvent event) throws IOException {
-    System.exit(0);
+  private void onClickExit(ActionEvent event) throws IOException {
+    App.setRoot("end_menu");
   }
 }

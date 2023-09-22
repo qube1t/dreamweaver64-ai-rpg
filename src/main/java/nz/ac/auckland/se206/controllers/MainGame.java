@@ -33,44 +33,6 @@ public class MainGame {
   private static Character character;
   @FXML
   private static Pane initialisedGamePane;
-  @FXML
-  private Pane gamePane;
-  @FXML
-  Pane outerPane;
-  @FXML
-  private Label timer;
-  @FXML
-  private Label hintCount;
-  @FXML
-  private ImageView item1;
-  @FXML
-  private ImageView item2;
-  @FXML
-  private ImageView item3;
-  @FXML
-  private ImageView item4;
-  @FXML
-  private ImageView item5;
-  @FXML
-  private ImageView item6;
-  @FXML
-  private Label chatToggleBtn;
-  @FXML
-  private Pane aiCharacterPane;
-  @FXML
-  private Pane chatPane;
-  @FXML
-  private ImageView speechBubble;
-  @FXML
-  private ScrollPane bubbleTextPane;
-  @FXML
-  private Label bubbleText;
-  @FXML
-  private ListView<Label> chat;
-  @FXML
-  private TextField chatInput;
-  @FXML
-  private Pane interactPane;
 
   private static MainGame instance;
   private static Thread timeLimitThread;
@@ -87,43 +49,16 @@ public class MainGame {
   private static ImageView item5Initiated;
   private static ImageView item6Initiated;
 
-  Text bubbleChatText = new Text("text");
-
-  public void initialize() throws IOException {
-    chatPane.setMouseTransparent(true);
-    bubbleTextPane.setMouseTransparent(true);
-    aiCharacterPane.setMouseTransparent(true);
-
-    GameState.mainGame = this;
-
-    timerInitiated = timer;
-    hintInitiated = hintCount;
-    item1Initiated = item1;
-    item2Initiated = item2;
-    item3Initiated = item3;
-    item4Initiated = item4;
-    item5Initiated = item5;
-    item6Initiated = item6;
-
-    System.out.println(1);
-    initialisedGamePane = gamePane;
-    initialisedInteractPane = interactPane;
-
-    // adding instruction overlay to the bottom of the outer pane
-    outerPane
-        .getChildren()
-        .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
-
-    addOverlay("room1", true);
-
-    getTimeLimit();
-    setHintCount();
-
-    instance = this;
-    // setting up bubble chat
-    bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
-    bubbleTextPane.setFitToWidth(true);
-    bubbleTextPane.setContent(bubbleChatText);
+  public static void enableInteractPane() {
+    // fade in interact pane
+    initialisedInteractPane.setVisible(true);
+    initialisedInteractPane.setDisable(false);
+    FadeTransition ft = new FadeTransition();
+    ft.setDuration(javafx.util.Duration.millis(500));
+    ft.setNode(initialisedInteractPane);
+    ft.setFromValue(0);
+    ft.setToValue(1);
+    ft.play();
   }
 
   public static void addOverlay(String roomN, boolean isRoom) throws IOException {
@@ -170,6 +105,84 @@ public class MainGame {
           .remove(initialisedGamePane.getChildren().size() - 1 - 3);
       initialisedGamePane.requestFocus();
     }
+  }
+
+  @FXML
+  private Pane gamePane;
+  @FXML
+  private Pane outerPane;
+  @FXML
+  private Label timer;
+  @FXML
+  private Label hintCount;
+  @FXML
+  private ImageView item1;
+  @FXML
+  private ImageView item2;
+  @FXML
+  private ImageView item3;
+  @FXML
+  private ImageView item4;
+  @FXML
+  private ImageView item5;
+  @FXML
+  private ImageView item6;
+  @FXML
+  private Label chatToggleBtn;
+  @FXML
+  private Pane aiCharacterPane;
+  @FXML
+  private Pane chatPane;
+  @FXML
+  private ImageView speechBubble;
+  @FXML
+  private ScrollPane bubbleTextPane;
+  @FXML
+  private Label bubbleText;
+  @FXML
+  private ListView<Label> chat;
+  @FXML
+  private TextField chatInput;
+  @FXML
+  private Pane interactPane;
+
+  private Text bubbleChatText = new Text("text");
+
+  public void initialize() throws IOException {
+    chatPane.setMouseTransparent(true);
+    bubbleTextPane.setMouseTransparent(true);
+    aiCharacterPane.setMouseTransparent(true);
+
+    GameState.mainGame = this;
+
+    timerInitiated = timer;
+    hintInitiated = hintCount;
+    item1Initiated = item1;
+    item2Initiated = item2;
+    item3Initiated = item3;
+    item4Initiated = item4;
+    item5Initiated = item5;
+    item6Initiated = item6;
+
+    System.out.println(1);
+    initialisedGamePane = gamePane;
+    initialisedInteractPane = interactPane;
+
+    // adding instruction overlay to the bottom of the outer pane
+    outerPane
+        .getChildren()
+        .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
+
+    addOverlay("room1", true);
+
+    getTimeLimit();
+    setHintCount();
+
+    instance = this;
+    // setting up bubble chat
+    bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
+    bubbleTextPane.setFitToWidth(true);
+    bubbleTextPane.setContent(bubbleChatText);
   }
 
   /**
@@ -304,18 +317,6 @@ public class MainGame {
     chat.scrollTo(index);
   }
 
-  public static void enableInteractPane() {
-    // fade in interact pane
-    initialisedInteractPane.setVisible(true);
-    initialisedInteractPane.setDisable(false);
-    FadeTransition ft = new FadeTransition();
-    ft.setDuration(javafx.util.Duration.millis(500));
-    ft.setNode(initialisedInteractPane);
-    ft.setFromValue(0);
-    ft.setToValue(1);
-    ft.play();
-  }
-
   public static void disableInteractPane() {
     // fade out interact pane
     initialisedInteractPane.setDisable(true);
@@ -358,9 +359,11 @@ public class MainGame {
    * @param timeLimit
    */
   private void setTimeLimit(int timeLimit) {
+    // setting time limit thread to count down from time limit.
     Task<Void> task = new Task<Void>() {
       @Override
       protected Void call() throws Exception {
+        // countdown from time limit to 0 using for loop.
         for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
           if (GameState.winTheGame || GameState.timeLimitReached) {
             break;
@@ -377,6 +380,7 @@ public class MainGame {
                 updateHintCount();
               });
           try {
+            // sleep for 1 second before next cycle.
             Thread.sleep(1000);
           } catch (InterruptedException e) {
             return null;
@@ -385,6 +389,7 @@ public class MainGame {
         Platform.runLater(
             () -> {
               try {
+                // handle time limit reached event when time limit is reached.
                 handleTimeLimitReached();
               } catch (IOException e) {
                 e.printStackTrace();

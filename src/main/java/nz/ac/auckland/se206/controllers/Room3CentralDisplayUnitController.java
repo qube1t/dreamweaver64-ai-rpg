@@ -30,7 +30,58 @@ public class Room3CentralDisplayUnitController {
   @FXML
   private Character character;
   @FXML
-  private Rectangle a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
+  private Rectangle aLetter;
+
+  @FXML
+  private Rectangle bLetter;
+  @FXML
+  private Rectangle cLetter;
+  @FXML
+  private Rectangle dLetter;
+  @FXML
+  private Rectangle eLetter;
+  @FXML
+  private Rectangle fLetter;
+  @FXML
+  private Rectangle gLetter;
+  @FXML
+  private Rectangle hLetter;
+  @FXML
+  private Rectangle iLetter;
+  @FXML
+  private Rectangle jLetter;
+  @FXML
+  private Rectangle kLetter;
+  @FXML
+  private Rectangle lLetter;
+  @FXML
+  private Rectangle mLetter;
+  @FXML
+  private Rectangle nLetter;
+  @FXML
+  private Rectangle oLetter;
+  @FXML
+  private Rectangle pLetter;
+  @FXML
+  private Rectangle qLetter;
+  @FXML
+  private Rectangle rLetter;
+  @FXML
+  private Rectangle sLetter;
+  @FXML
+  private Rectangle tLetter;
+  @FXML
+  private Rectangle uLetter;
+  @FXML
+  private Rectangle vLetter;
+  @FXML
+  private Rectangle wLetter;
+  @FXML
+  private Rectangle xLetter;
+  @FXML
+  private Rectangle yLetter;
+  @FXML
+  private Rectangle zLetter;
   @FXML
   private Rectangle one1;
   @FXML
@@ -84,7 +135,9 @@ public class Room3CentralDisplayUnitController {
     progress.setVisible(false);
 
     List<Rectangle> allButtons = Arrays.asList(
-        a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, q, r, s, t, u, v, w, x, y, z, slash,
+        aLetter, bLetter, cLetter, dLetter, eLetter, fLetter, gLetter, hLetter, iLetter, jLetter, kLetter,
+        lLetter, mLetter, nLetter, oLetter, pLetter, qLetter, rLetter, sLetter, tLetter, uLetter, vLetter, wLetter,
+        xLetter, yLetter, zLetter, slash,
         execute, clear, delete, one1, two2, three3, four4, five5, six6, seven7, eight8, nine9,
         zero0);
     this.allButtons = allButtons;

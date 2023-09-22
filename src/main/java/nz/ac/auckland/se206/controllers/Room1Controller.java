@@ -16,6 +16,9 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the room view. */
 public class Room1Controller {
+  // static fields for gpt
+  static boolean gptInit = false;
+  static int gptStage = 0;
 
   @FXML
   private Character character;
@@ -65,10 +68,6 @@ public class Room1Controller {
   private Rectangle shelfBtn;
   @FXML
   private Rectangle rect71;
-
-  // static fields for gpt
-  static boolean gptInit = false;
-  static int gptStage = 0;
 
   @FXML
   private Pane interactablePane;

@@ -11,7 +11,7 @@ public class CharacterMovement {
   private AnchorPane player;
   private Rectangle playerBound;
   private Circle proximityBound;
-  List<Rectangle> obstacles;
+  private List<Rectangle> obstacles;
   private ObservableList<Node> interactables;
 
   public CharacterMovement(
@@ -78,8 +78,6 @@ public class CharacterMovement {
     // Set the new player positon
     player.setLayoutX(player.getLayoutX() + dx);
     player.setLayoutY(player.getLayoutY() + dy);
-    // System.out.println(player.getLayoutX() + dx);
-    // System.out.println(player.getLayoutY() + dy);
 
     // Return to the old position if there is a collision
     if (checkCollision()) {
