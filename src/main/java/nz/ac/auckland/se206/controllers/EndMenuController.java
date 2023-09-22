@@ -14,7 +14,7 @@ public class EndMenuController {
   @FXML 
   private Button exit;
   @FXML 
-  private Text WinOrLose;
+  private Text win_or_lose;
   @FXML 
   private Label attribution;
   @FXML 
@@ -24,10 +24,10 @@ public class EndMenuController {
   public void initialize() {
     // Set the text to display based on whether the player won or lost
     if (GameState.winTheGame) {
-      WinOrLose.setText("You Escaped!");
+      win_or_lose.setText("You Escaped!");
       letter.setText(GameState.finalMsg);
     } else {
-      WinOrLose.setText("Time's Up! You Lose!");
+      win_or_lose.setText("Time's Up! You Lose!");
     }
   }
 

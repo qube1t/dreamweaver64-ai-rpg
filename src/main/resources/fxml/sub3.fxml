@@ -14,7 +14,7 @@
    <children>
       <Pane fx:id="mainScene" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="327.0" stylesheets="@../css/font.css">
          <children>
-            <ImageView fx:id="CentralDisplayUnit" fitHeight="500.0" fitWidth="327.0">
+            <ImageView fx:id="centralDisplayUnit" fitHeight="500.0" fitWidth="327.0">
                <image>
                   <Image url="@../images/rooms/room3/CDU_FMC.png" />
                </image>

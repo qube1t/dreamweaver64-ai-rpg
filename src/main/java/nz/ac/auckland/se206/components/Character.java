@@ -19,14 +19,14 @@ import nz.ac.auckland.se206.mobility.CharacterMovement;
 import nz.ac.auckland.se206.mobility.SpriteAnimation;
 
 public class Character extends AnchorPane {
-  @FXML private ImageView active_img;
-  @FXML private Rectangle playerBound;
-  @FXML private Circle proximityBound;
+  @FXML
+  private ImageView active_img;
+  @FXML
+  private Rectangle playerBound;
+  @FXML
+  private Circle proximityBound;
 
-  public Rectangle getPlayerBound() {
-    return playerBound;
-  }
-
+  private static int action = 0;
   private int columns;
   private int count;
   private int offsetX;
@@ -40,27 +40,6 @@ public class Character extends AnchorPane {
   private CharacterMovement movement;
 
   private boolean animating = false;
-
-  public boolean isAnimating() {
-    return animating;
-  }
-
-  private static int action = 0;
-
-  public int getAction() {
-    return action;
-  }
-
-  public void setAction(int a) {
-    action = a;
-    // this.offset_y = offset_y + 64 * action;
-
-    if (animating != true) initElements();
-  }
-
-  public String getSpriteSheet() {
-    return spriteSheet;
-  }
 
   public Character(
       @NamedArg("spriteSheet") String spriteSheet,
@@ -94,6 +73,32 @@ public class Character extends AnchorPane {
     initElements();
   }
 
+  public Rectangle getPlayerBound() {
+    return playerBound;
+  }
+
+  public boolean isAnimating() {
+    return animating;
+  }
+
+  public int getAction() {
+    return action;
+  }
+
+  public void setAction(int a) {
+    action = a;
+    // this.offset_y = offset_y + 64 * action;
+
+    if (animating != true) {
+      initElements();
+    }
+    ;
+  }
+
+  public String getSpriteSheet() {
+    return spriteSheet;
+  }
+
   private void initElements() {
     // init character
     Image sprite_sheet_img = new Image(getClass().getResource(spriteSheet).toExternalForm());
@@ -102,16 +107,15 @@ public class Character extends AnchorPane {
         new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
 
     // define animation
-    animation =
-        new SpriteAnimation(
-            active_img,
-            Duration.millis(800),
-            count,
-            columns,
-            offsetX,
-            offsetY + 64 * action,
-            frameWidth,
-            frameHeight);
+    animation = new SpriteAnimation(
+        active_img,
+        Duration.millis(800),
+        count,
+        columns,
+        offsetX,
+        offsetY + 64 * action,
+        frameWidth,
+        frameHeight);
   }
 
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {

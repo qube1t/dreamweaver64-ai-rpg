@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,16 +12,17 @@ public class EndCreditController {
   @FXML 
   private VBox contentVBox;
   @FXML 
-  private ScrollBar scrollbar;
+  private ScrollBar scrollBar;
   @FXML 
   private Button btnExit;
 
-  /** Initialize the scrollbar. */
+  /** Initialize the scroll bar. */
   public void initialize() {
-    scrollbar.setMin(0);
-    scrollbar.setMax(1);
-    scrollbar.setValue(0);
-    scrollbar
+    scrollBar.setMin(0);
+    scrollBar.setMax(1);
+    scrollBar.setValue(0);
+    // When the player scrolls the scroll bar, the content will be scrolled
+    scrollBar
         .valueProperty()
         .addListener(
             (observable, oldVale, newValue) -> {

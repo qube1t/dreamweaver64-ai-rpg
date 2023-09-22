@@ -17,43 +17,74 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3Controller {
 
-  @FXML private Rectangle computer;
-  @FXML private Rectangle computer2;
-  @FXML private Rectangle chair1;
-  @FXML private Rectangle chair2;
-  @FXML private Rectangle gate;
-  @FXML private Rectangle radar;
-  @FXML private Rectangle boundary1;
-  @FXML private Rectangle boundary2;
-  @FXML private Rectangle boundary3;
-  @FXML private Rectangle boundary4;
-  @FXML private Rectangle boundary5;
-  @FXML private Rectangle depBoard;
-  @FXML private Rectangle desk1;
-  @FXML private Rectangle desk2;
-  @FXML private Rectangle bound1;
-  @FXML private Rectangle bound2;
-  @FXML private Rectangle bound3;
-  @FXML private Rectangle paper;
-  @FXML private Rectangle clickableComputer;
-  @FXML private Rectangle clickableRadar;
-  @FXML private Rectangle clickableDoor;
-  @FXML private Rectangle worldMap;
-  @FXML private Circle box1;
-  @FXML private Circle box2;
-  @FXML private Circle box3;
-  @FXML private Circle box4;
-  @FXML private Circle box5;
-  @FXML private Character character;
-  @FXML private AnchorPane radarPane;
-  @FXML private ImageView map, paperImage;
-  @FXML private Pane clickPane;
+  @FXML
+  private Rectangle computer;
+  @FXML
+  private Rectangle computer2;
+  @FXML
+  private Rectangle chair1;
+  @FXML
+  private Rectangle chair2;
+  @FXML
+  private Rectangle gate;
+  @FXML
+  private Rectangle radar;
+  @FXML
+  private Rectangle boundary1;
+  @FXML
+  private Rectangle boundary2;
+  @FXML
+  private Rectangle boundary3;
+  @FXML
+  private Rectangle boundary4;
+  @FXML
+  private Rectangle boundary5;
+  @FXML
+  private Rectangle depBoard;
+  @FXML
+  private Rectangle desk1;
+  @FXML
+  private Rectangle desk2;
+  @FXML
+  private Rectangle bound1;
+  @FXML
+  private Rectangle bound2;
+  @FXML
+  private Rectangle bound3;
+  @FXML
+  private Rectangle paper;
+  @FXML
+  private Rectangle clickableComputer;
+  @FXML
+  private Rectangle clickableRadar;
+  @FXML
+  private Rectangle clickableDoor;
+  @FXML
+  private Rectangle worldMap;
+  @FXML
+  private Circle box1;
+  @FXML
+  private Circle box2;
+  @FXML
+  private Circle box3;
+  @FXML
+  private Circle box4;
+  @FXML
+  private Circle box5;
+  @FXML
+  private Character character;
+  @FXML
+  private AnchorPane radarPane;
+  @FXML
+  private ImageView map, paperImage;
+  @FXML
+  private Pane clickPane;
 
   private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
 
-    // Generate a random city destnation name for the puzzle game  if it is not set
+    // Generate a random city destnation name for the puzzle game if it is not set
     if (GameState.arrangedDestnationCity == "") {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getRandomCity(),
@@ -65,11 +96,11 @@ public class Room3Controller {
             if (startIndex != -1 && endIndex != -1)
               GameState.arrangedDestnationCity = result.substring(startIndex + 1, endIndex);
 
-            GameState.unarrangedDestnationCity =
-                makeUnarrangedCityName(GameState.arrangedDestnationCity);
+            GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
           });
     }
-    // Only displays the welcome message to Room3 if the plauyer first enters the room
+    // Only displays the welcome message to Room3 if the plauyer first enters the
+    // room
     if (!GameState.isRoom3FirstEntered) {
 
       GameState.isRoom3FirstEntered = true;
@@ -84,7 +115,8 @@ public class Room3Controller {
       MainGame.enableInteractPane();
     }
 
-    // Generate a introduction message for puzzle game when player first enters room.
+    // Generate a introduction message for puzzle game when player first enters
+    // room.
     if (GameState.puzzleIntroMessageRoom3 == "") {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
@@ -97,8 +129,8 @@ public class Room3Controller {
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
-      computer, computer2, chair1, chair2, gate, radar, desk1, desk2, depBoard, boundary1,
-      boundary2, boundary3, boundary4, boundary5, bound1, bound2, bound3
+        computer, computer2, chair1, chair2, gate, radar, desk1, desk2, depBoard, boundary1,
+        boundary2, boundary3, boundary4, boundary5, bound1, bound2, bound3
     };
 
     // Add all the obstacles to the list.
@@ -182,7 +214,8 @@ public class Room3Controller {
 
   @FXML
   /**
-   * This method is called when the puzzle is clicked It will open the puzzle game.
+   * This method is called when the puzzle is clicked It will open the puzzle
+   * game.
    *
    * @throws IOException
    * @throws ApiProxyException
@@ -210,7 +243,8 @@ public class Room3Controller {
 
   @FXML
   /**
-   * This method is called when the map is clicked It will open the map and set the GameState to
+   * This method is called when the map is clicked It will open the map and set
+   * the GameState to
    * true
    *
    * @throws IOException
@@ -231,7 +265,8 @@ public class Room3Controller {
 
   @FXML
   /**
-   * This method is called when the book is clicked It will open the flight plan if it is not open
+   * This method is called when the book is clicked It will open the flight plan
+   * if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
   public void clickPaperEvent() throws IOException, ApiProxyException {

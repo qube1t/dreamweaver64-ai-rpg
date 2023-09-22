@@ -1,8 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -26,14 +24,14 @@ public class StartMenuController {
   @FXML
   private Label title;
   @FXML
-  private Label txt_instruct;
+  private Label instruction;
 
   /** Initialize the start menu. */
   public void initialize() throws ApiProxyException {
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
 
-    txt_instruct.setText(GameState.instructionMsg);
+    instruction.setText(GameState.instructionMsg);
   }
 
   /**

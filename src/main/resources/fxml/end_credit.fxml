@@ -87,7 +87,7 @@
                   <Insets />
                </HBox.margin>
             </VBox>
-            <ScrollBar fx:id="scrollbar" orientation="VERTICAL" />
+            <ScrollBar fx:id="scrollBar" orientation="VERTICAL" />
          </children>
       </HBox>
       <Button fx:id="btnExit" alignment="CENTER" layoutX="299.0" layoutY="490.0" mnemonicParsing="false" onAction="#onClickExit" text="EXIT" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="315.0" AnchorPane.rightAnchor="315.0">

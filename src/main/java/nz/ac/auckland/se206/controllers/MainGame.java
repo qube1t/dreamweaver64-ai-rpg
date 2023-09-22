@@ -34,13 +34,13 @@ public class MainGame {
   @FXML
   private static Pane initialisedGamePane;
   @FXML
-  private Pane game_pane;
+  private Pane gamePane;
   @FXML
-  Pane outer_pane;
+  Pane outerPane;
   @FXML
   private Label timer;
   @FXML
-  private Label hint_count;
+  private Label hintCount;
   @FXML
   private ImageView item1;
   @FXML
@@ -54,7 +54,7 @@ public class MainGame {
   @FXML
   private ImageView item6;
   @FXML
-  private Label chat_toggle_btn;
+  private Label chatToggleBtn;
   @FXML
   private Pane aiCharacterPane;
   @FXML
@@ -70,7 +70,7 @@ public class MainGame {
   @FXML
   private TextField chatInput;
   @FXML
-  private Pane interact_pane;
+  private Pane interactPane;
 
   private static MainGame instance;
   private static Thread timeLimitThread;
@@ -97,7 +97,7 @@ public class MainGame {
     GameState.mainGame = this;
 
     timerInitiated = timer;
-    hintInitiated = hint_count;
+    hintInitiated = hintCount;
     item1Initiated = item1;
     item2Initiated = item2;
     item3Initiated = item3;
@@ -106,11 +106,11 @@ public class MainGame {
     item6Initiated = item6;
 
     System.out.println(1);
-    initialisedGamePane = game_pane;
-    initialisedInteractPane = interact_pane;
+    initialisedGamePane = gamePane;
+    initialisedInteractPane = interactPane;
 
     // adding instruction overlay to the bottom of the outer pane
-    outer_pane
+    outerPane
         .getChildren()
         .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
@@ -199,8 +199,9 @@ public class MainGame {
 
     // move after animating as it will change direction of character
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
-      if (!character.isAnimating())
+      if (!character.isAnimating()) {
         character.startAnimation();
+      }
       character.move();
     }
   }
@@ -226,7 +227,7 @@ public class MainGame {
       // chatPane is hidden -> show it
       chatPane.setDisable(false);
       chatPane.setOpacity(0.7);
-      chat_toggle_btn.setText("Hide Chat");
+      chatToggleBtn.setText("Hide Chat");
 
       speechBubble.setVisible(false);
       bubbleTextPane.setVisible(false);
@@ -235,8 +236,8 @@ public class MainGame {
       // hide chatPane
       chatPane.setDisable(true);
       chatPane.setOpacity(0);
-      chat_toggle_btn.setText("Show Chat");
-      outer_pane.requestFocus();
+      chatToggleBtn.setText("Show Chat");
+      outerPane.requestFocus();
       chatPane.setMouseTransparent(true);
     }
   }
@@ -263,8 +264,9 @@ public class MainGame {
                     if (GameState.hintsRemaining - 1 >= 0) {
                       GameState.hintsRemaining -= 1;
                       System.out.println("Hints remaining: " + GameState.hintsRemaining);
-                    } else
+                    } else {
                       GameState.hintsRemaining = 0;
+                    }
                   }
 
                   addChat(msg, true);
@@ -272,7 +274,7 @@ public class MainGame {
                 });
           });
       chatInput.setText("");
-      outer_pane.requestFocus();
+      outerPane.requestFocus();
     }
   }
 
@@ -424,7 +426,6 @@ public class MainGame {
         break;
       default:
         hintInitiated.setText("Hint: \u221E");
-        break;
     }
   }
 
@@ -437,7 +438,8 @@ public class MainGame {
     }
   }
 
-  private static void updateInventoryUI() {
+  private static void updateInventoryUi() {
+    // updating inventory ui with initialised images
 
     List<ImageView> inventoryItems = List.of(
         item1Initiated,
@@ -446,6 +448,7 @@ public class MainGame {
         item4Initiated,
         item5Initiated,
         item6Initiated);
+
     for (int i = 0; i < inventoryItems.size(); i++) {
       if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());
@@ -461,18 +464,20 @@ public class MainGame {
   }
 
   public static void addObtainedItem(Image itemImage, String itemId) {
+    // adding obtained item to inventory
     obtainedItems.add(new ObtainedItemsWithId(itemImage, itemId));
 
-    updateInventoryUI();
+    updateInventoryUi();
   }
 
   public static void removeObtainedItem(String itemId) {
+    // removing obtained item from inventory
     for (int i = 0; i < obtainedItems.size(); i++) {
       if (obtainedItems.get(i).getId().equals(itemId)) {
         obtainedItems.remove(i);
         break;
       }
     }
-    updateInventoryUI();
+    updateInventoryUi();
   }
 }

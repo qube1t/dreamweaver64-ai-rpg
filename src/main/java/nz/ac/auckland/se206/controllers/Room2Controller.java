@@ -22,40 +22,73 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 public class Room2Controller {
 
   @FXML
-  private Rectangle rect1,
-      rect2,
-      rect3,
-      rect4,
-      rect5,
-      rect6,
-      rect7,
-      rect8,
-      rect9,
-      rect10,
-      rect11,
-      rect12,
-      rect13,
-      rect14,
-      rect15,
-      rect16,
-      rect17,
-      rect18,
-      rect19,
-      rect20,
-      rect21,
-      rect22,
-      rect23,
-      rect24,
-      rect25,
-      rect26,
-      rect27,
-      rect28,
-      rect29,
-      rect30,
-      rect31,
-      rect32,
-      rect33,
-      rect34;
+  private Rectangle rect1;
+  @FXML
+  private Rectangle rect2;
+  @FXML
+  private Rectangle rect3;
+  @FXML
+  private Rectangle rect4;
+  @FXML
+  private Rectangle rect5;
+  @FXML
+  private Rectangle rect6;
+  @FXML
+  private Rectangle rect7;
+  @FXML
+  private Rectangle rect8;
+  @FXML
+  private Rectangle rect9;
+  @FXML
+  private Rectangle rect10;
+  @FXML
+  private Rectangle rect11;
+  @FXML
+  private Rectangle rect12;
+  @FXML
+  private Rectangle rect13;
+  @FXML
+  private Rectangle rect14;
+  @FXML
+  private Rectangle rect15;
+  @FXML
+  private Rectangle rect16;
+  @FXML
+  private Rectangle rect17;
+  @FXML
+  private Rectangle rect18;
+  @FXML
+  private Rectangle rect19;
+  @FXML
+  private Rectangle rect20;
+  @FXML
+  private Rectangle rect21;
+  @FXML
+  private Rectangle rect22;
+  @FXML
+  private Rectangle rect23;
+  @FXML
+  private Rectangle rect24;
+  @FXML
+  private Rectangle rect25;
+  @FXML
+  private Rectangle rect26;
+  @FXML
+  private Rectangle rect27;
+  @FXML
+  private Rectangle rect28;
+  @FXML
+  private Rectangle rect29;
+  @FXML
+  private Rectangle rect30;
+  @FXML
+  private Rectangle rect31;
+  @FXML
+  private Rectangle rect32;
+  @FXML
+  private Rectangle rect33;
+  @FXML
+  private Rectangle rect34;
   @FXML 
   private ImageView boxKey;
   @FXML 
@@ -81,7 +114,7 @@ public class Room2Controller {
   @FXML 
   private Pane piratePane;
   @FXML 
-  private ImageView speech_bubble;
+  private ImageView pirateSpeech;
   @FXML 
   private ScrollPane speechBubbleScrollPane;
   @FXML 
@@ -201,7 +234,7 @@ public class Room2Controller {
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) {
-      // if the player grab wrong book, the pirate will tell the player that the book is wrong
+      // if the player get wrong book, the message will be displayed
       if (GameState.takenBook != null && firstWrongBookClicked) {
         firstWrongBookClicked = false;
         GameState.eleanorAi.runGpt(
@@ -214,12 +247,12 @@ public class Room2Controller {
                   });
             });
       } else {
-        // if the player has not grabbed any book, the pirate will tell the player the riddle
+        // if the player has not got any book, the message will be displayed
         gptResponse.setText(GameState.pirateRiddle);
         piratePane.setVisible(true);
       }
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
-      // if the player has the correct book, the pirate will give the player the key to open the treasure box
+      // if the player get the correct book, the player can trade with pirate
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
       GameState.eleanorAi.runGpt(
@@ -249,7 +282,7 @@ public class Room2Controller {
     int boxLocation = GameState.currentBox;
     System.out.println("Number of treasure box: " + boxLocation);
     if (GameState.isBoxKeyFound) {
-      // if the player has found the key and open the treasure, the pirate will congratulate the player
+      // if the box location is matched with number, the player will get the treasure
       box1.setDisable(false);
       box2.setDisable(false);
       box3.setDisable(false);
@@ -270,7 +303,7 @@ public class Room2Controller {
               });
         }
       } else {
-        // if the player has clicked the wrong box, the pirate will tell the player to find the right box
+        // if the player has clicked the wrong box, the player will get the wrong message
         if (!wrongBoxClicked) {
           wrongBoxClicked = true;
           GameState.eleanorAi.runGpt(
@@ -286,7 +319,7 @@ public class Room2Controller {
         Helper.changeTreasureBox(GameState.currentBox);
       }
     } else {
-      // if the player has not found the key, the pirate will tell the player to find the key
+      // if the player has not got the key, the player will get the message
       box1.setDisable(true);
       box2.setDisable(true);
       box3.setDisable(true);

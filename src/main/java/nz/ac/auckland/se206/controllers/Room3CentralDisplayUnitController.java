@@ -24,30 +24,51 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3CentralDisplayUnitController {
 
-  @FXML private Text errorText;
+  @FXML
+  private Text errorText;
 
-  @FXML private Character character;
+  @FXML
+  private Character character;
   @FXML
   private Rectangle a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
-  @FXML private Rectangle one1;
-  @FXML private Rectangle two2;
-  @FXML private Rectangle three3;
-  @FXML private Rectangle four4;
-  @FXML private Rectangle five5;
-  @FXML private Rectangle six6;
-  @FXML private Rectangle seven7;
-  @FXML private Rectangle eight8;
-  @FXML private Rectangle nine9;
-  @FXML private Rectangle zero0;
-  @FXML private Rectangle slash;
-  @FXML private Rectangle clear;
-  @FXML private Rectangle delete;
-  @FXML private Rectangle execute;
-  @FXML private Text displayInput;
-  @FXML private TextField displayOutput;
-  @FXML private ImageView lock;
-  @FXML private ImageView CentralDisplayUnit;
-  @FXML private ProgressIndicator progress;
+  @FXML
+  private Rectangle one1;
+  @FXML
+  private Rectangle two2;
+  @FXML
+  private Rectangle three3;
+  @FXML
+  private Rectangle four4;
+  @FXML
+  private Rectangle five5;
+  @FXML
+  private Rectangle six6;
+  @FXML
+  private Rectangle seven7;
+  @FXML
+  private Rectangle eight8;
+  @FXML
+  private Rectangle nine9;
+  @FXML
+  private Rectangle zero0;
+  @FXML
+  private Rectangle slash;
+  @FXML
+  private Rectangle clear;
+  @FXML
+  private Rectangle delete;
+  @FXML
+  private Rectangle execute;
+  @FXML
+  private Text displayInput;
+  @FXML
+  private TextField displayOutput;
+  @FXML
+  private ImageView lock;
+  @FXML
+  private ImageView centralDisplayUnit;
+  @FXML
+  private ProgressIndicator progress;
 
   protected List<Rectangle> allButtons;
 
@@ -62,16 +83,15 @@ public class Room3CentralDisplayUnitController {
 
     progress.setVisible(false);
 
-    List<Rectangle> allButtons =
-        Arrays.asList(
-            a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, q, r, s, t, u, v, w, x, y, z, slash,
-            execute, clear, delete, one1, two2, three3, four4, five5, six6, seven7, eight8, nine9,
-            zero0);
+    List<Rectangle> allButtons = Arrays.asList(
+        a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, q, r, s, t, u, v, w, x, y, z, slash,
+        execute, clear, delete, one1, two2, three3, four4, five5, six6, seven7, eight8, nine9,
+        zero0);
     this.allButtons = allButtons;
 
     if (GameState.isPuzzleInRoom3Solved && GameState.isWorldMapOpened) {
       if (GameState.isAircraftCodeFound) {
-        CentralDisplayUnit.setOpacity(0.7);
+        centralDisplayUnit.setOpacity(0.7);
         displayOutput.setText("");
         // Update the introduction label with the correct answer message
         displayInput.setText("CONGRATULATIONS! AIRCRAFT CODE UNLOCKED: " + GameState.aircraftCode);
@@ -85,7 +105,7 @@ public class Room3CentralDisplayUnitController {
       }
 
     } else {
-      CentralDisplayUnit.setOpacity(0.7);
+      centralDisplayUnit.setOpacity(0.7);
       displayOutput.setText("LOCKED");
 
       for (Rectangle button : allButtons) {
@@ -101,17 +121,17 @@ public class Room3CentralDisplayUnitController {
   }
 
   /**
-   * This method automatically adds slash if coreect first two letter of current location entered.
+   * This method automatically adds slash if coreect first two letter of current
+   * location entered.
    */
   protected void addSlashIfEnteredCurrentCity() {
 
     String currentText = displayOutput.getText();
     // Convert the first two letters of the current city to uppercase
-    String firstTwoDeparture =
-        GameState.currentCities[GameState.currentCityIndex - 1]
-            .getText()
-            .substring(0, 2)
-            .toUpperCase();
+    String firstTwoDeparture = GameState.currentCities[GameState.currentCityIndex - 1]
+        .getText()
+        .substring(0, 2)
+        .toUpperCase();
     // Add slash if the first two letters of the current city is entered
     if (currentText.equalsIgnoreCase(firstTwoDeparture)) {
       displayOutput.setText(currentText + "/");
@@ -147,8 +167,7 @@ public class Room3CentralDisplayUnitController {
   @FXML
   private void handleLetterClick(MouseEvent event) {
     Rectangle letterRectangle = (Rectangle) event.getSource();
-    String upperLetter =
-        letterRectangle.getId().toUpperCase(); // Get the ID of the clicked rectangle
+    String upperLetter = letterRectangle.getId().toUpperCase(); // Get the ID of the clicked rectangle
     System.out.println("Letter clicked: " + upperLetter);
 
     // Append the clicked letter to the existing text
@@ -196,10 +215,9 @@ public class Room3CentralDisplayUnitController {
 
     for (int i = 0; i < messageLength; i++) {
       final int index = i;
-      KeyFrame keyFrame =
-          new KeyFrame(
-              Duration.millis(delay * i),
-              new KeyValue(text.textProperty(), message.substring(0, index + 1)));
+      KeyFrame keyFrame = new KeyFrame(
+          Duration.millis(delay * i),
+          new KeyValue(text.textProperty(), message.substring(0, index + 1)));
       timeline.getKeyFrames().add(keyFrame);
     }
 
@@ -207,7 +225,7 @@ public class Room3CentralDisplayUnitController {
   }
 
   protected void enableFlightComputer() {
-    CentralDisplayUnit.setOpacity(1);
+    centralDisplayUnit.setOpacity(1);
     lock.setVisible(false);
     lock.setDisable(true);
     displayOutput.setDisable(false);
@@ -236,13 +254,13 @@ public class Room3CentralDisplayUnitController {
   public void handleExecuteClick() throws ApiProxyException {
     String currentInput = displayOutput.getText();
     String firstTwoDestnation = GameState.arrangedDestnationCity.substring(0, 2).toUpperCase();
-    String firstTwoDeparture =
-        GameState.currentCities[GameState.currentCityIndex - 1].getText().substring(0, 2);
+    String firstTwoDeparture = GameState.currentCities[GameState.currentCityIndex - 1].getText().substring(0, 2);
 
     System.out.println("EXECUTED: " + currentInput);
     System.out.println("CORRECT ANSWER: " + firstTwoDeparture + "/" + firstTwoDestnation);
 
-    // Correct code has been entered, i.e., first two letters of the departure city and first two
+    // Correct code has been entered, i.e., first two letters of the departure city
+    // and first two
     // letters of the destination city
     if (currentInput.equalsIgnoreCase(firstTwoDeparture + "/" + firstTwoDestnation)) {
       // Aircraft code has been found.

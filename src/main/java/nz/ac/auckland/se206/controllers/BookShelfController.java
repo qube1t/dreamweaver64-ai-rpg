@@ -8,53 +8,66 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 
 public class BookShelfController {
-  @FXML private Label lbl_book1;
-  @FXML private Label lbl_book2;
-  @FXML private Label lbl_book3;
-  @FXML private Label lbl_book4;
-  @FXML private Label lbl_book5;
-  @FXML private Label lbl_book6;
-  @FXML private Label lbl_book7;
+  @FXML
+  private Label lblBook1;
+  @FXML
+  private Label lblBook2;
+  @FXML
+  private Label lblBook3;
+  @FXML
+  private Label lblBook4;
+  @FXML
+  private Label lblBook5;
+  @FXML
+  private Label lblBook6;
+  @FXML
+  private Label lblBook7;
 
-  @FXML private Rectangle book1_rect;
-  @FXML private Rectangle book2_rect;
-  @FXML private Rectangle book3_rect;
-  @FXML private Rectangle book4_rect;
-  @FXML private Rectangle book5_rect;
-  @FXML private Rectangle book6_rect;
-  @FXML private Rectangle book7_rect;
+  @FXML
+  private Rectangle book1Rect;
+  @FXML
+  private Rectangle book2Rect;
+  @FXML
+  private Rectangle book3Rect;
+  @FXML
+  private Rectangle book4Rect;
+  @FXML
+  private Rectangle book5Rect;
+  @FXML
+  private Rectangle book6Rect;
+  @FXML
+  private Rectangle book7Rect;
 
-  static Label[] lbl_books;
-  static Rectangle[] book_rects;
+  static Label[] lblBooks;
+  static Rectangle[] bookRects;
 
   public void initialize() {
     //
-    lbl_books =
-        new Label[] {lbl_book1, lbl_book2, lbl_book3, lbl_book4, lbl_book5, lbl_book6, lbl_book7};
+    lblBooks = new Label[] { lblBook1, lblBook2, lblBook3, lblBook4, lblBook5, lblBook6, lblBook7 };
 
-    book_rects =
-        new Rectangle[] {
-          book1_rect, book2_rect, book3_rect, book4_rect, book5_rect, book6_rect, book7_rect
-        };
+    bookRects = new Rectangle[] {
+        book1Rect, book2Rect, book3Rect, book4Rect, book5Rect, book6Rect, book7Rect
+    };
 
     // setting labels in the bookshelf
     for (int i = 0; i < GameState.booksInRoom1.length; i++) {
-      Label lbl_book = lbl_books[i];
+      Label lblBook = lblBooks[i];
       if (GameState.booksInRoom1[i] != null) {
-        lbl_book.setText(GameState.booksInRoom1[i]);
+        lblBook.setText(GameState.booksInRoom1[i]);
       } else {
-        lbl_book.setVisible(false);
-        book_rects[i].setVisible(false);
+        lblBook.setVisible(false);
+        bookRects[i].setVisible(false);
         continue;
       }
 
-      Rectangle book_rect = book_rects[i];
+      Rectangle bookRect = bookRects[i];
       int index = i;
-      lbl_books[i].setOnMouseClicked(
+      lblBooks[i].setOnMouseClicked(
           e -> {
             boolean oneWasTaken = hasTakenOneBook();
-            if (oneWasTaken) returnBook();
-            GameState.takenBook = lbl_book.getText();
+            if (oneWasTaken)
+              returnBook();
+            GameState.takenBook = lblBook.getText();
 
             if (GameState.booksInRoom1[index] == GameState.trueBook) {
               GameState.isBookFound = true;
@@ -64,25 +77,24 @@ public class BookShelfController {
             }
 
             if (!oneWasTaken) {
-              Image bookImage =
-                  new Image(App.class.getResource("/images/rooms/room1/book.png").toString());
+              Image bookImage = new Image(App.class.getResource("/images/rooms/room1/book.png").toString());
               MainGame.addObtainedItem(bookImage, "book");
             }
-            lbl_book.setVisible(false);
-            book_rect.setVisible(false);
+            lblBook.setVisible(false);
+            bookRect.setVisible(false);
             GameState.booksInRoom1[index] = null;
           });
     }
   }
 
   private boolean hasTakenOneBook() {
-    if (lbl_book1.isVisible()
-        && lbl_book2.isVisible()
-        && lbl_book3.isVisible()
-        && lbl_book4.isVisible()
-        && lbl_book5.isVisible()
-        && lbl_book6.isVisible()
-        && lbl_book7.isVisible()) {
+    if (lblBook1.isVisible()
+        && lblBook2.isVisible()
+        && lblBook3.isVisible()
+        && lblBook4.isVisible()
+        && lblBook5.isVisible()
+        && lblBook6.isVisible()
+        && lblBook7.isVisible()) {
       return false;
     }
     return true;
@@ -91,11 +103,11 @@ public class BookShelfController {
   public static void returnBook() {
     for (int i = 0; i < GameState.booksInRoom1.length; i++) {
       if (GameState.booksInRoom1[i] == null) {
-        lbl_books[i].setVisible(true);
-        book_rects[i].setVisible(true);
+        lblBooks[i].setVisible(true);
+        bookRects[i].setVisible(true);
         GameState.booksInRoom1[i] = GameState.takenBook;
         GameState.takenBook = null;
-        lbl_books[i].setText(GameState.booksInRoom1[i]);
+        lblBooks[i].setText(GameState.booksInRoom1[i]);
         break;
       }
     }
