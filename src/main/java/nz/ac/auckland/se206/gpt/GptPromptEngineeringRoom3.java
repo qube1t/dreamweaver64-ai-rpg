@@ -15,13 +15,16 @@ public class GptPromptEngineeringRoom3 {
   }
 
   /**
-   * Generates a GPT prompt engineering string for room3 welcome message and introduce the flow of
+   * Generates a GPT prompt engineering string for room3 welcome message and
+   * introduce the flow of
    * the game.
    *
    * @return the generated prompt engineering string
    * @return
    */
   public static String room3WelcomeMessage() {
+
+    // Ask GPT for the introduction of the game.
     return "User update: Give the user a short welcome message, do not include any information of"
         + " next step and surround the message to be displayed to user with * based on the"
         + " mission below.The user now entered one of the three rooms that is an air traffic"
@@ -33,7 +36,8 @@ public class GptPromptEngineeringRoom3 {
   }
 
   /**
-   * Generates a GPT prompt engineering string for random city for the puzzle game.
+   * Generates a GPT prompt engineering string for random city for the puzzle
+   * game.
    *
    * @return the generated prompt engineering string
    */

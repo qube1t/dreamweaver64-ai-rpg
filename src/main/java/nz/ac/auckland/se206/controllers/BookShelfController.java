@@ -11,7 +11,12 @@ public class BookShelfController {
   private static Label[] lblBooks;
   private static Rectangle[] bookRects;
 
+  /**
+   * Returns the book to the bookshelf.
+   * 
+   */
   public static void returnBook() {
+    // return the book to the bookshelf using for loop.
     for (int i = 0; i < GameState.booksInRoom1.length; i++) {
       if (GameState.booksInRoom1[i] == null) {
         lblBooks[i].setVisible(true);
@@ -102,7 +107,13 @@ public class BookShelfController {
     }
   }
 
+  /**
+   * This method checks whether the player has taken one book.
+   * 
+   * @return true if the player has taken one book, false otherwise
+   */
   private boolean hasTakenOneBook() {
+    // check whether the player has taken one book using if.
     if (lblBook1.isVisible()
         && lblBook2.isVisible()
         && lblBook3.isVisible()

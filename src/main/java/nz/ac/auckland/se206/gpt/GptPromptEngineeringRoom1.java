@@ -12,6 +12,7 @@ public class GptPromptEngineeringRoom1 {
    * @return the generated prompt engineering string
    */
   public static String gameIntro() {
+    // Ask GPT for the introduction of the game.
     return "I am the computer architecture that runs DREAMWEAVER64, a futuristic technology that"
         + " creates dreams and allows people to relive their past or discover lost truths or"
         + " memories from their pasts. Your are the operator of this machine."

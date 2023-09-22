@@ -91,42 +91,41 @@ public class Room2Controller {
   private Rectangle rect33;
   @FXML
   private Rectangle rect34;
-  @FXML 
+  @FXML
   private ImageView boxKey;
-  @FXML 
+  @FXML
   private Character character;
-  @FXML 
+  @FXML
   private Pane interactablePane;
-  @FXML 
+  @FXML
   private Rectangle box1;
-  @FXML 
+  @FXML
   private Rectangle box2;
-  @FXML 
+  @FXML
   private Rectangle box3;
-  @FXML 
+  @FXML
   private Rectangle box4;
-  @FXML 
+  @FXML
   private Rectangle box5;
-  @FXML 
+  @FXML
   private Rectangle pirate;
-  @FXML 
+  @FXML
   private Rectangle doorToRoom1;
-  @FXML 
+  @FXML
   private Rectangle doorToRoom3;
-  @FXML 
+  @FXML
   private Pane piratePane;
-  @FXML 
+  @FXML
   private ImageView pirateSpeech;
-  @FXML 
+  @FXML
   private ScrollPane speechBubbleScrollPane;
-  @FXML 
+  @FXML
   private Label gptResponse;
 
   private Boolean wrongBoxClicked = false;
   private Boolean correctBoxClicked = false;
   private Boolean boxClickedWithoutKey = false;
   private Boolean firstWrongBookClicked = true;
-  private String pirateMessage = null;
 
   /**
    * Initializes the room 2, it is called when the room loads.
@@ -135,13 +134,12 @@ public class Room2Controller {
    */
   public void initialize() throws ApiProxyException {
     // set the obstacles in the room2
-    ArrayList<Rectangle> obsts =
-        new ArrayList<Rectangle>(
-            Arrays.asList(
-                rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
-                rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21, rect22,
-                rect23, rect24, rect25, rect26, rect27, rect28, rect29, rect30, rect31, rect32,
-                rect33, rect34));
+    ArrayList<Rectangle> obsts = new ArrayList<Rectangle>(
+        Arrays.asList(
+            rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
+            rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21, rect22,
+            rect23, rect24, rect25, rect26, rect27, rect28, rect29, rect30, rect31, rect32,
+            rect33, rect34));
 
     character.enableMobility(obsts, interactablePane.getChildren());
 
@@ -191,11 +189,6 @@ public class Room2Controller {
 
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
-    }
-
-    if (pirateMessage != null) {
-      gptResponse.setText(pirateMessage);
-      piratePane.setVisible(true);
     }
   }
 
@@ -248,7 +241,7 @@ public class Room2Controller {
             (result) -> {
               Platform.runLater(
                   () -> {
-                    pirateMessage = result;
+                    displayBubble(result);
                   });
             });
       } else {
@@ -265,7 +258,7 @@ public class Room2Controller {
           (result) -> {
             Platform.runLater(
                 () -> {
-                  pirateMessage = result;
+                  displayBubble(result);
                 });
           });
       // add key image to the inventory
@@ -301,12 +294,13 @@ public class Room2Controller {
               (result) -> {
                 Platform.runLater(
                     () -> {
-                      pirateMessage = result;
+                      displayBubble(result);
                     });
               });
         }
       } else {
-        // if the player has clicked the wrong box, the player will get the wrong message
+        // if the player has clicked the wrong box, the player will get the wrong
+        // message
         if (!wrongBoxClicked) {
           wrongBoxClicked = true;
           GameState.eleanorAi.runGpt(
@@ -314,7 +308,7 @@ public class Room2Controller {
               (result) -> {
                 Platform.runLater(
                     () -> {
-                      pirateMessage = result;
+                      displayBubble(result);
                     });
               });
         }
@@ -334,11 +328,17 @@ public class Room2Controller {
             (result) -> {
               Platform.runLater(
                   () -> {
-                    pirateMessage = result;
+                    displayBubble(result);
                   });
             });
       }
     }
+  }
+
+  /** Display the message from GPT. */
+  private void displayBubble(String result) {
+    gptResponse.setText(result);
+    piratePane.setVisible(true);
   }
 
   /**

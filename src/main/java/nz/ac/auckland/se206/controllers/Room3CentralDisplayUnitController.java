@@ -2,9 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.Arrays;
 import java.util.List;
-
-import org.w3c.dom.css.Rect;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -26,6 +23,8 @@ import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3CentralDisplayUnitController {
+
+  protected List<Rectangle> allButtons;
 
   @FXML
   private Text errorText;
@@ -123,8 +122,6 @@ public class Room3CentralDisplayUnitController {
   @FXML
   private ProgressIndicator progress;
 
-  protected List<Rectangle> allButtons;
-
   public void initialize() throws ApiProxyException {
 
     // Add an event filter to the TextField to consume key events
@@ -137,10 +134,14 @@ public class Room3CentralDisplayUnitController {
     progress.setVisible(false);
 
     List<Rectangle> allButtons = Arrays.asList(
-        letterA, letterB, letterC, letterD, letterE, letterF, letterG, letterH, letterI, letterJ, letterK,
-        letterL, letterM, letterN, letterO, letterP, letterQ, letterR, letterS, letterT, letterU,
+        letterA, letterB, letterC, letterD, letterE, letterF,
+        letterG,
+        letterH, letterI, letterJ, letterK,
+        letterL, letterM, letterN, letterO, letterP, letterQ,
+        letterR, letterS, letterT, letterU,
         letterV, letterW, letterX, letterY, letterZ, slash,
-        execute, clear, delete, one1, two2, three3, four4, five5, six6, seven7, eight8, nine9,
+        execute, clear, delete, one1, two2, three3, four4, five5,
+        six6, seven7, eight8, nine9,
         zero0);
     this.allButtons = allButtons;
 
