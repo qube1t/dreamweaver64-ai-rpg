@@ -10,11 +10,11 @@ public class GptPromptEngineeringRoom2 {
    */
   public static String room2WelcomeMessage() {
     return "User update: The user now entered room2 that is a pirate's ship. The player needs to"
-               + " interact with different objects including solving a riddle to trade with pirate"
-               + " to get the key. Using the key, the player can open the treasure box You need to"
-               + " achknowledge the current state of the game. Give the user intructions on the"
-               + " mission with maximum 2 sentences, not including any hints. Surround the response"
-               + " to be displayed to the player to the user with *.";
+        + " interact with different objects including solving a riddle to trade with pirate"
+        + " to get the key. Using the key, the player can open the treasure box You need to"
+        + " achknowledge the current state of the game. Give the user intructions on the"
+        + " mission with maximum 2 sentences, not including any hints. Surround the response"
+        + " to be displayed to the player to the user with *.";
   }
 
   /**
@@ -22,7 +22,7 @@ public class GptPromptEngineeringRoom2 {
    * 
    * @return the prompt
    */
-  public static String getPirateWrongResponse(){
+  public static String getPirateWrongResponse() {
     return "This is the loading stage. Reply in one sentence how a pirate would say wrong answer."
         + " Surround the sentence before and after with the character ^";
   }
@@ -32,13 +32,14 @@ public class GptPromptEngineeringRoom2 {
    * 
    * @return the prompt
    */
-  public static String getPirateRightResponse(){
+  public static String getPirateRightResponse() {
     return "This is the loading stage. Reply in one sentence how a pirate would say correct answer."
         + " Surround the sentence before and after with the character ^";
   }
 
   /**
-   * Generate the prompt when the player get no key but try to open the treasure box.
+   * Generate the prompt when the player get no key but try to open the treasure
+   * box.
    * 
    * @return the prompt
    */
@@ -48,7 +49,8 @@ public class GptPromptEngineeringRoom2 {
   }
 
   /**
-   * Generate the unencrypted message that the player will get when they exit the game.
+   * Generate the unencrypted message that the player will get when they exit the
+   * game.
    * 
    * @return the unencrypted message
    */
@@ -60,7 +62,8 @@ public class GptPromptEngineeringRoom2 {
   }
 
   /**
-   * Generate the encrypted message that the player will get when they get the treasure.
+   * Generate the encrypted message that the player will get when they get the
+   * treasure.
    * 
    * @return the encrypted message
    */

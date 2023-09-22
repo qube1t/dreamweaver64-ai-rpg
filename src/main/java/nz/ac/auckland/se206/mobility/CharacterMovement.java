@@ -56,7 +56,8 @@ public class CharacterMovement {
 
   public void movePlayer(int action) {
     double playerSpeed = 8.0; // Adjust the player's speed as needed
-    double dx = 0, dy = 0;
+    double dx = 0;
+    double dy = 0;
 
     double oldX = player.getLayoutX();
     double oldY = player.getLayoutY();

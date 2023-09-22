@@ -65,8 +65,9 @@ public class BookShelfController {
       lblBooks[i].setOnMouseClicked(
           e -> {
             boolean oneWasTaken = hasTakenOneBook();
-            if (oneWasTaken)
+            if (oneWasTaken) {
               returnBook();
+            }
             GameState.takenBook = lblBook.getText();
 
             if (GameState.booksInRoom1[index] == GameState.trueBook) {
@@ -77,7 +78,8 @@ public class BookShelfController {
             }
 
             if (!oneWasTaken) {
-              Image bookImage = new Image(App.class.getResource("/images/rooms/room1/book.png").toString());
+              Image bookImage = new Image(App.class.getResource("/images/rooms/room1/book.png")
+                  .toString());
               MainGame.addObtainedItem(bookImage, "book");
             }
             lblBook.setVisible(false);

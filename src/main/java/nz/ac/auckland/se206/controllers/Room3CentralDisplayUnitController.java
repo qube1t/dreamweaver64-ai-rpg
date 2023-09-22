@@ -167,7 +167,8 @@ public class Room3CentralDisplayUnitController {
   @FXML
   private void handleLetterClick(MouseEvent event) {
     Rectangle letterRectangle = (Rectangle) event.getSource();
-    String upperLetter = letterRectangle.getId().toUpperCase(); // Get the ID of the clicked rectangle
+    // Get the ID of the clicked rectangle
+    String upperLetter = letterRectangle.getId().toUpperCase();
     System.out.println("Letter clicked: " + upperLetter);
 
     // Append the clicked letter to the existing text
@@ -254,7 +255,8 @@ public class Room3CentralDisplayUnitController {
   public void handleExecuteClick() throws ApiProxyException {
     String currentInput = displayOutput.getText();
     String firstTwoDestnation = GameState.arrangedDestnationCity.substring(0, 2).toUpperCase();
-    String firstTwoDeparture = GameState.currentCities[GameState.currentCityIndex - 1].getText().substring(0, 2);
+    String firstTwoDeparture = GameState.currentCities[GameState.currentCityIndex - 1]
+        .getText().substring(0, 2);
 
     System.out.println("EXECUTED: " + currentInput);
     System.out.println("CORRECT ANSWER: " + firstTwoDeparture + "/" + firstTwoDestnation);

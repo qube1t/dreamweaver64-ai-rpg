@@ -426,6 +426,7 @@ public class MainGame {
         break;
       default:
         hintInitiated.setText("Hint: \u221E");
+        break;
     }
   }
 

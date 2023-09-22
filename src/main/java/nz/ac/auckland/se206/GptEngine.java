@@ -22,8 +22,10 @@ public class GptEngine {
 
   public GptEngine() {
     // set up the GPT model only once
-    if (chatCompletionRequest == null)
-      chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.1).setTopP(0.5).setMaxTokens(100);
+    if (chatCompletionRequest == null) {
+      chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.1)
+          .setTopP(0.5).setMaxTokens(100);
+    }
 
     // set up a timer to check for gpt engine stalling, ie due to race condition if
     // there is prompt queue but no active thread
@@ -128,7 +130,7 @@ public class GptEngine {
 
     // get chat messages if exists
     List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*");
-    if (chatEntry.size() > 0)
+    if (chatEntry.size() > 0) {
       Platform.runLater(
           () -> {
             // remove quotes as it looks ugly
@@ -136,6 +138,7 @@ public class GptEngine {
 
             GameState.mainGame.addChat(msg, true);
           });
+    }
   }
 
   public void runGpt(String string) throws ApiProxyException {

@@ -9,11 +9,11 @@ import javafx.scene.layout.VBox;
 
 public class EndCreditController {
 
-  @FXML 
-  private VBox contentVBox;
-  @FXML 
+  @FXML
+  private VBox contentVbox;
+  @FXML
   private ScrollBar scrollBar;
-  @FXML 
+  @FXML
   private Button btnExit;
 
   /** Initialize the scroll bar. */
@@ -27,9 +27,9 @@ public class EndCreditController {
         .addListener(
             (observable, oldVale, newValue) -> {
               double scrollPosition = newValue.doubleValue();
-              double contentHeight = contentVBox.getBoundsInLocal().getHeight();
-              double scrollableHeight = contentHeight - contentVBox.getHeight();
-              contentVBox.setTranslateY(-scrollableHeight * (scrollPosition));
+              double contentHeight = contentVbox.getBoundsInLocal().getHeight();
+              double scrollableHeight = contentHeight - contentVbox.getHeight();
+              contentVbox.setTranslateY(-scrollableHeight * (scrollPosition));
             });
   }
 

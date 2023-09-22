@@ -11,23 +11,23 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 
 public class EndMenuController {
-  @FXML 
+  @FXML
   private Button exit;
-  @FXML 
-  private Text win_or_lose;
-  @FXML 
+  @FXML
+  private Text winOrLose;
+  @FXML
   private Label attribution;
-  @FXML 
+  @FXML
   private Label letter;
 
   /** Initialize the end menu. */
   public void initialize() {
     // Set the text to display based on whether the player won or lost
     if (GameState.winTheGame) {
-      win_or_lose.setText("You Escaped!");
+      winOrLose.setText("You Escaped!");
       letter.setText(GameState.finalMsg);
     } else {
-      win_or_lose.setText("Time's Up! You Lose!");
+      winOrLose.setText("Time's Up! You Lose!");
     }
   }
 
@@ -43,7 +43,8 @@ public class EndMenuController {
   }
 
   /**
-   * When the player clicks on the attribution, the attribution page will be opened.
+   * When the player clicks on the attribution, the attribution page will be
+   * opened.
    * 
    * @param event the mouse event
    * @throws IOException

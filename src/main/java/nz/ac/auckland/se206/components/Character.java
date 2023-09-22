@@ -20,7 +20,7 @@ import nz.ac.auckland.se206.mobility.SpriteAnimation;
 
 public class Character extends AnchorPane {
   @FXML
-  private ImageView active_img;
+  private ImageView activeImg;
   @FXML
   private Rectangle playerBound;
   @FXML
@@ -101,14 +101,14 @@ public class Character extends AnchorPane {
 
   private void initElements() {
     // init character
-    Image sprite_sheet_img = new Image(getClass().getResource(spriteSheet).toExternalForm());
-    active_img.setImage(sprite_sheet_img);
-    active_img.setViewport(
+    Image spriteSheetImg = new Image(getClass().getResource(spriteSheet).toExternalForm());
+    activeImg.setImage(spriteSheetImg);
+    activeImg.setViewport(
         new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
 
     // define animation
     animation = new SpriteAnimation(
-        active_img,
+        activeImg,
         Duration.millis(800),
         count,
         columns,
@@ -137,7 +137,7 @@ public class Character extends AnchorPane {
 
   public void endAnimation() {
     animation.stop();
-    active_img.setViewport(
+    activeImg.setViewport(
         new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
     animating = false;
   }

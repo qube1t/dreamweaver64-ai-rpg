@@ -76,7 +76,9 @@ public class Room3Controller {
   @FXML
   private AnchorPane radarPane;
   @FXML
-  private ImageView map, paperImage;
+  private ImageView map;
+  @FXML
+  private ImageView paperImage;
   @FXML
   private Pane clickPane;
 
@@ -93,8 +95,9 @@ public class Room3Controller {
             int startIndex = result.indexOf("^");
             int endIndex = result.indexOf("^", startIndex + 1);
 
-            if (startIndex != -1 && endIndex != -1)
+            if (startIndex != -1 && endIndex != -1) {
               GameState.arrangedDestnationCity = result.substring(startIndex + 1, endIndex);
+            }
 
             GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
           });
