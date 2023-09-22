@@ -90,6 +90,10 @@ public class DestnationPuzzleController {
                   introduction.setText(result);
                 });
           });
+      GameState.eleanorAi.runGpt(
+          "User update: The player now has correctly solved the"
+              + "puzzle for destnation city. In other words,"
+              + "the user has discovered the destnation city. Do not need to reply");
     } else {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.wrongPuzzleRoom3(),
