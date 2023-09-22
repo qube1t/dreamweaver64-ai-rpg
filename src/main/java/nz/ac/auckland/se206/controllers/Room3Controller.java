@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import javafx.fxml.FXML;
 import javafx.scene.image.Image;
@@ -11,7 +12,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -279,10 +282,22 @@ public class Room3Controller {
     if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
       paperImage.setVisible(false);
       System.out.println("Decrypted letter released");
+      // get the unencrypted message from GPT
+
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom2.generateFinalUnencrypted(),
+          s -> {
+            List<String> msg = Helper.getTextBetweenChar(s, "+");
+            if (msg.size() > 0) {
+              GameState.finalMsg = msg.get(0);
+            } else {
+              GameState.finalMsg = s;
+            }
+          });
 
       GameState.eleanorAi.runGpt(
           "User update: User has successfully decrypted the letter based on the objects he got. He"
-              + " can no2 click the main door to exit. Send a response to user without revealing"
+              + " can now click the main door to exit. Send a response to user without revealing"
               + " the exit / main door and surrounded with * .");
       // Set the aircraft code image to inventory.
       Image decryptedLetter = new Image("/images/rooms/room3/paper.png");

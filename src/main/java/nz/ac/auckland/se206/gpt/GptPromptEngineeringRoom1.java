@@ -45,8 +45,8 @@ public class GptPromptEngineeringRoom1 {
     return "This is the loading stage. Give a riddle in the form of a quote from"
         + ansbook
         + " in 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"
-        + " quote before and after with the character ^. The user needs to identify the book. Do"
-        + " not reveal the book name.";
+        + " quote before and after with the character ^. The user needs to identify the book somewhere in any of the rooms. Do"
+        + " not reveal the book name. In the future if the user asks for hints, you can give them.";
   }
 
   public static String getChatMessageFromUser(String chatInput) {
