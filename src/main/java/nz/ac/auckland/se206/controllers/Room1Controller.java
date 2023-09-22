@@ -125,18 +125,6 @@ public class Room1Controller {
           MainGameController.enableInteractPane();
 
           // get riddle from gpt
-          try {
-            GameState.eleanorAi.runGpt(
-                GptPromptEngineeringRoom1.getRiddleForPirate(ansBook),
-                (str2) -> {
-                  List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^");
-                  if (pirateDialogue.size() > 0) {
-                    GameState.pirateRiddle = pirateDialogue.get(0).replaceAll("\"", "");
-                  }
-                });
-          } catch (ApiProxyException e) {
-            e.printStackTrace();
-          }
         });
 
     // getting room intro from gpt
