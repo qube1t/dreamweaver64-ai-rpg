@@ -88,7 +88,7 @@ public class Room1Controller {
       gptInit = true;
     } else {
       // enable interact pane
-      MainGame.enableInteractPane();
+      MainGameController.enableInteractPane();
     }
 
     // set character position
@@ -122,7 +122,7 @@ public class Room1Controller {
           System.out.println(ansBook);
 
           // enable interact pane
-          MainGame.enableInteractPane();
+          MainGameController.enableInteractPane();
 
           // get riddle from gpt
           try {
@@ -150,29 +150,29 @@ public class Room1Controller {
   @FXML
   public void goToLeftRoom() throws IOException, InterruptedException {
     // go to the left room
-    InstructionsLoad.setText();
+    InstructionsLoadController.setText();
 
     // disable interact pane for transition
-    MainGame.disableInteractPane();
-    MainGame.removeOverlay(true);
-    MainGame.addOverlay("room3", true);
+    MainGameController.disableInteractPane();
+    MainGameController.removeOverlay(true);
+    MainGameController.addOverlay("room3", true);
   }
 
   @FXML
   private void goToRightRoom() throws IOException, InterruptedException {
     // go to the right room
-    InstructionsLoad.setText();
+    InstructionsLoadController.setText();
 
     // disable interact pane for transition
-    MainGame.disableInteractPane();
-    MainGame.removeOverlay(true);
-    MainGame.addOverlay("room2", true);
+    MainGameController.disableInteractPane();
+    MainGameController.removeOverlay(true);
+    MainGameController.addOverlay("room2", true);
   }
 
   @FXML
   private void openBookShelf() throws IOException, ApiProxyException {
     // book shelf clicked
-    MainGame.addOverlay("book_shelf", false);
+    MainGameController.addOverlay("book_shelf", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened book shelf. No reply is needed for this message.");
   }
@@ -192,7 +192,7 @@ public class Room1Controller {
   @FXML
   private void onClickCrockeries() throws ApiProxyException, IOException {
     // crockeries clicked
-    MainGame.addOverlay("crockery_shelf", false);
+    MainGameController.addOverlay("crockery_shelf", false);
     GameState.eleanorAi.runGpt(
         "User update, User has opened crockeries, but they are not accessible. No reply needed");
   }
@@ -200,7 +200,7 @@ public class Room1Controller {
   @FXML
   private void onClickChest() throws ApiProxyException, IOException {
     // chest clicked
-    MainGame.addOverlay("chest", false);
+    MainGameController.addOverlay("chest", false);
     GameState.eleanorAi.runGpt(
         "User update: opened the chest, but there is nothing to see there. No reply needed.");
   }

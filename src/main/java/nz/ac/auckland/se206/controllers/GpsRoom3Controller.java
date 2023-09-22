@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 
-public class GpsControllerRoom3 {
+public class GpsRoom3Controller {
 
   @FXML
   private Text label1;

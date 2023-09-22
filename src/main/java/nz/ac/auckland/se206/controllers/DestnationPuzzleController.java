@@ -110,6 +110,6 @@ public class DestnationPuzzleController {
 
   @FXML
   protected void onClickClose() {
-    MainGame.removeOverlay(false);
+    MainGameController.removeOverlay(false);
   }
 }

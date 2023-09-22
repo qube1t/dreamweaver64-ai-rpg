@@ -176,10 +176,10 @@ public class Room2Controller {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom2.room2WelcomeMessage(),
           (result) -> {
-            MainGame.enableInteractPane();
+            MainGameController.enableInteractPane();
           });
     } else {
-      MainGame.enableInteractPane();
+      MainGameController.enableInteractPane();
     }
 
     if (!gptInit) {
@@ -263,8 +263,8 @@ public class Room2Controller {
           });
       // add key image to the inventory
       Image keyImage = new Image("/images/key.png");
-      MainGame.removeObtainedItem("book");
-      MainGame.addObtainedItem(keyImage, "treasure box key");
+      MainGameController.removeObtainedItem("book");
+      MainGameController.addObtainedItem(keyImage, "treasure box key");
     }
   }
 
@@ -286,7 +286,7 @@ public class Room2Controller {
       box4.setDisable(false);
       box5.setDisable(false);
       if (numOfBox == boxLocation) {
-        MainGame.addOverlay("treasure_box", false);
+        MainGameController.addOverlay("treasure_box", false);
         if (!correctBoxClicked) {
           correctBoxClicked = true;
           GameState.eleanorAi.runGpt(
@@ -415,11 +415,11 @@ public class Room2Controller {
   @FXML
   private void onOpenRoom1(MouseEvent event) throws IOException {
     // go to the right room
-    InstructionsLoad.setText();
+    InstructionsLoadController.setText();
     // disable interact pane for transition
-    MainGame.disableInteractPane();
-    MainGame.removeOverlay(true);
-    MainGame.addOverlay("room1", true);
+    MainGameController.disableInteractPane();
+    MainGameController.removeOverlay(true);
+    MainGameController.addOverlay("room1", true);
   }
 
   /**
@@ -431,10 +431,10 @@ public class Room2Controller {
   @FXML
   private void onOpenRoom3(MouseEvent event) throws IOException {
     // go to the right room
-    InstructionsLoad.setText();
+    InstructionsLoadController.setText();
     // disable interact pane for transition
-    MainGame.disableInteractPane();
-    MainGame.removeOverlay(true);
-    MainGame.addOverlay("room3", true);
+    MainGameController.disableInteractPane();
+    MainGameController.removeOverlay(true);
+    MainGameController.addOverlay("room3", true);
   }
 }

@@ -6,7 +6,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
-public class InstructionsLoad {
+public class InstructionsLoadController {
 
   private static Label initialisedInstructTxt;
   private static Label initialisedTimeTxt;

@@ -25,6 +25,7 @@ public class EndMenuController {
     // Set the text to display based on whether the player won or lost
     if (GameState.winTheGame) {
       winOrLose.setText("You Escaped!");
+      letter.setWrapText(true);
       letter.setText(GameState.finalMsg);
     } else {
       winOrLose.setText("Time's Up! You Lose!");
@@ -38,7 +39,7 @@ public class EndMenuController {
    * @throws IOException
    */
   @FXML
-  private void onClickExit(ActionEvent event) throws IOException {
+  private void onClickExit(MouseEvent event) throws IOException {
     System.exit(0);
   }
 

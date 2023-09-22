@@ -2,7 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.util.List;
 import javafx.scene.text.Text;
-import nz.ac.auckland.se206.controllers.MainGame;
+import nz.ac.auckland.se206.controllers.MainGameController;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -19,7 +19,7 @@ public class GameState {
 
   // main game
   /** Indicates the main game. */
-  public static MainGame mainGame;
+  public static MainGameController mainGame;
 
   /** Indicates whether the time limit has reached. */
   public static boolean timeLimitReached = false;
@@ -60,10 +60,16 @@ public class GameState {
   /** Indicates whether the box key has found to open the treasure box. */
   public static boolean isBoxKeyFound = false;
 
-  /** Indicates the unencrypted message that the player will get when they exit the game. */
+  /**
+   * Indicates the unencrypted message that the player will get when they exit the
+   * game.
+   */
   public static String finalMsg;
 
-  /** Indicates the encrypted message that the player will get when they get the treasure. */
+  /**
+   * Indicates the encrypted message that the player will get when they get the
+   * treasure.
+   */
   public static String encryptedFinalMsg;
 
   /** Indicates whether the player has found the encrypted message. */
@@ -100,7 +106,9 @@ public class GameState {
   /** Indicates the aircraft code. */
   public static String aircraftCode = "";
 
-  /** Indicates the introduction message when first enter the puzzle game in Room3. */
+  /**
+   * Indicates the introduction message when first enter the puzzle game in Room3.
+   */
   public static String puzzleIntroMessageRoom3 = "";
 
   /** Indicates whether the player has decrypted the message. */

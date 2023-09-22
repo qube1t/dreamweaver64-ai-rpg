@@ -112,10 +112,10 @@ public class Room3Controller {
           GptPromptEngineeringRoom3.room3WelcomeMessage(),
           (result) -> {
             System.out.println(result);
-            MainGame.enableInteractPane();
+            MainGameController.enableInteractPane();
           });
     } else {
-      MainGame.enableInteractPane();
+      MainGameController.enableInteractPane();
     }
 
     // Generate a introduction message for puzzle game when player first enters
@@ -204,18 +204,18 @@ public class Room3Controller {
   public void onClickRoom2() throws IOException {
     System.out.println("Room2 clicked");
     // go to the right room
-    InstructionsLoad.setText();
+    InstructionsLoadController.setText();
 
     // disable interact pane for transition
-    MainGame.disableInteractPane();
-    MainGame.removeOverlay(true);
-    MainGame.addOverlay("room2", true);
+    MainGameController.disableInteractPane();
+    MainGameController.removeOverlay(true);
+    MainGameController.addOverlay("room2", true);
   }
 
   @FXML
   public void onClickComputer() throws IOException, ApiProxyException {
     System.out.println("Computer clicked");
-    MainGame.addOverlay("sub3", false);
+    MainGameController.addOverlay("sub3", false);
   }
 
   @FXML
@@ -229,7 +229,7 @@ public class Room3Controller {
   public void onClickPuzzle() throws IOException, ApiProxyException {
     System.out.println("destnation city is " + GameState.arrangedDestnationCity);
     // Add the puzzle game overlay
-    MainGame.addOverlay("room3_puzzle", false);
+    MainGameController.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened the unarranged word puzzle game. The correct city"
             + " name is "
@@ -240,7 +240,7 @@ public class Room3Controller {
 
   @FXML
   public void onClickRadar() throws IOException, ApiProxyException {
-    MainGame.addOverlay("radar_computer", false);
+    MainGameController.addOverlay("radar_computer", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened the radar computer and the red point indicates the correct"
             + " location for treasure box location in another room. If the user ask for hints give"
@@ -262,7 +262,7 @@ public class Room3Controller {
     }
 
     System.out.println("Location clicked");
-    MainGame.addOverlay("gps_current", false);
+    MainGameController.addOverlay("gps_current", false);
     // Generate GPT response to keep updated.
     GameState.eleanorAi.runGpt(
         "User update: User has opened the world map and achnowledge the current location. No need"
@@ -287,9 +287,9 @@ public class Room3Controller {
       // Set the aircraft code image to inventory.
       Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
 
-      MainGame.removeObtainedItem("aircraftCode");
-      MainGame.removeObtainedItem("treasure");
-      MainGame.addObtainedItem(decryptedLetter, "decryptedLetter");
+      MainGameController.removeObtainedItem("aircraftCode");
+      MainGameController.removeObtainedItem("treasure");
+      MainGameController.addObtainedItem(decryptedLetter, "decryptedLetter");
       GameState.hasDecrypted = true;
     } else {
 
@@ -306,11 +306,11 @@ public class Room3Controller {
     System.out.println("Door clicked");
     System.out.println(GameState.currentBox);
     // go to the right room
-    InstructionsLoad.setText();
+    InstructionsLoadController.setText();
 
     // disable interact pane for transition
-    MainGame.disableInteractPane();
-    MainGame.removeOverlay(true);
-    MainGame.addOverlay("room1", true);
+    MainGameController.disableInteractPane();
+    MainGameController.removeOverlay(true);
+    MainGameController.addOverlay("room1", true);
   }
 }

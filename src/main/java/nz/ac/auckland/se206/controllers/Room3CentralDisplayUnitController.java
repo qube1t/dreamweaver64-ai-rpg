@@ -352,7 +352,7 @@ public class Room3CentralDisplayUnitController {
 
                   Image aircraftCode = new Image("/images/aircraft_code.png");
 
-                  MainGame.addObtainedItem(aircraftCode, "aircraftCode");
+                  MainGameController.addObtainedItem(aircraftCode, "aircraftCode");
 
                   System.out.println("Aircraft code unlocked" + GameState.aircraftCode);
                 });

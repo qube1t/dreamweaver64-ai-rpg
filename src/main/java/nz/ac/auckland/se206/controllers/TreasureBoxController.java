@@ -11,13 +11,13 @@ import nz.ac.auckland.se206.GameState;
 
 public class TreasureBoxController {
 
-  @FXML 
+  @FXML
   private ImageView imgTreasure;
-  @FXML 
+  @FXML
   private ImageView clickedTreasure;
-  @FXML 
+  @FXML
   private Label message;
-  @FXML 
+  @FXML
   private Button treasure;
 
   /** Initialize the treasure box. */
@@ -31,7 +31,8 @@ public class TreasureBoxController {
   }
 
   /**
-   * When the player clicks on the treasure box, the encrypted message will be displayed.
+   * When the player clicks on the treasure box, the encrypted message will be
+   * displayed.
    *
    * @param event the action event
    * @throws IOException
@@ -49,7 +50,7 @@ public class TreasureBoxController {
 
     // add treasure image to the inventory
     Image treasureImage = new Image("/images/treasure.png");
-    MainGame.addObtainedItem(treasureImage, "treasure");
+    MainGameController.addObtainedItem(treasureImage, "treasure");
     System.out.println("Treasure obtained");
   }
 }

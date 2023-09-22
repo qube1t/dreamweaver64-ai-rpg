@@ -98,7 +98,7 @@ public class BookShelfController {
             if (!oneWasTaken) {
               Image bookImage = new Image(App.class.getResource("/images/rooms/room1/book.png")
                   .toString());
-              MainGame.addObtainedItem(bookImage, "book");
+              MainGameController.addObtainedItem(bookImage, "book");
             }
             lblBook.setVisible(false);
             bookRect.setVisible(false);

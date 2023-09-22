@@ -27,14 +27,14 @@ import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
-public class MainGame {
+public class MainGameController {
 
   @FXML
   private static Character character;
   @FXML
   private static Pane initialisedGamePane;
 
-  private static MainGame instance;
+  private static MainGameController instance;
   private static Thread timeLimitThread;
 
   private static List<ObtainedItemsWithId> obtainedItems = new ArrayList<>();
@@ -49,7 +49,7 @@ public class MainGame {
   private static ImageView item5Initiated;
   private static ImageView item6Initiated;
 
-  public static MainGame getInstance() {
+  public static MainGameController getInstance() {
     return instance;
   }
 
@@ -418,7 +418,7 @@ public class MainGame {
           Platform.runLater(
               () -> {
                 timerInitiated.setText(formattedTime);
-                InstructionsLoad.setTime(formattedTime);
+                InstructionsLoadController.setTime(formattedTime);
                 // update hint count every cycle
                 updateHintCount();
               });
