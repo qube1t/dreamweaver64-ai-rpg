@@ -11,12 +11,10 @@ public class GptPromptEngineeringRoom2 {
   public static String room2WelcomeMessage() {
     // Ask GPT for the introduction of the game.
     return "User update: The user now entered a pirate's ship which was his favorite"
-        + " childhood video game. You are the"
-        + " computer. Do not use pirate colloquite. The player needs to"
+        + " childhood video game. The player needs to"
         + " interact with different objects including solving a riddle to trade with pirate"
-        + " to get the key. Using the key, the player can open the treasure box. You need to"
-        + " achknowledge the current state of the game. Give the user intructions on the"
-        + " mission with maximum 2 sentences, not including any hints. Surround the response"
+        + " to get the key. Using the key, the player can open the treasure box."
+        + "  Introduce the user, not including any hints. Surround the response"
         + " to be displayed to the player to the user with *.";
   }
 
