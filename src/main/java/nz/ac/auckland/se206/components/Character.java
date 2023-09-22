@@ -29,10 +29,10 @@ public class Character extends AnchorPane {
 
   private int columns;
   private int count;
-  private int offset_x;
-  private int offset_y;
-  private int frame_width;
-  private int frame_height;
+  private int offsetX;
+  private int offsetY;
+  private int frameWidth;
+  private int frameHeight;
 
   private String spriteSheet;
 
@@ -66,19 +66,19 @@ public class Character extends AnchorPane {
       @NamedArg("spriteSheet") String spriteSheet,
       @NamedArg("columns") int columns,
       @NamedArg("count") int count,
-      @NamedArg("offset_x") int offset_x,
-      @NamedArg("offset_y") int offset_y,
-      @NamedArg("frame_width") int frame_width,
-      @NamedArg("frame_height") int frame_height) {
+      @NamedArg("offset_x") int offsetX,
+      @NamedArg("offset_y") int offsetY,
+      @NamedArg("frame_width") int frameWidth,
+      @NamedArg("frame_height") int frameHeight) {
 
     // character parameters
     this.spriteSheet = spriteSheet;
     this.columns = columns;
     this.count = count;
-    this.offset_x = offset_x;
-    this.offset_y = offset_y;
-    this.frame_width = frame_width;
-    this.frame_height = frame_height;
+    this.offsetX = offsetX;
+    this.offsetY = offsetY;
+    this.frameWidth = frameWidth;
+    this.frameHeight = frameHeight;
 
     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/character.fxml"));
     fxmlLoader.setRoot(this);
@@ -99,7 +99,7 @@ public class Character extends AnchorPane {
     Image sprite_sheet_img = new Image(getClass().getResource(spriteSheet).toExternalForm());
     active_img.setImage(sprite_sheet_img);
     active_img.setViewport(
-        new Rectangle2D(offset_x, offset_y + 64 * action, frame_width, frame_height));
+        new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
 
     // define animation
     animation =
@@ -108,10 +108,10 @@ public class Character extends AnchorPane {
             Duration.millis(800),
             count,
             columns,
-            offset_x,
-            offset_y + 64 * action,
-            frame_width,
-            frame_height);
+            offsetX,
+            offsetY + 64 * action,
+            frameWidth,
+            frameHeight);
   }
 
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
@@ -134,12 +134,12 @@ public class Character extends AnchorPane {
   public void endAnimation() {
     animation.stop();
     active_img.setViewport(
-        new Rectangle2D(offset_x, offset_y + 64 * action, frame_width, frame_height));
+        new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
     animating = false;
   }
 
-  public void setSpriteSheet(String sprite_sheet) {
-    this.spriteSheet = sprite_sheet;
+  public void setSpriteSheet(String spriteSheet) {
+    this.spriteSheet = spriteSheet;
   }
 
   public int getColumns() {
@@ -158,35 +158,35 @@ public class Character extends AnchorPane {
     this.count = count;
   }
 
-  public int getOffset_x() {
-    return offset_x;
+  public int getOffsetX() {
+    return offsetX;
   }
 
-  public void setOffset_x(int offset_x) {
-    this.offset_x = offset_x;
+  public void setOffsetX(int offsetX) {
+    this.offsetX = offsetX;
   }
 
-  public int getOffset_y() {
-    return offset_y;
+  public int getOffsetY() {
+    return offsetY;
   }
 
-  public void setOffset_y(int offset_y) {
-    this.offset_y = offset_y;
+  public void setOffsetY(int offsetY) {
+    this.offsetY = offsetY;
   }
 
-  public int getFrame_width() {
-    return frame_width;
+  public int getFrameWidth() {
+    return frameWidth;
   }
 
-  public void setFrame_width(int frame_width) {
-    this.frame_width = frame_width;
+  public void setFrameWidth(int frameWidth) {
+    this.frameWidth = frameWidth;
   }
 
-  public int getFrame_height() {
-    return frame_height;
+  public int getFrameHeight() {
+    return frameHeight;
   }
 
-  public void setFrame_height(int frame_height) {
-    this.frame_height = frame_height;
+  public void setFrameHeight(int frameHeight) {
+    this.frameHeight = frameHeight;
   }
 }

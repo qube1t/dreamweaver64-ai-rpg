@@ -15,7 +15,9 @@ public class SplashController {
   @FXML private ProgressBar progressBar;
 
   public void initialize() throws ApiProxyException {
+    // gpt prompts and setting progressbar progress
     progressBar.setProgress(.25);
+
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.gameIntro(),
         s -> {
@@ -24,6 +26,7 @@ public class SplashController {
                 progressBar.setProgress(.50);
               });
         });
+
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.gameInstructions(),
         s -> {
@@ -37,6 +40,7 @@ public class SplashController {
               });
         });
 
+    // final prompt, and let app change root.
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.getFacts(),
         s -> {
@@ -48,7 +52,6 @@ public class SplashController {
                 try {
                   App.setRoot("start_menu");
                 } catch (IOException e) {
-                  // TODO Auto-generated catch block
                   e.printStackTrace();
                 }
               });

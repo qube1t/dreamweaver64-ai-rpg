@@ -12,8 +12,16 @@ import nz.ac.auckland.se206.GameState;
 
 public class GpsControllerRoom3 {
 
-  @FXML private Text label1, label2, label3, label4, label5;
-  @FXML private Circle point1, point2, point3, point4, point5;
+  @FXML private Text label1;
+  @FXML private Text label2;
+  @FXML private Text label3;
+  @FXML private Text label4;
+  @FXML private Text label5;
+  @FXML private Circle point1;
+  @FXML private Circle point2;
+  @FXML private Circle point3;
+  @FXML private Circle point4;
+  @FXML private Circle point5;
 
   private Circle[] cityPoints;
   private Text[] cityLabels;

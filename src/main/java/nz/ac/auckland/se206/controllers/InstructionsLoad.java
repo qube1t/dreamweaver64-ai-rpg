@@ -29,12 +29,14 @@ public class InstructionsLoad {
   }
 
   public static void setText() {
+    // setting random text
     System.out.println(GameState.factsAboutDW64);
     initialised_instruct_txt.setText(
         GameState.factsAboutDW64.get(Helper.getRandomNumber(0, GameState.factsAboutDW64.size())));
   }
 
   public static void setTime(String t) {
+    // setting time, connect to timer
     initialised_time_txt.setText("You have " + t + " mins.");
   }
 }

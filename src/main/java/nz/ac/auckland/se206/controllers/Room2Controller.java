@@ -21,21 +21,6 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room2Controller {
 
-  @FXML private Rectangle box1;
-  @FXML private Rectangle box2;
-  @FXML private Rectangle box3;
-  @FXML private Rectangle box4;
-  @FXML private Rectangle box5;
-  @FXML private Rectangle pirate;
-  @FXML private Rectangle doorToRoom1;
-  @FXML private Rectangle doorToRoom3;
-  @FXML private ImageView boxKey;
-  @FXML private ImageView speech_bubble;
-  @FXML private Label gptResponse;
-  @FXML private Pane interactablePane;
-  @FXML private Pane piratePane;
-  @FXML private Character character;
-  @FXML private ScrollPane speechBubbleScrollPane;
   @FXML
   private Rectangle rect1,
       rect2,
@@ -71,19 +56,51 @@ public class Room2Controller {
       rect32,
       rect33,
       rect34;
+  @FXML 
+  private ImageView boxKey;
+  @FXML 
+  private Character character;
+  @FXML 
+  private Pane interactablePane;
+  @FXML 
+  private Rectangle box1;
+  @FXML 
+  private Rectangle box2;
+  @FXML 
+  private Rectangle box3;
+  @FXML 
+  private Rectangle box4;
+  @FXML 
+  private Rectangle box5;
+  @FXML 
+  private Rectangle pirate;
+  @FXML 
+  private Rectangle doorToRoom1;
+  @FXML 
+  private Rectangle doorToRoom3;
+  @FXML 
+  private Pane piratePane;
+  @FXML 
+  private ImageView speech_bubble;
+  @FXML 
+  private ScrollPane speechBubbleScrollPane;
+  @FXML 
+  private Label gptResponse;
+
+  private static boolean gptInit;
 
   private Boolean wrongBoxClicked = false;
   private Boolean correctBoxClicked = false;
-  private static boolean gptInit;
   private Boolean boxClickedWithoutKey = false;
   private Boolean firstWrongBookClicked = true;
 
   /**
-   * Initializes the room view, it is called when the room loads.
+   * Initializes the room 2, it is called when the room loads.
    *
    * @throws ApiProxyException
    */
   public void initialize() throws ApiProxyException {
+    // set the obstacles in the room2
     ArrayList<Rectangle> obsts =
         new ArrayList<Rectangle>(
             Arrays.asList(
@@ -94,6 +111,7 @@ public class Room2Controller {
 
     character.enableMobility(obsts, interactablePane.getChildren());
 
+    // set the location of the character depending on the previous room
     switch (GameState.prevRoom) {
       case 1:
         character.setLayoutX(70);
@@ -112,6 +130,7 @@ public class Room2Controller {
 
     piratePane.setVisible(false);
 
+    // set pane inside the speech bubble
     speechBubbleScrollPane = (ScrollPane) interactablePane.lookup("#speechBubbleScrollPane");
     if (speechBubbleScrollPane != null) {
       speechBubbleScrollPane.setContent(gptResponse);
@@ -119,13 +138,13 @@ public class Room2Controller {
       speechBubbleScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
     }
 
+    // print the welcome message when first enter the room 2
     if (!GameState.isRoom2FirstEntered) {
       GameState.isRoom2FirstEntered = true;
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom2.room2WelcomeMessage(),
           (result) -> {
             MainGame.enableInteractPane();
-            System.out.println("true book is " + GameState.trueBook);
           });
     } else {
       MainGame.enableInteractPane();
@@ -134,16 +153,20 @@ public class Room2Controller {
     if (!gptInit) {
       initGpt();
       gptInit = true;
-
     }
-
 
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
     }
   }
 
+  /**
+   * Initialize the GPT.
+   * 
+   * @throws ApiProxyException
+   */
   private void initGpt() throws ApiProxyException {
+    // get the encrypted message from GPT
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom2.generateFinalEncrypted(),
         s -> {
@@ -155,6 +178,7 @@ public class Room2Controller {
           }
         });
 
+    // get the unencrypted message from GPT
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom2.generateFinalUnencrypted(),
         s -> {
@@ -167,9 +191,17 @@ public class Room2Controller {
         });
   }
 
+  /**
+   * Handles the click event on the pirate.
+   * 
+   * @param event the mouse event
+   * @throws IOException
+   * @throws ApiProxyException
+   */
   @FXML
   public void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) {
+      // if the player grab wrong book, the pirate will tell the player that the book is wrong
       if (GameState.takenBook != null && firstWrongBookClicked) {
         firstWrongBookClicked = false;
         GameState.eleanorAi.runGpt(
@@ -182,10 +214,12 @@ public class Room2Controller {
                   });
             });
       } else {
+        // if the player has not grabbed any book, the pirate will tell the player the riddle
         gptResponse.setText(GameState.pirateRiddle);
         piratePane.setVisible(true);
       }
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
+      // if the player has the correct book, the pirate will give the player the key to open the treasure box
       GameState.isBoxKeyFound = true;
       boxKey.setVisible(false);
       GameState.eleanorAi.runGpt(
@@ -197,6 +231,7 @@ public class Room2Controller {
                   piratePane.setVisible(true);
                 });
           });
+      // add key image to the inventory
       Image keyImage = new Image("/images/key.png");
       MainGame.removeObtainedItem("book");
       MainGame.addObtainedItem(keyImage, "treasure box key");
@@ -204,9 +239,9 @@ public class Room2Controller {
   }
 
   /**
-   * Get the random treasure box and put the riddle or password in it
+   * Get the random treasure box and handle the click event on the treasure box.
    *
-   * @param numOfBox
+   * @param numOfBox the location of the treasure box
    * @throws IOException
    * @throws ApiProxyException
    */
@@ -214,6 +249,7 @@ public class Room2Controller {
     int boxLocation = GameState.currentBox;
     System.out.println("Number of treasure box: " + boxLocation);
     if (GameState.isBoxKeyFound) {
+      // if the player has found the key and open the treasure, the pirate will congratulate the player
       box1.setDisable(false);
       box2.setDisable(false);
       box3.setDisable(false);
@@ -234,7 +270,7 @@ public class Room2Controller {
               });
         }
       } else {
-        // write this sentance in chat box
+        // if the player has clicked the wrong box, the pirate will tell the player to find the right box
         if (!wrongBoxClicked) {
           wrongBoxClicked = true;
           GameState.eleanorAi.runGpt(
@@ -246,12 +282,11 @@ public class Room2Controller {
                       piratePane.setVisible(true);
                     });
               });
-
-
         }
         Helper.changeTreasureBox(GameState.currentBox);
       }
     } else {
+      // if the player has not found the key, the pirate will tell the player to find the key
       box1.setDisable(true);
       box2.setDisable(true);
       box3.setDisable(true);
@@ -347,7 +382,6 @@ public class Room2Controller {
   public void onOpenRoom1(MouseEvent event) throws IOException {
     // go to the right room
     InstructionsLoad.setText();
-
     // disable interact pane for transition
     MainGame.disableInteractPane();
     MainGame.removeOverlay(true);
@@ -362,10 +396,8 @@ public class Room2Controller {
    */
   @FXML
   public void onOpenRoom3(MouseEvent event) throws IOException {
-
     // go to the right room
     InstructionsLoad.setText();
-
     // disable interact pane for transition
     MainGame.disableInteractPane();
     MainGame.removeOverlay(true);

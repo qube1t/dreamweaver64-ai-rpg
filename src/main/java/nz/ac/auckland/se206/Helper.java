@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 public class Helper {
 
   public static List<String> getTextBetweenChar(String str, String c) {
+    // get text between two characters, including the two characters
     List<String> matchesList = new ArrayList<String>();
     Pattern pattern = Pattern.compile("\\" + c + "(.*?)\\" + c);
     Matcher m1 = pattern.matcher(str);
@@ -23,7 +24,8 @@ public class Helper {
     // Generate a random number between 1 and 5
     int boxNumber = (int) (Math.random() * 5) + 1;
 
-    // If the random number is the same as the box number, generate a new random number
+    // If the random number is the same as the box number, generate a new random
+    // number
     while (boxNumber == currentBoxNumber) {
       boxNumber = (int) (Math.random() * 5) + 1;
     }
@@ -36,6 +38,7 @@ public class Helper {
   }
 
   public static int countOccurences(String str, String c) {
+    // count the number of occurences of a character in a string
     int count = 0;
     for (int i = 0; i < str.length(); i++) {
       if (str.charAt(i) == c.charAt(0)) {

@@ -15,7 +15,8 @@ public class GptPromptEngineeringRoom3 {
   }
 
   /**
-   * Generates a GPT prompt engineering string for room3 welcome message.
+   * Generates a GPT prompt engineering string for room3 welcome message and introduce the flow of
+   * the game.
    *
    * @return the generated prompt engineering string
    * @return
@@ -31,12 +32,18 @@ public class GptPromptEngineeringRoom3 {
         + " and I will give you user action updates.";
   }
 
+  /**
+   * Generates a GPT prompt engineering string for random city for the puzzle game.
+   *
+   * @return the generated prompt engineering string
+   */
   public static String getRandomCity() {
-    return "Generate 1 random and real city name that is must be different from the example"
-        + " provided and different from any previous response in your memory. The city is"
-        + " only one word and less than 10 characters, the city name will be used in a puzzle"
-        + " game in this room, only reply with the city name surrounded between ^, example"
-        + "  ^Chicago^ ^Delhi^ ^Paris^ ^Tokyo^ ^Seattle^ ^Shanghai^ ^London^ ^Sydney^ ";
+    return "Generate 1 random and real city name with one word and less than 11 characters that"
+        + " must be different from the example provided and different from any previous"
+        + " response in your memory. "
+        + " This will be used in a puzzle game in this room, only reply with the"
+        + " city name surrounded between ^, example  ^Chicago^ ^Paris^ ^Tokyo^"
+        + " ^Seattle^ ^Shanghai^ ^London^ ^Sydney^ ";
   }
 
   public static String getIntroPuzzleMessage() {

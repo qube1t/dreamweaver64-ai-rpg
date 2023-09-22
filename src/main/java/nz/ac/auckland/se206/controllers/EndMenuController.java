@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -10,11 +11,16 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 
 public class EndMenuController {
-  @FXML private Button exit;
-  @FXML private Text WinOrLose;
-  @FXML private Label letter;
-  @FXML private Label attribution;
+  @FXML 
+  private Button exit;
+  @FXML 
+  private Text WinOrLose;
+  @FXML 
+  private Label attribution;
+  @FXML 
+  private Label letter;
 
+  /** Initialize the end menu. */
   public void initialize() {
     // Set the text to display based on whether the player won or lost
     if (GameState.winTheGame) {
@@ -25,12 +31,23 @@ public class EndMenuController {
     }
   }
 
+  /**
+   * When the player clicks on the exit button, the game will be closed.
+   * 
+   * @param event the action event
+   * @throws IOException
+   */
   @FXML
-  private void onClickExit() {
-    // When the exit button is clicked, exit the game
+  private void onClickExit(ActionEvent event) throws IOException {
     System.exit(0);
   }
 
+  /**
+   * When the player clicks on the attribution, the attribution page will be opened.
+   * 
+   * @param event the mouse event
+   * @throws IOException
+   */
   @FXML
   private void onOpenEndCredit(MouseEvent event) throws IOException {
     App.setRoot("end_credit");

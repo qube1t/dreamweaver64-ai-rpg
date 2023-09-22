@@ -30,9 +30,9 @@ public class GptPromptEngineeringRoom1 {
 
   public static String getFacts() {
     return "Give at least 2 single sentence warnings and historical facts about DREAMWEAVER64. For"
-               + " eg. changing between rooms fast can affect the structural integrity of the"
-               + " dream. They can be humorous or serious. Surround the sentences before and after"
-               + " with #";
+        + " eg. changing between rooms fast can affect the structural integrity of the"
+        + " dream. They can be humorous or serious. Surround the sentences before and after"
+        + " with #";
   }
 
   public static String get7Books() {
@@ -49,6 +49,7 @@ public class GptPromptEngineeringRoom1 {
   }
 
   public static String getChatMessageFromUser(String chatInput) {
+    // sending chat messages from user to gpt
     if (GameState.hintsRemaining == 0) {
       return "The user has send this message: '"
           + chatInput

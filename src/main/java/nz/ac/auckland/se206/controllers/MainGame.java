@@ -29,42 +29,63 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MainGame {
 
-  @FXML private static Character character;
-  @FXML private static Pane initialised_game_pane;
-  @FXML private Pane game_pane;
-  @FXML Pane outer_pane;
-  @FXML private Label timer;
-  @FXML private Label hint_count;
-  @FXML private ImageView item1;
-  @FXML private ImageView item2;
-  @FXML private ImageView item3;
-  @FXML private ImageView item4;
-  @FXML private ImageView item5;
-  @FXML private ImageView item6;
-  @FXML private Label chat_toggle_btn;
-  @FXML private Pane aiCharacterPane;
-  @FXML private Pane chatPane;
-  @FXML private ImageView speechBubble;
-  @FXML private ScrollPane bubbleTextPane;
-  @FXML private Label bubbleText;
-  @FXML private ListView<Label> chat;
-  @FXML private TextField chatInput;
-  @FXML private Pane interact_pane;
+  @FXML
+  private static Character character;
+  @FXML
+  private static Pane initialisedGamePane;
+  @FXML
+  private Pane game_pane;
+  @FXML
+  Pane outer_pane;
+  @FXML
+  private Label timer;
+  @FXML
+  private Label hint_count;
+  @FXML
+  private ImageView item1;
+  @FXML
+  private ImageView item2;
+  @FXML
+  private ImageView item3;
+  @FXML
+  private ImageView item4;
+  @FXML
+  private ImageView item5;
+  @FXML
+  private ImageView item6;
+  @FXML
+  private Label chat_toggle_btn;
+  @FXML
+  private Pane aiCharacterPane;
+  @FXML
+  private Pane chatPane;
+  @FXML
+  private ImageView speechBubble;
+  @FXML
+  private ScrollPane bubbleTextPane;
+  @FXML
+  private Label bubbleText;
+  @FXML
+  private ListView<Label> chat;
+  @FXML
+  private TextField chatInput;
+  @FXML
+  private Pane interact_pane;
 
   private static MainGame instance;
   private static Thread timeLimitThread;
 
   private static List<ObtainedItemsWithId> obtainedItems = new ArrayList<>();
-  private static Pane initialised_interact_pane;
+  private static Pane initialisedInteractPane;
 
-  private static Label timer_initiated;
-  private static Label hint_initiated;
-  private static ImageView item1_initiated;
-  private static ImageView item2_initiated;
-  private static ImageView item3_initiated;
-  private static ImageView item4_initiated;
-  private static ImageView item5_initiated;
-  private static ImageView item6_initiated;
+  private static Label timerInitiated;
+  private static Label hintInitiated;
+  private static ImageView item1Initiated;
+  private static ImageView item2Initiated;
+  private static ImageView item3Initiated;
+  private static ImageView item4Initiated;
+  private static ImageView item5Initiated;
+  private static ImageView item6Initiated;
 
   Text bubbleChatText = new Text("text");
 
@@ -75,26 +96,26 @@ public class MainGame {
 
     GameState.mainGame = this;
 
-    timer_initiated = timer;
-    hint_initiated = hint_count;
-    item1_initiated = item1;
-    item2_initiated = item2;
-    item3_initiated = item3;
-    item4_initiated = item4;
-    item5_initiated = item5;
-    item6_initiated = item6;
+    timerInitiated = timer;
+    hintInitiated = hint_count;
+    item1Initiated = item1;
+    item2Initiated = item2;
+    item3Initiated = item3;
+    item4Initiated = item4;
+    item5Initiated = item5;
+    item6Initiated = item6;
 
     System.out.println(1);
-    initialised_game_pane = game_pane;
-    initialised_interact_pane = interact_pane;
+    initialisedGamePane = game_pane;
+    initialisedInteractPane = interact_pane;
 
+    // adding instruction overlay to the bottom of the outer pane
     outer_pane
         .getChildren()
         .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
 
     addOverlay("room1", true);
 
-    GameState.isGameStarted = true;
     getTimeLimit();
     setHintCount();
 
@@ -123,10 +144,10 @@ public class MainGame {
         });
 
     // adding both to game pane
-    initialised_game_pane
+    initialisedGamePane
         .getChildren()
-        .add(initialised_game_pane.getChildren().size() - 3, backgroundBlur);
-    initialised_game_pane.getChildren().add(initialised_game_pane.getChildren().size() - 3, room1);
+        .add(initialisedGamePane.getChildren().size() - 3, backgroundBlur);
+    initialisedGamePane.getChildren().add(initialisedGamePane.getChildren().size() - 3, room1);
   }
 
   public static MainGame getInstance() {
@@ -140,14 +161,14 @@ public class MainGame {
       // removing rooms as well
       sub = 2;
     }
-    if (initialised_game_pane.getChildren().size() > 5 - sub) {
-      initialised_game_pane
+    if (initialisedGamePane.getChildren().size() > 5 - sub) {
+      initialisedGamePane
           .getChildren()
-          .remove(initialised_game_pane.getChildren().size() - 1 - 3);
-      initialised_game_pane
+          .remove(initialisedGamePane.getChildren().size() - 1 - 3);
+      initialisedGamePane
           .getChildren()
-          .remove(initialised_game_pane.getChildren().size() - 1 - 3);
-      initialised_game_pane.requestFocus();
+          .remove(initialisedGamePane.getChildren().size() - 1 - 3);
+      initialisedGamePane.requestFocus();
     }
   }
 
@@ -178,7 +199,8 @@ public class MainGame {
 
     // move after animating as it will change direction of character
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
-      if (!character.isAnimating()) character.startAnimation();
+      if (!character.isAnimating())
+        character.startAnimation();
       character.move();
     }
   }
@@ -241,7 +263,8 @@ public class MainGame {
                     if (GameState.hintsRemaining - 1 >= 0) {
                       GameState.hintsRemaining -= 1;
                       System.out.println("Hints remaining: " + GameState.hintsRemaining);
-                    } else GameState.hintsRemaining = 0;
+                    } else
+                      GameState.hintsRemaining = 0;
                   }
 
                   addChat(msg, true);
@@ -281,11 +304,11 @@ public class MainGame {
 
   public static void enableInteractPane() {
     // fade in interact pane
-    initialised_interact_pane.setVisible(true);
-    initialised_interact_pane.setDisable(false);
+    initialisedInteractPane.setVisible(true);
+    initialisedInteractPane.setDisable(false);
     FadeTransition ft = new FadeTransition();
     ft.setDuration(javafx.util.Duration.millis(500));
-    ft.setNode(initialised_interact_pane);
+    ft.setNode(initialisedInteractPane);
     ft.setFromValue(0);
     ft.setToValue(1);
     ft.play();
@@ -293,8 +316,8 @@ public class MainGame {
 
   public static void disableInteractPane() {
     // fade out interact pane
-    initialised_interact_pane.setDisable(true);
-    initialised_interact_pane.setOpacity(0);
+    initialisedInteractPane.setDisable(true);
+    initialisedInteractPane.setOpacity(0);
   }
 
   @FXML
@@ -309,19 +332,19 @@ public class MainGame {
     System.out.println("start game");
     switch (GameState.gameMode[1]) {
       case "2 minutes":
-        timer_initiated.setText("120");
+        timerInitiated.setText("120");
         setTimeLimit(120);
         break;
       case "4 minutes":
-        timer_initiated.setText("240");
+        timerInitiated.setText("240");
         setTimeLimit(240);
         break;
       case "6 minutes":
-        timer_initiated.setText("360");
+        timerInitiated.setText("360");
         setTimeLimit(360);
         break;
       default:
-        timer_initiated.setText("120");
+        timerInitiated.setText("120");
         setTimeLimit(120);
         break;
     }
@@ -333,42 +356,41 @@ public class MainGame {
    * @param timeLimit
    */
   private void setTimeLimit(int timeLimit) {
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
-              if (GameState.winTheGame || GameState.timeLimitReached) {
-                break;
-              }
-              int time = currentTime;
-              int minutes = time / 60;
-              int seconds = time % 60;
-              String formattedTime = String.format("%02d:%02d", minutes, seconds);
-              Platform.runLater(
-                  () -> {
-                    timer_initiated.setText(formattedTime);
-                    InstructionsLoad.setTime(formattedTime);
-                    // update hint count every cycle
-                    updateHintCount();
-                  });
-              try {
-                Thread.sleep(1000);
-              } catch (InterruptedException e) {
-                return null;
-              }
-            }
-            Platform.runLater(
-                () -> {
-                  try {
-                    handleTimeLimitReached();
-                  } catch (IOException e) {
-                    e.printStackTrace();
-                  }
-                });
+    Task<Void> task = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
+          if (GameState.winTheGame || GameState.timeLimitReached) {
+            break;
+          }
+          int time = currentTime;
+          int minutes = time / 60;
+          int seconds = time % 60;
+          String formattedTime = String.format("%02d:%02d", minutes, seconds);
+          Platform.runLater(
+              () -> {
+                timerInitiated.setText(formattedTime);
+                InstructionsLoad.setTime(formattedTime);
+                // update hint count every cycle
+                updateHintCount();
+              });
+          try {
+            Thread.sleep(1000);
+          } catch (InterruptedException e) {
             return null;
           }
-        };
+        }
+        Platform.runLater(
+            () -> {
+              try {
+                handleTimeLimitReached();
+              } catch (IOException e) {
+                e.printStackTrace();
+              }
+            });
+        return null;
+      }
+    };
     timeLimitThread = new Thread(task);
     timeLimitThread.setDaemon(true);
     timeLimitThread.start();
@@ -384,9 +406,6 @@ public class MainGame {
     GameState.timeLimitReached = true;
     if (!GameState.winTheGame) {
       System.out.println("time limit reached");
-      // outer_pane
-      //     .getChildren()
-      //     .add((Region) FXMLLoader.load(App.class.getResource("/fxml/end_menu.fxml")));
       App.setRoot("end_menu");
     }
   }
@@ -395,16 +414,16 @@ public class MainGame {
     // setting hint count
     switch (GameState.gameMode[0]) {
       case "EASY":
-        hint_initiated.setText("Hint: \u221E");
+        hintInitiated.setText("Hint: \u221E");
         break;
       case "MEDIUM":
-        hint_initiated.setText("Hint: 5");
+        hintInitiated.setText("Hint: 5");
         break;
       case "HARD":
-        hint_initiated.setText("Hint: None");
+        hintInitiated.setText("Hint: None");
         break;
       default:
-        hint_initiated.setText("Hint: \u221E");
+        hintInitiated.setText("Hint: \u221E");
         break;
     }
   }
@@ -412,7 +431,7 @@ public class MainGame {
   /** Updates the hint count. */
   private void updateHintCount() {
     if (GameState.gameMode[0].equals("MEDIUM")) {
-      hint_initiated.setText("Hint: " + Integer.toString(GameState.hintsRemaining));
+      hintInitiated.setText("Hint: " + Integer.toString(GameState.hintsRemaining));
     } else {
       return;
     }
@@ -420,14 +439,13 @@ public class MainGame {
 
   private static void updateInventoryUI() {
 
-    List<ImageView> inventoryItems =
-        List.of(
-            item1_initiated,
-            item2_initiated,
-            item3_initiated,
-            item4_initiated,
-            item5_initiated,
-            item6_initiated);
+    List<ImageView> inventoryItems = List.of(
+        item1Initiated,
+        item2Initiated,
+        item3Initiated,
+        item4Initiated,
+        item5Initiated,
+        item6Initiated);
     for (int i = 0; i < inventoryItems.size(); i++) {
       if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());

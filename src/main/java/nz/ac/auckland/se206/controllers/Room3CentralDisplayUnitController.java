@@ -29,11 +29,24 @@ public class Room3CentralDisplayUnitController {
   @FXML private Character character;
   @FXML
   private Rectangle a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y, z;
-  @FXML private Rectangle one1, two2, three3, four4, five5, six6, seven7, eight8, nine9, zero0;
-  @FXML private Rectangle slash, clear, delete, execute;
+  @FXML private Rectangle one1;
+  @FXML private Rectangle two2;
+  @FXML private Rectangle three3;
+  @FXML private Rectangle four4;
+  @FXML private Rectangle five5;
+  @FXML private Rectangle six6;
+  @FXML private Rectangle seven7;
+  @FXML private Rectangle eight8;
+  @FXML private Rectangle nine9;
+  @FXML private Rectangle zero0;
+  @FXML private Rectangle slash;
+  @FXML private Rectangle clear;
+  @FXML private Rectangle delete;
+  @FXML private Rectangle execute;
   @FXML private Text displayInput;
   @FXML private TextField displayOutput;
-  @FXML private ImageView lock, CentralDisplayUnit;
+  @FXML private ImageView lock;
+  @FXML private ImageView CentralDisplayUnit;
   @FXML private ProgressIndicator progress;
 
   protected List<Rectangle> allButtons;
@@ -87,13 +100,19 @@ public class Room3CentralDisplayUnitController {
     }
   }
 
+  /**
+   * This method automatically adds slash if coreect first two letter of current location entered.
+   */
   protected void addSlashIfEnteredCurrentCity() {
+
     String currentText = displayOutput.getText();
+    // Convert the first two letters of the current city to uppercase
     String firstTwoDeparture =
         GameState.currentCities[GameState.currentCityIndex - 1]
             .getText()
             .substring(0, 2)
             .toUpperCase();
+    // Add slash if the first two letters of the current city is entered
     if (currentText.equalsIgnoreCase(firstTwoDeparture)) {
       displayOutput.setText(currentText + "/");
     }

@@ -54,7 +54,7 @@
                               <Image url="@../images/ai_img.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="speechBubble" fitHeight="130.0" fitWidth="369.0" layoutX="26.0" pickOnBounds="true" AnchorPane.bottomAnchor="107.0">
+                        <ImageView fx:id="speechBubble" visible="false" fitHeight="130.0" fitWidth="369.0" layoutX="26.0" pickOnBounds="true" AnchorPane.bottomAnchor="107.0">
 
                            <image>
                               <Image url="@../images/chat_speech_bubble.png" />

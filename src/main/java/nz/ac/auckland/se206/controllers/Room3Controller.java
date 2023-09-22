@@ -17,39 +17,43 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3Controller {
 
-  @FXML
-  private Rectangle computer,
-      computer2,
-      chair1,
-      chair2,
-      gate,
-      radar,
-      boundary1,
-      boundary2,
-      boundary3,
-      boundary4,
-      boundary5,
-      depBoard,
-      desk1,
-      desk2,
-      bound1,
-      bound2,
-      bound3,
-      paper,
-      clickableComputer,
-      clickableRadar,
-      clickableDoor,
-      worldMap;
-  @FXML private Circle box1, box2, box3, box4, box5;
+  @FXML private Rectangle computer;
+  @FXML private Rectangle computer2;
+  @FXML private Rectangle chair1;
+  @FXML private Rectangle chair2;
+  @FXML private Rectangle gate;
+  @FXML private Rectangle radar;
+  @FXML private Rectangle boundary1;
+  @FXML private Rectangle boundary2;
+  @FXML private Rectangle boundary3;
+  @FXML private Rectangle boundary4;
+  @FXML private Rectangle boundary5;
+  @FXML private Rectangle depBoard;
+  @FXML private Rectangle desk1;
+  @FXML private Rectangle desk2;
+  @FXML private Rectangle bound1;
+  @FXML private Rectangle bound2;
+  @FXML private Rectangle bound3;
+  @FXML private Rectangle paper;
+  @FXML private Rectangle clickableComputer;
+  @FXML private Rectangle clickableRadar;
+  @FXML private Rectangle clickableDoor;
+  @FXML private Rectangle worldMap;
+  @FXML private Circle box1;
+  @FXML private Circle box2;
+  @FXML private Circle box3;
+  @FXML private Circle box4;
+  @FXML private Circle box5;
   @FXML private Character character;
   @FXML private AnchorPane radarPane;
-  @FXML public ImageView map, paperImage;
+  @FXML private ImageView map, paperImage;
   @FXML private Pane clickPane;
 
   private ArrayList<Rectangle> obstacles;
 
   public void initialize() throws ApiProxyException {
 
+    // Generate a random city destnation name for the puzzle game  if it is not set
     if (GameState.arrangedDestnationCity == "") {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getRandomCity(),
@@ -80,6 +84,7 @@ public class Room3Controller {
       MainGame.enableInteractPane();
     }
 
+    // Generate a introduction message for puzzle game when player first enters room.
     if (GameState.puzzleIntroMessageRoom3 == "") {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
@@ -96,10 +101,12 @@ public class Room3Controller {
       boundary2, boundary3, boundary4, boundary5, bound1, bound2, bound3
     };
 
+    // Add all the obstacles to the list.
     for (Rectangle rectangle : rectangles) {
       this.obstacles.add(rectangle);
     }
 
+    // Enable the character movement.
     character.enableMobility(obstacles, clickPane.getChildren());
 
     switch (GameState.prevRoom) {
@@ -121,14 +128,23 @@ public class Room3Controller {
     GameState.prevRoom = 3;
   }
 
+  /**
+   * This method makes the city name unarranged
+   *
+   * @param cityName the city name to be unarranged
+   * @return the unarranged city name
+   */
   protected String makeUnarrangedCityName(String cityName) {
     String unarrangedCityName = "";
     int length = cityName.length();
     int[] randomNumbers = new int[length];
+    // Initialize the array of random numbers
     for (int i = 0; i < length; i++) {
       randomNumbers[i] = i;
     }
     Random random = new Random();
+
+    // Shuffle the array of random numbers to make the city name unarranged
     for (int i = 0; i < length; i++) {
       int randomIndexToSwap = random.nextInt(length);
       int temp = randomNumbers[randomIndexToSwap];
@@ -165,8 +181,15 @@ public class Room3Controller {
   }
 
   @FXML
+  /**
+   * This method is called when the puzzle is clicked It will open the puzzle game.
+   *
+   * @throws IOException
+   * @throws ApiProxyException
+   */
   public void onClickPuzzle() throws IOException, ApiProxyException {
     System.out.println("destnation city is " + GameState.arrangedDestnationCity);
+    // Add the puzzle game overlay
     MainGame.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened the unarranged word puzzle game. The correct city"
@@ -186,11 +209,21 @@ public class Room3Controller {
   }
 
   @FXML
+  /**
+   * This method is called when the map is clicked It will open the map and set the GameState to
+   * true
+   *
+   * @throws IOException
+   * @throws ApiProxyException
+   */
   public void onClickMap() throws IOException, ApiProxyException {
-    if (!GameState.isWorldMapOpened) GameState.isWorldMapOpened = true;
+    if (!GameState.isWorldMapOpened) {
+      GameState.isWorldMapOpened = true;
+    }
 
     System.out.println("Location clicked");
     MainGame.addOverlay("gps_current", false);
+    // Generate GPT response to keep updated.
     GameState.eleanorAi.runGpt(
         "User update: User has opened the world map and achnowledge the current location. No need"
             + " to respond to this message.");
