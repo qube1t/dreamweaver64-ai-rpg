@@ -43,3 +43,13 @@
     -fx-font-family: 'Abaddon Light';
     -fx-font-size: 13px;
 }
+
+.momLetter {
+    -fx-font-family: 'Abaddon Bold';
+    -fx-font-size: 23px;
+}
+
+.encryptedMessage {
+    -fx-font-family: 'Abaddon Bold';
+    -fx-font-size: 15px;
+}

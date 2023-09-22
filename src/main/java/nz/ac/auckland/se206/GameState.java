@@ -86,7 +86,7 @@ public class GameState {
   public static boolean isAircraftCodeFound = false;
 
   /** Indicates the location of the treasure box. */
-  public static int currentBox = 3;
+  public static int currentBox = -1;
 
   /** Stored the randomly generated destnation cities */
   public static String[] destnationCities = new String[8];

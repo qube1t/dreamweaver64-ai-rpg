@@ -197,6 +197,10 @@ public class Room2Controller {
       box4.setDisable(true);
       box5.setDisable(true);
     }
+
+    if (GameState.currentBox == -1) {
+      Helper.changeTreasureBox(GameState.currentBox);
+    }
   }
 
   /**
