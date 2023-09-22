@@ -41,13 +41,12 @@ public class GptPromptEngineeringRoom3 {
    *
    * @return the generated prompt engineering string
    */
-  public static String getRandomCity() {
-    return "Generate 1 random and real city name with one word and less than 11 characters that"
-        + " must be different from the example provided and different from any previous"
-        + " response in your memory. "
-        + " This will be used in a puzzle game in this room, only reply with the"
-        + " city name surrounded between ^, example  ^Chicago^ ^Paris^ ^Tokyo^"
-        + " ^Seattle^ ^Shanghai^ ^London^ ^Sydney^ ";
+  public static String getEightRandomCity() {
+    return "Produce a list of 8 random and real city names "
+        + "with one word and less than 11 characters and must be different from the example provided."
+        + "Only reply with the"
+        + " city name surrounded between ^, example ^Chicago^ ^Delhi^ ^Tokyo^"
+        + " ^Seattle^ ^Shanghai^ ^Stockholm^ ^Sydney^ ^Paris^";
   }
 
   public static String getIntroPuzzleMessage() {
