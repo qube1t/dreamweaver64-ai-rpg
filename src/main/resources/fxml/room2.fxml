@@ -123,7 +123,7 @@
             </ImageView>
             <ScrollPane fx:id="speechBubbleScrollPane" layoutX="13.0" layoutY="6.0" prefHeight="76.0" prefWidth="180.0">
               <content>
-                  <Label fx:id="gptResponse" alignment="TOP_CENTER" prefHeight="113.0" prefWidth="163.0" textAlignment="CENTER" wrapText="true">
+                  <Label fx:id="gptResponse" alignment="TOP_CENTER" prefHeight="113.0" prefWidth="163.0" styleClass="aiInputField" stylesheets="@../css/font.css" textAlignment="CENTER" wrapText="true">
                      <padding>
                         <Insets top="3.0" />
                      </padding>
