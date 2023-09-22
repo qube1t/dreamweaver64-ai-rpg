@@ -28,7 +28,8 @@ public class GptPromptEngineeringRoom3 {
     return "User update: Give the user a short welcome message, do not include any information of"
         + " next step and surround the message to be displayed to user with * based on the"
         + " mission below.The user now entered an air traffic"
-        + " control tower which was his work in real life. The user needs to interact with different objects including"
+        + " control tower which was his work in real life. The user needs to interact with"
+        + " different objects including"
         + " solving a puzzle to get the aircraft code. The aircraft code combined with"
         + " encrypted message in another room is required to decrypt the letter in this room"
         + " to successfully escape.You need to achknowledge the current state of the game"
@@ -43,7 +44,8 @@ public class GptPromptEngineeringRoom3 {
    */
   public static String getEightRandomCity() {
     return "Produce a list of 8 random and real city names "
-        + "with one word and less than 11 characters and must be different from the example provided."
+        + "with one word and less than 11 characters and must be different from"
+        + " the example provided."
         + "Only reply with the"
         + " city name surrounded between ^, example ^Chicago^ ^Delhi^ ^Tokyo^"
         + " ^Seattle^ ^Shanghai^ ^Stockholm^ ^Sydney^ ^Paris^";

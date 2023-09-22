@@ -45,7 +45,8 @@ public class GptPromptEngineeringRoom1 {
     return "This is the loading stage. Give a riddle in the form of a quote from the book "
         + ansbook
         + " in 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"
-        + " quote before and after with the character ^. The user needs to identify the book " + ansbook
+        + " quote before and after with the character ^. The user needs to identify the book "
+        + ansbook
         + " in the other room, later in the game. Do"
         + " not reveal the book name. You can give hints once the riddle has been asked.";
   }
@@ -61,7 +62,8 @@ public class GptPromptEngineeringRoom1 {
     return "The user has send this message: '"
         + chatInput
         + "'. Reply as a normal human in 1 sentence. If the user asks for hints you must insert"
-        + " the character ~ before every hint so that it is transmited to them. Do not reveal the answer even if the user asks for"
+        + " the character ~ before every hint so that it is transmited to them. Do not reveal"
+        + " the answer even if the user asks for"
         + " it.";
   }
 }

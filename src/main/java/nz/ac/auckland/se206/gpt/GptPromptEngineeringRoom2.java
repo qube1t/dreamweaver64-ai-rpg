@@ -9,7 +9,8 @@ public class GptPromptEngineeringRoom2 {
    * @return the prompt
    */
   public static String room2WelcomeMessage() {
-    return "User update: The user now entered  a pirate's ship which was his favorite childhood video game. You are the"
+    return "User update: The user now entered a pirate's ship which was his favorite"
+        + " childhood video game. You are the"
         + " computer. Do not use pirate colloquite. The player needs to"
         + " interact with different objects including solving a riddle to trade with pirate"
         + " to get the key. Using the key, the player can open the treasure box. You need to"

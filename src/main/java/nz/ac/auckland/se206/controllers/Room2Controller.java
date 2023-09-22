@@ -245,7 +245,8 @@ public class Room2Controller {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) {
 
       GameState.eleanorAi.runGpt(
-          "User update: The pirate has asked the riddle to the user, but has not been solved. You can give hints if the user asks. No reply is required");
+          "User update: The pirate has asked the riddle to the user, but has not been solved."
+              + " You can give hints if the user asks. No reply is required");
 
       // if the player get wrong book, the message will be displayed
       if (GameState.takenBook != null) {
@@ -267,7 +268,9 @@ public class Room2Controller {
       }
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
       GameState.eleanorAi.runGpt(
-          "User update: The user has solved the book riddle. They have received the key. To find the treasure box, they needs to look at the radar. No reply is required");
+          "User update: The user has solved the book riddle. They have received the key."
+              + " To find the treasure box, they needs to look at the radar."
+              + " No reply is required");
 
       // if the player get the correct book, the player can trade with pirate
       GameState.isBoxKeyFound = true;
@@ -446,7 +449,8 @@ public class Room2Controller {
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room1", true);
     GameState.eleanorAi
-        .runGpt("User update: User has moved from the pirate ship to his childhood home. No reply is required");
+        .runGpt("User update: User has moved from the pirate ship to "
+            + "his childhood home. No reply is required");
   }
 
   /**
@@ -465,6 +469,7 @@ public class Room2Controller {
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room3", true);
     GameState.eleanorAi.runGpt(
-        "User update: User has moved from the pirate ship to his workplace the ATC tower. No reply is required");
+        "User update: User has moved from the pirate ship to his "
+            + "workplace the ATC tower. No reply is required");
   }
 }

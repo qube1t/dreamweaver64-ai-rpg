@@ -217,7 +217,8 @@ public class Room3Controller {
     MainGameController.disableInteractPane();
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room2", true);
-    GameState.eleanorAi.runGpt("User update: User has moved from ATC to the pirate ship. No reply is required");
+    GameState.eleanorAi.runGpt("User update: User has moved from ATC"
+        + "to the pirate ship. No reply is required");
   }
 
   @FXML
@@ -242,7 +243,8 @@ public class Room3Controller {
         "User update: User has opened the unarranged word puzzle game. The correct city"
             + " name is "
             + GameState.arrangedDestnationCity
-            + ". No reply is needed for this message. If the user ask for hints, give hint without"
+            + ". No reply is needed for this message. If the user ask for"
+            + " hints, give hint without"
             + " revealing the city name.");
   }
 
@@ -250,8 +252,10 @@ public class Room3Controller {
   public void onClickRadar() throws IOException, ApiProxyException {
     MainGameController.addOverlay("radar_computer", false);
     GameState.eleanorAi.runGpt(
-        "User update: User has opened the radar computer and the red point indicates the correct"
-            + " location for treasure box location in the pirate ship. If the user ask for hints give"
+        "User update: User has opened the radar computer and the red point"
+            + " indicates the correct"
+            + " location for treasure box location in the pirate ship. "
+            + "If the user ask for hints give"
             + " the hints. No need to respond to this message.");
   }
 
@@ -273,7 +277,8 @@ public class Room3Controller {
     MainGameController.addOverlay("gps_current", false);
     // Generate GPT response to keep updated.
     GameState.eleanorAi.runGpt(
-        "User update: User has opened the world map and achnowledge the current city location. No need"
+        "User update: User has opened the world map and achnowledge"
+            + " the current city location. No need"
             + " to respond to this message.");
   }
 
@@ -315,7 +320,8 @@ public class Room3Controller {
 
       GameState.eleanorAi.runGpt(
           "User update: User has clicked on the encrypted letter and fail to decrypt. He needs to"
-              + " get both encrypted message in pirate ship and aircraft code to decrypt. Send a response to user"
+              + " get both encrypted message in pirate ship and aircraft code to decrypt. "
+              + "Send a response to user"
               + " without revaling any step. If the user ask for hints give him. Only the message"
               + " surrounded with * will send to user .");
     }
