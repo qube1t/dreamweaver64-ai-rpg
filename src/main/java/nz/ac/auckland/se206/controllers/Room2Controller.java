@@ -94,6 +94,8 @@ public class Room2Controller {
   @FXML
   private ImageView boxKey;
   @FXML
+  private ImageView book;
+  @FXML
   private Character character;
   @FXML
   private Pane interactablePane;
@@ -121,11 +123,6 @@ public class Room2Controller {
   private ScrollPane speechBubbleScrollPane;
   @FXML
   private Label gptResponse;
-
-  private Boolean wrongBoxClicked = false;
-  private Boolean correctBoxClicked = false;
-  private Boolean boxClickedWithoutKey = false;
-  private Boolean firstWrongBookClicked = true;
 
   /**
    * Initializes the room 2, it is called when the room loads.
@@ -189,6 +186,15 @@ public class Room2Controller {
 
     if (GameState.isBoxKeyFound) {
       boxKey.setVisible(false);
+      book.setVisible(true);
+    }
+
+    if (!GameState.isBoxKeyFound) {
+      box1.setDisable(true);
+      box2.setDisable(true);
+      box3.setDisable(true);
+      box4.setDisable(true);
+      box5.setDisable(true);
     }
   }
 
@@ -234,8 +240,7 @@ public class Room2Controller {
   private void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) {
       // if the player get wrong book, the message will be displayed
-      if (GameState.takenBook != null && firstWrongBookClicked) {
-        firstWrongBookClicked = false;
+      if (GameState.takenBook != null) {
         GameState.eleanorAi.runGpt(
             GptPromptEngineeringRoom2.getPirateWrongResponse(),
             (result) -> {
@@ -252,7 +257,13 @@ public class Room2Controller {
     } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
       // if the player get the correct book, the player can trade with pirate
       GameState.isBoxKeyFound = true;
+      box1.setDisable(false);
+      box2.setDisable(false);
+      box3.setDisable(false);
+      box4.setDisable(false);
+      box5.setDisable(false);
       boxKey.setVisible(false);
+      book.setVisible(true);
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom2.getPirateRightResponse(),
           (result) -> {
@@ -279,39 +290,27 @@ public class Room2Controller {
     int boxLocation = GameState.currentBox;
     System.out.println("Number of treasure box: " + boxLocation);
     if (GameState.isBoxKeyFound) {
-      // if the box location is matched with number, the player will get the treasure
-      box1.setDisable(false);
-      box2.setDisable(false);
-      box3.setDisable(false);
-      box4.setDisable(false);
-      box5.setDisable(false);
       if (numOfBox == boxLocation) {
         MainGameController.addOverlay("treasure_box", false);
-        if (!correctBoxClicked) {
-          correctBoxClicked = true;
-          GameState.eleanorAi.runGpt(
-              GptPromptEngineeringRoom2.getPirateRightResponse(),
-              (result) -> {
-                Platform.runLater(
-                    () -> {
-                      displayBubble(result);
-                    });
-              });
-        }
+        GameState.eleanorAi.runGpt(
+            GptPromptEngineeringRoom2.getPirateRightResponse(),
+            (result) -> {
+              Platform.runLater(
+                  () -> {
+                    displayBubble(result);
+                  });
+            });
       } else {
         // if the player has clicked the wrong box, the player will get the wrong
         // message
-        if (!wrongBoxClicked) {
-          wrongBoxClicked = true;
-          GameState.eleanorAi.runGpt(
-              GptPromptEngineeringRoom2.getPirateWrongResponse(),
-              (result) -> {
-                Platform.runLater(
-                    () -> {
-                      displayBubble(result);
-                    });
-              });
-        }
+        GameState.eleanorAi.runGpt(
+            GptPromptEngineeringRoom2.getPirateWrongResponse(),
+            (result) -> {
+              Platform.runLater(
+                  () -> {
+                    displayBubble(result);
+                  });
+            });
         Helper.changeTreasureBox(GameState.currentBox);
       }
     } else {
@@ -321,17 +320,14 @@ public class Room2Controller {
       box3.setDisable(true);
       box4.setDisable(true);
       box5.setDisable(true);
-      if (!boxClickedWithoutKey) {
-        boxClickedWithoutKey = true;
-        GameState.eleanorAi.runGpt(
-            GptPromptEngineeringRoom2.getPirateNoKeyResponse(),
-            (result) -> {
-              Platform.runLater(
-                  () -> {
-                    displayBubble(result);
-                  });
-            });
-      }
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom2.getPirateNoKeyResponse(),
+          (result) -> {
+            Platform.runLater(
+                () -> {
+                  displayBubble(result);
+                });
+          });
     }
   }
 
