@@ -294,6 +294,8 @@ public class MainGameController {
       speechBubble.setVisible(false);
       bubbleTextPane.setVisible(false);
       chatPane.setMouseTransparent(false);
+      bubbleTextPane.setMouseTransparent(true);
+      aiCharacterPane.setMouseTransparent(true);
     } else {
       // hide chatPane
       chatPane.setDisable(true);
@@ -350,6 +352,9 @@ public class MainGameController {
     if (chatPane.isDisable()) {
       speechBubble.setVisible(true);
       bubbleTextPane.setVisible(true);
+
+      bubbleTextPane.setMouseTransparent(false);
+      aiCharacterPane.setMouseTransparent(false);
     }
 
     // adding to chatbox
@@ -363,14 +368,17 @@ public class MainGameController {
     List<Label> items = chat.getItems();
     int index = items.size();
     items.add(label);
-    chat.scrollTo(index);
+    chat.scrollTo(index + 1);
   }
 
   @FXML
-  private void clickedOuterPane() {
+  private void clickedGamePane() {
     // hide chat bubble
     speechBubble.setVisible(false);
     bubbleTextPane.setVisible(false);
+
+    bubbleTextPane.setMouseTransparent(true);
+    aiCharacterPane.setMouseTransparent(true);
   }
 
   public void getTimeLimit() {

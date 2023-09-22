@@ -16,6 +16,7 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -216,17 +217,6 @@ public class Room2Controller {
           }
         });
 
-    // get the unencrypted message from GPT
-    GameState.eleanorAi.runGpt(
-        GptPromptEngineeringRoom2.generateFinalUnencrypted(),
-        s -> {
-          List<String> msg = Helper.getTextBetweenChar(s, "+");
-          if (msg.size() > 0) {
-            GameState.finalMsg = msg.get(0);
-          } else {
-            GameState.finalMsg = s;
-          }
-        });
   }
 
   /**
@@ -239,6 +229,10 @@ public class Room2Controller {
   @FXML
   private void onGetTrade(MouseEvent event) throws IOException, ApiProxyException {
     if (!GameState.isBookFound && GameState.pirateRiddle != null) {
+
+      GameState.eleanorAi.runGpt(
+          "User update: the user has engaged with the pirate, but does not have the correct book. No reply is required");
+
       // if the player get wrong book, the message will be displayed
       if (GameState.takenBook != null) {
         GameState.eleanorAi.runGpt(
@@ -246,7 +240,10 @@ public class Room2Controller {
             (result) -> {
               Platform.runLater(
                   () -> {
-                    displayBubble(result);
+                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                    if (pirateDialogue.size() > 0) {
+                      displayBubble(result.replace("^", ""));
+                    }
                   });
             });
       } else {
@@ -269,7 +266,10 @@ public class Room2Controller {
           (result) -> {
             Platform.runLater(
                 () -> {
-                  displayBubble(result);
+                  List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                  if (pirateDialogue.size() > 0) {
+                    displayBubble(result.replace("^", ""));
+                  }
                 });
           });
       // add key image to the inventory
@@ -290,6 +290,7 @@ public class Room2Controller {
     int boxLocation = GameState.currentBox;
     System.out.println("Number of treasure box: " + boxLocation);
     if (GameState.isBoxKeyFound) {
+
       if (numOfBox == boxLocation) {
         MainGameController.addOverlay("treasure_box", false);
         GameState.eleanorAi.runGpt(
@@ -297,7 +298,10 @@ public class Room2Controller {
             (result) -> {
               Platform.runLater(
                   () -> {
-                    displayBubble(result);
+                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                      if (pirateDialogue.size() > 0) {
+                        displayBubble(result.replace("^", ""));
+                      }
                   });
             });
       } else {
@@ -308,7 +312,10 @@ public class Room2Controller {
             (result) -> {
               Platform.runLater(
                   () -> {
-                    displayBubble(result);
+                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                      if (pirateDialogue.size() > 0) {
+                        displayBubble(result.replace("^", ""));
+                      }
                   });
             });
         Helper.changeTreasureBox(GameState.currentBox);
@@ -320,12 +327,16 @@ public class Room2Controller {
       box3.setDisable(true);
       box4.setDisable(true);
       box5.setDisable(true);
+
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom2.getPirateNoKeyResponse(),
           (result) -> {
             Platform.runLater(
                 () -> {
-                  displayBubble(result);
+                  List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                      if (pirateDialogue.size() > 0) {
+                        displayBubble(result.replace("^", ""));
+                      }
                 });
           });
     }

@@ -12,12 +12,12 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" onMouseClicked="#clickedOuterPane" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGameController">
+<StackPane fx:id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGameController">
 
    <children>
       <VBox fx:id="interactPane" disable="true" prefHeight="560.0" prefWidth="706.0" visible="false">
          <children>
-            <AnchorPane prefHeight="50.0" prefWidth="700.0" style="-fx-border-color: pink;">
+            <AnchorPane prefHeight="50.0" prefWidth="700.0">
                <children>
                   <ImageView fitWidth="700.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <image>
@@ -41,7 +41,7 @@
                      </font>
                   </Label>
                </children></AnchorPane>
-            <StackPane fx:id="gamePane" prefHeight="750.0" style="-fx-border-color: blue; -fx-background-color: black;">
+            <StackPane fx:id="gamePane" onMouseClicked="#clickedGamePane" prefHeight="750.0" style="-fx-background-color: black;">
                <children>
                   <AnchorPane fx:id="aiCharacterPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="152.0" prefWidth="389.0" StackPane.alignment="BOTTOM_LEFT">
                      <StackPane.margin>
@@ -54,7 +54,7 @@
                               <Image url="@../images/ai_img.png" />
                            </image>
                         </ImageView>
-                        <ImageView fx:id="speechBubble" visible="false" fitHeight="130.0" fitWidth="369.0" layoutX="26.0" pickOnBounds="true" AnchorPane.bottomAnchor="107.0">
+                        <ImageView fx:id="speechBubble" fitHeight="130.0" fitWidth="369.0" layoutX="26.0" pickOnBounds="true" visible="false" AnchorPane.bottomAnchor="107.0">
 
                            <image>
                               <Image url="@../images/chat_speech_bubble.png" />
@@ -62,13 +62,13 @@
                         </ImageView>
 
 
-                        <ScrollPane fx:id="bubbleTextPane" fitToHeight="true" fitToWidth="true" layoutX="52.0" layoutY="7.0" minWidth="300.0" prefHeight="68.0" prefWidth="331.0" style="-fx-background-color: white;" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" visible="false" />
+                        <ScrollPane fx:id="bubbleTextPane" fitToHeight="true" fitToWidth="true" layoutX="39.0" layoutY="7.0" minWidth="300.0" prefHeight="84.0" prefWidth="344.0" style="-fx-background-color: white;" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" visible="false" />
 
 
 
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="chatPane" disable="true" maxHeight="-Infinity" opacity="0.0" prefHeight="144.0" prefWidth="704.0" style="-fx-border-color: green; -fx-background-color: black;" AnchorPane.bottomAnchor="0.0" StackPane.alignment="BOTTOM_CENTER">
+                  <AnchorPane fx:id="chatPane" disable="true" maxHeight="-Infinity" opacity="0.0" prefHeight="144.0" prefWidth="704.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" StackPane.alignment="BOTTOM_CENTER">
                   <children>
                         <ListView fx:id="chat" blendMode="LIGHTEN" focusTraversable="false" layoutX="-2.0" layoutY="6.0" maxHeight="-Infinity" prefHeight="98.0" prefWidth="611.0" style="-fx-background-color: black; -fx-border-color: orange; -fx-border-width: 4px;" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0">
 </ListView>
