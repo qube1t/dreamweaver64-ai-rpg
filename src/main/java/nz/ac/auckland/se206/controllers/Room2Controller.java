@@ -235,7 +235,10 @@ public class Room2Controller {
             (result) -> {
               Platform.runLater(
                   () -> {
-                    displayBubble(result);
+                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                    if (pirateDialogue.size() > 0) {
+                      displayBubble(result.replace("^", ""));
+                    }
                   });
             });
       } else {
@@ -252,7 +255,10 @@ public class Room2Controller {
           (result) -> {
             Platform.runLater(
                 () -> {
-                  displayBubble(result);
+                  List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                  if (pirateDialogue.size() > 0) {
+                    displayBubble(result.replace("^", ""));
+                  }
                 });
           });
       // add key image to the inventory
@@ -291,7 +297,10 @@ public class Room2Controller {
               (result) -> {
                 Platform.runLater(
                     () -> {
-                      displayBubble(result);
+                      List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                      if (pirateDialogue.size() > 0) {
+                        displayBubble(result.replace("^", ""));
+                      }
                     });
               });
         }
@@ -305,7 +314,10 @@ public class Room2Controller {
               (result) -> {
                 Platform.runLater(
                     () -> {
-                      displayBubble(result);
+                      List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                      if (pirateDialogue.size() > 0) {
+                        displayBubble(result.replace("^", ""));
+                      }
                     });
               });
         }
@@ -325,7 +337,10 @@ public class Room2Controller {
             (result) -> {
               Platform.runLater(
                   () -> {
-                    displayBubble(result);
+                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                    if (pirateDialogue.size() > 0) {
+                      displayBubble(result.replace("^", ""));
+                    }
                   });
             });
       }
