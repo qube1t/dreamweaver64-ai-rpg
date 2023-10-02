@@ -139,8 +139,7 @@ public class Room3Controller {
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
-        computer, computer2, chair1, chair2, gate, radar, desk1, desk2, depBoard, boundary1,
-        boundary2, boundary3, boundary4, boundary5, bound1, bound2, bound3
+        computer, boundary1, boundary2, gate,
     };
 
     // Add all the obstacles to the list.
