@@ -50,11 +50,7 @@ public class Room3Controller {
   @FXML
   private Rectangle boundary5;
   @FXML
-  private Rectangle depBoard;
-  @FXML
-  private Rectangle desk1;
-  @FXML
-  private Rectangle desk2;
+  private Rectangle decrypt;
   @FXML
   private Rectangle bound1;
   @FXML
@@ -139,7 +135,7 @@ public class Room3Controller {
             GameState.arrangedDestnationCity = (cities.get(GameState.destnationCityIndex));
             // Print the array
             System.out.println("Arranged:" + GameState.destnationCities.toString());
-            System.out.println("current city is " + GameState.arrangedDestnationCity);
+            System.out.println("Destnation city is " + GameState.arrangedDestnationCity);
 
             GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
 
@@ -175,7 +171,10 @@ public class Room3Controller {
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
-        computer, boundary1, boundary2, gate,
+        computer, boundary1, boundary2, boundary3, boundary4, boundary5, gate,
+        bound1, bound2, bound3, computer, computer2,
+        radar,
+        chair1, chair2, decrypt
     };
 
     // Add all the obstacles to the list.
