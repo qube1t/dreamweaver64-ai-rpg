@@ -377,9 +377,12 @@ public class Room2Controller {
    * @return the thread
    */
   private Thread flashBox() {
+    for (Rectangle box : treasureBoxes) {
+      box.setVisible(false);
+    }
     return new Thread(() -> {
       try {
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 6; i++) {
           for (Rectangle box : treasureBoxes) {
             if (box.isVisible()) {
               box.setVisible(false);
@@ -387,7 +390,7 @@ public class Room2Controller {
               box.setVisible(true);
             }
           }
-          Thread.sleep(500);
+          Thread.sleep(300);
         }
       } catch (InterruptedException e) {
         e.printStackTrace();
