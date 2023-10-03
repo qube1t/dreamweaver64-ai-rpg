@@ -4,7 +4,10 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <?import nz.ac.auckland.se206.components.Character?>
 
@@ -38,6 +41,12 @@
                   <Image url="@../images/rooms/room3/1.png" />
                </image>
             </ImageView>
+            <Circle fx:id="point1" fill="#ff1f1f" layoutX="310.0" layoutY="72.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text fx:id="label5" fill="#30ff35" layoutX="183.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEATTLE">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Text>
             <Rectangle fx:id="boundary1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" layoutX="25.0" layoutY="354.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="499.0" />
             <Rectangle fx:id="boundary2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" layoutX="76.0" layoutY="20.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="391.0" />
             <Rectangle fx:id="gate" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" layoutX="525.0" layoutY="162.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
@@ -59,6 +68,30 @@
                   <Image url="@../images/rooms/room3/map_on_computer.png" />
                </image>
             </ImageView>
+            <Circle fx:id="point3" fill="#ff1f1f" layoutX="387.0" layoutY="114.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="point2" fill="#ff1f1f" layoutX="196.0" layoutY="65.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="point4" fill="#ff1f1f" layoutX="360.0" layoutY="70.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="point5" fill="#ff1f1f" layoutX="175.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Text fx:id="label2" fill="#30ff35" layoutX="206.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOUSTON">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="label1" fill="#30ff35" layoutX="320.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DUBAI">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="label4" fill="#30ff35" layoutX="320.0" layoutY="62.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SHANGHAI">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Text>
+            <Text fx:id="label3" fill="#30ff35" layoutX="326.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SYDNEY">
+               <font>
+                  <Font name="Impact" size="18.0" />
+               </font>
+            </Text>
          </children>
       </Pane>
       <StackPane>
