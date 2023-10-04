@@ -31,7 +31,10 @@ public class MachineController {
 
     public void initialize() {
 
+        // Initialise the image set of size 3
         imageSet = new ArrayList<>();
+        imageSet.add(0, null);
+        imageSet.add(1, null);
         // Set up the drag over event handler and only allow drop into 2 inventory
         // boxes.
         machinePane.setOnDragOver(event -> {
@@ -62,17 +65,50 @@ public class MachineController {
                     dropItem(2);
                 }
             }
+            // Put rectangles to the front
+            inventory1.toFront();
+            inventory2.toFront();
             event.setDropCompleted(true);
             event.consume();
         });
     }
 
+    @FXML
+    private void onClickBox1() {
+        if (position1Taken == 1) {
+            System.out.println("Box 1 clicked");
+            // Find the ImageView by id
+            ImageView itemToRemove = (ImageView) machinePane.lookup("#item1");
+
+            // Remove the image from the machinePane
+            machinePane.getChildren().remove(itemToRemove);
+            // Add the item to the obtained items
+            MainGameController.addObtainedItem(imageSet.get(0).getOriginalImage(),
+                    imageSet.get(0).getId());
+            position1Taken = 0;
+        }
+    }
+
+    @FXML
+    private void onClickBox2() {
+        if (position2Taken == 1) {
+            System.out.println("return 2");
+            // Find the ImageView by id
+            ImageView itemToRemove = (ImageView) machinePane.lookup("#item2");
+            machinePane.getChildren().remove(itemToRemove);
+            MainGameController.addObtainedItem(imageSet.get(1).getOriginalImage(), imageSet.get(1).getId());
+            position2Taken = 0;
+        }
+
+    }
+
     private void dropItem(int positionNumber) {
         ImageView item = new ImageView(MainGameController.getImageSet().getOriginalImage());
-        imageSet.add(MainGameController.getImageSet());
+        imageSet.add(positionNumber - 1, MainGameController.getImageSet());
         item.setFitHeight(40);
         item.setPreserveRatio(true);
         machinePane.getChildren().add(item);
+        item.setId("item" + positionNumber);
         if (positionNumber == 1) {
             item.setLayoutX(POSITION_X_1);
             item.setLayoutY(POSITION_Y_1);
