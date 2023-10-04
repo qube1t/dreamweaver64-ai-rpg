@@ -8,7 +8,6 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -24,11 +23,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.CustomClipboardContent;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.ObtainedItemsWithId;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.components.CustomImageSet;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -53,6 +52,7 @@ public class MainGameController {
   private static ImageView item4Initiated;
   private static ImageView item5Initiated;
   private static ImageView item6Initiated;
+  private static CustomImageSet imageSet;
 
   public static MainGameController getInstance() {
     return instance;
@@ -76,9 +76,19 @@ public class MainGameController {
 
       item.setOnDragDetected(
           event -> {
-            Dragboard dragboard = item.startDragAndDrop(TransferMode.ANY);
+            Image originalImage = item.getImage();
+            ImageView originalImageView = new ImageView(originalImage);
+
+            originalImageView.setFitHeight(40); // Set the desired height
+            originalImageView.setFitWidth(40);
+
+            imageSet = new CustomImageSet(originalImage);
+
+            // Create a new ClipboardContent with the custom drag image
             ClipboardContent content = new ClipboardContent();
-            content.putImage(item.getImage());
+            Dragboard dragboard = item.startDragAndDrop(TransferMode.ANY);
+            // Store the custom image set in the Dragboard
+            content.putImage(originalImageView.snapshot(null, null));
             dragboard.setContent(content);
             GameState.currentDraggedItemIndex = obtainedItems.get(id).getId();
             event.consume();
@@ -96,6 +106,10 @@ public class MainGameController {
       }
     }
 
+  }
+
+  public static CustomImageSet getImageSet() {
+    return imageSet;
   }
 
   public static void addObtainedItem(Image itemImage, String itemId) {

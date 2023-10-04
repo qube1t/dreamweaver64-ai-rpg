@@ -145,7 +145,7 @@ public class Room3CentralDisplayUnitController {
         zero0);
     this.allButtons = allButtons;
 
-    if (GameState.isPuzzleInRoom3Solved && GameState.isWorldMapOpened) {
+    if (GameState.isPuzzleInRoom3Solved) {
       if (GameState.isAircraftCodeFound) {
         centralDisplayUnit.setOpacity(0.7);
         displayOutput.setText("");
