@@ -326,42 +326,43 @@ public class Room3Controller {
   public void clickMachineEvent() throws IOException, ApiProxyException {
     GameState.isMachineOpen = true;
     MainGameController.addOverlay("decryption_machine", false);
-    if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
-      paperImage.setVisible(false);
-      System.out.println("Decrypted letter released");
-      // get the unencrypted message from GPT
+    // if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
 
-      GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom2.generateFinalUnencrypted(),
-          s -> {
-            List<String> msg = Helper.getTextBetweenChar(s, "+");
-            if (msg.size() > 0) {
-              GameState.finalMsg = msg.get(0);
-            } else {
-              GameState.finalMsg = s;
-            }
-          });
+    // GameState.eleanorAi.runGpt(
+    // GptPromptEngineeringRoom2.generateFinalUnencrypted(),
+    // s -> {
+    // List<String> msg = Helper.getTextBetweenChar(s, "+");
+    // if (msg.size() > 0) {
+    // GameState.finalMsg = msg.get(0);
+    // } else {
+    // GameState.finalMsg = s;
+    // }
+    // });
 
-      GameState.eleanorAi.runGpt(
-          "User update: User has successfully decrypted the letter based on the objects he got. He"
-              + " can now click the main door to exit. Send a response to user without revealing"
-              + " the exit / main door and surrounded with * .");
-      // Set the aircraft code image to inventory.
-      Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
+    // GameState.eleanorAi.runGpt(
+    // "User update: User has successfully decrypted the letter based on the objects
+    // he got. He"
+    // + " can now click the main door to exit. Send a response to user without
+    // revealing"
+    // + " the exit / main door and surrounded with * .");
+    // // Set the aircraft code image to inventory.
+    // Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
 
-      MainGameController.removeObtainedItem("aircraftCode");
-      MainGameController.removeObtainedItem("treasure");
-      MainGameController.addObtainedItem(decryptedLetter, "decryptedLetter");
-      GameState.hasDecrypted = true;
-    } else {
+    // MainGameController.removeObtainedItem("aircraftCode");
+    // MainGameController.removeObtainedItem("treasure");
+    // MainGameController.addObtainedItem(decryptedLetter, "decryptedLetter");
+    // GameState.hasDecrypted = true;
+    // } else {
 
-      GameState.eleanorAi.runGpt(
-          "User update: User has clicked on the encrypted letter and fail to decrypt. He needs to"
-              + " get both encrypted message in pirate ship and aircraft code to decrypt. "
-              + "Send a response to user"
-              + " without revaling any step. If the user ask for hints give him. Only the message"
-              + " surrounded with * will send to user .");
-    }
+    // GameState.eleanorAi.runGpt(
+    // "User update: User has clicked on the encrypted letter and fail to decrypt.
+    // He needs to"
+    // + " get both encrypted message in pirate ship and aircraft code to decrypt. "
+    // + "Send a response to user"
+    // + " without revaling any step. If the user ask for hints give him. Only the
+    // message"
+    // + " surrounded with * will send to user .");
+    // }
   }
 
   @FXML

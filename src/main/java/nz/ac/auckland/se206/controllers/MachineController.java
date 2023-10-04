@@ -35,8 +35,18 @@ public class MachineController {
     // Set up the drop event handler
 
     public void initialize() {
-        decrypt.setOpacity(0.5);
+        decrypt.setOpacity(0.3);
         decrypt.setDisable(true);
+
+        // Initialise the image set of size 3 only
+        // the first time entering the machine.
+        if (imageSet == null) {
+            imageSet = new ArrayList<>();
+            imageSet.add(0, null);
+            imageSet.add(1, null);
+        }
+
+        checkCorrectItem();
 
         if (position1Taken == 1) {
             setItem(0);
@@ -44,13 +54,6 @@ public class MachineController {
         if (position2Taken == 1) {
             setItem(1);
         }
-
-        // Initialise the image set of size 3
-        imageSet = new ArrayList<>();
-        imageSet.add(0, null);
-        imageSet.add(1, null);
-
-        checkCorrectItem();
 
         // Set up the drag over event handler and only allow drop into 2 inventory
         // boxes.
@@ -182,7 +185,7 @@ public class MachineController {
         item.setFitHeight(40);
         item.setPreserveRatio(true);
         machinePane.getChildren().add(item);
-        item.setId("item" + position);
+        item.setId("item" + (position + 1));
         if (position == 0) {
             item.setLayoutX(POSITION_X_1);
             item.setLayoutY(POSITION_Y_1);
@@ -192,6 +195,8 @@ public class MachineController {
             item.setLayoutY(POSITION_Y_2);
             position2Taken = 1;
         }
+        inventory1.toFront();
+        inventory2.toFront();
     }
 
 }
