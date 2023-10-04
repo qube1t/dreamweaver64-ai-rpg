@@ -53,21 +53,7 @@ public class Room1Controller {
   @FXML
   private Rectangle rect15;
   @FXML
-  private Rectangle rect16;
-  @FXML
-  private Rectangle rect17;
-  @FXML
-  private Rectangle rect19;
-  @FXML
-  private Rectangle rect20;
-  @FXML
-  private Rectangle rect21;
-  @FXML
-  private Rectangle rect22;
-  @FXML
   private Rectangle shelfBtn;
-  @FXML
-  private Rectangle rect71;
 
   @FXML
   private Pane interactablePane;
@@ -77,8 +63,7 @@ public class Room1Controller {
     ArrayList<Rectangle> obsts = new ArrayList<Rectangle>(
         Arrays.asList(
             rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
-            rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21, rect22,
-            rect71));
+            rect12, rect13, rect14, rect15));
     // Initialization code goes here
     character.enableMobility(obsts, interactablePane.getChildren());
 
@@ -102,8 +87,8 @@ public class Room1Controller {
         character.setLayoutY(362);
         break;
       default:
-        character.setLayoutX(498);
-        character.setLayoutY(522);
+        character.setLayoutX(100);
+        character.setLayoutY(100);
     }
 
     GameState.prevRoom = 1;
