@@ -82,7 +82,7 @@ public class MainGameController {
             originalImageView.setFitHeight(40); // Set the desired height
             originalImageView.setFitWidth(40);
 
-            imageSet = new CustomImageSet(originalImage);
+            imageSet = new CustomImageSet(originalImage, obtainedItems.get(id).getId());
 
             // Create a new ClipboardContent with the custom drag image
             ClipboardContent content = new ClipboardContent();
