@@ -2,11 +2,14 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.ArrayList;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.CustomImageSet;
 
@@ -17,6 +20,8 @@ public class MachineController {
     private Rectangle inventory2;
     @FXML
     private AnchorPane machinePane;
+    @FXML
+    private Button decrypt;
 
     protected static ArrayList<CustomImageSet> imageSet;
     protected static int position1Taken = 0;
@@ -30,11 +35,23 @@ public class MachineController {
     // Set up the drop event handler
 
     public void initialize() {
+        decrypt.setOpacity(0.5);
+        decrypt.setDisable(true);
+
+        if (position1Taken == 1) {
+            setItem(0);
+        }
+        if (position2Taken == 1) {
+            setItem(1);
+        }
 
         // Initialise the image set of size 3
         imageSet = new ArrayList<>();
         imageSet.add(0, null);
         imageSet.add(1, null);
+
+        checkCorrectItem();
+
         // Set up the drag over event handler and only allow drop into 2 inventory
         // boxes.
         machinePane.setOnDragOver(event -> {
@@ -60,14 +77,15 @@ public class MachineController {
             double y = event.getY();
             if (event.getDragboard().hasImage()) {
                 if (inventory1.getBoundsInParent().contains(x, y) && position1Taken == 0) {
-                    dropItem(1);
+                    dropItem(0);
                 } else if (inventory2.getBoundsInParent().contains(x, y) && position2Taken == 0) {
-                    dropItem(2);
+                    dropItem(1);
                 }
             }
             // Put rectangles to the front
             inventory1.toFront();
             inventory2.toFront();
+            checkCorrectItem();
             event.setDropCompleted(true);
             event.consume();
         });
@@ -90,6 +108,12 @@ public class MachineController {
     }
 
     @FXML
+    private void onClickDecrypt() {
+        System.out.println("Decrypt button clicked");
+
+    }
+
+    @FXML
     private void onClickBox2() {
         if (position2Taken == 1) {
             System.out.println("return 2");
@@ -104,17 +128,17 @@ public class MachineController {
 
     private void dropItem(int positionNumber) {
         ImageView item = new ImageView(MainGameController.getImageSet().getOriginalImage());
-        imageSet.add(positionNumber - 1, MainGameController.getImageSet());
+        imageSet.add(positionNumber, MainGameController.getImageSet());
         item.setFitHeight(40);
         item.setPreserveRatio(true);
         machinePane.getChildren().add(item);
-        item.setId("item" + positionNumber);
-        if (positionNumber == 1) {
+        item.setId("item" + (positionNumber + 1));
+        if (positionNumber == 0) {
             item.setLayoutX(POSITION_X_1);
             item.setLayoutY(POSITION_Y_1);
             System.out.println("Dropped into first inventory box");
             position1Taken = 1;
-        } else if (positionNumber == 2) {
+        } else if (positionNumber == 1) {
             item.setLayoutX(POSITION_X_2);
             item.setLayoutY(POSITION_Y_2);
             System.out.println("Dropped into second inventory box");
@@ -123,6 +147,51 @@ public class MachineController {
 
         MainGameController.removeObtainedItem(GameState.currentDraggedItemIndex);
         System.out.println("item" + GameState.currentDraggedItemIndex + "removed from top bar.");
+    }
+
+    private void checkCorrectItem() {
+        if (imageSet.get(0) != null &&
+                imageSet.get(1) != null) {
+
+            String currentId = imageSet.get(0).getId().toLowerCase() +
+                    imageSet.get(1).getId().toLowerCase();
+            // Check if two correct items are here
+            if (currentId.contains("treasureaircraftcode")
+                    || currentId.contains("aircraftcodetreasure")) {
+                System.out.println("Correct items");
+                // Start animation of button from opacity of 0.5 to 1
+                // Create a FadeTransition
+                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.5), decrypt);
+
+                fadeTransition.setFromValue(0.3);
+                fadeTransition.setToValue(1);
+                // One cycle only
+                fadeTransition.setCycleCount(1);
+
+                // Play the animation
+                fadeTransition.play();
+                decrypt.setDisable(false);
+
+            }
+        }
+
+    }
+
+    private void setItem(int position) {
+        ImageView item = new ImageView(imageSet.get(position).getOriginalImage());
+        item.setFitHeight(40);
+        item.setPreserveRatio(true);
+        machinePane.getChildren().add(item);
+        item.setId("item" + position);
+        if (position == 0) {
+            item.setLayoutX(POSITION_X_1);
+            item.setLayoutY(POSITION_Y_1);
+            position1Taken = 1;
+        } else if (position == 1) {
+            item.setLayoutX(POSITION_X_2);
+            item.setLayoutY(POSITION_Y_2);
+            position2Taken = 1;
+        }
     }
 
 }
