@@ -8,18 +8,23 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.CustomClipboardContent;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.ObtainedItemsWithId;
@@ -65,6 +70,20 @@ public class MainGameController {
         item6Initiated);
 
     for (int i = 0; i < inventoryItems.size(); i++) {
+
+      ImageView item = inventoryItems.get(i);
+      int id = i;
+
+      item.setOnDragDetected(
+          event -> {
+            Dragboard dragboard = item.startDragAndDrop(TransferMode.ANY);
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(item.getImage());
+            dragboard.setContent(content);
+            GameState.currentDraggedItemIndex = obtainedItems.get(id).getId();
+            event.consume();
+          });
+
       if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());
 
@@ -76,6 +95,7 @@ public class MainGameController {
         inventoryItems.get(i).setImage(null);
       }
     }
+
   }
 
   public static void addObtainedItem(Image itemImage, String itemId) {
@@ -139,6 +159,7 @@ public class MainGameController {
   }
 
   public static void removeOverlay(boolean alsoRooms) {
+    GameState.isMachineOpen = false;
     // removing overlay
     int sub = 0;
     if (alsoRooms) {
@@ -155,6 +176,9 @@ public class MainGameController {
       initialisedGamePane.requestFocus();
     }
   }
+
+  @FXML
+  private Pane targetItem;
 
   @FXML
   private Pane gamePane;

@@ -58,7 +58,7 @@ public class Room3Controller {
   @FXML
   private Rectangle bound3;
   @FXML
-  private Rectangle paper;
+  private Rectangle machine;
   @FXML
   private Rectangle clickableComputer;
   @FXML
@@ -323,7 +323,9 @@ public class Room3Controller {
    * if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
-  public void clickPaperEvent() throws IOException, ApiProxyException {
+  public void clickMachineEvent() throws IOException, ApiProxyException {
+    GameState.isMachineOpen = true;
+    MainGameController.addOverlay("decryption_machine", false);
     if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
       paperImage.setVisible(false);
       System.out.println("Decrypted letter released");
@@ -387,12 +389,11 @@ public class Room3Controller {
     if (GameState.currentCityIndex == -1) {
 
       // generate a number between 1 and 5
-      int randomCity = (int) (Math.random() * 5 + 1);
-      GameState.currentCityIndex = randomCity;
-      this.currentCity = randomCity;
+      GameState.currentCityIndex = (int) (Math.random() * 5 + 1);
+      currentCity = GameState.currentCityIndex;
     }
 
-    this.currentCity = GameState.currentCityIndex;
+    currentCity = GameState.currentCityIndex;
 
     this.currentCityPoint = cityPoints[currentCity - 1];
     this.currentCityLabel = cityLabels[currentCity - 1];
