@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: Black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndMenuController">
    <children>
-      <Button fx:id="exit" layoutX="283.0" layoutY="434.0" mnemonicParsing="false" onMouseClicked="#onClickExit" prefHeight="58.0" prefWidth="134.0" styleClass="startEndTitle" text="EXIT" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="283.0">
+      <Button fx:id="exit" layoutX="431.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onClickExit" prefHeight="58.0" prefWidth="134.0" styleClass="startEndTitle" text="EXIT" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="135.0">
 
          <font>
             <Font name="Impact" size="44.0" />
@@ -18,22 +18,30 @@
             <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
          </padding>
       </Button>
-      <Text fx:id="winOrLose" fill="WHITE" layoutX="135.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="startEndTitle" textAlignment="CENTER" wrappingWidth="430.02872720271455" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="70.0">
+      <Text fx:id="winOrLose" fill="WHITE" layoutX="135.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="startEndTitle" text="&lt;result placeholder&gt;" textAlignment="CENTER" wrappingWidth="430.02872720271455" AnchorPane.leftAnchor="135.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="70.0">
          <font>
             <Font name="Impact" size="40.0" />
          </font>
       </Text>
 
-      <Label fx:id="attribution" alignment="CENTER" layoutX="531.0" layoutY="606.0" onMouseClicked="#onOpenEndCredit" styleClass="chooseLevel" text="ATTRIBUTION" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="40.0">
+      <Label fx:id="attribution" alignment="CENTER" layoutX="592.0" layoutY="550.0" onMouseClicked="#onOpenEndCredit" styleClass="chooseLevel" text="CREDITS" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="25.0">
 
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label fx:id="letter" alignment="CENTER" layoutX="100.0" layoutY="160.0" prefHeight="270.0" prefWidth="500.0" styleClass="momLetter" stylesheets="@../css/font.css" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0">
+      <Label fx:id="letter" alignment="CENTER" layoutX="100.0" layoutY="160.0" prefHeight="270.0" prefWidth="500.0" styleClass="momLetter" stylesheets="@../css/font.css" text="&lt;letter placeholder&gt;" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="150.0">
          <font>
             <Font size="20.0" />
          </font></Label>
+      <Button fx:id="exit1" layoutX="156.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onClickExit" prefHeight="72.0" prefWidth="194.0" styleClass="startEndTitle" text="RESTART">
+         <font>
+            <Font name="Impact" size="44.0" />
+         </font>
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+      </Button>
 
    </children>
 </AnchorPane>
