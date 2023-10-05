@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
@@ -12,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.DraggableLetter;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
@@ -25,6 +27,10 @@ public class DestnationPuzzleController {
   @FXML
   private HBox letterBox;
   @FXML
+  private Button submit;
+  @FXML
+  private Button exit;
+  @FXML
   private ProgressBar load;
   @FXML
   private Label loadText;
@@ -32,15 +38,30 @@ public class DestnationPuzzleController {
   private ImageView screen;
   @FXML
   private ImageView customCursor;
+  @FXML
+  private Rectangle screenArea;
+
+  private Cursor grabCursor;
+  private Cursor custom;
 
   public void initialize() throws ApiProxyException {
     // Set the cursor to custom cursor
-    Image cursor = new Image("/images/cursor.png", 20,
+    Image cursor = new Image("/images/cursor.png", 16,
+        27, true, true);
+
+    Image grab = new Image("/images/grab.png", 20,
         30, true, true);
+
     // Create a custom cursor from the loaded image
-    Cursor customCursor = new ImageCursor(cursor);
+    this.grabCursor = new ImageCursor(grab);
+    this.custom = new ImageCursor(cursor);
+
+    screenArea.setCursor(custom);
+    submit.setCursor(custom);
+    exit.setCursor(custom);
     // Set the custom cursor for the screen
-    screen.setCursor(customCursor);
+    // letterBox.setCursor(grabCursor);
+
     // Set progress bar to invisible
     load.setVisible(false);
     loadText.setVisible(false);
@@ -50,11 +71,19 @@ public class DestnationPuzzleController {
     introduction.setText(GameState.puzzleIntroMessageRoom3);
   }
 
-  protected void initializePuzzle(String cityName) {
+  public void setLetterCursor(int status) {
+    if (status == 0) {
+      letterBox.setCursor(Cursor.OPEN_HAND);
+    } else {
+      letterBox.setCursor(Cursor.CLOSED_HAND);
+    }
+  }
 
+  protected void initializePuzzle(String cityName) {
     char[] letters = cityName.toCharArray();
+
     for (char letter : letters) {
-      DraggableLetter draggableLetter = new DraggableLetter(String.valueOf(letter), letterBox);
+      DraggableLetter draggableLetter = new DraggableLetter(String.valueOf(letter), letterBox, this);
 
       // Create a StackPane to add a frame around each letter
       StackPane letterFrame = new StackPane();
