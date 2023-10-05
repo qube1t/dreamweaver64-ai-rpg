@@ -41,24 +41,18 @@ public class DestnationPuzzleController {
   @FXML
   private Rectangle screenArea;
 
-  private Cursor grabCursor;
   private Cursor custom;
 
   public void initialize() throws ApiProxyException {
     // Set the cursor to custom cursor
     Image cursor = new Image("/images/cursor.png", 16,
         27, true, true);
-
-    Image grab = new Image("/images/grab.png", 20,
-        30, true, true);
-
-    // Create a custom cursor from the loaded image
-    this.grabCursor = new ImageCursor(grab);
     this.custom = new ImageCursor(cursor);
 
     screenArea.setCursor(custom);
     submit.setCursor(custom);
     exit.setCursor(custom);
+    letterBox.setCursor(Cursor.OPEN_HAND);
     // Set the custom cursor for the screen
     // letterBox.setCursor(grabCursor);
 
