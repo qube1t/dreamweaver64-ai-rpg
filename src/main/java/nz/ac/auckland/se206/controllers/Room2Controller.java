@@ -135,7 +135,10 @@ public class Room2Controller {
   private ImageView imgDisabled4;
   @FXML
   private ImageView imgDisabled5;
+  @FXML
+  private ImageView imgEnd;
 
+  private static ImageView imgEndStatic;
   private ArrayList<Rectangle> obsts;
   private Rectangle[] treasureBoxes;
   private ImageView[] imgBoxes;
@@ -174,6 +177,13 @@ public class Room2Controller {
     GameState.prevRoom = 2;
 
     piratePane.setVisible(false);
+
+    imgEndStatic = imgEnd;
+    if (GameState.tenSecondsLeft) {
+      imgEndStatic.setVisible(true);
+    } else {
+      imgEndStatic.setVisible(false);
+    }
 
     // set pane inside the speech bubble
     speechBubbleScrollPane = (ScrollPane) interactablePane.lookup("#speechBubbleScrollPane");
@@ -227,6 +237,10 @@ public class Room2Controller {
     }
   }
 
+  public static void setEndImg() {
+    imgEndStatic.setVisible(true);
+  }
+
   /**
    * Initialize the GPT.
    * 
@@ -263,7 +277,7 @@ public class Room2Controller {
               + " You can give hints if the user asks. No reply is required");
 
       // if the player get wrong book, the message will be displayed
-      if (GameState.takenBook != null && wrongMsgPrinted == false) {
+      if (GameState.takenBook != null && !wrongMsgPrinted) {
         wrongMsgPrinted = true;
           GameState.eleanorAi.runGpt(
               GptPromptEngineeringRoom2.getPirateWrongResponse(),
@@ -327,47 +341,12 @@ public class Room2Controller {
     if (GameState.isBoxKeyFound) {
       if (numOfBox == boxLocation) {
         MainGameController.addOverlay("treasure_box", false);
-        GameState.eleanorAi.runGpt(
-            GptPromptEngineeringRoom2.getPirateRightResponse(),
-            (result) -> {
-              Platform.runLater(
-                  () -> {
-                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                    if (pirateDialogue.size() > 0) {
-                      displayBubble(result.replace("^", ""));
-                    }
-                  });
-            });
       } else {
         // if the player has clicked the wrong box, the player will get the wrong
         // message
-        Thread thread = flashBox();
-        thread.start();
-        GameState.eleanorAi.runGpt(
-            GptPromptEngineeringRoom2.getPirateWrongResponse(),
-            (result) -> {
-              Platform.runLater(
-                  () -> {
-                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                    if (pirateDialogue.size() > 0) {
-                      displayBubble(result.replace("^", ""));
-                    }
-                  });
-            });
+        flashBoxes();
         Helper.changeTreasureBox(GameState.currentBox);
       }
-    } else {
-      GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom2.getPirateNoKeyResponse(),
-          (result) -> {
-            Platform.runLater(
-                () -> {
-                  List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                  if (pirateDialogue.size() > 0) {
-                    displayBubble(result.replace("^", ""));
-                  }
-                });
-          });
     }
   }
 
@@ -376,26 +355,28 @@ public class Room2Controller {
    * 
    * @return the thread
    */
-  private Thread flashBox() {
+  private void flashBoxes() {
     for (Rectangle box : treasureBoxes) {
       box.setVisible(false);
     }
-    return new Thread(() -> {
+    new Thread(() -> {
       try {
         for (int i = 0; i < 6; i++) {
-          for (Rectangle box : treasureBoxes) {
-            if (box.isVisible()) {
-              box.setVisible(false);
-            } else {
-              box.setVisible(true);
+          Platform.runLater(() -> {
+            for (Rectangle box : treasureBoxes) {
+              if (!box.isVisible()) {
+                box.setVisible(true);
+              } else {
+                box.setVisible(false);
+              }
             }
-          }
-          Thread.sleep(300);
+          });
+          Thread.sleep(250);
         }
       } catch (InterruptedException e) {
         e.printStackTrace();
       }
-    });
+    }).start();
   }
 
   /**

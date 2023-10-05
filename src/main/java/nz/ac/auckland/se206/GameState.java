@@ -10,6 +10,9 @@ public class GameState {
   /** Indicates whether the riddle has been resolved. */
   public static boolean isRiddleResolved = false;
 
+  /** Indicates 10 seconds left */
+  public static boolean tenSecondsLeft = false;
+
   // start menu
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;

@@ -418,6 +418,12 @@ public class MainGameController {
         for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
           if (GameState.winTheGame || GameState.timeLimitReached) {
             break;
+          } else if (currentTime == 10) {
+            // 10 seconds left
+            GameState.tenSecondsLeft = true;
+            //Room1Controller.setEndImg();
+            Room2Controller.setEndImg();
+            //Room3Controller.setEndImg();
           }
           int time = currentTime;
           int minutes = time / 60;
@@ -463,7 +469,6 @@ public class MainGameController {
     // time limit reached
     GameState.timeLimitReached = true;
     if (!GameState.winTheGame) {
-      System.out.println("time limit reached");
       App.setRoot("end_menu");
     }
   }
