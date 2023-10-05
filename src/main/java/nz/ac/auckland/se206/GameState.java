@@ -117,6 +117,10 @@ public class GameState {
   /** Indicates the aircraft code. */
   public static String aircraftCode = "";
 
+  public static boolean isMachineOpen = false;
+
+  public static String currentDraggedItemIndex = "";
+
   /**
    * Indicates the introduction message when first enter the puzzle game in Room3.
    */
