@@ -18,6 +18,11 @@
             <Image url="@../images/rooms/room2/backShipMap.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="imgEnd" fitHeight="550.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/rooms/room2/end.gif" />
+         </image>
+      </ImageView>
       <Pane>
          <children>
             <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="33.0" layoutX="149.0" layoutY="184.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
@@ -139,7 +144,7 @@
             <Rectangle fx:id="doorToRoom3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="546.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
          </children>
       </Pane>
-      <Pane fx:id="piratePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" translateX="-30.0" translateY="30.0" StackPane.alignment="TOP_RIGHT">
+      <Pane fx:id="piratePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" translateX="-30.0" translateY="30.0" visible="false" StackPane.alignment="TOP_RIGHT">
          <children>
             <ImageView fx:id="pirateSpeech" fitHeight="118.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
                <image>
