@@ -55,6 +55,16 @@ public class MachineController {
             setItem(1);
         }
 
+        // Set background color to light purple when hovering
+        decrypt.setOnMouseEntered(event -> {
+            decrypt.setStyle("-fx-background-color: #e12ddb;");
+        });
+
+        // Reset to the default style when not hovering
+        decrypt.setOnMouseExited(event -> {
+            decrypt.setStyle("-fx-background-color: purple;");
+        });
+
         // Set up the drag over event handler and only allow drop into 2 inventory
         // boxes.
         machinePane.setOnDragOver(event -> {
@@ -163,8 +173,8 @@ public class MachineController {
                     || currentId.contains("aircraftcodetreasure")) {
                 System.out.println("Correct items");
                 // Start animation of button from opacity of 0.5 to 1
-                // Create a FadeTransition
-                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.5), decrypt);
+                // Create a FadeTransition of 3 seconds duration.
+                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), decrypt);
 
                 fadeTransition.setFromValue(0.3);
                 fadeTransition.setToValue(1);
