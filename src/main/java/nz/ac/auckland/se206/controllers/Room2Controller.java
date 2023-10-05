@@ -345,6 +345,10 @@ public class Room2Controller {
         // if the player has clicked the wrong box, the player will get the wrong
         // message
         flashBoxes();
+        for (Rectangle box : treasureBoxes) {
+          box.setVisible(false);
+          box.setOpacity(1);
+        }
         Helper.changeTreasureBox(GameState.currentBox);
       }
     }
@@ -357,17 +361,17 @@ public class Room2Controller {
    */
   private void flashBoxes() {
     for (Rectangle box : treasureBoxes) {
-      box.setVisible(false);
+      box.setVisible(true);
     }
     new Thread(() -> {
       try {
         for (int i = 0; i < 6; i++) {
           Platform.runLater(() -> {
             for (Rectangle box : treasureBoxes) {
-              if (!box.isVisible()) {
-                box.setVisible(true);
+              if (box.opacityProperty().getValue() == 0) {
+                box.setOpacity(1);
               } else {
-                box.setVisible(false);
+                box.setOpacity(0);
               }
             }
           });
