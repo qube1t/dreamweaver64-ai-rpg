@@ -11,7 +11,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" snapToPixel="false" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room1Controller">
    <children>
-      <ImageView fitHeight="600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/rooms/room1/background_1.png" />
          </image>
@@ -39,18 +39,19 @@
             <Rectangle fx:id="rect15" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="38.0" layoutX="577.0" layoutY="367.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="39.0" />
          </children>
       </Pane>
-      <ImageView fitHeight="600.0" pickOnBounds="true" preserveRatio="true" translateX="1.0">
+      <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true" translateX="1.0">
          <image>
             <Image url="@../images/rooms/room1/foreground_1.png" />
          </image>
       </ImageView>
       <Pane fx:id="interactablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="674.0">
          <children>
-            <Rectangle fx:id="shelf_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="82.0" layoutX="463.0" layoutY="109.0" onMouseClicked="#openBookShelf" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="48.0" />
-            <Rectangle fx:id="left_door_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="67.0" layoutX="538.0" layoutY="258.0" onMouseClicked="#goToLeftRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="48.0" />
-            <Rectangle fx:id="right_door_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="82.0" layoutX="89.0" layoutY="298.0" onMouseClicked="#goToRightRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="48.0" />
-            <Rectangle fx:id="shelf_btn1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="89.0" layoutX="202.0" layoutY="106.0" onMouseClicked="#openMainDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="48.0" />
-            <Rectangle fx:id="chest_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="76.0" layoutX="169.0" layoutY="223.0" onMouseClicked="#onClickChest" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="40.0" />
+            <Rectangle fx:id="shelf_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="76.0" layoutX="455.0" layoutY="124.0" onMouseClicked="#openBookShelf" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="39.0" />
+            <Rectangle fx:id="right_door_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="64.0" layoutX="524.0" layoutY="260.0" onMouseClicked="#goToRightRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="39.0" />
+            <Rectangle fx:id="left_door_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="58.0" layoutX="111.0" layoutY="298.0" onMouseClicked="#goToLeftRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="40.0" />
+            <Rectangle fx:id="shelf_btn1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="76.0" layoutX="214.0" layoutY="125.0" onMouseClicked="#openMainDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="40.0" />
+            <Rectangle fx:id="chest_btn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="66.0" layoutX="185.0" layoutY="230.0" onMouseClicked="#onClickChest" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="32.0" />
+            <Rectangle fx:id="mainDoorBtn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff68" height="70.0" layoutX="316.0" layoutY="94.0" onMouseClicked="#openMainDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="42.0" />
          </children>
       </Pane>
    </children>

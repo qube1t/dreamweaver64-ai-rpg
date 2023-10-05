@@ -79,16 +79,16 @@ public class Room1Controller {
     // set character position
     switch (GameState.prevRoom) {
       case 2:
-        character.setLayoutX(586);
-        character.setLayoutY(450);
+        character.setLayoutX(504);
+        character.setLayoutY(312);
         break;
       case 3:
-        character.setLayoutX(34);
-        character.setLayoutY(362);
+        character.setLayoutX(104);
+        character.setLayoutY(352);
         break;
       default:
-        character.setLayoutX(100);
-        character.setLayoutY(100);
+        character.setLayoutX(400);
+        character.setLayoutY(256);
     }
 
     GameState.prevRoom = 1;
