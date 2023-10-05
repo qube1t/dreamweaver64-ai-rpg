@@ -11,14 +11,14 @@
 
 <AnchorPane fx:id="puzzlePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DestnationPuzzleController">
    <children>
-      <ImageView fitHeight="816.0" fitWidth="906.0" layoutX="-145.0" layoutY="-71.0">
+      <ImageView fitHeight="816.0" fitWidth="912.0" layoutX="-151.0" layoutY="-71.0">
          <image>
             <Image url="@../images/rooms/room3/puzzle_new.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="337.0" fitWidth="493.0" layoutX="58.0" layoutY="31.0">
+      <ImageView fitHeight="334.0" fitWidth="491.0" layoutX="59.0" layoutY="32.0">
          <image>
-            <Image url="@../images/rooms/room3/Screenshot%202023-10-05%20at%203.25.26%E2%80%AFPM.png" />
+            <Image url="@../images/rooms/room3/95.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="301.0" fitWidth="323.0" layoutX="137.0" layoutY="40.0">
@@ -36,9 +36,9 @@
             <Font name="Impact" size="17.0" />
          </font></Label>
       <HBox fx:id="letterBox" layoutX="139.0" layoutY="270.0" prefHeight="60.0" prefWidth="323.0" />
-      <Button layoutX="274.0" layoutY="522.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="24.0" prefWidth="48.0" text="EXIT" textFill="#250000">
+      <Button layoutX="287.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="9.0" prefWidth="27.0" text="EXIT" textFill="#250000">
          <font>
-            <Font name="Impact" size="12.0" />
+            <Font name="Impact" size="6.0" />
          </font>
       </Button>
       <Button layoutX="256.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#onClickSubmit" style="-fx-background-color: #15dae4;" text="SUBMIT">
