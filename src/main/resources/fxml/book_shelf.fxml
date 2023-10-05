@@ -29,7 +29,11 @@
             <Image url="@../images/wood_texture.jpeg" />
          </image>
       </ImageView>
-      <Rectangle fx:id="book1Rect" arcHeight="5.0" arcWidth="5.0" fill="#51ff1f" height="112.0" layoutX="52.0" layoutY="14.0" rotate="24.8" stroke="BLACK" strokeType="INSIDE" width="26.0" />
+      <ImageView fx:id="book1Rect" pickOnBounds="true" fitHeight="112.0" layoutX="52.0" layoutY="14.0" rotate="24.8" fitWidth="26.0"> 
+      <image>
+            <Image url="@../images/rooms/room1/book1.png" />
+         </image>
+      </ImageView>
       <Label fx:id="lblBook1" layoutX="14.0" layoutY="60.0" prefHeight="17.0" prefWidth="100.0" rotate="-65.2" styleClass="book-shelf" text="book1" />
       <Rectangle fx:id="book2Rect" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="103.0" layoutX="100.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
       <Label fx:id="lblBook2" layoutX="66.0" layoutY="65.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" styleClass="book-shelf" stylesheets="@../css/style.css" text="book2" />
