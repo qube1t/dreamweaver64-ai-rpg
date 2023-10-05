@@ -14,6 +14,8 @@ public class GameState {
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
 
+  public static boolean isMuted = false;
+
   /** Indicates the number of hints remaining. */
   public static int hintsRemaining;
 

@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
+<StackPane style="-fx-background-color: black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" styleClass="startEndTitle" stylesheets="@../css/font.css">
           <children>
@@ -23,27 +27,88 @@
                   <BoxBlur iterations="2" />
                </effect>
             </ImageView>
-              <Button fx:id="startButton" layoutX="177.0" layoutY="437.0" onMouseClicked="#onClickStartButton" prefHeight="70.0" prefWidth="347.0" styleClass="startEndTitle" text="START GAME" textAlignment="CENTER" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="177.0" AnchorPane.rightAnchor="176.0">
+              <Button fx:id="startButton" layoutX="177.0" layoutY="447.0" onMouseClicked="#onClickStartButton" prefHeight="82.0" prefWidth="276.0" styleClass="startEndTitle" text="START GAME" textAlignment="CENTER" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="177.0" AnchorPane.rightAnchor="247.0">
                <padding>
                   <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-               </padding></Button>
-               <ComboBox fx:id="timeLimit" layoutX="379.0" layoutY="378.0" prefHeight="41.0" prefWidth="196.0" promptText="2 minutes" styleClass="chooseLevel" stylesheets="@../css/font.css" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="305.0" />
-            <Label fx:id="timeLimitLabel" alignment="CENTER" layoutX="100.0" layoutY="373.0" styleClass="startEndTitle" stylesheets="@../css/font.css" text="TIME LIMIT:" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="300.0">
+               </padding>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+               <ComboBox fx:id="timeLimit" layoutX="379.0" layoutY="378.0" prefHeight="41.0" prefWidth="196.0" promptText="2 minutes" styleClass="chooseLevel" stylesheets="@../css/font.css" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="305.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
+            <Label fx:id="timeLimitLabel" alignment="CENTER" layoutX="100.0" layoutY="373.0" styleClass="startEndTitle" stylesheets="@../css/font.css" text="Time Limit:" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="300.0">
                <font>
                   <Font name="Abaddon Light Regular" size="30.0" />
                </font></Label>
-            <Label fx:id="difficultyLabel" alignment="CENTER" layoutX="70.0" layoutY="238.0" styleClass="startEndTitle" text="DIFFICULTY:" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="238.0">
+            <Label fx:id="difficultyLabel" alignment="CENTER" layoutX="70.0" layoutY="238.0" styleClass="startEndTitle" text="Difficulty:" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="238.0">
                <font>
                   <Font size="51.0" />
                </font>
             </Label>
-            <ComboBox fx:id="difficulty" layoutX="421.0" layoutY="243.0" prefHeight="53.0" prefWidth="196.0" promptText="EASY" styleClass="chooseLevel" stylesheets="@../css/font.css" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="243.0" />
-            <Label fx:id="title" alignment="CENTER" layoutX="80.0" layoutY="42.0" prefHeight="58.0" prefWidth="434.0" styleClass="startEndTitle" text="DreamWeaver64" textFill="WHITE" AnchorPane.bottomAnchor="496.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="42.0">
+            <ComboBox fx:id="difficulty" layoutX="421.0" layoutY="243.0" prefHeight="53.0" prefWidth="196.0" promptText="EASY" styleClass="chooseLevel" stylesheets="@../css/font.css" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="243.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></ComboBox>
+            <Label layoutX="434.0" layoutY="77.0" rotate="-14.9" style="-fx-font-size: 14;" text="Also try Minecraft!" textFill="#f6ff00" />
+            <Label fx:id="title" alignment="CENTER" layoutX="80.0" layoutY="28.0" prefHeight="58.0" prefWidth="434.0" style="-fx-font-size: 50;" styleClass="startEndTitle" text="DREAMWEAVER64" textFill="WHITE" AnchorPane.bottomAnchor="510.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="28.0">
                <font>
-                  <Font name="Abaddon Light Regular" size="16.0" />
+                  <Font name="Abaddon Light Regular" size="22.0" />
                </font></Label>
-            <Label fx:id="instruction" layoutX="70.0" layoutY="116.0" prefHeight="106.0" prefWidth="540.0" styleClass="instructions" textFill="WHITE" wrapText="true" />
+            <Label fx:id="instruction" layoutX="70.0" layoutY="116.0" prefHeight="106.0" prefWidth="540.0" styleClass="instructions" text="&lt;placeholder for gpt intro&gt;" textFill="WHITE" wrapText="true" />
+            <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="491.0" layoutY="475.0" onMouseClicked="#toggleInfo" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/main_game/icons/info-circle.png" />
+               </image>
+               <effect>
+                  <Lighting specularConstant="2.0" specularExponent="0.0" surfaceScale="0.0">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
+            <ImageView fx:id="muteIcon" fitHeight="82.0" fitWidth="87.0" layoutX="563.0" layoutY="455.0" onMouseClicked="#toggleMute" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/main_game/icons/music_on.png" />
+               </image>
+               <effect>
+                  <Lighting specularConstant="2.0" specularExponent="0.0">
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </ImageView>
           </children>
+      </AnchorPane>
+      <AnchorPane fx:id="infoPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;">
+         <children>
+            <Button layoutX="40.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#toggleInfo" style="-fx-font-size: 20px;" styleClass="startEndTitle" text="&lt;&lt;">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Button>
+            <Label layoutX="175.0" layoutY="157.0" prefHeight="53.0" prefWidth="47.0" style="-fx-border-width: 2; -fx-border-color: white; -fx-border-radius: 5; -fx-padding: 10; -fx-font-size: 40;" styleClass="instructions" text="W" textFill="WHITE" />
+            <Label layoutX="144.0" layoutY="246.0" style="-fx-border-width: 2; -fx-border-color: white; -fx-border-radius: 5; -fx-padding: 10; -fx-font-size: 40;" styleClass="instructions" text="A" textFill="WHITE" />
+            <Label layoutX="198.0" layoutY="246.0" style="-fx-border-width: 2; -fx-border-color: white; -fx-border-radius: 5; -fx-padding: 10; -fx-font-size: 40;" styleClass="instructions" text="S" textFill="WHITE" />
+            <Label layoutX="250.0" layoutY="246.0" style="-fx-border-width: 2; -fx-border-color: white; -fx-border-radius: 5; -fx-padding: 10; -fx-font-size: 40;" styleClass="instructions" text="D" textFill="WHITE" />
+            <Label layoutX="329.0" layoutY="180.0" prefHeight="90.0" prefWidth="309.0" styleClass="instructions" text="Use WASD controls to navigate the character through the rooms." textFill="WHITE" wrapText="true" />
+            <Label layoutX="155.0" layoutY="393.0" prefHeight="90.0" prefWidth="309.0" styleClass="instructions" text="Use mouse cursor to click on and drag-drop items." textFill="WHITE" wrapText="true" />
+         </children>
       </AnchorPane>
    </children>
 </StackPane>
