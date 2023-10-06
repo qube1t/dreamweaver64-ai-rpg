@@ -12,11 +12,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane fx:id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="650.0" prefWidth="700.0" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGameController">
 
    <children>
-      <VBox fx:id="interactPane" disable="true" prefHeight="560.0" prefWidth="706.0">
+      <VBox fx:id="interactPane" disable="true" prefHeight="560.0" prefWidth="706.0" visible="false">
          <children>
             <AnchorPane prefHeight="50.0" prefWidth="700.0">
                <children>
@@ -44,11 +43,6 @@
                </children></AnchorPane>
             <StackPane fx:id="gamePane" onMouseClicked="#clickedGamePane" prefHeight="750.0" style="-fx-background-color: black;">
                <children>
-                  <Label fx:id="statusLbl" prefHeight="28.0" prefWidth="123.0" styleClass="aiInputField" text="&lt;status_label&gt;" textFill="WHITE" StackPane.alignment="TOP_RIGHT">
-                     <padding>
-                        <Insets right="10.0" top="10.0" />
-                     </padding>
-                  </Label>
                   <AnchorPane fx:id="aiCharacterPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="152.0" prefWidth="389.0" StackPane.alignment="BOTTOM_LEFT">
                      <StackPane.margin>
                         <Insets />
@@ -89,6 +83,11 @@
                         <Label fx:id="chatToggleBtn" onMouseClicked="#toggleChat" style="-fx-background-color: blue; -fx-label-padding: 5;" styleClass="centralDisplayUnitInput" text="Show Chat" textFill="#cdd3f8" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="133.0" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>
+                  <Label fx:id="statusLbl" prefHeight="28.0" prefWidth="123.0" styleClass="aiInputField" text="&lt;status_label&gt;" textFill="WHITE" StackPane.alignment="TOP_RIGHT">
+                     <padding>
+                        <Insets right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
                </children></StackPane>
 
 <!-- <StackPane fx:id="main_pane" alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="934" prefWidth="706" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGame">
