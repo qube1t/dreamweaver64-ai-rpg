@@ -3,9 +3,12 @@ package nz.ac.auckland.se206.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class BookShelfController {
   private static Label[] lblBooks;
@@ -29,6 +32,8 @@ public class BookShelfController {
     }
   }
 
+  @FXML
+  private AnchorPane bookShelfPane;
   @FXML
   private Label lblBook1;
   @FXML
@@ -60,15 +65,39 @@ public class BookShelfController {
   private Rectangle book7Rect;
 
   public void initialize() {
+
+    // Handle drag and drop book back to bookshelf
+    bookShelfPane.setOnDragOver(event -> {
+      System.out.println("Dragged over to bookshelf");
+      if (event.getGestureSource() != bookShelfPane &&
+          event.getDragboard().hasImage()) {
+        event.acceptTransferModes(TransferMode.ANY);
+      }
+      event.consume();
+    });
+
+    bookShelfPane.setOnDragDropped(event -> {
+      if (event.getDragboard().hasImage()) {
+        if (MainGameController.getImageSet().getId().equals("book")) {
+          returnBook();
+          MainGameController.removeObtainedItem("book");
+          System.out.println("Returned one book");
+        }
+      }
+
+      event.setDropCompleted(true);
+      event.consume();
+    });
+
     //
     lblBooks = new Label[] { lblBook1, lblBook2, lblBook3, lblBook4, lblBook5, lblBook6, lblBook7 };
 
-    bookRects = new Rectangle[] {
-        book1Rect, book2Rect, book3Rect, book4Rect, book5Rect, book6Rect, book7Rect
-    };
+    bookRects = new Rectangle[] { book1Rect, book2Rect, book3Rect, book4Rect, book5Rect, book6Rect, book7Rect };
 
     // setting labels in the bookshelf
-    for (int i = 0; i < GameState.booksInRoom1.length; i++) {
+    for (
+
+        int i = 0; i < GameState.booksInRoom1.length; i++) {
       Label lblBook = lblBooks[i];
       if (GameState.booksInRoom1[i] != null) {
         lblBook.setText(GameState.booksInRoom1[i]);
