@@ -106,7 +106,7 @@
             <ScrollBar fx:id="scrollBar" orientation="VERTICAL" />
          </children>
       </HBox>
-      <Button fx:id="btnExit" layoutX="50.0" layoutY="46.0" mnemonicParsing="false" onAction="#onClickExit" onMouseClicked="#toggleInfo" style="-fx-font-size: 20px;" styleClass="startEndTitle" text="&lt;&lt;">
+      <Button fx:id="btnExit" layoutX="50.0" layoutY="46.0" mnemonicParsing="false" onAction="#onClickExit" style="-fx-font-size: 20px;" styleClass="startEndTitle" text="&lt;&lt;">
          <font>
             <Font size="9.0" />
          </font>
