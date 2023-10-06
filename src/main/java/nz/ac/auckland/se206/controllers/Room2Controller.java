@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -124,6 +125,24 @@ public class Room2Controller {
   private ScrollPane speechBubbleScrollPane;
   @FXML
   private Label gptResponse;
+  @FXML
+  private ImageView imgDisabled1;
+  @FXML
+  private ImageView imgDisabled2;
+  @FXML
+  private ImageView imgDisabled3;
+  @FXML
+  private ImageView imgDisabled4;
+  @FXML
+  private ImageView imgDisabled5;
+  @FXML
+  private ImageView imgEnd;
+
+  private static ImageView imgEndStatic;
+  private ArrayList<Rectangle> obsts;
+  private Rectangle[] treasureBoxes;
+  private ImageView[] imgBoxes;
+  private Boolean wrongMsgPrinted = false;
 
   /**
    * Initializes the room 2, it is called when the room loads.
@@ -132,13 +151,12 @@ public class Room2Controller {
    */
   public void initialize() throws ApiProxyException {
     // set the obstacles in the room2
-    ArrayList<Rectangle> obsts = new ArrayList<Rectangle>(
+    this.obsts = new ArrayList<Rectangle>(
         Arrays.asList(
             rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
             rect12, rect13, rect14, rect15, rect16, rect17, rect19, rect20, rect21, rect22,
             rect23, rect24, rect25, rect26, rect27, rect28, rect29, rect30, rect31, rect32,
             rect33, rect34));
-
     character.enableMobility(obsts, interactablePane.getChildren());
 
     // set the location of the character depending on the previous room
@@ -160,6 +178,13 @@ public class Room2Controller {
 
     piratePane.setVisible(false);
 
+    imgEndStatic = imgEnd;
+    if (GameState.tenSecondsLeft) {
+      imgEndStatic.setVisible(true);
+    } else {
+      imgEndStatic.setVisible(false);
+    }
+
     // set pane inside the speech bubble
     speechBubbleScrollPane = (ScrollPane) interactablePane.lookup("#speechBubbleScrollPane");
     if (speechBubbleScrollPane != null) {
@@ -174,9 +199,8 @@ public class Room2Controller {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom2.room2WelcomeMessage(),
           (result) -> {
-
+            MainGameController.enableInteractPane();
           });
-
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom1.getRiddleForPirate(GameState.trueBook),
           (str2) -> {
@@ -184,7 +208,6 @@ public class Room2Controller {
             if (pirateDialogue.size() > 0) {
               GameState.pirateRiddle = pirateDialogue.get(0).replaceAll("\"", "");
             }
-            MainGameController.enableInteractPane();
           });
     } else {
       MainGameController.enableInteractPane();
@@ -195,22 +218,27 @@ public class Room2Controller {
       gptInit = true;
     }
 
-    if (GameState.isBoxKeyFound) {
-      boxKey.setVisible(false);
-      book.setVisible(true);
-    }
+    treasureBoxes = new Rectangle[] { box1, box2, box3, box4, box5 };
+    imgBoxes = new ImageView[] { imgDisabled1, imgDisabled2, imgDisabled3, imgDisabled4,
+        imgDisabled5 };
 
     if (!GameState.isBoxKeyFound) {
-      box1.setDisable(true);
-      box2.setDisable(true);
-      box3.setDisable(true);
-      box4.setDisable(true);
-      box5.setDisable(true);
+      for (int i = 0; i < treasureBoxes.length; i++) {
+        treasureBoxes[i].setDisable(true);
+        imgBoxes[i].setVisible(true);
+      }
+    } else {
+      boxKey.setVisible(false);
+      book.setVisible(true);
     }
 
     if (GameState.currentBox == -1) {
       Helper.changeTreasureBox(GameState.currentBox);
     }
+  }
+
+  public static void setEndImg() {
+    imgEndStatic.setVisible(true);
   }
 
   /**
@@ -249,20 +277,22 @@ public class Room2Controller {
               + " You can give hints if the user asks. No reply is required");
 
       // if the player get wrong book, the message will be displayed
-      if (GameState.takenBook != null) {
-        GameState.eleanorAi.runGpt(
-            GptPromptEngineeringRoom2.getPirateWrongResponse(),
-            (result) -> {
-              Platform.runLater(
-                  () -> {
-                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                    if (pirateDialogue.size() > 0) {
-                      displayBubble(result.replace("^", ""));
-                    }
-                  });
-            });
+      if (GameState.takenBook != null && !wrongMsgPrinted) {
+        wrongMsgPrinted = true;
+          GameState.eleanorAi.runGpt(
+              GptPromptEngineeringRoom2.getPirateWrongResponse(),
+              (result) -> {
+                Platform.runLater(
+                    () -> {
+                      List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                      if (pirateDialogue.size() > 0) {
+                        displayBubble(result.replace("^", ""));
+                      }
+                    });
+              });
       } else {
         // if the player has not got any book, the message will be displayed
+        wrongMsgPrinted = false;
         gptResponse.setText(GameState.pirateRiddle);
         piratePane.setVisible(true);
       }
@@ -274,11 +304,10 @@ public class Room2Controller {
 
       // if the player get the correct book, the player can trade with pirate
       GameState.isBoxKeyFound = true;
-      box1.setDisable(false);
-      box2.setDisable(false);
-      box3.setDisable(false);
-      box4.setDisable(false);
-      box5.setDisable(false);
+      for (int i = 0; i < treasureBoxes.length; i++) {
+        treasureBoxes[i].setDisable(false);
+        imgBoxes[i].setVisible(false);
+      }
       boxKey.setVisible(false);
       book.setVisible(true);
       GameState.eleanorAi.runGpt(
@@ -310,59 +339,55 @@ public class Room2Controller {
     int boxLocation = GameState.currentBox;
     System.out.println("Number of treasure box: " + boxLocation);
     if (GameState.isBoxKeyFound) {
-
       if (numOfBox == boxLocation) {
         MainGameController.addOverlay("treasure_box", false);
-        GameState.eleanorAi.runGpt(
-            GptPromptEngineeringRoom2.getPirateRightResponse(),
-            (result) -> {
-              Platform.runLater(
-                  () -> {
-                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                    if (pirateDialogue.size() > 0) {
-                      displayBubble(result.replace("^", ""));
-                    }
-                  });
-            });
       } else {
         // if the player has clicked the wrong box, the player will get the wrong
         // message
-        GameState.eleanorAi.runGpt(
-            GptPromptEngineeringRoom2.getPirateWrongResponse(),
-            (result) -> {
-              Platform.runLater(
-                  () -> {
-                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                    if (pirateDialogue.size() > 0) {
-                      displayBubble(result.replace("^", ""));
-                    }
-                  });
-            });
+        flashBoxes();
+        for (Rectangle box : treasureBoxes) {
+          box.setVisible(false);
+          box.setOpacity(1);
+        }
         Helper.changeTreasureBox(GameState.currentBox);
       }
-    } else {
-      // if the player has not got the key, the player will get the message
-      box1.setDisable(true);
-      box2.setDisable(true);
-      box3.setDisable(true);
-      box4.setDisable(true);
-      box5.setDisable(true);
-
-      GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom2.getPirateNoKeyResponse(),
-          (result) -> {
-            Platform.runLater(
-                () -> {
-                  List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                  if (pirateDialogue.size() > 0) {
-                    displayBubble(result.replace("^", ""));
-                  }
-                });
-          });
     }
   }
 
-  /** Display the message from GPT. */
+  /**
+   * Flash the treasure box when the player click the wrong box.
+   * 
+   * @return the thread
+   */
+  private void flashBoxes() {
+    for (Rectangle box : treasureBoxes) {
+      box.setVisible(true);
+    }
+    new Thread(() -> {
+      try {
+        for (int i = 0; i < 6; i++) {
+          Platform.runLater(() -> {
+            for (Rectangle box : treasureBoxes) {
+              if (box.opacityProperty().getValue() == 0) {
+                box.setOpacity(1);
+              } else {
+                box.setOpacity(0);
+              }
+            }
+          });
+          Thread.sleep(250);
+        }
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }).start();
+  }
+
+  /**
+   * Display the bubble with the message from GPT.
+   * 
+   * @param result the message from GPT
+   */
   private void displayBubble(String result) {
     gptResponse.setText(result);
     piratePane.setVisible(true);

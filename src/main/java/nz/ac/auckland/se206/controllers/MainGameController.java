@@ -14,8 +14,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Text;
@@ -24,6 +27,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.ObtainedItemsWithId;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.components.CustomImageSet;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -48,6 +52,7 @@ public class MainGameController {
   private static ImageView item4Initiated;
   private static ImageView item5Initiated;
   private static ImageView item6Initiated;
+  private static CustomImageSet imageSet;
 
   public static MainGameController getInstance() {
     return instance;
@@ -65,6 +70,30 @@ public class MainGameController {
         item6Initiated);
 
     for (int i = 0; i < inventoryItems.size(); i++) {
+
+      ImageView item = inventoryItems.get(i);
+      int id = i;
+
+      item.setOnDragDetected(
+          event -> {
+            Image originalImage = item.getImage();
+            ImageView originalImageView = new ImageView(originalImage);
+
+            originalImageView.setFitHeight(40); // Set the desired height
+            originalImageView.setFitWidth(40);
+
+            imageSet = new CustomImageSet(originalImage, obtainedItems.get(id).getId());
+
+            // Create a new ClipboardContent with the custom drag image
+            ClipboardContent content = new ClipboardContent();
+            Dragboard dragboard = item.startDragAndDrop(TransferMode.ANY);
+            // Store the custom image set in the Dragboard
+            content.putImage(originalImageView.snapshot(null, null));
+            dragboard.setContent(content);
+            GameState.currentDraggedItemIndex = obtainedItems.get(id).getId();
+            event.consume();
+          });
+
       if (obtainedItems.size() > i) {
         inventoryItems.get(i).setImage(obtainedItems.get(i).getImage());
 
@@ -76,6 +105,11 @@ public class MainGameController {
         inventoryItems.get(i).setImage(null);
       }
     }
+
+  }
+
+  public static CustomImageSet getImageSet() {
+    return imageSet;
   }
 
   public static void addObtainedItem(Image itemImage, String itemId) {
@@ -139,6 +173,7 @@ public class MainGameController {
   }
 
   public static void removeOverlay(boolean alsoRooms) {
+    GameState.isMachineOpen = false;
     // removing overlay
     int sub = 0;
     if (alsoRooms) {
@@ -155,6 +190,9 @@ public class MainGameController {
       initialisedGamePane.requestFocus();
     }
   }
+
+  @FXML
+  private Pane targetItem;
 
   @FXML
   private Pane gamePane;
@@ -418,6 +456,12 @@ public class MainGameController {
         for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
           if (GameState.winTheGame || GameState.timeLimitReached) {
             break;
+          } else if (currentTime == 10) {
+            // 10 seconds left
+            GameState.tenSecondsLeft = true;
+            //Room1Controller.setEndImg();
+            Room2Controller.setEndImg();
+            //Room3Controller.setEndImg();
           }
           int time = currentTime;
           int minutes = time / 60;
@@ -463,7 +507,6 @@ public class MainGameController {
     // time limit reached
     GameState.timeLimitReached = true;
     if (!GameState.winTheGame) {
-      System.out.println("time limit reached");
       App.setRoot("end_menu");
     }
   }

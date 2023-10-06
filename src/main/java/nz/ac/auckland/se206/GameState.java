@@ -10,9 +10,14 @@ public class GameState {
   /** Indicates whether the riddle has been resolved. */
   public static boolean isRiddleResolved = false;
 
+  /** Indicates 10 seconds left */
+  public static boolean tenSecondsLeft = false;
+
   // start menu
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
+
+  public static boolean isMuted = false;
 
   /** Indicates the number of hints remaining. */
   public static int hintsRemaining;
@@ -111,6 +116,10 @@ public class GameState {
 
   /** Indicates the aircraft code. */
   public static String aircraftCode = "";
+
+  public static boolean isMachineOpen = false;
+
+  public static String currentDraggedItemIndex = "";
 
   /**
    * Indicates the introduction message when first enter the puzzle game in Room3.

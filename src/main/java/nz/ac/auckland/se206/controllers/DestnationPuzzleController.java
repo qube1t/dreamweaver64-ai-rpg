@@ -3,8 +3,12 @@ package nz.ac.auckland.se206.controllers;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -24,9 +28,19 @@ public class DestnationPuzzleController {
   private ProgressBar load;
   @FXML
   private Label loadText;
+  @FXML
+  private ImageView screen;
+  @FXML
+  private ImageView customCursor;
 
   public void initialize() throws ApiProxyException {
-
+    // Set the cursor to custom cursor
+    Image cursor = new Image("/images/cursor.png", 20,
+        30, true, true);
+    // Create a custom cursor from the loaded image
+    Cursor customCursor = new ImageCursor(cursor);
+    // Set the custom cursor for the screen
+    screen.setCursor(customCursor);
     // Set progress bar to invisible
     load.setVisible(false);
     loadText.setVisible(false);

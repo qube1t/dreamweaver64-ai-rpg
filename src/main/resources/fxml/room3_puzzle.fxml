@@ -9,33 +9,53 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="puzzlePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DestnationPuzzleController">
+<AnchorPane fx:id="puzzlePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DestnationPuzzleController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="400.0">
+      <ImageView fitHeight="816.0" fitWidth="912.0" layoutX="-151.0" layoutY="-71.0">
+         <image>
+            <Image url="@../images/rooms/room3/puzzle_new.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="334.0" fitWidth="491.0" layoutX="59.0" layoutY="32.0">
+         <image>
+            <Image url="@../images/rooms/room3/95.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="301.0" fitWidth="323.0" layoutX="137.0" layoutY="40.0">
+         <image>
+            <Image url="@../images/rooms/room3/game-window.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="screen" fitHeight="287.0" fitWidth="323.0" layoutX="137.0" layoutY="55.0">
          <image>
             <Image url="@../images/rooms/room3/slow_square_earth.gif" />
          </image>
       </ImageView>
-      <Label fx:id="introduction" layoutX="52.0" layoutY="21.0" prefHeight="88.0" prefWidth="285.0" style="-fx-border-color: red; -fx-border-width: 2;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" textAlignment="CENTER" textFill="#15dae4" wrapText="true">
+      <Label fx:id="introduction" layoutX="158.0" layoutY="66.0" prefHeight="79.0" prefWidth="285.0" style="-fx-border-color: red; -fx-border-width: 2;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" textAlignment="CENTER" textFill="#15dae4" wrapText="true">
          <font>
             <Font name="Impact" size="17.0" />
          </font></Label>
-      <HBox fx:id="letterBox" layoutX="2.0" layoutY="290.0" prefHeight="60.0" prefWidth="398.0" />
-      <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="24.0" prefWidth="48.0" text="EXIT" textFill="#250000">
+      <HBox fx:id="letterBox" layoutX="139.0" layoutY="270.0" prefHeight="60.0" prefWidth="323.0" />
+      <Button layoutX="287.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="9.0" prefWidth="27.0" text="EXIT" textFill="#250000">
          <font>
-            <Font name="Impact" size="12.0" />
+            <Font name="Impact" size="6.0" />
          </font>
       </Button>
-      <Button layoutX="157.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#onClickSubmit" style="-fx-background-color: #15dae4;" text="SUBMIT">
+      <Button layoutX="256.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#onClickSubmit" style="-fx-background-color: #15dae4;" text="SUBMIT">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
       </Button>
-      <ProgressBar fx:id="load" layoutX="145.0" layoutY="65.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" style="-fx-background-color: red;" />
-      <Label fx:id="loadText" layoutX="157.0" layoutY="40.0" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" text="CHECKING..." textFill="RED">
+      <ProgressBar fx:id="load" layoutX="249.0" layoutY="115.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" style="-fx-background-color: red;" />
+      <Label fx:id="loadText" layoutX="263.0" layoutY="81.0" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" text="CHECKING..." textFill="RED">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
+      <ImageView fx:id="customCursor" fitHeight="30.0" fitWidth="20.0" layoutX="167.0" layoutY="234.0">
+         <image>
+            <Image url="@../images/rooms/room3/pixelated-cursor-arrow-md.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -9,23 +9,39 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndCreditController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndCreditController">
 
    <children>
-      <HBox layoutX="89.0" layoutY="40.0" prefHeight="430.0" prefWidth="600.0" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
-         <children>
-            <VBox fx:id="contentVbox" prefHeight="520.0" prefWidth="612.0">
-               <children>
 
-                  <Label alignment="CENTER" prefHeight="48.0" prefWidth="590.0" styleClass="centralDisplayUnitOutput" text="IMAGE" textAlignment="CENTER" textFill="WHITE">
+                  <Label alignment="CENTER" layoutX="211.0" layoutY="43.0" prefHeight="48.0" prefWidth="279.0" styleClass="centralDisplayUnitOutput" text="CREDITS" textAlignment="CENTER" textFill="WHITE">
 
                      <font>
-                        <Font name="Impact" size="35.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="20.0" />
-                     </VBox.margin>
-                  </Label>
+            <Font name="Impact" size="35.0" />
+         </font>
+      </Label>
+      <HBox alignment="TOP_CENTER" layoutX="13.0" layoutY="94.0" prefHeight="494.0" prefWidth="685.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="94.0">
+         <children>
+            <VBox fx:id="contentVbox" prefHeight="494.0" prefWidth="639.0">
+               <children>
+                  <AnchorPane prefHeight="153.0" prefWidth="584.0">
+                     <children>
+                        <Label layoutX="94.0" layoutY="105.0" style="-fx-font-size: 20;" styleClass="aiInputField" text="Name" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="299.0" layoutY="104.0" style="-fx-font-size: 20;" styleClass="aiInputField" text="Name" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="473.0" layoutY="104.0" style="-fx-font-size: 20;" styleClass="aiInputField" text="Name" textFill="WHITE" wrapText="true">
+                           <font>
+                              <Font name="Arial" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
                   <Label styleClass="aiInputField" text="&quot;Treasure Chest&quot; by Bonsaiheldin (https://opengameart.org/content/treasure-chests-32x32)" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="Arial" size="12.0" />
@@ -90,13 +106,10 @@
             <ScrollBar fx:id="scrollBar" orientation="VERTICAL" />
          </children>
       </HBox>
-      <Button fx:id="btnExit" alignment="CENTER" layoutX="299.0" layoutY="490.0" mnemonicParsing="false" onAction="#onClickExit" text="EXIT" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="315.0" AnchorPane.rightAnchor="315.0">
+      <Button fx:id="btnExit" layoutX="50.0" layoutY="46.0" mnemonicParsing="false" onAction="#onClickExit" onMouseClicked="#toggleInfo" style="-fx-font-size: 20px;" styleClass="startEndTitle" text="&lt;&lt;">
          <font>
-            <Font size="20.0" />
+            <Font size="9.0" />
          </font>
-         <padding>
-            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
-         </padding>
       </Button>
    </children>
 </AnchorPane>

@@ -47,7 +47,7 @@ public class GptPromptEngineeringRoom3 {
         + "with one word and must be different from the example provided"
         + " and must be less than 11 characters."
         + "Only reply with the"
-        + " city name surrounded between ^, example ^Chicago^ ^Delhi^ ^Tokyo^"
+        + " city name surrounded between ^, example ^Houston^ ^Dubai^ ^Tokyo^"
         + " ^Seattle^ ^Shanghai^ ^Stockholm^ ^Sydney^ ^Paris^";
   }
 
