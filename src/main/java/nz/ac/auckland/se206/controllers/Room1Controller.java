@@ -58,6 +58,11 @@ public class Room1Controller {
   @FXML
   private Pane interactablePane;
 
+  public static void resetGptRoom1() {
+    gptInit = false;
+    gptStage = 0;
+  }
+
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() throws ApiProxyException {
     ArrayList<Rectangle> obsts = new ArrayList<Rectangle>(

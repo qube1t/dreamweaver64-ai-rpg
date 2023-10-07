@@ -32,6 +32,12 @@ public class MachineController {
     protected final int POSITION_X_2 = 67;
     protected final int POSITION_Y_2 = 190;
 
+    public static void resetMachine() {
+        imageSet = null;
+        position1Taken = 0;
+        position2Taken = 0;
+    }
+
     // Set up the drop event handler
 
     public void initialize() {

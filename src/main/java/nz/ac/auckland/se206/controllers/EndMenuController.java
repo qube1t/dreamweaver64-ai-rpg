@@ -36,6 +36,9 @@ public class EndMenuController {
   @FXML
   private void onClickRestart(MouseEvent event) throws IOException {
     GameState.reset();
+    Room1Controller.resetGptRoom1();
+    Room2Controller.resetGptRoom2();
+    MachineController.resetMachine();
     App.setRoot("splash_screen");
   }
 

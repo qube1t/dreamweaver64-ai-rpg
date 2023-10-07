@@ -147,15 +147,15 @@ public class GameState {
   private static void resetGameVariables() {
     isRiddleResolved = false;
     tenSecondsLeft = false;
-    gameMode = null; // You might want to set this to a default game mode
+    gameMode = null;
     isMuted = false;
-    hintsRemaining = 0; // You might want to set this to a default number of hints
+    hintsRemaining = 0;
     mainGame = null;
     timeLimitReached = false;
     prevRoom = 1;
     eleanorAi = new GptEngine(); // Re-create the GptEngine
     instructionMsg = null;
-    factsAboutDW64 = null; // You might want to clear the list
+    factsAboutDW64 = null;
   }
 
   // Reset variables related to Room 1
@@ -165,13 +165,13 @@ public class GameState {
     isBookFound = false;
     trueBook = null;
     takenBook = null;
+    finalMsg = null;
   }
 
   // Reset variables related to Room 2
   private static void resetRoom2Variables() {
     isRoom2FirstEntered = false;
     isBoxKeyFound = false;
-    finalMsg = null;
     encryptedFinalMsg = null;
     isEncryptedMessageFound = false;
   }
