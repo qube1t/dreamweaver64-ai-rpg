@@ -41,7 +41,7 @@ public class MainGameController {
   private static MainGameController instance;
   private static Thread timeLimitThread;
 
-  private static List<ObtainedItemsWithId> obtainedItems = new ArrayList<>();
+  private static List<ObtainedItemsWithId> obtainedItems;
   private static Pane initialisedInteractPane;
 
   private static Label timerInitiated;
@@ -236,6 +236,7 @@ public class MainGameController {
   private Text bubbleChatText = new Text("text");
 
   public void initialize() throws IOException {
+    obtainedItems = new ArrayList<>();
     chatPane.setMouseTransparent(true);
     bubbleTextPane.setMouseTransparent(true);
     aiCharacterPane.setMouseTransparent(true);
