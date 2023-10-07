@@ -34,7 +34,7 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Button fx:id="exit1" layoutX="156.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onClickExit" prefHeight="72.0" prefWidth="194.0" styleClass="startEndTitle" text="RESTART">
+      <Button fx:id="exit1" layoutX="156.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onClickRestart" prefHeight="72.0" prefWidth="194.0" styleClass="startEndTitle" text="RESTART">
          <font>
             <Font name="Impact" size="44.0" />
          </font>

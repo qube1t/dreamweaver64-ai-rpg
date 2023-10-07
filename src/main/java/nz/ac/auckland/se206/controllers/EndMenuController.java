@@ -13,6 +13,8 @@ public class EndMenuController {
   @FXML
   private Button exit;
   @FXML
+  private Button restart;
+  @FXML
   private Text winOrLose;
   @FXML
   private Label attribution;
@@ -29,6 +31,12 @@ public class EndMenuController {
     } else {
       winOrLose.setText("Time's Up! You Lose!");
     }
+  }
+
+  @FXML
+  private void onClickRestart(MouseEvent event) throws IOException {
+    GameState.reset();
+    App.setRoot("splash_screen");
   }
 
   /**
