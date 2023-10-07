@@ -458,9 +458,9 @@ public class MainGameController {
             break;
           } else if (currentTime == 10) {
             // 10 seconds left
-            GameState.tenSecondsLeft = true;
-            // Room1Controller.setEndImg();
-            Room2Controller.setEndImg();
+            // GameState.tenSecondsLeft = true;
+            // // Room1Controller.setEndImg();
+            // Room2Controller.setEndImg();
             // Room3Controller.setEndImg();
           }
           int time = currentTime;
@@ -492,6 +492,7 @@ public class MainGameController {
             });
         return null;
       }
+
     };
     timeLimitThread = new Thread(task);
     timeLimitThread.setDaemon(true);
