@@ -9,7 +9,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: Black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.EndMenuController">
    <children>
-      <Button fx:id="exit" layoutX="431.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onClickExit" prefHeight="58.0" prefWidth="134.0" styleClass="startEndTitle" text="EXIT" AnchorPane.bottomAnchor="90.0" AnchorPane.rightAnchor="135.0">
+      <Button fx:id="exit" layoutX="478.0" layoutY="455.0" mnemonicParsing="false" onMouseClicked="#onClickExit" prefHeight="58.0" prefWidth="134.0" styleClass="startEndTitle" text="EXIT" AnchorPane.bottomAnchor="73.0" AnchorPane.rightAnchor="88.0">
 
          <font>
             <Font name="Impact" size="44.0" />
@@ -34,7 +34,7 @@
          <font>
             <Font size="20.0" />
          </font></Label>
-      <Button fx:id="exit1" layoutX="156.0" layoutY="438.0" mnemonicParsing="false" onMouseClicked="#onClickRestart" prefHeight="72.0" prefWidth="194.0" styleClass="startEndTitle" text="RESTART">
+      <Button fx:id="exit1" layoutX="84.0" layoutY="455.0" mnemonicParsing="false" onMouseClicked="#onClickRestart" prefHeight="72.0" prefWidth="194.0" styleClass="startEndTitle" text="RESTART" AnchorPane.bottomAnchor="73.0" AnchorPane.leftAnchor="84.0">
          <font>
             <Font name="Impact" size="44.0" />
          </font>
