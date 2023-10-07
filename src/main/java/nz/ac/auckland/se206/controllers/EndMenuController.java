@@ -8,6 +8,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GptEngine;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class EndMenuController {
   @FXML
@@ -21,8 +24,14 @@ public class EndMenuController {
   @FXML
   private Label letter;
 
-  /** Initialize the end menu. */
-  public void initialize() {
+  /**
+   * Initialize the end menu.
+   * 
+   * @throws ApiProxyException
+   */
+  public void initialize() throws ApiProxyException {
+    GameState.eleanorAi = new GptEngine(); // Re-create the GptEngine
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom1.gameIntro());
     // Set the text to display based on whether the player won or lost
     if (GameState.winTheGame) {
       winOrLose.setText("You Escaped!");
@@ -39,7 +48,7 @@ public class EndMenuController {
     Room1Controller.resetGptRoom1();
     Room2Controller.resetGptRoom2();
     MachineController.resetMachine();
-    App.setRoot("splash_screen");
+    App.setRoot("start_menu");
   }
 
   /**

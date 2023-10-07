@@ -140,7 +140,6 @@ public class GameState {
     resetRoom1Variables();
     resetRoom2Variables();
     resetRoom3Variables();
-    eleanorAi = new GptEngine(); // Re-create the GptEngine
   }
 
   // Reset game-related variables
@@ -153,14 +152,10 @@ public class GameState {
     mainGame = null;
     timeLimitReached = false;
     prevRoom = 1;
-    eleanorAi = new GptEngine(); // Re-create the GptEngine
-    instructionMsg = null;
-    factsAboutDW64 = null;
   }
 
   // Reset variables related to Room 1
   private static void resetRoom1Variables() {
-    pirateRiddle = null;
     Arrays.fill(booksInRoom1, null);
     isBookFound = false;
     trueBook = null;
@@ -170,6 +165,7 @@ public class GameState {
 
   // Reset variables related to Room 2
   private static void resetRoom2Variables() {
+    pirateRiddle = null;
     isRoom2FirstEntered = false;
     isBoxKeyFound = false;
     encryptedFinalMsg = null;
