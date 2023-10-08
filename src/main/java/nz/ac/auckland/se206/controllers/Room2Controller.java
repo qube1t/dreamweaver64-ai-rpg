@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.animation.FadeTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
@@ -24,6 +26,14 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 public class Room2Controller {
 
   private static boolean gptInit;
+  private static ImageView imgEndStatic;
+
+  /**
+   * Set the end image when the time is up.
+   */
+  public static void initializeMap() {
+    imgEndStatic.setVisible(true);
+  }
 
   @FXML
   private Rectangle rect1;
@@ -138,7 +148,6 @@ public class Room2Controller {
   @FXML
   private ImageView imgEnd;
 
-  private static ImageView imgEndStatic;
   private ArrayList<Rectangle> obsts;
   private Rectangle[] treasureBoxes;
   private ImageView[] imgBoxes;
@@ -180,9 +189,7 @@ public class Room2Controller {
 
     imgEndStatic = imgEnd;
     if (GameState.tenSecondsLeft) {
-      imgEndStatic.setVisible(true);
-    } else {
-      imgEndStatic.setVisible(false);
+      initializeMap();
     }
 
     // set pane inside the speech bubble
@@ -235,10 +242,6 @@ public class Room2Controller {
     if (GameState.currentBox == -1) {
       Helper.changeTreasureBox(GameState.currentBox);
     }
-  }
-
-  public static void setEndImg() {
-    imgEndStatic.setVisible(true);
   }
 
   public static void resetGptRoom2() {
@@ -308,12 +311,7 @@ public class Room2Controller {
 
       // if the player get the correct book, the player can trade with pirate
       GameState.isBoxKeyFound = true;
-      for (int i = 0; i < treasureBoxes.length; i++) {
-        treasureBoxes[i].setDisable(false);
-        imgBoxes[i].setVisible(false);
-      }
-      boxKey.setVisible(false);
-      book.setVisible(true);
+      fadeOutDisabledImg();
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom2.getPirateRightResponse(),
           (result) -> {
@@ -333,6 +331,28 @@ public class Room2Controller {
   }
 
   /**
+   * Handles the click event on the pirate speech bubble.
+   * 
+   * @param event the mouse event
+   * @throws IOException
+   * @throws ApiProxyException
+   */
+  private void fadeOutDisabledImg() {
+    Duration transitionDuration = Duration.seconds(1);
+    for (int i = 0; i < treasureBoxes.length; i++) {
+      treasureBoxes[i].setDisable(false);
+      final int currentIndex = i;
+      FadeTransition fadeOutTransition = new FadeTransition(transitionDuration, imgBoxes[i]);
+      fadeOutTransition.setFromValue(1.0); // Fully visible
+      fadeOutTransition.setToValue(0.0); // Completely transparent
+      fadeOutTransition.setOnFinished(event -> imgBoxes[currentIndex].setVisible(false));
+      fadeOutTransition.play();
+    }
+    boxKey.setVisible(false);
+    book.setVisible(true);
+  }
+
+  /**
    * Get the random treasure box and handle the click event on the treasure box.
    *
    * @param numOfBox the location of the treasure box
@@ -349,30 +369,26 @@ public class Room2Controller {
         // if the player has clicked the wrong box, the player will get the wrong
         // message
         flashBoxes();
-        for (Rectangle box : treasureBoxes) {
-          box.setVisible(false);
-          box.setOpacity(1);
-        }
         Helper.changeTreasureBox(GameState.currentBox);
       }
     }
   }
 
   /**
-   * Flash the treasure box when the player click the wrong box.
-   * 
-   * @return the thread
+   * Flash the treasure box when the player clicks the wrong box.
    */
   private void flashBoxes() {
     for (Rectangle box : treasureBoxes) {
       box.setVisible(true);
+      box.setOpacity(0);
     }
+
     new Thread(() -> {
       try {
-        for (int i = 0; i < 6; i++) {
+        for (int flashCount = 0; flashCount < 6; flashCount++) {
           Platform.runLater(() -> {
             for (Rectangle box : treasureBoxes) {
-              if (box.opacityProperty().getValue() == 0) {
+              if (box.getOpacity() == 0) {
                 box.setOpacity(1);
               } else {
                 box.setOpacity(0);
@@ -381,6 +397,14 @@ public class Room2Controller {
           });
           Thread.sleep(250);
         }
+
+        // After flashing, make the boxes invisible again
+        Platform.runLater(() -> {
+          for (Rectangle box : treasureBoxes) {
+            box.setVisible(false);
+          }
+        });
+
       } catch (InterruptedException e) {
         e.printStackTrace();
       }

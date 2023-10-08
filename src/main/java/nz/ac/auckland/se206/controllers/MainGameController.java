@@ -458,10 +458,10 @@ public class MainGameController {
             break;
           } else if (currentTime == 10) {
             // 10 seconds left
-            // GameState.tenSecondsLeft = true;
-            // // Room1Controller.setEndImg();
-            // Room2Controller.setEndImg();
-            // Room3Controller.setEndImg();
+            GameState.tenSecondsLeft = true;
+            // Room1Controller.initializeMap();
+            Room2Controller.initializeMap();
+            Room3Controller.initializeMap();
           }
           int time = currentTime;
           int minutes = time / 60;

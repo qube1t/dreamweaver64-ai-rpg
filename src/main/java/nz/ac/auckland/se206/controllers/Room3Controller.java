@@ -10,7 +10,6 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -21,11 +20,19 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
-import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3Controller {
+
+  private static ImageView imgEndSt;
+
+  /**
+   * Set the end image when the time is up.
+   */
+  public static void initializeMap() {
+    imgEndSt.setVisible(true);
+  }
 
   @FXML
   private Rectangle computer;
@@ -107,6 +114,8 @@ public class Room3Controller {
   private Circle point4;
   @FXML
   private Circle point5;
+  @FXML
+  private ImageView imgEnd;
 
   private Circle[] cityPoints;
   private Text[] cityLabels;
@@ -120,6 +129,12 @@ public class Room3Controller {
   public void initialize() throws ApiProxyException {
 
     initilizeGpsMap();
+
+    imgEndSt = imgEnd;
+
+    if (GameState.tenSecondsLeft) {
+      initializeMap();
+    }
 
     // Generate seven random city destnations and randomly choose one of them
     // for the puzzle game if it is not set
