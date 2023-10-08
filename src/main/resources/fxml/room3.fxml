@@ -111,7 +111,7 @@
                   <Rectangle fx:id="clickableRadar" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="25.0" layoutX="198.0" layoutY="205.0" onMouseClicked="#onClickRadar" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="81.0" />
                   <Rectangle fx:id="clickableDoor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="91.0" layoutX="518.0" layoutY="157.0" onMouseClicked="#onClickDoor" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="57.0" />
                   <Rectangle fx:id="clickableComputer2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="37.0" layoutX="377.0" layoutY="264.0" onMouseClicked="#onClickPuzzle" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="44.0" />
-                  <Rectangle fx:id="doorToRoom2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="88.0" layoutX="80.0" layoutY="102.0" onMouseClicked="#onClickRoom2" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="57.0" />
+                  <Rectangle fx:id="doorToRoom2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="92.0" layoutX="77.0" layoutY="102.0" onMouseClicked="#onClickRoom2" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="57.0" />
                </children>
             </Pane>
          </children>

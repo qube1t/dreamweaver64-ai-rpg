@@ -12,7 +12,8 @@ import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class SplashController {
-  @FXML private ProgressBar progressBar;
+  @FXML
+  private ProgressBar progressBar;
 
   public void initialize() throws ApiProxyException {
     // gpt prompts and setting progressbar progress

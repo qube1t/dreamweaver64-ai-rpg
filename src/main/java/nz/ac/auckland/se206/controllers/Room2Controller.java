@@ -244,6 +244,10 @@ public class Room2Controller {
     }
   }
 
+  public static void resetGptRoom2() {
+    gptInit = false;
+  }
+
   /**
    * Initialize the GPT.
    * 
