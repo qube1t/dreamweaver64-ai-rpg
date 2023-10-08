@@ -36,6 +36,12 @@ public class GptPromptEngineeringRoom3 {
         + " and I will give you user action updates.";
   }
 
+  public static String decryptedLetter() {
+    return "User update: The user now has successfully decrypted the letter from mom and now the letter is"
+        + " decrypted. The user now can escape the room. Produce a short message and do not include any hint."
+        + " You must surround the message to the user with *.";
+  }
+
   /**
    * Generates a GPT prompt engineering string for random city for the puzzle
    * game.

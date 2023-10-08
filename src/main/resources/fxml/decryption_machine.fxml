@@ -28,12 +28,17 @@
             <Cursor fx:constant="HAND" />
          </cursor></Button>
       <Text fx:id="craft" fill="#f2f2f2" layoutX="65.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="CRAFTING" />
-      <ImageView fx:id="arrow" fitHeight="40.0" fitWidth="70.0" layoutX="143.0" layoutY="151.0">
-         <image>
-            <Image url="@../images/rooms/room3/Screenshot%202023-10-08%20at%203.22.15%E2%80%AFPM.png" />
-         </image>
-      </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#004b46" height="46.0" layoutX="8.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: #004b46;" width="339.0" />
       <Text fill="WHITE" layoutX="90.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="startEndTitle" text="ENIGMA32" wrappingWidth="185.6138153076172" />
+      <ImageView fx:id="arrowAnimation" fitHeight="50.0" fitWidth="63.0" layoutX="148.0" layoutY="144.0">
+         <image>
+            <Image url="@../images/rooms/room3/arrow_animation.gif" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="arrowStatic" fitHeight="50.0" fitWidth="63.0" layoutX="148.0" layoutY="144.0">
+         <image>
+            <Image url="@../images/rooms/room3/arrow_static.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
