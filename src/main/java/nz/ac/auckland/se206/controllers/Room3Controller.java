@@ -121,6 +121,23 @@ public class Room3Controller {
 
     // Generate seven random city destnations and randomly choose one of them
     // for the puzzle game if it is not set
+
+    // Only displays the welcome message to Room3 if the plauyer first enters the
+    // room
+    if (!GameState.isRoom3FirstEntered) {
+
+      GameState.isRoom3FirstEntered = true;
+
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.room3WelcomeMessage(),
+          (result) -> {
+            System.out.println(result);
+            MainGameController.enableInteractPane();
+          });
+    } else {
+      MainGameController.enableInteractPane();
+    }
+
     if (GameState.arrangedDestnationCity == "") {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getEightRandomCity(),
@@ -139,22 +156,6 @@ public class Room3Controller {
 
           });
     }
-    // Only displays the welcome message to Room3 if the plauyer first enters the
-    // room
-    if (!GameState.isRoom3FirstEntered) {
-
-      GameState.isRoom3FirstEntered = true;
-
-      GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom3.room3WelcomeMessage(),
-          (result) -> {
-            System.out.println(result);
-            MainGameController.enableInteractPane();
-          });
-    } else {
-      MainGameController.enableInteractPane();
-    }
-
     // Generate a introduction message for puzzle game when player first enters
     // room.
     if (GameState.puzzleIntroMessageRoom3 == "") {
@@ -185,7 +186,7 @@ public class Room3Controller {
 
     switch (GameState.prevRoom) {
       case 1:
-        character.setLayoutX(530);
+        character.setLayoutX(527);
         character.setLayoutY(210);
 
         break;

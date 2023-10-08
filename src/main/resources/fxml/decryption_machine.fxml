@@ -16,7 +16,7 @@
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#4e4a4e" height="217.0" layoutX="25.0" layoutY="65.0" stroke="BLACK" strokeType="INSIDE" width="293.0" />
-      <ImageView fitHeight="243.0" fitWidth="323.0" layoutX="14.0" layoutY="51.0">
+      <ImageView fx:id="machine" fitHeight="243.0" fitWidth="323.0" layoutX="14.0" layoutY="51.0">
          <image>
             <Image url="@../images/rooms/room3/machineNew.png" />
          </image>
@@ -27,8 +27,8 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Text fill="#f2f2f2" layoutX="65.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="CRAFTING" />
-      <ImageView fitHeight="40.0" fitWidth="70.0" layoutX="143.0" layoutY="151.0">
+      <Text fx:id="craft" fill="#f2f2f2" layoutX="65.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="CRAFTING" />
+      <ImageView fx:id="arrow" fitHeight="40.0" fitWidth="70.0" layoutX="143.0" layoutY="151.0">
          <image>
             <Image url="@../images/rooms/room3/Screenshot%202023-10-08%20at%203.22.15%E2%80%AFPM.png" />
          </image>

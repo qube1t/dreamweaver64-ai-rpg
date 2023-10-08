@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
@@ -23,19 +26,34 @@ public class MachineController {
     private AnchorPane machinePane;
     @FXML
     private Button decrypt;
+    @FXML
+    private ImageView machine;
 
     protected static ArrayList<CustomImageSet> imageSet;
     protected static int position1Taken = 0;
     protected static int position2Taken = 0;
 
-    protected final int POSITION_X_1 = 74;
-    protected final int POSITION_Y_1 = 122;
-    protected final int POSITION_X_2 = 74;
-    protected final int POSITION_Y_2 = 172;
+    protected final int POSITION_X_1 = 79;
+    protected final int POSITION_Y_1 = 130;
+    protected final int POSITION_X_2 = 79;
+    protected final int POSITION_Y_2 = 177;
+    protected static Cursor custom;
 
     // Set up the drop event handler
 
     public void initialize() {
+
+        // Set the cursor to custom cursor
+        Image cursor = new Image("/images/machineCursor.png", 16,
+                27, true, true);
+        custom = new ImageCursor(cursor);
+
+        for (javafx.scene.Node node : machinePane.getChildren()) {
+            if (node.getBoundsInParent().intersects(machine.getBoundsInParent())) {
+                node.setCursor(custom);
+            }
+        }
+
         decrypt.setOpacity(0.3);
         decrypt.setDisable(true);
 

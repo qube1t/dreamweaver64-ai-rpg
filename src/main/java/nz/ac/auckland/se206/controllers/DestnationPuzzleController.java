@@ -56,6 +56,17 @@ public class DestnationPuzzleController {
     // Set the custom cursor for the screen
     // letterBox.setCursor(grabCursor);
 
+    submit.setOnMouseEntered(
+        event -> {
+          // Mouse hovering effect
+          submit.setStyle("-fx-background-color: #0aa9b5;");
+        });
+
+    submit.setOnMouseExited(
+        event -> {
+          // Mouse hovering effect
+          submit.setStyle("-fx-background-color: #15dae4;");
+        });
     // Set progress bar to invisible
     load.setVisible(false);
     loadText.setVisible(false);
