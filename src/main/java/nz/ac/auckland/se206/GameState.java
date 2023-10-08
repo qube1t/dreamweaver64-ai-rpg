@@ -84,9 +84,6 @@ public class GameState {
   /** Indicates whether the player has entered the room3 first time. */
   public static boolean isRoom3FirstEntered = false;
 
-  /** Indicates whether the world map has opened. */
-  public static boolean isWorldMapOpened = false;
-
   /** Indicates wheter the aircraft code has been found. */
   public static boolean isAircraftCodeFound = false;
 

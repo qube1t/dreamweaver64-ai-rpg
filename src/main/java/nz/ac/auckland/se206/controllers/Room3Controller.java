@@ -294,29 +294,6 @@ public class Room3Controller {
 
   @FXML
   /**
-   * This method is called when the map is clicked It will open the map and set
-   * the GameState to
-   * true
-   *
-   * @throws IOException
-   * @throws ApiProxyException
-   */
-  public void onClickMap() throws IOException, ApiProxyException {
-    if (!GameState.isWorldMapOpened) {
-      GameState.isWorldMapOpened = true;
-    }
-
-    System.out.println("Location clicked");
-    MainGameController.addOverlay("gps_current", false);
-    // Generate GPT response to keep updated.
-    GameState.eleanorAi.runGpt(
-        "User update: User has opened the world map and achnowledge"
-            + " the current city location. No need"
-            + " to respond to this message.");
-  }
-
-  @FXML
-  /**
    * This method is called when the book is clicked It will open the flight plan
    * if it is not open
    * and if the flight plan is open, then it will close the flight plan

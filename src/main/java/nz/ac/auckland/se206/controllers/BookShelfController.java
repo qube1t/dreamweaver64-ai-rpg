@@ -113,6 +113,7 @@ public class BookShelfController {
           e -> {
             boolean oneWasTaken = hasTakenOneBook();
             if (oneWasTaken) {
+              System.out.println("one book was taken");
               returnBook();
             }
             GameState.takenBook = lblBook.getText();

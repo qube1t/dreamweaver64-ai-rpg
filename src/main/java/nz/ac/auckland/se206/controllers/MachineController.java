@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
@@ -27,10 +28,10 @@ public class MachineController {
     protected static int position1Taken = 0;
     protected static int position2Taken = 0;
 
-    protected final int POSITION_X_1 = 67;
-    protected final int POSITION_Y_1 = 104;
-    protected final int POSITION_X_2 = 67;
-    protected final int POSITION_Y_2 = 190;
+    protected final int POSITION_X_1 = 74;
+    protected final int POSITION_Y_1 = 122;
+    protected final int POSITION_X_2 = 74;
+    protected final int POSITION_Y_2 = 172;
 
     // Set up the drop event handler
 
@@ -123,6 +124,7 @@ public class MachineController {
     @FXML
     private void onClickDecrypt() {
         System.out.println("Decrypt button clicked");
+        GameState.hasDecrypted = true;
 
     }
 
