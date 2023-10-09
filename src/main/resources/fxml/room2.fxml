@@ -99,7 +99,7 @@
                   <Image url="@../images/rooms/room1/book.png" />
                </image>
             </ImageView>
-            <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/main_game/characters/char1.png" />
+            <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" />
             <ImageView fx:id="imgDisabled1" fitHeight="40.0" fitWidth="37.0" layoutX="158.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/rooms/room2/disabledMark.png" />

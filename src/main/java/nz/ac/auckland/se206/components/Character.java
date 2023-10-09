@@ -37,7 +37,7 @@ public class Character extends AnchorPane {
   private int frameWidth;
   private int frameHeight;
 
-  private String spriteSheet;
+  // private String spriteSheet;
 
   private SpriteAnimation animation;
   private CharacterMovement movement;
@@ -45,7 +45,7 @@ public class Character extends AnchorPane {
   private boolean animating = false;
 
   public Character(
-      @NamedArg("spriteSheet") String spriteSheet,
+      // @NamedArg("spriteSheet") String spriteSheet,
       @NamedArg("columns") int columns,
       @NamedArg("count") int count,
       @NamedArg("offset_x") int offsetX,
@@ -54,7 +54,7 @@ public class Character extends AnchorPane {
       @NamedArg("frame_height") int frameHeight) {
 
     // character parameters
-    this.spriteSheet = spriteSheet;
+    // this.spriteSheet = spriteSheet;
     this.columns = columns;
     this.count = count;
     this.offsetX = offsetX;
@@ -72,15 +72,14 @@ public class Character extends AnchorPane {
       throw new RuntimeException(exception);
     }
 
-    System.out.println(spriteSheet);
+    // System.out.println(spriteSheet);
     initElements();
   }
 
-  public void setCharacter() {
+  public void setSpriteSheet() {
     switch (GameState.characterIndex) {
       case 1:
-        Image spriteSheetImg = new Image(getClass().getResource(spriteSheet).toExternalForm());
-        activeImg.setImage(spriteSheetImg);
+        activeImg.setImage(new Image("/images/main_game/characters/char1.png"));
         break;
       case 2:
         activeImg.setImage(new Image("/images/main_game/characters/char2.png"));
@@ -92,8 +91,7 @@ public class Character extends AnchorPane {
         activeImg.setImage(new Image("/images/main_game/characters/char4.png"));
         break;
       default:
-        Image imgSheet = new Image(getClass().getResource(spriteSheet).toExternalForm());
-        activeImg.setImage(imgSheet);
+        activeImg.setImage(new Image("/images/main_game/characters/char1.png"));
         break;
     }
   }
@@ -119,9 +117,9 @@ public class Character extends AnchorPane {
     ;
   }
 
-  public String getSpriteSheet() {
-    return spriteSheet;
-  }
+  // public String getSpriteSheet() {
+  //   return spriteSheet;
+  // }
 
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
     // create character movement object
@@ -147,9 +145,9 @@ public class Character extends AnchorPane {
     animating = false;
   }
 
-  public void setSpriteSheet(String spriteSheet) {
-    this.spriteSheet = spriteSheet;
-  }
+  // public void setSpriteSheet(String spriteSheet) {
+  //   this.spriteSheet = spriteSheet;
+  // }
 
   public int getColumns() {
     return columns;
@@ -201,7 +199,7 @@ public class Character extends AnchorPane {
 
   private void initElements() {
     // init character
-    setCharacter();
+    setSpriteSheet();
     // Image spriteSheetImg = new Image(getClass().getResource(spriteSheet).toExternalForm());
     // activeImg.setImage(spriteSheetImg);
     activeImg.setViewport(
