@@ -172,7 +172,6 @@ public class GameState {
   // Reset variables related to Room 3
   private static void resetRoom3Variables() {
     isRoom3FirstEntered = false;
-    isWorldMapOpened = false;
     isAircraftCodeFound = false;
     currentBox = -1;
     Arrays.fill(destnationCities, null);
