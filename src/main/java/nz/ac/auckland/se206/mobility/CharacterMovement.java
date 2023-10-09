@@ -79,6 +79,9 @@ public class CharacterMovement {
     player.setLayoutX(player.getLayoutX() + dx);
     player.setLayoutY(player.getLayoutY() + dy);
 
+    System.out.println(player.getLayoutX());
+    System.out.println(player.getLayoutY());
+
     // Return to the old position if there is a collision
     if (checkCollision()) {
       player.setLayoutX(oldX);

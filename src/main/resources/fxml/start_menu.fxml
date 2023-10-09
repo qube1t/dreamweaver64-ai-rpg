@@ -95,7 +95,7 @@
             </ImageView>
           </children>
       </AnchorPane>
-      <AnchorPane fx:id="infoPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;">
+      <AnchorPane fx:id="infoPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" visible="false">
          <children>
             <Button layoutX="40.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#toggleInfo" style="-fx-font-size: 20px;" styleClass="startEndTitle" text="&lt;&lt;">
                <font>

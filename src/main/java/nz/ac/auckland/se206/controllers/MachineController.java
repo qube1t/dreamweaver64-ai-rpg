@@ -48,6 +48,12 @@ public class MachineController {
     private final int POSITION_Y_2 = 177;
     private static Cursor custom;
 
+    public static void resetMachine() {
+        imageSet = null;
+        position1Taken = 0;
+        position2Taken = 0;
+    }
+
     // Set up the drop event handler
 
     public void initialize() {

@@ -25,6 +25,15 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3Controller {
 
+  private static ImageView imgEndSt;
+
+  /**
+   * Set the end image when the time is up.
+   */
+  public static void initializeMap() {
+    imgEndSt.setVisible(true);
+  }
+
   @FXML
   private Rectangle computer;
   @FXML
@@ -105,6 +114,8 @@ public class Room3Controller {
   private Circle point4;
   @FXML
   private Circle point5;
+  @FXML
+  private ImageView imgEnd;
 
   private Circle[] cityPoints;
   private Text[] cityLabels;
@@ -118,6 +129,12 @@ public class Room3Controller {
   public void initialize() throws ApiProxyException {
 
     initilizeGpsMap();
+
+    imgEndSt = imgEnd;
+
+    if (GameState.tenSecondsLeft) {
+      initializeMap();
+    }
 
     // Generate seven random city destnations and randomly choose one of them
     // for the puzzle game if it is not set

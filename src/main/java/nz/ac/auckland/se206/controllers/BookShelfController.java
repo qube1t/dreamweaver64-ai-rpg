@@ -6,13 +6,14 @@ import javafx.scene.image.Image;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class BookShelfController {
   private static Label[] lblBooks;
-  private static Rectangle[] bookRects;
+  private static ImageView[] bookRects;
 
   /**
    * Returns the book to the bookshelf.
@@ -50,19 +51,19 @@ public class BookShelfController {
   private Label lblBook7;
 
   @FXML
-  private Rectangle book1Rect;
+  private ImageView book1Img;
   @FXML
-  private Rectangle book2Rect;
+  private ImageView book2Img;
   @FXML
-  private Rectangle book3Rect;
+  private ImageView book3Img;
   @FXML
-  private Rectangle book4Rect;
+  private ImageView book4Img;
   @FXML
-  private Rectangle book5Rect;
+  private ImageView book5Img;
   @FXML
-  private Rectangle book6Rect;
+  private ImageView book6Img;
   @FXML
-  private Rectangle book7Rect;
+  private ImageView book7Img;
 
   public void initialize() {
 
@@ -92,7 +93,10 @@ public class BookShelfController {
     //
     lblBooks = new Label[] { lblBook1, lblBook2, lblBook3, lblBook4, lblBook5, lblBook6, lblBook7 };
 
-    bookRects = new Rectangle[] { book1Rect, book2Rect, book3Rect, book4Rect, book5Rect, book6Rect, book7Rect };
+
+    bookRects = new ImageView[] {
+        book1Img, book2Img, book3Img, book4Img, book5Img, book6Img, book7Img
+    };
 
     // setting labels in the bookshelf
     for (
@@ -107,7 +111,7 @@ public class BookShelfController {
         continue;
       }
 
-      Rectangle bookRect = bookRects[i];
+      ImageView bookRect = bookRects[i];
       int index = i;
       lblBooks[i].setOnMouseClicked(
           e -> {

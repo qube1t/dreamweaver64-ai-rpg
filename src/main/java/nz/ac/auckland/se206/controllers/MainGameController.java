@@ -41,7 +41,7 @@ public class MainGameController {
   private static MainGameController instance;
   private static Thread timeLimitThread;
 
-  private static List<ObtainedItemsWithId> obtainedItems = new ArrayList<>();
+  private static List<ObtainedItemsWithId> obtainedItems;
   private static Pane initialisedInteractPane;
 
   private static Label timerInitiated;
@@ -168,8 +168,8 @@ public class MainGameController {
     // adding both to game pane
     initialisedGamePane
         .getChildren()
-        .add(initialisedGamePane.getChildren().size() - 3, backgroundBlur);
-    initialisedGamePane.getChildren().add(initialisedGamePane.getChildren().size() - 3, room1);
+        .add(initialisedGamePane.getChildren().size() - 4, backgroundBlur);
+    initialisedGamePane.getChildren().add(initialisedGamePane.getChildren().size() - 4, room1);
   }
 
   public static void removeOverlay(boolean alsoRooms) {
@@ -180,13 +180,13 @@ public class MainGameController {
       // removing rooms as well
       sub = 2;
     }
-    if (initialisedGamePane.getChildren().size() > 5 - sub) {
+    if (initialisedGamePane.getChildren().size() > 6 - sub) {
       initialisedGamePane
           .getChildren()
-          .remove(initialisedGamePane.getChildren().size() - 1 - 3);
+          .remove(initialisedGamePane.getChildren().size() - 1 - 4);
       initialisedGamePane
           .getChildren()
-          .remove(initialisedGamePane.getChildren().size() - 1 - 3);
+          .remove(initialisedGamePane.getChildren().size() - 1 - 4);
       initialisedGamePane.requestFocus();
     }
   }
@@ -236,6 +236,7 @@ public class MainGameController {
   private Text bubbleChatText = new Text("text");
 
   public void initialize() throws IOException {
+    obtainedItems = new ArrayList<>();
     chatPane.setMouseTransparent(true);
     bubbleTextPane.setMouseTransparent(true);
     aiCharacterPane.setMouseTransparent(true);
@@ -459,9 +460,9 @@ public class MainGameController {
           } else if (currentTime == 10) {
             // 10 seconds left
             GameState.tenSecondsLeft = true;
-            //Room1Controller.setEndImg();
-            Room2Controller.setEndImg();
-            //Room3Controller.setEndImg();
+            // Room1Controller.initializeMap();
+            Room2Controller.initializeMap();
+            Room3Controller.initializeMap();
           }
           int time = currentTime;
           int minutes = time / 60;
@@ -492,6 +493,7 @@ public class MainGameController {
             });
         return null;
       }
+
     };
     timeLimitThread = new Thread(task);
     timeLimitThread.setDaemon(true);
