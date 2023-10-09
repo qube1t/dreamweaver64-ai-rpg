@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="459.0" style="-fx-background-image: url(&quot;https://static.vecteezy.com/system/resources/thumbnails/000/164/590/small_2x/WOODGRAIN.jpg&quot;);" styleClass="book-shelf" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookShelfController">
+<AnchorPane fx:id="bookShelfPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="459.0" style="-fx-background-image: url(&quot;https://static.vecteezy.com/system/resources/thumbnails/000/164/590/small_2x/WOODGRAIN.jpg&quot;);" styleClass="book-shelf" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookShelfController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="459.0" layoutY="-1.0" pickOnBounds="true">
          <image>

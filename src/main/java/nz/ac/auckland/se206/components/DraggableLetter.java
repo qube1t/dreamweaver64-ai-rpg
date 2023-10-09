@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.components;
 
+import nz.ac.auckland.se206.controllers.DestnationPuzzleController;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -9,7 +10,7 @@ import javafx.scene.text.Font;
 
 public class DraggableLetter extends Label {
 
-  public DraggableLetter(String text, HBox hbox) {
+  public DraggableLetter(String text, HBox hbox, DestnationPuzzleController controller) {
     super(text);
 
     Font font = Font.font("Arial", 45);
@@ -23,6 +24,7 @@ public class DraggableLetter extends Label {
           content.putString(getText()); // Copy the text of the label
           dragboard.setContent(content);
           event.consume();
+          controller.setLetterCursor(1);
         });
 
     setOnDragOver(
@@ -31,6 +33,7 @@ public class DraggableLetter extends Label {
           if (event.getDragboard().hasString()) {
             event.acceptTransferModes(TransferMode.MOVE);
           }
+          controller.setLetterCursor(1);
           event.consume();
         });
 
@@ -43,8 +46,10 @@ public class DraggableLetter extends Label {
             String temp = getText();
             setText(draggedText);
             sourceLabel.setText(temp);
+            controller.setLetterCursor(0);
           }
           event.consume();
         });
+
   }
 }

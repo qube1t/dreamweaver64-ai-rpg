@@ -28,6 +28,12 @@ public class GptPromptEngineeringRoom2 {
         + " Surround the sentence before and after with the character ^";
   }
 
+  public static String clickPirateGetTheKey() {
+    return "You are the pirate. The user has now got the correct book and stored inside the inventory bar. "
+        + " He needs to drag the book to your area to get the key. Now he clicks on you."
+        + "Surround the short response with ^.";
+  }
+
   /**
    * Generate the prompt when the player get right answer in the riddle.
    * 

@@ -13,6 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -159,6 +160,38 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   public void initialize() throws ApiProxyException {
+
+    interactablePane.setOnDragOver(event -> {
+      double x = event.getX();
+      double y = event.getY();
+
+      System.out.println("Dragged over to pirate");
+      if (event.getDragboard().hasImage() &&
+          pirate.getBoundsInParent().contains(x, y)) {
+        event.acceptTransferModes(TransferMode.ANY);
+      }
+      event.consume();
+
+    });
+
+    interactablePane.setOnDragDropped(event -> {
+      double x = event.getX();
+      double y = event.getY();
+      System.out.println("drop to pirate");
+      if (event.getDragboard().hasImage()) {
+        if (pirate.getBoundsInParent().contains(x, y) &&
+            MainGameController.getImageSet().getId().equals("book")) {
+          try {
+            unlockBox();
+          } catch (ApiProxyException e) {
+            e.printStackTrace();
+          }
+        }
+      }
+
+      event.setDropCompleted(true);
+      event.consume();
+    });
     // set the obstacles in the room2
     this.obsts = new ArrayList<Rectangle>(
         Arrays.asList(
@@ -314,6 +347,7 @@ public class Room2Controller {
       fadeOutDisabledImg();
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom2.getPirateRightResponse(),
+
           (result) -> {
             Platform.runLater(
                 () -> {
@@ -323,11 +357,70 @@ public class Room2Controller {
                   }
                 });
           });
-      // add key image to the inventory
-      Image keyImage = new Image("/images/key.png");
-      MainGameController.removeObtainedItem("book");
-      MainGameController.addObtainedItem(keyImage, "treasure box key");
+
+      // GameState.eleanorAi.runGpt(
+      // "User update: The user has solved the book riddle. They have received the
+      // key."
+      // + " To find the treasure box, they needs to look at the radar."
+      // + " No reply is required");
+
+      // // if the player get the correct book, the player can trade with pirate
+      // GameState.isBoxKeyFound = true;
+      // for (int i = 0; i < treasureBoxes.length; i++) {
+      // treasureBoxes[i].setDisable(false);
+      // imgBoxes[i].setVisible(false);
+      // }
+      // boxKey.setVisible(false);
+      // book.setVisible(true);
+      // GameState.eleanorAi.runGpt(
+      // GptPromptEngineeringRoom2.getPirateRightResponse(),
+      // (result) -> {
+      // Platform.runLater(
+      // () -> {
+      // List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+      // if (pirateDialogue.size() > 0) {
+      // displayBubble(result.replace("^", ""));
+      // }
+      // });
+      // });
+      // // add key image to the inventory
+      // Image keyImage = new Image("/images/key.png");
+      // MainGameController.removeObtainedItem("book");
+      // MainGameController.addObtainedItem(keyImage, "treasure box key");
     }
+  }
+
+  private void unlockBox() throws ApiProxyException {
+    GameState.eleanorAi.runGpt(
+        "User update: The user has solved the book riddle. They have received the key."
+            + " To find the treasure box, they needs to look at the radar."
+            + " No reply is required");
+
+    // if the player get the correct book, the player can trade with pirate
+    GameState.isBoxKeyFound = true;
+    for (int i = 0; i < treasureBoxes.length; i++) {
+      treasureBoxes[i].setDisable(false);
+      imgBoxes[i].setVisible(false);
+    }
+    boxKey.setVisible(false);
+    book.setVisible(true);
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom2.getPirateRightResponse(),
+        (result) -> {
+          Platform.runLater(
+              () -> {
+                List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                if (pirateDialogue.size() > 0) {
+                  displayBubble(result.replace("^", ""));
+                }
+              });
+        });
+
+    // add key image to the inventory
+    Image keyImage = new Image("/images/key.png");
+    MainGameController.removeObtainedItem("book");
+    MainGameController.addObtainedItem(keyImage, "treasure box key");
+
   }
 
   /**

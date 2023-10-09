@@ -3,15 +3,24 @@ package nz.ac.auckland.se206.controllers;
 import java.util.ArrayList;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.CustomImageSet;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MachineController {
     @FXML
@@ -22,15 +31,22 @@ public class MachineController {
     private AnchorPane machinePane;
     @FXML
     private Button decrypt;
+    @FXML
+    private ImageView machine;
+    @FXML
+    private ImageView arrowStatic;
+    @FXML
+    private ImageView arrowAnimation;
 
-    protected static ArrayList<CustomImageSet> imageSet;
-    protected static int position1Taken = 0;
-    protected static int position2Taken = 0;
+    private static ArrayList<CustomImageSet> imageSet;
+    private static int position1Taken = 0;
+    private static int position2Taken = 0;
 
-    protected final int POSITION_X_1 = 67;
-    protected final int POSITION_Y_1 = 104;
-    protected final int POSITION_X_2 = 67;
-    protected final int POSITION_Y_2 = 190;
+    private final int POSITION_X_1 = 79;
+    private final int POSITION_Y_1 = 130;
+    private final int POSITION_X_2 = 79;
+    private final int POSITION_Y_2 = 177;
+    private static Cursor custom;
 
     public static void resetMachine() {
         imageSet = null;
@@ -41,6 +57,10 @@ public class MachineController {
     // Set up the drop event handler
 
     public void initialize() {
+        arrowAnimation.setVisible(false);
+
+        setCustomCursor();
+
         decrypt.setOpacity(0.3);
         decrypt.setDisable(true);
 
@@ -74,6 +94,7 @@ public class MachineController {
         // Set up the drag over event handler and only allow drop into 2 inventory
         // boxes.
         machinePane.setOnDragOver(event -> {
+            setCustomCursor();
             double x = event.getX();
             double y = event.getY();
 
@@ -92,6 +113,7 @@ public class MachineController {
         // Set up the drag dropped event handler and drop the item into the inventory
         // box only if the box is empty.
         machinePane.setOnDragDropped(event -> {
+            setCustomCursor();
             double x = event.getX();
             double y = event.getY();
             if (event.getDragboard().hasImage()) {
@@ -127,8 +149,21 @@ public class MachineController {
     }
 
     @FXML
-    private void onClickDecrypt() {
+    private void onClickDecrypt() throws ApiProxyException {
+        arrowAnimation.setVisible(true);
+        arrowStatic.setVisible(false);
+        decrypt.setDisable(true);
         System.out.println("Decrypt button clicked");
+        GameState.hasDecrypted = true;
+        GameState.eleanorAi.runGpt(
+                GptPromptEngineeringRoom3.decryptedLetter(),
+                (result) -> {
+                    System.out.println(result);
+                    arrowAnimation.setVisible(false);
+                    arrowStatic.setVisible(true);
+                    GameState.hasDecrypted = true;
+                    decrypt.setDisable(false);
+                });
 
     }
 
@@ -143,6 +178,19 @@ public class MachineController {
             position2Taken = 0;
         }
 
+    }
+
+    private void setCustomCursor() {
+        // Set the cursor to custom cursor
+        Image cursor = new Image("/images/machineCursor.png", 16,
+                27, true, true);
+        custom = new ImageCursor(cursor);
+
+        for (javafx.scene.Node node : machinePane.getChildren()) {
+            if (node.getBoundsInParent().intersects(machine.getBoundsInParent())) {
+                node.setCursor(custom);
+            }
+        }
     }
 
     private void dropItem(int positionNumber) {

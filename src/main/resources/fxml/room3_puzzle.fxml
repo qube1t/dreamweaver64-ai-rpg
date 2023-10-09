@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
@@ -7,26 +8,27 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="puzzlePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="493.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.DestnationPuzzleController">
    <children>
-      <ImageView fitHeight="816.0" fitWidth="912.0" layoutX="-151.0" layoutY="-71.0">
+   <ImageView fitHeight="493.0" fitWidth="606.0">
          <image>
-            <Image url="@../images/rooms/room3/puzzle_new.png" />
+            <Image url="@../images/rooms/room3/newestComputer.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="334.0" fitWidth="491.0" layoutX="59.0" layoutY="32.0">
+      <ImageView fitHeight="332.0" fitWidth="488.0" layoutX="65.0" layoutY="43.0">
          <image>
             <Image url="@../images/rooms/room3/95.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="301.0" fitWidth="323.0" layoutX="137.0" layoutY="40.0">
+      <ImageView fitHeight="299.0" fitWidth="323.0" layoutX="137.0" layoutY="50.0">
          <image>
             <Image url="@../images/rooms/room3/game-window.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="screen" fitHeight="287.0" fitWidth="323.0" layoutX="137.0" layoutY="55.0">
+      <ImageView fx:id="screen" fitHeight="291.0" fitWidth="323.0" layoutX="137.0" layoutY="62.0">
          <image>
             <Image url="@../images/rooms/room3/slow_square_earth.gif" />
          </image>
@@ -35,27 +37,28 @@
          <font>
             <Font name="Impact" size="17.0" />
          </font></Label>
-      <HBox fx:id="letterBox" layoutX="139.0" layoutY="270.0" prefHeight="60.0" prefWidth="323.0" />
-      <Button layoutX="287.0" layoutY="240.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="9.0" prefWidth="27.0" text="EXIT" textFill="#250000">
-         <font>
-            <Font name="Impact" size="6.0" />
-         </font>
-      </Button>
-      <Button layoutX="256.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#onClickSubmit" style="-fx-background-color: #15dae4;" text="SUBMIT">
-         <font>
-            <Font name="Impact" size="20.0" />
-         </font>
-      </Button>
       <ProgressBar fx:id="load" layoutX="249.0" layoutY="115.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" style="-fx-background-color: red;" />
       <Label fx:id="loadText" layoutX="263.0" layoutY="81.0" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" text="CHECKING..." textFill="RED">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <ImageView fx:id="customCursor" fitHeight="30.0" fitWidth="20.0" layoutX="167.0" layoutY="234.0">
-         <image>
-            <Image url="@../images/rooms/room3/pixelated-cursor-arrow-md.png" />
-         </image>
-      </ImageView>
+      <Rectangle fx:id="screenArea" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="332.0" layoutX="65.0" layoutY="41.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="488.0" />
+      <Button fx:id="submit" layoutX="266.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#onClickSubmit" style="-fx-background-color: #15dae4;" styleClass="encryptedMessage" stylesheets="@../css/font.css" text="SUBMIT">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="exit" layoutX="274.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="32.0" prefWidth="46.0" style="-fx-background-color: #2ecc71##808080FF5733;" styleClass="encryptedMessage" stylesheets="@../css/font.css" text="EXIT" textFill="#250000">
+         <font>
+            <Font name="Impact" size="20.0" />
+         </font>
+      </Button>
+      <Rectangle fx:id="letterCursor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="67.0" layoutX="137.0" layoutY="240.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="322.0" />
+      <HBox fx:id="letterBox" layoutX="139.0" layoutY="243.0" prefHeight="63.0" prefWidth="323.0">
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor></HBox>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="9.0" layoutX="200.0" layoutY="51.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: white;" width="200.0" />
    </children>
 </AnchorPane>
