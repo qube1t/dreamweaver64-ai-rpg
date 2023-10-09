@@ -15,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.mobility.CharacterMovement;
 import nz.ac.auckland.se206.mobility.SpriteAnimation;
 
@@ -73,6 +74,28 @@ public class Character extends AnchorPane {
 
     System.out.println(spriteSheet);
     initElements();
+  }
+
+  public void setCharacter() {
+    switch (GameState.characterIndex) {
+      case 1:
+        Image spriteSheetImg = new Image(getClass().getResource(spriteSheet).toExternalForm());
+        activeImg.setImage(spriteSheetImg);
+        break;
+      case 2:
+        activeImg.setImage(new Image("/images/main_game/characters/char2.png"));
+        break;
+      case 3:
+        activeImg.setImage(new Image("/images/main_game/characters/char3.png"));
+        break;
+      case 4:
+        activeImg.setImage(new Image("/images/main_game/characters/char4.png"));
+        break;
+      default:
+        Image imgSheet = new Image(getClass().getResource(spriteSheet).toExternalForm());
+        activeImg.setImage(imgSheet);
+        break;
+    }
   }
 
   public Rectangle getPlayerBound() {
@@ -178,8 +201,9 @@ public class Character extends AnchorPane {
 
   private void initElements() {
     // init character
-    Image spriteSheetImg = new Image(getClass().getResource(spriteSheet).toExternalForm());
-    activeImg.setImage(spriteSheetImg);
+    setCharacter();
+    // Image spriteSheetImg = new Image(getClass().getResource(spriteSheet).toExternalForm());
+    // activeImg.setImage(spriteSheetImg);
     activeImg.setViewport(
         new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
 

@@ -21,7 +21,7 @@
       </ImageView>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="674.0">
          <children>
-            <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
+            <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/main_game/characters/char1.png" />
             <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="13.0" layoutX="47.0" layoutY="583.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="315.0" />
             <Rectangle fx:id="rect2" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="67.0" layoutX="337.0" layoutY="539.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="315.0" />
             <Rectangle fx:id="rect3" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="379.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="48.0" />
