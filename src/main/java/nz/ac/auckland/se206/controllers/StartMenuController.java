@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -32,13 +33,24 @@ public class StartMenuController {
   private Pane infoPane;
   @FXML
   private ImageView muteIcon;
+  @FXML
+  private Rectangle mc1;
+  @FXML
+  private Rectangle mc2;
+  @FXML
+  private Rectangle mc3;
+  @FXML
+  private Rectangle mc4;
+
+  private Rectangle[] characters;
 
   /** Initialize the start menu. */
   public void initialize() throws ApiProxyException {
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
-
     instruction.setText(GameState.instructionMsg);
+
+    characters = new Rectangle[] { mc1, mc2, mc3, mc4 };
   }
 
   /**
@@ -105,9 +117,48 @@ public class StartMenuController {
       muteIcon.setImage(new Image("/images/main_game/icons/music_off.png"));
     } else {
       muteIcon.setImage(new Image("/images/main_game/icons/music_on.png"));
-
     }
     // Image volIcon = new Image("images/volume.png");
     // muteIcon.setImage(volIcon);
+  }
+
+  /**
+   * When the player clicks on the character, the character will be chosen.
+   * 
+   * @param event
+   * @throws IOException
+   */
+  @FXML
+  private void toggleCharacterSelection(MouseEvent event) throws IOException {
+    Rectangle selectedCharacter = mc1;
+    if (event.getSource() == mc1) {
+      selectedCharacter = mc1;
+      GameState.characterIndex = 1;
+      System.out.println("Character 1 selected");
+    } else if (event.getSource() == mc2) {
+      selectedCharacter = mc2;
+      GameState.characterIndex = 2;
+      System.out.println("Character 2 selected");
+    } else if (event.getSource() == mc3) {
+      selectedCharacter = mc3;
+      GameState.characterIndex = 3;
+      System.out.println("Character 3 selected");
+    } else if (event.getSource() == mc4) {
+      selectedCharacter = mc4;
+      GameState.characterIndex = 4;
+      System.out.println("Character 4 selected");
+    } else {
+      selectedCharacter = mc1;
+      GameState.characterIndex = 1;
+      System.out.println("Character 1 selected");
+    }
+
+    for (Rectangle character : characters) {
+      if (character == selectedCharacter) {
+        character.setOpacity(1);
+      } else {
+        character.setOpacity(0);
+      }
+    }
   }
 }

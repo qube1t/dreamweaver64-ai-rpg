@@ -23,6 +23,9 @@ public class GameState {
   /** Indicates the number of hints remaining. */
   public static int hintsRemaining;
 
+  /** Indicates the character index. */
+  public static int characterIndex = 1;
+
   // main game
   /** Indicates the main game. */
   public static MainGameController mainGame;
