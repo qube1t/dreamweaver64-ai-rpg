@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
@@ -54,6 +56,12 @@ public class Room1Controller {
   private Rectangle rect15;
   @FXML
   private Rectangle shelfBtn;
+  @FXML
+  private ImageView shelfLoaderImg;
+  @FXML
+  private ImageView mainDoorBlockImg;
+  @FXML
+  private Rectangle mainDoorBtn;
 
   @FXML
   private Pane interactablePane;
@@ -64,6 +72,19 @@ public class Room1Controller {
         Arrays.asList(
             rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
             rect12, rect13, rect14, rect15));
+
+    if (!GameState.booksLoaded) {
+      shelfBtn.setDisable(true);
+      mainDoorBlockImg.setImage(null);
+    } else {
+      enableBookShelf();
+
+    }
+
+    if (GameState.hasDecrypted) {
+      mainDoorBtn.setDisable(true);
+
+    }
     // Initialization code goes here
     character.enableMobility(obsts, interactablePane.getChildren());
 
@@ -96,6 +117,7 @@ public class Room1Controller {
 
   private void initGpt() throws ApiProxyException {
     // gettng books from gpt
+    MainGameController.enableInteractPane();
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.get7Books(),
         str -> {
@@ -107,8 +129,7 @@ public class Room1Controller {
           System.out.println(ansBook);
 
           // enable interact pane
-          MainGameController.enableInteractPane();
-
+          enableBookShelf();
           // get riddle from gpt
         });
 
@@ -152,6 +173,12 @@ public class Room1Controller {
     MainGameController.addOverlay("book_shelf", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened book shelf. No reply is needed for this message.");
+  }
+
+  private void enableBookShelf() {
+    shelfBtn.setDisable(false);
+    shelfLoaderImg.setImage(null);
+    GameState.booksLoaded = true;
   }
 
   @FXML
