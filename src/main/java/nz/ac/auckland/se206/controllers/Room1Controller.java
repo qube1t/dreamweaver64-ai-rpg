@@ -106,6 +106,8 @@ public class Room1Controller {
 
     GameState.prevRoom = 1;
 
+    imgEndSt = imgEnd;
+
     if (GameState.tenSecondsLeft) {
       initializeMap();
     }
