@@ -55,6 +55,15 @@ public class Room1Controller {
   @FXML
   private Rectangle rect15;
   @FXML
+  private Rectangle rect16;
+  @FXML
+  private Rectangle rect17;
+  @FXML
+  private Rectangle rect18;
+  @FXML
+  private Rectangle rect19;
+
+  @FXML
   private Rectangle shelfBtn;
   @FXML
   private ImageView shelfLoaderImg;
@@ -71,7 +80,7 @@ public class Room1Controller {
     ArrayList<Rectangle> obsts = new ArrayList<Rectangle>(
         Arrays.asList(
             rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
-            rect12, rect13, rect14, rect15));
+            rect12, rect13, rect14, rect15, rect16, rect17, rect18, rect19));
 
     if (!GameState.booksLoaded) {
       // while loading
@@ -118,6 +127,14 @@ public class Room1Controller {
   private void initGpt() throws ApiProxyException {
     // gettng books from gpt
     MainGameController.enableInteractPane();
+
+    // getting room intro from gpt
+    GameState.eleanorAi.runGpt(
+        "The user has entered their childhood home. In this room they are encouraged to look"
+            + " around. You can talk to the user. Only the chunk of text surrounded with the"
+            + " character * before and after will be shown to the user. Keep the message 1"
+            + " sentance. .");
+
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.get7Books(),
         str -> {
@@ -132,13 +149,6 @@ public class Room1Controller {
           enableBookShelf();
           // get riddle from gpt
         });
-
-    // getting room intro from gpt
-    GameState.eleanorAi.runGpt(
-        "The user has entered their childhood home. In this room they are encouraged to look"
-            + " around. You can talk to the user. Only the chunk of text surrounded with the"
-            + " character * before and after will be shown to the user. Keep the message 1"
-            + " sentance. .");
   }
 
   @FXML

@@ -36,6 +36,19 @@ public class CharacterMovement {
         return true;
       }
     }
+
+    for (Node interactable : interactables) {
+      if (player
+          .localToParent(playerBound.getBoundsInParent())
+          .intersects(interactable.getBoundsInParent())) {
+        if (interactable.getId().equals("rightDoorBtn") || interactable.getId().equals("leftDoorBtn")
+            || interactable.getId().equals("mainDoorBtn")) {
+          if (!interactable.isDisable()) {
+            interactable.getOnMouseClicked().handle(null);
+          }
+        }
+      }
+    }
     return false;
   }
 
