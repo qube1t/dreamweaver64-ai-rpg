@@ -457,12 +457,6 @@ public class MainGameController {
         for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
           if (GameState.winTheGame || GameState.timeLimitReached) {
             break;
-          } else if (currentTime == 10) {
-            // 10 seconds left
-            GameState.tenSecondsLeft = true;
-            // Room1Controller.initializeMap();
-            Room2Controller.initializeMap();
-            Room3Controller.initializeMap();
           }
           int time = currentTime;
           int minutes = time / 60;
@@ -474,6 +468,12 @@ public class MainGameController {
                 InstructionsLoadController.setTime(formattedTime);
                 // update hint count every cycle
                 updateHintCount();
+                if (time == 10) {
+                  GameState.tenSecondsLeft = true;
+                  Room1Controller.initializeMap();
+                  Room2Controller.initializeMap();
+                  Room3Controller.initializeMap();
+                }
               });
           try {
             // sleep for 1 second before next cycle.
