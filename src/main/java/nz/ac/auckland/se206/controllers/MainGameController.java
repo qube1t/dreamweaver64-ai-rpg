@@ -8,6 +8,8 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -37,6 +39,8 @@ public class MainGameController {
   private static Character character;
   @FXML
   private static Pane initialisedGamePane;
+  @FXML
+  private static Pane initialisedInventoryPane;
 
   private static MainGameController instance;
   private static Thread timeLimitThread;
@@ -170,6 +174,7 @@ public class MainGameController {
         .getChildren()
         .add(initialisedGamePane.getChildren().size() - 4, backgroundBlur);
     initialisedGamePane.getChildren().add(initialisedGamePane.getChildren().size() - 4, room1);
+    setMainCursor();
   }
 
   public static void removeOverlay(boolean alsoRooms) {
@@ -189,6 +194,7 @@ public class MainGameController {
           .remove(initialisedGamePane.getChildren().size() - 1 - 4);
       initialisedGamePane.requestFocus();
     }
+    setMainCursor();
   }
 
   @FXML
@@ -232,6 +238,8 @@ public class MainGameController {
   private TextField chatInput;
   @FXML
   private Pane interactPane;
+  @FXML
+  private Pane inventoryPane;
 
   private Text bubbleChatText = new Text("text");
 
@@ -255,6 +263,9 @@ public class MainGameController {
     System.out.println(1);
     initialisedGamePane = gamePane;
     initialisedInteractPane = interactPane;
+    initialisedInventoryPane = interactPane;
+
+    setMainCursor();
 
     // adding instruction overlay to the bottom of the outer pane
     outerPane
@@ -343,6 +354,7 @@ public class MainGameController {
       outerPane.requestFocus();
       chatPane.setMouseTransparent(true);
     }
+    setMainCursor();
   }
 
   @FXML
@@ -538,5 +550,15 @@ public class MainGameController {
     } else {
       return;
     }
+  }
+
+  private static void setMainCursor() {
+    // Set the cursor to custom cursor
+    Image cursor = new Image("/images/mainCursor.png", 16,
+        27, true, true);
+    Cursor custom = new ImageCursor(cursor);
+
+    initialisedInventoryPane.setCursor(custom);
+    initialisedInteractPane.setCursor(custom);
   }
 }

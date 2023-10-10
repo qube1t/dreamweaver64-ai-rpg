@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -32,13 +34,19 @@ public class StartMenuController {
   private Pane infoPane;
   @FXML
   private ImageView muteIcon;
+  @FXML
+  private Pane outPane;
+  @FXML
+  private Pane startPane;
 
   /** Initialize the start menu. */
   public void initialize() throws ApiProxyException {
+
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
 
     instruction.setText(GameState.instructionMsg);
+    setCursor();
   }
 
   /**
@@ -95,6 +103,7 @@ public class StartMenuController {
   @FXML
   private void toggleInfo() {
     infoPane.setVisible(!infoPane.isVisible());
+    setCursor();
   }
 
   @FXML
@@ -107,7 +116,17 @@ public class StartMenuController {
       muteIcon.setImage(new Image("/images/main_game/icons/music_on.png"));
 
     }
+    setCursor();
     // Image volIcon = new Image("images/volume.png");
     // muteIcon.setImage(volIcon);
+  }
+
+  private void setCursor() {
+    // Set the cursor to custom cursor
+    Image cursor = new Image("/images/mainCursor.png", 16,
+        27, true, true);
+    Cursor custom = new ImageCursor(cursor);
+
+    outPane.setCursor(custom);
   }
 }
