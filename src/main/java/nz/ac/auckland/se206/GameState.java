@@ -117,9 +117,10 @@ public class GameState {
 
   public static boolean isMachineOpen = false;
 
-  public static String currentDraggedItemIndex = "";
+  public static String currentDraggedItemId = "";
 
   /**
+   *
    * Indicates the introduction message when first enter the puzzle game in Room3.
    */
   public static String puzzleIntroMessageRoom3 = "";
@@ -183,7 +184,7 @@ public class GameState {
     isPuzzleInRoom3Solved = false;
     aircraftCode = "";
     isMachineOpen = false;
-    currentDraggedItemIndex = "";
+    currentDraggedItemId = "";
     puzzleIntroMessageRoom3 = "";
     hasDecrypted = false;
   }

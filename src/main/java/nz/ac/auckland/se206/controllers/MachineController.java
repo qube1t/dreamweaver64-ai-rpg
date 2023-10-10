@@ -3,10 +3,8 @@ package nz.ac.auckland.se206.controllers;
 import java.util.ArrayList;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+
 import javafx.fxml.FXML;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
@@ -14,8 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.CustomImageSet;
@@ -23,10 +19,7 @@ import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class MachineController {
-    @FXML
-    private Rectangle inventory1;
-    @FXML
-    private Rectangle inventory2;
+
     @FXML
     private AnchorPane machinePane;
     @FXML
@@ -37,15 +30,16 @@ public class MachineController {
     private ImageView arrowStatic;
     @FXML
     private ImageView arrowAnimation;
+    @FXML
+    private ImageView item1;
+    @FXML
+    private ImageView item2;
+    @FXML
+    private ImageView letter;
 
     private static ArrayList<CustomImageSet> imageSet;
     private static int position1Taken = 0;
     private static int position2Taken = 0;
-
-    private final int POSITION_X_1 = 79;
-    private final int POSITION_Y_1 = 130;
-    private final int POSITION_X_2 = 79;
-    private final int POSITION_Y_2 = 177;
     private static Cursor custom;
 
     public static void resetMachine() {
@@ -57,12 +51,20 @@ public class MachineController {
     // Set up the drop event handler
 
     public void initialize() {
-        arrowAnimation.setVisible(false);
 
         setCustomCursor();
+        setDecrypted();
 
+        arrowAnimation.setVisible(false);
         decrypt.setOpacity(0.3);
         decrypt.setDisable(true);
+
+        if (position1Taken == 1) {
+            setItem(1);
+        }
+        if (position2Taken == 1) {
+            setItem(2);
+        }
 
         // Initialise the image set of size 3 only
         // the first time entering the machine.
@@ -74,21 +76,16 @@ public class MachineController {
 
         checkCorrectItem();
 
-        if (position1Taken == 1) {
-            setItem(0);
-        }
-        if (position2Taken == 1) {
-            setItem(1);
-        }
-
         // Set background color to light purple when hovering
         decrypt.setOnMouseEntered(event -> {
             decrypt.setStyle("-fx-background-color: #e12ddb;");
+            decrypt.setStyle("-fx-background-radius: 12");
         });
 
         // Reset to the default style when not hovering
         decrypt.setOnMouseExited(event -> {
-            decrypt.setStyle("-fx-background-color: purple;");
+            decrypt.setStyle("-fx-background-color: #d27d2c;");
+            decrypt.setStyle("-fx-background-radius: 12");
         });
 
         // Set up the drag over event handler and only allow drop into 2 inventory
@@ -101,8 +98,8 @@ public class MachineController {
             System.out.println("Dragged over");
             if (event.getGestureSource() != machinePane &&
                     event.getDragboard().hasImage()) {
-                if (inventory1.getBoundsInParent().contains(x, y) ||
-                        inventory2.getBoundsInParent().contains(x, y)) {
+                if (item1.getBoundsInParent().contains(x, y) ||
+                        item2.getBoundsInParent().contains(x, y)) {
                     event.acceptTransferModes(TransferMode.ANY);
                 }
             }
@@ -117,15 +114,13 @@ public class MachineController {
             double x = event.getX();
             double y = event.getY();
             if (event.getDragboard().hasImage()) {
-                if (inventory1.getBoundsInParent().contains(x, y) && position1Taken == 0) {
-                    dropItem(0);
-                } else if (inventory2.getBoundsInParent().contains(x, y) && position2Taken == 0) {
+                if (item1.getBoundsInParent().contains(x, y) && position1Taken == 0) {
                     dropItem(1);
+                } else if (item2.getBoundsInParent().contains(x, y) && position2Taken == 0) {
+                    dropItem(2);
                 }
             }
             // Put rectangles to the front
-            inventory1.toFront();
-            inventory2.toFront();
             checkCorrectItem();
             event.setDropCompleted(true);
             event.consume();
@@ -133,19 +128,29 @@ public class MachineController {
     }
 
     @FXML
-    private void onClickBox1() {
+    private void onClickInventory1() {
         if (position1Taken == 1) {
-            System.out.println("Box 1 clicked");
-            // Find the ImageView by id
-            ImageView itemToRemove = (ImageView) machinePane.lookup("#item1");
 
-            // Remove the image from the machinePane
-            machinePane.getChildren().remove(itemToRemove);
-            // Add the item to the obtained items
+            item1.setImage(null);
             MainGameController.addObtainedItem(imageSet.get(0).getOriginalImage(),
                     imageSet.get(0).getId());
             position1Taken = 0;
+            imageSet.add(0, null);
+            System.out.println("Removed item 1");
         }
+    }
+
+    @FXML
+    private void onClickInventory2() {
+        if (position2Taken == 1) {
+            item2.setImage(null);
+            MainGameController.addObtainedItem(imageSet.get(1).getOriginalImage(),
+                    imageSet.get(1).getId());
+            position2Taken = 0;
+            imageSet.add(1, null);
+            System.out.println("Removed item 2");
+        }
+
     }
 
     @FXML
@@ -159,23 +164,24 @@ public class MachineController {
                 GptPromptEngineeringRoom3.decryptedLetter(),
                 (result) -> {
                     System.out.println(result);
-                    arrowAnimation.setVisible(false);
-                    arrowStatic.setVisible(true);
-                    GameState.hasDecrypted = true;
-                    decrypt.setDisable(false);
+                    setDecrypted();
                 });
 
     }
 
-    @FXML
-    private void onClickBox2() {
-        if (position2Taken == 1) {
-            System.out.println("return 2");
-            // Find the ImageView by id
-            ImageView itemToRemove = (ImageView) machinePane.lookup("#item2");
-            machinePane.getChildren().remove(itemToRemove);
-            MainGameController.addObtainedItem(imageSet.get(1).getOriginalImage(), imageSet.get(1).getId());
+    private void setDecrypted() {
+        if (GameState.hasDecrypted) {
+            decrypt.setVisible(false);
+            arrowAnimation.setVisible(false);
+            arrowStatic.setVisible(true);
+            item1.setImage(null);
+            item2.setImage(null);
+            position1Taken = 0;
             position2Taken = 0;
+            Image letterMom = new Image("/images/letterMom.png");
+            letter.setImage(letterMom);
+            letter.setFitHeight(40);
+            letter.setPreserveRatio(true);
         }
 
     }
@@ -193,29 +199,6 @@ public class MachineController {
         }
     }
 
-    private void dropItem(int positionNumber) {
-        ImageView item = new ImageView(MainGameController.getImageSet().getOriginalImage());
-        imageSet.add(positionNumber, MainGameController.getImageSet());
-        item.setFitHeight(40);
-        item.setPreserveRatio(true);
-        machinePane.getChildren().add(item);
-        item.setId("item" + (positionNumber + 1));
-        if (positionNumber == 0) {
-            item.setLayoutX(POSITION_X_1);
-            item.setLayoutY(POSITION_Y_1);
-            System.out.println("Dropped into first inventory box");
-            position1Taken = 1;
-        } else if (positionNumber == 1) {
-            item.setLayoutX(POSITION_X_2);
-            item.setLayoutY(POSITION_Y_2);
-            System.out.println("Dropped into second inventory box");
-            position2Taken = 1;
-        }
-
-        MainGameController.removeObtainedItem(GameState.currentDraggedItemIndex);
-        System.out.println("item" + GameState.currentDraggedItemIndex + "removed from top bar.");
-    }
-
     private void checkCorrectItem() {
         if (imageSet.get(0) != null &&
                 imageSet.get(1) != null) {
@@ -228,7 +211,7 @@ public class MachineController {
                 System.out.println("Correct items");
                 // Start animation of button from opacity of 0.5 to 1
                 // Create a FadeTransition of 3 seconds duration.
-                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(3), decrypt);
+                FadeTransition fadeTransition = new FadeTransition(Duration.seconds(2), decrypt);
 
                 fadeTransition.setFromValue(0.3);
                 fadeTransition.setToValue(1);
@@ -245,22 +228,42 @@ public class MachineController {
     }
 
     private void setItem(int position) {
-        ImageView item = new ImageView(imageSet.get(position).getOriginalImage());
-        item.setFitHeight(40);
-        item.setPreserveRatio(true);
-        machinePane.getChildren().add(item);
-        item.setId("item" + (position + 1));
-        if (position == 0) {
-            item.setLayoutX(POSITION_X_1);
-            item.setLayoutY(POSITION_Y_1);
+        Image item = imageSet.get(position).getOriginalImage();
+        if (position == 1) {
+            item1.setImage(item);
+            item1.setFitHeight(35);
+            item1.setPreserveRatio(true);
             position1Taken = 1;
-        } else if (position == 1) {
-            item.setLayoutX(POSITION_X_2);
-            item.setLayoutY(POSITION_Y_2);
+        } else if (position == 2) {
+            item2.setImage(item);
+            item2.setFitHeight(35);
+            item2.setPreserveRatio(true);
             position2Taken = 1;
         }
-        inventory1.toFront();
-        inventory2.toFront();
+    }
+
+    private void dropItem(int positionNumber) {
+        Image item = MainGameController.getImageSet().getOriginalImage();
+        imageSet.add(positionNumber - 1, MainGameController.getImageSet());
+
+        if (positionNumber == 1) {
+            item1.setImage(item);
+            item1.setFitHeight(35);
+            item1.setPreserveRatio(true);
+            System.out.println("Dropped into first inventory box with id"
+                    + imageSet.get(positionNumber - 1).getId());
+            position1Taken = 1;
+        } else if (positionNumber == 2) {
+            item2.setImage(item);
+            item2.setFitHeight(35);
+            item2.setPreserveRatio(true);
+            System.out.println("Dropped into second inventory box with id" +
+                    imageSet.get(positionNumber - 1).getId());
+            position2Taken = 1;
+        }
+
+        MainGameController.removeObtainedItem(GameState.currentDraggedItemId);
+        System.out.println("item" + GameState.currentDraggedItemId + "removed from top bar.");
     }
 
 }

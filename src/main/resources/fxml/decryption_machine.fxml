@@ -21,8 +21,6 @@
             <Image url="@../images/rooms/room3/machineNew.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="inventory1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="49.0" layoutX="74.0" layoutY="122.0" onMouseClicked="#onClickBox1" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="inventory2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="51.0" layoutX="74.0" layoutY="172.0" onMouseClicked="#onClickBox2" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="54.0" />
       <Button fx:id="decrypt" layoutX="145.0" layoutY="220.0" mnemonicParsing="false" onMouseClicked="#onClickDecrypt" prefHeight="27.0" prefWidth="66.0" style="-fx-background-color: #d27d2c; -fx-background-radius: 12;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" text="DECRYPT">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -40,5 +38,8 @@
             <Image url="@../images/rooms/room3/arrow_static.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="item1" fitHeight="39.0" fitWidth="39.0" layoutX="81.0" layoutY="128.0" onMouseClicked="#onClickInventory1" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="item2" fitHeight="39.0" fitWidth="43.0" layoutX="79.0" layoutY="178.0" onMouseClicked="#onClickInventory2" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="letter" fitHeight="45.0" fitWidth="44.0" layoutX="228.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>
