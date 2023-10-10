@@ -74,16 +74,16 @@ public class Room1Controller {
             rect12, rect13, rect14, rect15));
 
     if (!GameState.booksLoaded) {
+      // while loading
       shelfBtn.setDisable(true);
-      mainDoorBlockImg.setImage(null);
     } else {
       enableBookShelf();
-
     }
 
     if (GameState.hasDecrypted) {
-      mainDoorBtn.setDisable(true);
-
+      // enable main door
+      mainDoorBtn.setDisable(false);
+      mainDoorBlockImg.setImage(null);
     }
     // Initialization code goes here
     character.enableMobility(obsts, interactablePane.getChildren());
