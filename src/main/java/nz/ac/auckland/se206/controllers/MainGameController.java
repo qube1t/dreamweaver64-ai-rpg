@@ -457,12 +457,16 @@ public class MainGameController {
         for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
           if (GameState.winTheGame || GameState.timeLimitReached) {
             break;
-          } else if (currentTime == 10) {
+          } 
+          if (currentTime == 10) {
             // 10 seconds left
             GameState.tenSecondsLeft = true;
-            // Room1Controller.initializeMap();
-            Room2Controller.initializeMap();
-            Room3Controller.initializeMap();
+            Platform.runLater(
+              () -> {
+                // Room1Controller.initializeMap();
+                Room2Controller.initializeMap();
+                Room3Controller.initializeMap();
+              });
           }
           int time = currentTime;
           int minutes = time / 60;
