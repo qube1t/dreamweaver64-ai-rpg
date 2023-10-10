@@ -114,10 +114,6 @@ public class Room2Controller {
   @FXML
   private Rectangle pirate;
   @FXML
-  private Rectangle doorToRoom1;
-  @FXML
-  private Rectangle doorToRoom3;
-  @FXML
   private Pane piratePane;
   @FXML
   private ImageView pirateSpeech;
@@ -279,17 +275,17 @@ public class Room2Controller {
       // if the player get wrong book, the message will be displayed
       if (GameState.takenBook != null && !wrongMsgPrinted) {
         wrongMsgPrinted = true;
-          GameState.eleanorAi.runGpt(
-              GptPromptEngineeringRoom2.getPirateWrongResponse(),
-              (result) -> {
-                Platform.runLater(
-                    () -> {
-                      List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                      if (pirateDialogue.size() > 0) {
-                        displayBubble(result.replace("^", ""));
-                      }
-                    });
-              });
+        GameState.eleanorAi.runGpt(
+            GptPromptEngineeringRoom2.getPirateWrongResponse(),
+            (result) -> {
+              Platform.runLater(
+                  () -> {
+                    List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+                    if (pirateDialogue.size() > 0) {
+                      displayBubble(result.replace("^", ""));
+                    }
+                  });
+            });
       } else {
         // if the player has not got any book, the message will be displayed
         wrongMsgPrinted = false;

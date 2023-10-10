@@ -86,7 +86,7 @@ public class Room3Controller {
   @FXML
   private ImageView paperImage;
   @FXML
-  private Pane clickPane;
+  private Pane interactablePane;
   @FXML
   private Text label1;
   @FXML
@@ -183,7 +183,7 @@ public class Room3Controller {
     }
 
     // Enable the character movement.
-    character.enableMobility(obstacles, clickPane.getChildren());
+    character.enableMobility(obstacles, interactablePane.getChildren());
 
     switch (GameState.prevRoom) {
       case 1:

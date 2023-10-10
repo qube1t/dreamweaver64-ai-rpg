@@ -11,7 +11,7 @@
 
 <?import nz.ac.auckland.se206.components.Character?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
    <children>
       <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -100,6 +100,15 @@
                </image>
             </ImageView>
             <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
+         </children>
+      </Pane>
+      <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/rooms/room2/frontShipMap.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="interactablePane">
+         <children>
             <ImageView fx:id="imgDisabled1" fitHeight="40.0" fitWidth="37.0" layoutX="158.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/rooms/room2/disabledMark.png" />
@@ -125,23 +134,14 @@
                   <Image url="@../images/rooms/room2/disabledMark.png" />
                </image>
             </ImageView>
-         </children>
-      </Pane>
-      <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/rooms/room2/frontShipMap.png" />
-         </image>
-      </ImageView>
-      <Pane fx:id="interactablePane">
-         <children>
-            <Rectangle fx:id="box1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff65" height="33.0" layoutX="149.0" layoutY="180.0" onMouseClicked="#onClickBox1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
-            <Rectangle fx:id="box2" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="118.0" layoutY="352.0" onMouseClicked="#onClickBox2" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
-            <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="202.0" layoutY="257.0" onMouseClicked="#onClickBox3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
-            <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="350.0" layoutY="384.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
-            <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="456.0" layoutY="300.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
-            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="#ffffff67" height="59.0" layoutX="434.0" layoutY="156.0" onMouseClicked="#onGetTrade" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="44.0" />
-            <Rectangle fx:id="doorToRoom1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="66.0" layoutY="216.0" onMouseClicked="#onOpenRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
-            <Rectangle fx:id="doorToRoom3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="546.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="19.0" />
+            <Rectangle fx:id="box1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff65" height="43.0" layoutX="145.0" layoutY="179.0" onMouseClicked="#onClickBox1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="62.0" />
+            <Rectangle fx:id="box2" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="42.0" layoutX="115.0" layoutY="348.0" onMouseClicked="#onClickBox2" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="66.0" />
+            <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="42.0" layoutX="199.0" layoutY="252.0" onMouseClicked="#onClickBox3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="62.0" />
+            <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="41.0" layoutX="347.0" layoutY="380.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="63.0" />
+            <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="41.0" layoutX="453.0" layoutY="296.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="62.0" />
+            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="#a19d9d04" height="59.0" layoutX="434.0" layoutY="156.0" onMouseClicked="#onGetTrade" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="44.0" />
+            <Rectangle fx:id="leftDoorBtn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="66.0" layoutY="216.0" onMouseClicked="#onOpenRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
+            <Rectangle fx:id="rightDoorBtn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="546.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
          </children>
       </Pane>
       <Pane fx:id="piratePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" translateX="-30.0" translateY="30.0" visible="false" StackPane.alignment="TOP_RIGHT">
