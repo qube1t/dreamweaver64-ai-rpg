@@ -47,6 +47,9 @@ public class GameState {
   public static List<String> factsAboutDW64;
 
   // room1
+
+  public static boolean booksLoaded;
+
   /** Indicates the riddle that used in the room2. */
   public static String pirateRiddle = null;
 

@@ -11,9 +11,9 @@
 
 <?import nz.ac.auckland.se206.components.Character?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room3Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room3Controller">
    <children>
-      <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
+      <Pane>
          <children>
             <ImageView fitHeight="510.0" fitWidth="600.0">
                <image>
@@ -30,7 +30,6 @@
                   <Image url="@../images/rooms/room3/launch_escape_map_1.jpg" />
                </image>
             </ImageView>
-            <Rectangle fx:id="computer" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="295.0" layoutY="271.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
             <ImageView fitHeight="69.0" fitWidth="44.0" layoutX="87.0" layoutY="110.0">
                <image>
                   <Image url="@../images/rooms/room3/door1.png" />
@@ -41,12 +40,26 @@
                   <Image url="@../images/rooms/room3/1.png" />
                </image>
             </ImageView>
+         </children>
+      </Pane>
+      <ImageView fx:id="imgEnd" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/rooms/room3/endRoom3.gif" />
+         </image>
+      </ImageView>
+      <Pane>
+         <children>
             <Circle fx:id="point1" fill="#ff1f1f" layoutX="310.0" layoutY="72.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="point3" fill="#ff1f1f" layoutX="387.0" layoutY="114.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="point2" fill="#ff1f1f" layoutX="196.0" layoutY="65.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="point4" fill="#ff1f1f" layoutX="360.0" layoutY="70.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="point5" fill="#ff1f1f" layoutX="181.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
             <Text fx:id="label5" layoutX="183.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEATTLE">
                <font>
                   <Font name="Impact" size="18.0" />
                </font>
             </Text>
+
             <Rectangle fx:id="boundary1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="148.0" layoutX="25.0" layoutY="354.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="499.0" />
             <Rectangle fx:id="boundary2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="156.0" layoutX="76.0" layoutY="20.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="391.0" />
             <Rectangle fx:id="gate" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="76.0" layoutX="525.0" layoutY="162.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="47.0" />
@@ -66,6 +79,7 @@
             <Circle fx:id="point2" fill="#ff1f1f" layoutX="196.0" layoutY="65.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fx:id="point4" fill="#ff1f1f" layoutX="360.0" layoutY="70.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fx:id="point5" fill="#ff1f1f" layoutX="181.0" layoutY="60.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" />
+
             <Text fx:id="label2" layoutX="206.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HOUSTON">
                <font>
                   <Font name="Impact" size="18.0" />
@@ -88,16 +102,18 @@
             </Text>
          </children>
       </Pane>
+
      <StackPane>
          <children>
-            <Pane fx:id="clickPane">
+            <Pane fx:id="interactablePane">
                <children>
-                  <Rectangle fx:id="machine" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="64.0" layoutX="78.0" layoutY="235.0" onMouseClicked="#clickMachineEvent" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="67.0" />
-                  <Rectangle fx:id="clickableComputer" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="29.0" layoutX="290.0" layoutY="261.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="46.0" />
-                  <Rectangle fx:id="clickableRadar" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="25.0" layoutX="198.0" layoutY="205.0" onMouseClicked="#onClickRadar" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="86.0" />
-                  <Rectangle fx:id="clickableDoor" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="91.0" layoutX="518.0" layoutY="157.0" onMouseClicked="#onClickDoor" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="60.0" />
-                  <Rectangle fx:id="clickableComputer2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="37.0" layoutX="377.0" layoutY="264.0" onMouseClicked="#onClickPuzzle" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="44.0" />
-                  <Rectangle fx:id="doorToRoom2" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="91.0" layoutX="77.0" layoutY="99.0" onMouseClicked="#onClickRoom2" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="63.0" />
+
+                  <Rectangle fx:id="machine" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="64.0" layoutX="78.0" layoutY="235.0" onMouseClicked="#clickMachineEvent" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="67.0" visible="false" />
+                  <Rectangle fx:id="clickableComputer" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="29.0" layoutX="290.0" layoutY="261.0" onMouseClicked="#onClickComputer" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="46.0" visible="false" />
+                  <Rectangle fx:id="clickableRadar" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="25.0" layoutX="198.0" layoutY="205.0" onMouseClicked="#onClickRadar" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="86.0" visible="false"/>
+                  <Rectangle fx:id="clickableDoor" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="91.0" layoutX="518.0" layoutY="157.0" onMouseClicked="#onClickDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" width="60.0" visible="false"/>
+                  <Rectangle fx:id="clickableComputer2" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="37.0" layoutX="377.0" layoutY="264.0" onMouseClicked="#onClickPuzzle" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="44.0" visible="false"/>
+                  <Rectangle fx:id="doorToRoom2" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="91.0" layoutX="77.0" layoutY="99.0" onMouseClicked="#onClickRoom2" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="63.0" visible="false"/>
                </children>
             </Pane>
          </children>

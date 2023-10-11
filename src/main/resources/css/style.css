@@ -17,14 +17,21 @@
 }
 
 .action-btn {
-    -fx-opacity: 0;
+    /* -fx-opacity: 1;
+    -fx-fill: transparent;
+    -fx-cursor: hand; */
+    /* -fx-border-style: solid inside; */
+    -fx-stroke: white;
+    -fx-stroke-width: 2px;
 }
 
 .action-btn:hover {
-    -fx-opacity: 1;
+    /* -fx-opacity: 1;*/
     -fx-fill: transparent;
     -fx-cursor: hand;
-    -fx-border-width: 0.2;
+    /* -fx-border-style: solid inside; */
+    -fx-stroke-width: 3.5px;
+    -fx-stroke: white;
 }
 
 .letter-frame {
