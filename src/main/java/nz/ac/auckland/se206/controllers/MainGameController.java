@@ -89,6 +89,7 @@ public class MainGameController {
             originalImageView.setFitWidth(40);
 
             imageSetDragging = new CustomImageSet(originalImage, obtainedItems.get(id).getId());
+            System.out.println("dragging " + obtainedItems.get(id).getId());
 
             // Create a new ClipboardContent with the custom drag image
             ClipboardContent content = new ClipboardContent();

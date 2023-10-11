@@ -145,35 +145,40 @@ public class Room3CentralDisplayUnitController {
         zero0);
     this.allButtons = allButtons;
 
-    if (GameState.isPuzzleInRoom3Solved) {
-      if (GameState.isAircraftCodeFound) {
-        centralDisplayUnit.setOpacity(0.7);
-        displayOutput.setText("");
-        // Update the introduction label with the correct answer message
-        displayInput.setText("CONGRATULATIONS! AIRCRAFT CODE UNLOCKED: " + GameState.aircraftCode);
-
-        for (Rectangle button : allButtons) {
-          button.setDisable(true);
-        }
-        displayOutput.setDisable(true);
-      } else {
-        enableFlightComputer();
-      }
-
-    } else {
+    // if (GameState.isPuzzleInRoom3Solved) {
+    if (GameState.isAircraftCodeFound) {
       centralDisplayUnit.setOpacity(0.7);
-      displayOutput.setText("LOCKED");
+      displayOutput.setText("");
+      // Update the introduction label with the correct answer message
+      displayInput.setText("CONGRATULATIONS! AIRCRAFT CODE UNLOCKED: " + GameState.aircraftCode);
 
       for (Rectangle button : allButtons) {
         button.setDisable(true);
       }
       displayOutput.setDisable(true);
-      GameState.eleanorAi.runGpt(
-          "User update: User clicks on the flight computer but it is locked due to either not"
-              + " solved the puzzle or not opened the world map to discover the current location."
-              + " Give player a short message without revealing any step. Only give hints if the"
-              + " user ask for it. Only the response surrounded between * will send to user.");
+    } else {
+      enableFlightComputer();
     }
+    // }
+
+    // } else {
+    // centralDisplayUnit.setOpacity(0.7);
+    // displayOutput.setText("LOCKED");
+
+    // for (Rectangle button : allButtons) {
+    // button.setDisable(true);
+    // }
+    // displayOutput.setDisable(true);
+    // GameState.eleanorAi.runGpt(
+    // "User update: User clicks on the flight computer but it is locked due to
+    // either not"
+    // + " solved the puzzle or not opened the world map to discover the current
+    // location."
+    // + " Give player a short message without revealing any step. Only give hints
+    // if the"
+    // + " user ask for it. Only the response surrounded between * will send to
+    // user.");
+    // }
   }
 
   /**
@@ -286,7 +291,6 @@ public class Room3CentralDisplayUnitController {
     lock.setVisible(false);
     lock.setDisable(true);
     displayOutput.setDisable(false);
-
     displayOutput.requestFocus();
     Platform.runLater(
         () -> {
@@ -297,7 +301,8 @@ public class Room3CentralDisplayUnitController {
     for (Rectangle button : allButtons) {
       button.setDisable(false);
     }
-    String message = "ENTER THE FIRST TWO LETTER OF DEP / DEST CITY THEN PRESS EXEC. E.g SY/ME";
+
+    String message = "ENTER THE FIRST THREE LETTER OF DEP / DEST CITY THEN PRESS EXEC. E.g SYD/MEL";
     int typingDelay = 50;
     typeTextEffect(displayInput, message, typingDelay);
   }
@@ -310,17 +315,17 @@ public class Room3CentralDisplayUnitController {
    */
   public void handleExecuteClick() throws ApiProxyException {
     String currentInput = displayOutput.getText();
-    String firstTwoDestnation = GameState.arrangedDestnationCity.substring(0, 2).toUpperCase();
-    String firstTwoDeparture = GameState.currentCities[GameState.currentCityIndex - 1]
-        .getText().substring(0, 2);
+    String firstThreeDestnation = GameState.arrangedDestnationCity.substring(0, 3).toUpperCase();
+    String firstThreeDeparture = GameState.currentCities[GameState.currentCityIndex - 1]
+        .getText().substring(0, 3);
 
     System.out.println("EXECUTED: " + currentInput);
-    System.out.println("CORRECT ANSWER: " + firstTwoDeparture + "/" + firstTwoDestnation);
+    System.out.println("CORRECT ANSWER: " + firstThreeDeparture + "/" + firstThreeDestnation);
 
     // Correct code has been entered, i.e., first two letters of the departure city
     // and first two
     // letters of the destination city
-    if (currentInput.equalsIgnoreCase(firstTwoDeparture + "/" + firstTwoDestnation)) {
+    if (currentInput.equalsIgnoreCase(firstThreeDeparture + "/" + firstThreeDestnation)) {
       // Aircraft code has been found.
       GameState.isAircraftCodeFound = true;
       displayInput.setText("");
@@ -346,13 +351,13 @@ public class Room3CentralDisplayUnitController {
                   }
                   // Update the introduction label with the correct answer message
                   displayInput.setText(
-                      "CONGRATULATIONS! AIRCRAFT CODE UNLOCKED: " + GameState.aircraftCode);
+                      "CONGRATULATIONS! AIRCRAFT CODE FOUND.");
 
                   // Set the aircraft code image to inventory.
 
                   Image aircraftCode = new Image("/images/aircraft_code.png");
 
-                  MainGameController.addObtainedItem(aircraftCode, "aircraftCode");
+                  MainGameController.addObtainedItem(aircraftCode, "code");
 
                   System.out.println("Aircraft code unlocked" + GameState.aircraftCode);
                 });

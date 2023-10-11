@@ -150,6 +150,7 @@ public class GameState {
     mainGame = null;
     timeLimitReached = false;
     prevRoom = 1;
+    winTheGame = false;
   }
 
   // Reset variables related to Room 1

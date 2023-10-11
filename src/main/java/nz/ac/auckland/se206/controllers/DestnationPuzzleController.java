@@ -73,7 +73,7 @@ public class DestnationPuzzleController {
     String unarrangedPuzzle = GameState.unarrangedDestnationCity;
     System.out.println(unarrangedPuzzle);
     initializePuzzle(unarrangedPuzzle);
-    introduction.setText(GameState.puzzleIntroMessageRoom3);
+    introduction.setText(GameState.puzzleIntroMessageRoom3.toUpperCase());
   }
 
   public void setLetterCursor(int status) {
@@ -106,6 +106,8 @@ public class DestnationPuzzleController {
     System.out.println("submit");
     // Get the current text of the puzzle
     StringBuilder sb = new StringBuilder();
+    submit.setOpacity(0.5);
+    submit.setDisable(true);
 
     // Loop through each letter in the puzzle
     for (int i = 0; i < letterBox.getChildren().size(); i++) {
@@ -135,7 +137,8 @@ public class DestnationPuzzleController {
                   load.setVisible(false);
                   loadText.setVisible(false);
                   // Update the introduction label with the correct answer message
-                  introduction.setText(result);
+                  introduction.setText(result.toUpperCase());
+                  submit.setVisible(false);
                 });
           });
       GameState.eleanorAi.runGpt(
@@ -155,6 +158,8 @@ public class DestnationPuzzleController {
                   loadText.setVisible(false);
                   // Update the introduction label with the incorrect answer message
                   introduction.setText(result);
+                  submit.setOpacity(1);
+                  submit.setDisable(false);
                 });
           });
     }

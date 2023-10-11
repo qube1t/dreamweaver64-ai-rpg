@@ -41,6 +41,7 @@ public class MachineController {
     private static int position1Taken = 0;
     private static int position2Taken = 0;
     private static Cursor custom;
+    private static int firstEnter = 0;
 
     public static void resetMachine() {
         imageSet = null;
@@ -68,10 +69,11 @@ public class MachineController {
 
         // Initialise the image set of size 3 only
         // the first time entering the machine.
-        if (imageSet == null) {
-            imageSet = new ArrayList<>();
+        if (firstEnter == 0) {
+            imageSet = new ArrayList<>(2);
             imageSet.add(0, null);
             imageSet.add(1, null);
+            firstEnter = 1;
         }
 
         checkCorrectItem();
@@ -119,9 +121,9 @@ public class MachineController {
                 } else if (item2.getBoundsInParent().contains(x, y) && position2Taken == 0) {
                     dropItem(2);
                 }
+                checkCorrectItem();
             }
-            // Put rectangles to the front
-            checkCorrectItem();
+
             event.setDropCompleted(true);
             event.consume();
         });
@@ -134,9 +136,11 @@ public class MachineController {
             item1.setImage(null);
             MainGameController.addObtainedItem(imageSet.get(0).getOriginalImage(),
                     imageSet.get(0).getId());
+            System.out.println("Removed item " + imageSet.get(0).getId());
             position1Taken = 0;
-            imageSet.add(0, null);
-            System.out.println("Removed item 1");
+            imageSet.get(0).setId(null);
+            imageSet.get(0).setOriginalImage(null);
+
         }
     }
 
@@ -147,8 +151,10 @@ public class MachineController {
             MainGameController.addObtainedItem(imageSet.get(1).getOriginalImage(),
                     imageSet.get(1).getId());
             position2Taken = 0;
-            imageSet.add(1, null);
-            System.out.println("Removed item 2");
+            System.out.println("Remove item" + imageSet.get(1).getId());
+            imageSet.get(1).setId(null);
+            imageSet.get(1).setOriginalImage(null);
+
         }
 
     }
@@ -200,14 +206,15 @@ public class MachineController {
     }
 
     private void checkCorrectItem() {
-        if (imageSet.get(0) != null &&
-                imageSet.get(1) != null) {
+        if (position1Taken == 1 &&
+                position2Taken == 1) {
 
             String currentId = imageSet.get(0).getId().toLowerCase() +
                     imageSet.get(1).getId().toLowerCase();
+            System.out.println("id checked" + currentId);
             // Check if two correct items are here
-            if (currentId.contains("treasureaircraftcode")
-                    || currentId.contains("aircraftcodetreasure")) {
+            if (currentId.equals("treasurecode")
+                    || currentId.contains("codetreasure")) {
                 System.out.println("Correct items");
                 // Start animation of button from opacity of 0.5 to 1
                 // Create a FadeTransition of 3 seconds duration.
@@ -228,7 +235,8 @@ public class MachineController {
     }
 
     private void setItem(int position) {
-        Image item = imageSet.get(position).getOriginalImage();
+        System.out.println("set item" + position + imageSet.get(position - 1).getId());
+        Image item = imageSet.get(position - 1).getOriginalImage();
         if (position == 1) {
             item1.setImage(item);
             item1.setFitHeight(35);
@@ -244,9 +252,12 @@ public class MachineController {
 
     private void dropItem(int positionNumber) {
         Image item = MainGameController.getImageSet().getOriginalImage();
-        imageSet.add(positionNumber - 1, MainGameController.getImageSet());
+        String id = MainGameController.getImageSet().getId();
+        CustomImageSet newSet = new CustomImageSet(item, id);
+        System.out.println(item + id);
 
         if (positionNumber == 1) {
+            imageSet.set(0, newSet);
             item1.setImage(item);
             item1.setFitHeight(35);
             item1.setPreserveRatio(true);
@@ -254,6 +265,7 @@ public class MachineController {
                     + imageSet.get(positionNumber - 1).getId());
             position1Taken = 1;
         } else if (positionNumber == 2) {
+            imageSet.set(1, newSet);
             item2.setImage(item);
             item2.setFitHeight(35);
             item2.setPreserveRatio(true);
