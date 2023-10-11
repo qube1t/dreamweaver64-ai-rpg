@@ -17,17 +17,31 @@ public class SplashController {
 
   public void initialize() throws ApiProxyException {
     // gpt prompts and setting progressbar progress
-    progressBar.setProgress(.25);
+    progressBar.setProgress(.33);
 
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.gameIntro(),
         s -> {
           Platform.runLater(
               () -> {
-                progressBar.setProgress(.50);
+                progressBar.setProgress(.66);
               });
         });
 
+    // GameState.eleanorAi.runGpt(
+    // GptPromptEngineeringRoom1.gameInstructions(),
+    // s -> {
+    // List<String> pirateDialogue = Helper.getTextBetweenChar(s, "#");
+    // if (pirateDialogue.size() > 0) {
+    // GameState.instructionMsg = pirateDialogue.get(0);
+    // }
+    // Platform.runLater(
+    // () -> {
+    // progressBar.setProgress(.75);
+    // });
+    // });
+
+    // final prompt, and let app change root.
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.gameInstructions(),
         s -> {
@@ -35,17 +49,6 @@ public class SplashController {
           if (pirateDialogue.size() > 0) {
             GameState.instructionMsg = pirateDialogue.get(0);
           }
-          Platform.runLater(
-              () -> {
-                progressBar.setProgress(.75);
-              });
-        });
-
-    // final prompt, and let app change root.
-    GameState.eleanorAi.runGpt(
-        GptPromptEngineeringRoom1.getFacts(),
-        s -> {
-          GameState.factsAboutDW64 = Helper.getTextBetweenChar(s, "#");
           Platform.runLater(
               () -> {
                 progressBar.setProgress(.99);

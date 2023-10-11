@@ -12,9 +12,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <StackPane fx:id="outPane" style="-fx-background-color: black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
+
    <children>
       <AnchorPane fx:id="startPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" styleClass="startEndTitle" stylesheets="@../css/font.css">
           <children>
@@ -26,7 +28,7 @@
                   <BoxBlur iterations="2" />
                </effect>
             </ImageView>
-              <Button fx:id="startButton" layoutX="177.0" layoutY="447.0" onMouseClicked="#onClickStartButton" prefHeight="82.0" prefWidth="276.0" styleClass="startEndTitle" text="START GAME" textAlignment="CENTER" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="177.0" AnchorPane.rightAnchor="247.0">
+              <Button fx:id="startButton" layoutX="202.0" layoutY="484.0" onMouseClicked="#onClickStartButton" prefHeight="82.0" prefWidth="276.0" styleClass="startEndTitle" text="START GAME" textAlignment="CENTER" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="202.0" AnchorPane.rightAnchor="222.0">
                <padding>
                   <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                </padding></Button>
@@ -47,7 +49,7 @@
                   <Font name="Abaddon Light Regular" size="22.0" />
                </font></Label>
             <Label fx:id="instruction" layoutX="70.0" layoutY="116.0" prefHeight="106.0" prefWidth="540.0" styleClass="instructions" text="&lt;placeholder for gpt intro&gt;" textFill="WHITE" wrapText="true" />
-            <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="491.0" layoutY="475.0" onMouseClicked="#toggleInfo" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="42.0" fitWidth="42.0" layoutX="507.0" layoutY="504.0" onMouseClicked="#toggleInfo" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/main_game/icons/info-circle.png" />
                </image>
@@ -62,7 +64,7 @@
                   </Lighting>
                </effect>
             </ImageView>
-            <ImageView fx:id="muteIcon" fitHeight="82.0" fitWidth="87.0" layoutX="563.0" layoutY="455.0" onMouseClicked="#toggleMute" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="muteIcon" fitHeight="42.0" fitWidth="42.0" layoutX="589.0" layoutY="504.0" onMouseClicked="#toggleMute" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/main_game/icons/music_on.png" />
                </image>
@@ -77,6 +79,30 @@
                   </Lighting>
                </effect>
             </ImageView>
+            <ImageView fitHeight="90.0" fitWidth="87.0" layoutX="181.0" layoutY="372.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/main_game/character/mc1.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="90.0" fitWidth="87.0" layoutX="265.0" layoutY="372.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/main_game/character/mc2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="90.0" fitWidth="87.0" layoutX="350.0" layoutY="372.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/main_game/character/mc3.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="90.0" fitWidth="87.0" layoutX="434.0" layoutY="372.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/main_game/character/mc4.png" />
+               </image>
+            </ImageView>
+            <Rectangle fx:id="mc1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="90.0" layoutX="181.0" layoutY="372.0" onMouseClicked="#toggleCharacterSelection" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="63.0" />
+            <Rectangle fx:id="mc2" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="90.0" layoutX="266.0" layoutY="372.0" onMouseClicked="#toggleCharacterSelection" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="63.0" />
+            <Rectangle fx:id="mc3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="90.0" layoutX="350.0" layoutY="372.0" onMouseClicked="#toggleCharacterSelection" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="63.0" />
+            <Rectangle fx:id="mc4" arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="90.0" layoutX="434.0" layoutY="372.0" onMouseClicked="#toggleCharacterSelection" opacity="0.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" width="63.0" />
           </children>
       </AnchorPane>
       <AnchorPane fx:id="infoPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: black;" visible="false">

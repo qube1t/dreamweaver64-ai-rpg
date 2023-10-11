@@ -8,8 +8,12 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
+
+import javafx.scene.Node;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -37,6 +41,8 @@ public class MainGameController {
 
   @FXML
   private static Character character;
+  private static Pane interactablePane;
+
   @FXML
   private static Pane initialisedGamePane;
   @FXML
@@ -52,6 +58,9 @@ public class MainGameController {
 
   private static Label timerInitiated;
   private static Label hintInitiated;
+  @FXML
+  private Label statusLbl;
+  private static Label statusLblInitiated;
   private static ImageView item1Initiated;
   private static ImageView item2Initiated;
   private static ImageView item3Initiated;
@@ -173,6 +182,20 @@ public class MainGameController {
 
     if (isRoom) {
       character = (Character) room1.lookup("#character");
+      interactablePane = (Pane) room1.lookup("#interactablePane");
+
+      // setting up interactable pane
+      for (Node node : interactablePane.getChildren()) {
+        node.hoverProperty()
+            .addListener(
+                (observable, oldValue, newValue) -> {
+                  if (newValue) {
+                    statusLblInitiated.setText(node.getAccessibleText());
+                  } else {
+                    statusLblInitiated.setText("");
+                  }
+                });
+      }
     }
 
     // adding blur background
@@ -267,6 +290,7 @@ public class MainGameController {
 
     timerInitiated = timer;
     hintInitiated = hintCount;
+    statusLblInitiated = statusLbl;
     item1Initiated = item1;
     item2Initiated = item2;
     item3Initiated = item3;
@@ -483,12 +507,17 @@ public class MainGameController {
         for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
           if (GameState.winTheGame || GameState.timeLimitReached) {
             break;
-          } else if (currentTime == 10) {
+          } 
+          if (currentTime == 10) {
             // 10 seconds left
             GameState.tenSecondsLeft = true;
-            // Room1Controller.initializeMap();
-            Room2Controller.initializeMap();
-            Room3Controller.initializeMap();
+            Platform.runLater(
+              () -> {
+                // Room1Controller.initializeMap();
+                Room2Controller.initializeMap();
+                Room3Controller.initializeMap();
+              });
+
           }
           int time = currentTime;
           int minutes = time / 60;
@@ -500,6 +529,12 @@ public class MainGameController {
                 InstructionsLoadController.setTime(formattedTime);
                 // update hint count every cycle
                 updateHintCount();
+                if (time == 10) {
+                  GameState.tenSecondsLeft = true;
+                  Room1Controller.initializeMap();
+                  Room2Controller.initializeMap();
+                  Room3Controller.initializeMap();
+                }
               });
           try {
             // sleep for 1 second before next cycle.

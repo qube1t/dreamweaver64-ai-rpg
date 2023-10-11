@@ -125,10 +125,6 @@ public class Room2Controller {
   @FXML
   private Rectangle pirate;
   @FXML
-  private Rectangle doorToRoom1;
-  @FXML
-  private Rectangle doorToRoom3;
-  @FXML
   private Pane piratePane;
   @FXML
   private ImageView pirateSpeech;

@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
+
+import javafx.scene.image.Image;
+
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
@@ -19,6 +23,16 @@ public class Room1Controller {
   // static fields for gpt
   static boolean gptInit = false;
   static int gptStage = 0;
+  static ImageView imgEndSt;
+
+  public static void resetGptRoom1() {
+    gptInit = false;
+    gptStage = 0;
+  }
+
+  public static void initializeMap() {
+    imgEndSt.setVisible(true);
+  }
 
   @FXML
   private Character character;
@@ -53,22 +67,54 @@ public class Room1Controller {
   @FXML
   private Rectangle rect15;
   @FXML
+  private Rectangle rect16;
+  @FXML
+  private Rectangle rect17;
+  @FXML
+  private Rectangle rect18;
+  @FXML
+  private Rectangle rect19;
+
+  @FXML
   private Rectangle shelfBtn;
+  @FXML
+  private ImageView shelfLoaderImg;
+  @FXML
+  private ImageView mainDoorBlockImg;
+  @FXML
+  private Rectangle mainDoorBtn;
 
   @FXML
   private Pane interactablePane;
-
-  public static void resetGptRoom1() {
-    gptInit = false;
-    gptStage = 0;
-  }
+  @FXML
+  private Rectangle leftDoorBtn;
+  @FXML
+  private Rectangle rightDoorBtn;
+  @FXML
+  private ImageView leftDoorLoaderImg;
+  @FXML
+  private ImageView rightDoorLoaderImg;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() throws ApiProxyException {
     ArrayList<Rectangle> obsts = new ArrayList<Rectangle>(
         Arrays.asList(
             rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
-            rect12, rect13, rect14, rect15));
+            rect12, rect13, rect14, rect15, rect16, rect17, rect18, rect19));
+
+    if (!GameState.booksLoaded) {
+      // while loading
+      shelfBtn.setDisable(true);
+    } else {
+      enableAccessToItem(shelfBtn, shelfLoaderImg);
+      GameState.booksLoaded = true;
+    }
+
+    if (GameState.hasDecrypted) {
+      // enable main door
+      mainDoorBtn.setDisable(false);
+      mainDoorBlockImg.setImage(null);
+    }
     // Initialization code goes here
     character.enableMobility(obsts, interactablePane.getChildren());
 
@@ -79,6 +125,8 @@ public class Room1Controller {
     } else {
       // enable interact pane
       MainGameController.enableInteractPane();
+      enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+      enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
     }
 
     // set character position
@@ -97,10 +145,25 @@ public class Room1Controller {
     }
 
     GameState.prevRoom = 1;
+
+    // imgEndSt = imgEnd;
+
+    if (GameState.tenSecondsLeft) {
+      initializeMap();
+    }
   }
 
   private void initGpt() throws ApiProxyException {
     // gettng books from gpt
+    MainGameController.enableInteractPane();
+
+    // getting room intro from gpt
+    GameState.eleanorAi.runGpt(
+        "The user has entered their childhood home. In this room they are encouraged to look"
+            + " around. You can talk to the user. Only the chunk of text surrounded with the"
+            + " character * before and after will be shown to the user. Keep the message 1"
+            + " sentance. .");
+
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.get7Books(),
         str -> {
@@ -112,17 +175,13 @@ public class Room1Controller {
           System.out.println(ansBook);
 
           // enable interact pane
-          MainGameController.enableInteractPane();
-
+          enableAccessToItem(shelfBtn, shelfLoaderImg);
+          GameState.booksLoaded = true;
           // get riddle from gpt
-        });
 
-    // getting room intro from gpt
-    GameState.eleanorAi.runGpt(
-        "The user has entered their childhood home. In this room they are encouraged to look"
-            + " around. You can talk to the user. Only the chunk of text surrounded with the"
-            + " character * before and after will be shown to the user. Keep the message 1"
-            + " sentance. .");
+          enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+        });
   }
 
   @FXML
@@ -157,6 +216,12 @@ public class Room1Controller {
     MainGameController.addOverlay("book_shelf", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened book shelf. No reply is needed for this message.");
+  }
+
+  private void enableAccessToItem(Rectangle btn, ImageView img) {
+    btn.setDisable(false);
+    img.setImage(null);
+
   }
 
   @FXML

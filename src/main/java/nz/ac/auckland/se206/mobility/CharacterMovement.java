@@ -29,11 +29,26 @@ public class CharacterMovement {
 
   protected boolean checkCollision() {
     // check intersection of inner square with rectangles
+    // System.out.println(obstacles.toString());
     for (Rectangle obstacle : obstacles) {
       if (player
           .localToParent(playerBound.getBoundsInParent())
           .intersects(obstacle.getBoundsInParent())) {
         return true;
+      }
+    }
+
+    for (Node interactable : interactables) {
+      if (player
+          .localToParent(playerBound.getBoundsInParent())
+          .intersects(interactable.getBoundsInParent())) {
+        if (interactable.getId() != null)
+          if (interactable.getId().equals("rightDoorBtn") || interactable.getId().equals("leftDoorBtn")
+              || interactable.getId().equals("mainDoorBtn")) {
+            if (!interactable.isDisable()) {
+              interactable.getOnMouseClicked().handle(null);
+            }
+          }
       }
     }
     return false;
@@ -46,10 +61,15 @@ public class CharacterMovement {
           .localToParent(proximityBound.getBoundsInParent())
           .intersects(interactable.getBoundsInParent())) {
         interactable.setVisible(true);
-        interactable.getStyleClass().add("action-btn");
+        // if interactable is a rectangle
+        if (interactable instanceof Rectangle) {
+          interactable.getStyleClass().add("action-btn");
+        }
+        // interactable.getStyleClass().add("action-btn");
       } else {
         interactable.setVisible(false);
-        interactable.getStyleClass().remove("action-btn");
+        if (interactable instanceof Rectangle)
+          interactable.getStyleClass().remove("action-btn");
       }
     }
   }
@@ -79,8 +99,7 @@ public class CharacterMovement {
     player.setLayoutX(player.getLayoutX() + dx);
     player.setLayoutY(player.getLayoutY() + dy);
 
-    System.out.println(player.getLayoutX());
-    System.out.println(player.getLayoutY());
+    // System.out.println();
 
     // Return to the old position if there is a collision
     if (checkCollision()) {
