@@ -37,15 +37,12 @@ public class Character extends AnchorPane {
   private int frameWidth;
   private int frameHeight;
 
-  // private String spriteSheet;
-
   private SpriteAnimation animation;
   private CharacterMovement movement;
 
   private boolean animating = false;
 
   public Character(
-      // @NamedArg("spriteSheet") String spriteSheet,
       @NamedArg("columns") int columns,
       @NamedArg("count") int count,
       @NamedArg("offset_x") int offsetX,
@@ -53,8 +50,6 @@ public class Character extends AnchorPane {
       @NamedArg("frame_width") int frameWidth,
       @NamedArg("frame_height") int frameHeight) {
 
-    // character parameters
-    // this.spriteSheet = spriteSheet;
     this.columns = columns;
     this.count = count;
     this.offsetX = offsetX;
@@ -72,26 +67,26 @@ public class Character extends AnchorPane {
       throw new RuntimeException(exception);
     }
 
-    // System.out.println(spriteSheet);
     initElements();
   }
 
-  public void setSpriteSheet() {
+  public void assignSpriteSheet() {
+    // assign character sprite sheet
     switch (GameState.characterIndex) {
       case 1:
-        activeImg.setImage(new Image("/images/main_game/characters/char1.png"));
+        activeImg.setImage(new Image("/images/main_game/character/char1.png"));
         break;
       case 2:
-        activeImg.setImage(new Image("/images/main_game/characters/char2.png"));
+        activeImg.setImage(new Image("/images/main_game/character/char2.png"));
         break;
       case 3:
-        activeImg.setImage(new Image("/images/main_game/characters/char3.png"));
+        activeImg.setImage(new Image("/images/main_game/character/char3.png"));
         break;
       case 4:
-        activeImg.setImage(new Image("/images/main_game/characters/char4.png"));
+        activeImg.setImage(new Image("/images/main_game/character/char4.png"));
         break;
       default:
-        activeImg.setImage(new Image("/images/main_game/characters/char1.png"));
+        activeImg.setImage(new Image("/images/main_game/character/char1.png"));
         break;
     }
   }
@@ -117,10 +112,6 @@ public class Character extends AnchorPane {
     ;
   }
 
-  // public String getSpriteSheet() {
-  //   return spriteSheet;
-  // }
-
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
     // create character movement object
     movement = new CharacterMovement(this, playerBound, proximityBound, obstacles, observableList);
@@ -144,10 +135,6 @@ public class Character extends AnchorPane {
         new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
     animating = false;
   }
-
-  // public void setSpriteSheet(String spriteSheet) {
-  //   this.spriteSheet = spriteSheet;
-  // }
 
   public int getColumns() {
     return columns;
@@ -199,9 +186,7 @@ public class Character extends AnchorPane {
 
   private void initElements() {
     // init character
-    setSpriteSheet();
-    // Image spriteSheetImg = new Image(getClass().getResource(spriteSheet).toExternalForm());
-    // activeImg.setImage(spriteSheetImg);
+    assignSpriteSheet();
     activeImg.setViewport(
         new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
 
