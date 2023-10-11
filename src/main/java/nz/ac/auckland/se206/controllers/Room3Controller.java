@@ -34,8 +34,8 @@ public class Room3Controller {
     imgEndSt.setVisible(true);
   }
 
-  @FXML
-  private Rectangle computer;
+  // @FXML
+  // private Rectangle computer;
   @FXML
   private Rectangle computer2;
   @FXML
@@ -187,8 +187,9 @@ public class Room3Controller {
     // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
     Rectangle[] rectangles = {
-        computer, boundary1, boundary2, boundary3, boundary4, boundary5, gate,
-        bound1, bound2, bound3, computer, computer2,
+        // computer,
+        boundary1, boundary2, boundary3, boundary4, boundary5, gate,
+        bound1, bound2, bound3, computer2,
         radar,
         chair1, chair2, decrypt
     };

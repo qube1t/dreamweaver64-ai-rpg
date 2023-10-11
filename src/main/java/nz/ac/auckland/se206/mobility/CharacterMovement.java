@@ -29,6 +29,7 @@ public class CharacterMovement {
 
   protected boolean checkCollision() {
     // check intersection of inner square with rectangles
+    // System.out.println(obstacles.toString());
     for (Rectangle obstacle : obstacles) {
       if (player
           .localToParent(playerBound.getBoundsInParent())
