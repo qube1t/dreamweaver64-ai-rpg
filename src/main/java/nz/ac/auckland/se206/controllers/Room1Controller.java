@@ -125,6 +125,8 @@ public class Room1Controller {
     } else {
       // enable interact pane
       MainGameController.enableInteractPane();
+      enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+      enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
     }
 
     // set character position
@@ -144,7 +146,7 @@ public class Room1Controller {
 
     GameState.prevRoom = 1;
 
-    imgEndSt = imgEnd;
+    // imgEndSt = imgEnd;
 
     if (GameState.tenSecondsLeft) {
       initializeMap();
