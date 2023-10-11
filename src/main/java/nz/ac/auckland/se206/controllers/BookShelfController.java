@@ -18,7 +18,7 @@ public class BookShelfController {
   public static void returnBook() {
     // return the book to the bookshelf using for loop.
     for (int i = 0; i < GameState.booksInRoom1.length; i++) {
-      if (GameState.booksInRoom1[i] == null) {
+      if (GameState.booksInRoom1[i] == GameState.takenBook) {
         lblBooks[i].setVisible(true);
         bookRects[i].setVisible(true);
         GameState.booksInRoom1[i] = GameState.takenBook;
@@ -70,18 +70,23 @@ public class BookShelfController {
     // setting labels in the bookshelf
     for (int i = 0; i < GameState.booksInRoom1.length; i++) {
       Label lblBook = lblBooks[i];
-      if (GameState.booksInRoom1[i] != null) {
+
+      // if (lblBook.getText() == GameState.takenBook)
+      // continue;
+
+      if (GameState.booksInRoom1[i] != GameState.takenBook) {
         lblBook.setText(GameState.booksInRoom1[i]);
       } else {
         lblBook.setVisible(false);
         bookRects[i].setVisible(false);
-        continue;
+        // continue;
       }
 
       ImageView bookRect = bookRects[i];
       int index = i;
       lblBooks[i].setOnMouseClicked(
           e -> {
+            System.out.println("clicked");
             boolean oneWasTaken = hasTakenOneBook();
             if (oneWasTaken) {
               returnBook();
@@ -102,7 +107,7 @@ public class BookShelfController {
             }
             lblBook.setVisible(false);
             bookRect.setVisible(false);
-            GameState.booksInRoom1[index] = null;
+            // GameState.booksInRoom1[index] = null;
           });
     }
   }
