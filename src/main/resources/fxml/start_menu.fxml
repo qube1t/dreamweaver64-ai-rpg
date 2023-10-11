@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
@@ -16,9 +15,10 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<StackPane style="-fx-background-color: black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
+<StackPane fx:id="outPane" style="-fx-background-color: black;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartMenuController">
+
    <children>
-      <AnchorPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" styleClass="startEndTitle" stylesheets="@../css/font.css">
+      <AnchorPane fx:id="startPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: black;" styleClass="startEndTitle" stylesheets="@../css/font.css">
           <children>
             <ImageView fitHeight="600.0" fitWidth="700.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -31,14 +31,8 @@
               <Button fx:id="startButton" layoutX="202.0" layoutY="484.0" onMouseClicked="#onClickStartButton" prefHeight="82.0" prefWidth="276.0" styleClass="startEndTitle" text="START GAME" textAlignment="CENTER" AnchorPane.bottomAnchor="42.0" AnchorPane.leftAnchor="202.0" AnchorPane.rightAnchor="222.0">
                <padding>
                   <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-               </padding>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
-               <ComboBox fx:id="timeLimit" layoutX="379.0" layoutY="378.0" prefHeight="41.0" prefWidth="196.0" promptText="2 minutes" styleClass="chooseLevel" stylesheets="@../css/font.css" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="305.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></ComboBox>
+               </padding></Button>
+               <ComboBox fx:id="timeLimit" layoutX="379.0" layoutY="378.0" prefHeight="41.0" prefWidth="196.0" promptText="2 minutes" styleClass="chooseLevel" stylesheets="@../css/font.css" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="305.0" />
             <Label fx:id="timeLimitLabel" alignment="CENTER" layoutX="100.0" layoutY="373.0" styleClass="startEndTitle" stylesheets="@../css/font.css" text="Time Limit:" textFill="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="300.0">
                <font>
                   <Font name="Abaddon Light Regular" size="30.0" />
@@ -48,10 +42,7 @@
                   <Font size="51.0" />
                </font>
             </Label>
-            <ComboBox fx:id="difficulty" layoutX="421.0" layoutY="243.0" prefHeight="53.0" prefWidth="196.0" promptText="EASY" styleClass="chooseLevel" stylesheets="@../css/font.css" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="243.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></ComboBox>
+            <ComboBox fx:id="difficulty" layoutX="421.0" layoutY="243.0" prefHeight="53.0" prefWidth="196.0" promptText="EASY" styleClass="chooseLevel" stylesheets="@../css/font.css" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="243.0" />
             <Label layoutX="434.0" layoutY="77.0" rotate="-14.9" style="-fx-font-size: 14;" text="Also try Minecraft!" textFill="#f6ff00" />
             <Label fx:id="title" alignment="CENTER" layoutX="80.0" layoutY="28.0" prefHeight="58.0" prefWidth="434.0" style="-fx-font-size: 50;" styleClass="startEndTitle" text="DREAMWEAVER64" textFill="WHITE" AnchorPane.bottomAnchor="510.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="28.0">
                <font>
@@ -72,9 +63,6 @@
                      </light>
                   </Lighting>
                </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
             </ImageView>
             <ImageView fx:id="muteIcon" fitHeight="42.0" fitWidth="42.0" layoutX="589.0" layoutY="504.0" onMouseClicked="#toggleMute" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -90,9 +78,6 @@
                      </light>
                   </Lighting>
                </effect>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
             </ImageView>
             <ImageView fitHeight="90.0" fitWidth="87.0" layoutX="181.0" layoutY="372.0" pickOnBounds="true" preserveRatio="true">
                <image>

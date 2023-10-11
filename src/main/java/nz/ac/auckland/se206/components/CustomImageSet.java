@@ -12,6 +12,14 @@ public class CustomImageSet {
 
     }
 
+    public void setOriginalImage(Image originalImage) {
+        this.originalImage = originalImage;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Image getOriginalImage() {
         return originalImage;
     }

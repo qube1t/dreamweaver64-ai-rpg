@@ -83,6 +83,9 @@ public class BookShelfController {
           returnBook();
           MainGameController.removeObtainedItem("book");
           System.out.println("Returned one book");
+          GameState.isBookFound = false;
+          GameState.takenBook = null;
+          System.out.println(lblBook1.isVisible());
         }
       }
 
@@ -92,7 +95,6 @@ public class BookShelfController {
 
     //
     lblBooks = new Label[] { lblBook1, lblBook2, lblBook3, lblBook4, lblBook5, lblBook6, lblBook7 };
-
 
     bookRects = new ImageView[] {
         book1Img, book2Img, book3Img, book4Img, book5Img, book6Img, book7Img
@@ -121,6 +123,7 @@ public class BookShelfController {
           e -> {
             System.out.println("clicked");
             boolean oneWasTaken = hasTakenOneBook();
+            System.out.println("book" + index + " clicked");
             if (oneWasTaken) {
               System.out.println("one book was taken");
               returnBook();

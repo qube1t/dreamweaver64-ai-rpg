@@ -115,17 +115,12 @@ public class GameState {
   /** The list of current locations. */
   public static Text[] currentCities;
 
-  /** Indicates whether the puzzle in room 3 solved. */
-  public static boolean isPuzzleInRoom3Solved = false;
-
-  /** Indicates the aircraft code. */
-  public static String aircraftCode = "";
-
   public static boolean isMachineOpen = false;
 
-  public static String currentDraggedItemIndex = "";
+  public static String currentDraggedItemId = "";
 
   /**
+   *
    * Indicates the introduction message when first enter the puzzle game in Room3.
    */
   public static String puzzleIntroMessageRoom3 = "";
@@ -155,6 +150,7 @@ public class GameState {
     mainGame = null;
     timeLimitReached = false;
     prevRoom = 1;
+    winTheGame = false;
   }
 
   // Reset variables related to Room 1
@@ -186,10 +182,8 @@ public class GameState {
     unarrangedDestnationCity = "";
     currentCityIndex = -1;
     currentCities = null;
-    isPuzzleInRoom3Solved = false;
-    aircraftCode = "";
     isMachineOpen = false;
-    currentDraggedItemIndex = "";
+    currentDraggedItemId = "";
     puzzleIntroMessageRoom3 = "";
     hasDecrypted = false;
   }

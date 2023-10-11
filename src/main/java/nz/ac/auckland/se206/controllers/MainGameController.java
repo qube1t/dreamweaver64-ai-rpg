@@ -8,7 +8,12 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
+import javafx.scene.Cursor;
+import javafx.scene.ImageCursor;
+
 import javafx.scene.Node;
+
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -40,6 +45,10 @@ public class MainGameController {
 
   @FXML
   private static Pane initialisedGamePane;
+  @FXML
+  private static Pane initialisedInventoryPane;
+  @FXML
+  private static Pane outPane;
 
   private static MainGameController instance;
   private static Thread timeLimitThread;
@@ -58,7 +67,7 @@ public class MainGameController {
   private static ImageView item4Initiated;
   private static ImageView item5Initiated;
   private static ImageView item6Initiated;
-  private static CustomImageSet imageSet;
+  private static CustomImageSet imageSetDragging;
 
   public static MainGameController getInstance() {
     return instance;
@@ -88,7 +97,8 @@ public class MainGameController {
             originalImageView.setFitHeight(40); // Set the desired height
             originalImageView.setFitWidth(40);
 
-            imageSet = new CustomImageSet(originalImage, obtainedItems.get(id).getId());
+            imageSetDragging = new CustomImageSet(originalImage, obtainedItems.get(id).getId());
+            System.out.println("dragging " + obtainedItems.get(id).getId());
 
             // Create a new ClipboardContent with the custom drag image
             ClipboardContent content = new ClipboardContent();
@@ -96,7 +106,7 @@ public class MainGameController {
             // Store the custom image set in the Dragboard
             content.putImage(originalImageView.snapshot(null, null));
             dragboard.setContent(content);
-            GameState.currentDraggedItemIndex = obtainedItems.get(id).getId();
+            GameState.currentDraggedItemId = obtainedItems.get(id).getId();
             event.consume();
           });
 
@@ -114,8 +124,19 @@ public class MainGameController {
 
   }
 
+  private static void setMainCursor() {
+    // Set the cursor to custom cursor
+    Image cursor = new Image("/images/mainCursor.png", 16,
+        27, true, true);
+    Cursor custom = new ImageCursor(cursor);
+
+    initialisedInventoryPane.setCursor(custom);
+    initialisedInteractPane.setCursor(custom);
+    outPane.setCursor(custom);
+  }
+
   public static CustomImageSet getImageSet() {
-    return imageSet;
+    return imageSetDragging;
   }
 
   public static void addObtainedItem(Image itemImage, String itemId) {
@@ -190,6 +211,7 @@ public class MainGameController {
         .getChildren()
         .add(initialisedGamePane.getChildren().size() - 4, backgroundBlur);
     initialisedGamePane.getChildren().add(initialisedGamePane.getChildren().size() - 4, room1);
+    setMainCursor();
   }
 
   public static void removeOverlay(boolean alsoRooms) {
@@ -209,6 +231,7 @@ public class MainGameController {
           .remove(initialisedGamePane.getChildren().size() - 1 - 4);
       initialisedGamePane.requestFocus();
     }
+    setMainCursor();
   }
 
   @FXML
@@ -252,6 +275,8 @@ public class MainGameController {
   private TextField chatInput;
   @FXML
   private Pane interactPane;
+  @FXML
+  private Pane inventoryPane;
 
   private Text bubbleChatText = new Text("text");
 
@@ -276,6 +301,8 @@ public class MainGameController {
     System.out.println(1);
     initialisedGamePane = gamePane;
     initialisedInteractPane = interactPane;
+    initialisedInventoryPane = interactPane;
+    outPane = outerPane;
 
     // adding instruction overlay to the bottom of the outer pane
     outerPane
@@ -292,6 +319,7 @@ public class MainGameController {
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
+    setMainCursor();
   }
 
   /**
@@ -364,6 +392,7 @@ public class MainGameController {
       outerPane.requestFocus();
       chatPane.setMouseTransparent(true);
     }
+    setMainCursor();
   }
 
   @FXML
@@ -571,4 +600,5 @@ public class MainGameController {
       return;
     }
   }
+
 }

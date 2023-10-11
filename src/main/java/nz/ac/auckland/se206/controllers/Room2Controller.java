@@ -149,6 +149,7 @@ public class Room2Controller {
   private Rectangle[] treasureBoxes;
   private ImageView[] imgBoxes;
   private Boolean wrongMsgPrinted = false;
+  private Boolean hasKeyRemoved = false;
 
   /**
    * Initializes the room 2, it is called when the room loads.
@@ -176,7 +177,8 @@ public class Room2Controller {
       System.out.println("drop to pirate");
       if (event.getDragboard().hasImage()) {
         if (pirate.getBoundsInParent().contains(x, y) &&
-            MainGameController.getImageSet().getId().equals("book")) {
+            MainGameController.getImageSet().getId().equals("book")
+            && GameState.isBookFound) {
           try {
             unlockBox();
           } catch (ApiProxyException e) {
@@ -269,7 +271,7 @@ public class Room2Controller {
     }
 
     if (GameState.currentBox == -1) {
-      Helper.changeTreasureBox(GameState.currentBox);
+      Helper.changeTreasureBox(GameState.currentBox, -1);
     }
   }
 
@@ -332,27 +334,28 @@ public class Room2Controller {
         gptResponse.setText(GameState.pirateRiddle);
         piratePane.setVisible(true);
       }
-    } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
-      GameState.eleanorAi.runGpt(
-          "User update: The user has solved the book riddle. They have received the key."
-              + " To find the treasure box, they needs to look at the radar."
-              + " No reply is required");
+      // } else if (GameState.isBookFound && !GameState.isBoxKeyFound) {
+      // GameState.eleanorAi.runGpt(
+      // "User update: The user has solved the book riddle. They have received the
+      // key."
+      // + " To find the treasure box, they needs to look at the radar."
+      // + " No reply is required");
 
-      // if the player get the correct book, the player can trade with pirate
-      GameState.isBoxKeyFound = true;
-      fadeOutDisabledImg();
-      GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom2.getPirateRightResponse(),
+      // // if the player get the correct book, the player can trade with pirate
+      // GameState.isBoxKeyFound = true;
+      // fadeOutDisabledImg();
+      // GameState.eleanorAi.runGpt(
+      // GptPromptEngineeringRoom2.getPirateRightResponse(),
 
-          (result) -> {
-            Platform.runLater(
-                () -> {
-                  List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
-                  if (pirateDialogue.size() > 0) {
-                    displayBubble(result.replace("^", ""));
-                  }
-                });
-          });
+      // (result) -> {
+      // Platform.runLater(
+      // () -> {
+      // List<String> pirateDialogue = Helper.getTextBetweenChar(result, "^");
+      // if (pirateDialogue.size() > 0) {
+      // displayBubble(result.replace("^", ""));
+      // }
+      // });
+      // });
 
       // GameState.eleanorAi.runGpt(
       // "User update: The user has solved the book riddle. They have received the
@@ -415,7 +418,7 @@ public class Room2Controller {
     // add key image to the inventory
     Image keyImage = new Image("/images/key.png");
     MainGameController.removeObtainedItem("book");
-    MainGameController.addObtainedItem(keyImage, "treasure box key");
+    MainGameController.addObtainedItem(keyImage, "key");
 
   }
 
@@ -453,12 +456,16 @@ public class Room2Controller {
     System.out.println("Number of treasure box: " + boxLocation);
     if (GameState.isBoxKeyFound) {
       if (numOfBox == boxLocation) {
+        if (!hasKeyRemoved) {
+          MainGameController.removeObtainedItem("key");
+          hasKeyRemoved = true;
+        }
         MainGameController.addOverlay("treasure_box", false);
       } else {
         // if the player has clicked the wrong box, the player will get the wrong
         // message
         flashBoxes();
-        Helper.changeTreasureBox(GameState.currentBox);
+        Helper.changeTreasureBox(GameState.currentBox, numOfBox);
       }
     }
   }

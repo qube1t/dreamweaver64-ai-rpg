@@ -93,14 +93,16 @@
                   <Image url="@../images/rooms/room2/key.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="book" fitHeight="32.0" fitWidth="34.0" layoutX="454.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true" rotate="20.0" visible="false">
+            <ImageView fx:id="book" fitHeight="22.0" fitWidth="18.0" layoutX="462.0" layoutY="184.0" visible="false">
+
                <image>
                   <Image url="@../images/rooms/room1/book.png" />
                </image>
             </ImageView>
 
+
             <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" />
-           
+          
          </children>
       </Pane>
       <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">

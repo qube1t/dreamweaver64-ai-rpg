@@ -19,14 +19,14 @@ public class Helper {
     return matchesList;
   }
 
-  public static void changeTreasureBox(int currentBoxNumber) {
+  public static void changeTreasureBox(int currentBoxNumber, int clickBox) {
 
     // Generate a random number between 1 and 5
     int boxNumber = (int) (Math.random() * 5) + 1;
 
     // If the random number is the same as the box number, generate a new random
     // number
-    while (boxNumber == currentBoxNumber) {
+    while (boxNumber == clickBox) {
       boxNumber = (int) (Math.random() * 5) + 1;
     }
     GameState.currentBox = boxNumber;
