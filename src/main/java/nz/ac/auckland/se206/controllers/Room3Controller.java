@@ -10,7 +10,6 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -21,11 +20,19 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
-import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3Controller {
+
+  private static ImageView imgEndSt;
+
+  /**
+   * Set the end image when the time is up.
+   */
+  public static void initializeMap() {
+    imgEndSt.setVisible(true);
+  }
 
   @FXML
   private Rectangle computer;
@@ -107,6 +114,8 @@ public class Room3Controller {
   private Circle point4;
   @FXML
   private Circle point5;
+  @FXML
+  private ImageView imgEnd;
 
   private Circle[] cityPoints;
   private Text[] cityLabels;
@@ -121,8 +130,31 @@ public class Room3Controller {
 
     initilizeGpsMap();
 
+    imgEndSt = imgEnd;
+
+    if (GameState.tenSecondsLeft) {
+      initializeMap();
+    }
+
     // Generate seven random city destnations and randomly choose one of them
     // for the puzzle game if it is not set
+
+    // Only displays the welcome message to Room3 if the plauyer first enters the
+    // room
+    if (!GameState.isRoom3FirstEntered) {
+
+      GameState.isRoom3FirstEntered = true;
+
+      GameState.eleanorAi.runGpt(
+          GptPromptEngineeringRoom3.room3WelcomeMessage(),
+          (result) -> {
+            System.out.println(result);
+            MainGameController.enableInteractPane();
+          });
+    } else {
+      MainGameController.enableInteractPane();
+    }
+
     if (GameState.arrangedDestnationCity == "") {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.getEightRandomCity(),
@@ -141,22 +173,6 @@ public class Room3Controller {
 
           });
     }
-    // Only displays the welcome message to Room3 if the plauyer first enters the
-    // room
-    if (!GameState.isRoom3FirstEntered) {
-
-      GameState.isRoom3FirstEntered = true;
-
-      GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom3.room3WelcomeMessage(),
-          (result) -> {
-            System.out.println(result);
-            MainGameController.enableInteractPane();
-          });
-    } else {
-      MainGameController.enableInteractPane();
-    }
-
     // Generate a introduction message for puzzle game when player first enters
     // room.
     if (GameState.puzzleIntroMessageRoom3 == "") {
@@ -187,7 +203,7 @@ public class Room3Controller {
 
     switch (GameState.prevRoom) {
       case 1:
-        character.setLayoutX(530);
+        character.setLayoutX(527);
         character.setLayoutY(210);
 
         break;
@@ -292,29 +308,6 @@ public class Room3Controller {
             + " location for treasure box location in the pirate ship. "
             + "If the user ask for hints give"
             + " the hints. No need to respond to this message.");
-  }
-
-  @FXML
-  /**
-   * This method is called when the map is clicked It will open the map and set
-   * the GameState to
-   * true
-   *
-   * @throws IOException
-   * @throws ApiProxyException
-   */
-  public void onClickMap() throws IOException, ApiProxyException {
-    if (!GameState.isWorldMapOpened) {
-      GameState.isWorldMapOpened = true;
-    }
-
-    System.out.println("Location clicked");
-    MainGameController.addOverlay("gps_current", false);
-    // Generate GPT response to keep updated.
-    GameState.eleanorAi.runGpt(
-        "User update: User has opened the world map and achnowledge"
-            + " the current city location. No need"
-            + " to respond to this message.");
   }
 
   @FXML

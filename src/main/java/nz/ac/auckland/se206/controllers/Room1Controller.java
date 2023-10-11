@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
+
 import javafx.scene.image.Image;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -21,6 +23,16 @@ public class Room1Controller {
   // static fields for gpt
   static boolean gptInit = false;
   static int gptStage = 0;
+  static ImageView imgEndSt;
+
+  public static void resetGptRoom1() {
+    gptInit = false;
+    gptStage = 0;
+  }
+
+  public static void initializeMap() {
+    imgEndSt.setVisible(true);
+  }
 
   @FXML
   private Character character;
@@ -131,6 +143,12 @@ public class Room1Controller {
     }
 
     GameState.prevRoom = 1;
+
+    imgEndSt = imgEnd;
+
+    if (GameState.tenSecondsLeft) {
+      initializeMap();
+    }
   }
 
   private void initGpt() throws ApiProxyException {

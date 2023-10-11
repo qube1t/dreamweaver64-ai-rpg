@@ -44,7 +44,7 @@ public class MainGameController {
   private static MainGameController instance;
   private static Thread timeLimitThread;
 
-  private static List<ObtainedItemsWithId> obtainedItems = new ArrayList<>();
+  private static List<ObtainedItemsWithId> obtainedItems;
   private static Pane initialisedInteractPane;
 
   private static Label timerInitiated;
@@ -256,6 +256,7 @@ public class MainGameController {
   private Text bubbleChatText = new Text("text");
 
   public void initialize() throws IOException {
+    obtainedItems = new ArrayList<>();
     chatPane.setMouseTransparent(true);
     bubbleTextPane.setMouseTransparent(true);
     aiCharacterPane.setMouseTransparent(true);
@@ -477,12 +478,6 @@ public class MainGameController {
         for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
           if (GameState.winTheGame || GameState.timeLimitReached) {
             break;
-          } else if (currentTime == 10) {
-            // 10 seconds left
-            GameState.tenSecondsLeft = true;
-            // Room1Controller.setEndImg();
-            Room2Controller.setEndImg();
-            // Room3Controller.setEndImg();
           }
           int time = currentTime;
           int minutes = time / 60;
@@ -494,6 +489,12 @@ public class MainGameController {
                 InstructionsLoadController.setTime(formattedTime);
                 // update hint count every cycle
                 updateHintCount();
+                if (time == 10) {
+                  GameState.tenSecondsLeft = true;
+                  Room1Controller.initializeMap();
+                  Room2Controller.initializeMap();
+                  Room3Controller.initializeMap();
+                }
               });
           try {
             // sleep for 1 second before next cycle.
@@ -513,6 +514,7 @@ public class MainGameController {
             });
         return null;
       }
+
     };
     timeLimitThread = new Thread(task);
     timeLimitThread.setDaemon(true);

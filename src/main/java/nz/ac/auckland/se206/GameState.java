@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.util.Arrays;
 import java.util.List;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.MainGameController;
@@ -87,9 +88,6 @@ public class GameState {
   /** Indicates whether the player has entered the room3 first time. */
   public static boolean isRoom3FirstEntered = false;
 
-  /** Indicates whether the world map has opened. */
-  public static boolean isWorldMapOpened = false;
-
   /** Indicates wheter the aircraft code has been found. */
   public static boolean isAircraftCodeFound = false;
 
@@ -135,4 +133,61 @@ public class GameState {
   // end menu
   /** Indicates whether the player exit the game. */
   public static boolean winTheGame = false;
+
+  // Method to reset all variables to default values
+  public static void reset() {
+    resetGameVariables();
+    resetRoom1Variables();
+    resetRoom2Variables();
+    resetRoom3Variables();
+  }
+
+  // Reset game-related variables
+  private static void resetGameVariables() {
+    isRiddleResolved = false;
+    tenSecondsLeft = false;
+    gameMode = null;
+    isMuted = false;
+    hintsRemaining = 0;
+    mainGame = null;
+    timeLimitReached = false;
+    prevRoom = 1;
+  }
+
+  // Reset variables related to Room 1
+  private static void resetRoom1Variables() {
+    Arrays.fill(booksInRoom1, null);
+    isBookFound = false;
+    trueBook = null;
+    takenBook = null;
+    finalMsg = null;
+  }
+
+  // Reset variables related to Room 2
+  private static void resetRoom2Variables() {
+    pirateRiddle = null;
+    isRoom2FirstEntered = false;
+    isBoxKeyFound = false;
+    encryptedFinalMsg = null;
+    isEncryptedMessageFound = false;
+  }
+
+  // Reset variables related to Room 3
+  private static void resetRoom3Variables() {
+    isRoom3FirstEntered = false;
+    isAircraftCodeFound = false;
+    currentBox = -1;
+    Arrays.fill(destnationCities, null);
+    destnationCityIndex = -1;
+    arrangedDestnationCity = "";
+    unarrangedDestnationCity = "";
+    currentCityIndex = -1;
+    currentCities = null;
+    isPuzzleInRoom3Solved = false;
+    aircraftCode = "";
+    isMachineOpen = false;
+    currentDraggedItemIndex = "";
+    puzzleIntroMessageRoom3 = "";
+    hasDecrypted = false;
+  }
 }
