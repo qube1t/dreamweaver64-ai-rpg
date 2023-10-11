@@ -74,6 +74,14 @@ public class Room1Controller {
 
   @FXML
   private Pane interactablePane;
+  @FXML
+  private Rectangle leftDoorBtn;
+  @FXML
+  private Rectangle rightDoorBtn;
+  @FXML
+  private ImageView leftDoorLoaderImg;
+  @FXML
+  private ImageView rightDoorLoaderImg;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() throws ApiProxyException {
@@ -86,7 +94,8 @@ public class Room1Controller {
       // while loading
       shelfBtn.setDisable(true);
     } else {
-      enableBookShelf();
+      enableAccessToItem(shelfBtn, shelfLoaderImg);
+      GameState.booksLoaded = true;
     }
 
     if (GameState.hasDecrypted) {
@@ -146,8 +155,12 @@ public class Room1Controller {
           System.out.println(ansBook);
 
           // enable interact pane
-          enableBookShelf();
+          enableAccessToItem(shelfBtn, shelfLoaderImg);
+          GameState.booksLoaded = true;
           // get riddle from gpt
+
+          enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
   }
 
@@ -185,10 +198,10 @@ public class Room1Controller {
         "User update: User has opened book shelf. No reply is needed for this message.");
   }
 
-  private void enableBookShelf() {
-    shelfBtn.setDisable(false);
-    shelfLoaderImg.setImage(null);
-    GameState.booksLoaded = true;
+  private void enableAccessToItem(Rectangle btn, ImageView img) {
+    btn.setDisable(false);
+    img.setImage(null);
+
   }
 
   @FXML

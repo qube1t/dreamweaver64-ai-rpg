@@ -25,7 +25,7 @@
       </ImageView>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="674.0">
          <children>
-            <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" />
+            <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
             <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="10.0" layoutX="47.0" layoutY="583.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="315.0" />
             <Rectangle fx:id="rect2" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="67.0" layoutX="337.0" layoutY="539.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="315.0" />
             <Rectangle fx:id="rect3" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="379.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="80.0" />
@@ -75,9 +75,27 @@
                   </ImageView>
                </children>
             </StackPane>
+            <StackPane layoutX="526.0" layoutY="265.0" prefHeight="52.0" prefWidth="35.0" visible="false">
+               <children>
+                  <ImageView fx:id="leftDoorLoaderImg" fitHeight="38.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/loading.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane layoutX="113.0" layoutY="301.0" prefHeight="52.0" prefWidth="35.0" visible="false">
+               <children>
+                  <ImageView fx:id="rightDoorLoaderImg" fitHeight="38.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/loading.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
             <Rectangle fx:id="shelfBtn" accessibleText="Book Shelf" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff49" height="76.0" layoutX="455.0" layoutY="124.0" onMouseClicked="#openBookShelf" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="39.0" />
-            <Rectangle fx:id="rightDoorBtn" accessibleText="Door" arcHeight="5.0" arcWidth="5.0" fill="#ffffff49" height="64.0" layoutX="524.0" layoutY="260.0" onMouseClicked="#goToRightRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="39.0" />
-            <Rectangle fx:id="leftDoorBtn" accessibleText="Door" arcHeight="5.0" arcWidth="5.0" fill="#ffffff49" height="58.0" layoutX="111.0" layoutY="298.0" onMouseClicked="#goToLeftRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="40.0" />
+            <Rectangle fx:id="rightDoorBtn" accessibleText="Door" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff49" height="64.0" layoutX="524.0" layoutY="260.0" onMouseClicked="#goToRightRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="39.0" />
+            <Rectangle fx:id="leftDoorBtn" accessibleText="Door" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff49" height="58.0" layoutX="111.0" layoutY="298.0" onMouseClicked="#goToLeftRoom" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="40.0" />
             <Rectangle fx:id="shelf_btn1" accessibleText="Shelf" arcHeight="5.0" arcWidth="5.0" fill="#ffffff49" height="76.0" layoutX="214.0" layoutY="125.0" onMouseClicked="#openMainDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="40.0" />
             <Rectangle fx:id="chest_btn" accessibleText="Chest" arcHeight="5.0" arcWidth="5.0" fill="#ffffff49" height="66.0" layoutX="185.0" layoutY="230.0" onMouseClicked="#onClickChest" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="32.0" />
             <Rectangle fx:id="mainDoorBtn" accessibleText="Main Door" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff49" height="70.0" layoutX="316.0" layoutY="94.0" onMouseClicked="#openMainDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="0.0" visible="false" width="42.0" />
