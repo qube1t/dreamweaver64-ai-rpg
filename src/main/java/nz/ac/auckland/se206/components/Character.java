@@ -2,6 +2,9 @@ package nz.ac.auckland.se206.components;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.animation.Animation;
 import javafx.beans.NamedArg;
 import javafx.collections.ObservableList;
@@ -12,9 +15,12 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.mobility.CharacterMovement;
 import nz.ac.auckland.se206.mobility.SpriteAnimation;
@@ -41,6 +47,12 @@ public class Character extends AnchorPane {
   private CharacterMovement movement;
 
   private boolean animating = false;
+
+  private AudioClip footstepSound = new AudioClip(
+      (new Media(App.class.getResource("/sounds/walkingSound.mp3").toString()))
+          .getSource());
+
+  private Timer movementTimer;
 
   public Character(
       @NamedArg("columns") int columns,
@@ -115,6 +127,20 @@ public class Character extends AnchorPane {
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
     // create character movement object
     movement = new CharacterMovement(this, playerBound, proximityBound, obstacles, observableList);
+  }
+
+  public void startMovement() {
+    movementTimer = new Timer();
+    movementTimer.scheduleAtFixedRate(new TimerTask() {
+      @Override
+      public void run() {
+        movement.movePlayer(action);
+      }
+    }, 0, 100);
+  }
+
+  public void stopMovement() {
+    movementTimer.cancel();
   }
 
   public void move() {

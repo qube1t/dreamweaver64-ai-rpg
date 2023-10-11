@@ -357,8 +357,9 @@ public class MainGameController {
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
       if (!character.isAnimating()) {
         character.startAnimation();
+        character.startMovement();
       }
-      character.move();
+      // character.move();
     }
   }
 
@@ -373,6 +374,7 @@ public class MainGameController {
     String letter = event.getCode().toString();
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
       character.endAnimation();
+      character.stopMovement();
     }
   }
 
