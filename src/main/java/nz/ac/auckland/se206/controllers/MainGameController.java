@@ -320,6 +320,12 @@ public class MainGameController {
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
     setMainCursor();
+
+    GameState.backgroundMusic.setCycleCount(1);
+    GameState.backgroundMusic.setVolume(.25);
+    if (!GameState.isMuted) {
+      GameState.backgroundMusic.play();
+    }
   }
 
   /**
@@ -507,16 +513,16 @@ public class MainGameController {
         for (int currentTime = timeLimit; currentTime >= 0; currentTime--) {
           if (GameState.winTheGame || GameState.timeLimitReached) {
             break;
-          } 
+          }
           if (currentTime == 10) {
             // 10 seconds left
             GameState.tenSecondsLeft = true;
             Platform.runLater(
-              () -> {
-                // Room1Controller.initializeMap();
-                Room2Controller.initializeMap();
-                Room3Controller.initializeMap();
-              });
+                () -> {
+                  // Room1Controller.initializeMap();
+                  Room2Controller.initializeMap();
+                  Room3Controller.initializeMap();
+                });
 
           }
           int time = currentTime;
