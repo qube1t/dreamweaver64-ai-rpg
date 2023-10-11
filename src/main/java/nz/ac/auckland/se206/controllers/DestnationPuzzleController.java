@@ -45,8 +45,8 @@ public class DestnationPuzzleController {
 
   public void initialize() throws ApiProxyException {
     // Set the cursor to custom cursor
-    Image cursor = new Image("/images/cursor.png", 16,
-        27, true, true);
+    Image cursor = new Image("/images/cursor.png", 14,
+        25, true, true);
     this.custom = new ImageCursor(cursor);
 
     screenArea.setCursor(custom);
