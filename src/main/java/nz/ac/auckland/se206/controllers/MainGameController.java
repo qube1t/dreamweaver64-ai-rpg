@@ -322,7 +322,7 @@ public class MainGameController {
     setMainCursor();
 
     GameState.backgroundMusic.setCycleCount(1);
-    GameState.backgroundMusic.setVolume(.25);
+    GameState.backgroundMusic.setVolume(.15);
     if (!GameState.isMuted) {
       GameState.backgroundMusic.play();
     }
@@ -357,7 +357,7 @@ public class MainGameController {
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
       if (!character.isAnimating()) {
         character.startAnimation();
-        character.startMovement();
+        // character.startMovement();
       }
       // character.move();
     }
@@ -374,7 +374,7 @@ public class MainGameController {
     String letter = event.getCode().toString();
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
       character.endAnimation();
-      character.stopMovement();
+      // character.stopMovement();
     }
   }
 

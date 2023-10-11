@@ -52,7 +52,7 @@ public class Character extends AnchorPane {
       (new Media(App.class.getResource("/sounds/walkingSound.mp3").toString()))
           .getSource());
 
-  private Timer movementTimer;
+  private Timer movementTimer = new Timer();
 
   public Character(
       @NamedArg("columns") int columns,
@@ -80,6 +80,15 @@ public class Character extends AnchorPane {
     }
 
     initElements();
+
+    movementTimer.scheduleAtFixedRate(new TimerTask() {
+      @Override
+      public void run() {
+        if (animating) {
+          movement.movePlayer(action);
+        }
+      }
+    }, 0, 100);
   }
 
   public void assignSpriteSheet() {
@@ -129,18 +138,17 @@ public class Character extends AnchorPane {
     movement = new CharacterMovement(this, playerBound, proximityBound, obstacles, observableList);
   }
 
-  public void startMovement() {
-    movementTimer = new Timer();
-    movementTimer.scheduleAtFixedRate(new TimerTask() {
-      @Override
-      public void run() {
-        movement.movePlayer(action);
-      }
-    }, 0, 100);
+  public void playFootSteps() {
+    if (!GameState.isMuted) {
+      footstepSound.setCycleCount(AudioClip.INDEFINITE);
+      footstepSound.setVolume(.45);
+      footstepSound.play();
+    }
+
   }
 
-  public void stopMovement() {
-    movementTimer.cancel();
+  public void endFootSteps() {
+    footstepSound.stop();
   }
 
   public void move() {
@@ -151,6 +159,7 @@ public class Character extends AnchorPane {
     if (animating != true) {
       animation.setCycleCount(Animation.INDEFINITE);
       animation.play();
+      playFootSteps();
       animating = true;
     }
   }
@@ -159,6 +168,7 @@ public class Character extends AnchorPane {
     animation.stop();
     activeImg.setViewport(
         new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
+    endFootSteps();
     animating = false;
   }
 
