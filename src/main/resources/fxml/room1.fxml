@@ -23,17 +23,9 @@
             <Point3D />
          </rotationAxis>
       </ImageView>
-      <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true" translateX="1.0">
-         <image>
-            <Image url="@../images/rooms/room1/foreground_1.png" />
-         </image>
-         <rotationAxis>
-            <Point3D />
-         </rotationAxis>
-      </ImageView>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="674.0">
          <children>
-            <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" spriteSheet="/images/sprite_mc_walks.png" />
+            <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" />
             <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="10.0" layoutX="47.0" layoutY="583.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="315.0" />
             <Rectangle fx:id="rect2" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="67.0" layoutX="337.0" layoutY="539.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="315.0" />
             <Rectangle fx:id="rect3" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="379.0" layoutY="214.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="80.0" />
@@ -55,6 +47,14 @@
             <Rectangle fx:id="rect19" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="60.0" layoutX="111.0" layoutY="268.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="44.0" />
          </children>
       </Pane>
+      <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true" translateX="1.0">
+         <image>
+            <Image url="@../images/rooms/room1/foreground_1.png" />
+         </image>
+         <rotationAxis>
+            <Point3D />
+         </rotationAxis>
+      </ImageView>
       <Pane fx:id="interactablePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="674.0">
          <children>
             <StackPane layoutX="458.0" layoutY="143.0" prefHeight="52.0" prefWidth="35.0" visible="false">

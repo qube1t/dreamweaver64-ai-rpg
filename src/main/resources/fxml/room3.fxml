@@ -93,7 +93,7 @@
          <children>
             <Pane fx:id="interactablePane">
                <children>
-                  <Rectangle fx:id="machine" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="64.0" layoutX="74.0" layoutY="235.0" onMouseClicked="#clickMachineEvent" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" visible="false" width="63.0" />
+                  <Rectangle fx:id="machine" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2b" height="64.0" layoutX="74.0" layoutY="235.0" onMouseClicked="#clickMachineEvent" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" visible="false" width="63.0" />
                   <Rectangle fx:id="clickableComputer" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="29.0" layoutX="290.0" layoutY="261.0" onMouseClicked="#onClickComputer" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" visible="false" width="46.0" />
                   <Rectangle fx:id="clickableRadar" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="25.0" layoutX="198.0" layoutY="205.0" onMouseClicked="#onClickRadar" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" visible="false" width="81.0" />
                   <Rectangle fx:id="clickableDoor" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="91.0" layoutX="518.0" layoutY="157.0" onMouseClicked="#onClickDoor" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" visible="false" width="57.0" />
