@@ -109,12 +109,6 @@ public class GameState {
   /** The list of current locations. */
   public static Text[] currentCities;
 
-  /** Indicates whether the puzzle in room 3 solved. */
-  public static boolean isPuzzleInRoom3Solved = false;
-
-  /** Indicates the aircraft code. */
-  public static String aircraftCode = "";
-
   public static boolean isMachineOpen = false;
 
   public static String currentDraggedItemId = "";
@@ -182,8 +176,6 @@ public class GameState {
     unarrangedDestnationCity = "";
     currentCityIndex = -1;
     currentCities = null;
-    isPuzzleInRoom3Solved = false;
-    aircraftCode = "";
     isMachineOpen = false;
     currentDraggedItemId = "";
     puzzleIntroMessageRoom3 = "";

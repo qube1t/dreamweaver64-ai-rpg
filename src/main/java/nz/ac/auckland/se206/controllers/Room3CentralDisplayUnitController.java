@@ -150,7 +150,7 @@ public class Room3CentralDisplayUnitController {
       centralDisplayUnit.setOpacity(0.7);
       displayOutput.setText("");
       // Update the introduction label with the correct answer message
-      displayInput.setText("CONGRATULATIONS! AIRCRAFT CODE UNLOCKED: " + GameState.aircraftCode);
+      displayInput.setText("CONGRATULATIONS! AIRCRAFT CODE OBTAINED.");
 
       for (Rectangle button : allButtons) {
         button.setDisable(true);
@@ -159,26 +159,6 @@ public class Room3CentralDisplayUnitController {
     } else {
       enableFlightComputer();
     }
-    // }
-
-    // } else {
-    // centralDisplayUnit.setOpacity(0.7);
-    // displayOutput.setText("LOCKED");
-
-    // for (Rectangle button : allButtons) {
-    // button.setDisable(true);
-    // }
-    // displayOutput.setDisable(true);
-    // GameState.eleanorAi.runGpt(
-    // "User update: User clicks on the flight computer but it is locked due to
-    // either not"
-    // + " solved the puzzle or not opened the world map to discover the current
-    // location."
-    // + " Give player a short message without revealing any step. Only give hints
-    // if the"
-    // + " user ask for it. Only the response surrounded between * will send to
-    // user.");
-    // }
   }
 
   /**
@@ -189,12 +169,12 @@ public class Room3CentralDisplayUnitController {
 
     String currentText = displayOutput.getText();
     // Convert the first two letters of the current city to uppercase
-    String firstTwoDeparture = GameState.currentCities[GameState.currentCityIndex - 1]
+    String firstThreeDeparture = GameState.currentCities[GameState.currentCityIndex - 1]
         .getText()
-        .substring(0, 2)
+        .substring(0, 3)
         .toUpperCase();
     // Add slash if the first two letters of the current city is entered
-    if (currentText.equalsIgnoreCase(firstTwoDeparture)) {
+    if (currentText.equalsIgnoreCase(firstThreeDeparture)) {
       displayOutput.setText(currentText + "/");
     }
   }
@@ -341,30 +321,18 @@ public class Room3CentralDisplayUnitController {
                 () -> {
                   // Hide the progress indicator
                   progress.setVisible(false);
-                  // Find the start and end indices of the aircraft code within single quotes
-                  int startIndex = result.indexOf("^");
-                  int endIndex = result.indexOf("^", startIndex + 1);
 
-                  if (startIndex != -1 && endIndex != -1) {
-                    // Extract the aircraft code
-                    GameState.aircraftCode = result.substring(startIndex + 1, endIndex);
-                  }
                   // Update the introduction label with the correct answer message
                   displayInput.setText(
-                      "CONGRATULATIONS! AIRCRAFT CODE FOUND.");
+                      result.toUpperCase());
 
                   // Set the aircraft code image to inventory.
 
                   Image aircraftCode = new Image("/images/aircraft_code.png");
-
                   MainGameController.addObtainedItem(aircraftCode, "code");
-
-                  System.out.println("Aircraft code unlocked" + GameState.aircraftCode);
+                  System.out.println("Aircraft code unlocked");
                 });
           });
-      GameState.eleanorAi.runGpt(
-          "User update: the player has unlocked the aircraft code."
-              + "The aircraft code combines with encrypted message discovered in priate ship will be used to decrypt the letter in this room and lead to success . Do not respond.");
 
       // Clear the input field and disable it along with the execute button
       displayOutput.setText("");
@@ -375,9 +343,8 @@ public class Room3CentralDisplayUnitController {
       displayInput.setStyle("-fx-text-fill: red;");
 
       GameState.eleanorAi.runGpt(
-          "User update: the player needs to enter the first two letters of current city /"
-              + " destnation city in the flight computer but now  it is incorrect. Do not"
-              + " respond.");
+          "User update: the player needs to enter the first three letters of current city /"
+              + " destnation city in the flight computer but now  it is incorrect. Do not respond");
       displayInput.setText("INCORRECT ANSWER TRY AGAIN");
       displayOutput.setText("");
     }

@@ -21,7 +21,7 @@
             <Image url="@../images/rooms/room3/machineNew.png" />
          </image>
       </ImageView>
-      <Button fx:id="decrypt" layoutX="145.0" layoutY="220.0" mnemonicParsing="false" onMouseClicked="#onClickDecrypt" prefHeight="27.0" prefWidth="66.0" style="-fx-background-color: #d27d2c; -fx-background-radius: 12;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" text="DECRYPT">
+      <Button fx:id="decrypt" layoutX="145.0" layoutY="220.0" mnemonicParsing="false" onMouseClicked="#onClickDecrypt" prefHeight="27.0" prefWidth="66.0" style="-fx-background-color: #d27d2c;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" text="DECRYPT">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
@@ -40,6 +40,6 @@
       </ImageView>
       <ImageView fx:id="item1" fitHeight="39.0" fitWidth="39.0" layoutX="81.0" layoutY="128.0" onMouseClicked="#onClickInventory1" pickOnBounds="true" preserveRatio="true" />
       <ImageView fx:id="item2" fitHeight="39.0" fitWidth="43.0" layoutX="79.0" layoutY="178.0" onMouseClicked="#onClickInventory2" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fx:id="letter" fitHeight="45.0" fitWidth="44.0" layoutX="228.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="letter" fitHeight="45.0" fitWidth="44.0" layoutX="228.0" layoutY="141.0" onMouseClicked="#onClickLetter" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

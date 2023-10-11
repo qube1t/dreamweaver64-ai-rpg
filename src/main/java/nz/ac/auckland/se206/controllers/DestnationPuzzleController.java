@@ -125,7 +125,7 @@ public class DestnationPuzzleController {
 
     // Handle the case where the user has entered the correct answer
     if (GameState.arrangedDestnationCity.equalsIgnoreCase(currentText)) {
-      GameState.isPuzzleInRoom3Solved = true;
+      // GameState.isPuzzleInRoom3Solved = true;
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.correctPuzzleRoom3(),
           (result) -> {

@@ -42,6 +42,7 @@ public class MachineController {
     private static int position2Taken = 0;
     private static Cursor custom;
     private static int firstEnter = 0;
+    private static boolean hasGotLetter = false;
 
     public static void resetMachine() {
         imageSet = null;
@@ -81,13 +82,11 @@ public class MachineController {
         // Set background color to light purple when hovering
         decrypt.setOnMouseEntered(event -> {
             decrypt.setStyle("-fx-background-color: #e12ddb;");
-            decrypt.setStyle("-fx-background-radius: 12");
         });
 
         // Reset to the default style when not hovering
         decrypt.setOnMouseExited(event -> {
             decrypt.setStyle("-fx-background-color: #d27d2c;");
-            decrypt.setStyle("-fx-background-radius: 12");
         });
 
         // Set up the drag over event handler and only allow drop into 2 inventory
@@ -130,6 +129,17 @@ public class MachineController {
     }
 
     @FXML
+    private void onClickLetter() {
+        letter.toFront();
+        System.out.println("Letter clicked");
+        if (hasGotLetter == true && letter != null) {
+            MainGameController.addObtainedItem(letter.getImage(), "letterMom");
+            letter.setImage(null);
+            GameState.hasDecrypted = true;
+        }
+    }
+
+    @FXML
     private void onClickInventory1() {
         if (position1Taken == 1) {
 
@@ -165,7 +175,7 @@ public class MachineController {
         arrowStatic.setVisible(false);
         decrypt.setDisable(true);
         System.out.println("Decrypt button clicked");
-        GameState.hasDecrypted = true;
+        hasGotLetter = true;
         GameState.eleanorAi.runGpt(
                 GptPromptEngineeringRoom3.decryptedLetter(),
                 (result) -> {
@@ -176,7 +186,7 @@ public class MachineController {
     }
 
     private void setDecrypted() {
-        if (GameState.hasDecrypted) {
+        if (hasGotLetter) {
             decrypt.setVisible(false);
             arrowAnimation.setVisible(false);
             arrowStatic.setVisible(true);

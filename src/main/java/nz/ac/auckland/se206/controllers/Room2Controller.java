@@ -153,6 +153,7 @@ public class Room2Controller {
   private Rectangle[] treasureBoxes;
   private ImageView[] imgBoxes;
   private Boolean wrongMsgPrinted = false;
+  private Boolean hasKeyRemoved = false;
 
   /**
    * Initializes the room 2, it is called when the room loads.
@@ -459,6 +460,10 @@ public class Room2Controller {
     System.out.println("Number of treasure box: " + boxLocation);
     if (GameState.isBoxKeyFound) {
       if (numOfBox == boxLocation) {
+        if (!hasKeyRemoved) {
+          MainGameController.removeObtainedItem("key");
+          hasKeyRemoved = true;
+        }
         MainGameController.addOverlay("treasure_box", false);
       } else {
         // if the player has clicked the wrong box, the player will get the wrong
