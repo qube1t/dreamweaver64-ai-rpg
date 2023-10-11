@@ -41,12 +41,13 @@ public class CharacterMovement {
       if (player
           .localToParent(playerBound.getBoundsInParent())
           .intersects(interactable.getBoundsInParent())) {
-        if (interactable.getId().equals("rightDoorBtn") || interactable.getId().equals("leftDoorBtn")
-            || interactable.getId().equals("mainDoorBtn")) {
-          if (!interactable.isDisable()) {
-            interactable.getOnMouseClicked().handle(null);
+        if (interactable.getId() != null)
+          if (interactable.getId().equals("rightDoorBtn") || interactable.getId().equals("leftDoorBtn")
+              || interactable.getId().equals("mainDoorBtn")) {
+            if (!interactable.isDisable()) {
+              interactable.getOnMouseClicked().handle(null);
+            }
           }
-        }
       }
     }
     return false;
