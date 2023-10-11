@@ -14,8 +14,9 @@ public class InstructionsLoadController {
   public static void setText() {
     // setting random text
     System.out.println(GameState.factsAboutDW64);
-    initialisedInstructTxt.setText(
-        GameState.factsAboutDW64.get(Helper.getRandomNumber(0, GameState.factsAboutDW64.size())));
+    // initialisedInstructTxt.setText(
+    // GameState.factsAboutDW64.get(Helper.getRandomNumber(0,
+    // GameState.factsAboutDW64.size())));
   }
 
   public static void setTime(String t) {

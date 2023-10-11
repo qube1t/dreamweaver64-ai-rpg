@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -35,6 +36,8 @@ public class MainGameController {
 
   @FXML
   private static Character character;
+  private static Pane interactablePane;
+
   @FXML
   private static Pane initialisedGamePane;
 
@@ -46,6 +49,9 @@ public class MainGameController {
 
   private static Label timerInitiated;
   private static Label hintInitiated;
+  @FXML
+  private Label statusLbl;
+  private static Label statusLblInitiated;
   private static ImageView item1Initiated;
   private static ImageView item2Initiated;
   private static ImageView item3Initiated;
@@ -155,6 +161,20 @@ public class MainGameController {
 
     if (isRoom) {
       character = (Character) room1.lookup("#character");
+      interactablePane = (Pane) room1.lookup("#interactablePane");
+
+      // setting up interactable pane
+      for (Node node : interactablePane.getChildren()) {
+        node.hoverProperty()
+            .addListener(
+                (observable, oldValue, newValue) -> {
+                  if (newValue) {
+                    statusLblInitiated.setText(node.getAccessibleText());
+                  } else {
+                    statusLblInitiated.setText("");
+                  }
+                });
+      }
     }
 
     // adding blur background
@@ -245,6 +265,7 @@ public class MainGameController {
 
     timerInitiated = timer;
     hintInitiated = hintCount;
+    statusLblInitiated = statusLbl;
     item1Initiated = item1;
     item2Initiated = item2;
     item3Initiated = item3;
