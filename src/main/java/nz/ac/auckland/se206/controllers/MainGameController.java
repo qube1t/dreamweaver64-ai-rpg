@@ -508,17 +508,6 @@ public class MainGameController {
           if (GameState.winTheGame || GameState.timeLimitReached) {
             break;
           } 
-          if (currentTime == 10) {
-            // 10 seconds left
-            GameState.tenSecondsLeft = true;
-            Platform.runLater(
-              () -> {
-                // Room1Controller.initializeMap();
-                Room2Controller.initializeMap();
-                Room3Controller.initializeMap();
-              });
-
-          }
           int time = currentTime;
           int minutes = time / 60;
           int seconds = time % 60;
