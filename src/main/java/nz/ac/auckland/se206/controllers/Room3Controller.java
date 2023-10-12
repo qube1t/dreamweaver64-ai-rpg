@@ -69,6 +69,8 @@ public class Room3Controller {
           GameState.puzzleIntroMessageRoom3 = result;
           GameState.isPuzzleLoaded = true;
           Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
+          Helper.enableAccessToItem(clickableDoor, doorLoad1);
+          Helper.enableAccessToItem(doorToRoom2, doorLoad2);
         });
 
   }
@@ -116,6 +118,8 @@ public class Room3Controller {
   @FXML
   private Rectangle clickableDoor;
   @FXML
+  private Rectangle doorToRoom2;
+  @FXML
   private Rectangle worldMap;
   @FXML
   private Circle box1;
@@ -161,6 +165,10 @@ public class Room3Controller {
   private ImageView imgEnd;
   @FXML
   private ImageView puzzleLoad;
+  @FXML
+  private ImageView doorLoad2;
+  @FXML
+  private ImageView doorLoad1;
 
   private Circle[] cityPoints;
   private Text[] cityLabels;
@@ -188,6 +196,11 @@ public class Room3Controller {
     if (!gptInit) {
       gptInitilize();
       gptInit = true;
+    } else {
+      MainGameController.enableInteractPane();
+      Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+      Helper.enableAccessToItem(clickableDoor, doorLoad1);
+      Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
     }
 
     // Initialize the obsts list
