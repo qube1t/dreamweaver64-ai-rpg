@@ -260,36 +260,6 @@ public class Room2Controller {
     if (GameState.tenSecondsLeft) {
       initializeMap();
     }
-
-    // if (!GameState.isBoxKeyFound) {
-    // for (int i = 0; i < treasureBoxes.length; i++) {
-    // treasureBoxes[i].setDisable(true);
-    // imgBoxes[i].setVisible(true);
-    // }
-    // } else {
-    // boxKey.setVisible(false);
-    // book.setVisible(true);
-    // }
-
-    // print the welcome message when first enter the room 2
-    // if (!GameState.isRoom2FirstEntered) {
-    // GameState.isRoom2FirstEntered = true;
-    // GameState.eleanorAi.runGpt(
-    // GptPromptEngineeringRoom2.room2WelcomeMessage(),
-    // (result) -> {
-    // MainGameController.enableInteractPane();
-    // });
-    // GameState.eleanorAi.runGpt(
-    // GptPromptEngineeringRoom1.getRiddleForPirate(GameState.trueBook),
-    // (str2) -> {
-    // List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^");
-    // if (pirateDialogue.size() > 0) {
-    // GameState.pirateRiddle = pirateDialogue.get(0).replaceAll("\"", "");
-    // }
-    // });
-    // } else {
-    // MainGameController.enableInteractPane();
-    // }
   }
 
   /**
@@ -368,49 +338,9 @@ public class Room2Controller {
           "User update: The pirate has asked the riddle to the user, but has not been solved."
               + " You can give hints if the user asks. No reply is required");
     if (GameState.pirateRiddle != null) {
-      displayBubble(GameState.pirateRiddle);
+      displayPirateResponse(GameState.pirateRiddle);
     }
   }
-
-  // /**
-  //  * Handles the click event on the pirate.
-  //  * 
-  //  * @param event the mouse event
-  //  * @throws IOException
-  //  * @throws ApiProxyException
-  //  */
-  // @FXML
-  // private void getRiddle(MouseEvent event) throws IOException, ApiProxyException {
-  //   if (!GameState.isBookFound && !GameState.isBoxKeyFound) {
-  //     GameState.eleanorAi.runGpt(
-  //         "User update: The pirate has asked the riddle to the user, but has not been solved."
-  //             + " You can give hints if the user asks. No reply is required");
-  //     // if the player get wrong book, the message will be displayed
-  //     if (GameState.takenBook != null && !wrongMsgPrinted) {
-  //       wrongMsgPrinted = true;
-  //       if (GameState.pirateWrongResponse != null) {
-  //         displayBubble(GameState.pirateWrongResponse);
-  //       }
-
-  //     } else {
-  //       // if the player has not got any book, the message will be displayed
-  //       wrongMsgPrinted = false;
-  //       if (GameState.pirateRiddle != null) {
-  //         displayBubble(GameState.pirateRiddle);
-  //       }
-  //     }
-
-  //   } else {
-  //     if (GameState.pirateRightResponse != null) {
-  //       displayBubble(GameState.pirateRightResponse);
-  //     }
-
-  //     GameState.eleanorAi.runGpt(
-  //         "User update: The user has solved the book riddle. They have received the key."
-  //             + " To find the treasure box, they needs to look at the radar."
-  //             + " You can give hints if the user asks. No reply is required");
-  //   }
-  // }
 
   /**
    * Trade the wrong book.
@@ -421,7 +351,7 @@ public class Room2Controller {
     GameState.eleanorAi.runGpt(
         "User update: The user has not solved the book riddle yet. No reply is required");
     if (GameState.pirateWrongResponse != null) {
-      displayBubble(GameState.pirateWrongResponse);
+      displayPirateResponse(GameState.pirateWrongResponse);
     }
   }
 
@@ -445,7 +375,7 @@ public class Room2Controller {
     boxKey.setVisible(false);
     book.setVisible(true);
     if (GameState.pirateRightResponse != null) {
-      displayBubble(GameState.pirateRightResponse);
+      displayPirateResponse(GameState.pirateRightResponse);
     }
 
     // add key image to the inventory
@@ -523,7 +453,7 @@ public class Room2Controller {
    * 
    * @param result the message from GPT
    */
-  private void displayBubble(String result) {
+  private void displayPirateResponse(String result) {
     gptResponse.setText(result);
     piratePane.setVisible(true);
   }
