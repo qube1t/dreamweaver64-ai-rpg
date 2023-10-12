@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
-
-import javafx.scene.image.Image;
-
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -106,7 +103,7 @@ public class Room1Controller {
       // while loading
       shelfBtn.setDisable(true);
     } else {
-      enableAccessToItem(shelfBtn, shelfLoaderImg);
+      Helper.enableAccessToItem(shelfBtn, shelfLoaderImg);
       GameState.booksLoaded = true;
     }
 
@@ -125,8 +122,8 @@ public class Room1Controller {
     } else {
       // enable interact pane
       MainGameController.enableInteractPane();
-      enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-      enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+      Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+      Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
     }
 
     // set character position
@@ -175,12 +172,12 @@ public class Room1Controller {
           System.out.println(ansBook);
 
           // enable interact pane
-          enableAccessToItem(shelfBtn, shelfLoaderImg);
+          Helper.enableAccessToItem(shelfBtn, shelfLoaderImg);
           GameState.booksLoaded = true;
           // get riddle from gpt
 
-          enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-          enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
   }
 
@@ -218,11 +215,10 @@ public class Room1Controller {
         "User update: User has opened book shelf. No reply is needed for this message.");
   }
 
-  private void enableAccessToItem(Rectangle btn, ImageView img) {
-    btn.setDisable(false);
-    img.setImage(null);
-
-  }
+  // private void enableAccessToItem(Rectangle btn, ImageView img) {
+  //   btn.setDisable(false);
+  //   img.setImage(null);
+  // }
 
   @FXML
   private void openMainDoor() throws ApiProxyException, IOException {
