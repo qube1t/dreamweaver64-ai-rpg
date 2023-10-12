@@ -299,10 +299,9 @@ public class Room2Controller {
 
     if (GameState.isBoxKeyFound) {
       book.setVisible(true);
-      boxKey.setVisible(false);
+      boxKey.setImage(null);
       for (int i = 0; i < treasureBoxes.length; i++) {
-        treasureBoxes[i].setDisable(false);
-        imgBoxes[i].setVisible(false);
+        Helper.enableAccessToItem(treasureBoxes[i], imgBoxes[i]);
       }
     }
 
@@ -432,8 +431,7 @@ public class Room2Controller {
 
     // if the player get the correct book, the player can trade with pirate
     for (int i = 0; i < treasureBoxes.length; i++) {
-      treasureBoxes[i].setDisable(false);
-      imgBoxes[i].setVisible(false);
+      Helper.enableAccessToItem(treasureBoxes[i], imgBoxes[i]);
     }
     boxKey.setVisible(false);
     book.setVisible(true);
