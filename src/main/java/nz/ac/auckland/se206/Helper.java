@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Rectangle;
+
 public class Helper {
 
   public static List<String> getTextBetweenChar(String str, String c) {
@@ -30,6 +33,12 @@ public class Helper {
       boxNumber = (int) (Math.random() * 5) + 1;
     }
     GameState.currentBox = boxNumber;
+  }
+
+  public static void enableAccessToItem(Rectangle btn, ImageView img) {
+    btn.setDisable(false);
+    img.setImage(null);
+
   }
 
   // https://www.baeldung.com/java-generating-random-numbers-in-range

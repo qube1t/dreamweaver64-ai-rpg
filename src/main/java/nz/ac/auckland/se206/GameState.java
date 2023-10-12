@@ -117,6 +117,8 @@ public class GameState {
 
   public static boolean isMachineOpen = false;
 
+  public static boolean isPuzzleLoaded = false;
+
   public static String currentDraggedItemId = "";
 
   /**
@@ -173,6 +175,7 @@ public class GameState {
 
   // Reset variables related to Room 3
   private static void resetRoom3Variables() {
+    isPuzzleLoaded = false;
     isRoom3FirstEntered = false;
     isAircraftCodeFound = false;
     currentBox = -1;

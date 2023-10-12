@@ -26,12 +26,51 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 public class Room3Controller {
 
   private static ImageView imgEndSt;
+  private static boolean gptInit = false;
 
   /**
    * Set the end image when the time is up.
    */
   public static void initializeMap() {
     imgEndSt.setVisible(true);
+  }
+
+  private void gptInitilize() throws ApiProxyException {
+
+    // Enable interact pane first
+    MainGameController.enableInteractPane();
+
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom3.room3WelcomeMessage(),
+        (result) -> {
+          System.out.println(result);
+        });
+
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom3.getEightRandomCity(),
+        (result) -> {
+
+          List<String> cities = Helper.getTextBetweenChar(result, "^");
+          GameState.destnationCities = cities.toArray(new String[cities.size()]);
+          GameState.destnationCityIndex = Helper.getRandomNumber(0, cities.size() - 1);
+          GameState.arrangedDestnationCity = (cities.get(GameState.destnationCityIndex));
+          // Print the city
+          System.out.println(result);
+          System.out.println("Arranged:" + GameState.destnationCities.toString() +
+              "Destnation city is " + GameState.arrangedDestnationCity);
+
+          GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
+        });
+
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
+        (result) -> {
+          System.out.println(result);
+          GameState.puzzleIntroMessageRoom3 = result;
+          GameState.isPuzzleLoaded = true;
+          Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
+        });
+
   }
 
   // @FXML
@@ -70,6 +109,8 @@ public class Room3Controller {
   private Rectangle machine;
   @FXML
   private Rectangle clickableComputer;
+  @FXML
+  private Rectangle clickableComputer2;
   @FXML
   private Rectangle clickableRadar;
   @FXML
@@ -118,6 +159,8 @@ public class Room3Controller {
   private Circle point5;
   @FXML
   private ImageView imgEnd;
+  @FXML
+  private ImageView puzzleLoad;
 
   private Circle[] cityPoints;
   private Text[] cityLabels;
@@ -138,52 +181,13 @@ public class Room3Controller {
       initializeMap();
     }
 
-    // Generate seven random city destnations and randomly choose one of them
-    // for the puzzle game if it is not set
-
-    // Only displays the welcome message to Room3 if the plauyer first enters the
-    // room
-    if (!GameState.isRoom3FirstEntered) {
-
-      GameState.isRoom3FirstEntered = true;
-
-      GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom3.room3WelcomeMessage(),
-          (result) -> {
-            System.out.println(result);
-            MainGameController.enableInteractPane();
-          });
-    } else {
-      MainGameController.enableInteractPane();
+    if (!GameState.isPuzzleLoaded) {
+      clickableComputer2.setDisable(true);
     }
 
-    if (GameState.arrangedDestnationCity == "") {
-      GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom3.getEightRandomCity(),
-          (result) -> {
-            System.out.println("GPT:" + result);
-
-            List<String> cities = Helper.getTextBetweenChar(result, "^");
-            GameState.destnationCities = cities.toArray(new String[cities.size()]);
-            GameState.destnationCityIndex = Helper.getRandomNumber(0, cities.size() - 1);
-            GameState.arrangedDestnationCity = (cities.get(GameState.destnationCityIndex));
-            // Print the array
-            System.out.println("Arranged:" + GameState.destnationCities.toString());
-            System.out.println("Destnation city is " + GameState.arrangedDestnationCity);
-
-            GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
-
-          });
-    }
-    // Generate a introduction message for puzzle game when player first enters
-    // room.
-    if (GameState.puzzleIntroMessageRoom3 == "") {
-      GameState.eleanorAi.runGpt(
-          GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
-          (result) -> {
-            System.out.println(result);
-            GameState.puzzleIntroMessageRoom3 = result;
-          });
+    if (!gptInit) {
+      gptInitilize();
+      gptInit = true;
     }
 
     // Initialize the obsts list
@@ -206,7 +210,7 @@ public class Room3Controller {
 
     switch (GameState.prevRoom) {
       case 1:
-        character.setLayoutX(527);
+        character.setLayoutX(523);
         character.setLayoutY(210);
 
         break;
