@@ -468,8 +468,6 @@ public class Room2Controller {
         }
         MainGameController.addOverlay("treasure_box", false);
       } else {
-        // if the player has clicked the wrong box, the player will get the wrong
-        // message
         flashBoxes();
         Helper.changeTreasureBox(GameState.currentBox, numOfBox);
       }
@@ -604,8 +602,8 @@ public class Room2Controller {
     MainGameController.disableInteractPane();
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room1", true);
-    GameState.eleanorAi
-        .runGpt("User update: User has moved from the pirate ship to "
+    GameState.eleanorAi.runGpt(
+      "User update: User has moved from the pirate ship to "
             + "his childhood home. No reply is required");
   }
 
