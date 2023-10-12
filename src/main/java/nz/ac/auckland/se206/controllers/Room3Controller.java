@@ -35,46 +35,6 @@ public class Room3Controller {
     imgEndSt.setVisible(true);
   }
 
-  private void gptInitilize() throws ApiProxyException {
-
-    // Enable interact pane first
-    MainGameController.enableInteractPane();
-
-    GameState.eleanorAi.runGpt(
-        GptPromptEngineeringRoom3.room3WelcomeMessage(),
-        (result) -> {
-          System.out.println(result);
-        });
-
-    GameState.eleanorAi.runGpt(
-        GptPromptEngineeringRoom3.getEightRandomCity(),
-        (result) -> {
-
-          List<String> cities = Helper.getTextBetweenChar(result, "^");
-          GameState.destnationCities = cities.toArray(new String[cities.size()]);
-          GameState.destnationCityIndex = Helper.getRandomNumber(0, cities.size() - 1);
-          GameState.arrangedDestnationCity = (cities.get(GameState.destnationCityIndex));
-          // Print the city
-          System.out.println(result);
-          System.out.println("Arranged:" + GameState.destnationCities.toString() +
-              "Destnation city is " + GameState.arrangedDestnationCity);
-
-          GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
-        });
-
-    GameState.eleanorAi.runGpt(
-        GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
-        (result) -> {
-          System.out.println(result);
-          GameState.puzzleIntroMessageRoom3 = result;
-          GameState.isPuzzleLoaded = true;
-          Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
-          Helper.enableAccessToItem(clickableDoor, doorLoad1);
-          Helper.enableAccessToItem(doorToRoom2, doorLoad2);
-        });
-
-  }
-
   // @FXML
   // private Rectangle computer;
   @FXML
@@ -116,7 +76,7 @@ public class Room3Controller {
   @FXML
   private Rectangle clickableRadar;
   @FXML
-  private Rectangle clickableDoor;
+  private Rectangle doorToRoom1;
   @FXML
   private Rectangle doorToRoom2;
   @FXML
@@ -199,7 +159,7 @@ public class Room3Controller {
     } else {
       MainGameController.enableInteractPane();
       Helper.enableAccessToItem(doorToRoom2, doorLoad2);
-      Helper.enableAccessToItem(clickableDoor, doorLoad1);
+      Helper.enableAccessToItem(doorToRoom1, doorLoad1);
       Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
     }
 
@@ -278,6 +238,20 @@ public class Room3Controller {
   }
 
   @FXML
+  public void onClickRoom1() throws IOException, ApiProxyException {
+    System.out.println("Door clicked");
+    System.out.println(GameState.currentBox);
+    // go to the right room
+    InstructionsLoadController.setText();
+
+    // disable interact pane for transition
+    MainGameController.disableInteractPane();
+    MainGameController.removeOverlay(true);
+    MainGameController.addOverlay("room1", true);
+    GameState.eleanorAi.runGpt("User update: User has moved from ATC to his childhood home room.");
+  }
+
+  @FXML
   public void onClickRoom2() throws IOException, ApiProxyException {
     System.out.println("Room2 clicked");
     // go to the right room
@@ -339,57 +313,46 @@ public class Room3Controller {
   public void clickMachineEvent() throws IOException, ApiProxyException {
     GameState.isMachineOpen = true;
     MainGameController.addOverlay("decryption_machine", false);
-    // if (GameState.isAircraftCodeFound && GameState.isEncryptedMessageFound) {
-
-    // GameState.eleanorAi.runGpt(
-    // GptPromptEngineeringRoom2.generateFinalUnencrypted(),
-    // s -> {
-    // List<String> msg = Helper.getTextBetweenChar(s, "+");
-    // if (msg.size() > 0) {
-    // GameState.finalMsg = msg.get(0);
-    // } else {
-    // GameState.finalMsg = s;
-    // }
-    // });
-
-    // GameState.eleanorAi.runGpt(
-    // "User update: User has successfully decrypted the letter based on the objects
-    // he got. He"
-    // + " can now click the main door to exit. Send a response to user without
-    // revealing"
-    // + " the exit / main door and surrounded with * .");
-    // // Set the aircraft code image to inventory.
-    // Image decryptedLetter = new Image("/images/rooms/room3/paper.png");
-
-    // MainGameController.removeObtainedItem("aircraftCode");
-    // MainGameController.removeObtainedItem("treasure");
-    // MainGameController.addObtainedItem(decryptedLetter, "decryptedLetter");
-    // GameState.hasDecrypted = true;
-    // } else {
-
-    // GameState.eleanorAi.runGpt(
-    // "User update: User has clicked on the encrypted letter and fail to decrypt.
-    // He needs to"
-    // + " get both encrypted message in pirate ship and aircraft code to decrypt. "
-    // + "Send a response to user"
-    // + " without revaling any step. If the user ask for hints give him. Only the
-    // message"
-    // + " surrounded with * will send to user .");
-    // }
   }
 
-  @FXML
-  public void onClickDoor() throws IOException, ApiProxyException {
-    System.out.println("Door clicked");
-    System.out.println(GameState.currentBox);
-    // go to the right room
-    InstructionsLoadController.setText();
+  private void gptInitilize() throws ApiProxyException {
 
-    // disable interact pane for transition
-    MainGameController.disableInteractPane();
-    MainGameController.removeOverlay(true);
-    MainGameController.addOverlay("room1", true);
-    GameState.eleanorAi.runGpt("User update: User has moved from ATC to his childhood home room.");
+    // Enable interact pane first
+    MainGameController.enableInteractPane();
+
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom3.room3WelcomeMessage(),
+        (result) -> {
+          System.out.println(result);
+        });
+
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom3.getEightRandomCity(),
+        (result) -> {
+
+          List<String> cities = Helper.getTextBetweenChar(result, "^");
+          GameState.destnationCities = cities.toArray(new String[cities.size()]);
+          GameState.destnationCityIndex = Helper.getRandomNumber(0, cities.size() - 1);
+          GameState.arrangedDestnationCity = (cities.get(GameState.destnationCityIndex));
+          // Print the city
+          System.out.println(result);
+          System.out.println("Arranged:" + GameState.destnationCities.toString() +
+              "Destnation city is " + GameState.arrangedDestnationCity);
+
+          GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
+        });
+
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
+        (result) -> {
+          System.out.println(result);
+          GameState.puzzleIntroMessageRoom3 = result;
+          GameState.isPuzzleLoaded = true;
+          Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
+          Helper.enableAccessToItem(doorToRoom1, doorLoad1);
+          Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+        });
+
   }
 
   private void initilizeGpsMap() {
@@ -430,7 +393,7 @@ public class Room3Controller {
     System.out.println("Current city is " + GameState.currentCities[currentCity - 1].getText());
   }
 
-  protected void fadeInRadarPoints(Circle city) {
+  private void fadeInRadarPoints(Circle city) {
 
     city.setVisible(true);
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1), city);
@@ -440,7 +403,7 @@ public class Room3Controller {
     fadeTransition.play();
   }
 
-  protected void fadeOutRadarPoints(Circle city) {
+  private void fadeOutRadarPoints(Circle city) {
 
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.5), city);
     fadeTransition.setFromValue(1.0);
