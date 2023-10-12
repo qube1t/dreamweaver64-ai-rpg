@@ -29,7 +29,7 @@ public class Room2Controller {
   /** Set the end image when the time is up. */
   public static void initializeMap() {
     if (imgEndStRoom2 == null) {
-      imgEndStRoom2 = new ImageView(new Image("/images/rooms/room2/end.gif"));
+      imgEndStRoom2.setImage(new Image("/images/rooms/room2/end.gif"));;
     }
     imgEndStRoom2.setVisible(true);
   }
@@ -223,6 +223,51 @@ public class Room2Controller {
               e.printStackTrace();
             }
           }
+        } else if (box1.getBoundsInParent().contains(x, y) &&
+            MainGameController.getImageSet().getId().equals("key")) {
+              try {
+                getRandomBox(1);
+              } catch (IOException e) {
+                e.printStackTrace();
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+              }
+        } else if (box2.getBoundsInParent().contains(x, y) &&
+            MainGameController.getImageSet().getId().equals("key")) {
+              try {
+                getRandomBox(2);
+              } catch (IOException e) {
+                e.printStackTrace();
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+              }
+        } else if (box3.getBoundsInParent().contains(x, y) &&
+            MainGameController.getImageSet().getId().equals("key")) {
+              try {
+                getRandomBox(3);
+              } catch (IOException e) {
+                e.printStackTrace();
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+              }
+        } else if (box4.getBoundsInParent().contains(x, y) &&
+            MainGameController.getImageSet().getId().equals("key")) {
+              try {
+                getRandomBox(4);
+              } catch (IOException e) {
+                e.printStackTrace();
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+              }
+        } else if (box5.getBoundsInParent().contains(x, y) &&
+            MainGameController.getImageSet().getId().equals("key")) {
+              try {
+                getRandomBox(5);
+              } catch (IOException e) {
+                e.printStackTrace();
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+              }
         }
       }
       event.setDropCompleted(true);
@@ -255,6 +300,10 @@ public class Room2Controller {
     if (GameState.isBoxKeyFound) {
       book.setVisible(true);
       boxKey.setVisible(false);
+      for (int i = 0; i < treasureBoxes.length; i++) {
+        treasureBoxes[i].setDisable(false);
+        imgBoxes[i].setVisible(false);
+      }
     }
 
     if (GameState.currentBox == -1) {
@@ -382,7 +431,6 @@ public class Room2Controller {
             + " You can give hints if the user asks. No reply is required");
 
     // if the player get the correct book, the player can trade with pirate
-    GameState.isBoxKeyFound = true;
     for (int i = 0; i < treasureBoxes.length; i++) {
       treasureBoxes[i].setDisable(false);
       imgBoxes[i].setVisible(false);
@@ -394,9 +442,12 @@ public class Room2Controller {
     }
 
     // add key image to the inventory
-    Image keyImage = new Image("/images/key.png");
-    MainGameController.removeObtainedItem("book");
-    MainGameController.addObtainedItem(keyImage, "key");
+    if (!GameState.isBoxKeyFound) {
+      Image keyImage = new Image("/images/key.png");
+      MainGameController.removeObtainedItem("book");
+      MainGameController.addObtainedItem(keyImage, "key");
+    }
+    GameState.isBoxKeyFound = true;
   }
 
   /**
