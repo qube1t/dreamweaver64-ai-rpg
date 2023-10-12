@@ -28,6 +28,9 @@ public class Room2Controller {
 
   /** Set the end image when the time is up. */
   public static void initializeMap() {
+    if (imgEndStRoom2 == null) {
+      imgEndStRoom2 = new ImageView(new Image("/images/rooms/room2/end.gif"));
+    }
     imgEndStRoom2.setVisible(true);
   }
 

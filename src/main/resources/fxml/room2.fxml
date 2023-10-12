@@ -17,11 +17,7 @@
             <Image url="@../images/rooms/room2/backShipMap.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgEnd" fitHeight="550.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/rooms/room2/end.gif" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="imgEnd" fitHeight="550.0" pickOnBounds="true" preserveRatio="true" visible="false" />
       <Pane>
          <children>
             <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="33.0" layoutX="149.0" layoutY="184.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
