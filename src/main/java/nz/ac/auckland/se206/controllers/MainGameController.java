@@ -181,6 +181,9 @@ public class MainGameController {
     room1.setScaleShape(true);
 
     if (isRoom) {
+      if (character != null) {
+        character.endAnimation(true);
+      }
       character = (Character) room1.lookup("#character");
       interactablePane = (Pane) room1.lookup("#interactablePane");
 
@@ -221,6 +224,7 @@ public class MainGameController {
     if (alsoRooms) {
       // removing rooms as well
       sub = 2;
+      character.endAnimation(alsoRooms);
     }
     if (initialisedGamePane.getChildren().size() > 6 - sub) {
       initialisedGamePane
@@ -279,6 +283,7 @@ public class MainGameController {
   private Pane inventoryPane;
 
   private Text bubbleChatText = new Text("text");
+  private String prevLetter;
 
   public void initialize() throws IOException {
     obtainedItems = new ArrayList<>();
@@ -337,6 +342,11 @@ public class MainGameController {
   public void onKeyPressed(KeyEvent event) {
     // on key pressed
     String letter = event.getCode().toString();
+    System.out.println("key " + event.getCode() + " pressed");
+    if (!letter.equals(prevLetter)) {
+      character.endAnimation(false);
+    }
+    prevLetter = letter;
 
     // character movement
     if (letter.equals("W")) {
@@ -355,10 +365,10 @@ public class MainGameController {
 
     // move after animating as it will change direction of character
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
-      if (!character.isAnimating()) {
-        character.startAnimation();
-        // character.startMovement();
-      }
+      // if (!character.isAnimating()) {
+      character.startAnimation();
+      // character.startMovement();
+      // }
       // character.move();
     }
   }
@@ -370,10 +380,13 @@ public class MainGameController {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) {
-    // System.out.println("key " + event.getCode() + " released");
+    System.out.println("key " + event.getCode() + " released");
     String letter = event.getCode().toString();
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
-      character.endAnimation();
+      if (letter.equals(prevLetter)) {
+        character.endAnimation(true);
+      }
+      // character.endAnimation();
       // character.stopMovement();
     }
   }

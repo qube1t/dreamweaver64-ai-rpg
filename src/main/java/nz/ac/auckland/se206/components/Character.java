@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import javafx.animation.Animation;
+import javafx.application.Platform;
 import javafx.beans.NamedArg;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -85,7 +86,9 @@ public class Character extends AnchorPane {
       @Override
       public void run() {
         if (animating) {
-          movement.movePlayer(action);
+          Platform.runLater(() -> {
+            movement.movePlayer(action);
+          });
         }
       }
     }, 0, 100);
@@ -130,7 +133,7 @@ public class Character extends AnchorPane {
     if (animating != true) {
       initElements();
     }
-    ;
+
   }
 
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
@@ -139,7 +142,7 @@ public class Character extends AnchorPane {
   }
 
   public void playFootSteps() {
-    if (!GameState.isMuted) {
+    if (!GameState.isMuted && !footstepSound.isPlaying()) {
       footstepSound.setCycleCount(AudioClip.INDEFINITE);
       footstepSound.setVolume(.45);
       footstepSound.play();
@@ -157,19 +160,20 @@ public class Character extends AnchorPane {
 
   public void startAnimation() {
     if (animating != true) {
+      animating = true;
       animation.setCycleCount(Animation.INDEFINITE);
       animation.play();
       playFootSteps();
-      animating = true;
     }
   }
 
-  public void endAnimation() {
+  public void endAnimation(boolean endSound) {
+    animating = false;
     animation.stop();
     activeImg.setViewport(
         new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
-    endFootSteps();
-    animating = false;
+    if (endSound)
+      endFootSteps();
   }
 
   public int getColumns() {
