@@ -32,6 +32,8 @@ public class Room1Controller {
   }
 
   @FXML
+  private ImageView imgEnd;
+  @FXML
   private Character character;
   @FXML
   private Rectangle rect1;
@@ -143,7 +145,7 @@ public class Room1Controller {
 
     GameState.prevRoom = 1;
 
-    // imgEndSt = imgEnd;
+    imgEndSt = imgEnd;
 
     if (GameState.tenSecondsLeft) {
       initializeMap();
