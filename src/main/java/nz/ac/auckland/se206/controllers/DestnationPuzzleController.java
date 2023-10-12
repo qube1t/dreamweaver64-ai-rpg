@@ -157,7 +157,7 @@ public class DestnationPuzzleController {
                   load.setVisible(false);
                   loadText.setVisible(false);
                   // Update the introduction label with the incorrect answer message
-                  introduction.setText(result);
+                  introduction.setText(result.toUpperCase());
                   submit.setOpacity(1);
                   submit.setDisable(false);
                 });

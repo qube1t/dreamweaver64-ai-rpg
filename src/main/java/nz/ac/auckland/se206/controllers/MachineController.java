@@ -174,6 +174,7 @@ public class MachineController {
         arrowAnimation.setVisible(true);
         arrowStatic.setVisible(false);
         decrypt.setDisable(true);
+        decrypt.setOpacity(0.6);
         System.out.println("Decrypt button clicked");
         hasGotLetter = true;
         GameState.eleanorAi.runGpt(
