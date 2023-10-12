@@ -190,9 +190,9 @@
             <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="350.0" layoutY="384.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
             <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="456.0" layoutY="300.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
 
-            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" fill="#ffffff67" height="60.0" layoutX="427.0" layoutY="167.0" onMouseClicked="#getRiddle" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="44.0" />
-            <Rectangle fx:id="leftDoorBtn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="90.0" layoutX="66.0" layoutY="223.0" onMouseClicked="#onOpenRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
-            <Rectangle fx:id="rightDoorBtn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="97.0" layoutX="551.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
+            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff67" height="60.0" layoutX="427.0" layoutY="167.0" onMouseClicked="#getTradeWithPirate" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="44.0" />
+            <Rectangle fx:id="leftDoorBtn" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff66" height="90.0" layoutX="66.0" layoutY="223.0" onMouseClicked="#onOpenRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
+            <Rectangle fx:id="rightDoorBtn" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff66" height="97.0" layoutX="551.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
          </children>
       </Pane>
       <Pane fx:id="piratePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" visible="false" StackPane.alignment="TOP_RIGHT">

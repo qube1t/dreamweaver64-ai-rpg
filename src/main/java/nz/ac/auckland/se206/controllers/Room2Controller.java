@@ -128,7 +128,7 @@ public class Room2Controller {
   @FXML
   private ImageView box5BlockImg;
   @FXML
-  private ImageView priateLoaderImg;
+  private ImageView pirateLoaderImg;
   @FXML
   private ImageView leftDoorLoaderImg;
   @FXML
@@ -160,6 +160,7 @@ public class Room2Controller {
   private Rectangle[] treasureBoxes;
   private ImageView[] imgBoxes;
   private Boolean hasKeyRemoved = false;
+  private Boolean wrongMsgPrinted = false;
 
   /**
    * Initializes the room 2, it is called when the room loads.
@@ -183,6 +184,7 @@ public class Room2Controller {
       gptInit = true;
     } else {
       MainGameController.enableInteractPane();
+      Helper.enableAccessToItem(pirate, pirateLoaderImg);
       Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
       Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
     }
@@ -300,6 +302,7 @@ public class Room2Controller {
           List<String> pirateDialogue = Helper.getTextBetweenChar(str, "^");
           if (pirateDialogue.size() > 0) {
             GameState.pirateRiddle = pirateDialogue.get(0).replaceAll("\"", "");
+            Helper.enableAccessToItem(pirate, pirateLoaderImg);
           }
         });
 
@@ -320,7 +323,6 @@ public class Room2Controller {
           List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^");
           if (pirateDialogue.size() > 0) {
             GameState.pirateWrongResponse = str2.replaceAll("^", "");
-            Helper.enableAccessToItem(pirate, priateLoaderImg);
           }
         });
   }
@@ -333,12 +335,22 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   @FXML
-  private void getRiddle(MouseEvent event) throws IOException, ApiProxyException {
-    GameState.eleanorAi.runGpt(
+  private void getTradeWithPirate(MouseEvent event) throws IOException, ApiProxyException {
+    if (GameState.takenBook == null) {
+      GameState.eleanorAi.runGpt(
           "User update: The pirate has asked the riddle to the user, but has not been solved."
               + " You can give hints if the user asks. No reply is required");
-    if (GameState.pirateRiddle != null) {
       displayPirateResponse(GameState.pirateRiddle);
+    } else if (!GameState.isBookFound) {
+      if (!wrongMsgPrinted) {
+        wrongMsgPrinted = true;
+        tradeWrongBook();
+      } else {
+        wrongMsgPrinted = false;
+        displayPirateResponse(GameState.pirateRiddle);
+      }
+    } else {
+      tradeCorrectBook();
     }
   }
 
