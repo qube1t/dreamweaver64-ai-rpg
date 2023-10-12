@@ -326,7 +326,7 @@ public class MainGameController {
     bubbleTextPane.setContent(bubbleChatText);
     setMainCursor();
 
-    GameState.backgroundMusic.setCycleCount(1);
+    GameState.backgroundMusic.setCycleCount(3);
     GameState.backgroundMusic.setVolume(.15);
     if (!GameState.isMuted) {
       GameState.backgroundMusic.play();
