@@ -144,7 +144,7 @@ public class Character extends AnchorPane {
   public void playFootSteps() {
     if (!GameState.isMuted && !footstepSound.isPlaying()) {
       footstepSound.setCycleCount(AudioClip.INDEFINITE);
-      footstepSound.setVolume(.45);
+      footstepSound.setVolume(.35);
       footstepSound.play();
     }
 
