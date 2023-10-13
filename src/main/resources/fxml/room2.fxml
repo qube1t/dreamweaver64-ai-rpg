@@ -161,7 +161,16 @@
                   </ImageView>
                </children>
             </StackPane>
-            <StackPane layoutX="545.0" layoutY="223.0" prefHeight="90.0" visible="false">
+            <StackPane layoutX="64.0" layoutY="223.0" prefHeight="90.0" visible="false">
+               <children>
+                  <ImageView fx:id="leftDoorLoaderImg" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/loading.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane layoutX="543.0" layoutY="223.0" prefHeight="90.0" visible="false">
                <children>
                   <ImageView fx:id="rightDoorLoaderImg" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                      <image>

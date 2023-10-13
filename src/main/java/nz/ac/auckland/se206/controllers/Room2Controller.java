@@ -133,6 +133,8 @@ public class Room2Controller {
   @FXML
   private ImageView pirateLoaderImg;
   @FXML
+  private ImageView leftDoorLoaderImg;
+  @FXML
   private ImageView rightDoorLoaderImg;
 
   @FXML
@@ -180,21 +182,25 @@ public class Room2Controller {
 
     character.enableMobility(obsts, interactablePane.getChildren());
 
-    if (GameState.isRoom3FirstEntered) {
-      Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
-    }
-
-    if (GameState.pirateResponsePrinted) {
-      Helper.enableAccessToItem(pirate, pirateLoaderImg);
-    }
+    GameState.mainGame.clickGamePane();
 
     if (!gptInit) {
       initGpt();
       gptInit = true;
+      GameState.isRoom2FirstEntered = true;
     } else {
       MainGameController.enableInteractPane();
-      Helper.enableAccessToItem(pirate, pirateLoaderImg);
-      Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+      if (GameState.isRoom3FirstEntered && GameState.isRoom3GptDone) {
+        Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+      } else {
+        Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+      }
+      if (GameState.isRoom1GptDone) {
+        Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+      }
+      if (GameState.isRoom2GptDone) {
+        Helper.enableAccessToItem(pirate, pirateLoaderImg);
+      }
     }
 
     interactablePane.setOnDragOver(event -> {
@@ -229,51 +235,6 @@ public class Room2Controller {
             }
           }
         }
-        // } else if (box1.getBoundsInParent().contains(x, y) &&
-        // MainGameController.getImageSet().getId().equals("key")) {
-        // try {
-        // getRandomBox(1);
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // } catch (ApiProxyException e) {
-        // e.printStackTrace();
-        // }
-        // } else if (box2.getBoundsInParent().contains(x, y) &&
-        // MainGameController.getImageSet().getId().equals("key")) {
-        // try {
-        // getRandomBox(2);
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // } catch (ApiProxyException e) {
-        // e.printStackTrace();
-        // }
-        // } else if (box3.getBoundsInParent().contains(x, y) &&
-        // MainGameController.getImageSet().getId().equals("key")) {
-        // try {
-        // getRandomBox(3);
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // } catch (ApiProxyException e) {
-        // e.printStackTrace();
-        // }
-        // } else if (box4.getBoundsInParent().contains(x, y) &&
-        // MainGameController.getImageSet().getId().equals("key")) {
-        // try {
-        // getRandomBox(4);
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // } catch (ApiProxyException e) {
-        // e.printStackTrace();
-        // }
-        // } else if (box5.getBoundsInParent().contains(x, y) &&
-        // MainGameController.getImageSet().getId().equals("key")) {
-        // try {
-        // getRandomBox(5);
-        // } catch (IOException e) {
-        // e.printStackTrace();
-        // } catch (ApiProxyException e) {
-        // e.printStackTrace();
-        // }
       }
       event.setDropCompleted(true);
       event.consume();
@@ -340,9 +301,9 @@ public class Room2Controller {
 
     GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.room2WelcomeMessage(),
         (str) -> {
-          if (!GameState.isRoom3FirstEntered) {
-            Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
-          }
+          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+          GameState.isRoom2GptDone = true;
         });
 
     // get riddle from GPT
@@ -385,20 +346,19 @@ public class Room2Controller {
         GptPromptEngineeringRoom2.getPirateWrongResponse(),
         (str2) -> {
           Platform.runLater(
-            () -> {
-              List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^");
-              if (pirateDialogue.size() > 0) {
-                GameState.pirateWrongResponse = str2.replaceAll("^", "");
-                if (!GameState.isBookFound) {
-                  try {
-                    tradeWrongBook();
-                  } catch (ApiProxyException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+              () -> {
+                List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^");
+                if (pirateDialogue.size() > 0) {
+                  GameState.pirateWrongResponse = str2.replaceAll("^", "");
+                  if (!GameState.isBookFound) {
+                    try {
+                      tradeWrongBook();
+                    } catch (ApiProxyException e) {
+                      e.printStackTrace();
+                    }
                   }
                 }
-              }
-            });
+              });
         });
 
     // get the pirate response about correct answer from GPT
@@ -406,21 +366,20 @@ public class Room2Controller {
         GptPromptEngineeringRoom2.getPirateRightResponse(),
         (str1) -> {
           Platform.runLater(
-            () -> {
-              List<String> pirateDialogue = Helper.getTextBetweenChar(str1, "^");
-              if (pirateDialogue.size() > 0) {
-                GameState.pirateRightResponse = str1.replaceAll("^", "");
-                if (GameState.isBookFound) {
-                  try {
-                    tradeCorrectBook();
-                  } catch (ApiProxyException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+              () -> {
+                List<String> pirateDialogue = Helper.getTextBetweenChar(str1, "^");
+                if (pirateDialogue.size() > 0) {
+                  GameState.pirateRightResponse = str1.replaceAll("^", "");
+                  if (GameState.isBookFound) {
+                    try {
+                      tradeCorrectBook();
+                    } catch (ApiProxyException e) {
+                      e.printStackTrace();
+                    }
                   }
+                  Helper.enableAccessToItem(pirate, pirateLoaderImg);
                 }
-                Helper.enableAccessToItem(pirate, pirateLoaderImg);
-              }
-            });
+              });
         });
   }
 
@@ -439,9 +398,9 @@ public class Room2Controller {
               + " You can give hints if the user asks. No reply is required");
       displayPirateResponse(GameState.pirateRiddle);
     } else if (GameState.takenBook != null) {
-      if (!GameState.pirateResponsePrinted) {
+      if (!GameState.isPirateResponsePrinted) {
         Helper.disableAccessToItem(pirate, pirateLoaderImg);
-        GameState.pirateResponsePrinted = true;
+        GameState.isPirateResponsePrinted = true;
         setPirateResponse();
       } else if (!GameState.isBookFound) {
         if (!wrongMsgPrinted) {

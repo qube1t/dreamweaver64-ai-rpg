@@ -72,6 +72,11 @@ public class GameState {
   /** Indicates the book that the player has taken. */
   public static String takenBook;
 
+  /** Indicates the room1 gpt is done */
+  public static boolean isRoom1GptDone = false;
+
+  public static boolean isRoom2FirstEntered = false;
+
   // room2
   /** Indicates the riddle that used in the room2. */
   public static String pirateRiddle = null;
@@ -95,7 +100,10 @@ public class GameState {
   public static String pirateWrongResponse = null;
 
   /** Indicates the pirate's responses are printed */
-  public static boolean pirateResponsePrinted = false;
+  public static boolean isPirateResponsePrinted = false;
+
+  /** Indicates the room2 gpt is done */
+  public static boolean isRoom2GptDone = false;
 
   // room3
   /** Indicates whether the player has entered the room3 first time. */
@@ -132,6 +140,9 @@ public class GameState {
   public static String currentDraggedItemId = "";
 
   public static boolean computerInIt = false;
+
+  /** Indicates the room3 gpt is done */
+  public static boolean isRoom3GptDone = false;
 
   /**
    *
@@ -174,6 +185,7 @@ public class GameState {
     trueBook = null;
     takenBook = null;
     finalMsg = null;
+    isRoom1GptDone = false;
   }
 
   // Reset variables related to Room 2
@@ -184,6 +196,9 @@ public class GameState {
     isBoxKeyFound = false;
     encryptedFinalMsg = null;
     isEncryptedMessageFound = false;
+    isRoom2FirstEntered = false;
+    isPirateResponsePrinted = false;
+    isRoom2GptDone = false;
   }
 
   // Reset variables related to Room 3
@@ -203,5 +218,6 @@ public class GameState {
     puzzleIntroMessageRoom3 = "";
     hasDecrypted = false;
     computerInIt = false;
+    isRoom3GptDone = false;
   }
 }
