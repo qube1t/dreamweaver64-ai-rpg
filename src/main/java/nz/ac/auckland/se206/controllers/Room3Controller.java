@@ -10,6 +10,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -41,35 +42,37 @@ public class Room3Controller {
   // @FXML
   // private Rectangle computer;
   @FXML
-  private Rectangle computer2;
-  @FXML
-  private Rectangle chair1;
-  @FXML
-  private Rectangle chair2;
-  @FXML
-  private Rectangle gate;
-  @FXML
-  private Rectangle radar;
-  @FXML
-  private Rectangle boundary1;
-  @FXML
-  private Rectangle boundary2;
-  @FXML
-  private Rectangle boundary3;
-  @FXML
-  private Rectangle boundary4;
-  @FXML
-  private Rectangle boundary5;
-  @FXML
-  private Rectangle decrypt;
-  @FXML
-  private Rectangle computer3;
-  @FXML
-  private Rectangle bound1;
-  @FXML
-  private Rectangle bound2;
-  @FXML
-  private Rectangle bound3;
+  private Pane obstalePane;
+  // @FXML
+  // private Rectangle computer2;
+  // @FXML
+  // private Rectangle chair1;
+  // @FXML
+  // private Rectangle chair2;
+  // @FXML
+  // private Rectangle gate;
+  // @FXML
+  // private Rectangle radar;
+  // @FXML
+  // private Rectangle boundary1;
+  // @FXML
+  // private Rectangle boundary2;
+  // @FXML
+  // private Rectangle boundary3;
+  // @FXML
+  // private Rectangle boundary4;
+  // @FXML
+  // private Rectangle boundary5;
+  // @FXML
+  // private Rectangle decrypt;
+  // @FXML
+  // private Rectangle computer3;
+  // @FXML
+  // private Rectangle bound1;
+  // @FXML
+  // private Rectangle bound2;
+  // @FXML
+  // private Rectangle bound3;
   @FXML
   private Rectangle machine;
   @FXML
@@ -82,8 +85,8 @@ public class Room3Controller {
   private Rectangle doorToRoom1;
   @FXML
   private Rectangle doorToRoom2;
-  @FXML
-  private Rectangle worldMap;
+  // @FXML
+  // private Rectangle worldMap;
   @FXML
   private Circle box1;
   @FXML
@@ -167,20 +170,29 @@ public class Room3Controller {
       Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
     }
 
-    // Initialize the obsts list
-    this.obstacles = new ArrayList<Rectangle>();
-    Rectangle[] rectangles = {
-        // computer,
-        boundary1, boundary2, boundary3, boundary4, boundary5, gate,
-        bound1, bound2, bound3, computer2, computer3,
-        radar,
-        chair1, chair2, decrypt
-    };
+    // // Initialize the obsts list
+    // this.obstacles = new ArrayList<Rectangle>();
+    // Rectangle[] rectangles = {
+    // // computer,
+    // boundary1, boundary2, boundary3, boundary4, boundary5, gate,
+    // bound1, bound2, bound3, computer2, computer3,
+    // radar,
+    // chair1, chair2, decrypt
+    // };
 
-    // Add all the obstacles to the list.
-    for (Rectangle rectangle : rectangles) {
-      this.obstacles.add(rectangle);
+    // Add all rectangle children
+    this.obstacles = new ArrayList<Rectangle>();
+
+    for (Node node : obstalePane.getChildren()) {
+      if (node instanceof Rectangle) {
+        obstacles.add((Rectangle) node);
+      }
     }
+
+    // // Add all the obstacles to the list.
+    // for (Rectangle rectangle : rectangles) {
+    // this.obstacles.add(rectangle);
+    // }
 
     // Enable the character movement.
     character.enableMobility(obstacles, interactablePane.getChildren());
