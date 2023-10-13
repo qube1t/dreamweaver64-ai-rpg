@@ -16,7 +16,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
@@ -319,8 +318,7 @@ public class Room2Controller {
       seaAmbiance.play();
       GameState.soundFx.add(seaAmbiance);
     }
-  }
-
+  
     imgEndStRoom2 = imgEnd;
     if (GameState.tenSecondsLeft) {
       initializeMap();
