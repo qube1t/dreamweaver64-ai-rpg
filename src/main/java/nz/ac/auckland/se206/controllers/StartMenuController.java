@@ -36,11 +36,11 @@ public class StartMenuController {
   @FXML
   private ImageView muteIcon;
   @FXML
-
   private Pane outPane;
   @FXML
   private Pane startPane;
 
+  @FXML
   private Rectangle mc1;
   @FXML
   private Rectangle mc2;
@@ -60,7 +60,6 @@ public class StartMenuController {
     instruction.setText(GameState.instructionMsg);
 
     setCursor();
-
 
     characters = new Rectangle[] { mc1, mc2, mc3, mc4 };
 
