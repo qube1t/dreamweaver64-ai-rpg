@@ -2,7 +2,11 @@ package nz.ac.auckland.se206.components;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.animation.Animation;
+import javafx.application.Platform;
 import javafx.beans.NamedArg;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,9 +16,12 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.mobility.CharacterMovement;
 import nz.ac.auckland.se206.mobility.SpriteAnimation;
@@ -42,6 +49,12 @@ public class Character extends AnchorPane {
 
   private boolean animating = false;
 
+  private AudioClip footstepSound = new AudioClip(
+      (new Media(App.class.getResource("/sounds/walkingSound.mp3").toString()))
+          .getSource());
+
+  private Timer movementTimer = new Timer();
+
   public Character(
       @NamedArg("columns") int columns,
       @NamedArg("count") int count,
@@ -68,6 +81,17 @@ public class Character extends AnchorPane {
     }
 
     initElements();
+
+    movementTimer.scheduleAtFixedRate(new TimerTask() {
+      @Override
+      public void run() {
+        if (animating) {
+          Platform.runLater(() -> {
+            movement.movePlayer(action);
+          });
+        }
+      }
+    }, 0, 100);
   }
 
   public void assignSpriteSheet() {
@@ -109,12 +133,25 @@ public class Character extends AnchorPane {
     if (animating != true) {
       initElements();
     }
-    ;
+
   }
 
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
     // create character movement object
     movement = new CharacterMovement(this, playerBound, proximityBound, obstacles, observableList);
+  }
+
+  public void playFootSteps() {
+    if (!GameState.isMuted && !footstepSound.isPlaying()) {
+      footstepSound.setCycleCount(AudioClip.INDEFINITE);
+      footstepSound.setVolume(.35);
+      footstepSound.play();
+    }
+
+  }
+
+  public void endFootSteps() {
+    footstepSound.stop();
   }
 
   public void move() {
@@ -123,17 +160,20 @@ public class Character extends AnchorPane {
 
   public void startAnimation() {
     if (animating != true) {
+      animating = true;
       animation.setCycleCount(Animation.INDEFINITE);
       animation.play();
-      animating = true;
+      playFootSteps();
     }
   }
 
-  public void endAnimation() {
+  public void endAnimation(boolean endSound) {
+    animating = false;
     animation.stop();
     activeImg.setViewport(
         new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
-    animating = false;
+    if (endSound)
+      endFootSteps();
   }
 
   public int getColumns() {

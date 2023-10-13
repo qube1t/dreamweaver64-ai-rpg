@@ -13,7 +13,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
@@ -160,7 +164,8 @@ public class Room2Controller {
   private Rectangle[] treasureBoxes;
   private ImageView[] imgBoxes;
   private Boolean hasKeyRemoved = false;
-  private Boolean wrongMsgPrinted = false;
+  private Boolean wrongMsgPrinted= false;
+  private AudioClip seaAmbiance;
 
   /**
    * Initializes the room 2, it is called when the room loads.
@@ -304,6 +309,17 @@ public class Room2Controller {
     if (GameState.currentBox == -1) {
       Helper.changeTreasureBox(GameState.currentBox, -1);
     }
+
+    if (!GameState.isMuted) {
+      seaAmbiance = new AudioClip(
+          (new Media(App.class.getResource("/sounds/oceanWavesSound.mp3").toString()))
+              .getSource());
+      seaAmbiance.setCycleCount(AudioClip.INDEFINITE);
+      seaAmbiance.setVolume(.25);
+      seaAmbiance.play();
+      GameState.soundFx.add(seaAmbiance);
+    }
+  }
 
     imgEndStRoom2 = imgEnd;
     if (GameState.tenSecondsLeft) {
@@ -594,6 +610,8 @@ public class Room2Controller {
     GameState.eleanorAi.runGpt(
         "User update: User has moved from the pirate ship to "
             + "his childhood home. No reply is required");
+    if (!GameState.isMuted)
+      seaAmbiance.stop();
   }
 
   /**
@@ -614,5 +632,7 @@ public class Room2Controller {
     GameState.eleanorAi.runGpt(
         "User update: User has moved from the pirate ship to his "
             + "workplace the ATC tower. No reply is required");
+    if (!GameState.isMuted)
+      seaAmbiance.stop();
   }
 }
