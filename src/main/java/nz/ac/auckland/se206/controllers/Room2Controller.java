@@ -602,13 +602,13 @@ public class Room2Controller {
     InstructionsLoadController.setText();
     // disable interact pane for transition
     MainGameController.disableInteractPane();
-    MainGameController.removeOverlay(true);
-    MainGameController.addOverlay("room1", true);
+    if (!GameState.isMuted)
+      seaAmbiance.stop();
     GameState.eleanorAi.runGpt(
         "User update: User has moved from the pirate ship to "
             + "his childhood home. No reply is required");
-    if (!GameState.isMuted)
-      seaAmbiance.stop();
+    MainGameController.removeOverlay(true);
+    MainGameController.addOverlay("room1", true);
   }
 
   /**

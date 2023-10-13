@@ -146,6 +146,7 @@ public class Character extends AnchorPane {
       footstepSound.setCycleCount(AudioClip.INDEFINITE);
       footstepSound.setVolume(.35);
       footstepSound.play();
+      GameState.soundFx.add(footstepSound);
     }
 
   }
