@@ -14,7 +14,7 @@
 
 <StackPane fx:id="outerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: grey;" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MainGameController">
    <children>
-      <VBox fx:id="interactPane" disable="true" prefHeight="550.0" prefWidth="706.0" visible="false">
+      <VBox fx:id="interactPane" disable="true" prefHeight="550.0" prefWidth="706.0">
          <children>
             <AnchorPane fx:id="inventoryPane" prefHeight="50.0" prefWidth="700.0" style="-fx-background-color: #4e4a4e;">
                <children>
@@ -67,11 +67,11 @@
 
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="chatPane" disable="true" maxHeight="-Infinity" opacity="0.0" prefHeight="144.0" prefWidth="704.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" StackPane.alignment="BOTTOM_CENTER">
+                  <AnchorPane fx:id="chatPane" disable="true" maxHeight="-Infinity" opacity="0.0" prefHeight="227.0" prefWidth="600.0" style="-fx-background-color: black;" AnchorPane.bottomAnchor="0.0" StackPane.alignment="BOTTOM_CENTER">
                   <children>
-                        <ListView fx:id="chat" blendMode="LIGHTEN" focusTraversable="false" layoutX="-2.0" layoutY="6.0" maxHeight="-Infinity" prefHeight="98.0" prefWidth="611.0" style="-fx-background-color: black; -fx-border-color: orange; -fx-border-width: 4px;" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0">
+                        <ListView fx:id="chat" blendMode="LIGHTEN" focusTraversable="false" layoutX="-2.0" layoutY="6.0" maxHeight="-Infinity" prefHeight="180.0" prefWidth="590.0" style="-fx-background-color: black; -fx-border-color: orange; -fx-border-width: 4px;" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0">
 </ListView>
-                        <TextField fx:id="chatInput" layoutX="5.0" layoutY="110.0" onKeyPressed="#keyPressedChatInput" prefHeight="28.0" prefWidth="562.0" promptText="Talk with AI. Click enter to send." style="-fx-background-color: black; -fx-border-color: grey; -fx-text-fill: white;" styleClass="aiInputField" stylesheets="@../css/font.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" />
+                        <TextField fx:id="chatInput" layoutX="5.0" layoutY="110.0" onKeyPressed="#keyPressedChatInput" prefHeight="28.0" prefWidth="562.0" promptText="Talk with AI. Click enter to send." style="-fx-background-color: black; -fx-border-color: grey; -fx-text-fill: white;" styleClass="aiInputField" stylesheets="@../css/font.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="10.0" />
                      </children>
                      <StackPane.margin>
                         <Insets bottom="40.0" left="100.0" />
