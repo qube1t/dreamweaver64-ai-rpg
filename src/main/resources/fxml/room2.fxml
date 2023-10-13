@@ -17,7 +17,7 @@
             <Image url="@../images/rooms/room2/backShipMap.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgEnd" fitHeight="550.0" pickOnBounds="true" preserveRatio="true" visible="false" />
+      <ImageView fx:id="imgEnd" fitHeight="550.0" pickOnBounds="true" preserveRatio="true" />
       <Pane>
          <children>
             <Rectangle fx:id="rect1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="33.0" layoutX="149.0" layoutY="184.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
@@ -188,7 +188,7 @@
 
             <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff67" height="60.0" layoutX="427.0" layoutY="167.0" onMouseClicked="#getTradeWithPirate" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="44.0" />
             <Rectangle fx:id="leftDoorBtn" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff66" height="90.0" layoutX="66.0" layoutY="223.0" onMouseClicked="#onOpenRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
-            <Rectangle fx:id="rightDoorBtn" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff66" height="97.0" layoutX="551.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
+            <Rectangle fx:id="rightDoorBtn" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff66" height="97.0" layoutX="546.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
          </children>
       </Pane>
       <Pane fx:id="piratePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" visible="false" StackPane.alignment="TOP_RIGHT">
