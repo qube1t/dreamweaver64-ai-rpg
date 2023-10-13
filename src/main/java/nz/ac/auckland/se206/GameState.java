@@ -94,6 +94,9 @@ public class GameState {
   /** Indicates the pirate's wrong response. */
   public static String pirateWrongResponse = null;
 
+  /** Indicates the pirate's responses are printed */
+  public static boolean pirateResponsePrinted = false;
+
   // room3
   /** Indicates whether the player has entered the room3 first time. */
   public static boolean isRoom3FirstEntered = false;
