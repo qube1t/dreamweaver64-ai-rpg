@@ -23,6 +23,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.controllers.MainGameController;
 import nz.ac.auckland.se206.mobility.CharacterMovement;
 import nz.ac.auckland.se206.mobility.SpriteAnimation;
 
@@ -146,6 +147,7 @@ public class Character extends AnchorPane {
       footstepSound.setCycleCount(AudioClip.INDEFINITE);
       footstepSound.setVolume(.35);
       footstepSound.play();
+      GameState.soundFx.add(footstepSound);
     }
 
   }
