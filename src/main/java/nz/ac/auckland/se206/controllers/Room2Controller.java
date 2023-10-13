@@ -284,6 +284,7 @@ public class Room2Controller {
       seaAmbiance.setCycleCount(AudioClip.INDEFINITE);
       seaAmbiance.setVolume(.25);
       seaAmbiance.play();
+      GameState.soundFx.add(seaAmbiance);
     }
   }
 

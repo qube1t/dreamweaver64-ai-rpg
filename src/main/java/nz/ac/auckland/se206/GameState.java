@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,6 +46,8 @@ public class GameState {
   public static AudioClip backgroundMusic = new AudioClip(
       (new Media(App.class.getResource("/sounds/Bogart VGM - 8Bit Action- Menu_Select.mp3").toString()))
           .getSource());
+
+  public static List<AudioClip> soundFx = new ArrayList<AudioClip>();
 
   // instruction loading stage
   /** Indicates the instruction message that used in the loading stage. */

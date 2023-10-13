@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.AudioClip;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -32,6 +33,14 @@ public class EndMenuController {
   public void initialize() throws ApiProxyException {
     GameState.eleanorAi = new GptEngine(); // Re-create the GptEngine
     GameState.eleanorAi.runGpt(GptPromptEngineeringRoom1.gameIntro());
+
+    // stop all sound effects
+    for (AudioClip sound : GameState.soundFx) {
+      sound.stop();
+    }
+
+    GameState.soundFx.clear();
+
     // Set the text to display based on whether the player won or lost
     if (GameState.winTheGame) {
       winOrLose.setText("You Escaped!");

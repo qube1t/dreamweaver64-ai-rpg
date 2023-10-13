@@ -230,6 +230,7 @@ public class Room3Controller {
       atcSound.setCycleCount(AudioClip.INDEFINITE);
       atcSound.setVolume(.45);
       atcSound.play();
+      GameState.soundFx.add(atcSound);
     }
   }
 
