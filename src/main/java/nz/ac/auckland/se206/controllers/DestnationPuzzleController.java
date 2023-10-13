@@ -10,8 +10,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
@@ -23,7 +23,7 @@ public class DestnationPuzzleController {
   @FXML
   private Label introduction;
   @FXML
-  private AnchorPane puzzlePane;
+  private Pane puzzlePane;
   @FXML
   private HBox letterBox;
   @FXML
@@ -49,12 +49,8 @@ public class DestnationPuzzleController {
         25, true, true);
     this.custom = new ImageCursor(cursor);
 
-    screenArea.setCursor(custom);
-    submit.setCursor(custom);
-    exit.setCursor(custom);
+    puzzlePane.setCursor(custom);
     letterBox.setCursor(Cursor.OPEN_HAND);
-    // Set the custom cursor for the screen
-    // letterBox.setCursor(grabCursor);
 
     submit.setOnMouseEntered(
         event -> {
@@ -70,35 +66,11 @@ public class DestnationPuzzleController {
     // Set progress bar to invisible
     load.setVisible(false);
     loadText.setVisible(false);
+
     String unarrangedPuzzle = GameState.unarrangedDestnationCity;
     System.out.println(unarrangedPuzzle);
     initializePuzzle(unarrangedPuzzle);
     introduction.setText(GameState.puzzleIntroMessageRoom3.toUpperCase());
-  }
-
-  public void setLetterCursor(int status) {
-    if (status == 0) {
-      letterBox.setCursor(Cursor.OPEN_HAND);
-    } else {
-      letterBox.setCursor(Cursor.CLOSED_HAND);
-    }
-  }
-
-  protected void initializePuzzle(String cityName) {
-    char[] letters = cityName.toCharArray();
-
-    for (char letter : letters) {
-      DraggableLetter draggableLetter = new DraggableLetter(String.valueOf(letter), letterBox, this);
-
-      // Create a StackPane to add a frame around each letter
-      StackPane letterFrame = new StackPane();
-      letterFrame.getStyleClass().add("letter-frame");
-
-      letterFrame.getChildren().add(draggableLetter);
-      letterBox.getChildren().add(letterFrame);
-    }
-    // Set the alignment of puzzle to middle
-    letterBox.setAlignment(Pos.CENTER);
   }
 
   @FXML
@@ -143,8 +115,7 @@ public class DestnationPuzzleController {
           });
       GameState.eleanorAi.runGpt(
           "User update: The player now has correctly solved the"
-              + "puzzle for destnation city. In other words,"
-              + "the user has discovered the destnation city. Do not need to reply");
+              + "puzzle for destnation city. Reply is not required.");
     } else {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.wrongPuzzleRoom3(),
@@ -168,5 +139,30 @@ public class DestnationPuzzleController {
   @FXML
   protected void onClickClose() {
     MainGameController.removeOverlay(false);
+  }
+
+  private void initializePuzzle(String cityName) {
+    char[] letters = cityName.toCharArray();
+
+    for (char letter : letters) {
+      DraggableLetter draggableLetter = new DraggableLetter(String.valueOf(letter), letterBox, this);
+
+      // Create a StackPane to add a frame around each letter
+      StackPane letterFrame = new StackPane();
+      letterFrame.getStyleClass().add("letter-frame");
+
+      letterFrame.getChildren().add(draggableLetter);
+      letterBox.getChildren().add(letterFrame);
+    }
+    // Set the alignment of puzzle to middle
+    letterBox.setAlignment(Pos.CENTER);
+  }
+
+  public void setLetterCursor(int status) {
+    if (status == 0) {
+      letterBox.setCursor(Cursor.OPEN_HAND);
+    } else {
+      letterBox.setCursor(Cursor.CLOSED_HAND);
+    }
   }
 }
