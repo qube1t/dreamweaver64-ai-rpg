@@ -11,11 +11,16 @@ import nz.ac.auckland.se206.GameState;
 
 public class RadarController {
 
-  @FXML private Circle box1;
-  @FXML private Circle box2;
-  @FXML private Circle box3;
-  @FXML private Circle box4;
-  @FXML private Circle box5;
+  @FXML
+  private Circle box1;
+  @FXML
+  private Circle box2;
+  @FXML
+  private Circle box3;
+  @FXML
+  private Circle box4;
+  @FXML
+  private Circle box5;
 
   private Timeline radarAnimation;
   private Circle[] radarPoints;
@@ -24,7 +29,8 @@ public class RadarController {
 
     // Call the set radar point color method to set the most up to date correct box
     if (GameState.currentBox == -1) {
-      // Generate a random number between 1 and 5 if the correct treasure box is not set
+      // Generate a random number between 1 and 5 if the correct treasure box is not
+      // set
       int randomBox = (int) (Math.random() * 5 + 1);
       changeCorrectBox(randomBox);
       GameState.currentBox = randomBox;
@@ -33,12 +39,11 @@ public class RadarController {
     }
 
     // Initialize the radar points and radarObjects to a list.
-    this.radarPoints = new Circle[] {box1, box2, box3, box4, box5};
+    this.radarPoints = new Circle[] { box1, box2, box3, box4, box5 };
     // Initialize the radarAnimation timeline
-    this.radarAnimation =
-        new Timeline(
-            new KeyFrame(Duration.seconds(0), event -> fadeInRadarPoints()),
-            new KeyFrame(Duration.seconds(1), event -> fadeOutRadarPoints()));
+    this.radarAnimation = new Timeline(
+        new KeyFrame(Duration.seconds(0), event -> fadeInRadarPoints()),
+        new KeyFrame(Duration.seconds(1), event -> fadeOutRadarPoints()));
     radarAnimation.setCycleCount(Timeline.INDEFINITE);
     radarAnimation.setOnFinished(
         event -> {

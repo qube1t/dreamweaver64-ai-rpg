@@ -24,11 +24,10 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3CentralDisplayUnitController {
 
-  protected List<Rectangle> allButtons;
+  private List<Rectangle> allButtons;
 
   @FXML
   private Text errorText;
-
   @FXML
   private Character character;
   @FXML
@@ -150,14 +149,14 @@ public class Room3CentralDisplayUnitController {
       centralDisplayUnit.setOpacity(0.7);
       displayOutput.setText("");
       // Update the introduction label with the correct answer message
-      displayInput.setText("CONGRATULATIONS! AIRCRAFT CODE OBTAINED.");
+      displayInput.setText("AIRCRAFT CODE HAS OBTAINED. CDU IS NOW LOCKED");
 
       for (Rectangle button : allButtons) {
         button.setDisable(true);
       }
       displayOutput.setDisable(true);
     } else {
-      enableFlightComputer();
+      enableFlightComputer(GameState.computerInIt);
     }
   }
 
@@ -249,44 +248,6 @@ public class Room3CentralDisplayUnitController {
     addSlashIfEnteredCurrentCity();
   }
 
-  protected void typeTextEffect(Text text, String message, int delay) {
-    text.setText(""); // Clear the text first
-    int messageLength = message.length();
-
-    Timeline timeline = new Timeline();
-
-    for (int i = 0; i < messageLength; i++) {
-      final int index = i;
-      KeyFrame keyFrame = new KeyFrame(
-          Duration.millis(delay * i),
-          new KeyValue(text.textProperty(), message.substring(0, index + 1)));
-      timeline.getKeyFrames().add(keyFrame);
-    }
-
-    timeline.play();
-  }
-
-  protected void enableFlightComputer() {
-    centralDisplayUnit.setOpacity(1);
-    lock.setVisible(false);
-    lock.setDisable(true);
-    displayOutput.setDisable(false);
-    displayOutput.requestFocus();
-    Platform.runLater(
-        () -> {
-          displayOutput.requestFocus();
-        });
-    // Enable the key press event
-
-    for (Rectangle button : allButtons) {
-      button.setDisable(false);
-    }
-
-    String message = "ENTER THE FIRST THREE LETTER OF DEP / DEST CITY THEN PRESS EXEC. E.g SYD/MEL";
-    int typingDelay = 50;
-    typeTextEffect(displayInput, message, typingDelay);
-  }
-
   @FXML
   /**
    * Handle execute button click
@@ -327,7 +288,6 @@ public class Room3CentralDisplayUnitController {
                       result.toUpperCase());
 
                   // Set the aircraft code image to inventory.
-
                   Image aircraftCode = new Image("/images/aircraft_code.png");
                   MainGameController.addObtainedItem(aircraftCode, "code");
                   System.out.println("Aircraft code unlocked");
@@ -349,4 +309,50 @@ public class Room3CentralDisplayUnitController {
       displayOutput.setText("");
     }
   }
+
+  private void typeTextEffect(Text text, String message, int delay) {
+    text.setText(""); // Clear the text first
+    int messageLength = message.length();
+
+    Timeline timeline = new Timeline();
+
+    for (int i = 0; i < messageLength; i++) {
+      final int index = i;
+      KeyFrame keyFrame = new KeyFrame(
+          Duration.millis(delay * i),
+          new KeyValue(text.textProperty(), message.substring(0, index + 1)));
+      timeline.getKeyFrames().add(keyFrame);
+    }
+
+    timeline.play();
+  }
+
+  private void enableFlightComputer(boolean inIt) {
+    centralDisplayUnit.setOpacity(1);
+    lock.setVisible(false);
+    lock.setDisable(true);
+    displayOutput.setDisable(false);
+    displayOutput.requestFocus();
+    Platform.runLater(
+        () -> {
+          displayOutput.requestFocus();
+        });
+    // Enable the key press event
+
+    for (Rectangle button : allButtons) {
+      button.setDisable(false);
+    }
+
+    String message = "ENTER THE FIRST THREE LETTER OF DEP / DEST CITY THEN PRESS EXEC. E.g SYD/MEL";
+    int typingDelay = 50;
+    // Only display type effect when first time enters.
+    if (inIt == false) {
+      typeTextEffect(displayInput, message, typingDelay);
+      GameState.computerInIt = true;
+    } else {
+      displayInput.setText(message);
+      System.out.println("true");
+    }
+  }
+
 }
