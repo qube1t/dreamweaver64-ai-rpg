@@ -164,7 +164,7 @@ public class Room2Controller {
   private Rectangle[] treasureBoxes;
   private ImageView[] imgBoxes;
   private Boolean hasKeyRemoved = false;
-  private Boolean wrongMsgPrinted= false;
+  private Boolean wrongMsgPrinted = false;
   private AudioClip seaAmbiance;
 
   /**
@@ -319,7 +319,6 @@ public class Room2Controller {
       seaAmbiance.play();
       GameState.soundFx.add(seaAmbiance);
     }
-  }
 
     imgEndStRoom2 = imgEnd;
     if (GameState.tenSecondsLeft) {
