@@ -59,7 +59,7 @@
             <Rectangle fx:id="chair2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="28.0" layoutX="383.0" layoutY="289.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="14.0" />
             <Rectangle fx:id="boundary3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="352.0" layoutX="2.0" layoutY="81.0" onMouseClicked="#onClickComputer" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
             <Rectangle fx:id="boundary4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="111.0" layoutX="619.0" layoutY="184.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
-            <Rectangle fx:id="boundary5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="79.0" layoutX="515.0" layoutY="351.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="127.0" />
+            <Rectangle fx:id="boundary5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="159.0" layoutX="515.0" layoutY="351.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="127.0" />
             <Rectangle fx:id="bound1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="20.0" layoutX="331.0" layoutY="285.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="12.0" />
             <Rectangle fx:id="bound3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="226.0" layoutY="215.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="20.0" />
             <Rectangle fx:id="bound2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="383.0" layoutY="285.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
@@ -67,12 +67,16 @@
             <Rectangle fx:id="computer3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="345.0" layoutY="270.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="37.0" />
             <Rectangle fx:id="new1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="45.0" layoutX="393.0" layoutY="385.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
             <Rectangle fx:id="new2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="114.0" layoutX="205.0" layoutY="357.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="49.0" />
-            <Rectangle fx:id="new4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="380.0" layoutY="400.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
-            <Rectangle fx:id="new3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="22.0" layoutX="445.0" layoutY="403.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="13.0" />
-            <Rectangle fx:id="new5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="25.0" layoutX="259.0" layoutY="430.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="9.0" />
-            <Rectangle fx:id="new6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="24.0" layoutX="191.0" layoutY="429.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="8.0" />
-            <Rectangle fx:id="new7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="27.0" layoutX="192.0" layoutY="373.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="8.0" />
-            <Rectangle fx:id="new8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="18.0" layoutX="257.0" layoutY="376.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="10.0" />
+            <Rectangle fx:id="new4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="382.0" layoutY="404.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="8.0" />
+            <Rectangle fx:id="new3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="447.0" layoutY="408.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="6.0" />
+            <Rectangle fx:id="new5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="18.0" layoutX="259.0" layoutY="430.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="7.0" />
+            <Rectangle fx:id="new6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="13.0" layoutX="192.0" layoutY="434.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="7.0" />
+            <Rectangle fx:id="new10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="591.0" layoutY="298.0" opacity="0.0" rotate="50.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
+            <Rectangle fx:id="new7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="192.0" layoutY="378.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="8.0" />
+            <Rectangle fx:id="new8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" layoutX="257.0" layoutY="379.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="8.0" />
+            <Rectangle fx:id="new9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="24.0" layoutX="133.0" layoutY="485.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="383.0" />
+            <Rectangle fx:id="boundary11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="7.0" layoutY="322.0" opacity="0.0" rotate="45.0" stroke="BLACK" strokeType="INSIDE" width="73.0" />
+            <Rectangle fx:id="bound11" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="19.0" layoutX="442.0" layoutY="286.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="16.0" />
       <Character fx:id="character" columns="9" count="9" frame_height="64" frame_width="64" layoutX="54.0" layoutY="76.0" offset_x="0" offset_y="0" />
             <Text fx:id="label5" fill="LIME" layoutX="242.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SEATTLE" visible="false">
                <font>
@@ -124,7 +128,7 @@
             </StackPane>
             <StackPane layoutX="436.0" layoutY="268.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="33.0" prefWidth="13.0" visible="false">
                <children>
-                  <ImageView fx:id="puzzleLoad1" fitHeight="26.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="puzzleLoad" fitHeight="26.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/loading.gif" />
                      </image>

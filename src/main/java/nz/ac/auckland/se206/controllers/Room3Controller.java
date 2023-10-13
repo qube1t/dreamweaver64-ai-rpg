@@ -12,7 +12,6 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
@@ -39,40 +38,20 @@ public class Room3Controller {
     imgEndSt.setVisible(true);
   }
 
-  // @FXML
-  // private Rectangle computer;
   @FXML
   private Pane obstalePane;
-  // @FXML
-  // private Rectangle computer2;
-  // @FXML
-  // private Rectangle chair1;
-  // @FXML
-  // private Rectangle chair2;
-  // @FXML
-  // private Rectangle gate;
-  // @FXML
-  // private Rectangle radar;
-  // @FXML
-  // private Rectangle boundary1;
-  // @FXML
-  // private Rectangle boundary2;
-  // @FXML
-  // private Rectangle boundary3;
-  // @FXML
-  // private Rectangle boundary4;
-  // @FXML
-  // private Rectangle boundary5;
-  // @FXML
-  // private Rectangle decrypt;
-  // @FXML
-  // private Rectangle computer3;
-  // @FXML
-  // private Rectangle bound1;
-  // @FXML
-  // private Rectangle bound2;
-  // @FXML
-  // private Rectangle bound3;
+  @FXML
+  private Pane interactablePane;
+  @FXML
+  private ImageView imgEnd;
+  @FXML
+  private ImageView puzzleLoad;
+  @FXML
+  private ImageView doorLoad2;
+  @FXML
+  private ImageView doorLoad1;
+  @FXML
+  private Character character;
   @FXML
   private Rectangle machine;
   @FXML
@@ -85,28 +64,6 @@ public class Room3Controller {
   private Rectangle doorToRoom1;
   @FXML
   private Rectangle doorToRoom2;
-  // @FXML
-  // private Rectangle worldMap;
-  @FXML
-  private Circle box1;
-  @FXML
-  private Circle box2;
-  @FXML
-  private Circle box3;
-  @FXML
-  private Circle box4;
-  @FXML
-  private Circle box5;
-  @FXML
-  private Character character;
-  @FXML
-  private AnchorPane radarPane;
-  @FXML
-  private ImageView map;
-  @FXML
-  private ImageView paperImage;
-  @FXML
-  private Pane interactablePane;
   @FXML
   private Text label1;
   @FXML
@@ -127,14 +84,6 @@ public class Room3Controller {
   private Circle point4;
   @FXML
   private Circle point5;
-  @FXML
-  private ImageView imgEnd;
-  @FXML
-  private ImageView puzzleLoad;
-  @FXML
-  private ImageView doorLoad2;
-  @FXML
-  private ImageView doorLoad1;
 
   private Circle[] cityPoints;
   private Text[] cityLabels;
@@ -170,17 +119,6 @@ public class Room3Controller {
       Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
     }
 
-    // // Initialize the obsts list
-    // this.obstacles = new ArrayList<Rectangle>();
-    // Rectangle[] rectangles = {
-    // // computer,
-    // boundary1, boundary2, boundary3, boundary4, boundary5, gate,
-    // bound1, bound2, bound3, computer2, computer3,
-    // radar,
-    // chair1, chair2, decrypt
-    // };
-
-    // Add all rectangle children
     this.obstacles = new ArrayList<Rectangle>();
 
     for (Node node : obstalePane.getChildren()) {
@@ -188,11 +126,6 @@ public class Room3Controller {
         obstacles.add((Rectangle) node);
       }
     }
-
-    // // Add all the obstacles to the list.
-    // for (Rectangle rectangle : rectangles) {
-    // this.obstacles.add(rectangle);
-    // }
 
     // Enable the character movement.
     character.enableMobility(obstacles, interactablePane.getChildren());

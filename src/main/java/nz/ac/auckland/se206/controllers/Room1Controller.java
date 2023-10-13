@@ -218,8 +218,8 @@ public class Room1Controller {
   }
 
   // private void enableAccessToItem(Rectangle btn, ImageView img) {
-  //   btn.setDisable(false);
-  //   img.setImage(null);
+  // btn.setDisable(false);
+  // img.setImage(null);
   // }
 
   @FXML

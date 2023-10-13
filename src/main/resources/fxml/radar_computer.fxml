@@ -18,10 +18,10 @@
          </image>
       </ImageView>
       <Circle fx:id="box1" fill="LIME" layoutX="163.0" layoutY="111.0" radius="5.0" stroke="LIME" strokeType="INSIDE" />
-      <Circle fx:id="box2" fill="LIME" layoutX="232.0" layoutY="148.0" radius="5.0" stroke="LIME" strokeType="INSIDE" />
-      <Circle fx:id="box3" fill="LIME" layoutX="150.0" layoutY="162.0" radius="5.0" stroke="LIME" strokeType="INSIDE" />
-      <Circle fx:id="box5" fill="LIME" layoutX="203.0" layoutY="175.0" radius="5.0" stroke="LIME" strokeType="INSIDE" />
-      <Circle fx:id="box4" fill="LIME" layoutX="184.0" layoutY="132.0" radius="5.0" stroke="LIME" strokeType="INSIDE" />
+      <Circle fx:id="box5" fill="LIME" layoutX="232.0" layoutY="148.0" radius="5.0" stroke="LIME" strokeType="INSIDE" />
+      <Circle fx:id="box2" fill="LIME" layoutX="150.0" layoutY="162.0" radius="5.0" stroke="LIME" strokeType="INSIDE" />
+      <Circle fx:id="box4" fill="LIME" layoutX="203.0" layoutY="175.0" radius="5.0" stroke="LIME" strokeType="INSIDE" />
+      <Circle fx:id="box3" fill="LIME" layoutX="184.0" layoutY="132.0" radius="5.0" stroke="LIME" strokeType="INSIDE" />
       
    </children>
 </AnchorPane>
