@@ -1,7 +1,11 @@
 package nz.ac.auckland.se206;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.controllers.MainGameController;
 
@@ -39,6 +43,12 @@ public class GameState {
   /** The GPT-3 engine. */
   public static GptEngine eleanorAi = new GptEngine();
 
+  public static AudioClip backgroundMusic = new AudioClip(
+      (new Media(App.class.getResource("/sounds/Bogart VGM - 8Bit Action- Menu_Select.mp3").toString()))
+          .getSource());
+
+  public static List<AudioClip> soundFx = new ArrayList<AudioClip>();
+
   // instruction loading stage
   /** Indicates the instruction message that used in the loading stage. */
   public static String instructionMsg = null;
@@ -49,9 +59,6 @@ public class GameState {
   // room1
 
   public static boolean booksLoaded;
-
-  /** Indicates the riddle that used in the room2. */
-  public static String pirateRiddle = null;
 
   /** Indicates the book array that stored in the room1. */
   public static String[] booksInRoom1 = new String[7];
@@ -66,26 +73,26 @@ public class GameState {
   public static String takenBook;
 
   // room2
-  /** Indicates whether the player has entered the room2 first time. */
-  public static boolean isRoom2FirstEntered = false;
+  /** Indicates the riddle that used in the room2. */
+  public static String pirateRiddle = null;
 
   /** Indicates whether the box key has found to open the treasure box. */
   public static boolean isBoxKeyFound = false;
 
-  /**
-   * Indicates the unencrypted message that the player will get when they exit the
-   * game.
-   */
+  /** Indicates the decrypted message that will be placed in end menu. */
   public static String finalMsg;
 
-  /**
-   * Indicates the encrypted message that the player will get when they get the
-   * treasure.
-   */
+  /** Indicates the encrypted message that will be placed in treasure box. */
   public static String encryptedFinalMsg;
 
   /** Indicates whether the player has found the encrypted message. */
   public static boolean isEncryptedMessageFound = false;
+
+  /** Indicates the pirate's right response. */
+  public static String pirateRightResponse = null;
+
+  /** Indicates the pirate's wrong response. */
+  public static String pirateWrongResponse = null;
 
   // room3
   /** Indicates whether the player has entered the room3 first time. */
@@ -169,7 +176,8 @@ public class GameState {
   // Reset variables related to Room 2
   private static void resetRoom2Variables() {
     pirateRiddle = null;
-    isRoom2FirstEntered = false;
+    pirateRightResponse = null;
+    pirateWrongResponse = null;
     isBoxKeyFound = false;
     encryptedFinalMsg = null;
     isEncryptedMessageFound = false;

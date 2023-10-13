@@ -10,6 +10,13 @@ import javafx.scene.shape.Rectangle;
 
 public class Helper {
 
+  /**
+   * Get the text between two characters.
+   * 
+   * @param str
+   * @param c
+   * @return matchesList
+   */
   public static List<String> getTextBetweenChar(String str, String c) {
     // get text between two characters, including the two characters
     List<String> matchesList = new ArrayList<String>();
@@ -22,6 +29,12 @@ public class Helper {
     return matchesList;
   }
 
+  /**
+   * Change the treasure box.
+   * 
+   * @param currentBoxNumber
+   * @param clickBox
+   */
   public static void changeTreasureBox(int currentBoxNumber, int clickBox) {
 
     // Generate a random number between 1 and 5
@@ -35,17 +48,26 @@ public class Helper {
     GameState.currentBox = boxNumber;
   }
 
-  public static void enableAccessToItem(Rectangle btn, ImageView img) {
-    btn.setDisable(false);
-    img.setImage(null);
 
-  }
-
+  /**
+   * Get a random number between two numbers.
+   * 
+   * @param min
+   * @param max
+   * @return
+   */
   // https://www.baeldung.com/java-generating-random-numbers-in-range
   public static int getRandomNumber(int min, int max) {
     return (int) ((Math.random() * (max - min)) + min);
   }
 
+  /**
+   * Count the number of occurences of a character in a string.
+   * 
+   * @param str
+   * @param c
+   * @return count
+   */
   public static int countOccurences(String str, String c) {
     // count the number of occurences of a character in a string
     int count = 0;
@@ -55,5 +77,16 @@ public class Helper {
       }
     }
     return count;
+  }
+
+  /**
+   * Enable access to an item.
+   * 
+   * @param btn
+   * @param img
+   */
+  public static void enableAccessToItem(Rectangle btn, ImageView img) {
+    btn.setDisable(false);
+    img.setImage(null);
   }
 }

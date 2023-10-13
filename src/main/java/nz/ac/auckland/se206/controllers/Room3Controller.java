@@ -13,10 +13,13 @@ import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
@@ -138,6 +141,7 @@ public class Room3Controller {
   private Text currentCityLabel;
 
   private ArrayList<Rectangle> obstacles;
+  private AudioClip atcSound;
 
   public void initialize() throws ApiProxyException {
 
@@ -198,6 +202,15 @@ public class Room3Controller {
     }
 
     GameState.prevRoom = 3;
+    if (!GameState.isMuted) {
+      atcSound = new AudioClip(
+          (new Media(App.class.getResource("/sounds/atcAmbiance.mp3").toString()))
+              .getSource());
+      atcSound.setCycleCount(AudioClip.INDEFINITE);
+      atcSound.setVolume(.45);
+      atcSound.play();
+      GameState.soundFx.add(atcSound);
+    }
   }
 
   /**
@@ -249,6 +262,8 @@ public class Room3Controller {
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room1", true);
     GameState.eleanorAi.runGpt("User update: User has moved from ATC to his childhood home room.");
+    if (!GameState.isMuted)
+      atcSound.stop();
   }
 
   @FXML
@@ -263,6 +278,9 @@ public class Room3Controller {
     MainGameController.addOverlay("room2", true);
     GameState.eleanorAi.runGpt("User update: User has moved from ATC"
         + "to the pirate ship. No reply is required");
+
+    if (!GameState.isMuted)
+      atcSound.stop();
   }
 
   @FXML
@@ -352,7 +370,6 @@ public class Room3Controller {
           Helper.enableAccessToItem(doorToRoom1, doorLoad1);
           Helper.enableAccessToItem(doorToRoom2, doorLoad2);
         });
-
   }
 
   private void initilizeGpsMap() {
