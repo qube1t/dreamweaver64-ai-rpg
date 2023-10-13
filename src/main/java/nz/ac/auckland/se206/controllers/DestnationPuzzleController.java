@@ -38,8 +38,6 @@ public class DestnationPuzzleController {
   private ImageView screen;
   @FXML
   private ImageView customCursor;
-  @FXML
-  private Rectangle screenArea;
 
   private Cursor custom;
 
