@@ -180,7 +180,6 @@ public class Room2Controller {
 
     if (!gptInit) {
       initGpt();
-      setPirateAnswer();
       gptInit = true;
     } else {
       MainGameController.enableInteractPane();
@@ -222,49 +221,49 @@ public class Room2Controller {
           }
         } else if (box1.getBoundsInParent().contains(x, y) &&
             MainGameController.getImageSet().getId().equals("key")) {
-              try {
-                getRandomBox(1);
-              } catch (IOException e) {
-                e.printStackTrace();
-              } catch (ApiProxyException e) {
-                e.printStackTrace();
-              }
+          try {
+            getRandomBox(1);
+          } catch (IOException e) {
+            e.printStackTrace();
+          } catch (ApiProxyException e) {
+            e.printStackTrace();
+          }
         } else if (box2.getBoundsInParent().contains(x, y) &&
             MainGameController.getImageSet().getId().equals("key")) {
-              try {
-                getRandomBox(2);
-              } catch (IOException e) {
-                e.printStackTrace();
-              } catch (ApiProxyException e) {
-                e.printStackTrace();
-              }
+          try {
+            getRandomBox(2);
+          } catch (IOException e) {
+            e.printStackTrace();
+          } catch (ApiProxyException e) {
+            e.printStackTrace();
+          }
         } else if (box3.getBoundsInParent().contains(x, y) &&
             MainGameController.getImageSet().getId().equals("key")) {
-              try {
-                getRandomBox(3);
-              } catch (IOException e) {
-                e.printStackTrace();
-              } catch (ApiProxyException e) {
-                e.printStackTrace();
-              }
+          try {
+            getRandomBox(3);
+          } catch (IOException e) {
+            e.printStackTrace();
+          } catch (ApiProxyException e) {
+            e.printStackTrace();
+          }
         } else if (box4.getBoundsInParent().contains(x, y) &&
             MainGameController.getImageSet().getId().equals("key")) {
-              try {
-                getRandomBox(4);
-              } catch (IOException e) {
-                e.printStackTrace();
-              } catch (ApiProxyException e) {
-                e.printStackTrace();
-              }
+          try {
+            getRandomBox(4);
+          } catch (IOException e) {
+            e.printStackTrace();
+          } catch (ApiProxyException e) {
+            e.printStackTrace();
+          }
         } else if (box5.getBoundsInParent().contains(x, y) &&
             MainGameController.getImageSet().getId().equals("key")) {
-              try {
-                getRandomBox(5);
-              } catch (IOException e) {
-                e.printStackTrace();
-              } catch (ApiProxyException e) {
-                e.printStackTrace();
-              }
+          try {
+            getRandomBox(5);
+          } catch (IOException e) {
+            e.printStackTrace();
+          } catch (ApiProxyException e) {
+            e.printStackTrace();
+          }
         }
       }
       event.setDropCompleted(true);
@@ -320,29 +319,12 @@ public class Room2Controller {
   private void initGpt() throws ApiProxyException {
     MainGameController.enableInteractPane();
 
-    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.room2WelcomeMessage());
-
-    // get the encrypted message from GPT
-    GameState.eleanorAi.runGpt(
-        GptPromptEngineeringRoom2.generateFinalEncrypted(),
-        s -> {
-          List<String> msg = Helper.getTextBetweenChar(s, "+");
-          if (msg.size() > 0) {
-            GameState.encryptedFinalMsg = msg.get(0);
-          } else {
-            GameState.encryptedFinalMsg = s;
-          }
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.room2WelcomeMessage(),
+        (str) -> {
           Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
           Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
-  }
 
-  /**
-   * Set the pirate answer.
-   * 
-   * @throws ApiProxyException
-   */
-  private void setPirateAnswer() throws ApiProxyException {
     // get riddle from GPT
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.getRiddleForPirate(GameState.trueBook),
@@ -350,6 +332,16 @@ public class Room2Controller {
           List<String> pirateDialogue = Helper.getTextBetweenChar(str, "^");
           if (pirateDialogue.size() > 0) {
             GameState.pirateRiddle = pirateDialogue.get(0).replaceAll("\"", "");
+          }
+        });
+
+    // get the pirate response about wrong answer from GPT
+    GameState.eleanorAi.runGpt(
+        GptPromptEngineeringRoom2.getPirateWrongResponse(),
+        (str2) -> {
+          List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^");
+          if (pirateDialogue.size() > 0) {
+            GameState.pirateWrongResponse = str2.replaceAll("^", "");
             Helper.enableAccessToItem(pirate, pirateLoaderImg);
           }
         });
@@ -364,13 +356,15 @@ public class Room2Controller {
           }
         });
 
-    // get the pirate response about wrong answer from GPT
+    // get the encrypted message from GPT
     GameState.eleanorAi.runGpt(
-        GptPromptEngineeringRoom2.getPirateWrongResponse(),
-        (str2) -> {
-          List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^");
-          if (pirateDialogue.size() > 0) {
-            GameState.pirateWrongResponse = str2.replaceAll("^", "");
+        GptPromptEngineeringRoom2.generateFinalEncrypted(),
+        s -> {
+          List<String> msg = Helper.getTextBetweenChar(s, "+");
+          if (msg.size() > 0) {
+            GameState.encryptedFinalMsg = msg.get(0);
+          } else {
+            GameState.encryptedFinalMsg = s;
           }
         });
   }
@@ -598,7 +592,7 @@ public class Room2Controller {
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room1", true);
     GameState.eleanorAi.runGpt(
-      "User update: User has moved from the pirate ship to "
+        "User update: User has moved from the pirate ship to "
             + "his childhood home. No reply is required");
   }
 
