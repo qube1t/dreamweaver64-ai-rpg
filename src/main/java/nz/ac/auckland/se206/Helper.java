@@ -42,11 +42,12 @@ public class Helper {
 
     // If the random number is the same as the box number, generate a new random
     // number
-    while (boxNumber == clickBox) {
+    while (boxNumber == clickBox || boxNumber == currentBoxNumber) {
       boxNumber = (int) (Math.random() * 5) + 1;
     }
     GameState.currentBox = boxNumber;
   }
+
 
   /**
    * Get a random number between two numbers.

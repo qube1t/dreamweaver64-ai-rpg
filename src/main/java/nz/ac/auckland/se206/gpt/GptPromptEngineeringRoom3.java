@@ -31,14 +31,17 @@ public class GptPromptEngineeringRoom3 {
         + " control tower which was his work in real life. The user needs to interact with"
         + " different objects including"
         + " solving a puzzle to get the aircraft code. The aircraft code combined with"
-        + " encrypted message in another room is required to decrypt the letter in this room"
-        + " to successfully escape.You need to achknowledge the current state of the game"
+        + " encrypted message in another room is required to decrypt the letter. You need to achknowledge "
+        + "the current state of the game"
         + " and I will give you user action updates.";
   }
 
   public static String decryptedLetter() {
-    return "User update: The user now has successfully decrypted the letter from mom and now the letter is"
-        + " decrypted. The user now can escape the room. Produce a short message and do not include any hint."
+    return "User update: The user now has successfully decrypted the letter from"
+        + "mom and now the letter is"
+        + " decrypted. The user needs to place the letter into inventory. "
+        + "Produce a short message to user and"
+        + "do not include any hint."
         + " You must surround the message to the user with *.";
   }
 
@@ -58,7 +61,7 @@ public class GptPromptEngineeringRoom3 {
   }
 
   public static String getIntroPuzzleMessage() {
-    return "Now the player enters the puzzle game after clicking the book which given a"
+    return "Now the player enters the puzzle game which gives a"
         + " unarranged destnation city name and the player need to drag and change the"
         + " position of the letter until the correct destnation city. Write a 10 words welcome"
         + " message and do not surround the message with *.";
@@ -66,12 +69,12 @@ public class GptPromptEngineeringRoom3 {
 
   public static String wrongPuzzleRoom3() {
     return "User update: Now the user rearranged the city name but it is not the correct city name,"
-        + " generate a 10 words message to tell the user that the city name is wrong and"
-        + " need to rearrange again do not surrounded with *.";
+        + " generate a short message to tell the user that the city name is wrong and"
+        + " need to rearrange again. The message must within 15 words. do not surrounded with *.";
   }
 
   public static String correctPuzzleRoom3() {
-    return "User update: Now the user rearranged the city name and it is the correct city name, say"
+    return "User update: Now the user has correctly rearranged the destnation city name say"
         + " correct and congrats the user about the achievement and do not surrounded with"
         + " *";
   }
