@@ -10,6 +10,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -35,7 +36,7 @@ public class Room3Controller {
    * Set the end image when the time is up.
    */
   public static void initializeMap() {
-    imgEndSt.setVisible(true);
+    imgEndSt.setImage(new Image("/images/rooms/room3/endRoom3.gif"));
   }
 
   // @FXML

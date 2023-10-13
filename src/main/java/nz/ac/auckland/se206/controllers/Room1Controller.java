@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -28,7 +29,7 @@ public class Room1Controller {
   }
 
   public static void initializeMap() {
-    imgEndSt.setVisible(true);
+    imgEndSt.setImage(new Image("/images/rooms/room1/endImage.gif"));
   }
 
   @FXML
