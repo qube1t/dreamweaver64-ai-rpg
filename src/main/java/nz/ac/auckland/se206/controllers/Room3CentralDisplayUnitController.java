@@ -121,8 +121,6 @@ public class Room3CentralDisplayUnitController {
   @FXML
   private ProgressIndicator progress;
 
-  private static boolean inIt = false;
-
   public void initialize() throws ApiProxyException {
 
     // Add an event filter to the TextField to consume key events
@@ -151,14 +149,14 @@ public class Room3CentralDisplayUnitController {
       centralDisplayUnit.setOpacity(0.7);
       displayOutput.setText("");
       // Update the introduction label with the correct answer message
-      displayInput.setText("CONGRATULATIONS! AIRCRAFT CODE OBTAINED.");
+      displayInput.setText("AIRCRAFT CODE HAS OBTAINED. CDU IS NOW LOCKED");
 
       for (Rectangle button : allButtons) {
         button.setDisable(true);
       }
       displayOutput.setDisable(true);
     } else {
-      enableFlightComputer(inIt);
+      enableFlightComputer(GameState.computerInIt);
     }
   }
 
@@ -348,11 +346,12 @@ public class Room3CentralDisplayUnitController {
     String message = "ENTER THE FIRST THREE LETTER OF DEP / DEST CITY THEN PRESS EXEC. E.g SYD/MEL";
     int typingDelay = 50;
     // Only display type effect when first time enters.
-    if (inIt) {
+    if (inIt == false) {
       typeTextEffect(displayInput, message, typingDelay);
-      inIt = true;
+      GameState.computerInIt = true;
     } else {
       displayInput.setText(message);
+      System.out.println("true");
     }
   }
 

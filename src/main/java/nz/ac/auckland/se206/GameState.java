@@ -121,6 +121,8 @@ public class GameState {
 
   public static String currentDraggedItemId = "";
 
+  public static boolean computerInIt = false;
+
   /**
    *
    * Indicates the introduction message when first enter the puzzle game in Room3.
@@ -189,5 +191,6 @@ public class GameState {
     currentDraggedItemId = "";
     puzzleIntroMessageRoom3 = "";
     hasDecrypted = false;
+    computerInIt = false;
   }
 }
