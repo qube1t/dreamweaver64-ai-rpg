@@ -59,6 +59,8 @@ public class Room3Controller {
   @FXML
   private Rectangle decrypt;
   @FXML
+  private Rectangle computer3;
+  @FXML
   private Rectangle bound1;
   @FXML
   private Rectangle bound2;
@@ -189,7 +191,7 @@ public class Room3Controller {
     Rectangle[] rectangles = {
         // computer,
         boundary1, boundary2, boundary3, boundary4, boundary5, gate,
-        bound1, bound2, bound3, computer2,
+        bound1, bound2, bound3, computer2, computer3,
         radar,
         chair1, chair2, decrypt
     };
@@ -392,18 +394,6 @@ public class Room3Controller {
 
     this.currentCityPoint = cityPoints[currentCity - 1];
     this.currentCityLabel = cityLabels[currentCity - 1];
-
-    // Set invisible at the start
-    label1.setVisible(false);
-    label2.setVisible(false);
-    label3.setVisible(false);
-    label4.setVisible(false);
-    label5.setVisible(false);
-    point1.setVisible(false);
-    point2.setVisible(false);
-    point3.setVisible(false);
-    point4.setVisible(false);
-    point5.setVisible(false);
 
     currentCityLabel.setVisible(true);
     // Initialize the radarAnimation timeline
