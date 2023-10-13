@@ -137,8 +137,8 @@ public class Room3Controller {
 
         break;
       case 2:
-        character.setLayoutX(90);
-        character.setLayoutY(154);
+        character.setLayoutX(29);
+        character.setLayoutY(198);
 
         break;
       default:
