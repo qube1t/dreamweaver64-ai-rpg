@@ -10,6 +10,7 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -35,7 +36,7 @@ public class Room3Controller {
    * Set the end image when the time is up.
    */
   public static void initializeMap() {
-    imgEndSt.setVisible(true);
+    imgEndSt.setImage(new Image("/images/rooms/room3/endRoom3.gif"));
   }
 
   // @FXML
@@ -146,6 +147,8 @@ public class Room3Controller {
   public void initialize() throws ApiProxyException {
 
     initilizeGpsMap();
+    
+    GameState.mainGame.clickGamePane();
 
     imgEndSt = imgEnd;
 
@@ -160,10 +163,17 @@ public class Room3Controller {
     if (!gptInit) {
       gptInitilize();
       gptInit = true;
+      GameState.isRoom3FirstEntered = true;
     } else {
       MainGameController.enableInteractPane();
-      Helper.enableAccessToItem(doorToRoom2, doorLoad2);
-      Helper.enableAccessToItem(doorToRoom1, doorLoad1);
+      if (GameState.isRoom2FirstEntered && GameState.isRoom2GptDone) {
+        Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+      } else {
+        Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+      }
+      if (GameState.isRoom1GptDone) {
+        Helper.enableAccessToItem(doorToRoom1, doorLoad1);
+      }
       Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
     }
 
@@ -342,6 +352,9 @@ public class Room3Controller {
         GptPromptEngineeringRoom3.room3WelcomeMessage(),
         (result) -> {
           System.out.println(result);
+          Helper.enableAccessToItem(doorToRoom1, doorLoad1);
+          Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+          GameState.isRoom3GptDone = true;
         });
 
     GameState.eleanorAi.runGpt(
@@ -367,8 +380,6 @@ public class Room3Controller {
           GameState.puzzleIntroMessageRoom3 = result;
           GameState.isPuzzleLoaded = true;
           Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
-          Helper.enableAccessToItem(doorToRoom1, doorLoad1);
-          Helper.enableAccessToItem(doorToRoom2, doorLoad2);
         });
   }
 

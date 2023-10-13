@@ -45,17 +45,6 @@ public class GptPromptEngineeringRoom2 {
   }
 
   /**
-   * Generate the prompt when the player get no key but try to open the treasure
-   * box.
-   * 
-   * @return the prompt
-   */
-  public static String getPirateNoKeyResponse() {
-    return "This is the loading stage. Reply in one sentence how a pirate would say no key."
-        + " Surround the sentence before and after with the character ^";
-  }
-
-  /**
    * Generate the unencrypted message that the player will get when they exit the
    * game.
    * 
