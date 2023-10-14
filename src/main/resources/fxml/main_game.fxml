@@ -47,10 +47,10 @@
                         <Insets />
                      </StackPane.margin>
                      <children>
-                        <ImageView fitHeight="144.0" fitWidth="129.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0">
+                        <ImageView fitHeight="107.0" fitWidth="162.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-1.0">
 
                            <image>
-                              <Image url="@../images/ai_img.png" />
+                              <Image url="@../images/robot_profile.png" />
                            </image>
                         </ImageView>
                         <ImageView fx:id="speechBubble" fitHeight="130.0" fitWidth="369.0" layoutX="26.0" pickOnBounds="true" visible="false" AnchorPane.bottomAnchor="107.0">
@@ -77,9 +77,9 @@
                         <Insets bottom="40.0" left="100.0" />
                      </StackPane.margin>
                   </AnchorPane>
-                  <AnchorPane maxHeight="-Infinity" maxWidth="221.0" prefHeight="33.0" prefWidth="221.0" StackPane.alignment="BOTTOM_LEFT">
+                  <AnchorPane maxHeight="-Infinity" maxWidth="239.0" prefHeight="39.0" prefWidth="239.0" StackPane.alignment="BOTTOM_LEFT">
                      <children>
-                        <Label fx:id="chatToggleBtn" onMouseClicked="#toggleChat" style="-fx-background-color: blue; -fx-label-padding: 5;" styleClass="centralDisplayUnitInput" text="Show Chat" textFill="#cdd3f8" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="133.0" AnchorPane.rightAnchor="0.0" />
+                        <Label fx:id="chatToggleBtn" alignment="CENTER" layoutX="148.0" onMouseClicked="#toggleChat" prefHeight="32.0" prefWidth="91.0" style="-fx-background-color: blue; -fx-label-padding: 5;" styleClass="centralDisplayUnitInput" text="Show Chat" textFill="#cdd3f8" textOverrun="CLIP" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="148.0" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>
                   <Label fx:id="statusLbl" prefHeight="28.0" prefWidth="123.0" styleClass="aiInputField" textFill="WHITE" StackPane.alignment="TOP_RIGHT">
