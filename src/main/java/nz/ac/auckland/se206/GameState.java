@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import javafx.scene.media.AudioClip;
@@ -47,7 +48,11 @@ public class GameState {
       (new Media(App.class.getResource("/sounds/Bogart VGM - 8Bit Action- Menu_Select.mp3").toString()))
           .getSource());
 
-  public static List<AudioClip> soundFx = new ArrayList<AudioClip>();
+  public static AudioClip doorSound = new AudioClip(
+      (new Media(App.class.getResource("/sounds/doorSound.mp3").toString()))
+          .getSource());
+
+  public static HashSet<AudioClip> soundFx = new HashSet<AudioClip>();
 
   // instruction loading stage
   /** Indicates the instruction message that used in the loading stage. */
