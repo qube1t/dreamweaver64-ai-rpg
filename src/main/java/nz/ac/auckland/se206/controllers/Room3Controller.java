@@ -31,14 +31,16 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3Controller {
 
-  private static ImageView imgEndSt;
+  private static ImageView imgEndStRoom3;
   private static boolean gptInit = false;
 
   /**
    * Set the end image when the time is up.
    */
   public static void initializeMap() {
-    imgEndSt.setImage(new Image("/images/rooms/room3/endRoom3.gif"));
+    if (imgEndStRoom3 != null) {
+      imgEndStRoom3.setImage(new Image("/images/rooms/room3/endRoom3.gif"));
+    }
   }
 
   public static void resetGptRoom3() {
@@ -108,7 +110,7 @@ public class Room3Controller {
     
     GameState.mainGame.clickGamePane();
 
-    imgEndSt = imgEnd;
+    imgEndStRoom3 = imgEnd;
 
     if (GameState.tenSecondsLeft) {
       initializeMap();

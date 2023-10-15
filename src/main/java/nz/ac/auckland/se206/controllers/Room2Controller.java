@@ -31,7 +31,9 @@ public class Room2Controller {
 
   /** Set the end image when the time is up. */
   public static void initializeMap() {
-    imgEndStRoom2.setImage(new Image("/images/rooms/room2/end.gif"));
+    if (imgEndStRoom2 != null) {
+      imgEndStRoom2.setImage(new Image("/images/rooms/room2/end.gif"));
+    }
   }
 
   /** Reset the GPT for room 2. */
@@ -234,7 +236,6 @@ public class Room2Controller {
             try {
               setPirateResponse();
             } catch (ApiProxyException e) {
-              // TODO Auto-generated catch block
               e.printStackTrace();
             }
           } else {
