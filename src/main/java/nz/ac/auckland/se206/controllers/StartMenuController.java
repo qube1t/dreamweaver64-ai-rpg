@@ -73,7 +73,7 @@ public class StartMenuController {
             startGameSetting();
           });
         }
-      }, 50);
+      }, 80);
 
     } else if (direction.equals("RIGHT")) {
       selectSound.play();
@@ -88,7 +88,7 @@ public class StartMenuController {
               characterArray[GameState.characterIndex - 1].setOpacity(1);
             });
           }
-        }, 50);
+        }, 80);
       } else {
         GameState.characterIndex = 1;
         Timer timer = new Timer();
@@ -100,7 +100,7 @@ public class StartMenuController {
               characterArray[0].setOpacity(1);
             });
           }
-        }, 50);
+        }, 80);
       }
     } else if (direction.equals("LEFT")) {
       selectSound.play();
@@ -116,7 +116,7 @@ public class StartMenuController {
               characterArray[GameState.characterIndex].setOpacity(0);
             });
           }
-        }, 50);
+        }, 80);
 
       } else {
         GameState.characterIndex = 4;
@@ -129,7 +129,7 @@ public class StartMenuController {
               characterArray[3].setOpacity(1);
             });
           }
-        }, 50);
+        }, 80);
       }
     }
 
@@ -238,6 +238,31 @@ public class StartMenuController {
     }
     // Image volIcon = new Image("images/volume.png");
     // muteIcon.setImage(volIcon);
+  }
+
+  @FXML
+  private void onClickCharacter(MouseEvent event) {
+
+    if (event.getSource() instanceof Rectangle) {
+      Rectangle character = (Rectangle) event.getSource();
+      int id = Integer.parseInt(character.getId().toString().substring(2));
+      if (GameState.characterIndex != id) {
+        selectSound.play();
+
+        // Delay the change of opacity to make it look smoother
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            Platform.runLater(() -> {
+              character.setOpacity(1);
+              characterArray[GameState.characterIndex - 1].setOpacity(0);
+              GameState.characterIndex = id;
+            });
+          }
+        }, 80);
+      }
+    }
   }
 
 }
