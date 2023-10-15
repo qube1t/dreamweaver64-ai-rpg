@@ -61,6 +61,10 @@ public class MachineController {
         decrypt.setOpacity(0.3);
         decrypt.setDisable(true);
 
+        if (GameState.hasDecrypted) {
+            letter.setImage(null);
+        }
+
         if (position1Taken == 1) {
             setItem(1);
         }
