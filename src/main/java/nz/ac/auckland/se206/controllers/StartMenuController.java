@@ -1,6 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -10,6 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -51,33 +56,57 @@ public class StartMenuController {
   private static Rectangle[] characterArray;
   private static ComboBox<String> difficultyStatic;
   private static ComboBox<String> timeLimitStatic;
+  private static AudioClip selectSound;
+  private static AudioClip startSound;
 
   public static void selectCharacter(KeyEvent event) {
 
     String direction = event.getCode().toString();
 
-    switch (direction) {
-      case "LEFT":
-        if (GameState.characterIndex != 1) {
-          GameState.characterIndex--;
-          characterArray[GameState.characterIndex - 1].setOpacity(1);
-          characterArray[GameState.characterIndex].setOpacity(0);
-
+    if (direction.equals("ENTER")) {
+      startSound.play();
+      Timer timer = new Timer();
+      timer.schedule(new TimerTask() {
+        @Override
+        public void run() {
+          Platform.runLater(() -> {
+            startGameSetting();
+          });
         }
-        break;
-      case "RIGHT":
-        if (GameState.characterIndex != 4) {
-          GameState.characterIndex++;
-          characterArray[GameState.characterIndex - 2].setOpacity(0);
-          characterArray[GameState.characterIndex - 1].setOpacity(1);
-        }
+      }, 160);
 
-        break;
+    } else if (direction.equals("RIGHT")) {
+      if (GameState.characterIndex != 4) {
+        selectSound.play();
+        GameState.characterIndex++;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            Platform.runLater(() -> {
+              characterArray[GameState.characterIndex - 2].setOpacity(0);
+              characterArray[GameState.characterIndex - 1].setOpacity(1);
+            });
+          }
+        }, 120);
+      }
+    } else if (direction.equals("LEFT")) {
+      if (GameState.characterIndex != 1) {
+        selectSound.play();
+        GameState.characterIndex--;
 
-      case "ENTER":
-        startGameSetting();
-        break;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            Platform.runLater(() -> {
+              characterArray[GameState.characterIndex - 1].setOpacity(1);
+              characterArray[GameState.characterIndex].setOpacity(0);
+            });
+          }
+        }, 150);
 
+      }
     }
 
   }
@@ -128,6 +157,10 @@ public class StartMenuController {
 
   /** Initialize the start menu. */
   public void initialize() throws ApiProxyException {
+    selectSound = new AudioClip(new Media(App.class.getResource("/sounds/selectSound.mp3").toString())
+        .getSource());
+    startSound = new AudioClip(new Media(App.class.getResource("/sounds/enter.mp3").toString())
+        .getSource());
 
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
