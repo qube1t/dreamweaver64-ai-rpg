@@ -2,13 +2,12 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
-import javafx.scene.ImageCursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -49,30 +48,44 @@ public class StartMenuController {
   @FXML
   private Rectangle mc4;
 
-  private Rectangle[] characters;
+  private static Rectangle[] characterArray;
+  private static ComboBox<String> difficultyStatic;
+  private static ComboBox<String> timeLimitStatic;
 
-  /** Initialize the start menu. */
-  public void initialize() throws ApiProxyException {
+  public static void selectCharacter(KeyEvent event) {
 
-    difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
-    timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
-    instruction.setText(GameState.instructionMsg);
+    String direction = event.getCode().toString();
 
-    characters = new Rectangle[] { mc1, mc2, mc3, mc4 };
+    switch (direction) {
+      case "LEFT":
+        if (GameState.characterIndex != 1) {
+          GameState.characterIndex--;
+          characterArray[GameState.characterIndex - 1].setOpacity(1);
+          characterArray[GameState.characterIndex].setOpacity(0);
+
+        }
+        break;
+      case "RIGHT":
+        if (GameState.characterIndex != 4) {
+          GameState.characterIndex++;
+          characterArray[GameState.characterIndex - 2].setOpacity(0);
+          characterArray[GameState.characterIndex - 1].setOpacity(1);
+        }
+
+        break;
+
+      case "ENTER":
+        startGameSetting();
+        break;
+
+    }
 
   }
 
-  /**
-   * When the player clicks on the start button, the game will be started.
-   * 
-   * @param event
-   * @throws IOException
-   */
-  @FXML
-  public void onClickStartButton(MouseEvent event) throws IOException {
+  public static void startGameSetting() {
     // Get the difficulty and time limit the user selected
-    String difficulty = this.difficulty.getValue();
-    String timeLimit = this.timeLimit.getValue();
+    String difficulty = difficultyStatic.getValue();
+    String timeLimit = timeLimitStatic.getValue();
 
     // If the difficulty or time limit is default, set it to easy and 2 minutes
     // respectively
@@ -113,6 +126,30 @@ public class StartMenuController {
     }
   }
 
+  /** Initialize the start menu. */
+  public void initialize() throws ApiProxyException {
+
+    difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
+    timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
+    instruction.setText(GameState.instructionMsg);
+
+    characterArray = new Rectangle[] { mc1, mc2, mc3, mc4 };
+    difficultyStatic = difficulty;
+    timeLimitStatic = timeLimit;
+
+  }
+
+  /**
+   * When the player clicks on the start button, the game will be started.
+   * 
+   * @param event
+   * @throws IOException
+   */
+  @FXML
+  public void onClickStartButton(MouseEvent event) throws IOException {
+    startGameSetting();
+  }
+
   @FXML
   private void toggleInfo() {
     infoPane.setVisible(!infoPane.isVisible());
@@ -131,43 +168,4 @@ public class StartMenuController {
     // muteIcon.setImage(volIcon);
   }
 
-  /**
-   * When the player clicks on the character, the character will be chosen.
-   * 
-   * @param event
-   * @throws IOException
-   */
-  @FXML
-  private void toggleCharacterSelection(MouseEvent event) throws IOException {
-    Rectangle selectedCharacter = mc1;
-    if (event.getSource() == mc1) {
-      selectedCharacter = mc1;
-      GameState.characterIndex = 1;
-      System.out.println("Character 1 selected");
-    } else if (event.getSource() == mc2) {
-      selectedCharacter = mc2;
-      GameState.characterIndex = 2;
-      System.out.println("Character 2 selected");
-    } else if (event.getSource() == mc3) {
-      selectedCharacter = mc3;
-      GameState.characterIndex = 3;
-      System.out.println("Character 3 selected");
-    } else if (event.getSource() == mc4) {
-      selectedCharacter = mc4;
-      GameState.characterIndex = 4;
-      System.out.println("Character 4 selected");
-    } else {
-      selectedCharacter = mc1;
-      GameState.characterIndex = 1;
-      System.out.println("Character 1 selected");
-    }
-
-    for (Rectangle character : characters) {
-      if (character == selectedCharacter) {
-        character.setOpacity(1);
-      } else {
-        character.setOpacity(0);
-      }
-    }
-  }
 }

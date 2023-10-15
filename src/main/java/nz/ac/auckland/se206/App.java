@@ -5,8 +5,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.controllers.StartMenuController;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this
@@ -24,6 +27,16 @@ public class App extends Application {
   public static void setRoot(String fxml) throws IOException {
     Pane root = (Pane) loadFxml(fxml);
     scene.setRoot(root);
+    if (fxml.equals("start_menu")) {
+      scene.addEventFilter(KeyEvent.KEY_PRESSED,
+          event -> {
+            if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.LEFT
+                || event.getCode() == KeyCode.ENTER) {
+              StartMenuController.selectCharacter(event);
+            }
+
+          });
+    }
     root.requestFocus();
   }
 
