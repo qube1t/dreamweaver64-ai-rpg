@@ -10,7 +10,7 @@
 
 <?import nz.ac.auckland.se206.components.Character?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
    <children>
       <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -182,7 +182,7 @@
             <Rectangle fx:id="box1" arcHeight="5.0" arcWidth="5.0" fill="#ffffff65" height="33.0" layoutX="149.0" layoutY="180.0" onMouseClicked="#onClickBox1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
             <Rectangle fx:id="box2" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="118.0" layoutY="352.0" onMouseClicked="#onClickBox2" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
             <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="202.0" layoutY="257.0" onMouseClicked="#onClickBox3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
-            <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="350.0" layoutY="384.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
+            <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="35.0" layoutX="350.0" layoutY="382.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="56.0" />
             <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="456.0" layoutY="300.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
 
             <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff67" height="60.0" layoutX="427.0" layoutY="167.0" onMouseClicked="#getTradeWithPirate" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="44.0" />

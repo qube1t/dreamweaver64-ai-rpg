@@ -166,6 +166,7 @@ public class Room2Controller {
   private Boolean hasKeyRemoved = false;
   private Boolean wrongMsgPrinted = false;
   private AudioClip seaAmbiance;
+  private ArrayList<Rectangle> boxs;
 
   /**
    * Initializes the room 2, it is called when the room loads.
@@ -173,6 +174,10 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   public void initialize() throws ApiProxyException {
+
+    if (boxs == null) {
+      boxs = new ArrayList<Rectangle>(Arrays.asList(box1, box2, box3, box4, box5));
+    }
     // set the obstacles in the room2
     this.obsts = new ArrayList<Rectangle>(
         Arrays.asList(
@@ -198,7 +203,8 @@ public class Room2Controller {
       double y = event.getY();
       System.out.println("Dragged over to pirate");
       if (event.getDragboard().hasImage() &&
-          pirate.getBoundsInParent().contains(x, y)) {
+          (pirate.getBoundsInParent().contains(x, y) ||
+              boxs.stream().anyMatch(box -> box.getBoundsInParent().contains(x, y)))) {
         event.acceptTransferModes(TransferMode.ANY);
       }
       event.consume();
@@ -208,6 +214,7 @@ public class Room2Controller {
       double x = event.getX();
       double y = event.getY();
       System.out.println("drop to pirate");
+      System.out.println("DRAGGING" + MainGameController.getImageSet().getId());
       if (event.getDragboard().hasImage()) {
         if (pirate.getBoundsInParent().contains(x, y) &&
             MainGameController.getImageSet().getId().equals("book")) {
@@ -224,50 +231,15 @@ public class Room2Controller {
               e.printStackTrace();
             }
           }
-        } else if (box1.getBoundsInParent().contains(x, y) &&
-            MainGameController.getImageSet().getId().equals("key")) {
-          try {
-            getRandomBox(1);
-          } catch (IOException e) {
-            e.printStackTrace();
-          } catch (ApiProxyException e) {
-            e.printStackTrace();
-          }
-        } else if (box2.getBoundsInParent().contains(x, y) &&
-            MainGameController.getImageSet().getId().equals("key")) {
-          try {
-            getRandomBox(2);
-          } catch (IOException e) {
-            e.printStackTrace();
-          } catch (ApiProxyException e) {
-            e.printStackTrace();
-          }
-        } else if (box3.getBoundsInParent().contains(x, y) &&
-            MainGameController.getImageSet().getId().equals("key")) {
-          try {
-            getRandomBox(3);
-          } catch (IOException e) {
-            e.printStackTrace();
-          } catch (ApiProxyException e) {
-            e.printStackTrace();
-          }
-        } else if (box4.getBoundsInParent().contains(x, y) &&
-            MainGameController.getImageSet().getId().equals("key")) {
-          try {
-            getRandomBox(4);
-          } catch (IOException e) {
-            e.printStackTrace();
-          } catch (ApiProxyException e) {
-            e.printStackTrace();
-          }
-        } else if (box5.getBoundsInParent().contains(x, y) &&
-            MainGameController.getImageSet().getId().equals("key")) {
-          try {
-            getRandomBox(5);
-          } catch (IOException e) {
-            e.printStackTrace();
-          } catch (ApiProxyException e) {
-            e.printStackTrace();
+        } else {
+          for (int i = 0; i < boxs.size(); i++) {
+            if (boxs.get(i).getBoundsInParent().contains(x, y)) {
+              try {
+                getRandomBox(i + 1);
+              } catch (IOException | ApiProxyException e) {
+                e.printStackTrace();
+              }
+            }
           }
         }
       }
