@@ -23,11 +23,7 @@
             <Point3D />
          </rotationAxis>
       </ImageView>
-      <ImageView fx:id="imgEnd" fitHeight="600.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/rooms/room1/endImage.gif" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="imgEnd" fitHeight="600.0" pickOnBounds="true" preserveRatio="true" />
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="674.0">
          <children>
 

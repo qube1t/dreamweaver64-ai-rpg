@@ -477,6 +477,16 @@ public class MainGameController {
     aiCharacterPane.setMouseTransparent(true);
   }
 
+  public void clickGamePane() {
+    // hide chat bubble
+    speechBubble.setVisible(false);
+    bubbleTextPane.setVisible(false);
+
+    bubbleTextPane.setMouseTransparent(true);
+    aiCharacterPane.setMouseTransparent(true);
+  }
+
+
   public void getTimeLimit() {
     // getting time limit from game mode
     System.out.println("start game");

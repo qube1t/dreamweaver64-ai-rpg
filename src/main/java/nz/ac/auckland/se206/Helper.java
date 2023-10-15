@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
@@ -88,5 +89,16 @@ public class Helper {
   public static void enableAccessToItem(Rectangle btn, ImageView img) {
     btn.setDisable(false);
     img.setImage(null);
+  }
+
+  /**
+   * Disable access to an item.
+   * 
+   * @param btn
+   * @param img
+   */
+  public static void disableAccessToItem(Rectangle btn, ImageView img) {
+    btn.setDisable(true);
+    img.setImage(new Image("/images/loading.gif"));
   }
 }

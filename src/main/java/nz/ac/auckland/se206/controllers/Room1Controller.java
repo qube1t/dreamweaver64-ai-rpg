@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -28,7 +29,7 @@ public class Room1Controller {
   }
 
   public static void initializeMap() {
-    imgEndSt.setVisible(true);
+    imgEndSt.setImage(new Image("/images/rooms/room1/endImage.gif"));
   }
 
   @FXML
@@ -101,6 +102,8 @@ public class Room1Controller {
             rect1, rect2, rect3, rect4, rect5, rect6, rect7, rect8, rect9, rect10, rect11,
             rect12, rect13, rect14, rect15, rect16, rect17, rect18, rect19));
 
+    GameState.mainGame.clickGamePane();
+
     if (!GameState.booksLoaded) {
       // while loading
       shelfBtn.setDisable(true);
@@ -124,8 +127,16 @@ public class Room1Controller {
     } else {
       // enable interact pane
       MainGameController.enableInteractPane();
-      Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-      Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+      if (GameState.isRoom3GptDone && GameState.isRoom3FirstEntered) {
+        Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+      } else {
+        Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+      }
+      if (GameState.isRoom2GptDone && GameState.isRoom2FirstEntered) {
+        Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+      } else {
+        Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+      }
     }
 
     // set character position
@@ -177,7 +188,7 @@ public class Room1Controller {
           Helper.enableAccessToItem(shelfBtn, shelfLoaderImg);
           GameState.booksLoaded = true;
           // get riddle from gpt
-
+          GameState.isRoom1GptDone = true;
           Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
           Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });

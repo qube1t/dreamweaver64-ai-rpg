@@ -31,12 +31,12 @@
       </ImageView>
       <ImageView fitHeight="17.0" fitWidth="323.0" layoutX="137.0" layoutY="45.0">
          <image>
-            <Image url="@../images/rooms/room3/Screenshot%202023-10-13%20at%202.54.51%E2%80%AFPM.png" />
+            <Image url="@../images/rooms/room3/topBarForWindow.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="17.0" fitWidth="26.0" layoutX="433.0" layoutY="45.0" onMouseClicked="#onClickClose">
          <image>
-            <Image url="@../images/rooms/room3/Screenshot%202023-10-13%20at%202.58.18%E2%80%AFPM.png" />
+            <Image url="@../images/rooms/room3/closeIcon.png" />
          </image>
       </ImageView>
       <ImageView fx:id="screen" fitHeight="291.0" fitWidth="323.0" layoutX="137.0" layoutY="62.0">
