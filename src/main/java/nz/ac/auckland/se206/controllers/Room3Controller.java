@@ -68,9 +68,9 @@ public class Room3Controller {
   @FXML
   private Rectangle clickableRadar;
   @FXML
-  private Rectangle doorToRoom1;
+  private Rectangle leftDoorBtn;
   @FXML
-  private Rectangle doorToRoom2;
+  private Rectangle rightDoorBtn;
   @FXML
   private Text label1;
   @FXML
@@ -125,12 +125,12 @@ public class Room3Controller {
     } else {
       MainGameController.enableInteractPane();
       if (GameState.isRoom2FirstEntered && GameState.isRoom2GptDone) {
-        Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+        Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
       } else {
-        Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+        Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
       }
       if (GameState.isRoom1GptDone) {
-        Helper.enableAccessToItem(doorToRoom1, doorLoad1);
+        Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
       }
       Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
     }
@@ -303,8 +303,8 @@ public class Room3Controller {
         GptPromptEngineeringRoom3.room3WelcomeMessage(),
         (result) -> {
           System.out.println(result);
-          Helper.enableAccessToItem(doorToRoom1, doorLoad1);
-          Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+          Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
+          Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
           GameState.isRoom3GptDone = true;
         });
 
