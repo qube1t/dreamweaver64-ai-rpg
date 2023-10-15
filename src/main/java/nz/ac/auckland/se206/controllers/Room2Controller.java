@@ -178,6 +178,8 @@ public class Room2Controller {
     if (boxs == null) {
       boxs = new ArrayList<Rectangle>(Arrays.asList(box1, box2, box3, box4, box5));
     }
+    imgEndStRoom2 = imgEnd;
+
     // set the obstacles in the room2
     this.obsts = new ArrayList<Rectangle>(
         Arrays.asList(

@@ -156,7 +156,7 @@ public class Room3Controller {
           (new Media(App.class.getResource("/sounds/atcAmbiance.mp3").toString()))
               .getSource());
       atcSound.setCycleCount(AudioClip.INDEFINITE);
-      atcSound.setVolume(.45);
+      atcSound.setVolume(.75);
       atcSound.play();
       GameState.soundFx.add(atcSound);
     }

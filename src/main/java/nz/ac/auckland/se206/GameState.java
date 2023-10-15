@@ -165,6 +165,7 @@ public class GameState {
     timeLimitReached = false;
     prevRoom = 1;
     winTheGame = false;
+    characterIndex = 1;
   }
 
   // Reset variables related to Room 1
