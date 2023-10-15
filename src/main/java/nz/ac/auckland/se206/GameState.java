@@ -19,6 +19,8 @@ public class GameState {
   /** Indicates 10 seconds left */
   public static boolean tenSecondsLeft = false;
 
+  public static boolean isEventFilter = false;
+
   // start menu
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
@@ -172,6 +174,7 @@ public class GameState {
 
   // Reset game-related variables
   private static void resetGameVariables() {
+    isEventFilter = false;
     isRiddleResolved = false;
     tenSecondsLeft = false;
     gameMode = null;
@@ -181,16 +184,19 @@ public class GameState {
     timeLimitReached = false;
     prevRoom = 1;
     winTheGame = false;
+    characterIndex = 1;
   }
 
   // Reset variables related to Room 1
   private static void resetRoom1Variables() {
-    Arrays.fill(booksInRoom1, null);
+    booksInRoom1 = new String[7];
     isBookFound = false;
     trueBook = null;
     takenBook = null;
     finalMsg = null;
+    booksLoaded = false;
     isRoom1GptDone = false;
+
   }
 
   // Reset variables related to Room 2

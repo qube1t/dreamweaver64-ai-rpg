@@ -2,11 +2,16 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.controllers.StartMenuController;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this
@@ -16,6 +21,7 @@ import javafx.stage.Stage;
 public class App extends Application {
 
   private static Scene scene;
+  public static EventHandler<KeyEvent> startMenu;
 
   public static void main(final String[] args) {
     launch();
@@ -24,6 +30,26 @@ public class App extends Application {
   public static void setRoot(String fxml) throws IOException {
     Pane root = (Pane) loadFxml(fxml);
     scene.setRoot(root);
+    if (fxml.equals("start_menu")) {
+      startMenu = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent event) {
+          if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.LEFT
+              || event.getCode() == KeyCode.ENTER) {
+            StartMenuController.selectCharacter(event);
+          }
+        }
+      };
+      scene.addEventFilter(KeyEvent.KEY_PRESSED, startMenu);
+      GameState.isEventFilter = true;
+    } else if (fxml.equals("main_game")) {
+      // Disable the key event filter
+      if (GameState.isEventFilter) {
+        scene.removeEventFilter(KeyEvent.KEY_PRESSED, startMenu);
+        GameState.isEventFilter = false;
+      }
+
+    }
     root.requestFocus();
   }
 

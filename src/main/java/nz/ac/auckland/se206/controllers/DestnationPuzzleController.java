@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.components.DraggableLetter;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
@@ -43,8 +42,8 @@ public class DestnationPuzzleController {
 
   public void initialize() throws ApiProxyException {
     // Set the cursor to custom cursor
-    Image cursor = new Image("/images/cursor.png", 14,
-        25, true, true);
+    Image cursor = new Image("/images/cursor.png", 9,
+        20, true, true);
     this.custom = new ImageCursor(cursor);
 
     puzzlePane.setCursor(custom);

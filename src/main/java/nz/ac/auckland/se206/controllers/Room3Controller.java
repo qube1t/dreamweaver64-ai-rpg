@@ -10,9 +10,9 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
@@ -27,6 +27,8 @@ import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+
+
 public class Room3Controller {
 
   private static ImageView imgEndSt;
@@ -39,38 +41,24 @@ public class Room3Controller {
     imgEndSt.setImage(new Image("/images/rooms/room3/endRoom3.gif"));
   }
 
-  // @FXML
-  // private Rectangle computer;
+  public static void resetGptRoom3() {
+    gptInit = false;
+  }
+
   @FXML
-  private Rectangle computer2;
+  private Pane obstalePane;
   @FXML
-  private Rectangle chair1;
+  private Pane interactablePane;
   @FXML
-  private Rectangle chair2;
+  private ImageView imgEnd;
   @FXML
-  private Rectangle gate;
+  private ImageView puzzleLoad;
   @FXML
-  private Rectangle radar;
+  private ImageView doorLoad2;
   @FXML
-  private Rectangle boundary1;
+  private ImageView doorLoad1;
   @FXML
-  private Rectangle boundary2;
-  @FXML
-  private Rectangle boundary3;
-  @FXML
-  private Rectangle boundary4;
-  @FXML
-  private Rectangle boundary5;
-  @FXML
-  private Rectangle decrypt;
-  @FXML
-  private Rectangle computer3;
-  @FXML
-  private Rectangle bound1;
-  @FXML
-  private Rectangle bound2;
-  @FXML
-  private Rectangle bound3;
+  private Character character;
   @FXML
   private Rectangle machine;
   @FXML
@@ -83,28 +71,6 @@ public class Room3Controller {
   private Rectangle doorToRoom1;
   @FXML
   private Rectangle doorToRoom2;
-  @FXML
-  private Rectangle worldMap;
-  @FXML
-  private Circle box1;
-  @FXML
-  private Circle box2;
-  @FXML
-  private Circle box3;
-  @FXML
-  private Circle box4;
-  @FXML
-  private Circle box5;
-  @FXML
-  private Character character;
-  @FXML
-  private AnchorPane radarPane;
-  @FXML
-  private ImageView map;
-  @FXML
-  private ImageView paperImage;
-  @FXML
-  private Pane interactablePane;
   @FXML
   private Text label1;
   @FXML
@@ -125,14 +91,6 @@ public class Room3Controller {
   private Circle point4;
   @FXML
   private Circle point5;
-  @FXML
-  private ImageView imgEnd;
-  @FXML
-  private ImageView puzzleLoad;
-  @FXML
-  private ImageView doorLoad2;
-  @FXML
-  private ImageView doorLoad1;
 
   private Circle[] cityPoints;
   private Text[] cityLabels;
@@ -177,19 +135,12 @@ public class Room3Controller {
       Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
     }
 
-    // Initialize the obsts list
     this.obstacles = new ArrayList<Rectangle>();
-    Rectangle[] rectangles = {
-        // computer,
-        boundary1, boundary2, boundary3, boundary4, boundary5, gate,
-        bound1, bound2, bound3, computer2, computer3,
-        radar,
-        chair1, chair2, decrypt
-    };
 
-    // Add all the obstacles to the list.
-    for (Rectangle rectangle : rectangles) {
-      this.obstacles.add(rectangle);
+    for (Node node : obstalePane.getChildren()) {
+      if (node instanceof Rectangle) {
+        obstacles.add((Rectangle) node);
+      }
     }
 
     // Enable the character movement.
@@ -202,8 +153,8 @@ public class Room3Controller {
 
         break;
       case 2:
-        character.setLayoutX(90);
-        character.setLayoutY(154);
+        character.setLayoutX(29);
+        character.setLayoutY(198);
 
         break;
       default:
@@ -217,7 +168,7 @@ public class Room3Controller {
           (new Media(App.class.getResource("/sounds/atcAmbiance.mp3").toString()))
               .getSource());
       atcSound.setCycleCount(AudioClip.INDEFINITE);
-      atcSound.setVolume(.45);
+      atcSound.setVolume(.75);
       atcSound.play();
       GameState.soundFx.add(atcSound);
     }

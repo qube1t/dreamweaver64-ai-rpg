@@ -124,17 +124,6 @@ public class MainGameController {
 
   }
 
-  private static void setMainCursor() {
-    // Set the cursor to custom cursor
-    Image cursor = new Image("/images/mainCursor.png", 16,
-        27, true, true);
-    Cursor custom = new ImageCursor(cursor);
-
-    initialisedInventoryPane.setCursor(custom);
-    initialisedInteractPane.setCursor(custom);
-    outPane.setCursor(custom);
-  }
-
   public static CustomImageSet getImageSet() {
     return imageSetDragging;
   }
@@ -220,7 +209,6 @@ public class MainGameController {
         .getChildren()
         .add(initialisedGamePane.getChildren().size() - 4, backgroundBlur);
     initialisedGamePane.getChildren().add(initialisedGamePane.getChildren().size() - 4, room1);
-    setMainCursor();
   }
 
   public static void removeOverlay(boolean alsoRooms) {
@@ -241,7 +229,6 @@ public class MainGameController {
           .remove(initialisedGamePane.getChildren().size() - 1 - 4);
       initialisedGamePane.requestFocus();
     }
-    setMainCursor();
   }
 
   @FXML
@@ -330,7 +317,6 @@ public class MainGameController {
     bubbleChatText.wrappingWidthProperty().bind(bubbleTextPane.minWidthProperty());
     bubbleTextPane.setFitToWidth(true);
     bubbleTextPane.setContent(bubbleChatText);
-    setMainCursor();
 
     if (!GameState.isMuted) {
       GameState.backgroundMusic.setCycleCount(3);
@@ -420,7 +406,6 @@ public class MainGameController {
       outerPane.requestFocus();
       chatPane.setMouseTransparent(true);
     }
-    setMainCursor();
   }
 
   @FXML
