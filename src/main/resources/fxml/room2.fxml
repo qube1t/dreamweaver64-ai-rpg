@@ -10,7 +10,7 @@
 
 <?import nz.ac.auckland.se206.components.Character?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
    <children>
       <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -116,7 +116,7 @@
                   </ImageView>
                </children>
             </StackPane>
-            <StackPane layoutX="128.0" layoutY="349.0" visible="false">
+            <StackPane layoutX="115.0" layoutY="349.0" prefHeight="39.0" prefWidth="63.0" visible="false">
                <children>
                   <ImageView fx:id="box2BlockImg" fitHeight="40.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -125,7 +125,7 @@
                   </ImageView>
                </children>
             </StackPane>
-            <StackPane layoutX="211.0" layoutY="255.0" visible="false">
+            <StackPane layoutX="199.0" layoutY="255.0" prefHeight="36.0" prefWidth="60.0" visible="false">
                <children>
                   <ImageView fx:id="box3BlockImg" fitHeight="40.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -134,7 +134,7 @@
                   </ImageView>
                </children>
             </StackPane>
-            <StackPane layoutX="360.0" layoutY="382.0" visible="false">
+            <StackPane layoutX="349.0" layoutY="382.0" prefHeight="36.0" prefWidth="60.0" visible="false">
                <children>
                   <ImageView fx:id="box4BlockImg" fitHeight="40.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -170,22 +170,22 @@
                   </ImageView>
                </children>
             </StackPane>
-            <StackPane layoutX="543.0" layoutY="223.0" prefHeight="90.0" visible="false">
+            <StackPane layoutX="548.0" layoutY="223.0" prefHeight="90.0" prefWidth="16.0" visible="false">
                <children>
-                  <ImageView fx:id="rightDoorLoaderImg" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="rightDoorLoaderImg" fitHeight="23.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/loading.gif" />
                      </image>
                   </ImageView>
                </children>
             </StackPane>
-            <Rectangle fx:id="box1" disable="true" arcHeight="5.0" arcWidth="5.0" fill="#ffffff65" height="33.0" layoutX="149.0" layoutY="180.0" onMouseClicked="#onClickBox1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
-            <Rectangle fx:id="box2" disable="true" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="118.0" layoutY="352.0" onMouseClicked="#onClickBox2" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
-            <Rectangle fx:id="box3" disable="true" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="202.0" layoutY="257.0" onMouseClicked="#onClickBox3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
-            <Rectangle fx:id="box4" disable="true" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="350.0" layoutY="384.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
-            <Rectangle fx:id="box5" disable="true" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="33.0" layoutX="456.0" layoutY="300.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="55.0" />
+            <Rectangle fx:id="box1" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff65" height="43.0" layoutX="146.0" layoutY="177.0" onMouseClicked="#onClickBox1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="63.0" />
+            <Rectangle fx:id="box2" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff66" height="41.0" layoutX="116.0" layoutY="348.0" onMouseClicked="#onClickBox2" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="62.0" />
+            <Rectangle fx:id="box3" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff66" height="41.0" layoutX="198.0" layoutY="252.0" onMouseClicked="#onClickBox3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="64.0" />
+            <Rectangle fx:id="box4" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff66" height="44.0" layoutX="346.0" layoutY="378.0" onMouseClicked="#onClickBox4" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="64.0" />
+            <Rectangle fx:id="box5" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff66" height="40.0" layoutX="454.0" layoutY="296.0" onMouseClicked="#onClickBox5" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="62.0" />
 
-            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff67" height="60.0" layoutX="427.0" layoutY="167.0" onMouseClicked="#getTradeWithPirate" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="44.0" />
+            <Rectangle fx:id="pirate" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff00" height="60.0" layoutX="427.0" layoutY="167.0" onMouseClicked="#getTradeWithPirate" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="44.0" />
             <Rectangle fx:id="leftDoorBtn" arcHeight="5.0" arcWidth="5.0" fill="#ffffff66" height="90.0" layoutX="66.0" layoutY="223.0" onMouseClicked="#onOpenRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
             <Rectangle fx:id="rightDoorBtn" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff66" height="97.0" layoutX="546.0" layoutY="219.0" onMouseClicked="#onOpenRoom3" stroke="WHITE" strokeType="INSIDE" strokeWidth="2.0" visible="false" width="19.0" />
          </children>
