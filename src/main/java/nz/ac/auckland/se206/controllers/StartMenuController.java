@@ -73,11 +73,11 @@ public class StartMenuController {
             startGameSetting();
           });
         }
-      }, 160);
+      }, 50);
 
     } else if (direction.equals("RIGHT")) {
+      selectSound.play();
       if (GameState.characterIndex != 4) {
-        selectSound.play();
         GameState.characterIndex++;
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -88,11 +88,23 @@ public class StartMenuController {
               characterArray[GameState.characterIndex - 1].setOpacity(1);
             });
           }
-        }, 120);
+        }, 50);
+      } else {
+        GameState.characterIndex = 1;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            Platform.runLater(() -> {
+              characterArray[3].setOpacity(0);
+              characterArray[0].setOpacity(1);
+            });
+          }
+        }, 50);
       }
     } else if (direction.equals("LEFT")) {
+      selectSound.play();
       if (GameState.characterIndex != 1) {
-        selectSound.play();
         GameState.characterIndex--;
 
         Timer timer = new Timer();
@@ -104,8 +116,20 @@ public class StartMenuController {
               characterArray[GameState.characterIndex].setOpacity(0);
             });
           }
-        }, 150);
+        }, 50);
 
+      } else {
+        GameState.characterIndex = 4;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            Platform.runLater(() -> {
+              characterArray[0].setOpacity(0);
+              characterArray[3].setOpacity(1);
+            });
+          }
+        }, 50);
       }
     }
 
@@ -159,8 +183,14 @@ public class StartMenuController {
   public void initialize() throws ApiProxyException {
     selectSound = new AudioClip(new Media(App.class.getResource("/sounds/selectSound.mp3").toString())
         .getSource());
+    selectSound.setVolume(0.3);
     startSound = new AudioClip(new Media(App.class.getResource("/sounds/enter.mp3").toString())
         .getSource());
+    startSound.setVolume(0.75);
+
+    // Add audioclip to GameState
+    GameState.soundFx.add(selectSound);
+    GameState.soundFx.add(startSound);
 
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
