@@ -18,6 +18,8 @@ public class GameState {
   /** Indicates 10 seconds left */
   public static boolean tenSecondsLeft = false;
 
+  public static boolean isEventFilter = false;
+
   // start menu
   /** Indicates the difficulty level and time limit the user selected. */
   public static String[] gameMode;
@@ -153,6 +155,7 @@ public class GameState {
 
   // Reset game-related variables
   private static void resetGameVariables() {
+    isEventFilter = false;
     isRiddleResolved = false;
     tenSecondsLeft = false;
     gameMode = null;

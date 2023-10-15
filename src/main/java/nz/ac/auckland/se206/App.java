@@ -2,6 +2,8 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +21,7 @@ import nz.ac.auckland.se206.controllers.StartMenuController;
 public class App extends Application {
 
   private static Scene scene;
+  public static EventHandler<KeyEvent> startMenu;
 
   public static void main(final String[] args) {
     launch();
@@ -28,14 +31,24 @@ public class App extends Application {
     Pane root = (Pane) loadFxml(fxml);
     scene.setRoot(root);
     if (fxml.equals("start_menu")) {
-      scene.addEventFilter(KeyEvent.KEY_PRESSED,
-          event -> {
-            if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.LEFT
-                || event.getCode() == KeyCode.ENTER) {
-              StartMenuController.selectCharacter(event);
-            }
+      startMenu = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent event) {
+          if (event.getCode() == KeyCode.RIGHT || event.getCode() == KeyCode.LEFT
+              || event.getCode() == KeyCode.ENTER) {
+            StartMenuController.selectCharacter(event);
+          }
+        }
+      };
+      scene.addEventFilter(KeyEvent.KEY_PRESSED, startMenu);
+      GameState.isEventFilter = true;
+    } else if (fxml.equals("main_game")) {
+      // Disable the key event filter
+      if (GameState.isEventFilter) {
+        scene.removeEventFilter(KeyEvent.KEY_PRESSED, startMenu);
+        GameState.isEventFilter = false;
+      }
 
-          });
     }
     root.requestFocus();
   }
