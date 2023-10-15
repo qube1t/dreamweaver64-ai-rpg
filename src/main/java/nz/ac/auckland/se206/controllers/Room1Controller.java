@@ -174,10 +174,10 @@ public class Room1Controller {
             + " character * before and after will be shown to the user. Keep the message 1"
             + " sentance. .");
 
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom1.get7Books(),
         str -> {
-          List<String> matchesList = Helper.getTextBetweenChar(str, "\"");
+          List<String> matchesList = Helper.getTextBetweenChar(str, "\"", true);
           GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
 
           String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));

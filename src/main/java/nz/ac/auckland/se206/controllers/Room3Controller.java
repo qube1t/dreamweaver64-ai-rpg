@@ -27,8 +27,6 @@ import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
-
-
 public class Room3Controller {
 
   private static ImageView imgEndSt;
@@ -105,7 +103,7 @@ public class Room3Controller {
   public void initialize() throws ApiProxyException {
 
     initilizeGpsMap();
-    
+
     GameState.mainGame.clickGamePane();
 
     imgEndSt = imgEnd;
@@ -308,11 +306,11 @@ public class Room3Controller {
           GameState.isRoom3GptDone = true;
         });
 
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom3.getEightRandomCity(),
         (result) -> {
 
-          List<String> cities = Helper.getTextBetweenChar(result, "^");
+          List<String> cities = Helper.getTextBetweenChar(result, "^", false);
           GameState.destnationCities = cities.toArray(new String[cities.size()]);
           GameState.destnationCityIndex = Helper.getRandomNumber(0, cities.size() - 1);
           GameState.arrangedDestnationCity = (cities.get(GameState.destnationCityIndex));
