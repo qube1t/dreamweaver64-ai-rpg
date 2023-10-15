@@ -487,7 +487,10 @@ public class Room2Controller {
    */
   private void getRandomBox(int numOfBox) throws IOException, ApiProxyException {
     int boxLocation = GameState.currentBox;
-    System.out.println("Number of treasure box: " + boxLocation);
+    for (int i = 0; i < treasureBoxes.length; i++) {
+      treasureBoxes[i].setDisable(true);
+      imgBoxes[i].setImage(new Image("/images/rooms/room2/disabledMark.png"));
+    }
     if (GameState.isBoxKeyFound) {
       if (numOfBox == boxLocation) {
         displayPirateResponse(GameState.pirateRightResponse);
@@ -530,9 +533,10 @@ public class Room2Controller {
 
         // After flashing, make the boxes invisible again
         Platform.runLater(() -> {
-          for (Rectangle box : treasureBoxes) {
-            box.setVisible(false);
-            box.setOpacity(1);
+          for (int i = 0; i < treasureBoxes.length; i++) {
+            treasureBoxes[i].setVisible(false);
+            treasureBoxes[i].setOpacity(1);
+            Helper.enableAccessToItem(treasureBoxes[i], imgBoxes[i]);
           }
         });
 
