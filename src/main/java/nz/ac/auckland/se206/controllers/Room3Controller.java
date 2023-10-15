@@ -38,6 +38,10 @@ public class Room3Controller {
     imgEndSt.setVisible(true);
   }
 
+  public static void resetGptRoom3() {
+    gptInit = false;
+  }
+
   @FXML
   private Pane obstalePane;
   @FXML

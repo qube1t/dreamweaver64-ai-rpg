@@ -37,7 +37,7 @@
             </ImageView>
          </children>
       </Pane>
-      <ImageView fx:id="imgEnd" fitWidth="600.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="imgEnd" fitHeight="511.0" fitWidth="647.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/rooms/room3/endRoom3.gif" />
          </image>

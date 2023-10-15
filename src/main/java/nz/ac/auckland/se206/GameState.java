@@ -166,11 +166,12 @@ public class GameState {
 
   // Reset variables related to Room 1
   private static void resetRoom1Variables() {
-    Arrays.fill(booksInRoom1, null);
+    booksInRoom1 = new String[7];
     isBookFound = false;
     trueBook = null;
     takenBook = null;
     finalMsg = null;
+    booksLoaded = false;
   }
 
   // Reset variables related to Room 2

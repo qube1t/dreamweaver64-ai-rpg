@@ -56,6 +56,7 @@ public class EndMenuController {
     GameState.reset();
     Room1Controller.resetGptRoom1();
     Room2Controller.resetGptRoom2();
+    Room3Controller.resetGptRoom3();
     MachineController.resetMachine();
     App.setRoot("start_menu");
   }

@@ -180,7 +180,16 @@ public class StartMenuController {
    */
   @FXML
   public void onClickStartButton(MouseEvent event) throws IOException {
-    startGameSetting();
+    startSound.play();
+    Timer timer = new Timer();
+    timer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+        Platform.runLater(() -> {
+          startGameSetting();
+        });
+      }
+    }, 160);
   }
 
   @FXML
