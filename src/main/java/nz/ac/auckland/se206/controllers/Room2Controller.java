@@ -230,17 +230,26 @@ public class Room2Controller {
       if (event.getDragboard().hasImage()) {
         if (pirate.getBoundsInParent().contains(x, y) &&
             MainGameController.getImageSet().getId().equals("book")) {
-          if (GameState.isBookFound) {
+          if (!GameState.isPirateResponsePrinted) {
             try {
-              tradeCorrectBook();
+              setPirateResponse();
             } catch (ApiProxyException e) {
+              // TODO Auto-generated catch block
               e.printStackTrace();
             }
           } else {
-            try {
-              tradeWrongBook();
-            } catch (ApiProxyException e) {
-              e.printStackTrace();
+            if (!GameState.isBookFound) {
+              try {
+                tradeWrongBook();
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+              }
+            } else if (GameState.isBookFound) {
+              try {
+                tradeCorrectBook();
+              } catch (ApiProxyException e) {
+                e.printStackTrace();
+              }
             }
           }
         } else {
