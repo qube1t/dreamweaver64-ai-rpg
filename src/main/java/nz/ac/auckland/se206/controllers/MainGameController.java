@@ -150,6 +150,12 @@ public class MainGameController {
     // fade out interact pane
     initialisedInteractPane.setDisable(true);
     initialisedInteractPane.setOpacity(0);
+    if (!GameState.isMuted) {
+      GameState.doorSound.setCycleCount(1);
+      GameState.doorSound.setVolume(.15);
+      GameState.doorSound.play();
+      GameState.soundFx.add(GameState.backgroundMusic);
+    }
   }
 
   public static void enableInteractPane() {
@@ -485,7 +491,6 @@ public class MainGameController {
     bubbleTextPane.setMouseTransparent(true);
     aiCharacterPane.setMouseTransparent(true);
   }
-
 
   public void getTimeLimit() {
     // getting time limit from game mode
