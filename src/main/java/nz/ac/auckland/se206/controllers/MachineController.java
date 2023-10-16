@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.ArrayList;
-
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -128,10 +127,10 @@ public class MachineController {
       double y = event.getY();
 
       System.out.println("Dragged over");
-      if (event.getGestureSource() != machinePane &&
-          event.getDragboard().hasImage()) {
-        if (item1.getBoundsInParent().contains(x, y) ||
-            item2.getBoundsInParent().contains(x, y)) {
+      if (event.getGestureSource() != machinePane
+          && event.getDragboard().hasImage()) {
+        if (item1.getBoundsInParent().contains(x, y)
+            || item2.getBoundsInParent().contains(x, y)) {
           event.acceptTransferModes(TransferMode.ANY);
         }
       }
@@ -312,8 +311,8 @@ public class MachineController {
     if (position1Taken == 1 &&
         position2Taken == 1) {
 
-      String currentId = imageSet.get(0).getId().toLowerCase() +
-          imageSet.get(1).getId().toLowerCase();
+      String currentId = imageSet.get(0).getId().toLowerCase()
+          + imageSet.get(1).getId().toLowerCase();
       System.out.println("id checked" + currentId);
       // Check if two correct items are here
       if (currentId.equals("treasurecode")

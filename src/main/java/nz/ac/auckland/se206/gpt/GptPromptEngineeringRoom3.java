@@ -11,10 +11,10 @@ package nz.ac.auckland.se206.gpt;
 public class GptPromptEngineeringRoom3 {
 
   /**
-   * Generates a GPT prompt engineering string for a riddle with the given word.
+   * Returns the aircraft code that will be used to decrypt the letter from mom.
+   * Produces a 10 word congratulation to player, without any hint.
    *
-   * @param wordToGuess the word to be guessed in the riddle
-   * @return the generated prompt engineering string
+   * @return the aircraft code as a String
    */
   public static String getAircraftCode() {
     return "User update: The player has now succesfully obtained the aircraft code"
@@ -28,7 +28,6 @@ public class GptPromptEngineeringRoom3 {
    * the game.
    *
    * @return the generated prompt engineering string
-   * @return
    */
   public static String room3WelcomeMessage() {
 

@@ -303,11 +303,15 @@ public class Room3Controller {
   }
 
   /**
-   * This method is called when the puzzle is clicked It will open the puzzle
-   * game.
+   * Handles the click event for the puzzle button in Room 3. Adds the puzzle game
+   * overlay and sends a message to the
+   * AI indicating that the user has opened the unarranged word puzzle game. The
+   * correct destination city name is
+   * GameState.arrangedDestnationCity. If the user asks for hints, give hint
+   * without revealing the city name.
    *
-   * @throws IOException
-   * @throws ApiProxyException
+   * @throws IOException       if there is an error adding the puzzle game overlay
+   * @throws ApiProxyException if there is an error sending the message to the AI
    */
   @FXML
   public void onClickPuzzle() throws IOException, ApiProxyException {
@@ -352,7 +356,7 @@ public class Room3Controller {
   /**
    * This method is called when the book is clicked It will open the flight plan
    * if it is not open
-   * and if the flight plan is open, then it will close the flight plan
+   * and if the flight plan is open, then it will close the flight plan.
    */
   @FXML
   public void clickMachineEvent() throws IOException, ApiProxyException {
