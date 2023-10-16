@@ -42,7 +42,10 @@ public class MachineController {
     imageSet = null;
     position1Taken = 0;
     position2Taken = 0;
-  }
+    custom = null;
+    firstEnter = 0;
+    hasGotLetter = false;
+   }
 
   @FXML
   private AnchorPane machinePane;

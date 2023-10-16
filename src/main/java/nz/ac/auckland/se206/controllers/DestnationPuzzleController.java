@@ -134,6 +134,8 @@ public class DestnationPuzzleController {
 
             Platform.runLater(
                 () -> {
+                  GameState.hasPuzzleSolved = true;
+                  Room3Controller.enableFlightComputer();
                   // Hide the progress bar
                   load.setVisible(false);
                   loadText.setVisible(false);
