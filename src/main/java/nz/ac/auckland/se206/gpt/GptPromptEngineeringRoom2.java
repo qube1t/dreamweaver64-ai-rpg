@@ -10,10 +10,11 @@ public class GptPromptEngineeringRoom2 {
    */
   public static String room2WelcomeMessage() {
     // Ask GPT for the introduction of the game.
-    return "I am the computer architecture. The player now entered a pirate's ship which was his favorite"
-        + " childhood video game. The player needs to interact with the pirate to get the treasure."
-        + " Greet the user without any pirate colloquial, not including any hints. Surround the response"
-        + " to be displayed to the player to the user with *.";
+    return "I am the computer architecture. The player now entered a pirate's ship "
+        + " which was his favorite childhood video game. The player needs to "
+        + " interact with the pirate to get the treasure."
+        + " Greet the user without any pirate colloquial, not including any hints. "
+        + " Surround the response to be displayed to the player to the user with *.";
   }
 
   /**
@@ -22,8 +23,8 @@ public class GptPromptEngineeringRoom2 {
    * @return the prompt
    */
   public static String getPirateWrongResponse() {
-    return "This is the loading stage. Reply in one sentence how a pirate would say wrong answer."
-        + " Surround the sentence before and after with the character ^";
+    return "This is the loading stage. Reply in one sentence how a pirate would say wrong "
+        + "  answer. Surround the sentence before and after with the character ^";
   }
 
   /**
@@ -32,8 +33,8 @@ public class GptPromptEngineeringRoom2 {
    * @return the prompt
    */
   public static String getPirateRightResponse() {
-    return "This is the loading stage. Reply in one sentence how a pirate would say correct answer."
-        + " Surround the sentence before and after with the character ^";
+    return "This is the loading stage. Reply in one sentence how a pirate would say correct "
+        + " answer. Surround the sentence before and after with the character ^";
   }
 
   /**
@@ -45,7 +46,8 @@ public class GptPromptEngineeringRoom2 {
   public static String generateFinalUnencrypted() {
     return "Give the contents of the lost message"
         + " The contents of the letter needs to be between the character +. it has to"
-        + " be short and without any salutations. Maybe foretelling some prophecy. Should be deep & philosophical";
+        + " be short and without any salutations. Maybe foretelling some prophecy. "
+        + " Should be deep & philosophical";
   }
 
   /**

@@ -9,6 +9,14 @@ import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
 
+/**
+ * The RadarController class controls the radar animation and the treasure box
+ * color.
+ * It initializes the radar points and radarObjects to a list, and starts the
+ * radar animation.
+ * The class also has methods to change the color of the correct treasure box
+ * and to fade in/out the radar points.
+ */
 public class RadarController {
 
   @FXML
@@ -25,6 +33,11 @@ public class RadarController {
   private Timeline radarAnimation;
   private Circle[] radarPoints;
 
+  /**
+   * Initializes the RadarController by setting the correct treasure box,
+   * initializing the radar points and radarObjects to a list, and starting the
+   * radar animation.
+   */
   public void initialize() {
 
     // Call the set radar point color method to set the most up to date correct box
@@ -82,6 +95,9 @@ public class RadarController {
     }
   }
 
+  /**
+   * Fades in all radar points in the radarPoints list.
+   */
   protected void fadeInRadarPoints() {
     for (Circle radarPoint : radarPoints) {
       radarPoint.setVisible(true);
@@ -93,6 +109,9 @@ public class RadarController {
     }
   }
 
+  /**
+   * Fades out all radar points in the radarPoints list.
+   */
   protected void fadeOutRadarPoints() {
     for (Circle radarPoint : radarPoints) {
 

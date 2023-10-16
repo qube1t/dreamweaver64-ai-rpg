@@ -51,6 +51,13 @@ public class EndMenuController {
     }
   }
 
+  /**
+   * Handles the restart button click event. Resets the game state and all
+   * controllers, then navigates to the start menu.
+   * 
+   * @param event The mouse click event.
+   * @throws IOException If there is an error navigating to the start menu.
+   */
   @FXML
   private void onClickRestart(MouseEvent event) throws IOException {
     GameState.reset();

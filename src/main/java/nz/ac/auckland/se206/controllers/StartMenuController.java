@@ -26,11 +26,11 @@ public class StartMenuController {
   @FXML
   private ComboBox<String> timeLimit;
   @FXML
+  private ComboBox<String> difficulty;
+  @FXML
   private Label timeLimitLabel;
   @FXML
   private Label difficultyLabel;
-  @FXML
-  private ComboBox<String> difficulty;
   @FXML
   private Label title;
   @FXML
@@ -38,12 +38,9 @@ public class StartMenuController {
   @FXML
   private Pane infoPane;
   @FXML
-  private ImageView muteIcon;
-  @FXML
   private Pane outPane;
   @FXML
   private Pane startPane;
-
   @FXML
   private Rectangle mc1;
   @FXML
@@ -52,6 +49,8 @@ public class StartMenuController {
   private Rectangle mc3;
   @FXML
   private Rectangle mc4;
+  @FXML
+  private ImageView muteIcon;
 
   private static Rectangle[] characterArray;
   private static ComboBox<String> difficultyStatic;

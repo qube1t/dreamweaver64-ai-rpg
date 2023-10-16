@@ -12,6 +12,14 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
+/**
+ * The GptEngine class represents an engine that runs the GPT model with a given
+ * chat message.
+ * It provides methods to add chat messages to a queue and execute them
+ * asynchronously.
+ * The engine uses a timer to check for stalling and starts a new thread if
+ * there is a prompt queue but no active thread.
+ */
 public class GptEngine {
   private ChatCompletionRequest chatCompletionRequest;
   private boolean active = false;
@@ -66,6 +74,13 @@ public class GptEngine {
     }
   }
 
+  /**
+   * Runs the GPT engine with the given input string.
+   * If no function is specified, the default function is called.
+   * 
+   * @param string The input string to run the GPT engine with.
+   * @throws ApiProxyException If there is an error running the GPT engine.
+   */
   public void runGpt(String string) throws ApiProxyException {
     // when there is no function to call
     runGpt(string, null);
@@ -118,6 +133,18 @@ public class GptEngine {
     activeThread.start();
   }
 
+  /**
+   * This method is called when a GPT-3 chat completion request is completed.
+   * It increments the stage, gets the first result, adds the chat message to the
+   * request,
+   * calls the function if not null, and gets chat messages if they exist.
+   * If chat messages exist, it adds them to the main game chat.
+   *
+   * @param chatCompletionResult The result of the GPT-3 chat completion request.
+   * @param myFunc               The function to call with the chat message
+   *                             content, if not null.
+   * @throws Exception If there is an error calling the function.
+   */
   private void onGptCompletion(ChatCompletionResult chatCompletionResult, GptResultAction myFunc)
       throws Exception {
 

@@ -33,22 +33,8 @@ public class SplashController {
         s -> {
           Platform.runLater(
               () -> {
-                // progressBar.setProgress(.66);
               });
         });
-
-    // GameState.eleanorAi.runGpt(
-    // GptPromptEngineeringRoom1.gameInstructions(),
-    // s -> {
-    // List<String> pirateDialogue = Helper.getTextBetweenChar(s, "#");
-    // if (pirateDialogue.size() > 0) {
-    // GameState.instructionMsg = pirateDialogue.get(0);
-    // }
-    // Platform.runLater(
-    // () -> {
-    // progressBar.setProgress(.75);
-    // });
-    // });
 
     // final prompt, and let app change root.
     GameState.eleanorAi.runGpt(

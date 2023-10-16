@@ -10,6 +10,12 @@ import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * The controller class for the Treasure Box in the game. This class handles the
+ * initialization of the treasure box and the action of getting the treasure.
+ * When the player clicks on the treasure box, the encrypted message will be
+ * displayed. The class also adds the treasure image to the inventory.
+ */
 public class TreasureBoxController {
 
   @FXML
@@ -21,7 +27,10 @@ public class TreasureBoxController {
   @FXML
   private Button treasure;
 
-  /** Initialize the treasure box. */
+  /**
+   * Initializes the TreasureBoxController. If the encrypted message has been
+   * found, the treasure box is disabled and its components are hidden.
+   */
   public void initialize() {
     if (GameState.isEncryptedMessageFound) {
       clickedTreasure.setVisible(false);

@@ -65,6 +65,11 @@ public class BookShelfController {
   @FXML
   private ImageView book7Img;
 
+  /**
+   * Initializes the BookShelfController by setting up drag and drop functionality
+   * for books, setting up labels for books in the bookshelf, and handling mouse
+   * clicks on the labels to take or return books.
+   */
   public void initialize() {
 
     // Handle drag and drop book back to bookshelf
@@ -97,17 +102,13 @@ public class BookShelfController {
     lblBooks = new Label[] { lblBook1, lblBook2, lblBook3, lblBook4, lblBook5, lblBook6, lblBook7 };
 
     bookRects = new ImageView[] {
-        book1Img, book2Img, book3Img, book4Img, book5Img, book6Img, book7Img
-    };
+        book1Img, book2Img, book3Img, book4Img, book5Img, book6Img, book7Img };
 
     // setting labels in the bookshelf
     for (
 
         int i = 0; i < GameState.booksInRoom1.length; i++) {
       Label lblBook = lblBooks[i];
-
-      // if (lblBook.getText() == GameState.takenBook)
-      // continue;
 
       if (GameState.booksInRoom1[i] != GameState.takenBook) {
         lblBook.setText(GameState.booksInRoom1[i]);
@@ -144,7 +145,6 @@ public class BookShelfController {
             }
             lblBook.setVisible(false);
             bookRect.setVisible(false);
-            // GameState.booksInRoom1[index] = null;
           });
     }
   }

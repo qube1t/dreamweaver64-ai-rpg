@@ -7,6 +7,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * The CharacterMovement class represents the movement of a character in the
+ * game.
+ * It contains methods to check for collision between the player and obstacles
+ * or interactables,
+ * to check the proximity of the player to interactable nodes and update their
+ * visibility and style accordingly,
+ * and to move the player in the specified direction based on the given action.
+ */
 public class CharacterMovement {
   private AnchorPane player;
   private Rectangle playerBound;
@@ -14,6 +23,17 @@ public class CharacterMovement {
   private List<Rectangle> obstacles;
   private ObservableList<Node> interactables;
 
+  /**
+   * Represents the movement of a character in the game.
+   * 
+   * @param player         the AnchorPane representing the player
+   * @param playerBound    the Rectangle representing the player's bounds
+   * @param proximityBound the Circle representing the player's proximity bounds
+   * @param obstacles      the List of Rectangles representing the obstacles in
+   *                       the game
+   * @param interactables  the ObservableList of Nodes representing the
+   *                       interactable objects in the game
+   */
   public CharacterMovement(
       AnchorPane player,
       Rectangle playerBound,
@@ -27,9 +47,12 @@ public class CharacterMovement {
     this.interactables = interactables;
   }
 
+  /**
+   * Checks for collision between the player and obstacles or interactables.
+   * 
+   * @return true if there is a collision, false otherwise.
+   */
   protected boolean checkCollision() {
-    // check intersection of inner square with rectangles
-    // System.out.println(obstacles.toString());
     for (Rectangle obstacle : obstacles) {
       if (player
           .localToParent(playerBound.getBoundsInParent())
@@ -54,6 +77,10 @@ public class CharacterMovement {
     return false;
   }
 
+  /**
+   * Checks the proximity of the player to interactable nodes and updates their
+   * visibility and style accordingly.
+   */
   private void checkProximity() {
     // check intersection of outer circle with rectangles
     for (Node interactable : interactables) {
@@ -74,6 +101,12 @@ public class CharacterMovement {
     }
   }
 
+  /**
+   * Moves the player in the specified direction based on the given action.
+   * 
+   * @param action an integer representing the direction to move the player in:
+   *               0 for up, 1 for left, 2 for down, and 3 for right
+   */
   public void movePlayer(int action) {
     double playerSpeed = 8.0; // Adjust the player's speed as needed
     double dx = 0;

@@ -121,6 +121,15 @@ public class Room3CentralDisplayUnitController {
   @FXML
   private ProgressIndicator progress;
 
+  /**
+   * Initializes the Room3CentralDisplayUnitController by adding an event filter
+   * to the TextField to consume key events,
+   * setting the visibility of progress to false, setting all buttons to a list,
+   * and enabling/disabling buttons based on
+   * whether the aircraft code has been found or not.
+   *
+   * @throws ApiProxyException if there is an issue with the API proxy
+   */
   public void initialize() throws ApiProxyException {
 
     // Add an event filter to the TextField to consume key events
@@ -178,6 +187,16 @@ public class Room3CentralDisplayUnitController {
     }
   }
 
+  /**
+   * Handles key press events on the display unit. Adds the pressed key to the
+   * display output if it is a letter or number.
+   * If the pressed key is the backspace key, removes the last character from the
+   * display output.
+   * If the pressed key is the slash key ("/"), adds a slash to the display
+   * output.
+   *
+   * @param event The KeyEvent object representing the key press event.
+   */
   @FXML
   private void keyPressHandle(KeyEvent event) {
     System.out.println("Key pressed");
@@ -204,6 +223,15 @@ public class Room3CentralDisplayUnitController {
     }
   }
 
+  /**
+   * Handles the event when a letter is clicked on the display unit.
+   * Gets the ID of the clicked rectangle and appends the corresponding letter to
+   * the existing text.
+   * If the letter is the first letter of a new city, adds a slash to separate the
+   * cities.
+   * 
+   * @param event The MouseEvent that triggered the method call.
+   */
   @FXML
   private void handleLetterClick(MouseEvent event) {
     Rectangle letterRectangle = (Rectangle) event.getSource();
@@ -217,12 +245,23 @@ public class Room3CentralDisplayUnitController {
     addSlashIfEnteredCurrentCity();
   }
 
+  /**
+   * Appends a forward slash to the current text in the display output.
+   * 
+   * @param event The mouse event that triggered the method call.
+   */
   @FXML
   private void handleSlashClick(MouseEvent event) {
     String currentText = displayOutput.getText();
     displayOutput.setText(currentText + "/");
   }
 
+  /**
+   * Handles the click event for the delete button. Removes the last character
+   * from the displayOutput text field.
+   * 
+   * @param event The MouseEvent that triggered this method.
+   */
   @FXML
   private void handleDeleteClick(MouseEvent event) {
     String currentText = displayOutput.getText();
@@ -231,11 +270,25 @@ public class Room3CentralDisplayUnitController {
     }
   }
 
+  /**
+   * Clears the text displayed on the output screen.
+   * 
+   * @param event The mouse event that triggered this method.
+   */
   @FXML
   private void handleClearClick(MouseEvent event) {
     displayOutput.setText("");
   }
 
+  /**
+   * Handles the click event of a number rectangle. Gets the ID of the clicked
+   * rectangle and appends the last character of the ID to the displayOutput text.
+   * If the displayOutput text is not empty, the number is appended to the end of
+   * the text.
+   * Calls addSlashIfEnteredCurrentCity() method after appending the number.
+   * 
+   * @param event The MouseEvent that triggered the method call.
+   */
   @FXML
   private void handleNumberClick(MouseEvent event) {
     Rectangle numberRectangle = (Rectangle) event.getSource();
@@ -248,12 +301,16 @@ public class Room3CentralDisplayUnitController {
     addSlashIfEnteredCurrentCity();
   }
 
-  @FXML
   /**
-   * Handle execute button click
+   * This method is called when the user clicks on the execute button. It checks
+   * if the entered code is correct or not. If the code is correct, it sets the
+   * aircraft code as found, updates the display, adds the aircraft code image to
+   * the inventory, and disables the input field and execute button. If the code
+   * is incorrect, it displays an error message.
    *
-   * @param event
+   * @throws ApiProxyException if there is an error with the API proxy
    */
+  @FXML
   public void handleExecuteClick() throws ApiProxyException {
     String currentInput = displayOutput.getText();
     String firstThreeDestnation = GameState.arrangedDestnationCity.substring(0, 3).toUpperCase();
@@ -310,6 +367,15 @@ public class Room3CentralDisplayUnitController {
     }
   }
 
+  /**
+   * This method creates a typing effect on the given Text object by displaying
+   * the given message
+   * character by character with a specified delay between each character.
+   *
+   * @param text    The Text object to display the typing effect on.
+   * @param message The message to be displayed with the typing effect.
+   * @param delay   The delay between each character in milliseconds.
+   */
   private void typeTextEffect(Text text, String message, int delay) {
     text.setText(""); // Clear the text first
     int messageLength = message.length();
@@ -327,6 +393,17 @@ public class Room3CentralDisplayUnitController {
     timeline.play();
   }
 
+  /**
+   * Enables the flight computer by setting the opacity of the central display
+   * unit to 1, hiding the lock, disabling the lock, enabling the display output,
+   * and enabling the key press event. Also sets the message to "ENTER THE FIRST
+   * THREE LETTER OF DEP / DEST CITY THEN PRESS EXEC. E.g SYD/MEL" and displays it
+   * using a type effect if it is the first time entering. Otherwise, sets the
+   * message directly.
+   * 
+   * @param inIt a boolean indicating whether it is the first time entering the
+   *             flight computer
+   */
   private void enableFlightComputer(boolean inIt) {
     centralDisplayUnit.setOpacity(1);
     lock.setVisible(false);

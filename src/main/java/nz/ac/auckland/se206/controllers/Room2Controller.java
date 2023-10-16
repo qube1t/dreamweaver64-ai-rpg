@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -177,8 +176,7 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   public void initialize() throws ApiProxyException {
-
-    // treasureBoxes = new Rectangle[] { box1, box2, box3, box4, box5 };
+    // created treasure box and block image array
     treasureBoxes = new ArrayList<Rectangle>(
         Arrays.asList(box1, box2, box3, box4, box5));
     imgBoxes = new ImageView[] { box1BlockImg, box2BlockImg, box3BlockImg, box4BlockImg,
@@ -226,7 +224,8 @@ public class Room2Controller {
       System.out.println("DRAGGING " + MainGameController.getImageSet().getId());
       if (event.getDragboard().hasImage()) {
         if (pirate.getBoundsInParent().contains(x, y) &&
-            MainGameController.getImageSet().getId().equals("book") && GameState.pirateRiddle != null) {
+            MainGameController.getImageSet().getId().equals("book") &&
+            GameState.pirateRiddle != null) {
           try {
             tradeWithPirate();
           } catch (ApiProxyException e) {
@@ -299,7 +298,7 @@ public class Room2Controller {
   }
 
   /**
-   * Initialize the GPT.
+   * Initialize the GPT for room 2.
    * 
    * @throws ApiProxyException
    */
@@ -378,14 +377,17 @@ public class Room2Controller {
   }
 
   /**
-   * Get the riddle from pirate.
+   * This method is called when the user click pirate. It shows the riddle to
+   * user.
    * 
    * @param event the mouse event
-   * @throws IOException
-   * @throws ApiProxyException
+   * @throws IOException       if there is an issue with the file
+   * @throws ApiProxyException if there is an issue with the API proxy
    */
   @FXML
   private void getTradeWithPirate(MouseEvent event) throws IOException, ApiProxyException {
+    // if the player does not have the book, the player need to solve the riddle
+    // first
     if (GameState.takenBook == null) {
       // no book in inventory
       GameState.eleanorAi.runGpt(
@@ -395,6 +397,7 @@ public class Room2Controller {
       if (GameState.pirateRiddle != null) {
         displayPirateResponse(GameState.pirateRiddle);
       }
+      // if the player has the book, try to trade with the pirate
     } else if (GameState.takenBook != null) {
       if (!GameState.isBookFound) {
         if (!wrongMsgPrinted) {
@@ -415,38 +418,29 @@ public class Room2Controller {
   /**
    * Trade with the pirate by dragging and dropping the key.
    * 
-   * @throws ApiProxyException
+   * @throws ApiProxyException if there is an issue with the API proxy
    */
   private void tradeWithPirate() throws ApiProxyException {
-    if (GameState.takenBook == null) {
-      GameState.eleanorAi.runGpt(
-          "User update: The pirate has asked the riddle to the user, but has not been solved."
-              + " You can give hints if the user asks. No reply is required");
-      if (GameState.pirateRiddle != null) {
-        displayPirateResponse(GameState.pirateRiddle);
-      }
-
-    } else if (GameState.takenBook != null) {
-      if (!GameState.isBookFound) {
-        if (!wrongMsgPrinted) {
-          wrongMsgPrinted = true;
-          tradeWrongBook();
-        } else {
-          wrongMsgPrinted = false;
-          if (GameState.pirateRiddle != null) {
-            displayPirateResponse(GameState.pirateRiddle);
-          }
+    if (!GameState.isBookFound) {
+      if (!wrongMsgPrinted) {
+        wrongMsgPrinted = true;
+        tradeWrongBook();
+      } else {
+        wrongMsgPrinted = false;
+        if (GameState.pirateRiddle != null) {
+          displayPirateResponse(GameState.pirateRiddle);
         }
-      } else if (GameState.isBookFound) {
-        tradeCorrectBook();
       }
+    } else if (GameState.isBookFound) {
+      tradeCorrectBook();
     }
   }
 
   /**
-   * Trade the wrong book.
+   * This is called when the user give the wrong book to pirate. It shows the
+   * response from pirate.
    * 
-   * @throws ApiProxyException
+   * @throws ApiProxyException if there is an issue with the API proxy
    */
   private void tradeWrongBook() throws ApiProxyException {
     if (GameState.pirateWrongResponse != null) {
@@ -455,9 +449,10 @@ public class Room2Controller {
   }
 
   /**
-   * Unlock the treasure box.
+   * This is called when the user give the correct book to pirate. It shows the
+   * response from pirate.
    * 
-   * @throws ApiProxyException
+   * @throws ApiProxyException if there is an issue with the API proxy
    */
   private void tradeCorrectBook() throws ApiProxyException {
     GameState.eleanorAi.runGpt(
@@ -487,9 +482,9 @@ public class Room2Controller {
   /**
    * Get the random treasure box and handle the click event on the treasure box.
    *
-   * @param numOfBox the location of the treasure box
-   * @throws IOException
-   * @throws ApiProxyException
+   * @param numOfBox  the number of the treasure box
+   * @throws IOException  if there is an issue with the file
+   * @throws ApiProxyException  if there is an issue with the API proxy
    */
   private void getRandomBox(int numOfBox) throws IOException, ApiProxyException {
     int boxLocation = GameState.currentBox;
@@ -504,27 +499,21 @@ public class Room2Controller {
         }
         MainGameController.addOverlay("treasure_box", false);
       } else {
-
-        // GameState.eleanorAi.runGpt(
-        // "User update: User clicked the wrong treasure box."
-        // + " The location of the correct treasure box is shown in room3 radar."
-        // + " No reply is required. If the user ask for hint, give the hint.");
-
         flashBoxes();
         Helper.changeTreasureBox(GameState.currentBox, numOfBox);
       }
     }
   }
 
-  /**
-   * Flash the treasure box when the player clicks the wrong box.
-   */
+  /** Flash the treasure box when the player clicks the wrong box. */
   private void flashBoxes() {
+    // Make the treasure boxes visible
     for (Rectangle box : treasureBoxes) {
       box.setVisible(true);
       box.setOpacity(0);
     }
 
+    // Flash the treasure boxes
     new Thread(() -> {
       try {
         for (int flashCount = 0; flashCount < 6; flashCount++) {
@@ -569,8 +558,8 @@ public class Room2Controller {
    * Handles the click event on the treasure box 1.
    *
    * @param event the mouse event
-   * @throws IOException
-   * @throws ApiProxyException
+   * @throws IOException if there is an issue with the file
+   * @throws ApiProxyException if there is an issue with the API proxy
    */
   @FXML
   private void onClickBox1(MouseEvent event) throws IOException, ApiProxyException {
@@ -582,8 +571,8 @@ public class Room2Controller {
    * Handles the click event on the treasure box 2.
    *
    * @param event the mouse event
-   * @throws IOException
-   * @throws ApiProxyException
+   * @throws IOException          if there is an issue with the file
+   * @throws ApiProxyException    if there is an issue with the API proxy
    */
   @FXML
   private void onClickBox2(MouseEvent event) throws IOException, ApiProxyException {
@@ -594,9 +583,9 @@ public class Room2Controller {
   /**
    * Handles the click event on the treasure box 3.
    *
-   * @param event the mouse event
-   * @throws IOException
-   * @throws ApiProxyException
+   * @param event                 if the user clicked the third treasure box
+   * @throws IOException          if there is an issue with the file
+   * @throws ApiProxyException    if there is an issue with the API proxy
    */
   @FXML
   private void onClickBox3(MouseEvent event) throws IOException, ApiProxyException {
@@ -607,9 +596,9 @@ public class Room2Controller {
   /**
    * Handles the click event on the treasure box 4.
    *
-   * @param event the mouse event
-   * @throws IOException
-   * @throws ApiProxyException
+   * @param event                 if the user clicked the fourth treasure box
+   * @throws IOException          if there is an issue with the file
+   * @throws ApiProxyException    if there is an issue with the API proxy
    */
   @FXML
   private void onClickBox4(MouseEvent event) throws IOException, ApiProxyException {
@@ -620,9 +609,9 @@ public class Room2Controller {
   /**
    * Handles the click event on the treasure box 5.
    *
-   * @param event the mouse event
-   * @throws IOException
-   * @throws ApiProxyException
+   * @param event                 if the user clicked the fifth treasure box
+   * @throws IOException          if there is an issue with the file
+   * @throws ApiProxyException    if there is an issue with the API proxy
    */
   @FXML
   private void onClickBox5(MouseEvent event) throws IOException, ApiProxyException {
@@ -631,11 +620,14 @@ public class Room2Controller {
   }
 
   /**
-   * Handles the click event on the door.
+   * This method is called when the user wants to go to the right room. It disables
+   * the interact pane for transition,
+   * removes the overlay, adds the overlay for room1, and runs the GPT model to
+   * update the user's location.
    *
-   * @param event the mouse event
-   * @throws IOException
-   * @throws ApiProxyException
+   * @param event                 if the user clicked the door
+   * @throws IOException          if there is an error with input/output
+   * @throws ApiProxyException    if there is an error with the API proxy
    */
   @FXML
   private void onOpenRoom1(MouseEvent event) throws IOException, ApiProxyException {
@@ -643,8 +635,11 @@ public class Room2Controller {
     InstructionsLoadController.setText();
     // disable interact pane for transition
     MainGameController.disableInteractPane();
-    if (!GameState.isMuted)
-      seaAmbiance.stop();
+    if (!GameState.isMuted) {
+      if (seaAmbiance != null) {
+        seaAmbiance.stop();
+      }
+    }
     GameState.eleanorAi.runGpt(
         "User update: User has moved from the pirate ship to "
             + "his childhood home. No reply is required");
@@ -653,11 +648,14 @@ public class Room2Controller {
   }
 
   /**
-   * Handles the click event on the door.
+   * This method is called when the user wants to go to the left room. It disables
+   * the interact pane for transition,
+   * removes the overlay, adds the overlay for room3, and runs the GPT model to
+   * update the user's location.
    *
-   * @param event the mouse event
-   * @throws IOException
-   * @throws ApiProxyException
+   * @param event                 if the user clicked the door
+   * @throws IOException          if there is an error with input/output
+   * @throws ApiProxyException    if there is an error with the API proxy
    */
   @FXML
   private void onOpenRoom3(MouseEvent event) throws IOException, ApiProxyException {
@@ -670,7 +668,10 @@ public class Room2Controller {
     GameState.eleanorAi.runGpt(
         "User update: User has moved from the pirate ship to his "
             + "workplace the ATC tower. No reply is required");
-    if (!GameState.isMuted)
-      seaAmbiance.stop();
+    if (!GameState.isMuted) {
+      if (seaAmbiance != null) {
+        seaAmbiance.stop();
+      }
+    }
   }
 }
