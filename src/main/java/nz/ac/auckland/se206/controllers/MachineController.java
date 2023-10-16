@@ -42,7 +42,10 @@ public class MachineController {
     imageSet = null;
     position1Taken = 0;
     position2Taken = 0;
-  }
+    custom = null;
+    firstEnter = 0;
+    hasGotLetter = false;
+   }
 
   @FXML
   private AnchorPane machinePane;
@@ -308,8 +311,8 @@ public class MachineController {
    * @return void
    */
   private void checkCorrectItem() {
-    if (position1Taken == 1 &&
-        position2Taken == 1) {
+    if (position1Taken == 1
+        && position2Taken == 1) {
 
       String currentId = imageSet.get(0).getId().toLowerCase()
           + imageSet.get(1).getId().toLowerCase();

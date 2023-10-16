@@ -39,6 +39,8 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 public class Room3Controller {
 
   private static ImageView imgEndStRoom3;
+  private static Rectangle flightComputer;
+  private static ImageView lockRed;
   private static boolean gptInit = false;
 
   /**
@@ -56,6 +58,10 @@ public class Room3Controller {
     gptInit = false;
   }
 
+  public static void enableFlightComputer() {
+    Helper.enableAccessToItem(flightComputer, lockRed);
+  }
+
   @FXML
   private Pane obstalePane;
   @FXML
@@ -67,13 +73,15 @@ public class Room3Controller {
   @FXML
   private ImageView doorLoad2;
   @FXML
+  private ImageView lock;
+  @FXML
   private ImageView doorLoad1;
   @FXML
   private Character character;
   @FXML
   private Rectangle machine;
   @FXML
-  private Rectangle clickableComputer;
+  private Rectangle clickableComputer1;
   @FXML
   private Rectangle clickableComputer2;
   @FXML
@@ -123,7 +131,14 @@ public class Room3Controller {
    */
   public void initialize() throws ApiProxyException {
 
-    // Initalize the world map
+
+    flightComputer = clickableComputer1;
+    lockRed = lock;
+
+    if (GameState.hasPuzzleSolved) {
+      enableFlightComputer();
+    }
+
     initilizeGpsMap();
 
     GameState.mainGame.clickGamePane();
@@ -139,7 +154,7 @@ public class Room3Controller {
       // Set the puzzle load image to invisible if the puzzle is not loaded.
       clickableComputer2.setDisable(true);
     }
-
+    
     if (!gptInit) {
       gptInitilize();
       gptInit = true;
@@ -172,9 +187,9 @@ public class Room3Controller {
 
         break;
       case 2:
-        // Set the character position if previous room is room2.
-        character.setLayoutX(29);
-        character.setLayoutY(210);
+
+        character.setLayoutX(27);
+        character.setLayoutY(214);
 
         break;
       default:

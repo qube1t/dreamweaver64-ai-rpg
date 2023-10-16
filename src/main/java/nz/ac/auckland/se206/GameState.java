@@ -97,6 +97,8 @@ public class GameState {
   /** Indicates the encrypted message that will be placed in treasure box. */
   public static String encryptedFinalMsg;
 
+  public static boolean hasPuzzleSolved = false;
+
   /** Indicates whether the player has found the encrypted message. */
   public static boolean isEncryptedMessageFound = false;
 
@@ -251,8 +253,9 @@ public class GameState {
     // Reset destnation cities array of size 8.
     destnationCities = new String[8];
     destnationCityIndex = -1;
-    arrangedDestnation = "";
-    unarrangedDestnation = "";
+    arrangedDestnationCity = "";
+    unarrangedDestnationCity = "";
+    hasPuzzleSolved = false;
     currentCityIndex = -1;
     currentCities = null;
     // Reset is machine open to false.
