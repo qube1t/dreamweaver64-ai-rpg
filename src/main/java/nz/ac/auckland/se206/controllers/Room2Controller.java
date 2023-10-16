@@ -233,48 +233,25 @@ public class Room2Controller {
       double y = event.getY();
       System.out.println("DRAGGING " + MainGameController.getImageSet().getId());
       if (event.getDragboard().hasImage()) {
-        if (GameState.isRoom2GptDone) {
-          if (pirate.getBoundsInParent().contains(x, y) &&
-            MainGameController.getImageSet().getId().equals("book")) {
-          // if (!GameState.isPirateResponsePrinted) {
-          //   try {
-          //     setPirateResponse();
-          //   } catch (ApiProxyException e) {
-          //     e.printStackTrace();
-          //   }
-          // } else {
-          //   if (!GameState.isBookFound) {
-          //     try {
-          //       tradeWrongBook();
-          //     } catch (ApiProxyException e) {
-          //       e.printStackTrace();
-          //     }
-          //   } else if (GameState.isBookFound) {
-          //     try {
-          //       tradeCorrectBook();
-          //     } catch (ApiProxyException e) {
-          //       e.printStackTrace();
-          //     }
-          //   }
-          // }
+        if (pirate.getBoundsInParent().contains(x, y) &&
+            MainGameController.getImageSet().getId().equals("book") && GameState.pirateRiddle != null) {
           try {
             tradeWithPirate();
           } catch (ApiProxyException e) {
             e.printStackTrace();
           }
-        }
         } else {
           if (GameState.isBoxKeyFound) {
             for (int i = 0; i < treasureBoxes.size(); i++) {
-            if (treasureBoxes.get(i).getBoundsInParent().contains(x, y) &&
-                MainGameController.getImageSet().getId().equals("key")) {
-              try {
-                getRandomBox(i + 1);
-              } catch (IOException | ApiProxyException e) {
-                e.printStackTrace();
+              if (treasureBoxes.get(i).getBoundsInParent().contains(x, y) &&
+                  MainGameController.getImageSet().getId().equals("key")) {
+                try {
+                  getRandomBox(i + 1);
+                } catch (IOException | ApiProxyException e) {
+                  e.printStackTrace();
+                }
               }
             }
-          }
           }
         }
       }
@@ -454,6 +431,11 @@ public class Room2Controller {
     }
   }
 
+  /**
+   * Trade with the pirate by dragging and dropping the key.
+   * 
+   * @throws ApiProxyException
+   */
   private void tradeWithPirate() throws ApiProxyException {
     if (GameState.takenBook == null) {
       GameState.eleanorAi.runGpt(
@@ -486,7 +468,7 @@ public class Room2Controller {
    */
   private void tradeWrongBook() throws ApiProxyException {
     GameState.eleanorAi.runGpt(
-        "User update: The user has not solved the book riddle yet. No reply is required");
+        "User update: The user get the wrong book. No reply is required");
     if (GameState.pirateWrongResponse != null) {
       displayPirateResponse(GameState.pirateWrongResponse);
     }
@@ -545,8 +527,8 @@ public class Room2Controller {
       } else {
         GameState.eleanorAi.runGpt(
             "User update: User clicked the wrong treasure box."
-            + " The location of the correct treasure box is shown in room3 radar."
-            + " No reply is required. If the user ask for hint, give the hint.");
+                + " The location of the correct treasure box is shown in room3 radar."
+                + " No reply is required. If the user ask for hint, give the hint.");
         flashBoxes();
         Helper.changeTreasureBox(GameState.currentBox, numOfBox);
       }
