@@ -23,11 +23,16 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class GptEngine {
   private ChatCompletionRequest chatCompletionRequest;
   private boolean active = false;
-  private int stage = 0;
   private Thread activeThread;
   private Queue<ChatMessage> promptQueue = new LinkedList<>();
   private Queue<GptResultAction> promptFuncQueue = new LinkedList<>();
 
+  /**
+   * GptEngine class represents the engine that handles the chat completion
+   * requests using the GPT model.
+   * It sets up the GPT model only once and sets up a timer to check for GPT
+   * engine stalling.
+   */
   public GptEngine() {
     // set up the GPT model only once
     if (chatCompletionRequest == null) {
@@ -54,10 +59,10 @@ public class GptEngine {
   }
 
   /**
-   * Runs the GPT model with a given chat message.
+   * Runs the chat message to process.
    *
-   * @param msg the chat message to process
-   * @return the response chat message
+   * @param msg    the chat message to process
+   * @param myFunc the function to call when the chat message is processed
    * @throws ApiProxyException if there is an error communicating with the API
    *                           proxy
    */
@@ -77,7 +82,7 @@ public class GptEngine {
   /**
    * Runs the GPT engine with the given input string.
    * If no function is specified, the default function is called.
-   * 
+   *
    * @param string The input string to run the GPT engine with.
    * @throws ApiProxyException If there is an error running the GPT engine.
    */
@@ -103,8 +108,6 @@ public class GptEngine {
               // adds prompt to conversation and execs
               chatCompletionRequest.addMessage(nextPrompt);
               ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-
-              stage++;
 
               // performs onfinish tasks
               onGptCompletion(chatCompletionResult, myFunc);
@@ -147,8 +150,6 @@ public class GptEngine {
    */
   private void onGptCompletion(ChatCompletionResult chatCompletionResult, GptResultAction myFunc)
       throws Exception {
-
-    stage++;
     // get the first result
     Choice result = chatCompletionResult.getChoices().iterator().next();
     System.out.println(result.getChatMessage().getContent());
@@ -161,7 +162,8 @@ public class GptEngine {
     }
 
     // get chat messages if exists
-    List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*", true);
+    List<String> chatEntry = Helper.getTextBetweenChar(result
+        .getChatMessage().getContent(), "*", true);
     if (chatEntry.size() > 0) {
       Platform.runLater(
           () -> {

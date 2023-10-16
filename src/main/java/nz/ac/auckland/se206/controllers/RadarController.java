@@ -69,7 +69,7 @@ public class RadarController {
   }
 
   /**
-   * This method randomly select one of the boxes and change its color to red
+   * This method randomly select one of the boxes and change its color to red.
    *
    * @return the snumber of the box that has been changed
    */

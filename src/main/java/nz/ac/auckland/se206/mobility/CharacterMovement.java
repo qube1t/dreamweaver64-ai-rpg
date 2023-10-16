@@ -25,7 +25,7 @@ public class CharacterMovement {
 
   /**
    * Represents the movement of a character in the game.
-   * 
+   *
    * @param player         the AnchorPane representing the player
    * @param playerBound    the Rectangle representing the player's bounds
    * @param proximityBound the Circle representing the player's proximity bounds
@@ -49,29 +49,35 @@ public class CharacterMovement {
 
   /**
    * Checks for collision between the player and obstacles or interactables.
-   * 
+   *
    * @return true if there is a collision, false otherwise.
    */
   protected boolean checkCollision() {
     for (Rectangle obstacle : obstacles) {
+      // check intersection of player with obstacles
       if (player
           .localToParent(playerBound.getBoundsInParent())
           .intersects(obstacle.getBoundsInParent())) {
         return true;
       }
     }
-
+    // Loop through interactables and check if player intersects with them
     for (Node interactable : interactables) {
       if (player
           .localToParent(playerBound.getBoundsInParent())
           .intersects(interactable.getBoundsInParent())) {
-        if (interactable.getId() != null)
-          if (interactable.getId().equals("rightDoorBtn") || interactable.getId().equals("leftDoorBtn")
+        // If the interactable is a rectangle
+        if (interactable.getId() != null) {
+          // If interactable is a door and not disabled, proceed execution
+          if (interactable.getId().equals("rightDoorBtn")
+              || interactable.getId().equals("leftDoorBtn")
               || interactable.getId().equals("mainDoorBtn")) {
+            // If the door is enabled, walk through to the room where the door leads
             if (!interactable.isDisable()) {
               interactable.getOnMouseClicked().handle(null);
             }
           }
+        }
       }
     }
     return false;
@@ -92,18 +98,18 @@ public class CharacterMovement {
         if (interactable instanceof Rectangle) {
           interactable.getStyleClass().add("action-btn");
         }
-        // interactable.getStyleClass().add("action-btn");
       } else {
         interactable.setVisible(false);
-        if (interactable instanceof Rectangle)
+        if (interactable instanceof Rectangle) {
           interactable.getStyleClass().remove("action-btn");
+        }
       }
     }
   }
 
   /**
    * Moves the player in the specified direction based on the given action.
-   * 
+   *
    * @param action an integer representing the direction to move the player in:
    *               0 for up, 1 for left, 2 for down, and 3 for right
    */
@@ -131,8 +137,6 @@ public class CharacterMovement {
     // Set the new player positon
     player.setLayoutX(player.getLayoutX() + dx);
     player.setLayoutY(player.getLayoutY() + dy);
-
-    // System.out.println();
 
     // Return to the old position if there is a collision
     if (checkCollision()) {

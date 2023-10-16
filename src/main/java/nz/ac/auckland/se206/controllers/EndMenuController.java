@@ -31,8 +31,10 @@ public class EndMenuController {
   private Label letter;
 
   /**
-   * Initializes the EndMenuController by re-creating the GptEngine, stopping all sound effects, 
-   * and setting the text to display based on whether the player won or lost.
+   * Initializes the EndMenuController by re-creating the GptEngine, stopping 
+   * all sound effects, and setting the text to display based on whether the 
+   * player won or lost.
+   *
    * @throws ApiProxyException if there is an issue with the API proxy
    */
   public void initialize() throws ApiProxyException {
@@ -58,6 +60,7 @@ public class EndMenuController {
 
   /**
    * Resets the game state and all controllers, and returns to the start menu.
+   *
    * @param event The mouse event that triggered the restart.
    * @throws IOException If there is an error loading the start menu.
    */
@@ -75,6 +78,7 @@ public class EndMenuController {
 
   /**
    * Exits the application when the exit button is clicked.
+   *
    * @param event The mouse event that triggered the method call.
    * @throws IOException If an I/O error occurs.
    */

@@ -26,10 +26,13 @@ import nz.ac.auckland.se206.mobility.CharacterMovement;
 import nz.ac.auckland.se206.mobility.SpriteAnimation;
 
 /**
- * The Character class extends AnchorPane and represents a character in the game.
- * It contains methods for assigning a sprite sheet, enabling mobility, playing footstep sounds,
+ * The Character class extends AnchorPane and represents a character in the
+ * game.
+ * It contains methods for assigning a sprite sheet, enabling mobility, playing
+ * footstep sounds,
  * starting and ending animations, and initializing elements.
- * It also has instance variables for the character's action, columns, count, offset x and y,
+ * It also has instance variables for the character's action, columns, count,
+ * offset x and y,
  * frame width and height, animation, and movement.
  */
 public class Character extends AnchorPane {
@@ -62,14 +65,15 @@ public class Character extends AnchorPane {
   private Timer movementTimer = new Timer();
 
   /**
-   * The Character class represents a character in the game. It extends the JavaFX Pane class and
+   * The Character class represents a character in the game. It extends the JavaFX
+   * Pane class and
    * contains the character's sprite and movement logic.
    *
-   * @param columns the number of columns in the sprite sheet
-   * @param count the total number of frames in the sprite sheet
-   * @param offsetX the x-coordinate offset of the sprite sheet
-   * @param offsetY the y-coordinate offset of the sprite sheet
-   * @param frameWidth the width of each frame in the sprite sheet
+   * @param columns     the number of columns in the sprite sheet
+   * @param count       the total number of frames in the sprite sheet
+   * @param offsetX     the x-coordinate offset of the sprite sheet
+   * @param offsetY     the y-coordinate offset of the sprite sheet
+   * @param frameWidth  the width of each frame in the sprite sheet
    * @param frameHeight the height of each frame in the sprite sheet
    */
   public Character(
@@ -112,8 +116,10 @@ public class Character extends AnchorPane {
   }
 
   /**
-   * Assigns the sprite sheet for the character based on the current character index in the game state.
-   * If the character index is not 1, 2, 3, or 4, the default sprite sheet (char1.png) is assigned.
+   * Assigns the sprite sheet for the character based on the current character
+   * index
+   * in the game state. If the character index is not 1, 2, 3, or 4, the default
+   * sprite sheet (char1.png) is assigned.
    */
   public void assignSpriteSheet() {
     // assign character sprite sheet
@@ -150,7 +156,8 @@ public class Character extends AnchorPane {
 
   /**
    * Sets the action of this character to the given integer value.
-   * If the character is not currently animating, initializes the character's elements.
+   * If the character is not currently animating, initializes the character's
+   * elements.
    *
    * @param a the integer value representing the action to set
    */
@@ -164,9 +171,12 @@ public class Character extends AnchorPane {
   }
 
   /**
-   * Enables mobility for the character by creating a new CharacterMovement object.
-   * @param obstacles a list of Rectangles representing obstacles that the character must avoid
-   * @param observableList an ObservableList of Nodes representing the nodes that the character must avoid
+   * Enables mobility for the character by creating a new CharacterMovement
+   * object.
+   *
+   * @param obstacles      A list of Rectangles representing obstacles that the
+   *                       character should avoid.
+   * @param observableList An ObservableList of Nodes representing the game world.
    */
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
     // create character movement object
@@ -174,7 +184,8 @@ public class Character extends AnchorPane {
   }
 
   /**
-   * Plays the footstep sound effect if the game is not muted and the sound effect is not already playing.
+   * Plays the footstep sound effect if the game is not muted and the sound effect
+   * is not already playing.
    * Adds the sound effect to the list of sound effects in the GameState.
    */
   public void playFootSteps() {
@@ -210,7 +221,8 @@ public class Character extends AnchorPane {
   }
 
   /**
-   * Stops the animation and sets the active image viewport to the last frame of the animation.
+   * Stops the animation and sets the active image viewport to the last frame of
+   * the animation.
    * If endSound is true, it also ends the footstep sound.
    *
    * @param endSound a boolean indicating whether to end the footstep sound or not

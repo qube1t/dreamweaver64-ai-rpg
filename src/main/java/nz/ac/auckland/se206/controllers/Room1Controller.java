@@ -17,9 +17,12 @@ import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /**
- * The Room1Controller class is responsible for controlling the behavior of Room 1 in the game.
- * It initializes the map, character mobility, and GPT-3 API for generating prompts for the user to interact with.
- * It also enables/disables buttons and obstacles in the room based on the game state.
+ * The Room1Controller class is responsible for controlling the behavior of Room
+ * 1 in the game.
+ * It initializes the map, character mobility, and GPT-3 API for generating
+ * prompts for the user to interact with.
+ * It also enables/disables buttons and obstacles in the room based on the game
+ * state.
  */
 public class Room1Controller {
   // static fields for gpt
@@ -107,9 +110,12 @@ public class Room1Controller {
   private ImageView rightDoorLoaderImg;
 
   /**
-   * Initializes the Room1Controller by setting up the obstacles, enabling/disabling buttons 
-   * based on game state, enabling character mobility, initializing GPT, setting character 
+   * Initializes the Room1Controller by setting up the obstacles,
+   * enabling/disabling buttons
+   * based on game state, enabling character mobility, initializing GPT, setting
+   * character
    * position, and initializing the map if ten seconds are left.
+   *
    * @throws ApiProxyException if there is an issue with the API proxy
    */
   public void initialize() throws ApiProxyException {
@@ -172,9 +178,12 @@ public class Room1Controller {
   }
 
   /**
-   * Initializes the GPT-3 API for Room 1. Retrieves books from GPT-3 and sets up the interact pane. 
-   * Only the chunk of text surrounded with the character * before and after will be shown to the user. 
+   * Initializes the GPT-3 API for Room 1. Retrieves books from GPT-3 and sets up
+   * the interact pane.
+   * Only the chunk of text surrounded with the character * before and after will
+   * be shown to the user.
    * Keep the message 1 sentence.
+   *
    * @throws ApiProxyException if there is an issue with the API proxy
    */
   private void initGpt() throws ApiProxyException {
@@ -182,7 +191,8 @@ public class Room1Controller {
     MainGameController.enableInteractPane();
 
     GameState.eleanorAi.runGpt(
-        "The user has entered their childhood home. In this room they are encouraged to look"
+        "The user has entered their childhood home."
+            + " In this room they are encouraged to look"
             + " around. You can talk to the user. Only the chunk of text surrounded with the"
             + " character * before and after will be shown to the user. Keep the message 1"
             + " sentance. .",
@@ -297,6 +307,7 @@ public class Room1Controller {
   /**
    * Handles the event when the crockeries button is clicked.
    * Adds an overlay for the crockery shelf to the main game controller.
+   *
    * @throws ApiProxyException if there is an issue with the API proxy
    * @throws IOException       if there is an issue with IO operations
    */

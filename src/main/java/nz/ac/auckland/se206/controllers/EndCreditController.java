@@ -8,8 +8,10 @@ import javafx.scene.layout.VBox;
 import nz.ac.auckland.se206.App;
 
 /**
- * This class is the controller for the end credits screen. It handles the initialization of the screen
- * and the event when the exit button is clicked, which sets the root of the application to the end menu.
+ * This class is the controller for the end credits screen.
+ * It handles the initialization of the screen
+ * and the event when the exit button is clicked,
+ * which sets the root of the application to the end menu.
  */
 public class EndCreditController {
 
@@ -19,7 +21,8 @@ public class EndCreditController {
   private Button btnExit;
 
   /**
-   * Initializes the EndCreditController.
+   * This method is called by the FXMLLoader when the EndCredit.fxml file is
+   * loaded. It is used to initialize the controller.
    */
   public void initialize() {
   }
@@ -27,6 +30,7 @@ public class EndCreditController {
   /**
    * This method is called when the exit button is clicked. It sets the root of
    * the application to the end_menu.
+   *
    * @param event The event that triggered the method call.
    * @throws IOException If an I/O error occurs.
    */

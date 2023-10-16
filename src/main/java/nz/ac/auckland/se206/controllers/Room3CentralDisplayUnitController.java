@@ -22,6 +22,20 @@ import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * This class is the controller for the central display unit in Room 3 of the
+ * game.
+ * It handles key press events on the display unit, adds the pressed key to the
+ * display output if it is a letter or number,
+ * removes the last character from the display output if the pressed key is the
+ * backspace key,
+ * adds a slash to the display output if the pressed key is the slash key ("/"),
+ * and initializes the controller by adding an event filter to the TextField to
+ * consume key events,
+ * setting the visibility of progress to false, setting all buttons to a list,
+ * and enabling/disabling buttons based on whether the aircraft code has been
+ * found or not.
+ */
 public class Room3CentralDisplayUnitController {
 
   private List<Rectangle> allButtons;
@@ -229,14 +243,16 @@ public class Room3CentralDisplayUnitController {
    * the existing text.
    * If the letter is the first letter of a new city, adds a slash to separate the
    * cities.
-   * 
+   *
    * @param event The MouseEvent that triggered the method call.
    */
   @FXML
   private void handleLetterClick(MouseEvent event) {
     Rectangle letterRectangle = (Rectangle) event.getSource();
     // Get the ID - last character of the clicked rectangle
-    String upperLetter = letterRectangle.getId().substring(letterRectangle.getId().length() - 1).toUpperCase();
+    String upperLetter = letterRectangle.getId()
+        .substring(letterRectangle.getId().length() - 1)
+        .toUpperCase();
     System.out.println("Letter clicked: " + upperLetter);
 
     // Append the clicked letter to the existing text
@@ -247,7 +263,7 @@ public class Room3CentralDisplayUnitController {
 
   /**
    * Appends a forward slash to the current text in the display output.
-   * 
+   *
    * @param event The mouse event that triggered the method call.
    */
   @FXML
@@ -259,7 +275,7 @@ public class Room3CentralDisplayUnitController {
   /**
    * Handles the click event for the delete button. Removes the last character
    * from the displayOutput text field.
-   * 
+   *
    * @param event The MouseEvent that triggered this method.
    */
   @FXML
@@ -272,7 +288,7 @@ public class Room3CentralDisplayUnitController {
 
   /**
    * Clears the text displayed on the output screen.
-   * 
+   *
    * @param event The mouse event that triggered this method.
    */
   @FXML
@@ -286,7 +302,7 @@ public class Room3CentralDisplayUnitController {
    * If the displayOutput text is not empty, the number is appended to the end of
    * the text.
    * Calls addSlashIfEnteredCurrentCity() method after appending the number.
-   * 
+   *
    * @param event The MouseEvent that triggered the method call.
    */
   @FXML
@@ -313,7 +329,7 @@ public class Room3CentralDisplayUnitController {
   @FXML
   public void handleExecuteClick() throws ApiProxyException {
     String currentInput = displayOutput.getText();
-    String firstThreeDestnation = GameState.arrangedDestnationCity.substring(0, 3).toUpperCase();
+    String firstThreeDestnation = GameState.arrangedDestnation.substring(0, 3).toUpperCase();
     String firstThreeDeparture = GameState.currentCities[GameState.currentCityIndex - 1]
         .getText().substring(0, 3);
 
@@ -400,7 +416,7 @@ public class Room3CentralDisplayUnitController {
    * THREE LETTER OF DEP / DEST CITY THEN PRESS EXEC. E.g SYD/MEL" and displays it
    * using a type effect if it is the first time entering. Otherwise, sets the
    * message directly.
-   * 
+   *
    * @param inIt a boolean indicating whether it is the first time entering the
    *             flight computer
    */

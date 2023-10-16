@@ -158,6 +158,7 @@ public class MainGameController {
 
   /**
    * Removes the item with the specified ID from the player's inventory.
+   *
    * @param itemId the ID of the item to be removed
    */
   public static void removeObtainedItem(String itemId) {
@@ -205,7 +206,8 @@ public class MainGameController {
 
   /**
    * Adds an overlay to the game pane.
-   * @param roomN The name of the room to add as an overlay.
+   *
+   * @param roomN  The name of the room to add as an overlay.
    * @param isRoom A boolean indicating whether the overlay is a room or not.
    * @throws IOException If the FXML file for the room cannot be loaded.
    */
@@ -254,6 +256,7 @@ public class MainGameController {
   /**
    * Removes the overlay from the game screen. If alsoRooms is true, it also
    * removes the rooms and ends the character animation.
+   *
    * @param alsoRooms a boolean indicating whether to remove the rooms as well
    */
   public static void removeOverlay(boolean alsoRooms) {
@@ -327,8 +330,10 @@ public class MainGameController {
 
   /**
    * Initializes the game by setting up various components such as the timer, hint
-   * count, and inventory items. Also sets up the bubble chat and adds an instruction 
-   * overlay to the bottom of the outer pane. Finally, initializes the game state and 
+   * count, and inventory items. Also sets up the bubble chat and adds an
+   * instruction
+   * overlay to the bottom of the outer pane. Finally, initializes the game state
+   * and
    * starts playing the background music if not muted.
    *
    * @throws IOException if there is an error loading the instruction overlay FXML
@@ -475,6 +480,7 @@ public class MainGameController {
    * chat box and sent to the Eleanor AI for a response. The response is then
    * displayed in the chat box. If the response contains hints, the number of
    * remaining hints is updated.
+   *
    * @param ke The KeyEvent object representing the key press event.
    * @throws ApiProxyException if there is an error with the API proxy.
    */
@@ -516,7 +522,8 @@ public class MainGameController {
 
   /**
    * Adds a chat message to the chat pane.
-   * @param text the text of the chat message
+   *
+   * @param text      the text of the chat message
    * @param isEleanor true if the chat message is from Eleanor, false otherwise
    */
   public void addChat(String text, boolean isEleanor) {
@@ -604,8 +611,9 @@ public class MainGameController {
   }
 
   /**
-   * Sets the time limit for the game and starts a thread to count down from the time limit.
-   * 
+   * Sets the time limit for the game and starts a thread to count down from the
+   * time limit.
+   *
    * @param timeLimit the time limit in seconds
    */
   private void setTimeLimit(int timeLimit) {
@@ -662,6 +670,7 @@ public class MainGameController {
 
   /**
    * Handles the time limit reached event.
+   *
    * @throws IOException if there is an error loading the end menu FXML file
    */
   private void handleTimeLimitReached() throws IOException {

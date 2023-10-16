@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -127,10 +126,11 @@ public class Room3Controller {
    * movement, and loading the appropriate game state.
    * If the puzzle is not loaded, the clickableComputer2 is disabled.
    * If the game is muted, the ATC ambiance sound is played.
-   * 
+   *
    * @throws ApiProxyException if there is an issue with the API proxy.
    */
   public void initialize() throws ApiProxyException {
+
 
     flightComputer = clickableComputer1;
     lockRed = lock;
@@ -146,14 +146,21 @@ public class Room3Controller {
     imgEndStRoom3 = imgEnd;
 
     if (GameState.tenSecondsLeft) {
+      // Initialize the end image if the time is less or equal to 10 seconds.
       initializeMap();
     }
 
+    if (!GameState.isPuzzleLoaded) {
+      // Set the puzzle load image to invisible if the puzzle is not loaded.
+      clickableComputer2.setDisable(true);
+    }
+    
     if (!gptInit) {
       gptInitilize();
       gptInit = true;
       GameState.isRoom3FirstEntered = true;
     } else {
+      // If GPT has been initialized, enable all the objects
       MainGameController.enableInteractPane();
       Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
       Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
@@ -162,6 +169,7 @@ public class Room3Controller {
 
     this.obstacles = new ArrayList<Rectangle>();
 
+    // Get all the obstacles and add to obstacles list
     for (Node node : obstalePane.getChildren()) {
       if (node instanceof Rectangle) {
         obstacles.add((Rectangle) node);
@@ -173,22 +181,26 @@ public class Room3Controller {
 
     switch (GameState.prevRoom) {
       case 1:
+        // Set the character position if previous room is room1.
         character.setLayoutX(523);
         character.setLayoutY(210);
 
         break;
       case 2:
+
         character.setLayoutX(27);
         character.setLayoutY(214);
 
         break;
       default:
+        // Set default position
         character.setLayoutX(530);
         character.setLayoutY(210);
     }
 
     GameState.prevRoom = 3;
     if (!GameState.isMuted) {
+      // Play the atc background music if the game is not muted by user.
       atcSound = new AudioClip(
           (new Media(App.class.getResource("/sounds/atcAmbiance.mp3").toString()))
               .getSource());
@@ -200,12 +212,12 @@ public class Room3Controller {
   }
 
   /**
-   * This method makes the city name unarranged
+   * This method makes the city name unarranged.
    *
    * @param cityName the city name to be unarranged
    * @return the unarranged city name
    */
-  protected String makeUnarrangedCityName(String cityName) {
+  protected String makeUnarrangedCity(String cityName) {
     int length = cityName.length();
     int[] randomNumbers = new int[length];
     // Initialize the array of random numbers
@@ -230,7 +242,7 @@ public class Room3Controller {
     ;
 
     if (unarrangedCityName.equals(cityName)) {
-      return makeUnarrangedCityName(cityName);
+      return makeUnarrangedCity(cityName);
     }
 
     return unarrangedCityName.toUpperCase();
@@ -243,7 +255,7 @@ public class Room3Controller {
    * removes the overlay, adds the overlay for Room 1, and runs the GPT model for
    * Eleanor AI.
    * If the game is not muted, it stops the sound from the previous room.
-   * 
+   *
    * @throws IOException       if an I/O error occurs
    * @throws ApiProxyException if an error occurs while calling the GPT API
    */
@@ -259,8 +271,9 @@ public class Room3Controller {
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room1", true);
     GameState.eleanorAi.runGpt("User update: User has moved from ATC to his childhood home room.");
-    if (!GameState.isMuted)
+    if (!GameState.isMuted) {
       atcSound.stop();
+    }
   }
 
   /**
@@ -268,7 +281,7 @@ public class Room3Controller {
    * Loads instructions, disables interact pane for transition, removes overlay,
    * adds overlay for room2,
    * runs GPT for Eleanor AI, and stops ATC sound if not muted.
-   * 
+   *
    * @throws IOException       if an I/O error occurs
    * @throws ApiProxyException if an API proxy error occurs
    */
@@ -285,14 +298,15 @@ public class Room3Controller {
     GameState.eleanorAi.runGpt("User update: User has moved from ATC"
         + "to the pirate ship. No reply is required");
 
-    if (!GameState.isMuted)
+    if (!GameState.isMuted) {
       atcSound.stop();
+    }
   }
 
   /**
    * Handles the event when the computer is clicked.
    * Adds an overlay to the main game controller.
-   * 
+   *
    * @throws IOException       if an I/O error occurs.
    * @throws ApiProxyException if an API proxy error occurs.
    */
@@ -302,22 +316,26 @@ public class Room3Controller {
     MainGameController.addOverlay("sub3", false);
   }
 
-  @FXML
   /**
-   * This method is called when the puzzle is clicked It will open the puzzle
-   * game.
+   * Handles the click event for the puzzle button in Room 3. Adds the puzzle game
+   * overlay and sends a message to the
+   * AI indicating that the user has opened the unarranged word puzzle game. The
+   * correct destination city name is
+   * GameState.arrangedDestnationCity. If the user asks for hints, give hint
+   * without revealing the city name.
    *
-   * @throws IOException
-   * @throws ApiProxyException
+   * @throws IOException       if there is an error adding the puzzle game overlay
+   * @throws ApiProxyException if there is an error sending the message to the AI
    */
+  @FXML
   public void onClickPuzzle() throws IOException, ApiProxyException {
-    System.out.println("destnation city is " + GameState.arrangedDestnationCity);
+    System.out.println("destnation city is " + GameState.arrangedDestnation);
     // Add the puzzle game overlay
     MainGameController.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened the unarranged word puzzle game. The correct destnation city"
             + " name is "
-            + GameState.arrangedDestnationCity
+            + GameState.arrangedDestnation
             + ". No reply is needed for this message. If the user ask for"
             + " hints, give hint without"
             + " revealing the city name.");
@@ -349,12 +367,12 @@ public class Room3Controller {
             + " the hints. No need to respond to this message.");
   }
 
-  @FXML
   /**
    * This method is called when the book is clicked It will open the flight plan
    * if it is not open
-   * and if the flight plan is open, then it will close the flight plan
+   * and if the flight plan is open, then it will close the flight plan.
    */
+  @FXML
   public void clickMachineEvent() throws IOException, ApiProxyException {
     GameState.isMachineOpen = true;
     MainGameController.addOverlay("decryption_machine", false);
@@ -365,7 +383,7 @@ public class Room3Controller {
    * message, the city selection prompt, and the puzzle introduction message.
    * Enables access to the right and left door buttons and the clickable computer
    * 2 after the prompts are completed.
-   * 
+   *
    * @throws ApiProxyException if there is an issue with the API proxy
    */
   private void gptInitilize() throws ApiProxyException {
@@ -374,6 +392,7 @@ public class Room3Controller {
     MainGameController.enableInteractPane();
 
     GameState.eleanorAi.runGpt(
+        // Get the welcome message from GPT.
         GptPromptEngineeringRoom3.room3WelcomeMessage(),
         (result) -> {
           System.out.println(result);
@@ -386,16 +405,18 @@ public class Room3Controller {
         GptPromptEngineeringRoom3.getEightRandomCity(),
         (result) -> {
 
+          // Get the list of cities from the result
           List<String> cities = Helper.getTextBetweenChar(result, "^", false);
+          // Set the list of cities to the game state
           GameState.destnationCities = cities.toArray(new String[cities.size()]);
           GameState.destnationCityIndex = Helper.getRandomNumber(0, cities.size() - 1);
-          GameState.arrangedDestnationCity = (cities.get(GameState.destnationCityIndex));
-          // Print the city
+          GameState.arrangedDestnation = (cities.get(GameState.destnationCityIndex));
+          // Print the city generated
           System.out.println(result);
-          System.out.println("Arranged:" + GameState.destnationCities.toString() +
-              "Destnation city is " + GameState.arrangedDestnationCity);
+          System.out.println("Arranged:" + GameState.destnationCities.toString()
+              + "Destnation city is " + GameState.arrangedDestnation);
 
-          GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
+          GameState.unarrangedDestnation = makeUnarrangedCity(GameState.arrangedDestnation);
         });
 
     GameState.eleanorAi2.runGpt(
@@ -453,7 +474,7 @@ public class Room3Controller {
 
   /**
    * Fades in the given circle object representing a city on the radar.
-   * 
+   *
    * @param city the circle object representing the city to be faded in
    */
   private void fadeInRadarPoints(Circle city) {
@@ -469,7 +490,7 @@ public class Room3Controller {
   /**
    * Fades out the given Circle object over a duration of 1.5 seconds using a
    * linear interpolation.
-   * 
+   *
    * @param city The Circle object to fade out.
    */
   private void fadeOutRadarPoints(Circle city) {

@@ -11,10 +11,25 @@ import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * The SplashController class is responsible for initializing the splash screen
+ * of the application.
+ * It sets the progress bar progress and runs GPT prompts. The final prompt
+ * changes the root of the app to "start_menu".
+ *
+ * @throws ApiProxyException if there is an issue with the API proxy
+ */
 public class SplashController {
   @FXML
   private ProgressBar progressBar;
 
+  /**
+   * Initializes the SplashController by setting the progress bar progress and
+   * running GPT prompts.
+   * The final prompt changes the root of the app to "start_menu".
+   *
+   * @throws ApiProxyException if there is an issue with the API proxy
+   */
   public void initialize() throws ApiProxyException {
     // gpt prompts and setting progressbar progress
     progressBar.setProgress(.33);

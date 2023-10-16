@@ -16,9 +16,9 @@ public class DraggableLetter extends Label {
   /**
    * A custom Label class that can be dragged and dropped.
    * It allows the user to drag and drop the label to another location.
-   * 
-   * @param text the text to be displayed on the label
-   * @param hbox the HBox that the label is in
+   *
+   * @param text       the text to be displayed on the label
+   * @param hbox       the HBox that the label is in
    * @param controller the controller for the destination puzzle
    */
   public DraggableLetter(String text, HBox hbox, DestnationPuzzleController controller) {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
@@ -16,11 +15,19 @@ import javafx.scene.shape.Rectangle;
 public class Helper {
 
   /**
-   * Get the text between two characters.
-   * 
-   * @param str
-   * @param c
-   * @return matchesList
+   * Returns a list of strings that are between two instances of a given character
+   * in a given string.
+   * If strict is true, only strings that are between two instances of the given
+   * character will be returned.
+   * If strict is false and no instances of the given character are found, the
+   * original string will be returned.
+   *
+   * @param str    the string to search for matches in
+   * @param c      the character to search for matches between
+   * @param strict whether to only return matches that are strictly between two
+   *               instances of the given character
+   * @return a list of strings that are between two instances of the given
+   *         character in the given string
    */
   public static List<String> getTextBetweenChar(String str, String c, boolean strict) {
     // get text between two characters, including the two characters
@@ -40,10 +47,12 @@ public class Helper {
   }
 
   /**
-   * Change the treasure box.
-   * 
-   * @param currentBoxNumber
-   * @param clickBox
+   * Changes the treasure box to a new random box number, ensuring that the new
+   * box
+   * number is not the same as the current box number or the box that was clicked.
+   *
+   * @param currentBoxNumber The current treasure box number.
+   * @param clickBox         The box that was clicked.
    */
   public static void changeTreasureBox(int currentBoxNumber, int clickBox) {
 
@@ -59,23 +68,24 @@ public class Helper {
   }
 
   /**
-   * Get a random number between two numbers.
-   * 
-   * @param min
-   * @param max
-   * @return
+   * Returns a random integer between the specified minimum and maximum values
+   * (inclusive).
+   *
+   * @param min the minimum value of the range (inclusive)
+   * @param max the maximum value of the range (inclusive)
+   * @return a random integer between the specified minimum and maximum values
+   *         (inclusive)
    */
-  // https://www.baeldung.com/java-generating-random-numbers-in-range
   public static int getRandomNumber(int min, int max) {
     return (int) ((Math.random() * (max - min)) + min);
   }
 
   /**
-   * Count the number of occurences of a character in a string.
-   * 
-   * @param str
-   * @param c
-   * @return count
+   * Counts the number of occurrences of a character in a string.
+   *
+   * @param str the string to search for occurrences of the character
+   * @param c   the character to count occurrences of
+   * @return the number of occurrences of the character in the string
    */
   public static int countOccurences(String str, String c) {
     // count the number of occurences of a character in a string
@@ -89,10 +99,11 @@ public class Helper {
   }
 
   /**
-   * Enable access to an item.
-   * 
-   * @param btn
-   * @param img
+   * Enables access to an item by setting the button to be enabled and the image
+   * to be null.
+   *
+   * @param btn The button to enable access to the item.
+   * @param img The image to set to null.
    */
   public static void enableAccessToItem(Rectangle btn, ImageView img) {
     btn.setDisable(false);
@@ -100,10 +111,10 @@ public class Helper {
   }
 
   /**
-   * Disable access to an item.
-   * 
-   * @param btn
-   * @param img
+   * Disables access to an item represented by a button and an image view.
+   *
+   * @param btn The button representing the item.
+   * @param img The image view representing the item.
    */
   public static void disableAccessToItem(Rectangle btn, ImageView img) {
     btn.setDisable(true);
