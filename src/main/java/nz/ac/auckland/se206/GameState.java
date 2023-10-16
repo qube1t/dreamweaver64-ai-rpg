@@ -113,6 +113,9 @@ public class GameState {
   /** Indicates the room2 gpt is done */
   public static boolean isRoom2GptDone = false;
 
+  /** Indicates whether the player has clicked the wrong box first. */
+  public static boolean isWrongBoxFirstClicked = false;
+
   // room3
   /** Indicates whether the player has entered the room3 first time. */
   public static boolean isRoom3FirstEntered = false;
@@ -211,6 +214,7 @@ public class GameState {
     isRoom2FirstEntered = false;
     isPirateResponsePrinted = false;
     isRoom2GptDone = false;
+    isWrongBoxFirstClicked = false;
   }
 
   // Reset variables related to Room 3

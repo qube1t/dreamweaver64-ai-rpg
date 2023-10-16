@@ -10,9 +10,9 @@ public class GptPromptEngineeringRoom2 {
    */
   public static String room2WelcomeMessage() {
     // Ask GPT for the introduction of the game.
-    return "I am the computer architecture that runs DREAMWEAVER64. The player now entered a pirate's ship which was his favorite"
+    return "I am the computer architecture. The player now entered a pirate's ship which was his favorite"
         + " childhood video game. The player needs to interact with the pirate to get the treasure."
-        + " Greet and introduce the user, not including any hints. Surround the response"
+        + " Greet the user without any pirate colloquial, not including any hints. Surround the response"
         + " to be displayed to the player to the user with *.";
   }
 

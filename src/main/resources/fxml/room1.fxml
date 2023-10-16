@@ -10,7 +10,7 @@
 
 <?import nz.ac.auckland.se206.components.Character?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" snapToPixel="false" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room1Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" snapToPixel="false" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room1Controller">
    <children>
       <ImageView fitHeight="550.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -43,7 +43,7 @@
             <Rectangle fx:id="rect12" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="309.0" layoutX="561.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="68.0" />
             <Rectangle fx:id="rect13" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="70.0" layoutX="458.0" layoutY="264.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="35.0" />
             <Rectangle fx:id="rect14" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="562.0" layoutX="595.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="76.0" />
-            <Rectangle fx:id="rect15" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="38.0" layoutX="577.0" layoutY="367.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="39.0" />
+            <Rectangle fx:id="rect15" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="38.0" layoutX="565.0" layoutY="367.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="51.0" />
             <Rectangle fx:id="rect16" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="303.0" layoutX="492.0" layoutY="32.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="35.0" />
             <Rectangle fx:id="rect17" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="70.0" layoutX="527.0" layoutY="228.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="33.0" />
             <Rectangle fx:id="rect18" arcHeight="5.0" arcWidth="5.0" fill="#ff3f1f69" height="110.0" layoutX="150.0" layoutY="258.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="30.0" />
