@@ -73,11 +73,11 @@ public class StartMenuController {
             startGameSetting();
           });
         }
-      }, 160);
+      }, 80);
 
     } else if (direction.equals("RIGHT")) {
+      selectSound.play();
       if (GameState.characterIndex != 4) {
-        selectSound.play();
         GameState.characterIndex++;
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
@@ -88,11 +88,23 @@ public class StartMenuController {
               characterArray[GameState.characterIndex - 1].setOpacity(1);
             });
           }
-        }, 120);
+        }, 80);
+      } else {
+        GameState.characterIndex = 1;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            Platform.runLater(() -> {
+              characterArray[3].setOpacity(0);
+              characterArray[0].setOpacity(1);
+            });
+          }
+        }, 80);
       }
     } else if (direction.equals("LEFT")) {
+      selectSound.play();
       if (GameState.characterIndex != 1) {
-        selectSound.play();
         GameState.characterIndex--;
 
         Timer timer = new Timer();
@@ -104,8 +116,20 @@ public class StartMenuController {
               characterArray[GameState.characterIndex].setOpacity(0);
             });
           }
-        }, 150);
+        }, 80);
 
+      } else {
+        GameState.characterIndex = 4;
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            Platform.runLater(() -> {
+              characterArray[0].setOpacity(0);
+              characterArray[3].setOpacity(1);
+            });
+          }
+        }, 80);
       }
     }
 
@@ -159,8 +183,14 @@ public class StartMenuController {
   public void initialize() throws ApiProxyException {
     selectSound = new AudioClip(new Media(App.class.getResource("/sounds/selectSound.mp3").toString())
         .getSource());
+    selectSound.setVolume(0.3);
     startSound = new AudioClip(new Media(App.class.getResource("/sounds/enter.mp3").toString())
         .getSource());
+    startSound.setVolume(0.75);
+
+    // Add audioclip to GameState
+    GameState.soundFx.add(selectSound);
+    GameState.soundFx.add(startSound);
 
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
@@ -208,6 +238,31 @@ public class StartMenuController {
     }
     // Image volIcon = new Image("images/volume.png");
     // muteIcon.setImage(volIcon);
+  }
+
+  @FXML
+  private void onClickCharacter(MouseEvent event) {
+
+    if (event.getSource() instanceof Rectangle) {
+      Rectangle character = (Rectangle) event.getSource();
+      int id = Integer.parseInt(character.getId().toString().substring(2));
+      if (GameState.characterIndex != id) {
+        selectSound.play();
+
+        // Delay the change of opacity to make it look smoother
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+          @Override
+          public void run() {
+            Platform.runLater(() -> {
+              character.setOpacity(1);
+              characterArray[GameState.characterIndex - 1].setOpacity(0);
+              GameState.characterIndex = id;
+            });
+          }
+        }, 80);
+      }
+    }
   }
 
 }

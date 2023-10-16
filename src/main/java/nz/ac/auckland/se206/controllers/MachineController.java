@@ -61,6 +61,11 @@ public class MachineController {
         decrypt.setOpacity(0.3);
         decrypt.setDisable(true);
 
+        // If has decrypted, remove the letter
+        if (GameState.hasDecrypted) {
+            letter.setImage(null);
+        }
+
         if (position1Taken == 1) {
             setItem(1);
         }

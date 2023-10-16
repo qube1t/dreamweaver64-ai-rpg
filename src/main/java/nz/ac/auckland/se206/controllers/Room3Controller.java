@@ -29,14 +29,18 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class Room3Controller {
 
-  private static ImageView imgEndSt;
+  private static ImageView imgEndStRoom3;
   private static boolean gptInit = false;
 
   /**
    * Set the end image when the time is up.
    */
   public static void initializeMap() {
-    imgEndSt.setImage(new Image("/images/rooms/room3/endRoom3.gif"));
+    if (imgEndStRoom3 != null) {
+      imgEndStRoom3.setImage(new Image("/images/rooms/room3/endRoom3.gif"));
+    } else {
+      return;
+    }
   }
 
   public static void resetGptRoom3() {
@@ -66,9 +70,9 @@ public class Room3Controller {
   @FXML
   private Rectangle clickableRadar;
   @FXML
-  private Rectangle doorToRoom1;
+  private Rectangle leftDoorBtn;
   @FXML
-  private Rectangle doorToRoom2;
+  private Rectangle rightDoorBtn;
   @FXML
   private Text label1;
   @FXML
@@ -106,7 +110,7 @@ public class Room3Controller {
 
     GameState.mainGame.clickGamePane();
 
-    imgEndSt = imgEnd;
+    imgEndStRoom3 = imgEnd;
 
     if (GameState.tenSecondsLeft) {
       initializeMap();
@@ -123,12 +127,12 @@ public class Room3Controller {
     } else {
       MainGameController.enableInteractPane();
       if (GameState.isRoom2FirstEntered && GameState.isRoom2GptDone) {
-        Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+        Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
       } else {
-        Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+        Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
       }
       if (GameState.isRoom1GptDone) {
-        Helper.enableAccessToItem(doorToRoom1, doorLoad1);
+        Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
       }
       Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
     }
@@ -152,7 +156,7 @@ public class Room3Controller {
         break;
       case 2:
         character.setLayoutX(29);
-        character.setLayoutY(198);
+        character.setLayoutY(210);
 
         break;
       default:
@@ -301,8 +305,8 @@ public class Room3Controller {
         GptPromptEngineeringRoom3.room3WelcomeMessage(),
         (result) -> {
           System.out.println(result);
-          Helper.enableAccessToItem(doorToRoom1, doorLoad1);
-          Helper.enableAccessToItem(doorToRoom2, doorLoad2);
+          Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
+          Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
           GameState.isRoom3GptDone = true;
         });
 
