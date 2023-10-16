@@ -329,7 +329,7 @@ public class Room3CentralDisplayUnitController {
   @FXML
   public void handleExecuteClick() throws ApiProxyException {
     String currentInput = displayOutput.getText();
-    String firstThreeDestnation = GameState.arrangedDestnationCity.substring(0, 3).toUpperCase();
+    String firstThreeDestnation = GameState.arrangedDestnation.substring(0, 3).toUpperCase();
     String firstThreeDeparture = GameState.currentCities[GameState.currentCityIndex - 1]
         .getText().substring(0, 3);
 

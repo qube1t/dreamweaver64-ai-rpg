@@ -202,7 +202,7 @@ public class Room3Controller {
    * @param cityName the city name to be unarranged
    * @return the unarranged city name
    */
-  protected String makeUnarrangedCityName(String cityName) {
+  protected String makeUnarrangedCity(String cityName) {
     int length = cityName.length();
     int[] randomNumbers = new int[length];
     // Initialize the array of random numbers
@@ -227,7 +227,7 @@ public class Room3Controller {
     ;
 
     if (unarrangedCityName.equals(cityName)) {
-      return makeUnarrangedCityName(cityName);
+      return makeUnarrangedCity(cityName);
     }
 
     return unarrangedCityName.toUpperCase();
@@ -314,13 +314,13 @@ public class Room3Controller {
    */
   @FXML
   public void onClickPuzzle() throws IOException, ApiProxyException {
-    System.out.println("destnation city is " + GameState.arrangedDestnationCity);
+    System.out.println("destnation city is " + GameState.arrangedDestnation);
     // Add the puzzle game overlay
     MainGameController.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
         "User update: User has opened the unarranged word puzzle game. The correct destnation city"
             + " name is "
-            + GameState.arrangedDestnationCity
+            + GameState.arrangedDestnation
             + ". No reply is needed for this message. If the user ask for"
             + " hints, give hint without"
             + " revealing the city name.");
@@ -395,13 +395,13 @@ public class Room3Controller {
           // Set the list of cities to the game state
           GameState.destnationCities = cities.toArray(new String[cities.size()]);
           GameState.destnationCityIndex = Helper.getRandomNumber(0, cities.size() - 1);
-          GameState.arrangedDestnationCity = (cities.get(GameState.destnationCityIndex));
+          GameState.arrangedDestnation = (cities.get(GameState.destnationCityIndex));
           // Print the city generated
           System.out.println(result);
           System.out.println("Arranged:" + GameState.destnationCities.toString()
-              + "Destnation city is " + GameState.arrangedDestnationCity);
+              + "Destnation city is " + GameState.arrangedDestnation);
 
-          GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
+          GameState.unarrangedDestnation = makeUnarrangedCity(GameState.arrangedDestnation);
         });
 
     GameState.eleanorAi2.runGpt(

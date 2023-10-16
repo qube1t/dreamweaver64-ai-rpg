@@ -132,10 +132,10 @@ public class GameState {
   public static int destnationCityIndex = -1;
 
   /** Indicates the arranged city name for the puzzle game. */
-  public static String arrangedDestnationCity = "";
+  public static String arrangedDestnation = "";
 
   /** Indicates the unarranged city name for puzzle game. */
-  public static String unarrangedDestnationCity = "";
+  public static String unarrangedDestnation = "";
 
   /** Indicates the correct city index. */
   public static int currentCityIndex = -1;
@@ -251,8 +251,8 @@ public class GameState {
     // Reset destnation cities array of size 8.
     destnationCities = new String[8];
     destnationCityIndex = -1;
-    arrangedDestnationCity = "";
-    unarrangedDestnationCity = "";
+    arrangedDestnation = "";
+    unarrangedDestnation = "";
     currentCityIndex = -1;
     currentCities = null;
     // Reset is machine open to false.

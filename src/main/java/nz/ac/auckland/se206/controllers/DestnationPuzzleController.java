@@ -84,7 +84,7 @@ public class DestnationPuzzleController {
     load.setVisible(false);
     loadText.setVisible(false);
 
-    String unarrangedPuzzle = GameState.unarrangedDestnationCity;
+    String unarrangedPuzzle = GameState.unarrangedDestnation;
     System.out.println(unarrangedPuzzle);
     initializePuzzle(unarrangedPuzzle);
     introduction.setText(GameState.puzzleIntroMessageRoom3.toUpperCase());
@@ -125,7 +125,7 @@ public class DestnationPuzzleController {
     load.setProgress(ProgressBar.INDETERMINATE_PROGRESS);
 
     // Handle the case where the user has entered the correct answer
-    if (GameState.arrangedDestnationCity.equalsIgnoreCase(currentText)) {
+    if (GameState.arrangedDestnation.equalsIgnoreCase(currentText)) {
       // GameState.isPuzzleInRoom3Solved = true;
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.correctPuzzleRoom3(),

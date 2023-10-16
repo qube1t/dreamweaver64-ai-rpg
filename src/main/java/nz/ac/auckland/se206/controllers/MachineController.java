@@ -389,8 +389,8 @@ public class MachineController {
       item2.setImage(item);
       item2.setFitHeight(35);
       item2.setPreserveRatio(true);
-      System.out.println("Dropped into second inventory box with id" +
-          imageSet.get(positionNumber - 1).getId());
+      System.out.println("Dropped into second inventory box with id"
+          + imageSet.get(positionNumber - 1).getId());
       position2Taken = 1;
     }
     // Remove the item from the top bar in main game controller
