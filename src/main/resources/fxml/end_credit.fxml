@@ -24,17 +24,17 @@
                <children>
                   <AnchorPane prefHeight="153.0" prefWidth="584.0">
                      <children>
-                        <Label layoutX="94.0" layoutY="105.0" style="-fx-font-size: 20;" styleClass="aiInputField" text="Name" textFill="WHITE" wrapText="true">
+                        <Label layoutX="61.0" layoutY="104.0" style="-fx-font-size: 20;" styleClass="aiInputField" text="Samuel Kurian" textFill="WHITE" wrapText="true">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="299.0" layoutY="104.0" style="-fx-font-size: 20;" styleClass="aiInputField" text="Name" textFill="WHITE" wrapText="true">
+                        <Label layoutX="276.0" layoutY="104.0" prefHeight="29.0" prefWidth="101.0" style="-fx-font-size: 20;" styleClass="aiInputField" text="Yuewen Sun" textFill="WHITE" wrapText="true" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="262.0">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="473.0" layoutY="104.0" style="-fx-font-size: 20;" styleClass="aiInputField" text="Name" textFill="WHITE" wrapText="true">
+                        <Label layoutX="473.0" layoutY="104.0" style="-fx-font-size: 20;" styleClass="aiInputField" text="Siyeon Kim" textFill="WHITE" wrapText="true">
                            <font>
                               <Font name="Arial" size="12.0" />
                            </font>
