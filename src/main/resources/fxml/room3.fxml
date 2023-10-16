@@ -37,11 +37,7 @@
             </ImageView>
          </children>
       </Pane>
-      <ImageView fx:id="imgEnd" fitHeight="511.0" fitWidth="647.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/rooms/room3/endRoom3.gif" />
-         </image>
-      </ImageView>
+      <ImageView fx:id="imgEnd" fitHeight="511.0" fitWidth="647.0" pickOnBounds="true" preserveRatio="true" />
       <Pane fx:id="obstalePane">
          <children>
             <Circle fx:id="point4" fill="#ff1f1f" layoutX="415.0" layoutY="75.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
@@ -152,9 +148,9 @@
             <Rectangle fx:id="machine1" accessibleText="Enigma Machine" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="62.0" layoutX="127.0" layoutY="237.0" onMouseClicked="#clickMachineEvent" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" visible="false" width="69.0" />
             <Rectangle fx:id="clickableComputer1" accessibleText="Computer" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="27.0" layoutX="337.0" layoutY="263.0" onMouseClicked="#onClickComputer" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" visible="false" width="42.0" />
             <Rectangle fx:id="clickableRadar1" accessibleText="Radar" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="25.0" layoutX="247.0" layoutY="205.0" onMouseClicked="#onClickRadar" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" visible="false" width="89.0" />
-            <Rectangle fx:id="doorToRoom2" accessibleText="Door" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff2a" height="54.0" layoutX="569.0" layoutY="188.0" onMouseClicked="#onClickRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" visible="false" width="50.0" />
+            <Rectangle fx:id="rightDoorBtn" accessibleText="Door" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff2a" height="54.0" layoutX="569.0" layoutY="188.0" onMouseClicked="#onClickRoom1" stroke="WHITE" strokeType="INSIDE" strokeWidth="4.0" visible="false" width="50.0" />
             <Rectangle fx:id="clickableComputer2" accessibleText="Computer" arcHeight="5.0" arcWidth="5.0" fill="#ffffff2a" height="36.0" layoutX="430.0" layoutY="265.0" onMouseClicked="#onClickPuzzle" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" visible="false" width="36.0" />
-            <Rectangle fx:id="doorToRoom1" accessibleText="Door" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff2a" height="53.0" layoutX="29.0" layoutY="188.0" onMouseClicked="#onClickRoom2" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" visible="false" width="50.0" />
+            <Rectangle fx:id="leftDoorBtn" accessibleText="Door" arcHeight="5.0" arcWidth="5.0" disable="true" fill="#ffffff2a" height="53.0" layoutX="29.0" layoutY="188.0" onMouseClicked="#onClickRoom2" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" visible="false" width="50.0" />
          </children>
       </Pane>
    </children>

@@ -93,4 +93,8 @@ public class App extends Application {
     root.requestFocus();
   }
 
+  public void stop() throws Exception {
+    System.exit(0);
+  }
+
 }

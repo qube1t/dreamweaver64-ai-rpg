@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class TreasureBoxController {
 
@@ -36,9 +37,14 @@ public class TreasureBoxController {
    *
    * @param event the action event
    * @throws IOException
+   * @throws ApiProxyException
    */
   @FXML
-  private void onGetTreasure(ActionEvent event) throws IOException {
+  private void onGetTreasure(ActionEvent event) throws IOException, ApiProxyException {
+    GameState.eleanorAi.runGpt(
+        "User update: User opened the treasure box and got the treasure which is the encrypted message."
+            + " To decrypte the message, user need to use engine machine. No reply is required"
+            + " If the user ask for hint, give the hint.");
     treasure.setDisable(true);
     GameState.isEncryptedMessageFound = true;
     imgTreasure.setVisible(false);

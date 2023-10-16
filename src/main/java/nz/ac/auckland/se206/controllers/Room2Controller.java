@@ -31,7 +31,11 @@ public class Room2Controller {
 
   /** Set the end image when the time is up. */
   public static void initializeMap() {
-    imgEndStRoom2.setImage(new Image("/images/rooms/room2/end.gif"));
+    if (imgEndStRoom2 != null) {
+      imgEndStRoom2.setImage(new Image("/images/rooms/room2/end.gif"));
+    } else {
+      return;
+    }
   }
 
   /** Reset the GPT for room 2. */
@@ -160,12 +164,12 @@ public class Room2Controller {
   private Label gptResponse;
 
   private ArrayList<Rectangle> obsts;
-  private Rectangle[] treasureBoxes;
+  // private Rectangle[] treasureBoxes;
   private ImageView[] imgBoxes;
   private Boolean hasKeyRemoved = false;
   private Boolean wrongMsgPrinted = false;
   private AudioClip seaAmbiance;
-  private ArrayList<Rectangle> boxs;
+  private ArrayList<Rectangle> treasureBoxes;
 
   /**
    * Initializes the room 2, it is called when the room loads.
@@ -174,9 +178,12 @@ public class Room2Controller {
    */
   public void initialize() throws ApiProxyException {
 
-    if (boxs == null) {
-      boxs = new ArrayList<Rectangle>(Arrays.asList(box1, box2, box3, box4, box5));
-    }
+    // treasureBoxes = new Rectangle[] { box1, box2, box3, box4, box5 };
+    treasureBoxes = new ArrayList<Rectangle>(
+        Arrays.asList(box1, box2, box3, box4, box5));
+    imgBoxes = new ImageView[] { box1BlockImg, box2BlockImg, box3BlockImg, box4BlockImg,
+        box5BlockImg };
+
     imgEndStRoom2 = imgEnd;
 
     // set the obstacles in the room2
@@ -213,10 +220,9 @@ public class Room2Controller {
     interactablePane.setOnDragOver(event -> {
       double x = event.getX();
       double y = event.getY();
-      System.out.println("Dragged over to pirate");
       if (event.getDragboard().hasImage() &&
           (pirate.getBoundsInParent().contains(x, y) ||
-              boxs.stream().anyMatch(box -> box.getBoundsInParent().contains(x, y)))) {
+              treasureBoxes.stream().anyMatch(box -> box.getBoundsInParent().contains(x, y)))) {
         event.acceptTransferModes(TransferMode.ANY);
       }
       event.consume();
@@ -225,31 +231,25 @@ public class Room2Controller {
     interactablePane.setOnDragDropped(event -> {
       double x = event.getX();
       double y = event.getY();
-      System.out.println("drop to pirate");
-      System.out.println("DRAGGING" + MainGameController.getImageSet().getId());
+      System.out.println("DRAGGING " + MainGameController.getImageSet().getId());
       if (event.getDragboard().hasImage()) {
         if (pirate.getBoundsInParent().contains(x, y) &&
-            MainGameController.getImageSet().getId().equals("book")) {
-          if (GameState.isBookFound) {
-            try {
-              tradeCorrectBook();
-            } catch (ApiProxyException e) {
-              e.printStackTrace();
-            }
-          } else {
-            try {
-              tradeWrongBook();
-            } catch (ApiProxyException e) {
-              e.printStackTrace();
-            }
+            MainGameController.getImageSet().getId().equals("book") && GameState.pirateRiddle != null) {
+          try {
+            tradeWithPirate();
+          } catch (ApiProxyException e) {
+            e.printStackTrace();
           }
         } else {
-          for (int i = 0; i < boxs.size(); i++) {
-            if (boxs.get(i).getBoundsInParent().contains(x, y)) {
-              try {
-                getRandomBox(i + 1);
-              } catch (IOException | ApiProxyException e) {
-                e.printStackTrace();
+          if (GameState.isBoxKeyFound) {
+            for (int i = 0; i < treasureBoxes.size(); i++) {
+              if (treasureBoxes.get(i).getBoundsInParent().contains(x, y) &&
+                  MainGameController.getImageSet().getId().equals("key")) {
+                try {
+                  getRandomBox(i + 1);
+                } catch (IOException | ApiProxyException e) {
+                  e.printStackTrace();
+                }
               }
             }
           }
@@ -278,15 +278,11 @@ public class Room2Controller {
 
     piratePane.setVisible(false);
 
-    treasureBoxes = new Rectangle[] { box1, box2, box3, box4, box5 };
-    imgBoxes = new ImageView[] { box1BlockImg, box2BlockImg, box3BlockImg, box4BlockImg,
-        box5BlockImg };
-
     if (GameState.isBoxKeyFound) {
       book.setVisible(true);
       boxKey.setImage(null);
-      for (int i = 0; i < treasureBoxes.length; i++) {
-        Helper.enableAccessToItem(treasureBoxes[i], imgBoxes[i]);
+      for (int i = 0; i < treasureBoxes.size(); i++) {
+        Helper.enableAccessToItem(treasureBoxes.get(i), imgBoxes[i]);
       }
     }
 
@@ -329,7 +325,7 @@ public class Room2Controller {
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.getRiddleForPirate(GameState.trueBook),
         (str) -> {
-          List<String> pirateDialogue = Helper.getTextBetweenChar(str, "^");
+          List<String> pirateDialogue = Helper.getTextBetweenChar(str, "^", false);
           if (pirateDialogue.size() > 0) {
             GameState.pirateRiddle = pirateDialogue.get(0).replaceAll("\"", "");
             Helper.enableAccessToItem(pirate, pirateLoaderImg);
@@ -337,10 +333,10 @@ public class Room2Controller {
         });
 
     // get the encrypted message from GPT
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom2.generateFinalEncrypted(),
         s -> {
-          List<String> msg = Helper.getTextBetweenChar(s, "+");
+          List<String> msg = Helper.getTextBetweenChar(s, "+", false);
           if (msg.size() > 0) {
             GameState.encryptedFinalMsg = msg.get(0);
           } else {
@@ -349,54 +345,56 @@ public class Room2Controller {
         });
 
     // get the encrypted message from GPT
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom2.generateFinalUnencrypted(),
         s -> {
-          List<String> msg = Helper.getTextBetweenChar(s, "+");
+          List<String> msg = Helper.getTextBetweenChar(s, "+", false);
           if (msg.size() > 0) {
             GameState.finalMsg = msg.get(0);
           }
         });
+
+    setPirateResponse();
   }
 
   private void setPirateResponse() throws ApiProxyException {
     // get the pirate response about wrong answer from GPT
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom2.getPirateWrongResponse(),
         (str2) -> {
           Platform.runLater(
               () -> {
-                List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^");
+                List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^", false);
                 if (pirateDialogue.size() > 0) {
-                  GameState.pirateWrongResponse = str2.replaceAll("^", "");
-                  if (!GameState.isBookFound) {
-                    try {
-                      tradeWrongBook();
-                    } catch (ApiProxyException e) {
-                      e.printStackTrace();
-                    }
-                  }
+                  GameState.pirateWrongResponse = pirateDialogue.get(0).replaceAll("^", "");
+                  // if (!GameState.isBookFound) {
+                  // try {
+                  // tradeWrongBook();
+                  // } catch (ApiProxyException e) {
+                  // e.printStackTrace();
+                  // }
+                  // }
                 }
               });
         });
 
     // get the pirate response about correct answer from GPT
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom2.getPirateRightResponse(),
         (str1) -> {
           Platform.runLater(
               () -> {
-                List<String> pirateDialogue = Helper.getTextBetweenChar(str1, "^");
+                List<String> pirateDialogue = Helper.getTextBetweenChar(str1, "^", false);
                 if (pirateDialogue.size() > 0) {
                   GameState.pirateRightResponse = str1.replaceAll("^", "");
-                  if (GameState.isBookFound) {
-                    try {
-                      tradeCorrectBook();
-                    } catch (ApiProxyException e) {
-                      e.printStackTrace();
-                    }
-                  }
-                  Helper.enableAccessToItem(pirate, pirateLoaderImg);
+                  // if (GameState.isBookFound) {
+                  // try {
+                  // tradeCorrectBook();
+                  // } catch (ApiProxyException e) {
+                  // e.printStackTrace();
+                  // }
+                  // }
+                  // Helper.enableAccessToItem(pirate, pirateLoaderImg);
                 }
               });
         });
@@ -411,6 +409,46 @@ public class Room2Controller {
    */
   @FXML
   private void getTradeWithPirate(MouseEvent event) throws IOException, ApiProxyException {
+    if (GameState.takenBook == null) {
+      // no book in inventory
+      GameState.eleanorAi.runGpt(
+          "User update: The pirate has asked the riddle to the user, but has not been solved."
+              + " You can give hints if the user asks. No reply is required");
+
+      displayPirateResponse(GameState.pirateRiddle);
+
+    } else if (GameState.takenBook != null) {
+      // book in inventory
+      // if (!GameState.isPirateResponsePrinted) {
+      // // pirate has not shown response
+
+      // // make pirate loading
+      // // Helper.disableAccessToItem(pirate, pirateLoaderImg);
+      // // GameState.isPirateResponsePrinted = true;
+
+      // // setPirateResponse();
+
+      // } else
+      if (!GameState.isBookFound) {
+        if (!wrongMsgPrinted) {
+          wrongMsgPrinted = true;
+          tradeWrongBook();
+        } else {
+          wrongMsgPrinted = false;
+          displayPirateResponse(GameState.pirateRiddle);
+        }
+      } else if (GameState.isBookFound) {
+        tradeCorrectBook();
+      }
+    }
+  }
+
+  /**
+   * Trade with the pirate by dragging and dropping the key.
+   * 
+   * @throws ApiProxyException
+   */
+  private void tradeWithPirate() throws ApiProxyException {
     if (GameState.takenBook == null) {
       GameState.eleanorAi.runGpt(
           "User update: The pirate has asked the riddle to the user, but has not been solved."
@@ -442,7 +480,7 @@ public class Room2Controller {
    */
   private void tradeWrongBook() throws ApiProxyException {
     GameState.eleanorAi.runGpt(
-        "User update: The user has not solved the book riddle yet. No reply is required");
+        "User update: The user get the wrong book. No reply is required");
     if (GameState.pirateWrongResponse != null) {
       displayPirateResponse(GameState.pirateWrongResponse);
     }
@@ -460,8 +498,8 @@ public class Room2Controller {
             + " You can give hints if the user asks. No reply is required");
 
     // if the player get the correct book, the player can trade with pirate
-    for (int i = 0; i < treasureBoxes.length; i++) {
-      Helper.enableAccessToItem(treasureBoxes[i], imgBoxes[i]);
+    for (int i = 0; i < treasureBoxes.size(); i++) {
+      Helper.enableAccessToItem(treasureBoxes.get(i), imgBoxes[i]);
     }
     boxKey.setVisible(false);
     book.setVisible(true);
@@ -487,18 +525,23 @@ public class Room2Controller {
    */
   private void getRandomBox(int numOfBox) throws IOException, ApiProxyException {
     int boxLocation = GameState.currentBox;
-    System.out.println("Number of treasure box: " + boxLocation);
+    for (int i = 0; i < treasureBoxes.size(); i++) {
+      treasureBoxes.get(i).setDisable(true);
+      imgBoxes[i].setImage(new Image("/images/rooms/room2/disabledMark.png"));
+    }
     if (GameState.isBoxKeyFound) {
       if (numOfBox == boxLocation) {
-        displayPirateResponse(GameState.pirateRightResponse);
         if (!hasKeyRemoved) {
           MainGameController.removeObtainedItem("key");
           hasKeyRemoved = true;
         }
         MainGameController.addOverlay("treasure_box", false);
       } else {
+        GameState.eleanorAi.runGpt(
+            "User update: User clicked the wrong treasure box."
+                + " The location of the correct treasure box is shown in room3 radar."
+                + " No reply is required. If the user ask for hint, give the hint.");
         flashBoxes();
-        displayPirateResponse(GameState.pirateWrongResponse);
         Helper.changeTreasureBox(GameState.currentBox, numOfBox);
       }
     }
@@ -530,9 +573,10 @@ public class Room2Controller {
 
         // After flashing, make the boxes invisible again
         Platform.runLater(() -> {
-          for (Rectangle box : treasureBoxes) {
-            box.setVisible(false);
-            box.setOpacity(1);
+          for (int i = 0; i < treasureBoxes.size(); i++) {
+            treasureBoxes.get(i).setVisible(false);
+            treasureBoxes.get(i).setOpacity(1);
+            Helper.enableAccessToItem(treasureBoxes.get(i), imgBoxes[i]);
           }
         });
 

@@ -28,6 +28,15 @@ public class SplashController {
               });
         });
 
+    GameState.eleanorAi2.runGpt(
+        GptPromptEngineeringRoom1.gameIntro(),
+        s -> {
+          Platform.runLater(
+              () -> {
+                // progressBar.setProgress(.66);
+              });
+        });
+
     // GameState.eleanorAi.runGpt(
     // GptPromptEngineeringRoom1.gameInstructions(),
     // s -> {
@@ -45,7 +54,7 @@ public class SplashController {
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.gameInstructions(),
         s -> {
-          List<String> pirateDialogue = Helper.getTextBetweenChar(s, "#");
+          List<String> pirateDialogue = Helper.getTextBetweenChar(s, "#", false);
           if (pirateDialogue.size() > 0) {
             GameState.instructionMsg = pirateDialogue.get(0);
           }

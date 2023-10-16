@@ -10,8 +10,6 @@
 
 <?import nz.ac.auckland.se206.components.Character?>
 
-
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: black;" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.Room2Controller">
 
    <children>
@@ -29,7 +27,7 @@
             <Rectangle fx:id="rect4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="353.0" layoutY="384.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
             <Rectangle fx:id="rect5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="32.0" layoutX="458.0" layoutY="299.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
             <Rectangle fx:id="rect6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="250.0" layoutY="125.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="71.0" />
-            <Rectangle fx:id="rect7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" layoutX="307.0" layoutY="265.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="19.0" />
+            <Rectangle fx:id="rect7" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" layoutX="307.0" layoutY="254.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="19.0" />
             <Rectangle fx:id="rect8" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="506.0" layoutY="185.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="55.0" />
             <Rectangle fx:id="rect9" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="519.0" layoutY="361.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="34.0" />
             <Rectangle fx:id="rect10" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="14.0" layoutX="7.0" layoutY="420.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />

@@ -335,7 +335,7 @@ public class MainGameController {
   public void onKeyPressed(KeyEvent event) {
     // on key pressed
     String letter = event.getCode().toString();
-    System.out.println("key " + event.getCode() + " pressed");
+    // System.out.println("key " + event.getCode() + " pressed");
     if (!letter.equals(prevLetter)) {
       character.endAnimation(false);
     }
@@ -373,7 +373,7 @@ public class MainGameController {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) {
-    System.out.println("key " + event.getCode() + " released");
+    // System.out.println("key " + event.getCode() + " released");
     String letter = event.getCode().toString();
     if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
       if (letter.equals(prevLetter)) {
@@ -424,7 +424,7 @@ public class MainGameController {
                   // counting hints
                   int noOfHints = Helper.countOccurences(res, "~");
                   String msg = res.replaceAll("~", "");
-                  System.out.println("hints contained" + noOfHints);
+                  System.out.println("Hints contained: " + noOfHints);
 
                   if (noOfHints > 0) {
                     if (GameState.hintsRemaining - 1 >= 0) {

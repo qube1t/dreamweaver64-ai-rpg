@@ -134,7 +134,7 @@ public class GptEngine {
     }
 
     // get chat messages if exists
-    List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*");
+    List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*", true);
     if (chatEntry.size() > 0) {
       Platform.runLater(
           () -> {
