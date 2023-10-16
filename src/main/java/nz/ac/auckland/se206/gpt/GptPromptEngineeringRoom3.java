@@ -39,7 +39,7 @@ public class GptPromptEngineeringRoom3 {
   public static String decryptedLetter() {
     return "User update: The user now has successfully decrypted the letter from"
         + "mom and now the letter is"
-        + " decrypted. The user needs to place the letter into inventory. "
+        + " decrypted. The user now needs to place the letter into inventory. "
         + "Produce a short message to user and"
         + "do not include any hint."
         + " You must surround the message to the user with *.";

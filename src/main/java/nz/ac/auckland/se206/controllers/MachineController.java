@@ -48,6 +48,9 @@ public class MachineController {
         imageSet = null;
         position1Taken = 0;
         position2Taken = 0;
+        custom = null;
+        firstEnter = 0;
+        hasGotLetter = false;
     }
 
     // Set up the drop event handler
@@ -179,10 +182,10 @@ public class MachineController {
         arrowAnimation.setVisible(true);
         arrowStatic.setVisible(false);
         decrypt.setDisable(true);
-        decrypt.setOpacity(0.6);
+        decrypt.setOpacity(0.3);
         System.out.println("Decrypt button clicked");
         hasGotLetter = true;
-        GameState.eleanorAi.runGpt(
+        GameState.eleanorAi2.runGpt(
                 GptPromptEngineeringRoom3.decryptedLetter(),
                 (result) -> {
                     System.out.println(result);
