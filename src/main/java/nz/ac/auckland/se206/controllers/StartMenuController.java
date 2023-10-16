@@ -13,8 +13,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -56,15 +56,21 @@ public class StartMenuController {
   private static Rectangle[] characterArray;
   private static ComboBox<String> difficultyStatic;
   private static ComboBox<String> timeLimitStatic;
-  private static AudioClip selectSound;
-  private static AudioClip startSound;
+  private static MediaPlayer startSoundPlayer;
+  private static MediaPlayer selectSoundPlayer;
 
   public static void selectCharacter(KeyEvent event) {
 
     String direction = event.getCode().toString();
 
     if (direction.equals("ENTER")) {
-      startSound.play();
+      // Check if the player is currently playing
+      if (startSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+        // If it's playing, stop and reset it
+        startSoundPlayer.stop();
+        startSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+      }
+      startSoundPlayer.play();
       Timer timer = new Timer();
       timer.schedule(new TimerTask() {
         @Override
@@ -73,63 +79,47 @@ public class StartMenuController {
             startGameSetting();
           });
         }
-      }, 80);
+      }, 50);
 
     } else if (direction.equals("RIGHT")) {
-      selectSound.play();
+      // Check if the player is currently playing
+      if (selectSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+        // If it's playing, stop and reset it
+        selectSoundPlayer.stop();
+        selectSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+      }
+
+      // Play the sound effect
+      selectSoundPlayer.play();
+
       if (GameState.characterIndex != 4) {
         GameState.characterIndex++;
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-          @Override
-          public void run() {
-            Platform.runLater(() -> {
-              characterArray[GameState.characterIndex - 2].setOpacity(0);
-              characterArray[GameState.characterIndex - 1].setOpacity(1);
-            });
-          }
-        }, 80);
+        characterArray[GameState.characterIndex - 2].setOpacity(0);
+        characterArray[GameState.characterIndex - 1].setOpacity(1);
       } else {
         GameState.characterIndex = 1;
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-          @Override
-          public void run() {
-            Platform.runLater(() -> {
-              characterArray[3].setOpacity(0);
-              characterArray[0].setOpacity(1);
-            });
-          }
-        }, 80);
+        characterArray[3].setOpacity(0);
+        characterArray[0].setOpacity(1);
       }
     } else if (direction.equals("LEFT")) {
-      selectSound.play();
+      // Check if the player is currently playing
+      if (selectSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+        // If it's playing, stop and reset it
+        selectSoundPlayer.stop();
+        selectSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+      }
+
+      // Play the sound effect
+      selectSoundPlayer.play();
+
       if (GameState.characterIndex != 1) {
         GameState.characterIndex--;
-
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-          @Override
-          public void run() {
-            Platform.runLater(() -> {
-              characterArray[GameState.characterIndex - 1].setOpacity(1);
-              characterArray[GameState.characterIndex].setOpacity(0);
-            });
-          }
-        }, 80);
-
+        characterArray[GameState.characterIndex - 1].setOpacity(1);
+        characterArray[GameState.characterIndex].setOpacity(0);
       } else {
         GameState.characterIndex = 4;
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-          @Override
-          public void run() {
-            Platform.runLater(() -> {
-              characterArray[0].setOpacity(0);
-              characterArray[3].setOpacity(1);
-            });
-          }
-        }, 80);
+        characterArray[0].setOpacity(0);
+        characterArray[3].setOpacity(1);
       }
     }
 
@@ -181,16 +171,14 @@ public class StartMenuController {
 
   /** Initialize the start menu. */
   public void initialize() throws ApiProxyException {
-    selectSound = new AudioClip(new Media(App.class.getResource("/sounds/selectSound.mp3").toString())
-        .getSource());
-    selectSound.setVolume(0.3);
-    startSound = new AudioClip(new Media(App.class.getResource("/sounds/enter.mp3").toString())
-        .getSource());
-    startSound.setVolume(0.75);
 
-    // Add audioclip to GameState
-    GameState.soundFx.add(selectSound);
-    GameState.soundFx.add(startSound);
+    Media sound1 = new Media(App.class.getResource("/sounds/selectSound.mp3").toString());
+    Media sound2 = new Media(App.class.getResource("/sounds/enter.mp3").toString());
+    selectSoundPlayer = new MediaPlayer(sound1);
+    startSoundPlayer = new MediaPlayer(sound2);
+
+    selectSoundPlayer.setVolume(0.4);
+    startSoundPlayer.setVolume(0.7);
 
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
@@ -210,16 +198,15 @@ public class StartMenuController {
    */
   @FXML
   public void onClickStartButton(MouseEvent event) throws IOException {
-    startSound.play();
-    Timer timer = new Timer();
-    timer.schedule(new TimerTask() {
-      @Override
-      public void run() {
-        Platform.runLater(() -> {
-          startGameSetting();
-        });
-      }
-    }, 160);
+    // Check if the player is currently playing
+    if (startSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+      // If it's playing, stop and reset it
+      startSoundPlayer.stop();
+      startSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+    }
+    startSoundPlayer.play();
+    startGameSetting();
+
   }
 
   @FXML
@@ -247,20 +234,17 @@ public class StartMenuController {
       Rectangle character = (Rectangle) event.getSource();
       int id = Integer.parseInt(character.getId().toString().substring(2));
       if (GameState.characterIndex != id) {
-        selectSound.play();
+        // Check if the player is currently playing
+        if (selectSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+          // If it's playing, stop and reset it
+          selectSoundPlayer.stop();
+          selectSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+        }
+        selectSoundPlayer.play();
+        character.setOpacity(1);
+        characterArray[GameState.characterIndex - 1].setOpacity(0);
+        GameState.characterIndex = id;
 
-        // Delay the change of opacity to make it look smoother
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-          @Override
-          public void run() {
-            Platform.runLater(() -> {
-              character.setOpacity(1);
-              characterArray[GameState.characterIndex - 1].setOpacity(0);
-              GameState.characterIndex = id;
-            });
-          }
-        }, 80);
       }
     }
   }
