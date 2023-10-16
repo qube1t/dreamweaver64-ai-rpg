@@ -13,6 +13,11 @@ import nz.ac.auckland.se206.GptEngine;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * The EndMenuController class controls the end menu screen of the game. It handles 
+ * the restart and exit button clicks, displays the final message to the player, 
+ * and navigates to the start menu or end credits screen based on user input.
+ */
 public class EndMenuController {
   @FXML
   private Button exit;
@@ -26,9 +31,9 @@ public class EndMenuController {
   private Label letter;
 
   /**
-   * Initialize the end menu.
-   * 
-   * @throws ApiProxyException
+   * Initializes the EndMenuController by re-creating the GptEngine, stopping all sound effects, 
+   * and setting the text to display based on whether the player won or lost.
+   * @throws ApiProxyException if there is an issue with the API proxy
    */
   public void initialize() throws ApiProxyException {
     GameState.eleanorAi = new GptEngine(); // Re-create the GptEngine
@@ -52,14 +57,13 @@ public class EndMenuController {
   }
 
   /**
-   * Handles the restart button click event. Resets the game state and all
-   * controllers, then navigates to the start menu.
-   * 
-   * @param event The mouse click event.
-   * @throws IOException If there is an error navigating to the start menu.
+   * Resets the game state and all controllers, and returns to the start menu.
+   * @param event The mouse event that triggered the restart.
+   * @throws IOException If there is an error loading the start menu.
    */
   @FXML
   private void onClickRestart(MouseEvent event) throws IOException {
+    // Reset the game state and all controllers
     GameState.reset();
     Room1Controller.resetGptRoom1();
     Room2Controller.resetGptRoom2();
@@ -70,10 +74,9 @@ public class EndMenuController {
   }
 
   /**
-   * When the player clicks on the exit button, the game will be closed.
-   * 
-   * @param event the action event
-   * @throws IOException
+   * Exits the application when the exit button is clicked.
+   * @param event The mouse event that triggered the method call.
+   * @throws IOException If an I/O error occurs.
    */
   @FXML
   private void onClickExit(MouseEvent event) throws IOException {
@@ -81,11 +84,11 @@ public class EndMenuController {
   }
 
   /**
-   * When the player clicks on the attribution, the attribution page will be
-   * opened.
-   * 
-   * @param event the mouse event
-   * @throws IOException
+   * Event handler for when the user clicks on the "End Credits" button.
+   * Changes the scene to the end credit screen.
+   *
+   * @param event The mouse event that triggered this method.
+   * @throws IOException If there is an error loading the end credit screen.
    */
   @FXML
   private void onOpenEndCredit(MouseEvent event) throws IOException {

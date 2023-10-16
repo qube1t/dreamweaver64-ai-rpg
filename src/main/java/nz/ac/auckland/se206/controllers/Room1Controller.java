@@ -16,14 +16,10 @@ import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
-/** Controller class for the room view. */
 /**
- * This class is the controller for Room 1 in the game. It handles the
- * initialization of the room,
- * the movement of the character, and the interaction with various objects in
- * the room. It also
- * contains methods for resetting the GPT model for the room and initializing
- * the map.
+ * The Room1Controller class is responsible for controlling the behavior of Room 1 in the game.
+ * It initializes the map, character mobility, and GPT-3 API for generating prompts for the user to interact with.
+ * It also enables/disables buttons and obstacles in the room based on the game state.
  */
 public class Room1Controller {
   // static fields for gpt
@@ -111,13 +107,9 @@ public class Room1Controller {
   private ImageView rightDoorLoaderImg;
 
   /**
-   * Initializes the Room1Controller by setting up obstacles, enabling/disabling
-   * buttons,
-   * initializing the character's mobility, and setting the character's position.
-   * Also initializes GPT if it hasn't been initialized yet and enables the
-   * interact pane.
-   * If ten seconds are left, initializes the map.
-   * 
+   * Initializes the Room1Controller by setting up the obstacles, enabling/disabling buttons 
+   * based on game state, enabling character mobility, initializing GPT, setting character 
+   * position, and initializing the map if ten seconds are left.
    * @throws ApiProxyException if there is an issue with the API proxy
    */
   public void initialize() throws ApiProxyException {
@@ -180,14 +172,9 @@ public class Room1Controller {
   }
 
   /**
-   * Initializes the GPT-3 API to generate prompts for the user to interact with
-   * in Room 1.
-   * The API generates prompts for the user to look around the room and interact
-   * with objects.
-   * Only the chunk of text surrounded with the character * before and after will
-   * be shown to the user.
+   * Initializes the GPT-3 API for Room 1. Retrieves books from GPT-3 and sets up the interact pane. 
+   * Only the chunk of text surrounded with the character * before and after will be shown to the user. 
    * Keep the message 1 sentence.
-   * 
    * @throws ApiProxyException if there is an issue with the API proxy
    */
   private void initGpt() throws ApiProxyException {
@@ -310,7 +297,6 @@ public class Room1Controller {
   /**
    * Handles the event when the crockeries button is clicked.
    * Adds an overlay for the crockery shelf to the main game controller.
-   * 
    * @throws ApiProxyException if there is an issue with the API proxy
    * @throws IOException       if there is an issue with IO operations
    */

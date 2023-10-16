@@ -41,19 +41,26 @@ public class TreasureBoxController {
   }
 
   /**
-   * When the player clicks on the treasure box, the encrypted message will be
-   * displayed.
+   * This method is called when the user clicks on the treasure box. It runs the
+   * GPT model to
+   * generate a message indicating that the user has obtained the treasure. The
+   * treasure box
+   * is then disabled, the encrypted message is displayed, and the treasure image
+   * is added
+   * to the inventory. No reply is required, but a hint can be given if the user
+   * asks for one.
    *
-   * @param event the action event
-   * @throws IOException
-   * @throws ApiProxyException
+   * @param event The event triggered by the user clicking on the treasure box.
+   * @throws IOException       If an I/O error occurs while running the GPT model.
+   * @throws ApiProxyException If an error occurs while running the GPT model.
    */
   @FXML
   private void onGetTreasure(ActionEvent event) throws IOException, ApiProxyException {
     GameState.eleanorAi.runGpt(
-        "User update: User opened the treasure box and got the treasure which is the encrypted message."
-            + " To decrypte the message, user need to use engine machine. No reply is required"
-            + " If the user ask for hint, give the hint.");
+        "User update: User opened the treasure box and got the treasure which is "
+            + " the encrypted message. To decrypte the message, user need to use "
+            + " engine machine. No reply is required. If the user ask for hint, "
+            + " give the hint.");
     treasure.setDisable(true);
     GameState.isEncryptedMessageFound = true;
     imgTreasure.setVisible(false);

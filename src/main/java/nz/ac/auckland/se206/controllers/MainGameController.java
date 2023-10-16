@@ -8,9 +8,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.Node;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -62,8 +60,6 @@ public class MainGameController {
 
   private static Label timerInitiated;
   private static Label hintInitiated;
-  @FXML
-  private Label statusLbl;
   private static Label statusLblInitiated;
   private static ImageView item1Initiated;
   private static ImageView item2Initiated;
@@ -74,9 +70,8 @@ public class MainGameController {
   private static CustomImageSet imageSetDragging;
 
   /**
-   * Returns the instance of the MainGameController singleton.
-   * 
-   * @return the instance of the MainGameController singleton.
+   * This class is the controller for the main game screen.
+   * It manages the game logic and user interface.
    */
   public static MainGameController getInstance() {
     return instance;
@@ -84,10 +79,8 @@ public class MainGameController {
 
   /**
    * Updates the inventory UI with the initialized images.
-   * 
    * This method sets up the drag and drop functionality for the inventory items
    * and updates the UI with the obtained items.
-   * 
    */
   private static void updateInventoryUi() {
     // updating inventory ui with initialised images
@@ -165,7 +158,6 @@ public class MainGameController {
 
   /**
    * Removes the item with the specified ID from the player's inventory.
-   * 
    * @param itemId the ID of the item to be removed
    */
   public static void removeObtainedItem(String itemId) {
@@ -213,10 +205,9 @@ public class MainGameController {
 
   /**
    * Adds an overlay to the game pane.
-   * 
-   * @param roomN  the name of the FXML file for the overlay
-   * @param isRoom a boolean indicating whether the overlay is a room or not
-   * @throws IOException if the FXML file cannot be loaded
+   * @param roomN The name of the room to add as an overlay.
+   * @param isRoom A boolean indicating whether the overlay is a room or not.
+   * @throws IOException If the FXML file for the room cannot be loaded.
    */
   public static void addOverlay(String roomN, boolean isRoom) throws IOException {
     // adds overlay to the game pane
@@ -263,7 +254,6 @@ public class MainGameController {
   /**
    * Removes the overlay from the game screen. If alsoRooms is true, it also
    * removes the rooms and ends the character animation.
-   * 
    * @param alsoRooms a boolean indicating whether to remove the rooms as well
    */
   public static void removeOverlay(boolean alsoRooms) {
@@ -322,6 +312,8 @@ public class MainGameController {
   @FXML
   private Label bubbleText;
   @FXML
+  private Label statusLbl;
+  @FXML
   private ListView<Label> chat;
   @FXML
   private TextField chatInput;
@@ -335,11 +327,9 @@ public class MainGameController {
 
   /**
    * Initializes the game by setting up various components such as the timer, hint
-   * count, and inventory items.
-   * Also sets up the bubble chat and adds an instruction overlay to the bottom of
-   * the outer pane.
-   * Finally, initializes the game state and starts playing the background music
-   * if not muted.
+   * count, and inventory items. Also sets up the bubble chat and adds an instruction 
+   * overlay to the bottom of the outer pane. Finally, initializes the game state and 
+   * starts playing the background music if not muted.
    *
    * @throws IOException if there is an error loading the instruction overlay FXML
    *                     file.
@@ -485,7 +475,6 @@ public class MainGameController {
    * chat box and sent to the Eleanor AI for a response. The response is then
    * displayed in the chat box. If the response contains hints, the number of
    * remaining hints is updated.
-   * 
    * @param ke The KeyEvent object representing the key press event.
    * @throws ApiProxyException if there is an error with the API proxy.
    */
@@ -527,10 +516,8 @@ public class MainGameController {
 
   /**
    * Adds a chat message to the chat pane.
-   * 
-   * @param text      The text of the chat message.
-   * @param isEleanor A boolean indicating whether the chat message is from
-   *                  Eleanor or not.
+   * @param text the text of the chat message
+   * @param isEleanor true if the chat message is from Eleanor, false otherwise
    */
   public void addChat(String text, boolean isEleanor) {
     System.out.println("add chat");
@@ -617,9 +604,9 @@ public class MainGameController {
   }
 
   /**
-   * Sets the time limit.
-   *
-   * @param timeLimit
+   * Sets the time limit for the game and starts a thread to count down from the time limit.
+   * 
+   * @param timeLimit the time limit in seconds
    */
   private void setTimeLimit(int timeLimit) {
     // setting time limit thread to count down from time limit.
@@ -675,8 +662,7 @@ public class MainGameController {
 
   /**
    * Handles the time limit reached event.
-   *
-   * @throws IOException
+   * @throws IOException if there is an error loading the end menu FXML file
    */
   private void handleTimeLimitReached() throws IOException {
     // time limit reached
