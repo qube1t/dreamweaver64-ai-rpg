@@ -256,15 +256,16 @@ public class Room1Controller {
   private void onClickCrockeries() throws ApiProxyException, IOException {
     // crockeries clicked
     MainGameController.addOverlay("crockery_shelf", false);
-    GameState.eleanorAi.runGpt(
-        "User update, User has opened an empty book shelf. No reply needed");
+    // GameState.eleanorAi.runGpt(
+    // "User update, User has opened an empty book shelf. No reply needed");
   }
 
   @FXML
   private void onClickChest() throws ApiProxyException, IOException {
     // chest clicked
     MainGameController.addOverlay("chest", false);
-    GameState.eleanorAi.runGpt(
-        "User update: opened the chest, but there is nothing to see there. No reply needed.");
+    // GameState.eleanorAi.runGpt(
+    // "User update: opened the chest, but there is nothing to see there. No reply
+    // needed.");
   }
 }

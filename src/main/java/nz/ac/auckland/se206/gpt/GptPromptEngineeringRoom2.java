@@ -43,10 +43,9 @@ public class GptPromptEngineeringRoom2 {
    * @return the unencrypted message
    */
   public static String generateFinalUnencrypted() {
-    return "This is the loading stage. Give the contents of the lost message to be shown to the"
-        + " user. The contents of the letter needs to be between the character +. it has to"
-        + " be only 2 sentences long. Maybe foretelling some prophecy. Should try to reveal"
-        + " some fact";
+    return "Give the contents of the lost message"
+        + " The contents of the letter needs to be between the character +. it has to"
+        + " be short and without any salutations. Maybe foretelling some prophecy. Should be deep & philosophical";
   }
 
   /**
