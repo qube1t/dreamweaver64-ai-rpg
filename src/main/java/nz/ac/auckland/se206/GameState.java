@@ -253,8 +253,8 @@ public class GameState {
     // Reset destnation cities array of size 8.
     destnationCities = new String[8];
     destnationCityIndex = -1;
-    arrangedDestnationCity = "";
-    unarrangedDestnationCity = "";
+    arrangedDestnation = "";
+    unarrangedDestnation = "";
     hasPuzzleSolved = false;
     currentCityIndex = -1;
     currentCities = null;
