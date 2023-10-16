@@ -45,7 +45,7 @@ public class MachineController {
     custom = null;
     firstEnter = 0;
     hasGotLetter = false;
-   }
+  }
 
   @FXML
   private AnchorPane machinePane;
