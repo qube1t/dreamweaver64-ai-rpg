@@ -174,6 +174,8 @@ public class Room1Controller {
             + " sentance. .",
         str -> {
           System.out.println("111");
+          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
 
     // GameState.eleanorAi.runGpt(GptPromptEngineeringRoom1.get7Books(), str -> {
@@ -196,8 +198,8 @@ public class Room1Controller {
           GameState.booksLoaded = true;
           // get riddle from gpt
           GameState.isRoom1GptDone = true;
-          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+          // Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          // Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
   }
 
