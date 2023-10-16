@@ -5,7 +5,7 @@ public class GptPromptEngineeringRoom2 {
 
   /**
    * Generate the prompt when the player enters the room 2 first time.
-   * 
+   *
    * @return the prompt
    */
   public static String room2WelcomeMessage() {
@@ -19,7 +19,7 @@ public class GptPromptEngineeringRoom2 {
 
   /**
    * Generate the prompt when the player get wrong answer in the riddle.
-   * 
+   *
    * @return the prompt
    */
   public static String getPirateWrongResponse() {
@@ -29,7 +29,7 @@ public class GptPromptEngineeringRoom2 {
 
   /**
    * Generate the prompt when the player get right answer in the riddle.
-   * 
+   *
    * @return the prompt
    */
   public static String getPirateRightResponse() {
@@ -40,7 +40,7 @@ public class GptPromptEngineeringRoom2 {
   /**
    * Generate the unencrypted message that the player will get when they exit the
    * game.
-   * 
+   *
    * @return the unencrypted message
    */
   public static String generateFinalUnencrypted() {
@@ -53,7 +53,7 @@ public class GptPromptEngineeringRoom2 {
   /**
    * Generate the encrypted message that the player will get when they get the
    * treasure.
-   * 
+   *
    * @return the encrypted message
    */
   public static String generateFinalEncrypted() {

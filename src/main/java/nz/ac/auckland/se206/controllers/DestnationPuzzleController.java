@@ -57,7 +57,7 @@ public class DestnationPuzzleController {
    * sets progress bar to invisible, initializes the puzzle with unarranged puzzle
    * string,
    * and sets the introduction text to the puzzle intro message for room 3.
-   * 
+   *
    * @throws ApiProxyException if there is an issue with the API proxy
    */
   public void initialize() throws ApiProxyException {
@@ -99,7 +99,7 @@ public class DestnationPuzzleController {
    * message and hides the submit button.
    * If the answer is incorrect, it updates the introduction label with a failure
    * message and enables the submit button.
-   * 
+   *
    * @throws ApiProxyException if there is an error with the API proxy
    */
   @FXML
@@ -196,7 +196,7 @@ public class DestnationPuzzleController {
    * Sets the cursor of the letter box based on the given status.
    * If the status is 0, the cursor is set to OPEN_HAND.
    * If the status is not 0, the cursor is set to CLOSED_HAND.
-   * 
+   *
    * @param status the status of the cursor to be set
    */
   public void setLetterCursor(int status) {

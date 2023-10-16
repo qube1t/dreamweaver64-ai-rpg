@@ -33,6 +33,11 @@ public class InstructionsLoadController {
     initialisedTimeTxt.setText("You have " + t + " mins.");
   }
 
+  @FXML
+  private Label instructTxt;
+  @FXML
+  private Label timeTxt;
+
   /**
    * Initializes the InstructionsLoadController by setting the initial time and
    * text.
@@ -47,11 +52,6 @@ public class InstructionsLoadController {
     setText();
     setTime(Integer.parseInt(GameState.gameMode[1].replaceAll("[\\D]", "")) + "");
   }
-
-  @FXML
-  private Label instructTxt;
-  @FXML
-  private Label timeTxt;
 
   /**
    * Calls the setText method to produce another fact.

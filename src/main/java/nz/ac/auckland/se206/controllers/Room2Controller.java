@@ -25,10 +25,11 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /**
  * This class is the controller for Room 2 in the game. It handles the
- * initialization of the room, resetting the GPT for the room, setting 
- * the end image when the time is up, and enabling the drag and drop 
- * functionality for the pirate and treasure boxes. It also contains the 
- * obstacles and interactable items in the room, such as the character, boxes, and doors.
+ * initialization of the room, resetting the GPT for the room, setting
+ * the end image when the time is up, and enabling the drag and drop
+ * functionality for the pirate and treasure boxes. It also contains the
+ * obstacles and interactable items in the room, such as the character, boxes,
+ * and doors.
  */
 public class Room2Controller {
 
@@ -177,11 +178,12 @@ public class Room2Controller {
   private ArrayList<Rectangle> treasureBoxes;
 
   /**
-   * Initializes the Room2Controller by setting up the obstacles, enabling 
-   * mobility for the character, initializing the GPT if the player has not 
-   * entered the room 2, enabling access to items, setting up drag and drop 
-   * functionality for the pirate and treasure boxes, setting the location 
-   * of the character depending on the previous room, and playing the sea ambiance.
+   * Initializes the Room2Controller by setting up the obstacles, enabling
+   * mobility for the character, initializing the GPT if the player has not
+   * entered the room 2, enabling access to items, setting up drag and drop
+   * functionality for the pirate and treasure boxes, setting the location
+   * of the character depending on the previous room, and playing the sea
+   * ambiance.
    * If the player has the key, the player can open the treasure box.
    * If 10 seconds left, sets the map image on room2.
    *
@@ -374,7 +376,7 @@ public class Room2Controller {
 
   /**
    * Sets the pirate response for both correct and wrong answers by retrieving
-   * them from GPT and updating the GameState. Uses Platform.runLater to ensure 
+   * them from GPT and updating the GameState. Uses Platform.runLater to ensure
    * the UI is updated on the JavaFX Application Thread.
    *
    * @throws ApiProxyException if there is an error with the API proxy
@@ -409,10 +411,10 @@ public class Room2Controller {
 
   /**
    * This method is called when the player clicks on the "Trade with Pirate"
-   * button in Room 2. If the player does not have the book, the player needs 
-   * to solve the riddle first. If the player has the book, the method tries 
-   * to trade with the pirate. If the player has the wrong book, the method 
-   * displays an error message. If the player has the correct book, the method 
+   * button in Room 2. If the player does not have the book, the player needs
+   * to solve the riddle first. If the player has the book, the method tries
+   * to trade with the pirate. If the player has the wrong book, the method
+   * displays an error message. If the player has the correct book, the method
    * initiates the trade.
    *
    * @param event The mouse event that triggered the method call.
@@ -454,8 +456,9 @@ public class Room2Controller {
    * This method attempts to trade with the pirate if the player has the book.
    * If the player does not have the book, it will call tradeWrongBook() method to
    * display a message. If the player has the correct book, it will call
-   * tradeCorrectBook() method to initiate the trade. If the player has already 
-   * displayed the wrong message, it will display the pirate's response to the riddle.
+   * tradeCorrectBook() method to initiate the trade. If the player has already
+   * displayed the wrong message, it will display the pirate's response to the
+   * riddle.
    *
    * @throws ApiProxyException if there is an issue with the API proxy
    */
@@ -492,8 +495,9 @@ public class Room2Controller {
   /**
    * This method is called when the player has solved the book riddle and obtained
    * the correct book. It enables access to the treasure boxes, hides the box key,
-   * displays the correct book, and displays the pirate's response if available. 
-   * If the box key has not been found before, it adds the key image to the inventory 
+   * displays the correct book, and displays the pirate's response if available.
+   * If the box key has not been found before, it adds the key image to the
+   * inventory
    * and removes the book image.
    *
    * @throws ApiProxyException if there is an issue with the API proxy
@@ -525,7 +529,8 @@ public class Room2Controller {
 
   /**
    * Gets a random treasure box and checks if the player has the key to open it.
-   * If the player has the key, the treasure box is opened. Otherwise, the treasure 
+   * If the player has the key, the treasure box is opened. Otherwise, the
+   * treasure
    * boxes are flashed and the current treasure box is changed.
    *
    * @param numOfBox the number of the treasure box to be opened
@@ -608,9 +613,11 @@ public class Room2Controller {
   /**
    * Handles the event when the first treasure box is clicked.
    * Calls the getRandomBox method with parameter 1.
+   *
    * @param event The MouseEvent that triggered this method.
-   * @throws IOException If an I/O error occurs.
-   * @throws ApiProxyException If an error occurs while communicating with the API.
+   * @throws IOException       If an I/O error occurs.
+   * @throws ApiProxyException If an error occurs while communicating with the
+   *                           API.
    */
   @FXML
   private void onClickBox1(MouseEvent event) throws IOException, ApiProxyException {
@@ -621,24 +628,26 @@ public class Room2Controller {
   /**
    * Handles the event when the first treasure box is clicked.
    * Calls the getRandomBox method with parameter 2.
-   * 
+   *
    * @param event The MouseEvent that triggered this method.
-   * @throws IOException If an I/O error occurs.
-   * @throws ApiProxyException If an error occurs while communicating with the API.
+   * @throws IOException       If an I/O error occurs.
+   * @throws ApiProxyException If an error occurs while communicating with the
+   *                           API.
    */
   @FXML
   private void onClickBox2(MouseEvent event) throws IOException, ApiProxyException {
     System.out.println("Second teasure box clicked");
     getRandomBox(2);
   }
-  
+
   /**
    * Handles the event when the third treasure box is clicked.
    * Calls the getRandomBox method with the box number as 3.
    *
    * @param event The MouseEvent that triggered this method.
-   * @throws IOException If an I/O error occurs.
-   * @throws ApiProxyException If an error occurs while communicating with the API.
+   * @throws IOException       If an I/O error occurs.
+   * @throws ApiProxyException If an error occurs while communicating with the
+   *                           API.
    */
   @FXML
   private void onClickBox3(MouseEvent event) throws IOException, ApiProxyException {
@@ -651,8 +660,9 @@ public class Room2Controller {
    * Calls the getRandomBox method with the parameter 4.
    *
    * @param event The mouse event that triggered this method.
-   * @throws IOException If an I/O error occurs.
-   * @throws ApiProxyException If an error occurs while communicating with the API.
+   * @throws IOException       If an I/O error occurs.
+   * @throws ApiProxyException If an error occurs while communicating with the
+   *                           API.
    */
   @FXML
   private void onClickBox4(MouseEvent event) throws IOException, ApiProxyException {
@@ -665,8 +675,9 @@ public class Room2Controller {
    * Calls the getRandomBox method with the box number as an argument.
    *
    * @param event The MouseEvent that triggered this method.
-   * @throws IOException If an I/O error occurs.
-   * @throws ApiProxyException If an error occurs while communicating with the API.
+   * @throws IOException       If an I/O error occurs.
+   * @throws ApiProxyException If an error occurs while communicating with the
+   *                           API.
    */
   @FXML
   private void onClickBox5(MouseEvent event) throws IOException, ApiProxyException {
@@ -676,14 +687,15 @@ public class Room2Controller {
 
   /**
    * Handles the event when the user clicks on the button to open Room 1.
-   * This method sets the text for the instructions, disables the interact pane 
-   * for transition, stops the sea ambiance sound if it is playing, runs the GPT 
-   * model to update the user's status, removes the current overlay and adds the 
+   * This method sets the text for the instructions, disables the interact pane
+   * for transition, stops the sea ambiance sound if it is playing, runs the GPT
+   * model to update the user's status, removes the current overlay and adds the
    * overlay for Room 1.
    *
    * @param event The mouse event that triggered this method.
-   * @throws IOException If an I/O error occurs.
-   * @throws ApiProxyException If an error occurs while communicating with the API.
+   * @throws IOException       If an I/O error occurs.
+   * @throws ApiProxyException If an error occurs while communicating with the
+   *                           API.
    */
   @FXML
   private void onOpenRoom1(MouseEvent event) throws IOException, ApiProxyException {
@@ -705,13 +717,16 @@ public class Room2Controller {
 
   /**
    * Handles the event when the user clicks on the door to Room 3.
-   * Loads Room 3, disables the interact pane for transition, removes overlay, adds 
-   * overlay for Room 3, runs GPT-3 to update Eleanor AI, and stops the sea ambiance 
+   * Loads Room 3, disables the interact pane for transition, removes overlay,
+   * adds
+   * overlay for Room 3, runs GPT-3 to update Eleanor AI, and stops the sea
+   * ambiance
    * sound if it is playing.
    *
    * @param event The mouse event that triggered this method.
-   * @throws IOException If there is an error loading Room 3.
-   * @throws ApiProxyException If there is an error running GPT-3 to update Eleanor AI.
+   * @throws IOException       If there is an error loading Room 3.
+   * @throws ApiProxyException If there is an error running GPT-3 to update
+   *                           Eleanor AI.
    */
   @FXML
   private void onOpenRoom3(MouseEvent event) throws IOException, ApiProxyException {

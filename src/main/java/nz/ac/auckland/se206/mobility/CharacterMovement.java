@@ -92,7 +92,6 @@ public class CharacterMovement {
         if (interactable instanceof Rectangle) {
           interactable.getStyleClass().add("action-btn");
         }
-        // interactable.getStyleClass().add("action-btn");
       } else {
         interactable.setVisible(false);
         if (interactable instanceof Rectangle)
@@ -131,8 +130,6 @@ public class CharacterMovement {
     // Set the new player positon
     player.setLayoutX(player.getLayoutX() + dx);
     player.setLayoutY(player.getLayoutY() + dy);
-
-    // System.out.println();
 
     // Return to the old position if there is a collision
     if (checkCollision()) {

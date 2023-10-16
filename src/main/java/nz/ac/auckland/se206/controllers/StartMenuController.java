@@ -236,8 +236,6 @@ public class StartMenuController {
     } else {
       muteIcon.setImage(new Image("/images/main_game/icons/music_on.png"));
     }
-    // Image volIcon = new Image("images/volume.png");
-    // muteIcon.setImage(volIcon);
   }
 
   /**

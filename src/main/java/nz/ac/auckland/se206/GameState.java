@@ -177,15 +177,18 @@ public class GameState {
 
   // Reset game-related variables
   private static void resetGameVariables() {
+    // Reset the event filter for character selection
     isEventFilter = false;
     isRiddleResolved = false;
     tenSecondsLeft = false;
     gameMode = null;
+    // Reset mute setting
     isMuted = false;
     hintsRemaining = 0;
     mainGame = null;
     timeLimitReached = false;
     prevRoom = 1;
+    // Reset win the game to false.
     winTheGame = false;
     characterIndex = 1;
   }

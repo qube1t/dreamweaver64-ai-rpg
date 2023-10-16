@@ -16,7 +16,8 @@ import javafx.scene.shape.Rectangle;
 public class Helper {
 
   /**
-   * Get the text between two characters.
+   * Get the text between two characters. This is done by using regex to find the
+   * text between the two characters.
    *
    * @param str
    * @param c
@@ -40,9 +41,10 @@ public class Helper {
   }
 
   /**
-   * Change the treasure box.
+   * Change the treasure box. This is done by generating a random number between 1
+   * and 5.
    *
-   * @param currentBoxNumber
+   * @param currentBoxNumbers
    * @param clickBox
    */
   public static void changeTreasureBox(int currentBoxNumber, int clickBox) {
@@ -59,13 +61,14 @@ public class Helper {
   }
 
   /**
-   * Get a random number between two numbers.
+   * Returns a random integer between the specified minimum and maximum values
+   * (inclusive).
    *
-   * @param min
-   * @param max
-   * @return
+   * @param min the minimum value of the range (inclusive)
+   * @param max the maximum value of the range (inclusive)
+   * @return a random integer between the specified minimum and maximum values
+   *         (inclusive)
    */
-  // https://www.baeldung.com/java-generating-random-numbers-in-range
   public static int getRandomNumber(int min, int max) {
     return (int) ((Math.random() * (max - min)) + min);
   }
@@ -89,7 +92,8 @@ public class Helper {
   }
 
   /**
-   * Enable access to an item.
+   * Enable access to an item. This is done by removing the loading gif and
+   * setting the button to be enabled.
    *
    * @param btn
    * @param img
@@ -100,7 +104,8 @@ public class Helper {
   }
 
   /**
-   * Disable access to an item.
+   * Disable access to an item. This is done by adding the loading gif and setting
+   * the button to be disabled.
    *
    * @param btn
    * @param img

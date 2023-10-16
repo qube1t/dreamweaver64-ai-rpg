@@ -30,7 +30,7 @@ public class EndCreditController {
   /**
    * This method is called when the exit button is clicked. It sets the root of
    * the application to the end_menu.
-   * 
+   *
    * @param event The event that triggered the method call.
    * @throws IOException If an I/O error occurs.
    */

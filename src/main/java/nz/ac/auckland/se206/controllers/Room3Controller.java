@@ -291,7 +291,6 @@ public class Room3Controller {
     MainGameController.addOverlay("sub3", false);
   }
 
-  @FXML
   /**
    * This method is called when the puzzle is clicked It will open the puzzle
    * game.
@@ -299,6 +298,7 @@ public class Room3Controller {
    * @throws IOException
    * @throws ApiProxyException
    */
+  @FXML
   public void onClickPuzzle() throws IOException, ApiProxyException {
     System.out.println("destnation city is " + GameState.arrangedDestnationCity);
     // Add the puzzle game overlay
@@ -338,12 +338,12 @@ public class Room3Controller {
             + " the hints. No need to respond to this message.");
   }
 
-  @FXML
   /**
    * This method is called when the book is clicked It will open the flight plan
    * if it is not open
    * and if the flight plan is open, then it will close the flight plan
    */
+  @FXML
   public void clickMachineEvent() throws IOException, ApiProxyException {
     GameState.isMachineOpen = true;
     MainGameController.addOverlay("decryption_machine", false);
