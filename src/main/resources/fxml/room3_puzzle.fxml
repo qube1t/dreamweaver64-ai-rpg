@@ -44,28 +44,28 @@
             <Image url="@../images/rooms/room3/slow_square_earth.gif" />
          </image>
       </ImageView>
-      <Label fx:id="introduction" layoutX="158.0" layoutY="66.0" prefHeight="79.0" prefWidth="285.0" style="-fx-border-color: red; -fx-border-width: 2;" styleClass="centralDisplayUnitOutput" stylesheets="@../css/font.css" textAlignment="CENTER" textFill="#15dae4" wrapText="true">
+      <Label fx:id="introduction" layoutX="158.0" layoutY="66.0" prefHeight="110.0" prefWidth="285.0" style="-fx-border-color: red; -fx-border-width: 2;" styleClass="puzzleGame" stylesheets="@../css/font.css" textAlignment="CENTER" textFill="#15dae4" wrapText="true">
          <font>
             <Font name="Impact" size="17.0" />
          </font></Label>
-      <ProgressBar fx:id="load" layoutX="249.0" layoutY="115.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" style="-fx-background-color: red;" />
-      <Label fx:id="loadText" layoutX="263.0" layoutY="81.0" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" text="CHECKING..." textFill="RED">
+      <ProgressBar fx:id="load" layoutX="249.0" layoutY="123.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" style="-fx-background-color: red;" />
+      <Label fx:id="loadText" layoutX="263.0" layoutY="88.0" styleClass="centralDisplayUnitInput" stylesheets="@../css/font.css" text="CHECKING..." textFill="RED">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="submit" layoutX="266.0" layoutY="200.0" mnemonicParsing="false" onMouseClicked="#onClickSubmit" style="-fx-background-color: #15dae4;" styleClass="encryptedMessage" stylesheets="@../css/font.css" text="SUBMIT">
+      <Button fx:id="submit" layoutX="266.0" layoutY="220.0" mnemonicParsing="false" onMouseClicked="#onClickSubmit" style="-fx-background-color: #15dae4;" styleClass="encryptedMessage" stylesheets="@../css/font.css" text="SUBMIT">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
       </Button>
-      <Button fx:id="exit" layoutX="274.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="32.0" prefWidth="46.0" style="-fx-background-color: #2ecc71##808080FF5733;" styleClass="encryptedMessage" stylesheets="@../css/font.css" text="EXIT" textFill="#250000">
+      <Button fx:id="exit" layoutX="275.0" layoutY="180.0" mnemonicParsing="false" onMouseClicked="#onClickClose" prefHeight="32.0" prefWidth="46.0" style="-fx-background-color: #2ecc71##808080FF5733;" styleClass="encryptedMessage" stylesheets="@../css/font.css" text="EXIT" textFill="#250000">
          <font>
             <Font name="Impact" size="20.0" />
          </font>
       </Button>
       <Rectangle fx:id="letterCursor" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="67.0" layoutX="137.0" layoutY="240.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="322.0" />
-      <HBox fx:id="letterBox" layoutX="139.0" layoutY="243.0" prefHeight="63.0" prefWidth="323.0">
+      <HBox fx:id="letterBox" layoutX="139.0" layoutY="270.0" prefHeight="63.0" prefWidth="323.0">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor></HBox>

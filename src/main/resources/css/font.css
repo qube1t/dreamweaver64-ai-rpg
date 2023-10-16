@@ -34,6 +34,11 @@
     -fx-font-ssize: 20px;
 }
 
+.puzzleGame {
+    -fx-font-family: 'Abaddon Bold';
+    -fx-font-ssize: 12px;
+}
+
 .currentLocations {
     -fx-font-family: 'Abaddon Bold';
     -fx-font-size: 18px;

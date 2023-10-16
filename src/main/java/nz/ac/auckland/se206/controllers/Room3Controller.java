@@ -56,6 +56,8 @@ public class Room3Controller {
 
   public static void resetGptRoom3() {
     gptInit = false;
+    flightComputer = null;
+    lockRed = null;
   }
 
   public static void enableFlightComputer() {
@@ -131,7 +133,6 @@ public class Room3Controller {
    */
   public void initialize() throws ApiProxyException {
 
-
     flightComputer = clickableComputer1;
     lockRed = lock;
 
@@ -154,7 +155,7 @@ public class Room3Controller {
       // Set the puzzle load image to invisible if the puzzle is not loaded.
       clickableComputer2.setDisable(true);
     }
-    
+
     if (!gptInit) {
       gptInitilize();
       gptInit = true;
@@ -333,12 +334,11 @@ public class Room3Controller {
     // Add the puzzle game overlay
     MainGameController.addOverlay("room3_puzzle", false);
     GameState.eleanorAi.runGpt(
-        "User update: User has opened the unarranged word puzzle game. The correct destnation city"
-            + " name is "
+        "User update: User has opened the unarranged word puzzle game. The correct"
+            + " destination city name is "
             + GameState.arrangedDestnation
-            + ". No reply is needed for this message. If the user ask for"
-            + " hints, give hint without"
-            + " revealing the city name.");
+            + ". Only give hints if the user asks for hints, "
+            + " and give hint without revealing the city name. No response required");
   }
 
   /**
@@ -403,16 +403,16 @@ public class Room3Controller {
 
     GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom3.getEightRandomCity(),
-        (result) -> {
+        (randomCities) -> {
 
           // Get the list of cities from the result
-          List<String> cities = Helper.getTextBetweenChar(result, "^", false);
+          List<String> cities = Helper.getTextBetweenChar(randomCities, "^", false);
           // Set the list of cities to the game state
           GameState.destnationCities = cities.toArray(new String[cities.size()]);
           GameState.destnationCityIndex = Helper.getRandomNumber(0, cities.size() - 1);
           GameState.arrangedDestnation = (cities.get(GameState.destnationCityIndex));
           // Print the city generated
-          System.out.println(result);
+          System.out.println(randomCities);
           System.out.println("Arranged:" + GameState.destnationCities.toString()
               + "Destnation city is " + GameState.arrangedDestnation);
 
@@ -421,9 +421,9 @@ public class Room3Controller {
 
     GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
-        (result) -> {
-          System.out.println(result);
-          GameState.puzzleIntroMessageRoom3 = result;
+        (puzzleWelcome) -> {
+          System.out.println(puzzleWelcome);
+          GameState.puzzleIntroMessageRoom3 = puzzleWelcome;
           GameState.isPuzzleLoaded = true;
           Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
         });

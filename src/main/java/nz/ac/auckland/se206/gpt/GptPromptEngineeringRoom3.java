@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206.gpt;
 
+import nz.ac.auckland.se206.GameState;
+
 /**
  * This class contains static methods that generate GPT prompt engineering
  * strings for various
@@ -32,13 +34,13 @@ public class GptPromptEngineeringRoom3 {
   public static String room3WelcomeMessage() {
 
     // Ask GPT for the introduction of the game.
-    return "User update: Give the user a short welcome message, do not include any " 
+    return "User update: Give the user a short welcome message, do not include any "
         + "information of next step and surround the message to be displayed to user "
-        + " with * based on the mission below.The user now entered an air traffic"
+        + " with * based on the mission below. The user now entered an air traffic "
         + " control tower which was his work in real life. The user needs to interact "
-        + " with different objects including solving a puzzle to get the aircraft code." 
-        + " The aircraft code combined with encrypted message in another room is"
-        + " required to decrypt the letter. You need to achknowledge the current "
+        + " with different objects including solving a puzzle to get the aircraft code."
+        + " The aircraft code combined with encrypted message in pirate ship is"
+        + " required to decrypt the letter from mom. You need to achknowledge the current "
         + " state of the game and I will give you user action updates.";
   }
 
@@ -85,10 +87,11 @@ public class GptPromptEngineeringRoom3 {
    * @return a welcome message for the puzzle game
    */
   public static String getIntroPuzzleMessage() {
-    return "Now the player enters the puzzle game which gives a"
-        + " unarranged destnation city name and the player need to drag and change the"
-        + " position of the letter until the correct destnation city. Write a 10 words welcome"
-        + " message and do not surround the message with *.";
+    return "Now the player enters the puzzle game in a ATC tower "
+        + "(his previous work place) which gives a"
+        + " puzzle for destnation city name and the player need to play it to get the city."
+        + "Generate a creative welcome message to him and do not surround "
+        + "with * or quote. The message must within 15 words";
   }
 
   /**
@@ -113,7 +116,8 @@ public class GptPromptEngineeringRoom3 {
    */
   public static String correctPuzzleRoom3() {
     return "User update: Now the user has correctly rearranged the destnation city name say"
-        + " correct and congrats the user about the achievement and do not surrounded with"
-        + " *";
+        + " correct and congrats the user in a createive way about the achievement"
+        + " and do not surrounded with *. The message must within 15 words.";
+
   }
 }

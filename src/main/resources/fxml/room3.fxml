@@ -53,7 +53,7 @@
             <Rectangle fx:id="bound1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="19.0" layoutX="322.0" layoutY="286.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="18.0" />
             <Rectangle fx:id="bound3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="17.0" layoutX="226.0" layoutY="211.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="105.0" />
             <Rectangle fx:id="bound2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="29.0" layoutX="383.0" layoutY="285.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="17.0" />
-            <Rectangle fx:id="decrypt" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="11.0" layoutX="142.0" layoutY="275.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Rectangle fx:id="decrypt" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="18.0" layoutX="142.0" layoutY="268.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
             <Rectangle fx:id="new1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="45.0" layoutX="393.0" layoutY="385.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="50.0" />
             <Rectangle fx:id="new2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="114.0" layoutX="205.0" layoutY="357.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="49.0" />
             <Rectangle fx:id="new4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="16.0" layoutX="382.0" layoutY="404.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="8.0" />

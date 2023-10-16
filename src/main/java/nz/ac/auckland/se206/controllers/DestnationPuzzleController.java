@@ -144,9 +144,6 @@ public class DestnationPuzzleController {
                   submit.setVisible(false);
                 });
           });
-      GameState.eleanorAi.runGpt(
-          "User update: The player now has correctly solved the"
-              + "puzzle for destnation city. Reply is not required.");
     } else {
       GameState.eleanorAi.runGpt(
           GptPromptEngineeringRoom3.wrongPuzzleRoom3(),
