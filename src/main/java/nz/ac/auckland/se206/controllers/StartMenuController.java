@@ -20,6 +20,12 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * The StartMenuController class is responsible for controlling the start menu
+ * view of the game. It handles user input for selecting game settings and
+ * character,
+ * and starts the game when the start button is clicked.
+ */
 public class StartMenuController {
   private static Rectangle[] characterArray;
   private static ComboBox<String> difficultyStatic;
@@ -27,6 +33,22 @@ public class StartMenuController {
   private static MediaPlayer startSoundPlayer;
   private static MediaPlayer selectSoundPlayer;
 
+  /**
+   * This method handles the selection of a character in the start menu.
+   * It takes a KeyEvent as input and checks the direction of the key pressed.
+   * If the direction is "ENTER", it stops and resets the startSoundPlayer if it's
+   * currently playing, plays the startSoundPlayer, and schedules a TimerTask to
+   * start the game setting after 50 milliseconds. If the direction is "RIGHT", it
+   * stops and resets the selectSoundPlayer if it's currently playing,
+   * plays the selectSoundPlayer, and changes the character selection to the
+   * right.
+   * If the direction is "LEFT", it stops and resets the selectSoundPlayer if it's
+   * currently playing, plays the selectSoundPlayer, and changes the character
+   * selection
+   * to the left.
+   *
+   * @param event the KeyEvent that triggered the character selection
+   */
   public static void selectCharacter(KeyEvent event) {
 
     String direction = event.getCode().toString();
@@ -93,6 +115,13 @@ public class StartMenuController {
 
   }
 
+  /**
+   * This method sets the game mode and hints remaining based on the user's
+   * selected
+   * difficulty and time limit. If the user does not select a difficulty or time
+   * limit, it defaults to easy and 2 minutes respectively.
+   * The method then transitions to the main game view.
+   */
   public static void startGameSetting() {
     // Get the difficulty and time limit the user selected
     String difficulty = difficultyStatic.getValue();
@@ -175,7 +204,7 @@ public class StartMenuController {
    * @throws ApiProxyException if there is an issue with the API proxy
    */
   public void initialize() throws ApiProxyException {
-
+    // Set up the sound players
     Media sound1 = new Media(App.class.getResource("/sounds/selectSound.mp3").toString());
     Media sound2 = new Media(App.class.getResource("/sounds/enter.mp3").toString());
     selectSoundPlayer = new MediaPlayer(sound1);
@@ -184,10 +213,12 @@ public class StartMenuController {
     selectSoundPlayer.setVolume(0.4);
     startSoundPlayer.setVolume(0.7);
 
+    // Set up the dropdown menus
     difficulty.getItems().addAll("EASY", "MEDIUM", "HARD");
     timeLimit.getItems().addAll("2 minutes", "4 minutes", "6 minutes");
     instruction.setText(GameState.instructionMsg);
 
+    // Set up the character selection
     characterArray = new Rectangle[] { mc1, mc2, mc3, mc4 };
     difficultyStatic = difficulty;
     timeLimitStatic = timeLimit;
@@ -197,8 +228,8 @@ public class StartMenuController {
   /**
    * When the player clicks on the start button, the game will be started.
    *
-   * @param event
-   * @throws IOException
+   * @param event The mouse event that triggered the start button click.
+   * @throws IOException If there is an error loading the main game view.
    */
   @FXML
   public void onClickStartButton(MouseEvent event) throws IOException {
@@ -231,6 +262,7 @@ public class StartMenuController {
   private void toggleMute() {
     GameState.isMuted = !GameState.isMuted;
 
+    // set mute icon
     if (GameState.isMuted) {
       muteIcon.setImage(new Image("/images/main_game/icons/music_off.png"));
     } else {

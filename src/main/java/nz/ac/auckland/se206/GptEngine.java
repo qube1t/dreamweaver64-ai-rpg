@@ -23,7 +23,6 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class GptEngine {
   private ChatCompletionRequest chatCompletionRequest;
   private boolean active = false;
-  private int stage = 0;
   private Thread activeThread;
   private Queue<ChatMessage> promptQueue = new LinkedList<>();
   private Queue<GptResultAction> promptFuncQueue = new LinkedList<>();
@@ -104,8 +103,6 @@ public class GptEngine {
               chatCompletionRequest.addMessage(nextPrompt);
               ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
 
-              stage++;
-
               // performs onfinish tasks
               onGptCompletion(chatCompletionResult, myFunc);
             } catch (Exception e) {
@@ -147,8 +144,6 @@ public class GptEngine {
    */
   private void onGptCompletion(ChatCompletionResult chatCompletionResult, GptResultAction myFunc)
       throws Exception {
-
-    stage++;
     // get the first result
     Choice result = chatCompletionResult.getChoices().iterator().next();
     System.out.println(result.getChatMessage().getContent());
@@ -161,7 +156,8 @@ public class GptEngine {
     }
 
     // get chat messages if exists
-    List<String> chatEntry = Helper.getTextBetweenChar(result.getChatMessage().getContent(), "*", true);
+    List<String> chatEntry = Helper.getTextBetweenChar(result
+        .getChatMessage().getContent(), "*", true);
     if (chatEntry.size() > 0) {
       Platform.runLater(
           () -> {

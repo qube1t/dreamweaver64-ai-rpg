@@ -2,16 +2,18 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.input.TransferMode;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 
 /**
- * The BookShelfController class is responsible for managing the bookshelf in the game.
- * It handles drag and drop functionality for books, sets up labels for books in the bookshelf,
+ * The BookShelfController class is responsible for managing the bookshelf in
+ * the game.
+ * It handles drag and drop functionality for books, sets up labels for books in
+ * the bookshelf,
  * and handles mouse clicks on the labels to take or return books.
  */
 public class BookShelfController {
@@ -150,8 +152,8 @@ public class BookShelfController {
   }
 
   /**
-   * This method checks whether the player has taken one book.
-   * @return true if the player has taken one book, false otherwise
+   * Checks whether the player has taken one book.
+   * @return true if the player has taken one book, false otherwise.
    */
   private boolean hasTakenOneBook() {
     // check whether the player has taken one book using if.

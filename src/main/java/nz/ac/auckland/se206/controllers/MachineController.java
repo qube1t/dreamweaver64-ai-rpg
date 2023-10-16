@@ -3,7 +3,6 @@ package nz.ac.auckland.se206.controllers;
 import java.util.ArrayList;
 
 import javafx.animation.FadeTransition;
-
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.ImageCursor;
@@ -263,11 +262,16 @@ public class MachineController {
    */
   private void setDecrypted() {
     if (hasGotLetter) {
+      // Hide the decrypt button
+
+      // Set decrypt button and arrow animationto invisible
       decrypt.setVisible(false);
       arrowAnimation.setVisible(false);
       arrowStatic.setVisible(true);
+      // Set the drcrypted images to null.
       item1.setImage(null);
       item2.setImage(null);
+      // Set the position taken variables to 0.
       position1Taken = 0;
       position2Taken = 0;
       Image letterMom = new Image("/images/letterMom.png");

@@ -3,7 +3,6 @@ package nz.ac.auckland.se206;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.text.Text;
@@ -15,9 +14,10 @@ public class GameState {
   /** Indicates whether the riddle has been resolved. */
   public static boolean isRiddleResolved = false;
 
-  /** Indicates 10 seconds left */
+  /** Indicates 10 seconds left. */
   public static boolean tenSecondsLeft = false;
 
+  /** Indicates whether the event filter is on. */
   public static boolean isEventFilter = false;
 
   // start menu
@@ -47,7 +47,8 @@ public class GameState {
   public static GptEngine eleanorAi2 = new GptEngine();
 
   public static AudioClip backgroundMusic = new AudioClip(
-      (new Media(App.class.getResource("/sounds/Bogart VGM - 8Bit Action- Menu_Select.mp3").toString()))
+      (new Media(App.class.getResource(
+        "/sounds/Bogart VGM - 8Bit Action- Menu_Select.mp3").toString()))
           .getSource());
 
   public static AudioClip doorSound = new AudioClip(
@@ -79,7 +80,7 @@ public class GameState {
   /** Indicates the book that the player has taken. */
   public static String takenBook;
 
-  /** Indicates the room1 gpt is done */
+  /** Indicates the room1 gpt is done. */
   public static boolean isRoom1GptDone = false;
 
   public static boolean isRoom2FirstEntered = false;
@@ -106,10 +107,10 @@ public class GameState {
   /** Indicates the pirate's wrong response. */
   public static String pirateWrongResponse = null;
 
-  /** Indicates the pirate's responses are printed */
+  /** Indicates the pirate's responses are printed. */
   public static boolean isPirateResponsePrinted = false;
 
-  /** Indicates the room2 gpt is done */
+  /** Indicates the room2 gpt is done. */
   public static boolean isRoom2GptDone = false;
 
   /** Indicates whether the player has clicked the wrong box first. */
@@ -125,7 +126,7 @@ public class GameState {
   /** Indicates the location of the treasure box. */
   public static int currentBox = -1;
 
-  /** Stored the randomly generated destnation cities */
+  /** Stored the randomly generated destnation cities. */
   public static String[] destnationCities = new String[8];
 
   /** Indicates the destnation city index in the array. */
@@ -151,11 +152,10 @@ public class GameState {
 
   public static boolean computerInIt = false;
 
-  /** Indicates the room3 gpt is done */
+  /** Indicates the room3 gpt is done. */
   public static boolean isRoom3GptDone = false;
 
   /**
-   *
    * Indicates the introduction message when first enter the puzzle game in Room3.
    */
   public static String puzzleIntroMessageRoom3 = "";
@@ -167,7 +167,9 @@ public class GameState {
   /** Indicates whether the player exit the game. */
   public static boolean winTheGame = false;
 
-  // Method to reset all variables to default values
+  /**
+   * Resets the game state by resetting all game variables and variables for each room.
+   */
   public static void reset() {
     resetGameVariables();
     resetRoom1Variables();
@@ -195,25 +197,32 @@ public class GameState {
 
   // Reset variables related to Room 1
   private static void resetRoom1Variables() {
+    // Reset the book array
     booksInRoom1 = new String[7];
+    // Reset the book found status
     isBookFound = false;
     trueBook = null;
     takenBook = null;
+    // Reset the final message to null.
     finalMsg = null;
     booksLoaded = false;
+    // Reset the room1 gpt status
     isRoom1GptDone = false;
 
   }
 
   // Reset variables related to Room 2
   private static void resetRoom2Variables() {
+    // Reset pirate riddle to null.
     pirateRiddle = null;
     pirateRightResponse = null;
     pirateWrongResponse = null;
     isBoxKeyFound = false;
+    // Reset the final message to null.
     encryptedFinalMsg = null;
     isEncryptedMessageFound = false;
     isRoom2FirstEntered = false;
+    // Reset the pirate response printed status
     isPirateResponsePrinted = false;
     isRoom2GptDone = false;
     isWrongBoxFirstClicked = false;
@@ -221,19 +230,24 @@ public class GameState {
 
   // Reset variables related to Room 3
   private static void resetRoom3Variables() {
+    // Set is puzzle loaded to false
     isPuzzleLoaded = false;
     isRoom3FirstEntered = false;
+    // Reset the aircraft code found status
     isAircraftCodeFound = false;
     currentBox = -1;
-    Arrays.fill(destnationCities, null);
+    // Reset destnation cities array of size 8.
+    destnationCities = new String[8];
     destnationCityIndex = -1;
     arrangedDestnationCity = "";
     unarrangedDestnationCity = "";
     currentCityIndex = -1;
     currentCities = null;
+    // Reset is machine open to false.
     isMachineOpen = false;
     currentDraggedItemId = "";
     puzzleIntroMessageRoom3 = "";
+    // Set decryption status to false.
     hasDecrypted = false;
     computerInIt = false;
     isRoom3GptDone = false;

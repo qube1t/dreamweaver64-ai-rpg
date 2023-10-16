@@ -54,24 +54,29 @@ public class CharacterMovement {
    */
   protected boolean checkCollision() {
     for (Rectangle obstacle : obstacles) {
+      // check intersection of player with obstacles
       if (player
           .localToParent(playerBound.getBoundsInParent())
           .intersects(obstacle.getBoundsInParent())) {
         return true;
       }
     }
-
+    // Loop through interactables and check if player intersects with them
     for (Node interactable : interactables) {
       if (player
           .localToParent(playerBound.getBoundsInParent())
           .intersects(interactable.getBoundsInParent())) {
-        if (interactable.getId() != null)
+        // If the interactable is a rectangle
+        if (interactable.getId() != null) {
+          // If interactable is a door and not disabled, proceed execution
           if (interactable.getId().equals("rightDoorBtn") || interactable.getId().equals("leftDoorBtn")
               || interactable.getId().equals("mainDoorBtn")) {
+            // If the door is enabled, walk through to the room where the door leads
             if (!interactable.isDisable()) {
               interactable.getOnMouseClicked().handle(null);
             }
           }
+        }
       }
     }
     return false;
@@ -94,8 +99,9 @@ public class CharacterMovement {
         }
       } else {
         interactable.setVisible(false);
-        if (interactable instanceof Rectangle)
+        if (interactable instanceof Rectangle) {
           interactable.getStyleClass().remove("action-btn");
+        }
       }
     }
   }
