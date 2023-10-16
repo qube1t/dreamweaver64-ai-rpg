@@ -40,6 +40,8 @@ public class Room3Controller {
   public static void initializeMap() {
     if (imgEndStRoom3 != null) {
       imgEndStRoom3.setImage(new Image("/images/rooms/room3/endRoom3.gif"));
+    } else {
+      return;
     }
   }
 
@@ -156,7 +158,7 @@ public class Room3Controller {
         break;
       case 2:
         character.setLayoutX(29);
-        character.setLayoutY(198);
+        character.setLayoutY(210);
 
         break;
       default:
