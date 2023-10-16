@@ -119,7 +119,7 @@ public class Room3Controller {
    * movement, and loading the appropriate game state.
    * If the puzzle is not loaded, the clickableComputer2 is disabled.
    * If the game is muted, the ATC ambiance sound is played.
-   * 
+   *
    * @throws ApiProxyException if there is an issue with the API proxy.
    */
   public void initialize() throws ApiProxyException {
@@ -232,7 +232,7 @@ public class Room3Controller {
    * removes the overlay, adds the overlay for Room 1, and runs the GPT model for
    * Eleanor AI.
    * If the game is not muted, it stops the sound from the previous room.
-   * 
+   *
    * @throws IOException       if an I/O error occurs
    * @throws ApiProxyException if an error occurs while calling the GPT API
    */
@@ -257,7 +257,7 @@ public class Room3Controller {
    * Loads instructions, disables interact pane for transition, removes overlay,
    * adds overlay for room2,
    * runs GPT for Eleanor AI, and stops ATC sound if not muted.
-   * 
+   *
    * @throws IOException       if an I/O error occurs
    * @throws ApiProxyException if an API proxy error occurs
    */
@@ -281,7 +281,7 @@ public class Room3Controller {
   /**
    * Handles the event when the computer is clicked.
    * Adds an overlay to the main game controller.
-   * 
+   *
    * @throws IOException       if an I/O error occurs.
    * @throws ApiProxyException if an API proxy error occurs.
    */
@@ -354,7 +354,7 @@ public class Room3Controller {
    * message, the city selection prompt, and the puzzle introduction message.
    * Enables access to the right and left door buttons and the clickable computer
    * 2 after the prompts are completed.
-   * 
+   *
    * @throws ApiProxyException if there is an issue with the API proxy
    */
   private void gptInitilize() throws ApiProxyException {
@@ -363,6 +363,7 @@ public class Room3Controller {
     MainGameController.enableInteractPane();
 
     GameState.eleanorAi.runGpt(
+        // Get the welcome message from GPT.
         GptPromptEngineeringRoom3.room3WelcomeMessage(),
         (result) -> {
           System.out.println(result);
@@ -375,11 +376,13 @@ public class Room3Controller {
         GptPromptEngineeringRoom3.getEightRandomCity(),
         (result) -> {
 
+          // Get the list of cities from the result
           List<String> cities = Helper.getTextBetweenChar(result, "^", false);
+          // Set the list of cities to the game state
           GameState.destnationCities = cities.toArray(new String[cities.size()]);
           GameState.destnationCityIndex = Helper.getRandomNumber(0, cities.size() - 1);
           GameState.arrangedDestnationCity = (cities.get(GameState.destnationCityIndex));
-          // Print the city
+          // Print the city generated
           System.out.println(result);
           System.out.println("Arranged:" + GameState.destnationCities.toString() +
               "Destnation city is " + GameState.arrangedDestnationCity);
@@ -442,7 +445,7 @@ public class Room3Controller {
 
   /**
    * Fades in the given circle object representing a city on the radar.
-   * 
+   *
    * @param city the circle object representing the city to be faded in
    */
   private void fadeInRadarPoints(Circle city) {
@@ -458,7 +461,7 @@ public class Room3Controller {
   /**
    * Fades out the given Circle object over a duration of 1.5 seconds using a
    * linear interpolation.
-   * 
+   *
    * @param city The Circle object to fade out.
    */
   private void fadeOutRadarPoints(Circle city) {

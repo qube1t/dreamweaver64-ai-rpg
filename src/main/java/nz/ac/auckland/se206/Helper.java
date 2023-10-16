@@ -17,7 +17,7 @@ public class Helper {
 
   /**
    * Get the text between two characters.
-   * 
+   *
    * @param str
    * @param c
    * @return matchesList
@@ -41,7 +41,7 @@ public class Helper {
 
   /**
    * Change the treasure box.
-   * 
+   *
    * @param currentBoxNumber
    * @param clickBox
    */
@@ -60,7 +60,7 @@ public class Helper {
 
   /**
    * Get a random number between two numbers.
-   * 
+   *
    * @param min
    * @param max
    * @return
@@ -72,7 +72,7 @@ public class Helper {
 
   /**
    * Count the number of occurences of a character in a string.
-   * 
+   *
    * @param str
    * @param c
    * @return count
@@ -90,7 +90,7 @@ public class Helper {
 
   /**
    * Enable access to an item.
-   * 
+   *
    * @param btn
    * @param img
    */
@@ -101,7 +101,7 @@ public class Helper {
 
   /**
    * Disable access to an item.
-   * 
+   *
    * @param btn
    * @param img
    */

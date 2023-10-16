@@ -25,7 +25,7 @@ public class CharacterMovement {
 
   /**
    * Represents the movement of a character in the game.
-   * 
+   *
    * @param player         the AnchorPane representing the player
    * @param playerBound    the Rectangle representing the player's bounds
    * @param proximityBound the Circle representing the player's proximity bounds
@@ -49,7 +49,7 @@ public class CharacterMovement {
 
   /**
    * Checks for collision between the player and obstacles or interactables.
-   * 
+   *
    * @return true if there is a collision, false otherwise.
    */
   protected boolean checkCollision() {
@@ -103,7 +103,7 @@ public class CharacterMovement {
 
   /**
    * Moves the player in the specified direction based on the given action.
-   * 
+   *
    * @param action an integer representing the direction to move the player in:
    *               0 for up, 1 for left, 2 for down, and 3 for right
    */

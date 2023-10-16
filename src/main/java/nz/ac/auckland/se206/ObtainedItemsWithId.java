@@ -11,7 +11,7 @@ public class ObtainedItemsWithId {
 
   /**
    * Constructor for ObtainedItemsWithId.
-   * 
+   *
    * @param itemImage the image of the item
    * @param id        the id of the item
    */
@@ -22,7 +22,7 @@ public class ObtainedItemsWithId {
 
   /**
    * Get the image of the item.
-   * 
+   *
    * @return the image of the item
    */
   public javafx.scene.image.Image getImage() {
@@ -31,7 +31,7 @@ public class ObtainedItemsWithId {
 
   /**
    * Get the id of the item.
-   * 
+   *
    * @return the id of the item
    */
   public String getId() {

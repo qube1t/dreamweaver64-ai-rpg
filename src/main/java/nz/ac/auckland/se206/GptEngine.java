@@ -77,7 +77,7 @@ public class GptEngine {
   /**
    * Runs the GPT engine with the given input string.
    * If no function is specified, the default function is called.
-   * 
+   *
    * @param string The input string to run the GPT engine with.
    * @throws ApiProxyException If there is an error running the GPT engine.
    */

@@ -18,6 +18,16 @@ import nz.ac.auckland.se206.components.DraggableLetter;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * The DestnationPuzzleController class is responsible for controlling the
+ * destination puzzle screen.
+ * It initializes the puzzle, handles the submit button click event, and handles
+ * the close button click event.
+ * The class also sets the cursor to a custom cursor and sets mouse hovering
+ * effects for the submit button.
+ * The class extends the JavaFX Controller class and is used to interact with
+ * the FXML file for the destination puzzle screen.
+ */
 public class DestnationPuzzleController {
   @FXML
   private Label introduction;
@@ -168,7 +178,8 @@ public class DestnationPuzzleController {
     char[] letters = cityName.toCharArray();
 
     for (char letter : letters) {
-      DraggableLetter draggableLetter = new DraggableLetter(String.valueOf(letter), letterBox, this);
+      DraggableLetter draggableLetter = new DraggableLetter(
+          String.valueOf(letter), letterBox, this);
 
       // Create a StackPane to add a frame around each letter
       StackPane letterFrame = new StackPane();

@@ -21,37 +21,6 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartMenuController {
-  @FXML
-  private Button startButton;
-  @FXML
-  private ComboBox<String> timeLimit;
-  @FXML
-  private ComboBox<String> difficulty;
-  @FXML
-  private Label timeLimitLabel;
-  @FXML
-  private Label difficultyLabel;
-  @FXML
-  private Label title;
-  @FXML
-  private Label instruction;
-  @FXML
-  private Pane infoPane;
-  @FXML
-  private Pane outPane;
-  @FXML
-  private Pane startPane;
-  @FXML
-  private Rectangle mc1;
-  @FXML
-  private Rectangle mc2;
-  @FXML
-  private Rectangle mc3;
-  @FXML
-  private Rectangle mc4;
-  @FXML
-  private ImageView muteIcon;
-
   private static Rectangle[] characterArray;
   private static ComboBox<String> difficultyStatic;
   private static ComboBox<String> timeLimitStatic;
@@ -168,7 +137,43 @@ public class StartMenuController {
     }
   }
 
-  /** Initialize the start menu. */
+  @FXML
+  private Button startButton;
+  @FXML
+  private ComboBox<String> timeLimit;
+  @FXML
+  private ComboBox<String> difficulty;
+  @FXML
+  private Label timeLimitLabel;
+  @FXML
+  private Label difficultyLabel;
+  @FXML
+  private Label title;
+  @FXML
+  private Label instruction;
+  @FXML
+  private Pane infoPane;
+  @FXML
+  private Pane outPane;
+  @FXML
+  private Pane startPane;
+  @FXML
+  private Rectangle mc1;
+  @FXML
+  private Rectangle mc2;
+  @FXML
+  private Rectangle mc3;
+  @FXML
+  private Rectangle mc4;
+  @FXML
+  private ImageView muteIcon;
+
+  /**
+   * Initializes the StartMenuController by setting up the sound players, dropdown
+   * menus, and instruction message.
+   *
+   * @throws ApiProxyException if there is an issue with the API proxy
+   */
   public void initialize() throws ApiProxyException {
 
     Media sound1 = new Media(App.class.getResource("/sounds/selectSound.mp3").toString());
@@ -191,7 +196,7 @@ public class StartMenuController {
 
   /**
    * When the player clicks on the start button, the game will be started.
-   * 
+   *
    * @param event
    * @throws IOException
    */
@@ -208,11 +213,20 @@ public class StartMenuController {
 
   }
 
+  /**
+   * Toggles the visibility of the info pane.
+   */
   @FXML
   private void toggleInfo() {
     infoPane.setVisible(!infoPane.isVisible());
   }
 
+  /**
+   * Toggles the game's mute state and updates the mute icon accordingly.
+   * If the game is currently muted, the mute icon will display a "music off"
+   * image.
+   * If the game is not muted, the mute icon will display a "music on" image.
+   */
   @FXML
   private void toggleMute() {
     GameState.isMuted = !GameState.isMuted;
@@ -226,6 +240,16 @@ public class StartMenuController {
     // muteIcon.setImage(volIcon);
   }
 
+  /**
+   * Handles the event when a character is clicked on the start menu.
+   * If the clicked character is different from the current selected character,
+   * the character's opacity is set to 1 and the previously selected character's
+   * opacity is set to 0. The character index in the GameState is updated to the
+   * clicked character's index. If the select sound is currently playing, it is
+   * stopped and reset before playing again.
+   *
+   * @param event The MouseEvent triggered by clicking on a character.
+   */
   @FXML
   private void onClickCharacter(MouseEvent event) {
 

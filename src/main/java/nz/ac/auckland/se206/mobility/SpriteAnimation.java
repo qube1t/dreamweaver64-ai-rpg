@@ -62,7 +62,7 @@ public class SpriteAnimation extends Transition {
 
   /**
    * Interpolates through the sprite sheet based on the given value.
-   * 
+   *
    * @param k The value used to interpolate through the sprite sheet.
    */
   protected void interpolate(double k) {
