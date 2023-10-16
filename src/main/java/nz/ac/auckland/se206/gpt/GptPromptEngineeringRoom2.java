@@ -1,6 +1,13 @@
 package nz.ac.auckland.se206.gpt;
 
-/** Utility class for generating GPT prompt engineering strings. */
+/**
+ * This class contains methods to generate prompts for the game "Pirate's
+ * Treasure Hunt".
+ * The prompts include welcome message for room 2, responses for correct and
+ * incorrect answers in a riddle,
+ * an unencrypted message for when the player exits the game, and an encrypted
+ * message for when the player gets the treasure.
+ */
 public class GptPromptEngineeringRoom2 {
 
   /**

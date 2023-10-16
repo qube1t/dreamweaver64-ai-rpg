@@ -111,11 +111,10 @@ public class Helper {
   }
 
   /**
-   * Disable access to an item. This is done by adding the loading gif and setting
-   * the button to be disabled.
+   * Disables access to an item represented by a button and an image view.
    *
-   * @param btn
-   * @param img
+   * @param btn The button representing the item.
+   * @param img The image view representing the item.
    */
   public static void disableAccessToItem(Rectangle btn, ImageView img) {
     btn.setDisable(true);

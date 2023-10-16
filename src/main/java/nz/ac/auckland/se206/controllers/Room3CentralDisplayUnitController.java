@@ -22,6 +22,20 @@ import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * This class is the controller for the central display unit in Room 3 of the
+ * game.
+ * It handles key press events on the display unit, adds the pressed key to the
+ * display output if it is a letter or number,
+ * removes the last character from the display output if the pressed key is the
+ * backspace key,
+ * adds a slash to the display output if the pressed key is the slash key ("/"),
+ * and initializes the controller by adding an event filter to the TextField to
+ * consume key events,
+ * setting the visibility of progress to false, setting all buttons to a list,
+ * and enabling/disabling buttons based on whether the aircraft code has been
+ * found or not.
+ */
 public class Room3CentralDisplayUnitController {
 
   private List<Rectangle> allButtons;

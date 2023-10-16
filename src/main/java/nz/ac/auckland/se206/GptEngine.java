@@ -27,6 +27,12 @@ public class GptEngine {
   private Queue<ChatMessage> promptQueue = new LinkedList<>();
   private Queue<GptResultAction> promptFuncQueue = new LinkedList<>();
 
+  /**
+   * GptEngine class represents the engine that handles the chat completion
+   * requests using the GPT model.
+   * It sets up the GPT model only once and sets up a timer to check for GPT
+   * engine stalling.
+   */
   public GptEngine() {
     // set up the GPT model only once
     if (chatCompletionRequest == null) {

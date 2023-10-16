@@ -1,6 +1,5 @@
 package nz.ac.auckland.se206;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import javafx.scene.media.AudioClip;
@@ -48,7 +47,7 @@ public class GameState {
 
   public static AudioClip backgroundMusic = new AudioClip(
       (new Media(App.class.getResource(
-        "/sounds/Bogart VGM - 8Bit Action- Menu_Select.mp3").toString()))
+          "/sounds/Bogart VGM - 8Bit Action- Menu_Select.mp3").toString()))
           .getSource());
 
   public static AudioClip doorSound = new AudioClip(
@@ -168,16 +167,20 @@ public class GameState {
   public static boolean winTheGame = false;
 
   /**
-   * Resets the game state by resetting all game variables and variables for each room.
+   * Resets the game state by resetting all game variables and variables for each
+   * room.
    */
   public static void reset() {
     resetGameVariables();
+
     resetRoom1Variables();
     resetRoom2Variables();
     resetRoom3Variables();
   }
 
-  // Reset game-related variables
+  /**
+   * Resets all game variables to their default values.
+   */
   private static void resetGameVariables() {
     // Reset the event filter for character selection
     isEventFilter = false;
@@ -195,7 +198,11 @@ public class GameState {
     characterIndex = 1;
   }
 
-  // Reset variables related to Room 1
+  /**
+   * Resets the variables related to Room 1.
+   * This includes resetting the book array, book found status, final message,
+   * room1 gpt status, and more.
+   */
   private static void resetRoom1Variables() {
     // Reset the book array
     booksInRoom1 = new String[7];
@@ -211,7 +218,9 @@ public class GameState {
 
   }
 
-  // Reset variables related to Room 2
+  /**
+   * Resets all the variables related to room 2 to their default values.
+   */
   private static void resetRoom2Variables() {
     // Reset pirate riddle to null.
     pirateRiddle = null;
@@ -228,7 +237,10 @@ public class GameState {
     isWrongBoxFirstClicked = false;
   }
 
-  // Reset variables related to Room 3
+  /**
+   * Resets all the variables related to Room 3 to their default values.
+   * This method is called when the player exits Room 3.
+   */
   private static void resetRoom3Variables() {
     // Set is puzzle loaded to false
     isPuzzleLoaded = false;

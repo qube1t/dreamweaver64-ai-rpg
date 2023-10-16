@@ -124,6 +124,7 @@ public class Room3Controller {
    */
   public void initialize() throws ApiProxyException {
 
+    // Initalize the world map
     initilizeGpsMap();
 
     GameState.mainGame.clickGamePane();
@@ -131,10 +132,12 @@ public class Room3Controller {
     imgEndStRoom3 = imgEnd;
 
     if (GameState.tenSecondsLeft) {
+      // Initialize the end image if the time is less or equal to 10 seconds.
       initializeMap();
     }
 
     if (!GameState.isPuzzleLoaded) {
+      // Set the puzzle load image to invisible if the puzzle is not loaded.
       clickableComputer2.setDisable(true);
     }
 
@@ -143,6 +146,7 @@ public class Room3Controller {
       gptInit = true;
       GameState.isRoom3FirstEntered = true;
     } else {
+      // If GPT has been initialized, enable all the objects
       MainGameController.enableInteractPane();
       Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
       Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
@@ -151,6 +155,7 @@ public class Room3Controller {
 
     this.obstacles = new ArrayList<Rectangle>();
 
+    // Get all the obstacles and add to obstacles list
     for (Node node : obstalePane.getChildren()) {
       if (node instanceof Rectangle) {
         obstacles.add((Rectangle) node);
@@ -162,22 +167,26 @@ public class Room3Controller {
 
     switch (GameState.prevRoom) {
       case 1:
+        // Set the character position if previous room is room1.
         character.setLayoutX(523);
         character.setLayoutY(210);
 
         break;
       case 2:
+        // Set the character position if previous room is room2.
         character.setLayoutX(29);
         character.setLayoutY(210);
 
         break;
       default:
+        // Set default position
         character.setLayoutX(530);
         character.setLayoutY(210);
     }
 
     GameState.prevRoom = 3;
     if (!GameState.isMuted) {
+      // Play the atc background music if the game is not muted by user.
       atcSound = new AudioClip(
           (new Media(App.class.getResource("/sounds/atcAmbiance.mp3").toString()))
               .getSource());
@@ -189,7 +198,7 @@ public class Room3Controller {
   }
 
   /**
-   * This method makes the city name unarranged
+   * This method makes the city name unarranged.
    *
    * @param cityName the city name to be unarranged
    * @return the unarranged city name
@@ -248,8 +257,9 @@ public class Room3Controller {
     MainGameController.removeOverlay(true);
     MainGameController.addOverlay("room1", true);
     GameState.eleanorAi.runGpt("User update: User has moved from ATC to his childhood home room.");
-    if (!GameState.isMuted)
+    if (!GameState.isMuted) {
       atcSound.stop();
+    }
   }
 
   /**
@@ -274,8 +284,9 @@ public class Room3Controller {
     GameState.eleanorAi.runGpt("User update: User has moved from ATC"
         + "to the pirate ship. No reply is required");
 
-    if (!GameState.isMuted)
+    if (!GameState.isMuted) {
       atcSound.stop();
+    }
   }
 
   /**

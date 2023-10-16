@@ -2,13 +2,20 @@ package nz.ac.auckland.se206.gpt;
 
 import nz.ac.auckland.se206.GameState;
 
-/** Utility class for generating GPT prompt engineering strings. */
+/**
+ * This class represents the GPT prompt engineering for the Engineering Room 1
+ * game.
+ * It contains methods to generate game introduction, game instructions, a list
+ * of 7 books,
+ * a pirate-themed riddle, and a message to be sent to the user based on their
+ * chat input.
+ */
 public class GptPromptEngineeringRoom1 {
 
   /**
    * Generates a GPT prompt engineering string for a riddle with the given word.
    *
-   *  @return the generated prompt engineering string
+   * @return the generated prompt engineering string
    */
   public static String gameIntro() {
     // Ask GPT for the introduction of the game.
@@ -26,7 +33,7 @@ public class GptPromptEngineeringRoom1 {
    * The user is given a limited time to complete the mission of recovering
    * a lost letter from their mother by revisiting their past memories.
    * If the time runs out, the mission is aborted.
-   * The instructions are returned as a string with a maximum of 2 sentences, 
+   * The instructions are returned as a string with a maximum of 2 sentences,
    * surrounded by # symbols.
    *
    * @return the game instructions as a formatted string
@@ -39,7 +46,7 @@ public class GptPromptEngineeringRoom1 {
   }
 
   /**
-   * Returns a string containing a message to produce a list of 7 books that have 
+   * Returns a string containing a message to produce a list of 7 books that have
    * less than 7 characters, surrounded by quotes, to show on the shelf.
    *
    * @return a string containing the message to produce the list of 7 books.
@@ -50,9 +57,9 @@ public class GptPromptEngineeringRoom1 {
   }
 
   /**
-   * Returns a pirate-themed riddle in the form of a quote from the book ansbook 
-   * in 1 sentence. The quote is surrounded by the character ^ before and after. 
-   * The user needs to identify the book ansbook in the other room. Hints can be 
+   * Returns a pirate-themed riddle in the form of a quote from the book ansbook
+   * in 1 sentence. The quote is surrounded by the character ^ before and after.
+   * The user needs to identify the book ansbook in the other room. Hints can be
    * given once the riddle has been asked.
    * 
    * @param ansbook the book from which the quote will be taken
@@ -73,13 +80,13 @@ public class GptPromptEngineeringRoom1 {
 
   /**
    * Returns a message to be sent to the user based on their chat input.
-   * If there are no hints remaining, the message reminds the user of the 
-   * current state of the dream and instructs them to reply as a normal 
+   * If there are no hints remaining, the message reminds the user of the
+   * current state of the dream and instructs them to reply as a normal
    * human in one sentence without giving hints or answers to any riddle.
-   * If there are hints remaining, the message reminds the user of the 
-   * current state of the dream and instructs them to reply as a normal 
-   * human in one sentence. If the user asks for hints, the message inserts 
-   * the character ~ before every hint so that it is transmitted to them. 
+   * If there are hints remaining, the message reminds the user of the
+   * current state of the dream and instructs them to reply as a normal
+   * human in one sentence. If the user asks for hints, the message inserts
+   * the character ~ before every hint so that it is transmitted to them.
    * The message does not reveal the answer even if the user asks for it.
    *
    * @param chatInput the user's chat input

@@ -153,6 +153,7 @@ public class BookShelfController {
 
   /**
    * Checks whether the player has taken one book.
+   *
    * @return true if the player has taken one book, false otherwise.
    */
   private boolean hasTakenOneBook() {
