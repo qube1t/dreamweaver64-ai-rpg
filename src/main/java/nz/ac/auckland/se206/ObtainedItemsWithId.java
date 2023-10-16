@@ -1,5 +1,9 @@
 package nz.ac.auckland.se206;
 
+/**
+ * Represents an item that has been obtained in the game, with an associated ID
+ * and image.
+ */
 public class ObtainedItemsWithId {
 
   private javafx.scene.image.Image image;

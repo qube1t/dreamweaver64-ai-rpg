@@ -7,6 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import nz.ac.auckland.se206.App;
 
+/**
+ * This class is the controller for the end credits screen. It handles the initialization of the screen
+ * and the event when the exit button is clicked, which sets the root of the application to the end menu.
+ */
 public class EndCreditController {
 
   @FXML
@@ -14,13 +18,17 @@ public class EndCreditController {
   @FXML
   private Button btnExit;
 
-  public void initialize() { }
+  /**
+   * Initializes the EndCreditController.
+   */
+  public void initialize() {
+  }
 
   /**
-   * When the player clicks on the exit button, the game will be closed.
-   * 
-   * @param event the action event
-   * @throws IOException
+   * This method is called when the exit button is clicked. It sets the root of
+   * the application to the end_menu.
+   * @param event The event that triggered the method call.
+   * @throws IOException If an I/O error occurs.
    */
   @FXML
   private void onClickExit(ActionEvent event) throws IOException {

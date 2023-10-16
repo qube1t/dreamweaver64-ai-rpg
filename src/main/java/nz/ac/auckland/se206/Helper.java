@@ -9,6 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * The Helper class contains various static helper methods that can be used
+ * throughout the application.
+ */
 public class Helper {
 
   /**

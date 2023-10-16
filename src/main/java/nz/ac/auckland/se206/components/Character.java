@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javafx.animation.Animation;
 import javafx.application.Platform;
 import javafx.beans.NamedArg;
@@ -26,6 +25,13 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.mobility.CharacterMovement;
 import nz.ac.auckland.se206.mobility.SpriteAnimation;
 
+/**
+ * The Character class extends AnchorPane and represents a character in the game.
+ * It contains methods for assigning a sprite sheet, enabling mobility, playing footstep sounds,
+ * starting and ending animations, and initializing elements.
+ * It also has instance variables for the character's action, columns, count, offset x and y,
+ * frame width and height, animation, and movement.
+ */
 public class Character extends AnchorPane {
 
   private static int action = 0;
@@ -55,6 +61,17 @@ public class Character extends AnchorPane {
 
   private Timer movementTimer = new Timer();
 
+  /**
+   * The Character class represents a character in the game. It extends the JavaFX Pane class and
+   * contains the character's sprite and movement logic.
+   *
+   * @param columns the number of columns in the sprite sheet
+   * @param count the total number of frames in the sprite sheet
+   * @param offsetX the x-coordinate offset of the sprite sheet
+   * @param offsetY the y-coordinate offset of the sprite sheet
+   * @param frameWidth the width of each frame in the sprite sheet
+   * @param frameHeight the height of each frame in the sprite sheet
+   */
   public Character(
       @NamedArg("columns") int columns,
       @NamedArg("count") int count,
@@ -94,6 +111,10 @@ public class Character extends AnchorPane {
     }, 0, 100);
   }
 
+  /**
+   * Assigns the sprite sheet for the character based on the current character index in the game state.
+   * If the character index is not 1, 2, 3, or 4, the default sprite sheet (char1.png) is assigned.
+   */
   public void assignSpriteSheet() {
     // assign character sprite sheet
     switch (GameState.characterIndex) {
@@ -127,6 +148,12 @@ public class Character extends AnchorPane {
     return action;
   }
 
+  /**
+   * Sets the action of this character to the given integer value.
+   * If the character is not currently animating, initializes the character's elements.
+   *
+   * @param a the integer value representing the action to set
+   */
   public void setAction(int a) {
     action = a;
 
@@ -136,11 +163,20 @@ public class Character extends AnchorPane {
 
   }
 
+  /**
+   * Enables mobility for the character by creating a new CharacterMovement object.
+   * @param obstacles a list of Rectangles representing obstacles that the character must avoid
+   * @param observableList an ObservableList of Nodes representing the nodes that the character must avoid
+   */
   public void enableMobility(List<Rectangle> obstacles, ObservableList<Node> observableList) {
     // create character movement object
     movement = new CharacterMovement(this, playerBound, proximityBound, obstacles, observableList);
   }
 
+  /**
+   * Plays the footstep sound effect if the game is not muted and the sound effect is not already playing.
+   * Adds the sound effect to the list of sound effects in the GameState.
+   */
   public void playFootSteps() {
     if (!GameState.isMuted && !footstepSound.isPlaying()) {
       footstepSound.setCycleCount(AudioClip.INDEFINITE);
@@ -159,6 +195,11 @@ public class Character extends AnchorPane {
     movement.movePlayer(action);
   }
 
+  /**
+   * Starts the animation for the character if it is not already animating.
+   * Sets the cycle count to indefinite and plays the animation.
+   * Also plays the footstep sound effect.
+   */
   public void startAnimation() {
     if (animating != true) {
       animating = true;
@@ -168,13 +209,20 @@ public class Character extends AnchorPane {
     }
   }
 
+  /**
+   * Stops the animation and sets the active image viewport to the last frame of the animation.
+   * If endSound is true, it also ends the footstep sound.
+   *
+   * @param endSound a boolean indicating whether to end the footstep sound or not
+   */
   public void endAnimation(boolean endSound) {
     animating = false;
     animation.stop();
     activeImg.setViewport(
         new Rectangle2D(offsetX, offsetY + 64 * action, frameWidth, frameHeight));
-    if (endSound)
+    if (endSound) {
       endFootSteps();
+    }
   }
 
   public int getColumns() {
@@ -225,6 +273,9 @@ public class Character extends AnchorPane {
     this.frameHeight = frameHeight;
   }
 
+  /**
+   * Initializes the character's sprite sheet and animation.
+   */
   private void initElements() {
     // init character
     assignSpriteSheet();

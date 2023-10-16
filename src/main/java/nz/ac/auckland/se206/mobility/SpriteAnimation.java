@@ -11,6 +11,11 @@ import javafx.util.Duration;
 https://netopyr.com/2012/03/09/creating-a-sprite-animation-with-javafx/
  */
 
+/**
+ * The SpriteAnimation class is used to create an animation from a sprite sheet.
+ * It extends the Transition class and overrides the interpolate method to
+ * interpolate through the sprite sheet based on the given value.
+ */
 public class SpriteAnimation extends Transition {
 
   private final ImageView imageView;
@@ -23,6 +28,18 @@ public class SpriteAnimation extends Transition {
 
   private int lastIndex;
 
+  /**
+   * Constructs a new SpriteAnimation object.
+   *
+   * @param imageView the ImageView to apply the animation to
+   * @param duration  the duration of the animation
+   * @param count     the number of frames in the animation
+   * @param columns   the number of columns in the sprite sheet
+   * @param offsetX   the x offset of the first frame in the sprite sheet
+   * @param offsetY   the y offset of the first frame in the sprite sheet
+   * @param width     the width of each frame in the sprite sheet
+   * @param height    the height of each frame in the sprite sheet
+   */
   public SpriteAnimation(
       ImageView imageView,
       Duration duration,
@@ -43,6 +60,11 @@ public class SpriteAnimation extends Transition {
     setInterpolator(Interpolator.LINEAR);
   }
 
+  /**
+   * Interpolates through the sprite sheet based on the given value.
+   * 
+   * @param k The value used to interpolate through the sprite sheet.
+   */
   protected void interpolate(double k) {
     // interpolating through teh sprite sheet
     int index = Math.min((int) Math.floor(k * count), count - 1);

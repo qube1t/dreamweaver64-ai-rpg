@@ -1,15 +1,26 @@
 package nz.ac.auckland.se206.components;
 
-import nz.ac.auckland.se206.controllers.DestnationPuzzleController;
 import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+import nz.ac.auckland.se206.controllers.DestnationPuzzleController;
 
+/**
+ * A custom Label class that can be dragged and dropped.
+ */
 public class DraggableLetter extends Label {
 
+  /**
+   * A custom Label class that can be dragged and dropped.
+   * It allows the user to drag and drop the label to another location.
+   * 
+   * @param text the text to be displayed on the label
+   * @param hbox the HBox that the label is in
+   * @param controller the controller for the destination puzzle
+   */
   public DraggableLetter(String text, HBox hbox, DestnationPuzzleController controller) {
     super(text);
 

@@ -40,6 +40,16 @@ public class DestnationPuzzleController {
 
   private Cursor custom;
 
+  /**
+   * Initializes the Destination Puzzle Controller.
+   * Sets the cursor to custom cursor, sets mouse hovering effects for submit
+   * button,
+   * sets progress bar to invisible, initializes the puzzle with unarranged puzzle
+   * string,
+   * and sets the introduction text to the puzzle intro message for room 3.
+   * 
+   * @throws ApiProxyException if there is an issue with the API proxy
+   */
   public void initialize() throws ApiProxyException {
     // Set the cursor to custom cursor
     Image cursor = new Image("/images/cursor.png", 9,
@@ -70,6 +80,18 @@ public class DestnationPuzzleController {
     introduction.setText(GameState.puzzleIntroMessageRoom3.toUpperCase());
   }
 
+  /**
+   * This method is called when the user clicks the submit button for the
+   * destination puzzle.
+   * It retrieves the current text of the puzzle and checks if it matches the
+   * correct answer.
+   * If the answer is correct, it updates the introduction label with a success
+   * message and hides the submit button.
+   * If the answer is incorrect, it updates the introduction label with a failure
+   * message and enables the submit button.
+   * 
+   * @throws ApiProxyException if there is an error with the API proxy
+   */
   @FXML
   public void onClickSubmit() throws ApiProxyException {
     System.out.println("submit");
@@ -135,6 +157,10 @@ public class DestnationPuzzleController {
     }
   }
 
+  /**
+   * Handles the event when the close button is clicked. Removes the overlay from
+   * the main game controller.
+   */
   @FXML
   protected void onClickClose() {
     MainGameController.removeOverlay(false);
@@ -157,6 +183,13 @@ public class DestnationPuzzleController {
     letterBox.setAlignment(Pos.CENTER);
   }
 
+  /**
+   * Sets the cursor of the letter box based on the given status.
+   * If the status is 0, the cursor is set to OPEN_HAND.
+   * If the status is not 0, the cursor is set to CLOSED_HAND.
+   * 
+   * @param status the status of the cursor to be set
+   */
   public void setLetterCursor(int status) {
     if (status == 0) {
       letterBox.setCursor(Cursor.OPEN_HAND);

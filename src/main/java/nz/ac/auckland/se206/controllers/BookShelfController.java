@@ -2,22 +2,24 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * The BookShelfController class is responsible for managing the bookshelf in the game.
+ * It handles drag and drop functionality for books, sets up labels for books in the bookshelf,
+ * and handles mouse clicks on the labels to take or return books.
+ */
 public class BookShelfController {
   private static Label[] lblBooks;
   private static ImageView[] bookRects;
 
   /**
    * Returns the book to the bookshelf.
-   * 
    */
   public static void returnBook() {
     // return the book to the bookshelf using for loop.
@@ -65,14 +67,20 @@ public class BookShelfController {
   @FXML
   private ImageView book7Img;
 
+  /**
+   * Initializes the BookShelfController by setting up drag and drop functionality
+   * for books, setting up labels for books in the bookshelf, and handling mouse
+   * clicks on the labels to take or return books.
+   */
   public void initialize() {
 
     // Handle drag and drop book back to bookshelf
     bookShelfPane.setOnDragOver(event -> {
       System.out.println("Dragged over to bookshelf");
-      if (event.getGestureSource() != bookShelfPane &&
-          event.getDragboard().hasImage()) {
-        event.acceptTransferModes(TransferMode.ANY);
+      if (event.getGestureSource() != bookShelfPane) {
+        if (event.getDragboard().hasImage()) {
+          event.acceptTransferModes(TransferMode.ANY);
+        }
       }
       event.consume();
     });
@@ -97,24 +105,17 @@ public class BookShelfController {
     lblBooks = new Label[] { lblBook1, lblBook2, lblBook3, lblBook4, lblBook5, lblBook6, lblBook7 };
 
     bookRects = new ImageView[] {
-        book1Img, book2Img, book3Img, book4Img, book5Img, book6Img, book7Img
-    };
+        book1Img, book2Img, book3Img, book4Img, book5Img, book6Img, book7Img };
 
     // setting labels in the bookshelf
-    for (
-
-        int i = 0; i < GameState.booksInRoom1.length; i++) {
+    for (int i = 0; i < GameState.booksInRoom1.length; i++) {
       Label lblBook = lblBooks[i];
-
-      // if (lblBook.getText() == GameState.takenBook)
-      // continue;
 
       if (GameState.booksInRoom1[i] != GameState.takenBook) {
         lblBook.setText(GameState.booksInRoom1[i]);
       } else {
         lblBook.setVisible(false);
         bookRects[i].setVisible(false);
-        // continue;
       }
 
       ImageView bookRect = bookRects[i];
@@ -144,14 +145,12 @@ public class BookShelfController {
             }
             lblBook.setVisible(false);
             bookRect.setVisible(false);
-            // GameState.booksInRoom1[index] = null;
           });
     }
   }
 
   /**
    * This method checks whether the player has taken one book.
-   * 
    * @return true if the player has taken one book, false otherwise
    */
   private boolean hasTakenOneBook() {

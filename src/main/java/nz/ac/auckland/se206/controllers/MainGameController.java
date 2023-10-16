@@ -8,12 +8,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-
-import javafx.scene.Cursor;
-import javafx.scene.ImageCursor;
-
 import javafx.scene.Node;
-
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
@@ -37,6 +32,13 @@ import nz.ac.auckland.se206.components.CustomImageSet;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * The MainGameController class is responsible for controlling the main game
+ * logic and UI.
+ * It manages the game inventory, interactable objects, and overlays.
+ * This class is a singleton and can be accessed through the getInstance()
+ * method.
+ */
 public class MainGameController {
 
   @FXML
@@ -58,8 +60,6 @@ public class MainGameController {
 
   private static Label timerInitiated;
   private static Label hintInitiated;
-  @FXML
-  private Label statusLbl;
   private static Label statusLblInitiated;
   private static ImageView item1Initiated;
   private static ImageView item2Initiated;
@@ -69,10 +69,19 @@ public class MainGameController {
   private static ImageView item6Initiated;
   private static CustomImageSet imageSetDragging;
 
+  /**
+   * This class is the controller for the main game screen.
+   * It manages the game logic and user interface.
+   */
   public static MainGameController getInstance() {
     return instance;
   }
 
+  /**
+   * Updates the inventory UI with the initialized images.
+   * This method sets up the drag and drop functionality for the inventory items
+   * and updates the UI with the obtained items.
+   */
   private static void updateInventoryUi() {
     // updating inventory ui with initialised images
 
@@ -97,7 +106,8 @@ public class MainGameController {
             originalImageView.setFitHeight(40); // Set the desired height
             originalImageView.setFitWidth(40);
 
-            imageSetDragging = new CustomImageSet(originalImage, obtainedItems.get(id).getId());
+            imageSetDragging = new CustomImageSet(originalImage,
+                obtainedItems.get(id).getId());
             System.out.println("dragging " + obtainedItems.get(id).getId());
 
             // Create a new ClipboardContent with the custom drag image
@@ -124,10 +134,21 @@ public class MainGameController {
 
   }
 
+  /**
+   * Returns the current image set being used for dragging.
+   *
+   * @return the current image set being used for dragging
+   */
   public static CustomImageSet getImageSet() {
     return imageSetDragging;
   }
 
+  /**
+   * Adds an obtained item to the inventory.
+   *
+   * @param itemImage The image of the obtained item.
+   * @param itemId    The ID of the obtained item.
+   */
   public static void addObtainedItem(Image itemImage, String itemId) {
     // adding obtained item to inventory
     obtainedItems.add(new ObtainedItemsWithId(itemImage, itemId));
@@ -135,6 +156,10 @@ public class MainGameController {
     updateInventoryUi();
   }
 
+  /**
+   * Removes the item with the specified ID from the player's inventory.
+   * @param itemId the ID of the item to be removed
+   */
   public static void removeObtainedItem(String itemId) {
     // removing obtained item from inventory
     for (int i = 0; i < obtainedItems.size(); i++) {
@@ -146,6 +171,10 @@ public class MainGameController {
     updateInventoryUi();
   }
 
+  /**
+   * Disables the interact pane and fades it out. Plays a door sound effect if the
+   * game is not muted.
+   */
   public static void disableInteractPane() {
     // fade out interact pane
     initialisedInteractPane.setDisable(true);
@@ -158,6 +187,10 @@ public class MainGameController {
     }
   }
 
+  /**
+   * Enables the interact pane by fading it in and setting it to be visible and
+   * not disabled.
+   */
   public static void enableInteractPane() {
     // fade in interact pane
     initialisedInteractPane.setVisible(true);
@@ -170,9 +203,16 @@ public class MainGameController {
     ft.play();
   }
 
+  /**
+   * Adds an overlay to the game pane.
+   * @param roomN The name of the room to add as an overlay.
+   * @param isRoom A boolean indicating whether the overlay is a room or not.
+   * @throws IOException If the FXML file for the room cannot be loaded.
+   */
   public static void addOverlay(String roomN, boolean isRoom) throws IOException {
     // adds overlay to the game pane
-    Region room1 = (Region) FXMLLoader.load(App.class.getResource("/fxml/" + roomN + ".fxml"));
+    Region room1 = (Region) FXMLLoader.load(App.class
+        .getResource("/fxml/" + roomN + ".fxml"));
     room1.setScaleShape(true);
 
     if (isRoom) {
@@ -211,6 +251,11 @@ public class MainGameController {
     initialisedGamePane.getChildren().add(initialisedGamePane.getChildren().size() - 4, room1);
   }
 
+  /**
+   * Removes the overlay from the game screen. If alsoRooms is true, it also
+   * removes the rooms and ends the character animation.
+   * @param alsoRooms a boolean indicating whether to remove the rooms as well
+   */
   public static void removeOverlay(boolean alsoRooms) {
     GameState.isMachineOpen = false;
     // removing overlay
@@ -267,6 +312,8 @@ public class MainGameController {
   @FXML
   private Label bubbleText;
   @FXML
+  private Label statusLbl;
+  @FXML
   private ListView<Label> chat;
   @FXML
   private TextField chatInput;
@@ -278,6 +325,15 @@ public class MainGameController {
   private Text bubbleChatText = new Text("text");
   private String prevLetter;
 
+  /**
+   * Initializes the game by setting up various components such as the timer, hint
+   * count, and inventory items. Also sets up the bubble chat and adds an instruction 
+   * overlay to the bottom of the outer pane. Finally, initializes the game state and 
+   * starts playing the background music if not muted.
+   *
+   * @throws IOException if there is an error loading the instruction overlay FXML
+   *                     file.
+   */
   public void initialize() throws IOException {
     obtainedItems = new ArrayList<>();
     chatPane.setMouseTransparent(true);
@@ -305,7 +361,8 @@ public class MainGameController {
     // adding instruction overlay to the bottom of the outer pane
     outerPane
         .getChildren()
-        .add(0, (Region) FXMLLoader.load(App.class.getResource("/fxml/instruction_load.fxml")));
+        .add(0, (Region) FXMLLoader.load(App.class
+            .getResource("/fxml/instruction_load.fxml")));
 
     addOverlay("room1", true);
 
@@ -335,7 +392,6 @@ public class MainGameController {
   public void onKeyPressed(KeyEvent event) {
     // on key pressed
     String letter = event.getCode().toString();
-    // System.out.println("key " + event.getCode() + " pressed");
     if (!letter.equals(prevLetter)) {
       character.endAnimation(false);
     }
@@ -357,12 +413,11 @@ public class MainGameController {
     }
 
     // move after animating as it will change direction of character
-    if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
-      // if (!character.isAnimating()) {
+    if (letter.equals("D") || letter.equals("A")
+        || letter.equals("W") || letter.equals("S")) {
+
       character.startAnimation();
-      // character.startMovement();
-      // }
-      // character.move();
+
     }
   }
 
@@ -373,17 +428,23 @@ public class MainGameController {
    */
   @FXML
   public void onKeyReleased(KeyEvent event) {
-    // System.out.println("key " + event.getCode() + " released");
     String letter = event.getCode().toString();
-    if (letter.equals("D") || letter.equals("A") || letter.equals("W") || letter.equals("S")) {
+    if (letter.equals("D") || letter.equals("A")
+        || letter.equals("W") || letter.equals("S")) {
       if (letter.equals(prevLetter)) {
         character.endAnimation(true);
       }
-      // character.endAnimation();
-      // character.stopMovement();
     }
   }
 
+  /**
+   * Toggles the visibility of the chat pane and updates the chat toggle button
+   * text accordingly.
+   * If the chat pane is hidden, it will be shown and the chat toggle button text
+   * will be set to "Hide Chat".
+   * If the chat pane is shown, it will be hidden and the chat toggle button text
+   * will be set to "Show Chat".
+   */
   @FXML
   private void toggleChat() {
     System.out.println("toggle chat");
@@ -408,6 +469,15 @@ public class MainGameController {
     }
   }
 
+  /**
+   * This method is called when the user presses a key while typing in the chat
+   * input box. If the key pressed is the ENTER key, the message is added to the
+   * chat box and sent to the Eleanor AI for a response. The response is then
+   * displayed in the chat box. If the response contains hints, the number of
+   * remaining hints is updated.
+   * @param ke The KeyEvent object representing the key press event.
+   * @throws ApiProxyException if there is an error with the API proxy.
+   */
   @FXML
   private void keyPressedChatInput(KeyEvent ke) throws ApiProxyException {
     if (ke.getCode().equals(KeyCode.ENTER)) {
@@ -444,6 +514,11 @@ public class MainGameController {
     }
   }
 
+  /**
+   * Adds a chat message to the chat pane.
+   * @param text the text of the chat message
+   * @param isEleanor true if the chat message is from Eleanor, false otherwise
+   */
   public void addChat(String text, boolean isEleanor) {
     System.out.println("add chat");
 
@@ -473,6 +548,11 @@ public class MainGameController {
     chat.scrollTo(index + 1);
   }
 
+  /**
+   * This method is called when the user clicks on the game pane. It hides the
+   * chat bubble and sets the mouse transparency of the bubble text pane and AI
+   * character pane to true.
+   */
   @FXML
   private void clickedGamePane() {
     // hide chat bubble
@@ -483,6 +563,10 @@ public class MainGameController {
     aiCharacterPane.setMouseTransparent(true);
   }
 
+  /**
+   * Hides the chat bubble and sets the mouse transparency of the bubble text pane
+   * and AI character pane to true.
+   */
   public void clickGamePane() {
     // hide chat bubble
     speechBubble.setVisible(false);
@@ -492,6 +576,10 @@ public class MainGameController {
     aiCharacterPane.setMouseTransparent(true);
   }
 
+  /**
+   * Gets the time limit for the game based on the selected game mode.
+   * Sets the time limit and updates the timerInitiated label accordingly.
+   */
   public void getTimeLimit() {
     // getting time limit from game mode
     System.out.println("start game");
@@ -516,9 +604,9 @@ public class MainGameController {
   }
 
   /**
-   * Sets the time limit.
-   *
-   * @param timeLimit
+   * Sets the time limit for the game and starts a thread to count down from the time limit.
+   * 
+   * @param timeLimit the time limit in seconds
    */
   private void setTimeLimit(int timeLimit) {
     // setting time limit thread to count down from time limit.
@@ -574,8 +662,7 @@ public class MainGameController {
 
   /**
    * Handles the time limit reached event.
-   *
-   * @throws IOException
+   * @throws IOException if there is an error loading the end menu FXML file
    */
   private void handleTimeLimitReached() throws IOException {
     // time limit reached
@@ -585,6 +672,12 @@ public class MainGameController {
     }
   }
 
+  /**
+   * Sets the hint count based on the game mode selected.
+   * If game mode is EASY, hint count is infinite.
+   * If game mode is MEDIUM, hint count is 5.
+   * If game mode is HARD, hint count is none.
+   */
   private void setHintCount() {
     // setting hint count
     switch (GameState.gameMode[0]) {
@@ -603,7 +696,10 @@ public class MainGameController {
     }
   }
 
-  /** Updates the hint count. */
+  /**
+   * Updates the hint count displayed on the UI based on the current game mode.
+   * If the game mode is not MEDIUM, the hint count will not be updated.
+   */
   private void updateHintCount() {
     if (GameState.gameMode[0].equals("MEDIUM")) {
       hintInitiated.setText("Hint: " + Integer.toString(GameState.hintsRemaining));

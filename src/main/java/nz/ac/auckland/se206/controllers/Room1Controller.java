@@ -16,18 +16,29 @@ import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
-/** Controller class for the room view. */
+/**
+ * The Room1Controller class is responsible for controlling the behavior of Room 1 in the game.
+ * It initializes the map, character mobility, and GPT-3 API for generating prompts for the user to interact with.
+ * It also enables/disables buttons and obstacles in the room based on the game state.
+ */
 public class Room1Controller {
   // static fields for gpt
   static boolean gptInit = false;
   static int gptStage = 0;
   static ImageView imgEndSt;
 
+  /**
+   * Resets the GPT (Generative Pre-trained Transformer) for Room 1.
+   * This method sets the gptInit flag to false and the gptStage to 0.
+   */
   public static void resetGptRoom1() {
     gptInit = false;
     gptStage = 0;
   }
 
+  /**
+   * Initializes the map for Room 1 by setting the end image.
+   */
   public static void initializeMap() {
     imgEndSt.setImage(new Image("/images/rooms/room1/endImage.gif"));
   }
@@ -95,7 +106,12 @@ public class Room1Controller {
   @FXML
   private ImageView rightDoorLoaderImg;
 
-  /** Initializes the room view, it is called when the room loads. */
+  /**
+   * Initializes the Room1Controller by setting up the obstacles, enabling/disabling buttons 
+   * based on game state, enabling character mobility, initializing GPT, setting character 
+   * position, and initializing the map if ten seconds are left.
+   * @throws ApiProxyException if there is an issue with the API proxy
+   */
   public void initialize() throws ApiProxyException {
     ArrayList<Rectangle> obsts = new ArrayList<Rectangle>(
         Arrays.asList(
@@ -127,16 +143,8 @@ public class Room1Controller {
     } else {
       // enable interact pane
       MainGameController.enableInteractPane();
-      if (GameState.isRoom3GptDone && GameState.isRoom3FirstEntered) {
-        Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-      } else {
-        Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-      }
-      if (GameState.isRoom2GptDone && GameState.isRoom2FirstEntered) {
-        Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
-      } else {
-        Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
-      }
+      Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+      Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
     }
 
     // set character position
@@ -163,6 +171,12 @@ public class Room1Controller {
     }
   }
 
+  /**
+   * Initializes the GPT-3 API for Room 1. Retrieves books from GPT-3 and sets up the interact pane. 
+   * Only the chunk of text surrounded with the character * before and after will be shown to the user. 
+   * Keep the message 1 sentence.
+   * @throws ApiProxyException if there is an issue with the API proxy
+   */
   private void initGpt() throws ApiProxyException {
     // gettng books from gpt
     MainGameController.enableInteractPane();
@@ -174,11 +188,9 @@ public class Room1Controller {
             + " sentance. .",
         str -> {
           System.out.println("111");
+          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
-
-    // GameState.eleanorAi.runGpt(GptPromptEngineeringRoom1.get7Books(), str -> {
-    // System.out.println("221");
-    // });
 
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.get7Books(),
@@ -196,11 +208,19 @@ public class Room1Controller {
           GameState.booksLoaded = true;
           // get riddle from gpt
           GameState.isRoom1GptDone = true;
-          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
   }
 
+  /**
+   * This method is called when the user wants to go to the left room. It disables
+   * the interact pane for transition,
+   * removes the overlay, adds the overlay for room3, and runs the GPT model to
+   * update the user's location.
+   *
+   * @throws IOException          if there is an error with input/output
+   * @throws InterruptedException if the thread is interrupted
+   * @throws ApiProxyException    if there is an error with the API proxy
+   */
   @FXML
   public void goToLeftRoom() throws IOException, InterruptedException, ApiProxyException {
     // go to the left room
@@ -214,6 +234,16 @@ public class Room1Controller {
         + "No reply is required");
   }
 
+  /**
+   * This method is called when the user wants to move to the right room. It
+   * disables the interact pane for transition,
+   * removes the overlay, adds the overlay for room2, and runs the GPT model to
+   * update the game state.
+   *
+   * @throws IOException          if there is an error with input/output
+   * @throws InterruptedException if the thread is interrupted
+   * @throws ApiProxyException    if there is an error with the API proxy
+   */
   @FXML
   private void goToRightRoom() throws IOException, InterruptedException, ApiProxyException {
     // go to the right room
@@ -227,6 +257,15 @@ public class Room1Controller {
         + " ship. No reply is required");
   }
 
+  /**
+   * Opens the book shelf and adds an overlay to the main game controller.
+   * Also runs a GPT to update the game state with a message indicating that the
+   * user has opened the book shelf.
+   *
+   * @throws IOException       if an I/O error occurs when opening the book shelf.
+   * @throws ApiProxyException if an error occurs when running the GPT to update
+   *                           the game state.
+   */
   @FXML
   private void openBookShelf() throws IOException, ApiProxyException {
     // book shelf clicked
@@ -235,11 +274,14 @@ public class Room1Controller {
         "User update: User has opened book shelf. No reply is needed for this message.");
   }
 
-  // private void enableAccessToItem(Rectangle btn, ImageView img) {
-  // btn.setDisable(false);
-  // img.setImage(null);
-  // }
-
+  /**
+   * Opens the main door if the user has decrypted the mission. If the user has
+   * not decrypted the
+   * mission, a message is sent to the Eleanor AI and no further action is taken.
+   *
+   * @throws ApiProxyException if there is an issue with the API proxy
+   * @throws IOException       if there is an issue with input/output
+   */
   @FXML
   private void openMainDoor() throws ApiProxyException, IOException {
     // main door clicked
@@ -252,19 +294,30 @@ public class Room1Controller {
     }
   }
 
+  /**
+   * Handles the event when the crockeries button is clicked.
+   * Adds an overlay for the crockery shelf to the main game controller.
+   * @throws ApiProxyException if there is an issue with the API proxy
+   * @throws IOException       if there is an issue with IO operations
+   */
   @FXML
   private void onClickCrockeries() throws ApiProxyException, IOException {
     // crockeries clicked
     MainGameController.addOverlay("crockery_shelf", false);
-    GameState.eleanorAi.runGpt(
-        "User update, User has opened an empty book shelf. No reply needed");
   }
 
+  /**
+   * Handles the event when the chest is clicked.
+   * Adds an overlay to the main game controller to display the chest, and updates
+   * the game state.
+   *
+   * @throws ApiProxyException if there is an issue with the API proxy
+   * @throws IOException       if there is an issue with the input/output
+   */
   @FXML
   private void onClickChest() throws ApiProxyException, IOException {
     // chest clicked
     MainGameController.addOverlay("chest", false);
-    GameState.eleanorAi.runGpt(
-        "User update: opened the chest, but there is nothing to see there. No reply needed.");
+
   }
 }

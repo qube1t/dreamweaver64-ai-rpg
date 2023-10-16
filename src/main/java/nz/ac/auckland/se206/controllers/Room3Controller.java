@@ -27,6 +27,16 @@ import nz.ac.auckland.se206.components.Character;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/**
+ * The Room3Controller class is responsible for controlling the behavior of Room
+ * 3 in the game.
+ * It initializes the GPS map, enables character movement, and loads the
+ * appropriate game state.
+ * It also handles click events for various elements in the room, such as doors
+ * and computers.
+ * Additionally, it contains methods for unarranging city names and setting the
+ * end image when the time is up.
+ */
 public class Room3Controller {
 
   private static ImageView imgEndStRoom3;
@@ -112,6 +122,14 @@ public class Room3Controller {
   private ArrayList<Rectangle> obstacles;
   private AudioClip atcSound;
 
+  /**
+   * Initializes the Room3Controller by setting up the GPS map, enabling character
+   * movement, and loading the appropriate game state.
+   * If the puzzle is not loaded, the clickableComputer2 is disabled.
+   * If the game is muted, the ATC ambiance sound is played.
+   * 
+   * @throws ApiProxyException if there is an issue with the API proxy.
+   */
   public void initialize() throws ApiProxyException {
 
     flightComputer = clickableComputer1;
@@ -137,14 +155,8 @@ public class Room3Controller {
       GameState.isRoom3FirstEntered = true;
     } else {
       MainGameController.enableInteractPane();
-      if (GameState.isRoom2FirstEntered && GameState.isRoom2GptDone) {
-        Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
-      } else {
-        Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
-      }
-      if (GameState.isRoom1GptDone) {
-        Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
-      }
+      Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
+      Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
       Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
     }
 
@@ -224,6 +236,17 @@ public class Room3Controller {
     return unarrangedCityName.toUpperCase();
   }
 
+  /**
+   * Handles the click event for the door in Room 1.
+   * This method updates the game state, disables the interact pane for
+   * transition,
+   * removes the overlay, adds the overlay for Room 1, and runs the GPT model for
+   * Eleanor AI.
+   * If the game is not muted, it stops the sound from the previous room.
+   * 
+   * @throws IOException       if an I/O error occurs
+   * @throws ApiProxyException if an error occurs while calling the GPT API
+   */
   @FXML
   public void onClickRoom1() throws IOException, ApiProxyException {
     System.out.println("Door clicked");
@@ -240,6 +263,15 @@ public class Room3Controller {
       atcSound.stop();
   }
 
+  /**
+   * Handles the click event for the Room2 button.
+   * Loads instructions, disables interact pane for transition, removes overlay,
+   * adds overlay for room2,
+   * runs GPT for Eleanor AI, and stops ATC sound if not muted.
+   * 
+   * @throws IOException       if an I/O error occurs
+   * @throws ApiProxyException if an API proxy error occurs
+   */
   @FXML
   public void onClickRoom2() throws IOException, ApiProxyException {
     System.out.println("Room2 clicked");
@@ -257,6 +289,13 @@ public class Room3Controller {
       atcSound.stop();
   }
 
+  /**
+   * Handles the event when the computer is clicked.
+   * Adds an overlay to the main game controller.
+   * 
+   * @throws IOException       if an I/O error occurs.
+   * @throws ApiProxyException if an API proxy error occurs.
+   */
   @FXML
   public void onClickComputer() throws IOException, ApiProxyException {
     System.out.println("Computer clicked");
@@ -284,6 +323,20 @@ public class Room3Controller {
             + " revealing the city name.");
   }
 
+  /**
+   * Handles the event when the user clicks on the radar button. Adds an overlay
+   * to the main game
+   * screen to display the radar computer, and runs the GPT model to generate a
+   * message indicating
+   * that the user has opened the radar computer and the location of the treasure
+   * box. If the user
+   * asks for hints, the hints should be given. No need to respond to this
+   * message.
+   *
+   * @throws IOException       if an I/O error occurs
+   * @throws ApiProxyException if an error occurs while communicating with the GPT
+   *                           API
+   */
   @FXML
   public void onClickRadar() throws IOException, ApiProxyException {
     // user clicked radar
@@ -307,6 +360,14 @@ public class Room3Controller {
     MainGameController.addOverlay("decryption_machine", false);
   }
 
+  /**
+   * Initializes the GPT-3 API for Room 3 and runs three prompts: the welcome
+   * message, the city selection prompt, and the puzzle introduction message.
+   * Enables access to the right and left door buttons and the clickable computer
+   * 2 after the prompts are completed.
+   * 
+   * @throws ApiProxyException if there is an issue with the API proxy
+   */
   private void gptInitilize() throws ApiProxyException {
 
     // Enable interact pane first
@@ -347,6 +408,11 @@ public class Room3Controller {
         });
   }
 
+  /**
+   * Initializes the GPS map by setting up the radar points and radar objects to a
+   * list, setting the current city index if it is not set, initializing the
+   * current city point and label, and starting the radar animation.
+   */
   private void initilizeGpsMap() {
     // Initialize the radar points and radarObjects to a list.
     this.cityPoints = new Circle[] { point1, point2, point3, point4, point5 };
@@ -385,6 +451,11 @@ public class Room3Controller {
     System.out.println("Current city is " + GameState.currentCities[currentCity - 1].getText());
   }
 
+  /**
+   * Fades in the given circle object representing a city on the radar.
+   * 
+   * @param city the circle object representing the city to be faded in
+   */
   private void fadeInRadarPoints(Circle city) {
 
     city.setVisible(true);
@@ -395,6 +466,12 @@ public class Room3Controller {
     fadeTransition.play();
   }
 
+  /**
+   * Fades out the given Circle object over a duration of 1.5 seconds using a
+   * linear interpolation.
+   * 
+   * @param city The Circle object to fade out.
+   */
   private void fadeOutRadarPoints(Circle city) {
 
     FadeTransition fadeTransition = new FadeTransition(Duration.seconds(1.5), city);
