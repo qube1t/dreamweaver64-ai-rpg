@@ -10,11 +10,9 @@ public class GptPromptEngineeringRoom2 {
    */
   public static String room2WelcomeMessage() {
     // Ask GPT for the introduction of the game.
-    return "User update: The user now entered a pirate's ship which was his favorite"
-        + " childhood video game. The player needs to"
-        + " interact with different objects including solving a riddle to trade with pirate"
-        + " to get the key. Using the key, the player can open the treasure box."
-        + "  Introduce the user, not including any hints. Surround the response"
+    return "I am the computer architecture that runs DREAMWEAVER64. The player now entered a pirate's ship which was his favorite"
+        + " childhood video game. The player needs to interact with the pirate to get the treasure."
+        + " Greet and introduce the user, not including any hints. Surround the response"
         + " to be displayed to the player to the user with *.";
   }
 
@@ -26,12 +24,6 @@ public class GptPromptEngineeringRoom2 {
   public static String getPirateWrongResponse() {
     return "This is the loading stage. Reply in one sentence how a pirate would say wrong answer."
         + " Surround the sentence before and after with the character ^";
-  }
-
-  public static String clickPirateGetTheKey() {
-    return "You are the pirate. The user has now got the correct book and stored inside the inventory bar. "
-        + " He needs to drag the book to your area to get the key. Now he clicks on you."
-        + "Surround the short response with ^.";
   }
 
   /**
@@ -53,7 +45,7 @@ public class GptPromptEngineeringRoom2 {
   public static String generateFinalUnencrypted() {
     return "This is the loading stage. Give the contents of the lost message to be shown to the"
         + " user. The contents of the letter needs to be between the character +. it has to"
-        + " be only 2 sentences long. maybe foretelling some prophecy. should try to reveal"
+        + " be only 2 sentences long. Maybe foretelling some prophecy. Should try to reveal"
         + " some fact";
   }
 
@@ -64,7 +56,7 @@ public class GptPromptEngineeringRoom2 {
    * @return the encrypted message
    */
   public static String generateFinalEncrypted() {
-    return "This is the loading stage. Return meaningless encryption of 2 sentences, and only"
+    return "This is the loading stage. Return meaningless encryption of 1 sentence, and only"
         + " return the encryption with the character + before and after. ";
   }
 }
