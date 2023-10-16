@@ -127,16 +127,8 @@ public class Room1Controller {
     } else {
       // enable interact pane
       MainGameController.enableInteractPane();
-      if (GameState.isRoom3GptDone && GameState.isRoom3FirstEntered) {
-        Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-      } else {
-        Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-      }
-      if (GameState.isRoom2GptDone && GameState.isRoom2FirstEntered) {
-        Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
-      } else {
-        Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
-      }
+      Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+      Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
     }
 
     // set character position
@@ -256,15 +248,15 @@ public class Room1Controller {
   private void onClickCrockeries() throws ApiProxyException, IOException {
     // crockeries clicked
     MainGameController.addOverlay("crockery_shelf", false);
-    GameState.eleanorAi.runGpt(
-        "User update, User has opened an empty book shelf. No reply needed");
+    // GameState.eleanorAi.runGpt(
+    //     "User update, User has opened an empty book shelf. No reply needed");
   }
 
   @FXML
   private void onClickChest() throws ApiProxyException, IOException {
     // chest clicked
     MainGameController.addOverlay("chest", false);
-    GameState.eleanorAi.runGpt(
-        "User update: opened the chest, but there is nothing to see there. No reply needed.");
+    // GameState.eleanorAi.runGpt(
+    //     "User update: opened the chest, but there is nothing to see there. No reply needed.");
   }
 }
