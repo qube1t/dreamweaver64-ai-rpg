@@ -504,12 +504,12 @@ public class Room2Controller {
         }
         MainGameController.addOverlay("treasure_box", false);
       } else {
-        if (!GameState.isWrongBoxFirstClicked) {
-          GameState.eleanorAi.runGpt(
-            "User update: User clicked the wrong treasure box."
-                + " The location of the correct treasure box is shown in room3 radar."
-                + " No reply is required. If the user ask for hint, give the hint.");
-        }
+
+        // GameState.eleanorAi.runGpt(
+        // "User update: User clicked the wrong treasure box."
+        // + " The location of the correct treasure box is shown in room3 radar."
+        // + " No reply is required. If the user ask for hint, give the hint.");
+
         flashBoxes();
         Helper.changeTreasureBox(GameState.currentBox, numOfBox);
       }

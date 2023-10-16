@@ -166,6 +166,8 @@ public class Room1Controller {
             + " sentance. .",
         str -> {
           System.out.println("111");
+          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
 
     // GameState.eleanorAi.runGpt(GptPromptEngineeringRoom1.get7Books(), str -> {
@@ -188,8 +190,8 @@ public class Room1Controller {
           GameState.booksLoaded = true;
           // get riddle from gpt
           GameState.isRoom1GptDone = true;
-          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+          // Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          // Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
   }
 
@@ -249,7 +251,9 @@ public class Room1Controller {
     // crockeries clicked
     MainGameController.addOverlay("crockery_shelf", false);
     // GameState.eleanorAi.runGpt(
-    //     "User update, User has opened an empty book shelf. No reply needed");
+
+    // "User update, User has opened an empty book shelf. No reply needed");
+
   }
 
   @FXML
@@ -258,5 +262,6 @@ public class Room1Controller {
     MainGameController.addOverlay("chest", false);
     // GameState.eleanorAi.runGpt(
     //     "User update: opened the chest, but there is nothing to see there. No reply needed.");
+
   }
 }
