@@ -45,10 +45,11 @@ public class GptPromptEngineeringRoom1 {
     // asking pirate riddle
     return "This is the loading stage. Give a riddle in the form of a quote from the book "
         + ansbook
-        + " in only 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"
-        + " quote before and after with the character ^. The user needs to identify the book "
+
+        + " in 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"
+        + " quote before and after with the character ^ do not use any other character. The user needs to identify the book "
         + ansbook
-        + " in the other room, later in the game. Do"
+        + " in the other room. Do"
         + " not reveal the book name. You can give hints once the riddle has been asked.";
   }
 

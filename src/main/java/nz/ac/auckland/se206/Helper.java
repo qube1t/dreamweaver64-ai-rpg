@@ -18,7 +18,7 @@ public class Helper {
    * @param c
    * @return matchesList
    */
-  public static List<String> getTextBetweenChar(String str, String c) {
+  public static List<String> getTextBetweenChar(String str, String c, boolean strict) {
     // get text between two characters, including the two characters
     List<String> matchesList = new ArrayList<String>();
     Pattern pattern = Pattern.compile("\\" + c + "(.*?)\\" + c);
@@ -27,6 +27,11 @@ public class Helper {
     while (m1.find()) {
       matchesList.add(m1.group().replace(c, ""));
     }
+
+    if (matchesList.size() == 0 && !strict) {
+      matchesList.add(str);
+    }
+
     return matchesList;
   }
 
@@ -48,7 +53,6 @@ public class Helper {
     }
     GameState.currentBox = boxNumber;
   }
-
 
   /**
    * Get a random number between two numbers.

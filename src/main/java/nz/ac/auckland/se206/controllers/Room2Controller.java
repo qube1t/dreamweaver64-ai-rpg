@@ -325,7 +325,7 @@ public class Room2Controller {
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.getRiddleForPirate(GameState.trueBook),
         (str) -> {
-          List<String> pirateDialogue = Helper.getTextBetweenChar(str, "^");
+          List<String> pirateDialogue = Helper.getTextBetweenChar(str, "^", false);
           if (pirateDialogue.size() > 0) {
             GameState.pirateRiddle = pirateDialogue.get(0).replaceAll("\"", "");
             Helper.enableAccessToItem(pirate, pirateLoaderImg);
@@ -333,10 +333,10 @@ public class Room2Controller {
         });
 
     // get the encrypted message from GPT
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom2.generateFinalEncrypted(),
         s -> {
-          List<String> msg = Helper.getTextBetweenChar(s, "+");
+          List<String> msg = Helper.getTextBetweenChar(s, "+", false);
           if (msg.size() > 0) {
             GameState.encryptedFinalMsg = msg.get(0);
           } else {
@@ -345,54 +345,56 @@ public class Room2Controller {
         });
 
     // get the encrypted message from GPT
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom2.generateFinalUnencrypted(),
         s -> {
-          List<String> msg = Helper.getTextBetweenChar(s, "+");
+          List<String> msg = Helper.getTextBetweenChar(s, "+", false);
           if (msg.size() > 0) {
             GameState.finalMsg = msg.get(0);
           }
         });
+
+    setPirateResponse();
   }
 
   private void setPirateResponse() throws ApiProxyException {
     // get the pirate response about wrong answer from GPT
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom2.getPirateWrongResponse(),
         (str2) -> {
           Platform.runLater(
               () -> {
-                List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^");
+                List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^", false);
                 if (pirateDialogue.size() > 0) {
-                  GameState.pirateWrongResponse = str2.replaceAll("^", "");
-                  if (!GameState.isBookFound) {
-                    try {
-                      tradeWrongBook();
-                    } catch (ApiProxyException e) {
-                      e.printStackTrace();
-                    }
-                  }
+                  GameState.pirateWrongResponse = pirateDialogue.get(0).replaceAll("^", "");
+                  // if (!GameState.isBookFound) {
+                  // try {
+                  // tradeWrongBook();
+                  // } catch (ApiProxyException e) {
+                  // e.printStackTrace();
+                  // }
+                  // }
                 }
               });
         });
 
     // get the pirate response about correct answer from GPT
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom2.getPirateRightResponse(),
         (str1) -> {
           Platform.runLater(
               () -> {
-                List<String> pirateDialogue = Helper.getTextBetweenChar(str1, "^");
+                List<String> pirateDialogue = Helper.getTextBetweenChar(str1, "^", false);
                 if (pirateDialogue.size() > 0) {
                   GameState.pirateRightResponse = str1.replaceAll("^", "");
-                  if (GameState.isBookFound) {
-                    try {
-                      tradeCorrectBook();
-                    } catch (ApiProxyException e) {
-                      e.printStackTrace();
-                    }
-                  }
-                  Helper.enableAccessToItem(pirate, pirateLoaderImg);
+                  // if (GameState.isBookFound) {
+                  // try {
+                  // tradeCorrectBook();
+                  // } catch (ApiProxyException e) {
+                  // e.printStackTrace();
+                  // }
+                  // }
+                  // Helper.enableAccessToItem(pirate, pirateLoaderImg);
                 }
               });
         });
@@ -408,16 +410,26 @@ public class Room2Controller {
   @FXML
   private void getTradeWithPirate(MouseEvent event) throws IOException, ApiProxyException {
     if (GameState.takenBook == null) {
+      // no book in inventory
       GameState.eleanorAi.runGpt(
           "User update: The pirate has asked the riddle to the user, but has not been solved."
               + " You can give hints if the user asks. No reply is required");
+
       displayPirateResponse(GameState.pirateRiddle);
+
     } else if (GameState.takenBook != null) {
-      if (!GameState.isPirateResponsePrinted) {
-        Helper.disableAccessToItem(pirate, pirateLoaderImg);
-        GameState.isPirateResponsePrinted = true;
-        setPirateResponse();
-      } else if (!GameState.isBookFound) {
+      // book in inventory
+      // if (!GameState.isPirateResponsePrinted) {
+      // // pirate has not shown response
+
+      // // make pirate loading
+      // // Helper.disableAccessToItem(pirate, pirateLoaderImg);
+      // // GameState.isPirateResponsePrinted = true;
+
+      // // setPirateResponse();
+
+      // } else
+      if (!GameState.isBookFound) {
         if (!wrongMsgPrinted) {
           wrongMsgPrinted = true;
           tradeWrongBook();

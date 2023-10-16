@@ -45,6 +45,7 @@ public class GameState {
 
   /** The GPT-3 engine. */
   public static GptEngine eleanorAi = new GptEngine();
+  public static GptEngine eleanorAi2 = new GptEngine();
 
   public static AudioClip backgroundMusic = new AudioClip(
       (new Media(App.class.getResource("/sounds/Bogart VGM - 8Bit Action- Menu_Select.mp3").toString()))
