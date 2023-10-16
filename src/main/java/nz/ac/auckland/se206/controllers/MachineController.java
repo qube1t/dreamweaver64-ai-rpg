@@ -246,7 +246,7 @@ public class MachineController {
     System.out.println("Decrypt button clicked");
     hasGotLetter = true;
     // Update GPT status for decrypted letter.
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom3.decryptedLetter(),
         (result) -> {
           System.out.println(result);

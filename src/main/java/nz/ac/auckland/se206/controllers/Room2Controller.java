@@ -242,7 +242,7 @@ public class Room2Controller {
       System.out.println("DRAGGING " + MainGameController.getImageSet().getId());
       if (event.getDragboard().hasImage()) {
         if (pirate.getBoundsInParent().contains(x, y)) {
-          if (MainGameController.getImageSet().getId().equals("key")) {
+          if (MainGameController.getImageSet().getId().equals("book")) {
             if (GameState.pirateRiddle != null) {
               try {
                 tradeWithPirate();
@@ -254,25 +254,27 @@ public class Room2Controller {
         } else {
           if (GameState.isBoxKeyFound) {
             for (int i = 0; i < treasureBoxes.size(); i++) {
-              if (treasureBoxes.get(i).getBoundsInParent().contains(x, y)) {
-                if (MainGameController.getImageSet().getId().equals("key")) {
-                  try {
-                    getRandomBox(i + 1);
-                  } catch (IOException | ApiProxyException e) {
-                    e.printStackTrace();
-                  }
+              if (treasureBoxes.get(i).getBoundsInParent().contains(x, y)
+                  && MainGameController.getImageSet().getId().equals("key")) {
+                try {
+                  getRandomBox(i + 1);
+                } catch (IOException | ApiProxyException e) {
+                  e.printStackTrace();
                 }
               }
             }
           }
         }
       }
+
       event.setDropCompleted(true);
       event.consume();
     });
 
     // set the location of the character depending on the previous room
-    switch (GameState.prevRoom) {
+    switch (GameState.prevRoom)
+
+    {
       case 1:
         character.setLayoutX(70);
         character.setLayoutY(250);
