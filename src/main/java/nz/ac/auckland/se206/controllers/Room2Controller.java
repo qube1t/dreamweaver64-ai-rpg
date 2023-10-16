@@ -204,17 +204,9 @@ public class Room2Controller {
       GameState.isRoom2FirstEntered = true;
     } else {
       MainGameController.enableInteractPane();
-      if (GameState.isRoom3FirstEntered && GameState.isRoom3GptDone) {
-        Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
-      } else {
-        Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
-      }
-      if (GameState.isRoom1GptDone) {
-        Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-      }
-      if (GameState.isRoom2GptDone) {
-        Helper.enableAccessToItem(pirate, pirateLoaderImg);
-      }
+      Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
+      Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+      Helper.enableAccessToItem(pirate, pirateLoaderImg);
     }
 
     interactablePane.setOnDragOver(event -> {
@@ -367,13 +359,6 @@ public class Room2Controller {
                 List<String> pirateDialogue = Helper.getTextBetweenChar(str2, "^", false);
                 if (pirateDialogue.size() > 0) {
                   GameState.pirateWrongResponse = pirateDialogue.get(0).replaceAll("^", "");
-                  // if (!GameState.isBookFound) {
-                  // try {
-                  // tradeWrongBook();
-                  // } catch (ApiProxyException e) {
-                  // e.printStackTrace();
-                  // }
-                  // }
                 }
               });
         });
@@ -387,14 +372,6 @@ public class Room2Controller {
                 List<String> pirateDialogue = Helper.getTextBetweenChar(str1, "^", false);
                 if (pirateDialogue.size() > 0) {
                   GameState.pirateRightResponse = str1.replaceAll("^", "");
-                  // if (GameState.isBookFound) {
-                  // try {
-                  // tradeCorrectBook();
-                  // } catch (ApiProxyException e) {
-                  // e.printStackTrace();
-                  // }
-                  // }
-                  // Helper.enableAccessToItem(pirate, pirateLoaderImg);
                 }
               });
         });
@@ -415,27 +392,19 @@ public class Room2Controller {
           "User update: The pirate has asked the riddle to the user, but has not been solved."
               + " You can give hints if the user asks. No reply is required");
 
-      displayPirateResponse(GameState.pirateRiddle);
-
+      if (GameState.pirateRiddle != null) {
+        displayPirateResponse(GameState.pirateRiddle);
+      }
     } else if (GameState.takenBook != null) {
-      // book in inventory
-      // if (!GameState.isPirateResponsePrinted) {
-      // // pirate has not shown response
-
-      // // make pirate loading
-      // // Helper.disableAccessToItem(pirate, pirateLoaderImg);
-      // // GameState.isPirateResponsePrinted = true;
-
-      // // setPirateResponse();
-
-      // } else
       if (!GameState.isBookFound) {
         if (!wrongMsgPrinted) {
           wrongMsgPrinted = true;
           tradeWrongBook();
         } else {
           wrongMsgPrinted = false;
-          displayPirateResponse(GameState.pirateRiddle);
+          if (GameState.pirateRiddle != null) {
+            displayPirateResponse(GameState.pirateRiddle);
+          }
         }
       } else if (GameState.isBookFound) {
         tradeCorrectBook();
@@ -453,19 +422,20 @@ public class Room2Controller {
       GameState.eleanorAi.runGpt(
           "User update: The pirate has asked the riddle to the user, but has not been solved."
               + " You can give hints if the user asks. No reply is required");
-      displayPirateResponse(GameState.pirateRiddle);
+      if (GameState.pirateRiddle != null) {
+        displayPirateResponse(GameState.pirateRiddle);
+      }
+
     } else if (GameState.takenBook != null) {
-      if (!GameState.isPirateResponsePrinted) {
-        Helper.disableAccessToItem(pirate, pirateLoaderImg);
-        GameState.isPirateResponsePrinted = true;
-        setPirateResponse();
-      } else if (!GameState.isBookFound) {
+      if (!GameState.isBookFound) {
         if (!wrongMsgPrinted) {
           wrongMsgPrinted = true;
           tradeWrongBook();
         } else {
           wrongMsgPrinted = false;
-          displayPirateResponse(GameState.pirateRiddle);
+          if (GameState.pirateRiddle != null) {
+            displayPirateResponse(GameState.pirateRiddle);
+          }
         }
       } else if (GameState.isBookFound) {
         tradeCorrectBook();
@@ -479,8 +449,6 @@ public class Room2Controller {
    * @throws ApiProxyException
    */
   private void tradeWrongBook() throws ApiProxyException {
-    GameState.eleanorAi.runGpt(
-        "User update: The user get the wrong book. No reply is required");
     if (GameState.pirateWrongResponse != null) {
       displayPirateResponse(GameState.pirateWrongResponse);
     }
@@ -527,7 +495,6 @@ public class Room2Controller {
     int boxLocation = GameState.currentBox;
     for (int i = 0; i < treasureBoxes.size(); i++) {
       treasureBoxes.get(i).setDisable(true);
-      imgBoxes[i].setImage(new Image("/images/rooms/room2/disabledMark.png"));
     }
     if (GameState.isBoxKeyFound) {
       if (numOfBox == boxLocation) {
@@ -537,10 +504,12 @@ public class Room2Controller {
         }
         MainGameController.addOverlay("treasure_box", false);
       } else {
-        GameState.eleanorAi.runGpt(
+        if (!GameState.isWrongBoxFirstClicked) {
+          GameState.eleanorAi.runGpt(
             "User update: User clicked the wrong treasure box."
                 + " The location of the correct treasure box is shown in room3 radar."
                 + " No reply is required. If the user ask for hint, give the hint.");
+        }
         flashBoxes();
         Helper.changeTreasureBox(GameState.currentBox, numOfBox);
       }

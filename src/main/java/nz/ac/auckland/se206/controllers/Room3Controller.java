@@ -126,14 +126,8 @@ public class Room3Controller {
       GameState.isRoom3FirstEntered = true;
     } else {
       MainGameController.enableInteractPane();
-      if (GameState.isRoom2FirstEntered && GameState.isRoom2GptDone) {
-        Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
-      } else {
-        Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
-      }
-      if (GameState.isRoom1GptDone) {
-        Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
-      }
+      Helper.enableAccessToItem(leftDoorBtn, doorLoad2);      
+      Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
       Helper.enableAccessToItem(clickableComputer2, puzzleLoad);
     }
 
