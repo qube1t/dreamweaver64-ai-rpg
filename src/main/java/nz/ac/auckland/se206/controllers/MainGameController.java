@@ -691,7 +691,7 @@ public class MainGameController {
     // setting hint count
     switch (GameState.gameMode[0]) {
       case "EASY":
-        hintInitiated.setText("Hint: \u221E");
+        hintInitiated.setText("Hint: ∞");
         break;
       case "MEDIUM":
         hintInitiated.setText("Hint: 5");
@@ -700,7 +700,7 @@ public class MainGameController {
         hintInitiated.setText("Hint: None");
         break;
       default:
-        hintInitiated.setText("Hint: \u221E");
+        hintInitiated.setText("Hint: ∞");
         break;
     }
   }
