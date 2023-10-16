@@ -322,7 +322,7 @@ public class Room3Controller {
           GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
         });
 
-    GameState.eleanorAi.runGpt(
+    GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom3.getIntroPuzzleMessage(),
         (result) -> {
           System.out.println(result);

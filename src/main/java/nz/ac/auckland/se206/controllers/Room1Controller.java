@@ -167,16 +167,23 @@ public class Room1Controller {
     // gettng books from gpt
     MainGameController.enableInteractPane();
 
-    // getting room intro from gpt
     GameState.eleanorAi.runGpt(
         "The user has entered their childhood home. In this room they are encouraged to look"
             + " around. You can talk to the user. Only the chunk of text surrounded with the"
             + " character * before and after will be shown to the user. Keep the message 1"
-            + " sentance. .");
+            + " sentance. .",
+        str -> {
+          System.out.println("111");
+        });
 
-    GameState.eleanorAi2.runGpt(
+    // GameState.eleanorAi.runGpt(GptPromptEngineeringRoom1.get7Books(), str -> {
+    // System.out.println("221");
+    // });
+
+    GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.get7Books(),
         str -> {
+          // System.out.println("222");
           List<String> matchesList = Helper.getTextBetweenChar(str, "\"", true);
           GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
 
