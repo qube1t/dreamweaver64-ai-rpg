@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
@@ -399,8 +398,8 @@ public class Room3Controller {
           GameState.arrangedDestnationCity = (cities.get(GameState.destnationCityIndex));
           // Print the city generated
           System.out.println(result);
-          System.out.println("Arranged:" + GameState.destnationCities.toString() +
-              "Destnation city is " + GameState.arrangedDestnationCity);
+          System.out.println("Arranged:" + GameState.destnationCities.toString()
+              + "Destnation city is " + GameState.arrangedDestnationCity);
 
           GameState.unarrangedDestnationCity = makeUnarrangedCityName(GameState.arrangedDestnationCity);
         });

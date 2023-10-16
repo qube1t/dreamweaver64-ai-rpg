@@ -59,11 +59,10 @@ public class GptEngine {
   }
 
   /**
-   * Runs the chat message to process
+   * Runs the chat message to process.
    *
    * @param msg    the chat message to process
    * @param myFunc the function to call when the chat message is processed
-   * @return the response chat message
    * @throws ApiProxyException if there is an error communicating with the API
    *                           proxy
    */

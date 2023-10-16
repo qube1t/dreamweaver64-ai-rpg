@@ -32,15 +32,14 @@ public class GptPromptEngineeringRoom3 {
   public static String room3WelcomeMessage() {
 
     // Ask GPT for the introduction of the game.
-    return "User update: Give the user a short welcome message, do not include any information of"
-        + " next step and surround the message to be displayed to user with * based on the"
-        + " mission below.The user now entered an air traffic"
-        + " control tower which was his work in real life. The user needs to interact with"
-        + " different objects including"
-        + " solving a puzzle to get the aircraft code. The aircraft code combined with"
-        + " encrypted message in another room is required to decrypt the letter. You need to achknowledge "
-        + "the current state of the game"
-        + " and I will give you user action updates.";
+    return "User update: Give the user a short welcome message, do not include any " 
+        + "information of next step and surround the message to be displayed to user "
+        + " with * based on the mission below.The user now entered an air traffic"
+        + " control tower which was his work in real life. The user needs to interact "
+        + " with different objects including solving a puzzle to get the aircraft code." 
+        + " The aircraft code combined with encrypted message in another room is"
+        + " required to decrypt the letter. You need to achknowledge the current "
+        + " state of the game and I will give you user action updates.";
   }
 
   /**

@@ -69,8 +69,8 @@ public class CharacterMovement {
         // If the interactable is a rectangle
         if (interactable.getId() != null) {
           // If interactable is a door and not disabled, proceed execution
-          if (interactable.getId().equals("rightDoorBtn") ||
-              interactable.getId().equals("leftDoorBtn")
+          if (interactable.getId().equals("rightDoorBtn")
+              || interactable.getId().equals("leftDoorBtn")
               || interactable.getId().equals("mainDoorBtn")) {
             // If the door is enabled, walk through to the room where the door leads
             if (!interactable.isDisable()) {

@@ -61,7 +61,7 @@ public class GptPromptEngineeringRoom1 {
    * in 1 sentence. The quote is surrounded by the character ^ before and after.
    * The user needs to identify the book ansbook in the other room. Hints can be
    * given once the riddle has been asked.
-   * 
+   *
    * @param ansbook the book from which the quote will be taken
    * @return a pirate-themed riddle in the form of a quote from the book ansbook
    */
