@@ -55,7 +55,7 @@ public class GameState {
           .getSource());
 
   public static AudioClip tickingSound = new AudioClip(
-      (new Media(App.class.getResource("sounds/tickingSound.mp3").toString()))
+      (new Media(App.class.getResource("/sounds/tickingSound.mp3").toString()))
           .getSource());
 
   public static HashSet<AudioClip> soundFx = new HashSet<AudioClip>();
