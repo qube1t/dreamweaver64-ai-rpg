@@ -174,15 +174,9 @@ public class Room1Controller {
     MainGameController.enableInteractPane();
 
     GameState.eleanorAi.runGpt(
-        "The user has entered their childhood home."
-            + " In this room they are encouraged to look"
-            + " around. You can talk to the user. Only the chunk of text surrounded with the"
-            + " character * before and after will be shown to the user. Keep the message 1"
-            + " sentance. .",
+        GptPromptEngineeringRoom1.room1Intro(),
         str -> {
           System.out.println("111");
-          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
 
     GameState.eleanorAi.runGpt(
@@ -190,7 +184,9 @@ public class Room1Controller {
         str -> {
           // System.out.println("222");
           List<String> matchesList = Helper.getTextBetweenChar(str, "\"", true);
-          GameState.booksInRoom1 = matchesList.toArray(new String[matchesList.size()]);
+          for (int i=0;   i<7; i++) {
+            GameState.booksInRoom1[i] = matchesList.get(i).replace(",", "");
+          }
 
           String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));
           GameState.trueBook = ansBook;
@@ -201,6 +197,8 @@ public class Room1Controller {
           GameState.booksLoaded = true;
           // get riddle from gpt
           GameState.isRoom1GptDone = true;
+          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
   }
 

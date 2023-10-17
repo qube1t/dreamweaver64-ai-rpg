@@ -315,13 +315,8 @@ public class Room2Controller {
    */
   private void initGpt() throws ApiProxyException {
     MainGameController.enableInteractPane();
-
-    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.room2WelcomeMessage(),
-        (str) -> {
-          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
-          GameState.isRoom2GptDone = true;
-        });
+    Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+    Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
 
     // get riddle from GPT
     GameState.eleanorAi.runGpt(
@@ -333,7 +328,12 @@ public class Room2Controller {
             Helper.enableAccessToItem(pirate, pirateLoaderImg);
           }
         });
+    GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.room2WelcomeMessage(),
+        (str) -> {
+          GameState.isRoom2GptDone = true;
+        });
 
+    setPirateResponse();
     // get the encrypted message from GPT
     GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom2.generateFinalEncrypted(),
@@ -356,7 +356,6 @@ public class Room2Controller {
           }
         });
 
-    setPirateResponse();
   }
 
   /**
@@ -595,6 +594,7 @@ public class Room2Controller {
   private void displayPirateResponse(String result) {
     gptResponse.setText(result);
     piratePane.setVisible(true);
+    GameState.mainGame.addChat("Pirate: " + result, false);
   }
 
   /**

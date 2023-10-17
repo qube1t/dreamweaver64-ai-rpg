@@ -552,7 +552,7 @@ public class MainGameController {
     List<Label> items = chat.getItems();
     int index = items.size();
     items.add(label);
-    chat.scrollTo(index + 1);
+    chat.scrollTo(index);
   }
 
   /**

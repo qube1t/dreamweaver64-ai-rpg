@@ -46,6 +46,23 @@ public class GptPromptEngineeringRoom1 {
   }
 
   /**
+   * Returns the introduction message for the user when they enter the childhood
+   * home in room 1.
+   * The message encourages the user to look around and informs them that only the
+   * text surrounded by
+   * asterisks will be shown to them. The message is limited to one sentence.
+   *
+   * @return the introduction message for room 1
+   */
+  public static String room1Intro() {
+    return "The user has entered their childhood home."
+        + " In this room they are encouraged to look"
+        + " around. You can talk to the user. Only the chunk of text surrounded with the"
+        + " character * before and after will be shown to the user. Keep the message 1"
+        + " sentance. .";
+  }
+
+  /**
    * Returns a string containing a message to produce a list of 7 books that have
    * less than 7 characters, surrounded by quotes, to show on the shelf.
    *
