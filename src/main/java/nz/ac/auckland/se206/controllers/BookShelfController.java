@@ -127,17 +127,18 @@ public class BookShelfController {
             e -> {
               System.out.println("clicked");
               boolean oneWasTaken = hasTakenOneBook();
-              System.out.println("book" + index + " clicked");
+              // System.out.println("book " + GameState.booksInRoom1[index] + " clicked");
               if (oneWasTaken) {
-                System.out.println("one book was taken");
+                // System.out.println("one book was taken");
                 returnBook();
               }
-              GameState.takenBook = lblBook.getText();
+              GameState.takenBook = GameState.booksInRoom1[index];
 
-              if (GameState.booksInRoom1[index] == GameState.trueBook) {
+              if (GameState.booksInRoom1[index].trim().equalsIgnoreCase(GameState.trueBook.trim())) {
                 GameState.isBookFound = true;
                 System.out.println("true book found");
               } else {
+                System.out.println(GameState.booksInRoom1[index] + " ≠ " + GameState.trueBook);
                 GameState.isBookFound = false;
               }
 

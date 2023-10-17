@@ -59,7 +59,7 @@ public class GptPromptEngineeringRoom1 {
         + " In this room they are encouraged to look"
         + " around. You can talk to the user. Only the chunk of text surrounded with the"
         + " character * before and after will be shown to the user. Keep the message 1"
-        + " sentance. .";
+        + " sentance.";
   }
 
   /**
@@ -69,8 +69,8 @@ public class GptPromptEngineeringRoom1 {
    * @return a string containing the message to produce the list of 7 books.
    */
   public static String get7Books() {
-    return "This is the loading stage. Produce a list of 7 books that have less than 7 characters,"
-        + " surrounded by quotes, to show on the shelf";
+    return "Produce a list of 7 book titles that are single word,"
+        + " surrounded by quotes in an array, to show on the shelf. No response is needed to user";
   }
 
   /**
@@ -84,7 +84,7 @@ public class GptPromptEngineeringRoom1 {
    */
   public static String getRiddleForPirate(String ansbook) {
     // asking pirate riddle
-    return "This is the loading stage. Give a riddle in the form of a quote from the book "
+    return "Give a riddle in the form of a quote from the book "
         + ansbook
         + " in 25 words. Only this time, say this riddle with a pirate colloquial. Surround the"
         + " quote before and after with the character ^ "

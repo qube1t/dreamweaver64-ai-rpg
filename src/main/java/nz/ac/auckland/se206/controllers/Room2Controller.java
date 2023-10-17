@@ -331,6 +331,7 @@ public class Room2Controller {
         });
 
     // get riddle from GPT
+    GameState.isPirateRiddleLoaded = true;
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.getRiddleForPirate(GameState.trueBook),
         (str) -> {
