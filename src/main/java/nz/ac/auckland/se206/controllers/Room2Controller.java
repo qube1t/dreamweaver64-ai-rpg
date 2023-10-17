@@ -389,7 +389,7 @@ public class Room2Controller {
               () -> {
                 List<String> pirateDialogue = Helper.getTextBetweenChar(str1, "^", false);
                 if (pirateDialogue.size() > 0) {
-                  GameState.pirateRightResponse = str1.replaceAll("^", "");
+                  GameState.pirateRightResponse = pirateDialogue.get(0).replaceAll("^", "");
                 }
               });
         });
