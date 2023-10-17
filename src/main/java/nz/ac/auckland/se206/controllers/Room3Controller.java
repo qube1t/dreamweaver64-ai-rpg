@@ -41,6 +41,7 @@ public class Room3Controller {
   private static ImageView imgEndStRoom3;
   private static Rectangle flightComputer;
   private static ImageView lockRed;
+  private static boolean radarOpened = false;
   private static boolean gptInit = false;
 
   /**
@@ -58,6 +59,7 @@ public class Room3Controller {
     gptInit = false;
     flightComputer = null;
     lockRed = null;
+    radarOpened = false;
   }
 
   public static void enableFlightComputer() {
@@ -359,12 +361,15 @@ public class Room3Controller {
   public void onClickRadar() throws IOException, ApiProxyException {
     // user clicked radar
     MainGameController.addOverlay("radar_computer", false);
-    GameState.eleanorAi.runGpt(
-        "User update: User has opened the radar computer and the red point"
-            + " indicates the correct"
-            + " location for treasure box location in the pirate ship. "
-            + "If the user ask for hints give"
-            + " the hints. No need to respond to this message.");
+    if (!radarOpened) {
+      GameState.eleanorAi.runGpt(
+          "User update: User has opened the radar computer and the red point"
+              + " indicates the correct"
+              + " location for treasure box location in the pirate ship. "
+              + "If the user ask for hints give"
+              + " the hints. No need to respond to this message.");
+      radarOpened = true;
+    }
   }
 
   /**

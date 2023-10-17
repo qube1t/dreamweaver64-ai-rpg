@@ -14,8 +14,9 @@ import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom1;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /**
- * The EndMenuController class controls the end menu screen of the game. It handles 
- * the restart and exit button clicks, displays the final message to the player, 
+ * The EndMenuController class controls the end menu screen of the game. It
+ * handles
+ * the restart and exit button clicks, displays the final message to the player,
  * and navigates to the start menu or end credits screen based on user input.
  */
 public class EndMenuController {
@@ -31,15 +32,17 @@ public class EndMenuController {
   private Label letter;
 
   /**
-   * Initializes the EndMenuController by re-creating the GptEngine, stopping 
-   * all sound effects, and setting the text to display based on whether the 
+   * Initializes the EndMenuController by re-creating the GptEngine, stopping
+   * all sound effects, and setting the text to display based on whether the
    * player won or lost.
    *
    * @throws ApiProxyException if there is an issue with the API proxy
    */
   public void initialize() throws ApiProxyException {
     GameState.eleanorAi = new GptEngine(); // Re-create the GptEngine
+    GameState.eleanorAi2 = new GptEngine(); // Re-create the second GptEngine
     GameState.eleanorAi.runGpt(GptPromptEngineeringRoom1.gameIntro());
+    GameState.eleanorAi2.runGpt(GptPromptEngineeringRoom1.gameIntro());
 
     // stop all sound effects
     for (AudioClip sound : GameState.soundFx) {
