@@ -17,11 +17,11 @@ public class GptPromptEngineeringRoom2 {
    */
   public static String room2WelcomeMessage() {
     // Ask GPT for the introduction of the game.
-    return "I am the computer architecture. The player now entered a pirate's ship "
-        + " which was player's favorite childhood video game. The player needs to "
-        + " interact with the pirate to get the treasure."
+    return "User update: Give the user a short welcome message without any pirate colloquial."
+        + " The player now entered a pirate's ship which was player's favorite childhood "
+        + " video game. The player needs to interact with different objects to get a treasure."
         + " Greet the user without any pirate colloquial, not including any hints. "
-        + " Surround the response to be displayed to the player to the user with *.";
+        + " Surround the response to be displayed to the player to the user with *";
   }
 
   /**
@@ -64,7 +64,7 @@ public class GptPromptEngineeringRoom2 {
    * @return the encrypted message
    */
   public static String generateFinalEncrypted() {
-    return "This is the loading stage. Return meaningless encryption of 1 sentence, and only"
+    return "This is the loading stage. Return meaningless encryption of 60 characters, and only"
         + " return the encryption with the character + before and after. ";
   }
 }

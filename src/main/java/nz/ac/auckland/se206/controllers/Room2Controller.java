@@ -319,6 +319,17 @@ public class Room2Controller {
     Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
     Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
 
+    GameState.eleanorAi2.runGpt(
+        GptPromptEngineeringRoom2.generateFinalEncrypted(),
+        s -> {
+          List<String> msg = Helper.getTextBetweenChar(s, "+", false);
+          if (msg.size() > 0) {
+            GameState.encryptedFinalMsg = msg.get(0);
+          } else {
+            GameState.encryptedFinalMsg = s;
+          }
+        });
+
     // get riddle from GPT
     GameState.isPirateRiddleLoaded = true;
     GameState.eleanorAi.runGpt(
@@ -330,23 +341,13 @@ public class Room2Controller {
             Helper.enableAccessToItem(pirate, pirateLoaderImg);
           }
         });
+
     GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.room2WelcomeMessage(),
         (str) -> {
           GameState.isRoom2GptDone = true;
         });
 
     setPirateResponse();
-    // get the encrypted message from GPT
-    GameState.eleanorAi2.runGpt(
-        GptPromptEngineeringRoom2.generateFinalEncrypted(),
-        s -> {
-          List<String> msg = Helper.getTextBetweenChar(s, "+", false);
-          if (msg.size() > 0) {
-            GameState.encryptedFinalMsg = msg.get(0);
-          } else {
-            GameState.encryptedFinalMsg = s;
-          }
-        });
 
     // get the encrypted message from GPT
     GameState.eleanorAi2.runGpt(
