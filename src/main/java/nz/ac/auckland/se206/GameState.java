@@ -54,6 +54,10 @@ public class GameState {
       (new Media(App.class.getResource("/sounds/doorSound.mp3").toString()))
           .getSource());
 
+  public static AudioClip tickingSound = new AudioClip(
+      (new Media(App.class.getResource("sounds/tickingSound.mp3").toString()))
+          .getSource());
+
   public static HashSet<AudioClip> soundFx = new HashSet<AudioClip>();
 
   // instruction loading stage
@@ -189,8 +193,6 @@ public class GameState {
     isRiddleResolved = false;
     tenSecondsLeft = false;
     gameMode = null;
-    // Reset mute setting
-    isMuted = false;
     hintsRemaining = 0;
     mainGame = null;
     timeLimitReached = false;
