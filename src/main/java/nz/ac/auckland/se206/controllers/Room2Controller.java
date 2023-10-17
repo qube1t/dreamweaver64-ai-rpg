@@ -198,7 +198,7 @@ public class Room2Controller {
     // if the player has not entered the room 2, initialize the GPT
     if (!gptInit) {
       initGpt();
-      gptInit = true;
+
       GameState.isRoom2FirstEntered = true;
     } else {
       MainGameController.enableInteractPane();
@@ -257,7 +257,7 @@ public class Room2Controller {
     });
 
     // set the location of the character depending on the previous room
-    switch (GameState.prevRoom){
+    switch (GameState.prevRoom) {
       case 1:
         character.setLayoutX(70);
         character.setLayoutY(250);
@@ -331,6 +331,7 @@ public class Room2Controller {
     GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.room2WelcomeMessage(),
         (str) -> {
           GameState.isRoom2GptDone = true;
+          gptInit = true;
         });
 
     setPirateResponse();
