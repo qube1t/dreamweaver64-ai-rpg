@@ -347,17 +347,6 @@ public class Room2Controller {
         });
 
     setPirateResponse();
-
-    // get the encrypted message from GPT
-    GameState.eleanorAi2.runGpt(
-        GptPromptEngineeringRoom2.generateFinalUnencrypted(),
-        s -> {
-          List<String> msg = Helper.getTextBetweenChar(s, "+", false);
-          if (msg.size() > 0) {
-            GameState.finalMsg = msg.get(0);
-          }
-        });
-
   }
 
   /**
