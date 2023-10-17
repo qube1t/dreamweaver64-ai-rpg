@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="bookShelfPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="459.0" style="-fx-background-image: url(&quot;https://static.vecteezy.com/system/resources/thumbnails/000/164/590/small_2x/WOODGRAIN.jpg&quot;);" styleClass="book-shelf" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookShelfController">
+<AnchorPane fx:id="bookShelfPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="459.0" style="-fx-background-image: url(&quot;https://static.vecteezy.com/system/resources/thumbnails/000/164/590/small_2x/WOODGRAIN.jpg&quot;);" styleClass="book-shelf" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.BookShelfController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="459.0" layoutY="-1.0" pickOnBounds="true">
          <image>
@@ -33,20 +33,20 @@
             <Image url="@../images/rooms/room1/book1.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblBook1" layoutX="14.0" layoutY="60.0" prefHeight="17.0" prefWidth="100.0" rotate="-65.2" styleClass="book-shelf" text="book1" textFill="WHITE" />
+      <Label fx:id="lblBook1" layoutX="14.0" layoutY="60.0" prefHeight="17.0" prefWidth="100.0" rotate="-65.2" styleClass="bookShelf" stylesheets="@../css/font.css" text="book1" textFill="WHITE" />
       <ImageView fx:id="book2Img" fitHeight="103.0" fitWidth="28.0" layoutX="100.0" layoutY="22.0">
       <image>
             <Image url="@../images/rooms/room1/book4.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblBook2" layoutX="66.0" layoutY="65.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" styleClass="book-shelf" stylesheets="@../css/style.css" text="book2" />
+      <Label fx:id="lblBook2" layoutX="66.0" layoutY="65.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" styleClass="bookShelf" stylesheets="@../css/font.css" text="book2" />
       <ImageView fx:id="book3Img" fitHeight="112.0" fitWidth="28.0" layoutX="130.0" layoutY="13.0">
       <image>
             <Image url="@../images/rooms/room1/book2.png" />
          </image>
       </ImageView>
       
-      <Label fx:id="lblBook3" layoutX="96.0" layoutY="65.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" text="book3" textFill="WHITE">
+      <Label fx:id="lblBook3" layoutX="96.0" layoutY="65.0" prefHeight="17.0" prefWidth="96.0" rotate="-90.0" styleClass="bookShelf" stylesheets="@../css/font.css" text="book3" textFill="WHITE">
          <font>
             <Font name="System Bold Italic" size="12.0" />
          </font></Label>
@@ -70,13 +70,13 @@
             <Image url="@../images/rooms/room1/book2.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblBook4" layoutX="150.0" layoutY="227.0" prefHeight="17.0" prefWidth="84.0" text="book4" textFill="WHITE">
+      <Label fx:id="lblBook4" layoutX="150.0" layoutY="227.0" prefHeight="17.0" prefWidth="84.0" styleClass="bookShelf" stylesheets="@../css/font.css" text="book4" textFill="WHITE">
          <font>
             <Font name="System Bold" size="11.0" />
          </font>
       </Label>
-      <Label fx:id="lblBook5" layoutX="219.0" layoutY="198.0" prefHeight="17.0" prefWidth="71.0" rotate="-90.0" text="book5" />
-      <Label fx:id="lblBook6" layoutX="237.0" layoutY="183.0" prefHeight="27.0" prefWidth="90.0" rotate="-90.0" text="book6" textFill="WHITE" />
-      <Label fx:id="lblBook7" layoutX="284.0" layoutY="184.0" prefHeight="33.0" prefWidth="84.0" rotate="-103.5" text="book7" textFill="WHITE" wrapText="true" />
+      <Label fx:id="lblBook5" layoutX="219.0" layoutY="198.0" prefHeight="17.0" prefWidth="71.0" rotate="-90.0" styleClass="bookShelf" stylesheets="@../css/font.css" text="book5" />
+      <Label fx:id="lblBook6" layoutX="237.0" layoutY="183.0" prefHeight="27.0" prefWidth="90.0" rotate="-90.0" styleClass="bookShelf" stylesheets="@../css/font.css" text="book6" textFill="WHITE" />
+      <Label fx:id="lblBook7" layoutX="284.0" layoutY="184.0" prefHeight="33.0" prefWidth="84.0" rotate="-103.5" styleClass="bookShelf" stylesheets="@../css/font.css" text="book7" textFill="WHITE" wrapText="true" />
    </children>
 </AnchorPane>

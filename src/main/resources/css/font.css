@@ -49,6 +49,11 @@
     -fx-font-size: 13px;
 }
 
+.bookShelf {
+    -fx-font-family: 'Abaddon Bold';
+    -fx-font-size: 15px;
+}
+
 .momLetter {
     -fx-font-family: 'Abaddon Bold';
     -fx-font-size: 23px;

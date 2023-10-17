@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="machinePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MachineController">
+<AnchorPane fx:id="machinePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../css/font.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.MachineController">
    <children>
       <ImageView fitHeight="400.0" fitWidth="351.0">
          <image>
@@ -25,7 +25,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Text fx:id="craft" fill="#f2f2f2" layoutX="65.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="CRAFTING" />
+      <Text fill="#f2f2f2" layoutX="72.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="currentLocations" text="DECODE" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#004b46" height="46.0" layoutX="8.0" layoutY="4.0" stroke="BLACK" strokeType="INSIDE" style="-fx-stroke: #004b46;" width="339.0" />
       <Text fill="WHITE" layoutX="90.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="startEndTitle" text="ENIGMA32" wrappingWidth="185.6138153076172" />
       <ImageView fx:id="arrowAnimation" fitHeight="50.0" fitWidth="63.0" layoutX="148.0" layoutY="144.0">
