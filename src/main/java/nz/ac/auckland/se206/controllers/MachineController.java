@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -172,8 +171,8 @@ public class MachineController {
    * If the letter has been obtained, it adds the obtained item to the
    * MainGameController and sets the letter image to null.
    * It also sets the GameState.hasDecrypted to true.
-   * 
-   * @throws ApiProxyException
+   *
+   * @throws ApiProxyException If there is an error with the API proxy.
    */
   @FXML
   private void onClickLetter() throws ApiProxyException {
