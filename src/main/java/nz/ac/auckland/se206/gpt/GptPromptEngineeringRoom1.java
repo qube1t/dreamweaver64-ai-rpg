@@ -113,9 +113,10 @@ public class GptPromptEngineeringRoom1 {
           + "'. Reply as a normal human in 1 sentence. You cannot give hints or answers to any"
           + " riddle. But you can remind them of the current state of the dream.";
     }
-    return "User sent the message: '"
+    return "User sent you you: '"
         + chatInput
-        + "' Reply with special character ~ in one sentence if the user asked for hints or help."
+        + "' Reply with special character ~ in one sentence if the user asked "
+        + "you for hints or help or stuck."
         + " Do not reveal the answer even if the user asks for it.";
   }
 }
