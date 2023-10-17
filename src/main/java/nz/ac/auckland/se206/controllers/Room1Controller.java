@@ -191,15 +191,9 @@ public class Room1Controller {
     MainGameController.enableInteractPane();
 
     GameState.eleanorAi.runGpt(
-        "The user has entered their childhood home."
-            + " In this room they are encouraged to look"
-            + " around. You can talk to the user. Only the chunk of text surrounded with the"
-            + " character * before and after will be shown to the user. Keep the message 1"
-            + " sentance. .",
+        GptPromptEngineeringRoom1.room1Intro(),
         str -> {
           System.out.println("111");
-          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
-          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
 
     GameState.eleanorAi.runGpt(
@@ -218,6 +212,8 @@ public class Room1Controller {
           GameState.booksLoaded = true;
           // get riddle from gpt
           GameState.isRoom1GptDone = true;
+          Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
+          Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
         });
   }
 

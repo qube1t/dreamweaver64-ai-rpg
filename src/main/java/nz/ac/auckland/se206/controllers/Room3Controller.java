@@ -155,7 +155,8 @@ public class Room3Controller {
       // Set the puzzle load image to invisible if the puzzle is not loaded.
       clickableComputer2.setDisable(true);
     }
-
+    Helper.enableAccessToItem(leftDoorBtn, doorLoad2);
+    Helper.enableAccessToItem(rightDoorBtn, doorLoad1);
     if (!gptInit) {
       gptInitilize();
       gptInit = true;
