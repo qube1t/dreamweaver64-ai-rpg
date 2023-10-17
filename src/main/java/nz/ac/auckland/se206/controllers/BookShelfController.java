@@ -122,32 +122,33 @@ public class BookShelfController {
 
       ImageView bookRect = bookRects[i];
       int index = i;
-      lblBooks[i].setOnMouseClicked(
-          e -> {
-            System.out.println("clicked");
-            boolean oneWasTaken = hasTakenOneBook();
-            System.out.println("book" + index + " clicked");
-            if (oneWasTaken) {
-              System.out.println("one book was taken");
-              returnBook();
-            }
-            GameState.takenBook = lblBook.getText();
+      if (!GameState.isBoxKeyFound)
+        lblBooks[i].setOnMouseClicked(
+            e -> {
+              System.out.println("clicked");
+              boolean oneWasTaken = hasTakenOneBook();
+              System.out.println("book" + index + " clicked");
+              if (oneWasTaken) {
+                System.out.println("one book was taken");
+                returnBook();
+              }
+              GameState.takenBook = lblBook.getText();
 
-            if (GameState.booksInRoom1[index] == GameState.trueBook) {
-              GameState.isBookFound = true;
-              System.out.println("true book found");
-            } else {
-              GameState.isBookFound = false;
-            }
+              if (GameState.booksInRoom1[index] == GameState.trueBook) {
+                GameState.isBookFound = true;
+                System.out.println("true book found");
+              } else {
+                GameState.isBookFound = false;
+              }
 
-            if (!oneWasTaken) {
-              Image bookImage = new Image(App.class.getResource("/images/rooms/room1/book.png")
-                  .toString());
-              MainGameController.addObtainedItem(bookImage, "book");
-            }
-            lblBook.setVisible(false);
-            bookRect.setVisible(false);
-          });
+              if (!oneWasTaken) {
+                Image bookImage = new Image(App.class.getResource("/images/rooms/room1/book.png")
+                    .toString());
+                MainGameController.addObtainedItem(bookImage, "book");
+              }
+              lblBook.setVisible(false);
+              bookRect.setVisible(false);
+            });
     }
   }
 

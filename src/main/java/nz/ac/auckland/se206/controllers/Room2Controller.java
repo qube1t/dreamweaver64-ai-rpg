@@ -350,6 +350,7 @@ public class Room2Controller {
           GameState.isRoom2GptDone = true;
         });
 
+    setPirateResponse();
     // get the encrypted message from GPT
     GameState.eleanorAi2.runGpt(
         GptPromptEngineeringRoom2.generateFinalEncrypted(),
@@ -372,7 +373,6 @@ public class Room2Controller {
           }
         });
 
-    setPirateResponse();
   }
 
   /**

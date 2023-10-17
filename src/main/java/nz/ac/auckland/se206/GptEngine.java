@@ -121,17 +121,17 @@ public class GptEngine {
 
             // if there is no next prompt, wait for 2 seconds and check again
             if (nextPrompt == null) {
-              try {
-                // wait for 2 seconds // TODO is this needed, can cause more trouble??
-                Thread.sleep(2000);
-                nextPrompt = promptQueue.poll();
-                myFunc = promptFuncQueue.poll();
-              } catch (InterruptedException e) {
-                e.printStackTrace();
-              }
+              active = false;
+              // try {
+              // // wait for 2 seconds // TODO is this needed, can cause more trouble??
+              // Thread.sleep(2000);
+              // nextPrompt = promptQueue.poll();
+              // myFunc = promptFuncQueue.poll();
+              // } catch (InterruptedException e) {
+              // e.printStackTrace();
+              // }
             }
           }
-          active = false;
         });
     activeThread.start();
   }
