@@ -318,8 +318,9 @@ public class Room3Controller {
         "User update: User has opened the unarranged word puzzle game. The correct"
             + " destination city name is "
             + GameState.arrangedDestnation
-            + ". Only give hints if the user asks for hints, "
-            + " and give hint without revealing the city name. No response required");
+            + ". Only give hints if the user asks for hints."
+            + " Do not contain" + GameState.arrangedDestnation
+            + "in any response. No response required");
   }
 
   /**
