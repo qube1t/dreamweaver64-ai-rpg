@@ -51,7 +51,6 @@ public class GptEngine {
               active = true;
               startNewThread();
             }
-            ;
           }
         },
         1000,
@@ -112,6 +111,7 @@ public class GptEngine {
               // performs onfinish tasks
               onGptCompletion(chatCompletionResult, myFunc);
             } catch (Exception e) {
+              System.out.println("Error running GPT engine");
               e.printStackTrace();
             }
 

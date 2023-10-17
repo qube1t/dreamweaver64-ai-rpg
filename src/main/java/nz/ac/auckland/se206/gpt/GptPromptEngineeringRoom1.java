@@ -69,7 +69,7 @@ public class GptPromptEngineeringRoom1 {
    * @return a string containing the message to produce the list of 7 books.
    */
   public static String get7Books() {
-    return "Produce a list of 7 books that have less than 7 characters,"
+    return "Produce a list of 7 book titles that are single word,"
         + " surrounded by quotes, to show on the shelf";
   }
 
