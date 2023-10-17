@@ -69,7 +69,7 @@ public class GptPromptEngineeringRoom1 {
    * @return a string containing the message to produce the list of 7 books.
    */
   public static String get7Books() {
-    return "This is the loading stage. Produce a list of 7 books that have less than 7 characters,"
+    return "Produce a list of 7 books that have less than 7 characters,"
         + " surrounded by quotes, to show on the shelf";
   }
 
@@ -84,15 +84,12 @@ public class GptPromptEngineeringRoom1 {
    */
   public static String getRiddleForPirate(String ansbook) {
     // asking pirate riddle
-    return "This is the loading stage. Give a riddle in the form of a quote from the book "
+    return "Give a riddle in the form of a quote from the book "
         + ansbook
-
         + " in 1 sentence. Only this time, say this riddle with a pirate colloquial. surround the"
         + " quote before and after with the character ^ do not use any other character. "
-        + " The user needs to identify the book "
-        + ansbook
-        + " in the other room. Do"
-        + " not reveal the book name. You can give hints once the riddle has been asked.";
+        + " Do"
+        + " not reveal the book name. You can give hints if the user asks.";
   }
 
   /**

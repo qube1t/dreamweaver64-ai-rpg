@@ -184,11 +184,11 @@ public class Room1Controller {
         str -> {
           // System.out.println("222");
           List<String> matchesList = Helper.getTextBetweenChar(str, "\"", true);
-          for (int i=0;   i<7; i++) {
+          for (int i = 0; i < 7; i++) {
             GameState.booksInRoom1[i] = matchesList.get(i).replace(",", "");
           }
 
-          String ansBook = (matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)));
+          String ansBook = matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)).replace(",", "");
           GameState.trueBook = ansBook;
           System.out.println(ansBook);
 
