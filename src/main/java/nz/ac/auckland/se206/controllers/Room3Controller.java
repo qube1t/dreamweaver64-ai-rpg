@@ -10,7 +10,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
@@ -38,21 +37,9 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
  */
 public class Room3Controller {
 
-  private static ImageView imgEndStRoom3;
   private static Rectangle flightComputer;
   private static ImageView lockRed;
   private static boolean gptInit = false;
-
-  /**
-   * Set the end image when the time is up.
-   */
-  public static void initializeMap() {
-    if (imgEndStRoom3 != null) {
-      imgEndStRoom3.setImage(new Image("/images/rooms/room3/endRoom3.gif"));
-    } else {
-      return;
-    }
-  }
 
   public static void resetGptRoom3() {
     gptInit = false;
@@ -68,8 +55,6 @@ public class Room3Controller {
   private Pane obstalePane;
   @FXML
   private Pane interactablePane;
-  @FXML
-  private ImageView imgEnd;
   @FXML
   private ImageView puzzleLoad;
   @FXML
@@ -143,13 +128,6 @@ public class Room3Controller {
     initilizeGpsMap();
 
     GameState.mainGame.clickGamePane();
-
-    imgEndStRoom3 = imgEnd;
-
-    if (GameState.tenSecondsLeft) {
-      // Initialize the end image if the time is less or equal to 10 seconds.
-      initializeMap();
-    }
 
     if (!GameState.isPuzzleLoaded) {
       // Set the puzzle load image to invisible if the puzzle is not loaded.

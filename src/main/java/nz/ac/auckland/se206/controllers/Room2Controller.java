@@ -34,24 +34,11 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 public class Room2Controller {
 
   private static boolean gptInit;
-  private static ImageView imgEndStRoom2;
-
-  /** Set the end image when the time is up. */
-  public static void initializeMap() {
-    if (imgEndStRoom2 != null) {
-      imgEndStRoom2.setImage(new Image("/images/rooms/room2/end.gif"));
-    } else {
-      return;
-    }
-  }
 
   /** Reset the GPT for room 2. */
   public static void resetGptRoom2() {
     gptInit = false;
   }
-
-  @FXML
-  private ImageView imgEnd;
 
   @FXML
   private Rectangle rect1;
@@ -196,8 +183,6 @@ public class Room2Controller {
     imgBoxes = new ImageView[] { box1BlockImg, box2BlockImg, box3BlockImg, box4BlockImg,
         box5BlockImg };
 
-    imgEndStRoom2 = imgEnd;
-
     // set the obstacles in the room2
     this.obsts = new ArrayList<Rectangle>(
         Arrays.asList(
@@ -272,9 +257,7 @@ public class Room2Controller {
     });
 
     // set the location of the character depending on the previous room
-    switch (GameState.prevRoom)
-
-    {
+    switch (GameState.prevRoom){
       case 1:
         character.setLayoutX(70);
         character.setLayoutY(250);
@@ -301,6 +284,11 @@ public class Room2Controller {
       }
     }
 
+    if (GameState.isEncryptedMessageFound) {
+      pirate.setDisable(true);
+      piratePane.setVisible(false);
+    }
+
     if (GameState.currentBox == -1) {
       Helper.changeTreasureBox(GameState.currentBox, -1);
     }
@@ -316,11 +304,6 @@ public class Room2Controller {
       GameState.soundFx.add(seaAmbiance);
     }
 
-    // if 10 seconds left, set the map image on room2
-    imgEndStRoom2 = imgEnd;
-    if (GameState.tenSecondsLeft) {
-      initializeMap();
-    }
   }
 
   /**
@@ -450,6 +433,7 @@ public class Room2Controller {
         }
       } else if (GameState.isBookFound) {
         tradeCorrectBook();
+        pirate.setDisable(true);
       }
     }
   }
@@ -478,6 +462,7 @@ public class Room2Controller {
       }
     } else if (GameState.isBookFound) {
       tradeCorrectBook();
+      pirate.setDisable(true);
     }
   }
 
