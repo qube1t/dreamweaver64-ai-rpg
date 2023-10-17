@@ -314,18 +314,22 @@ public class Room2Controller {
    * @throws ApiProxyException if there is an error with the API proxy
    */
   private void initGpt() throws ApiProxyException {
+    // get welcome message from GPT
     gptInit = true;
     MainGameController.enableInteractPane();
+    // Enable access to both doors.
     Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
     Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
 
     GameState.eleanorAi2.runGpt(
+        // Generate the encrypted message from GPT.
         GptPromptEngineeringRoom2.generateFinalEncrypted(),
         s -> {
           List<String> msg = Helper.getTextBetweenChar(s, "+", false);
           if (msg.size() > 0) {
             GameState.encryptedFinalMsg = msg.get(0);
           } else {
+            // If the message is not found, use a default message.
             GameState.encryptedFinalMsg = s;
           }
         });
@@ -341,6 +345,7 @@ public class Room2Controller {
           }
         });
 
+    // Generate welcome message for room2.
     GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.room2WelcomeMessage(),
         (str) -> {
           GameState.isRoom2GptDone = true;
