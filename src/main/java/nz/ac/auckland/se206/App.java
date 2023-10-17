@@ -85,7 +85,7 @@ public class App extends Application {
 
     stage.setScene(scene);
     stage.show();
-
+    stage.setResizable(false);
     // Add the style css file
     scene.getStylesheets().add("/css/style.css");
 
