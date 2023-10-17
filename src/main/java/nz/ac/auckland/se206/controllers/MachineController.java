@@ -168,9 +168,11 @@ public class MachineController {
    * If the letter has been obtained, it adds the obtained item to the
    * MainGameController and sets the letter image to null.
    * It also sets the GameState.hasDecrypted to true.
+   * 
+   * @throws ApiProxyException
    */
   @FXML
-  private void onClickLetter() {
+  private void onClickLetter() throws ApiProxyException {
     // Set the letter to front of FXML
     letter.toFront();
     System.out.println("Letter clicked");
@@ -179,6 +181,7 @@ public class MachineController {
       // item to the decrypted positon
       MainGameController.addObtainedItem(letter.getImage(), "letterMom");
       letter.setImage(null);
+
       GameState.hasDecrypted = true;
     }
   }
@@ -252,7 +255,9 @@ public class MachineController {
           System.out.println(result);
           setDecrypted();
         });
-
+    GameState.eleanorAi.runGpt("User update: The user has decrypted letter from mom. Now "
+        + "the user need to click the letter to place it on inventory to completed the mission and "
+        + "escape the room from main door. No reply is required.");
   }
 
   /**
