@@ -64,8 +64,8 @@ public class GptPromptEngineeringRoom2 {
    * @return the encrypted message
    */
   public static String generateFinalEncrypted() {
-    return "This is the loading stage. Return meaningless encryption contains only numbers and letters"
-        + "of 60 characters, and only"
-        + " return the encryption with the character + before and after. ";
+    return "Generate a meaningless encryption sequence contains only numbers and letters"
+        + "of 60 characters. You must only"
+        + " return the encryption surrounded with special character +.";
   }
 }
