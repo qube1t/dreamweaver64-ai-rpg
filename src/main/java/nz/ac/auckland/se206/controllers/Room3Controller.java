@@ -42,6 +42,11 @@ public class Room3Controller {
   private static boolean radarOpened = false;
   private static boolean gptInit = false;
 
+  /**
+   * Resets the variables used in the GPT section of Room 3.
+   * Sets gptInit to false, flightComputer to null, lockRed to null, and 
+   * radarOpened to false.
+   */
   public static void resetGptRoom3() {
     gptInit = false;
     flightComputer = null;

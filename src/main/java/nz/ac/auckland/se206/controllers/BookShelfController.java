@@ -122,7 +122,7 @@ public class BookShelfController {
 
       ImageView bookRect = bookRects[i];
       int index = i;
-      if (!GameState.isBoxKeyFound)
+      if (!GameState.isBoxKeyFound) {
         lblBooks[i].setOnMouseClicked(
             e -> {
               System.out.println("clicked");
@@ -134,7 +134,8 @@ public class BookShelfController {
               }
               GameState.takenBook = GameState.booksInRoom1[index];
 
-              if (GameState.booksInRoom1[index].trim().equalsIgnoreCase(GameState.trueBook.trim())) {
+              if (GameState.booksInRoom1[index].trim()
+                  .equalsIgnoreCase(GameState.trueBook.trim())) {
                 GameState.isBookFound = true;
                 System.out.println("true book found");
               } else {
@@ -150,6 +151,7 @@ public class BookShelfController {
               lblBook.setVisible(false);
               bookRect.setVisible(false);
             });
+      }
     }
   }
 

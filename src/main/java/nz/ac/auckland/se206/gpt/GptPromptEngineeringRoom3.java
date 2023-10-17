@@ -100,9 +100,10 @@ public class GptPromptEngineeringRoom3 {
    * @return a short message to prompt the user to rearrange the city name again
    */
   public static String wrongPuzzleRoom3() {
-    return "User update: Now the user rearranged the city name but it is not the correct city name,"
-        + " generate a short and interesting message to tell the user that the city name is wrong and"
-        + " need to rearrange again. The message must within 15 words. do not surrounded with *.";
+    return "User update: Now the user rearranged the city name but it is not "
+        + " the correct city name, generate a short and interesting message to "
+        + " tell the user that the city name is wrong and to rearrange again. "
+        + " The message must within 15 words. do not surrounded with *.";
   }
 
   /**

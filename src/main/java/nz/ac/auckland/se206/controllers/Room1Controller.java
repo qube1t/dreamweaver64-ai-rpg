@@ -188,7 +188,9 @@ public class Room1Controller {
             GameState.booksInRoom1[i] = matchesList.get(i).replace(",", "");
           }
 
-          String ansBook = matchesList.get(Helper.getRandomNumber(0, matchesList.size() - 1)).replace(",", "");
+          String ansBook = matchesList.get(Helper
+              .getRandomNumber(0, matchesList.size() - 1))
+              .replace(",", "");
           GameState.trueBook = ansBook;
           System.out.println(ansBook);
 
