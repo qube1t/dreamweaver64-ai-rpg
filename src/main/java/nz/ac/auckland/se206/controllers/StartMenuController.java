@@ -55,12 +55,14 @@ public class StartMenuController {
 
     if (direction.equals("ENTER")) {
       // Check if the player is currently playing
-      if (startSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-        // If it's playing, stop and reset it
-        startSoundPlayer.stop();
-        startSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+      if (!GameState.isMuted) {
+        if (startSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+          // If it's playing, stop and reset it
+          startSoundPlayer.stop();
+          startSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+        }
+        startSoundPlayer.play();
       }
-      startSoundPlayer.play();
       Timer timer = new Timer();
       timer.schedule(new TimerTask() {
         @Override
@@ -72,16 +74,16 @@ public class StartMenuController {
       }, 50);
 
     } else if (direction.equals("RIGHT")) {
-      // Check if the player is currently playing
-      if (selectSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-        // If it's playing, stop and reset it
-        selectSoundPlayer.stop();
-        selectSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+      if (!GameState.isMuted) {
+        // Check if the player is currently playing
+        if (selectSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+          // If it's playing, stop and reset it
+          selectSoundPlayer.stop();
+          selectSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+        }
+        // Play the sound effect
+        selectSoundPlayer.play();
       }
-
-      // Play the sound effect
-      selectSoundPlayer.play();
-
       if (GameState.characterIndex != 4) {
         GameState.characterIndex++;
         characterArray[GameState.characterIndex - 2].setOpacity(0);
@@ -92,15 +94,16 @@ public class StartMenuController {
         characterArray[0].setOpacity(1);
       }
     } else if (direction.equals("LEFT")) {
-      // Check if the player is currently playing
-      if (selectSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-        // If it's playing, stop and reset it
-        selectSoundPlayer.stop();
-        selectSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+      if (!GameState.isMuted) {
+        // Check if the player is currently playing
+        if (selectSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+          // If it's playing, stop and reset it
+          selectSoundPlayer.stop();
+          selectSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+        }
+        // Play the sound effect
+        selectSoundPlayer.play();
       }
-
-      // Play the sound effect
-      selectSoundPlayer.play();
 
       if (GameState.characterIndex != 1) {
         GameState.characterIndex--;
@@ -205,10 +208,16 @@ public class StartMenuController {
    */
   public void initialize() throws ApiProxyException {
     // Set up the sound players
-    Media sound1 = new Media(App.class.getResource("/sounds/selectSound.mp3").toString());
+    Media sound1 = new Media(App.class.getResource("/sounds/char-select.mp3").toString());
     Media sound2 = new Media(App.class.getResource("/sounds/enter.mp3").toString());
     selectSoundPlayer = new MediaPlayer(sound1);
     startSoundPlayer = new MediaPlayer(sound2);
+    
+    if (GameState.isMuted) {
+      muteIcon.setImage(new Image("/images/main_game/icons/music_off.png"));
+    } else {
+      muteIcon.setImage(new Image("/images/main_game/icons/music_on.png"));
+    }
 
     selectSoundPlayer.setVolume(0.4);
     startSoundPlayer.setVolume(0.7);
@@ -222,7 +231,6 @@ public class StartMenuController {
     characterArray = new Rectangle[] { mc1, mc2, mc3, mc4 };
     difficultyStatic = difficulty;
     timeLimitStatic = timeLimit;
-
   }
 
   /**
@@ -233,13 +241,15 @@ public class StartMenuController {
    */
   @FXML
   public void onClickStartButton(MouseEvent event) throws IOException {
-    // Check if the player is currently playing
-    if (startSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-      // If it's playing, stop and reset it
-      startSoundPlayer.stop();
-      startSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+    if (!GameState.isMuted) {
+      // Check if the player is currently playing
+      if (startSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+        // If it's playing, stop and reset it
+        startSoundPlayer.stop();
+        startSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+      }
+      startSoundPlayer.play();
     }
-    startSoundPlayer.play();
     startGameSetting();
 
   }
@@ -261,7 +271,6 @@ public class StartMenuController {
   @FXML
   private void toggleMute() {
     GameState.isMuted = !GameState.isMuted;
-
     // set mute icon
     if (GameState.isMuted) {
       muteIcon.setImage(new Image("/images/main_game/icons/music_off.png"));
@@ -287,13 +296,16 @@ public class StartMenuController {
       Rectangle character = (Rectangle) event.getSource();
       int id = Integer.parseInt(character.getId().toString().substring(2));
       if (GameState.characterIndex != id) {
-        // Check if the player is currently playing
-        if (selectSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-          // If it's playing, stop and reset it
-          selectSoundPlayer.stop();
-          selectSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+        if (!GameState.isMuted) {
+          // Check if the player is currently playing
+          if (selectSoundPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
+            // If it's playing, stop and reset it
+            selectSoundPlayer.stop();
+            selectSoundPlayer.setStartTime(javafx.util.Duration.ZERO);
+          }
+          selectSoundPlayer.play();
         }
-        selectSoundPlayer.play();
+
         character.setOpacity(1);
         characterArray[GameState.characterIndex - 1].setOpacity(0);
         GameState.characterIndex = id;

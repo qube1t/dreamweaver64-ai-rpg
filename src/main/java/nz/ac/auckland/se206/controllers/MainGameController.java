@@ -638,9 +638,7 @@ public class MainGameController {
                 updateHintCount();
                 if (time == 10) {
                   GameState.tenSecondsLeft = true;
-                  Room1Controller.initializeMap();
-                  Room2Controller.initializeMap();
-                  Room3Controller.initializeMap();
+                  setTenSecondsSound();
                 }
               });
           try {
@@ -666,6 +664,15 @@ public class MainGameController {
     timeLimitThread = new Thread(task);
     timeLimitThread.setDaemon(true);
     timeLimitThread.start();
+  }
+
+  private void setTenSecondsSound() {
+    if (!GameState.isMuted) {
+      GameState.tickingSound.setCycleCount(1);
+      GameState.tickingSound.setVolume(0.4);
+      GameState.tickingSound.play();
+      GameState.soundFx.add(GameState.backgroundMusic);
+    }
   }
 
   /**
