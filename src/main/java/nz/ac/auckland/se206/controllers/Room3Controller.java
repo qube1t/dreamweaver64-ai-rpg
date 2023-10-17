@@ -22,6 +22,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.Character;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -44,7 +45,7 @@ public class Room3Controller {
 
   /**
    * Resets the variables used in the GPT section of Room 3.
-   * Sets gptInit to false, flightComputer to null, lockRed to null, and 
+   * Sets gptInit to false, flightComputer to null, lockRed to null, and
    * radarOpened to false.
    */
   public static void resetGptRoom3() {
@@ -366,6 +367,7 @@ public class Room3Controller {
   public void clickMachineEvent() throws IOException, ApiProxyException {
     GameState.isMachineOpen = true;
     MainGameController.addOverlay("decryption_machine", false);
+
   }
 
   /**

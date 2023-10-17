@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -12,7 +14,9 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Helper;
 import nz.ac.auckland.se206.components.CustomImageSet;
+import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom2;
 import nz.ac.auckland.se206.gpt.GptPromptEngineeringRoom3;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -257,7 +261,22 @@ public class MachineController {
         });
     GameState.eleanorAi.runGpt("User update: The user has decrypted letter from mom. Now "
         + "the user need to click the letter to place it on inventory to completed the mission and "
-        + "escape the room from main door. No reply is required.");
+        + "escape the room from main door. No reply is required.", s -> {
+          try {
+            GameState.eleanorAi2.runGpt(
+                GptPromptEngineeringRoom2.generateFinalUnencrypted(),
+                m -> {
+                  List<String> msg = Helper.getTextBetweenChar(m, "+", false);
+                  if (msg.size() > 0) {
+                    GameState.finalMsg = msg.get(0);
+                  }
+                });
+          } catch (ApiProxyException e) {
+            e.printStackTrace();
+          }
+
+        });
+
   }
 
   /**
