@@ -314,11 +314,13 @@ public class Room2Controller {
    * @throws ApiProxyException if there is an error with the API proxy
    */
   private void initGpt() throws ApiProxyException {
+    gptInit = true;
     MainGameController.enableInteractPane();
     Helper.enableAccessToItem(leftDoorBtn, leftDoorLoaderImg);
     Helper.enableAccessToItem(rightDoorBtn, rightDoorLoaderImg);
 
     // get riddle from GPT
+    GameState.isPirateRiddleLoaded = true;
     GameState.eleanorAi.runGpt(
         GptPromptEngineeringRoom1.getRiddleForPirate(GameState.trueBook),
         (str) -> {
@@ -331,7 +333,6 @@ public class Room2Controller {
     GameState.eleanorAi.runGpt(GptPromptEngineeringRoom2.room2WelcomeMessage(),
         (str) -> {
           GameState.isRoom2GptDone = true;
-          gptInit = true;
         });
 
     setPirateResponse();

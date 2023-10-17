@@ -59,7 +59,7 @@ public class GptPromptEngineeringRoom1 {
         + " In this room they are encouraged to look"
         + " around. You can talk to the user. Only the chunk of text surrounded with the"
         + " character * before and after will be shown to the user. Keep the message 1"
-        + " sentance. .";
+        + " sentance.";
   }
 
   /**
@@ -70,7 +70,7 @@ public class GptPromptEngineeringRoom1 {
    */
   public static String get7Books() {
     return "Produce a list of 7 book titles that are single word,"
-        + " surrounded by quotes, to show on the shelf";
+        + " surrounded by quotes in an array, to show on the shelf. No response is needed to user";
   }
 
   /**
