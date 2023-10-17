@@ -36,7 +36,7 @@
       <Pane fx:id="obstalePane">
          <children>
             <Circle fx:id="point4" fill="#ff1f1f" layoutX="415.0" layoutY="75.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
-            <Circle fx:id="point1" fill="#ff1f1f" layoutX="310.0" layoutY="72.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+            <Circle fx:id="point1" fill="#ff1f1f" layoutX="360.0" layoutY="80.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
             <Circle fx:id="point3" fill="#ff1f1f" layoutX="435.0" layoutY="114.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
             <Circle fx:id="point2" fill="#ff1f1f" layoutX="260.0" layoutY="68.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
             <Circle fx:id="point5" fill="#ff1f1f" layoutX="236.0" layoutY="62.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
@@ -84,7 +84,7 @@
                   <Font name="Impact" size="18.0" />
                </font>
             </Text>
-            <Text fx:id="label1" fill="LIME" layoutX="320.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DUBAI" visible="false">
+            <Text fx:id="label1" fill="LIME" layoutX="306.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DUBAI" visible="false">
                <font>
                   <Font name="Impact" size="18.0" />
                </font>
