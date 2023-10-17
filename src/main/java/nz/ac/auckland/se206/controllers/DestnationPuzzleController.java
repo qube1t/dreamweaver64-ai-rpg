@@ -127,7 +127,7 @@ public class DestnationPuzzleController {
     // Handle the case where the user has entered the correct answer
     if (GameState.arrangedDestnation.equalsIgnoreCase(currentText)) {
       // GameState.isPuzzleInRoom3Solved = true;
-      GameState.eleanorAi.runGpt(
+      GameState.eleanorAi2.runGpt(
           GptPromptEngineeringRoom3.correctPuzzleRoom3(),
           (result) -> {
             System.out.println(result);
@@ -145,7 +145,7 @@ public class DestnationPuzzleController {
                 });
           });
     } else {
-      GameState.eleanorAi.runGpt(
+      GameState.eleanorAi2.runGpt(
           GptPromptEngineeringRoom3.wrongPuzzleRoom3(),
           (result) -> {
             System.out.println(result);
