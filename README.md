@@ -18,3 +18,15 @@
 ## To debug the game
 
 `./mvnw clean javafx:run@debug` then in VS Code "Run & Debug", then run "Debug JavaFX"
+
+## Contributors
+
+Samuel Kurian 
+* Software Engineering and Physics Conjoint
+
+Siyeon Kim 
+* Software Engineering
+* linkedin.com/in/siyeonkim612
+
+Yuewen Sun
+* Software Engineering
