@@ -1,4 +1,9 @@
-# SOFTENG 206 - EscAIpe Room
+# DreamWeaver64 - RPG powered by AI
+
+(requires OpenAI API to run)
+
+<img width="703" alt="image" src="https://github.com/qube1t/dreamweaver64-ai-rpg/assets/77086852/d4910eb3-456a-42e5-b354-968a456ebff4">
+
 
 ## To setup OpenAI's API
 
@@ -6,7 +11,7 @@
 - put inside the credentials that you received from no-reply@digitaledu.ac.nz (put the quotes "")
 
   ```
-  email: "upi123@aucklanduni.ac.nz"
+  email: "YOUR@EMAIL"
   apiKey: "YOUR_KEY"
   ```
   these are your credentials to invoke the OpenAI GPT APIs
@@ -21,12 +26,9 @@
 
 ## Contributors
 
-Samuel Kurian 
-* Software Engineering and Physics Conjoint
+[Samuel Kurian](https://www.linkedin.com/in/kurian-samuel/)
 
-Siyeon Kim 
-* Software Engineering
-* linkedin.com/in/siyeonkim612
+[Siyeon Kim](https://www.linkedin.com/in/siyeonkim612) 
 
-Yuewen Sun
-* Software Engineering
+[Yuewen Sun](https://www.linkedin.com/in/james-sun-513165241/)
+
